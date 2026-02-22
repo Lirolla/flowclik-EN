@@ -1284,44 +1284,7 @@ function AdminSettingsContent() {
                   )}
                 </div>
                 
-                {/* PIX */}
-                <div className="border rounded-lg p-4">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-2">
-                      <div className="w-10 h-10 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center">
-                        <span className="text-xl">💲</span>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">PIX</h4>
-                        <p className="text-sm text-muted-foreground">Instant payment</p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-sm text-muted-foreground">
-                        {paymentPixEnabled ? "Ativado" : "Desativado"}
-                      </span>
-                      <input
-                        type="checkbox"
-                        checked={paymentPixEnabled}
-                        onChange={(e) => setPaymentPixEnabled(e.target.checked)}
-                        className="w-5 h-5 cursor-pointer"
-                      />
-                    </div>
-                  </div>
-                  {paymentPixEnabled && (
-                    <div className="mt-3">
-                      <Label>Key PIX</Label>
-                      <Input
-                        value={paymentPixKey}
-                        onChange={(e) => setPaymentPixKey(e.target.value)}
-                        placeholder="email@example.com or phone or random key"
-                      />
-                      <p className="text-xs text-muted-foreground mt-1">
-                        Enter your payment key (email, phone or random key)
-                      </p>
-                    </div>
-                  )}
-                </div>
+
                 
                 {/* Payment Link */}
                 <div className="border rounded-lg p-4">
