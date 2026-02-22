@@ -253,7 +253,7 @@ export const collectionsRouter = router({
         .where(and(eq(mediaItems.collectionId, input.id), eq(mediaItems.tenantId, tenantId)));
 
       // 2. Extrair keys do R2 a partir das URLs
-      const R2_PUBLIC_URL = "https://pub-flowclikuk.r2.dev";
+      const R2_PUBLIC_URL = "https://fotos.flowclik.com";
       const keysToDelete: string[] = [];
 
       for (const photo of photos) {

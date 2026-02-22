@@ -10,7 +10,7 @@ const R2_ACCOUNT_ID = "023a0bad3f17632316cd10358db2201f";
 const R2_ACCESS_KEY_ID = "928a0bf105386ca2e80d8e666c26af32";
 const R2_SECRET_ACCESS_KEY = "de2bf4c9f70208e1482c2e6e29d098c687f71996e76d66ac9a9b89a7c6187dc5";
 const R2_BUCKET_NAME = "flowclikuk";
-const R2_PUBLIC_URL = "https://pub-flowclikuk.r2.dev";
+const R2_PUBLIC_URL = "https://fotos.flowclik.com";
 
 // Endpoint de API do R2 (diferente do domain public)
 const R2_API_ENDPOINT = `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`;

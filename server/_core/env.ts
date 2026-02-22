@@ -15,7 +15,7 @@ export const ENV = {
   r2AccessKeyId: process.env.R2_ACCESS_KEY_ID || "928a0bf105386ca2e80d8e666c26af32",
   r2SecretAccessKey: process.env.R2_SECRET_ACCESS_KEY || "de2bf4c9f70208e1482c2e6e29d098c687f71996e76d66ac9a9b89a7c6187dc5",
   r2BucketName: process.env.R2_BUCKET_NAME || "flowclikuk",
-  r2PublicUrl: process.env.R2_PUBLIC_URL || "https://pub-flowclikuk.r2.dev",
+  r2PublicUrl: process.env.R2_PUBLIC_URL || "https://fotos.flowclik.com",
   // SMTP
   smtpHost: process.env.SMTP_HOST ?? "",
   smtpPort: parseInt(process.env.SMTP_PORT ?? "587"),
