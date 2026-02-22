@@ -1,107 +1,107 @@
 /**
- * Sistema de moeda 100% BRASIL
- * Hardcoded: R$ (BRL), pt-BR, America/Sao_Paulo, +55
+ * Currency system 100% UK
+ * Hardcoded: £ (GBP), en-GB, Europe/London, +44
  * 
- * VALORES EM REAIS (não centavos)
- * Quando o fotógrafo digita 650, salva 650 e exibe R$ 650,00
+ * VALUES IN POUNDS (not pence)
+ * When the photographer types 650, it saves 650 and displays £650.00
  */
 
 /**
- * Formata valor em reais para moeda brasileira
- * @param value Valor em reais (ex: 650 = R$ 650,00)
- * @returns String formatada (ex: "R$ 650,00")
+ * Formats value in pounds to British currency
+ * @param value Value in pounds (e.g.: 650 = £650.00)
+ * @returns Formatted string (e.g.: "£650.00")
  */
 export function formatCurrency(value: number): string {
-  return new Intl.NumberFormat("pt-BR", {
+  return new Intl.NumberFormat("en-GB", {
     style: "currency",
-    currency: "BRL",
+    currency: "GBP",
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(value);
 }
 
 /**
- * Formata número de input do usuário para moeda brasileira
- * Adiciona separadores de milhar e decimal automaticamente
- * @param value String digitada pelo usuário
- * @returns String formatada sem símbolo (ex: "1.234,56")
+ * Formats user input number to British currency format
+ * Adds thousands separators automatically
+ * @param value String typed by the user
+ * @returns Formatted string without symbol (e.g.: "1,234")
  */
 export function formatInputCurrency(value: string): string {
-  // Remove tudo exceto dígitos
+  // Remove everything except digits
   const digitsOnly = value.replace(/\D/g, "");
   
   if (!digitsOnly) return "";
   
-  // Converte para número inteiro (reais)
-  const reais = parseInt(digitsOnly, 10);
+  // Convert to integer (pounds)
+  const pounds = parseInt(digitsOnly, 10);
   
-  // Formata sem símbolo
-  return new Intl.NumberFormat("pt-BR", {
+  // Format without symbol
+  return new Intl.NumberFormat("en-GB", {
     style: "decimal",
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
-  }).format(reais);
+  }).format(pounds);
 }
 
 /**
- * Converte string formatada de volta para valor em reais
- * @param formattedValue String formatada (ex: "1.234" ou "R$ 1.234")
- * @returns Valor em reais
+ * Converts formatted string back to value in pounds
+ * @param formattedValue Formatted string (e.g.: "1,234" or "£1,234")
+ * @returns Value in pounds
  */
 export function parseCurrencyInput(formattedValue: string): number {
-  // Remove símbolos de moeda e espaços
+  // Remove currency symbols and spaces
   let cleaned = formattedValue.replace(/[^\d,.-]/g, "");
   
-  // Brasil: vírgula é decimal, ponto é milhar
-  cleaned = cleaned.replace(/\./g, "").replace(",", ".");
+  // UK: comma is thousands separator, dot is decimal
+  cleaned = cleaned.replace(/,/g, "");
   
   const value = parseFloat(cleaned) || 0;
   return Math.round(value);
 }
 
 /**
- * Retorna símbolo da moeda brasileira
+ * Returns British currency symbol
  */
 export function getCurrencySymbol(): string {
-  return "R$";
+  return "£";
 }
 
 /**
- * Retorna locale brasileiro
+ * Returns British locale
  */
 export function getLocale(): string {
-  return "pt-BR";
+  return "en-GB";
 }
 
 /**
- * Retorna label de campo de preço
+ * Returns price field label
  */
 export function getPriceLabel(): string {
-  return "Preço (R$)";
+  return "Price (£)";
 }
 
 /**
- * Retorna código do telefone brasileiro
+ * Returns British phone code
  */
 export function getPhoneCode(): string {
-  return "+55";
+  return "+44";
 }
 
 /**
- * Retorna timezone brasileiro
+ * Returns British timezone
  */
 export function getTimezone(): string {
-  return "America/Sao_Paulo";
+  return "Europe/London";
 }
 
 /**
- * Configuração de campos de endereço brasileiro
+ * UK address fields configuration
  */
 export const ADDRESS_CONFIG = {
-  postalCodeLabel: "CEP",
-  postalCodePlaceholder: "01310-100",
-  cityStateLabel: "Cidade/Estado",
-  cityStatePlaceholder: "São Paulo, SP",
-  taxIdLabel: "CPF",
-  taxIdPlaceholder: "000.000.000-00",
+  postalCodeLabel: "Postcode",
+  postalCodePlaceholder: "SW1A 1AA",
+  cityStateLabel: "City/County",
+  cityStatePlaceholder: "London, Greater London",
+  taxIdLabel: "Company Number",
+  taxIdPlaceholder: "12345678",
 };

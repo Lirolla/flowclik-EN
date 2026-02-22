@@ -11,29 +11,29 @@ import {
 } from "@/lib/currency";
 
 /**
- * Hook para usar sistema de moeda brasileiro
- * Hardcoded: R$ (BRL), pt-BR, +55, America/Sao_Paulo
- * VALORES EM REAIS (não centavos)
+ * Hook for UK currency system
+ * Hardcoded: £ (GBP), en-GB, +44, Europe/London
+ * VALUES IN POUNDS (not pence)
  */
 export function useCurrency() {
   return useMemo(
     () => ({
-      // Configuração do Brasil (hardcoded)
-      country: "Brasil",
-      currency: "BRL",
-      symbol: "R$",
-      locale: "pt-BR",
-      phoneCode: "+55",
-      timezone: "America/Sao_Paulo",
+      // UK configuration (hardcoded)
+      country: "United Kingdom",
+      currency: "GBP",
+      symbol: "£",
+      locale: "en-GB",
+      phoneCode: "+44",
+      timezone: "Europe/London",
       
-      // Funções de formatação - valor em REAIS
-      format: (valueInReais: number) => formatCurrency(valueInReais),
+      // Formatting functions - value in POUNDS
+      format: (valueInPounds: number) => formatCurrency(valueInPounds),
       
       formatInput: (value: string) => formatInputCurrency(value),
       
       parseInput: (formattedValue: string) => parseCurrencyInput(formattedValue),
       
-      // Labels fixos em português
+      // Fixed labels in English
       priceLabel: getPriceLabel(),
       
       // Helpers

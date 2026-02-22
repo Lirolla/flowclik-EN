@@ -5,8 +5,8 @@ import { useCurrency } from "@/hooks/useCurrency";
 
 interface CurrencyInputProps {
   label?: string;
-  value: number; // Valor em reais
-  onChange: (valueInReais: number) => void;
+  value: number; // Value in pounds
+  onChange: (valueInPounds: number) => void;
   placeholder?: string;
   id?: string;
   required?: boolean;
@@ -15,9 +15,9 @@ interface CurrencyInputProps {
 }
 
 /**
- * Input de moeda com formatação automática
- * Valores em REAIS (não centavos)
- * Usuário digita 650 → salva 650 → exibe R$ 650,00
+ * Currency input with automatic formatting
+ * Values in POUNDS (not pence)
+ * User types 650 → saves 650 → displays £650.00
  */
 export function CurrencyInput({
   label,
@@ -31,14 +31,14 @@ export function CurrencyInput({
 }: CurrencyInputProps) {
   const { format, priceLabel, symbol } = useCurrency();
   
-  // Estado local para exibição
+  // Local state for display
   const [displayValue, setDisplayValue] = useState("");
   
-  // Sincronizar com prop value (quando muda externamente)
+  // Sync with prop value (when changed externally)
   useEffect(() => {
     if (value === 0 && displayValue === "") return;
-    // Formata o valor em reais para exibição
-    const formatted = new Intl.NumberFormat("pt-BR", {
+    // Format value in pounds for display
+    const formatted = new Intl.NumberFormat("en-GB", {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(value);
@@ -48,7 +48,7 @@ export function CurrencyInput({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
     
-    // Remove tudo exceto dígitos
+    // Remove everything except digits
     const digitsOnly = input.replace(/\D/g, "");
     
     if (!digitsOnly) {
@@ -57,24 +57,24 @@ export function CurrencyInput({
       return;
     }
     
-    // Converte para reais
-    const reais = parseInt(digitsOnly, 10);
+    // Convert to pounds
+    const pounds = parseInt(digitsOnly, 10);
     
-    // Formata para exibição com separadores de milhar
-    const formatted = new Intl.NumberFormat("pt-BR", {
+    // Format for display with thousands separators
+    const formatted = new Intl.NumberFormat("en-GB", {
       minimumFractionDigits: 0,
       maximumFractionDigits: 0,
-    }).format(reais);
+    }).format(pounds);
     setDisplayValue(formatted);
     
-    // Notifica mudança em reais
-    onChange(reais);
+    // Notify change in pounds
+    onChange(pounds);
   };
   
   const handleBlur = () => {
-    // Garante formatação correta ao sair do campo
+    // Ensure correct formatting on blur
     if (value > 0) {
-      const formatted = new Intl.NumberFormat("pt-BR", {
+      const formatted = new Intl.NumberFormat("en-GB", {
         minimumFractionDigits: 0,
         maximumFractionDigits: 0,
       }).format(value);
