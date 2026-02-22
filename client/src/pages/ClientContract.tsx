@@ -3,16 +3,23 @@ import { ClientLayout } from "@/components/ClientLayout";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { trpc } from "@/lib/trpc";
-import { AlertCircle, CheckCircle, FileText, Download } from "lucide-react";
+import { AlertCircle, CheckCircle, FileText, Download, Clock } from "lucide-react";
 
 export default function ClientContract() {
   const [, params] = useRoute("/client/contract/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
 
-  const { data: appointment, isLoading } = trpc.appointments.getById.useQuery(
+  const { data: appointment, isLoading: loadingAppointment } = trpc.appointments.getById.useQuery(
     { id: appointmentId },
     { enabled: appointmentId > 0 }
   );
+
+  const { data: contract, isLoading: loadingContract } = trpc.contracts.getByAppointmentId.useQuery(
+    { appointmentId },
+    { enabled: appointmentId > 0 }
+  );
+
+  const isLoading = loadingAppointment || loadingContract;
 
   if (isLoading) {
     return (
@@ -35,8 +42,9 @@ export default function ClientContract() {
     );
   }
 
-  const hasContract = !!appointment.contractUrl;
-  const isSigned = appointment.contractSigned;
+  const hasContract = !!contract;
+  const isSigned = contract?.status === 'signed' || appointment.contractSigned;
+  const isSent = contract?.status === 'sent';
 
   return (
     <ClientLayout appointmentId={appointmentId}>
@@ -65,6 +73,12 @@ export default function ClientContract() {
                     <p className="text-gray-300 mt-1">
                       Your contract is ready for review
                     </p>
+                    {isSent && contract?.sentAt && (
+                      <p className="text-gray-400 text-sm mt-1 flex items-center gap-1">
+                        <Clock className="h-3 w-3" />
+                        Sent on {new Date(contract.sentAt).toLocaleDateString('en-GB')}
+                      </p>
+                    )}
                   </div>
                 </>
               )}
@@ -95,13 +109,15 @@ export default function ClientContract() {
             <div className="space-y-4">
               <div className="flex justify-between items-center pb-4 border-b border-gray-800">
                 <span className="text-gray-400">Client</span>
-                <span className="font-semibold">{appointment.clientName}</span>
+                <span className="font-semibold">{contract.clientName || appointment.clientName}</span>
               </div>
 
-              <div className="flex justify-between items-center pb-4 border-b border-gray-800">
-                <span className="text-gray-400">Service</span>
-                <span className="font-semibold">{appointment.serviceName || "Not specified"}</span>
-              </div>
+              {contract.serviceName && (
+                <div className="flex justify-between items-center pb-4 border-b border-gray-800">
+                  <span className="text-gray-400">Service</span>
+                  <span className="font-semibold">{contract.serviceName}</span>
+                </div>
+              )}
 
               <div className="flex justify-between items-center pb-4 border-b border-gray-800">
                 <span className="text-gray-400">Session Date</span>
@@ -117,38 +133,40 @@ export default function ClientContract() {
                 </span>
               </div>
 
-              <div className="flex justify-between items-center">
-                <span className="text-gray-400">Total Amount</span>
-                <span className="font-semibold text-xl">
-                  £{((appointment.finalPrice || appointment.servicePrice || 0) / 100).toFixed(2)}
-                </span>
-              </div>
-            </div>
-
-            {/* Download Button */}
-            <div className="mt-6">
-              <Button 
-                className="w-full bg-red-600 hover:bg-red-700"
-                onClick={() => window.open(appointment.contractUrl!, '_blank')}
-              >
-                <Download className="h-4 w-4 mr-2" />
-                Download Contract (PDF)
-              </Button>
+              {contract.price && (
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-400">Total Amount</span>
+                  <span className="font-semibold text-xl">
+                    £{contract.price}
+                  </span>
+                </div>
+              )}
             </div>
           </Card>
         )}
 
-        {/* Contract Preview */}
-        {hasContract && (
+        {/* Contract Content */}
+        {hasContract && contract.content && (
           <Card className="bg-gray-900 border-gray-800 p-6">
-            <h3 className="text-xl font-semibold mb-4">Contract Preview</h3>
-            <div className="aspect-[8.5/11] bg-black rounded-lg overflow-hidden">
-              <iframe
-                src={appointment.contractUrl!}
-                className="w-full h-full"
-                title="Contract"
-              />
+            <h3 className="text-xl font-semibold mb-4">Contract Document</h3>
+            <div className="bg-white text-black p-8 rounded-lg max-h-[600px] overflow-y-auto" style={{ fontFamily: 'Georgia, serif', fontSize: '13px', lineHeight: '1.8' }}>
+              <div style={{ whiteSpace: 'pre-wrap' }}>
+                {contract.content}
+              </div>
             </div>
+          </Card>
+        )}
+
+        {/* Download PDF if contractUrl exists */}
+        {appointment.contractUrl && (
+          <Card className="bg-gray-900 border-gray-800 p-6">
+            <Button 
+              className="w-full bg-red-600 hover:bg-red-700"
+              onClick={() => window.open(appointment.contractUrl!, '_blank')}
+            >
+              <Download className="h-4 w-4 mr-2" />
+              Download Contract (PDF)
+            </Button>
           </Card>
         )}
 

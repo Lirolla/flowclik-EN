@@ -790,4 +790,21 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       return result;
     }),
 
+  // Public route: get contract by appointmentId (for client panel)
+  getByAppointmentId: publicProcedure
+    .input(z.object({ appointmentId: z.number() }))
+    .query(async ({ input, ctx }) => {
+      const db = await getDb();
+      if (!db) return null;
+      const tenantId = getTenantId(ctx);
+      const result = await db.select().from(contracts)
+        .where(and(
+          eq(contracts.appointmentId, input.appointmentId),
+          eq(contracts.tenantId, tenantId)
+        ))
+        .orderBy(desc(contracts.createdAt))
+        .limit(1);
+      return result[0] || null;
+    }),
+
 });
