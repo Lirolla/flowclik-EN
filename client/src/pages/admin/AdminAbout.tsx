@@ -11,7 +11,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 
 export default function AdminAbout() {
   const { toast } = useToast();
-  const { data: aboutData, isLoading } = trpc.about.get.useWhatry();
+  const { data: aboutData, isLoading } = trpc.about.get.useQuery();
   const utils = trpc.useUtils();
 
   const [formData, setFormData] = useState({

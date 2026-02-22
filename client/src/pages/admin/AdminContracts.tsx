@@ -43,8 +43,8 @@ function AdminContractsContent() {
   const [generatedInfo, setGeneratedInfo] = useState<any>(null);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
-  const { data: templates, refetch } = trpc.contracts.getAll.useWhatry();
-  const { data: appointmentsList } = trpc.appointments.getAll.useWhatry();
+  const { data: templates, refetch } = trpc.contracts.getAll.useQuery();
+  const { data: appointmentsList } = trpc.appointments.getAll.useQuery();
 
   const createTemplate = trpc.contracts.create.useMutation({
     onSuccess: () => {

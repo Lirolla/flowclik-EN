@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 
 export default function VideoPage() {
-  const { data: portfolioItems } = trpc.portfolio.listActive.useWhatry();
+  const { data: portfolioItems } = trpc.portfolio.listActive.useQuery();
   const [selectedVideo, setSelectedVideo] = useState<any>(null);
 
   // Filter only videos

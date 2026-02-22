@@ -21,18 +21,18 @@ function AdminClientDetailsContent() {
   const [, params] = useRoute("/admin/client/:email");
   const email = params?.email ? decodeURIComponent(params.email) : "";
   
-  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
+  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
   const currencySymbol = getCurrencySymbol();
 
-  const { data: summary } = trpc.clientDetails.getClientSummary.useWhatry(
+  const { data: summary } = trpc.clientDetails.getClientSummary.useQuery(
     { email },
     { enabled: !!email }
   );
-  const { data: appointments } = trpc.clientDetails.getAppointmentsByEmail.useWhatry(
+  const { data: appointments } = trpc.clientDetails.getAppointmentsByEmail.useQuery(
     { email },
     { enabled: !!email }
   );
-  const { data: orders } = trpc.clientDetails.getOrdersByEmail.useWhatry(
+  const { data: orders } = trpc.clientDetails.getOrdersByEmail.useQuery(
     { email },
     { enabled: !!email }
   );

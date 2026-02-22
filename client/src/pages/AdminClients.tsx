@@ -12,8 +12,8 @@ import { PhoneInput } from '@/components/PhoneInput';
 
 export default function AdminClients() {
   const utils = trpc.useUtils();
-  const { data: clients = [], isLoading } = trpc.clients.list.useWhatry();
-  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
+  const { data: clients = [], isLoading } = trpc.clients.list.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
   const createMutation = trpc.clients.create.useMutation({
     onSuccess: () => {
       utils.clients.list.invalidate();

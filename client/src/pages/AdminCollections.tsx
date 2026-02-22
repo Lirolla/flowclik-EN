@@ -32,8 +32,8 @@ function AdminCollectionsContent() {
   const [layoutType, setLayoutType] = useState<"grid" | "masonry" | "fullscreen">("masonry");
 
   const utils = trpc.useUtils();
-  const { data: collections, isLoading } = trpc.collections.getAll.useWhatry();
-  const { data: permissions } = trpc.downloadControl.getAllPermissions.useWhatry();
+  const { data: collections, isLoading } = trpc.collections.getAll.useQuery();
+  const { data: permissions } = trpc.downloadControl.getAllPermissions.useQuery();
 
   const toggleDownloadMutation = trpc.downloadControl.togglePermission.useMutation({
     onSuccess: () => {

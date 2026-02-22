@@ -8,8 +8,8 @@ import { X, MapPin, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { VideoPlayer } from "@/components/VideoPlayer";
 
 export default function Portfolio() {
-  const { data: allItems, isLoading } = (trpc.portfolio.listActive.useWhatry() as any);
-  const { data: siteConfig } = (trpc.site.getConfig.useWhatry() as any);
+  const { data: allItems, isLoading } = (trpc.portfolio.listActive.useQuery() as any);
+  const { data: siteConfig } = (trpc.site.getConfig.useQuery() as any);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [filter, setFilter] = useState<"photo" | "video">("photo");
 

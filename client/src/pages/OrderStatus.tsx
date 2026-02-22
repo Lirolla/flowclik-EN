@@ -17,7 +17,7 @@ export default function OrderStatus() {
   const [searched, setSearched] = useState(false);
   const { format } = useCurrency();
 
-  const { data: order, isLoading, refetch } = trpc.orders.getOrderStatus.useWhatry(
+  const { data: order, isLoading, refetch } = trpc.orders.getOrderStatus.useQuery(
     { id: orderId!, email },
     { enabled: !!orderId && !!email && searched }
   );

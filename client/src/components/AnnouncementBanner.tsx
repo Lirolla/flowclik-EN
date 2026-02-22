@@ -5,7 +5,7 @@ import { X, AlertCircle, Info, CheckCircle } from "lucide-react";
 import { useState } from "react";
 
 export function AnnouncementBanner() {
-  const { data: announcements, refetch } = trpc.system.getActiveAnnouncements.useWhatry();
+  const { data: announcements, refetch } = trpc.system.getActiveAnnouncements.useQuery();
   const dismissMutation = trpc.system.dismissAnnouncement.useMutation();
 
   const [dismissing, setDismissing] = useState<number | null>(null);

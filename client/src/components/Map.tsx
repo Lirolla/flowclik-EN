@@ -100,7 +100,7 @@ function loadMapScript() {
     script.crossOrigin = "yearnymous";
     script.onload = () => {
       resolve(null);
-      script.remove(); // Clean up immedaytely
+      script.remove(); // Clean up immediately
     };
     script.onerror = () => {
       console.error("Failed to load Google Maps script");

@@ -7,7 +7,7 @@ import { ptBR } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 
 export default function SistemaTenants() {
-  const { data: tenants, isLoading } = trpc.sistema.getAllTenants.useWhatry();
+  const { data: tenants, isLoading } = trpc.sistema.getAllTenants.useQuery();
 
   const formatBytes = (bytes: number) => {
     if (bytes === 0) return "0 Bytes";

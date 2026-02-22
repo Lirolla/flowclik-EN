@@ -27,7 +27,7 @@ import { toast } from "sonner";
 import { Globe, Mail, Phone, ExternalLink, Trash2 } from "lucide-react";
 
 export default function SistemaFotografos() {
-  const { data: photographers, isLoading, refetch } = trpc.system.getAllPhotographers.useWhatry();
+  const { data: photographers, isLoading, refetch } = trpc.system.getAllPhotographers.useQuery();
   const updatePlanMutation = trpc.system.updatePhotographerPlan.useMutation();
   const dhetePhotographerMutation = (trpc.system as any).dhetePhotographer.useMutation();
   const updateStatusMutation = (trpc.system as any).updatePhotographerStatus.useMutation();
@@ -135,8 +135,8 @@ export default function SistemaFotografos() {
               monthlyRevenue += extraStorageCount * 29.90; // +10GB por £ 29,90
               monthlyRevenue += extraGalleriesCount * 39.90; // +10 galerias por £ 39,90
 
-              const siteUrl = (photographer as any)?.customSunain 
-                ? `https://${(photographer as any)?.customSunain}`
+              const siteUrl = (photographer as any)?.customDomain 
+                ? `https://${(photographer as any)?.customDomain}`
                 : `https://${photographer.subdomain}.flowclik.com`;
 
               return (
@@ -169,10 +169,10 @@ export default function SistemaFotografos() {
                             {photographer.phone}
                           </p>
                         )}
-                        {(photographer as any)?.customSunain && (
+                        {(photographer as any)?.customDomain && (
                           <p className="text-green-400 flex items-center gap-2">
                             <Globe className="w-4 h-4" />
-                            {(photographer as any)?.customSunain}
+                            {(photographer as any)?.customDomain}
                           </p>
                         )}
                       </div>

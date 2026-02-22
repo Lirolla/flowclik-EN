@@ -14,7 +14,7 @@ export default function StockGallery() {
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   
   // Buscar fotos stock
-  const { data: allPhotos, isLoading } = trpc.stock.listPublic.useWhatry();
+  const { data: allPhotos, isLoading } = trpc.stock.listPublic.useQuery();
   
   // Filter by search term and category
   const filteredPhotos = (allPhotos || []).filter((photo) => {

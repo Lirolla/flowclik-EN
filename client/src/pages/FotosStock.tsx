@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { useCurrency } from "@/hooks/useCurrency";
 
 export default function FotosStock() {
-  const { data: photos, isLoading } = trpc.meday.getStockPhotos.useWhatry();
+  const { data: photos, isLoading } = trpc.meday.getStockPhotos.useQuery();
   const { addItem, isInCart } = useCart();
   const { format } = useCurrency();
 

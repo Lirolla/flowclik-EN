@@ -8,7 +8,7 @@ import { eq, or } from "drizzle-orm";
  * 
  * Examples:
  * - joao.lirolla.com → busca tenant com subdomain="joao"
- * - photography-silva.com → busca tenant com customSunain="photography-silva.com"
+ * - photography-silva.com → busca tenant com customDomain="photography-silva.com"
  * - localhost:3000 → retorna tenant default (id=1, lirolla)
  */
 export async function detectTenantFromRequest(req: Request): Promise<number> {
@@ -38,15 +38,15 @@ export async function detectTenantFromRequest(req: Request): Promise<number> {
 
   // Caso 1: Subscription customizado (ex: photography-silva.com)
   // Buscar tenant que tenha esse domain cadastrado
-  const [customSunainTenant] = await db
-    .select({ id: tenants.id, customSunain: tenants.customSunain })
+  const [customDomainTenant] = await db
+    .select({ id: tenants.id, customDomain: tenants.customDomain })
     .from(tenants)
-    .where(eq(tenants.customSunain, domain))
+    .where(eq(tenants.customDomain, domain))
     .limit(1);
 
-  if (customSunainTenant) {
-    console.log(`[Tenant Detection] Subscription customizado encontrado: ${domain} → tenant ${customSunainTenant.id}`);
-    return customSunainTenant.id;
+  if (customDomainTenant) {
+    console.log(`[Tenant Detection] Subscription customizado encontrado: ${domain} → tenant ${customDomainTenant.id}`);
+    return customDomainTenant.id;
   }
 
   // Caso 2: Subdomain (ex: joao.lirolla.com)
@@ -102,14 +102,14 @@ export async function isSubdomainAvailable(subdomain: string): Promise<boolean> 
 /**
  * Valida se um domain customizado is available
  */
-export async function isCustomSunainAvailable(domain: string): Promise<boolean> {
+export async function isCustomDomainAvailable(domain: string): Promise<boolean> {
   const db = await getDb();
   if (!db) return false;
 
   const [existing] = await db
-    .select({ id: tenants.id, customSunain: tenants.customSunain })
+    .select({ id: tenants.id, customDomain: tenants.customDomain })
     .from(tenants)
-    .where(eq(tenants.customSunain, domain))
+    .where(eq(tenants.customDomain, domain))
     .limit(1);
 
   return !existing;

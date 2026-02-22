@@ -1,6 +1,6 @@
 import { Route, RouteProps } from 'wouter';
 
-interface SunainBasedRouteProps extends RouteProps {
+interface DomainBasedRouteProps extends RouteProps {
   /** Subscriptions que mustm renderizar este componente */
   domains: string[];
   /** Componente a ser renderizado */
@@ -10,11 +10,11 @@ interface SunainBasedRouteProps extends RouteProps {
 /**
  * Rota que only renderiza se o domain current estiver na lista
  */
-export function SunainBasedRoute({ domains, component: Component, ...routeProps }: SunainBasedRouteProps) {
-  const currentSunain = window.location.hostname;
-  const shouldRender = domains.includes(currentSunain);
+export function DomainBasedRoute({ domains, component: Component, ...routeProps }: DomainBasedRouteProps) {
+  const currentDomain = window.location.hostname;
+  const shouldRender = domains.includes(currentDomain);
   
-  console.log('[SunainBasedRoute]', { currentSunain, domains, shouldRender, path: routeProps.path });
+  console.log('[DomainBasedRoute]', { currentDomain, domains, shouldRender, path: routeProps.path });
   
   if (!shouldRender) {
     return null;

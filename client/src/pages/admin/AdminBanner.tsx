@@ -33,7 +33,7 @@ export default function AdminBanner() {
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string>("");
 
-  const { data: slides, refetch } = trpc.banner.getAll.useWhatry();
+  const { data: slides, refetch } = trpc.banner.getAll.useQuery();
 
   const createSlide = trpc.banner.create.useMutation({
     onSuccess: () => {

@@ -35,7 +35,7 @@ function AdminCollectionsContent() {
   });
 
   const utils = trpc.useUtils();
-  const { data: collections, isLoading } = trpc.collections.getAll.useWhatry();
+  const { data: collections, isLoading } = trpc.collections.getAll.useQuery();
 
   const createMutation = trpc.collections.create.useMutation({
     onSuccess: () => {

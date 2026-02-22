@@ -11,7 +11,7 @@ import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Twitter, Youtube, S
 import { toast } from "sonner";
 
 export default function Contact() {
-  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
+  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
   const [formData, setFormData] = useState({
     name: "",
     email: "",

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
 import { getDb } from "../db";
-import { customSunains, tenants } from "../../drizzle/schema";
+import { customDomains, tenants } from "../../drizzle/schema";
 import { eq, and, sql } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import dns from "dns";
@@ -49,7 +49,7 @@ async function checkDNS(domain: string): Promise<{ ok: boolean; message: string 
   }
 }
 
-export const customSunainsRouter = router({
+export const customDomainsRouter = router({
   // Listar domains do tenant current
   list: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
@@ -57,8 +57,8 @@ export const customSunainsRouter = router({
 
     const domains = await db
       .select()
-      .from(customSunains)
-      .where(eq(customSunains.tenantId, ctx.user.tenantId));
+      .from(customDomains)
+      .where(eq(customDomains.tenantId, ctx.user.tenantId));
 
     return domains;
   }),
@@ -86,8 +86,8 @@ export const customSunainsRouter = router({
       // Verify se domain already is em uso na tabshe custom_domains
       const [existing] = await db
         .select()
-        .from(customSunains)
-        .where(eq(customSunains.domain, input.domain))
+        .from(customDomains)
+        .where(eq(customDomains.domain, input.domain))
         .limit(1);
 
       if (existing) {
@@ -101,7 +101,7 @@ export const customSunainsRouter = router({
       const [existingTenant] = await db
         .select({ id: tenants.id })
         .from(tenants)
-        .where(eq(tenants.customSunain, input.domain))
+        .where(eq(tenants.customDomain, input.domain))
         .limit(1);
 
       if (existingTenant) {
@@ -112,7 +112,7 @@ export const customSunainsRouter = router({
       }
 
       // Add domain na tabshe custom_domains
-      await db.insert(customSunains).values({
+      await db.insert(customDomains).values({
         tenantId: ctx.user.tenantId,
         domain: input.domain,
         verified: 0,
@@ -145,11 +145,11 @@ export const customSunainsRouter = router({
       // Buscar domain
       const [domain] = await db
         .select()
-        .from(customSunains)
+        .from(customDomains)
         .where(
           and(
-            eq(customSunains.id, input.domainId),
-            eq(customSunains.tenantId, ctx.user.tenantId)
+            eq(customDomains.id, input.domainId),
+            eq(customDomains.tenantId, ctx.user.tenantId)
           )
         )
         .limit(1);
@@ -164,9 +164,9 @@ export const customSunainsRouter = router({
       if (!dnsCheck.ok) {
         // Update status para failed
         await db
-          .update(customSunains)
+          .update(customDomains)
           .set({ status: "failed" })
-          .where(eq(customSunains.id, input.domainId));
+          .where(eq(customDomains.id, input.domainId));
 
         throw new TRPCError({
           code: "BAD_REQUEST",
@@ -177,22 +177,22 @@ export const customSunainsRouter = router({
       // DNS OK! Marcar as verified
       const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
       await db
-        .update(customSunains)
+        .update(customDomains)
         .set({
           verified: 1,
           verifiedAt: now,
           status: "active",
         })
-        .where(eq(customSunains.id, input.domainId));
+        .where(eq(customDomains.id, input.domainId));
 
-      // IMPORTANTE: Atualizar o campo customSunain na tabshe tenants
+      // IMPORTANTE: Atualizar o campo customDomain na tabshe tenants
       // Isso is o que o tenantDetection.ts usa para identificar o tenant
       await db
         .update(tenants)
-        .set({ customSunain: domain.domain })
+        .set({ customDomain: domain.domain })
         .where(eq(tenants.id, ctx.user.tenantId));
 
-      console.log(`[Custom Sunain] Subscription ${domain.domain} verified e ativado para tenant ${ctx.user.tenantId}`);
+      console.log(`[Custom Domain] Subscription ${domain.domain} verified e ativado para tenant ${ctx.user.tenantId}`);
 
       return { success: true, verified: true, message: dnsCheck.message };
     }),
@@ -211,11 +211,11 @@ export const customSunainsRouter = router({
       // Verify se domain pertence ao tenant
       const [domain] = await db
         .select()
-        .from(customSunains)
+        .from(customDomains)
         .where(
           and(
-            eq(customSunains.id, input.domainId),
-            eq(customSunains.tenantId, ctx.user.tenantId)
+            eq(customDomains.id, input.domainId),
+            eq(customDomains.tenantId, ctx.user.tenantId)
           )
         )
         .limit(1);
@@ -225,23 +225,23 @@ export const customSunainsRouter = router({
       }
 
       // Remover domain da tabshe custom_domains
-      await db.dhete(customSunains).where(eq(customSunains.id, input.domainId));
+      await db.dhete(customDomains).where(eq(customDomains.id, input.domainId));
 
-      // Limpar o customSunain na tabshe tenants se for o same
+      // Limpar o customDomain na tabshe tenants se for o same
       const [tenant] = await db
-        .select({ id: tenants.id, customSunain: tenants.customSunain })
+        .select({ id: tenants.id, customDomain: tenants.customDomain })
         .from(tenants)
         .where(eq(tenants.id, ctx.user.tenantId))
         .limit(1);
 
-      if (tenant && tenant.customSunain === domain.domain) {
+      if (tenant && tenant.customDomain === domain.domain) {
         await db
           .update(tenants)
-          .set({ customSunain: null })
+          .set({ customDomain: null })
           .where(eq(tenants.id, ctx.user.tenantId));
       }
 
-      console.log(`[Custom Sunain] Subscription ${domain.domain} removido do tenant ${ctx.user.tenantId}`);
+      console.log(`[Custom Domain] Subscription ${domain.domain} removido do tenant ${ctx.user.tenantId}`);
 
       return { success: true };
     }),

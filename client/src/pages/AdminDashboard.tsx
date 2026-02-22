@@ -6,14 +6,14 @@ import { useCurrency } from '@/hooks/useCurrency';
 import { AnnouncementBanner } from '@/components/AnnouncementBanner';
 
 export default function AdminDashboard() {
-  const { data: stats, isLoading } = trpc.dashboard.stats.useWhatry();
-  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
-  const { data: statusStats } = trpc.appointmentStats.getByStatus.useWhatry();
-  const { data: monthlyStats } = trpc.appointmentStats.getMonthly.useWhatry();
-  const { data: revenueStats } = trpc.appointmentStats.getRevenue.useWhatry();
-  const { data: conversionStats } = trpc.appointmentStats.getConversionRate.useWhatry();
-  const { data: recentOrders } = trpc.dashboard.recentOrders.useWhatry();
-  const { data: upcomingAppointments } = trpc.dashboard.upcomingAppointments.useWhatry();
+  const { data: stats, isLoading } = trpc.dashboard.stats.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
+  const { data: statusStats } = trpc.appointmentStats.getByStatus.useQuery();
+  const { data: monthlyStats } = trpc.appointmentStats.getMonthly.useQuery();
+  const { data: revenueStats } = trpc.appointmentStats.getRevenue.useQuery();
+  const { data: conversionStats } = trpc.appointmentStats.getConversionRate.useQuery();
+  const { data: recentOrders } = trpc.dashboard.recentOrders.useQuery();
+  const { data: upcomingAppointments } = trpc.dashboard.upcomingAppointments.useQuery();
   const { format } = useCurrency();
 
   const getStatusLabel = (status: string) => {

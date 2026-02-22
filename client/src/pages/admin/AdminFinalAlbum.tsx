@@ -12,12 +12,12 @@ export default function AdminFinalAlbum() {
   const { toast } = useToast();
   const [uploading, setUploading] = useState(false);
 
-  const { data: collection } = trpc.collections.getById.useWhatry(
+  const { data: collection } = trpc.collections.getById.useQuery(
     { id: collectionId },
     { enabled: collectionId > 0 }
   );
 
-  const { data: finalPhotos, refetch } = trpc.finalAlbums.getByAppointment.useWhatry(
+  const { data: finalPhotos, refetch } = trpc.finalAlbums.getByAppointment.useQuery(
     { appointmentId: collection?.appointmentId || 0 },
     { enabled: !!collection?.appointmentId }
   );

@@ -11,13 +11,13 @@ import { VideoPlayer } from "@/components/VideoPlayer";
 import { useState } from "react";
 
 export default function Home() {
-  const { data: siteConfig } = (trpc.siteConfig.get.useWhatry() as any);
-  const { data: oldSiteConfig } = (trpc.site.getConfig.useWhatry() as any);
+  const { data: siteConfig } = (trpc.siteConfig.get.useQuery() as any);
+  const { data: oldSiteConfig } = (trpc.site.getConfig.useQuery() as any);
   
   // Merge configs (siteConfig has businessMode, oldSiteConfig has other fields)
   const config = { ...oldSiteConfig, ...siteConfig };
-  const { data: featuredCollections } = (trpc.collections.getFeatured.useWhatry() as any);
-  const { data: portfolioItems } = (trpc.portfolio.listForHome.useWhatry() as any);
+  const { data: featuredCollections } = (trpc.collections.getFeatured.useQuery() as any);
+  const { data: portfolioItems } = (trpc.portfolio.listForHome.useQuery() as any);
   const [selectedVideo, setSelectedVideo] = useState<any>(null);
 
   return (

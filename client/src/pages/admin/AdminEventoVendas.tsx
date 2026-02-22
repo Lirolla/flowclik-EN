@@ -25,7 +25,7 @@ function AdminEventoVendasContent() {
   const utils = trpc.useUtils();
   
   // OPTIMIZED: 1 query traz tudo (appointments + leads count + collection data)
-  const { data: appointments, isLoading } = trpc.appointments.getWithFinalAlbums.useWhatry();
+  const { data: appointments, isLoading } = trpc.appointments.getWithFinalAlbums.useQuery();
 
   const enableSalesMutation = trpc.collections.enableSales.useMutation({
     onSuccess: () => {

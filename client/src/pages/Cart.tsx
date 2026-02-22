@@ -25,8 +25,8 @@ export default function Cart() {
   const [pixCopied, setPixCopied] = useState(false);
   const [orderTotal, setOrderTotal] = useState(0);
 
-  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
-  const { data: paymentConfig } = trpc.orders.getPaymentConfig.useWhatry();
+  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
+  const { data: paymentConfig } = trpc.orders.getPaymentConfig.useQuery();
   const { format } = useCurrency();
 
   const checkoutMutation = trpc.orders.checkout.useMutation({

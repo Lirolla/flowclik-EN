@@ -9,9 +9,9 @@ import { Globe, Mail, CheckCircle2, AlertCircle, ExternalLink, Send, Trash2, Ref
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
-export default function AdminSunainEmail() {
+export default function AdminDomainEmail() {
   // Estados para Subscription
-  const [customSunain, setCustomSunain] = useState("");
+  const [customDomain, setCustomDomain] = useState("");
   const [adding, setAdding] = useState(false);
   const [verifying, setVerifying] = useState<number | null>(null);
 
@@ -21,15 +21,15 @@ export default function AdminSunainEmail() {
   const [emailConfigured, setEmailConfigured] = useState(false);
 
   // Buscar domains do tenant
-  const { data: domains, refetch: refetchSunains } = trpc.customSunains.list.useWhatry();
+  const { data: domains, refetch: refetchDomains } = trpc.customDomains.list.useQuery();
 
   // Buscar configuration de email
-  const { data: emailConfig, refetch: refetchEmailConfig } = trpc.email.getConfig.useWhatry();
+  const { data: emailConfig, refetch: refetchEmailConfig } = trpc.email.getConfig.useQuery();
 
   // Mutations de domain
-  const addSunainMutation = trpc.customSunains.add.useMutation();
-  const verifySunainMutation = trpc.customSunains.verify.useMutation();
-  const removeSunainMutation = trpc.customSunains.remove.useMutation();
+  const addDomainMutation = trpc.customDomains.add.useMutation();
+  const verifyDomainMutation = trpc.customDomains.verify.useMutation();
+  const removeDomainMutation = trpc.customDomains.remove.useMutation();
 
   // Mutations de email
   const saveEmailMutation = trpc.email.saveConfig.useMutation();
@@ -51,13 +51,13 @@ export default function AdminSunainEmail() {
   };
 
   // Handler: Add Subscription (API real)
-  const handleAddSunain = async () => {
-    if (!customSunain) {
+  const handleAddDomain = async () => {
+    if (!customDomain) {
       toast.error("Digite um domain valid");
       return;
     }
     // Limpar domain
-    let domain = customSunain.toLowerCase().trim();
+    let domain = customDomain.toLowerCase().trim();
     // Remover http:// ou https:// se o user colocou
     domain = domain.replace(/^https?:\/\//, "");
     // Remover / no final
@@ -73,10 +73,10 @@ export default function AdminSunainEmail() {
     }
     setAdding(true);
     try {
-      await addSunainMutation.mutateAsync({ domain });
+      await addDomainMutation.mutateAsync({ domain });
       toast.success("Domain added! Now follow the instructions below to configure DNS.");
-      setCustomSunain("");
-      refetchSunains();
+      setCustomDomain("");
+      refetchDomains();
     } catch (error: any) {
       toast.error(error.message || "Erro ao add domain");
     } finally {
@@ -88,9 +88,9 @@ export default function AdminSunainEmail() {
   const handleVerifyDNS = async (domainId: number) => {
     setVerifying(domainId);
     try {
-      await verifySunainMutation.mutateAsync({ domainId });
+      await verifyDomainMutation.mutateAsync({ domainId });
       toast.success("Subscription verified e ativado com sucesso! Your site already is accessible pelo new domain.");
-      refetchSunains();
+      refetchDomains();
     } catch (error: any) {
       toast.error(error.message || "DNS is still not configured correctly. Check the instructions and try again in a few minutes.");
     } finally {
@@ -99,12 +99,12 @@ export default function AdminSunainEmail() {
   };
 
   // Handler: Remover Subscription
-  const handleRemoveSunain = async (domainId: number) => {
+  const handleRemoveDomain = async (domainId: number) => {
     if (!confirm("Are you sure you want to remove this domain? Your site will only work via the FlowClik subdomain.")) return;
     try {
-      await removeSunainMutation.mutateAsync({ domainId });
+      await removeDomainMutation.mutateAsync({ domainId });
       toast.success("Subscription removido com sucesso");
-      refetchSunains();
+      refetchDomains();
     } catch (error: any) {
       toast.error(error.message || "Erro ao remover domain");
     }
@@ -189,14 +189,14 @@ export default function AdminSunainEmail() {
                 <Input
                   id="domain"
                   placeholder="yourfotografo.com.br"
-                  value={customSunain}
-                  onChange={(e) => setCustomSunain(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleAddSunain()}
+                  value={customDomain}
+                  onChange={(e) => setCustomDomain(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleAddDomain()}
                 />
                 <Button
                   variant="destructive"
-                  onClick={handleAddSunain}
-                  disabled={!customSunain || adding}
+                  onClick={handleAddDomain}
+                  disabled={!customDomain || adding}
                   className="shrink-0"
                 >
                   {adding ? (
@@ -234,7 +234,7 @@ export default function AdminSunainEmail() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => handleRemoveSunain(d.id)}
+                        onClick={() => handleRemoveDomain(d.id)}
                         className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -291,7 +291,7 @@ export default function AdminSunainEmail() {
                             <p><strong>Record.br:</strong> Clique no domain → "DNS" → "Editar zona"</p>
                             <p><strong>Hostinger:</strong> Subscriptions → Manage → Zona DNS</p>
                             <p><strong>GoDaddy:</strong> Meus Produtos → DNS → Manage Zonas</p>
-                            <p><strong>Namecheap:</strong> Sunain List → Manage → Advanced DNS</p>
+                            <p><strong>Namecheap:</strong> Domain List → Manage → Advanced DNS</p>
                           </div>
                         </div>
 

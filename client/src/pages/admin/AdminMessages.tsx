@@ -16,14 +16,14 @@ export default function AdminMessages() {
 
   // Buscar conversas do photographer (agendamentos com messages)
   const { data: conversations, isLoading: loadingConversations, refetch: refetchConversations } = 
-    trpc.clientChat.getAllConversations.useWhatry();
+    trpc.clientChat.getAllConversations.useQuery();
 
   // Buscar everys os agendamentos para criar new conversa
-  const { data: allAppointments } = trpc.appointments.getAll.useWhatry();
+  const { data: allAppointments } = trpc.appointments.getAll.useQuery();
 
   // Buscar messages da conversa shecionada
   const { data: messages, isLoading: loadingMessages, refetch: refetchMessages } = 
-    trpc.clientChat.getMessages.useWhatry(
+    trpc.clientChat.getMessages.useQuery(
       { appointmentId: selectedAppointmentId! },
       { 
         enabled: !!selectedAppointmentId,

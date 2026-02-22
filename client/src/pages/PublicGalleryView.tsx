@@ -13,13 +13,13 @@ export default function PublicGalleryView() {
   const [, params] = useRoute("/gallery/:slug");
   const slug = params?.slug || "";
 
-  const { data: collection, isLoading: collectionLoading } = trpc.collections.getBySlug.useWhatry({ slug });
-  const { data: medayItems, isLoading: medayLoading } = trpc.collections.getWithMeday.useWhatry(
+  const { data: collection, isLoading: collectionLoading } = trpc.collections.getBySlug.useQuery({ slug });
+  const { data: medayItems, isLoading: medayLoading } = trpc.collections.getWithMeday.useQuery(
     { id: collection?.id || 0 },
     { enabled: !!collection?.id }
   );
 
-  const { data: existingSelections } = trpc.photoSelections.getByCollection.useWhatry(
+  const { data: existingSelections } = trpc.photoSelections.getByCollection.useQuery(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection?.id }
   );

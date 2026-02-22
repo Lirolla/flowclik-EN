@@ -19,7 +19,7 @@ import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
 export default function SistemaAvisos() {
-  const { data: announcements, refetch } = trpc.system.getAllAnnouncements.useWhatry();
+  const { data: announcements, refetch } = trpc.system.getAllAnnouncements.useQuery();
   const createMutation = trpc.system.createAnnouncement.useMutation();
   const deactivateMutation = trpc.system.deactivateAnnouncement.useMutation();
 

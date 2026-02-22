@@ -5,7 +5,7 @@ import { Link } from "wouter";
 import { Image as ImageIcon, Loader2 } from "lucide-react";
 
 export default function PublicGalleries() {
-  const { data: collections, isLoading } = trpc.collections.getPublic.useWhatry();
+  const { data: collections, isLoading } = trpc.collections.getPublic.useQuery();
 
   if (isLoading) {
     return (

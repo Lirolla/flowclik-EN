@@ -14,13 +14,13 @@ export default function ClientFinalAlbum() {
   const slug = params?.slug || "";
   const { toast } = useToast();
 
-  const { data: collection, isLoading: collectionLoading } = trpc.collections.getBySlug.useWhatry({ slug });
-  const { data: editedPhotos, isLoading: photosLoading, refetch } = trpc.photoSelections.getEditedPhotos.useWhatry(
+  const { data: collection, isLoading: collectionLoading } = trpc.collections.getBySlug.useQuery({ slug });
+  const { data: editedPhotos, isLoading: photosLoading, refetch } = trpc.photoSelections.getEditedPhotos.useQuery(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection?.id }
   );
 
-  const { data: downloadUrls } = trpc.photoSelections.getDownloadUrls.useWhatry(
+  const { data: downloadUrls } = trpc.photoSelections.getDownloadUrls.useQuery(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection?.id }
   );

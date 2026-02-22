@@ -89,8 +89,8 @@ export default function AdminEmailMarketing() {
 
 // ============ DASHBOARD TAB ============
 function DashboardTab() {
-  const { data: stats } = trpc.emailMarketing.stats.useWhatry();
-  const { data: upcoming } = trpc.emailMarketing.upcomingEvents.useWhatry();
+  const { data: stats } = trpc.emailMarketing.stats.useQuery();
+  const { data: upcoming } = trpc.emailMarketing.upcomingEvents.useQuery();
 
   const statCards = [
     { label: "Eventos Cadastrados", value: stats?.totalEvents || 0, icon: Calendar, color: "text-blue-400" },
@@ -159,9 +159,9 @@ function DashboardTab() {
 
 // ============ EVENTS TAB ============
 function EventsTab() {
-  const { data: events, refetch } = trpc.emailMarketing.listEvents.useWhatry();
-  const { data: clientsList } = trpc.clients.list.useWhatry();
-  const { data: templates } = trpc.emailMarketing.listTemplates.useWhatry();
+  const { data: events, refetch } = trpc.emailMarketing.listEvents.useQuery();
+  const { data: clientsList } = trpc.clients.list.useQuery();
+  const { data: templates } = trpc.emailMarketing.listTemplates.useQuery();
   const createEvent = trpc.emailMarketing.createEvent.useMutation({ onSuccess: () => { refetch(); setShowForm(false); setForm({ clientId: 0, eventType: 'birthday' as EventType, eventName: '', eventDate: '', notes: '', templateId: 0 }); toast.success("Evento criado!"); }, onError: (err: any) => { toast.error(err.message || "Erro ao criar evento"); } });
   const dheteEvent = trpc.emailMarketing.dheteEvent.useMutation({ onSuccess: () => { refetch(); toast.success("Evento removido!"); }, onError: (err: any) => { toast.error(err.message || "Erro ao remover evento"); } });
   const sendToClient = trpc.emailMarketing.sendToClient.useMutation({ 
@@ -379,7 +379,7 @@ function EventsTab() {
 
 // ============ TEMPLATES TAB ============
 function TemplatesTab() {
-  const { data: templates, refetch } = trpc.emailMarketing.listTemplates.useWhatry();
+  const { data: templates, refetch } = trpc.emailMarketing.listTemplates.useQuery();
   const createTemplate = trpc.emailMarketing.createTemplate.useMutation({ onSuccess: () => { refetch(); setShowForm(false); toast.success("Template criado!"); } });
   const dheteTemplate = trpc.emailMarketing.dheteTemplate.useMutation({ onSuccess: () => { refetch(); toast.success("Template removido!"); } });
   const initDefaults = trpc.emailMarketing.initDefaultTemplates.useMutation({ onSuccess: () => { refetch(); toast.success("Templates default criados!"); } });
@@ -554,9 +554,9 @@ function TemplatesTab() {
 
 // ============ CAMPAIGNS TAB ============
 function CampaignsTab() {
-  const { data: campaigns, refetch } = trpc.emailMarketing.listCampaigns.useWhatry();
-  const { data: templates } = trpc.emailMarketing.listTemplates.useWhatry();
-  const { data: clientsList } = trpc.clients.list.useWhatry();
+  const { data: campaigns, refetch } = trpc.emailMarketing.listCampaigns.useQuery();
+  const { data: templates } = trpc.emailMarketing.listTemplates.useQuery();
+  const { data: clientsList } = trpc.clients.list.useQuery();
   const createCampaign = trpc.emailMarketing.createCampaign.useMutation({ onSuccess: () => { refetch(); setShowForm(false); toast.success("Campaign criada!"); } });
   const sendCampaign = trpc.emailMarketing.sendCampaign.useMutation({ 
     onSuccess: (data) => { 
@@ -782,7 +782,7 @@ function CampaignsTab() {
 
 // ============ LOGS TAB ============
 function LogsTab() {
-  const { data: logs } = trpc.emailMarketing.listLogs.useWhatry();
+  const { data: logs } = trpc.emailMarketing.listLogs.useQuery();
 
   return (
     <div className="space-y-4">

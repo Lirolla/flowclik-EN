@@ -11,7 +11,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 
 export default function AdminContact() {
   const { toast } = useToast();
-  const { data: contactData, isLoading } = trpc.contact.get.useWhatry();
+  const { data: contactData, isLoading } = trpc.contact.get.useQuery();
   const utils = trpc.useUtils();
 
   const [formData, setFormData] = useState({

@@ -44,7 +44,7 @@ export default function AdminSettings() {
   const [socialFacebook, setSocialFacebook] = useState("");
   const [socialYouTube, setSocialYouTube] = useState("");
 
-  const { data: config, isLoading } = trpc.siteConfig.get.useWhatry();
+  const { data: config, isLoading } = trpc.siteConfig.get.useQuery();
   const updateMutation = trpc.siteConfig.update.useMutation({
     onSuccess: () => {
       toast.success("Settings salvas com sucesso!");

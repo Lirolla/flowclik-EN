@@ -21,17 +21,17 @@ export default function ClientGallery() {
   const [comment, setComment] = useState("");
   const { toast } = useToast();
 
-  const { data: galleryData, refetch } = trpc.sessionGallery.getForClient.useWhatry(
+  const { data: galleryData, refetch } = trpc.sessionGallery.getForClient.useQuery(
     { appointmentId, clientEmail },
     { enabled: isAuthenticated && !!clientEmail }
   );
 
-  const { data: comments, refetch: refetchComments } = trpc.photoComments.getForClient.useWhatry(
+  const { data: comments, refetch: refetchComments } = trpc.photoComments.getForClient.useQuery(
     { appointmentId, clientEmail },
     { enabled: isAuthenticated && !!clientEmail }
   );
 
-  const { data: downloadPermission } = trpc.downloadControl.checkPermission.useWhatry(
+  const { data: downloadPermission } = trpc.downloadControl.checkPermission.useQuery(
     { collectionId: galleryData?.gallery?.id || 0 },
     { enabled: !!galleryData?.gallery?.id }
   );

@@ -25,7 +25,7 @@ export function getSessionCookieOptions(
   req: Request
 ): Pick<CookieOptions, "domain" | "httpOnly" | "path" | "sameSite" | "secure"> {
   // const hostname = req.hostname;
-  // const shouldSetSunain =
+  // const shouldSetDomain =
   //   hostname &&
   //   !LOCAL_HOSTS.has(hostname) &&
   //   !isIpAddress(hostname) &&
@@ -33,9 +33,9 @@ export function getSessionCookieOptions(
   //   hostname !== "::1";
 
   // const domain =
-  //   shouldSetSunain && !hostname.startsWith(".")
+  //   shouldSetDomain && !hostname.startsWith(".")
   //     ? `.${hostname}`
-  //     : shouldSetSunain
+  //     : shouldSetDomain
   //       ? hostname
   //       : undefined;
 

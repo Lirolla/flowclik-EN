@@ -35,12 +35,12 @@ export default function ClientFinalAlbumView() {
     };
   }, []);
 
-  const { data: appointment } = trpc.appointments.getById.useWhatry(
+  const { data: appointment } = trpc.appointments.getById.useQuery(
     { id: appointmentId },
     { enabled: appointmentId > 0 }
   );
 
-  const { data: finalPhotos } = trpc.finalAlbums.getByAppointment.useWhatry(
+  const { data: finalPhotos } = trpc.finalAlbums.getByAppointment.useQuery(
     { appointmentId },
     { enabled: appointmentId > 0 }
   );

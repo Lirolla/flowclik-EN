@@ -5,7 +5,7 @@ import { Users, DollarSign, Package, AlertCircle } from "lucide-react";
 import { Link } from "wouter";
 
 export default function SistemaDashboard() {
-  const { data: dashboard, isLoading } = trpc.system.getDashboard.useWhatry();
+  const { data: dashboard, isLoading } = trpc.system.getDashboard.useQuery();
 
   if (isLoading) {
     return (

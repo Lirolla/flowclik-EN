@@ -14,7 +14,7 @@ export default function GalleryCompra() {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [lightboxPhoto, setLightboxPhoto] = useState<any>(null);
 
-  const { data: gallery, isLoading } = trpc.collections.getByPublicSlug.useWhatry(
+  const { data: gallery, isLoading } = trpc.collections.getByPublicSlug.useQuery(
     { slug: slug || "" },
     { enabled: !!slug }
   );

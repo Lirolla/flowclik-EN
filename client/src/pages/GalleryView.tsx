@@ -14,8 +14,8 @@ export default function GalleryView() {
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  const { data: collection } = trpc.collections.getBySlug.useWhatry({ slug });
-  const { data: meday } = trpc.meday.listByCollection.useWhatry(
+  const { data: collection } = trpc.collections.getBySlug.useQuery({ slug });
+  const { data: meday } = trpc.meday.listByCollection.useQuery(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection }
   );

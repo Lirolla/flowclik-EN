@@ -9,8 +9,8 @@ interface EditorialNavbarProps {
 }
 
 export default function EditorialNavbar({ currentPage }: EditorialNavbarProps) {
-  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
-  const { data: oldSiteConfig } = trpc.site.getConfig.useWhatry();
+  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
+  const { data: oldSiteConfig } = trpc.site.getConfig.useQuery();
   const config = { ...oldSiteConfig, ...siteConfig };
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);

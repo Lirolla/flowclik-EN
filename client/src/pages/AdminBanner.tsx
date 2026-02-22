@@ -25,7 +25,7 @@ export default function AdminBanner() {
   const [showForm, setShowForm] = useState(false);
 
   const utils = trpc.useUtils();
-  const { data: slides, isLoading } = trpc.banner.getAll.useWhatry();
+  const { data: slides, isLoading } = trpc.banner.getAll.useQuery();
 
   if (user?.role !== "admin") {
     return (

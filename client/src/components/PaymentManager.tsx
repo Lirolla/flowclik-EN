@@ -39,15 +39,15 @@ export default function PaymentManager({
   const [extraPrice, setExtraPrice] = useState("");
 
   // Get available payment methods
-  const { data: availableMethods } = trpc.paymentMethods.getAvailableMethods.useWhatry();
+  const { data: availableMethods } = trpc.paymentMethods.getAvailableMethods.useQuery();
   
   // Get payment summary
-  const { data: paymentSummary } = trpc.paymentMethods.getPaymentSummary.useWhatry({ 
+  const { data: paymentSummary } = trpc.paymentMethods.getPaymentSummary.useQuery({ 
     appointmentId 
   });
 
   // Get extras
-  const { data: extras = [] } = trpc.appointments.getExtras.useWhatry({ appointmentId });
+  const { data: extras = [] } = trpc.appointments.getExtras.useQuery({ appointmentId });
 
   // Add extra mutation
   const addExtraMutation = trpc.appointments.addExtra.useMutation({

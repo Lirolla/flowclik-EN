@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Target, Eye, Heart, Users } from "lucide-react";
 
 export default function About() {
-  const { data: siteConfig, isLoading } = trpc.siteConfig.get.useWhatry();
+  const { data: siteConfig, isLoading } = trpc.siteConfig.get.useQuery();
 
   return (
     <LayoutWrapper currentPage="about">

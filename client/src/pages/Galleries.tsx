@@ -6,7 +6,7 @@ import { Folder, Image as ImageIcon } from "lucide-react";
 import { Link } from "wouter";
 
 export default function Galleries() {
-  const { data: collections, isLoading } = trpc.collections.getPublic.useWhatry();
+  const { data: collections, isLoading } = trpc.collections.getPublic.useQuery();
 
   return (
     <LayoutWrapper currentPage="galerias">

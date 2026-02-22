@@ -38,8 +38,8 @@ export default function AdminSupport() {
   const [replyMessage, setReplyMessage] = useState("");
 
   // Whatries
-  const { data: tickets, refetch: refetchTickets } = trpc.supportTickets.getMyTickets.useWhatry();
-  const { data: ticketDetails } = trpc.supportTickets.getTicketById.useWhatry(
+  const { data: tickets, refetch: refetchTickets } = trpc.supportTickets.getMyTickets.useQuery();
+  const { data: ticketDetails } = trpc.supportTickets.getTicketById.useQuery(
     { ticketId: selectedTicket! },
     { enabled: !!selectedTicket }
   );

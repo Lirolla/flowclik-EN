@@ -17,9 +17,9 @@ const LandingPage = lazy(() => import('./pages/LandingPage'));
 const CadastroSaaS = lazy(() => import('./pages/CadastroSaaS'));
 const Docs = lazy(() => import('./pages/DocsNew'));
 const TermsOfService = lazy(() => import('./pages/TermosDeServico'));
-const PrivacyPolicy = lazy(() => import('./pages/PoliticaDePrivacy'));
-const RefundPolicy = lazy(() => import('./pages/PoliticaDeRefund'));
-const AboutUs = lazy(() => import('./pages/AboutNos'));
+const PrivacyPolicy = lazy(() => import('./pages/PoliticaDePrivacidade'));
+const RefundPolicy = lazy(() => import('./pages/PoliticaDeReembolso'));
+const AboutUs = lazy(() => import('./pages/SobreNos'));
 const Login = lazy(() => import('./pages/Login'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 
@@ -81,12 +81,12 @@ const PublicGalleries = lazy(() => import('./pages/PublicGalleries'));
 const PublicGalleryView = lazy(() => import('./pages/PublicGalleryView'));
 const SharedAlbum = lazy(() => import('./pages/SharedAlbum'));
 const ClientFinalAlbum = lazy(() => import('./pages/ClientFinalAlbum'));
-const GalleryCompra = lazy(() => import('./pages/GalleryCompra'));
+const GalleryCompra = lazy(() => import('./pages/GaleriaCompra'));
 const Cart = lazy(() => import('./pages/Cart'));
 const OrderStatus = lazy(() => import('./pages/OrderStatus'));
 
 // ============================================================================
-// GLOBAL COMPONENTS (Loaded immedaytely)
+// GLOBAL COMPONENTS (Loaded immediately)
 // ============================================================================
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { CartButton } from './components/CartButton';
@@ -165,7 +165,7 @@ function Router() {
         
         {/* Settings */}
         <Route path="/admin/settings" component={AdminSettings} />
-        <Route path="/admin/domain-email" component={lazy(() => import("./pages/admin/AdminSunainEmail"))} />
+        <Route path="/admin/domain-email" component={lazy(() => import("./pages/admin/AdminDomainEmail"))} />
         <Route path="/admin/subscription" component={AdminSubscription} />
         <Route path="/admin/support" component={AdminSupport} />
 

@@ -7,10 +7,10 @@ import { useToast } from "@/hooks/use-toast";
 
 export default function AdminPhotoSelections() {
   const { toast } = useToast();
-  const { data: collections, isLoading } = trpc.collections.getWithSelectionsCount.useWhatry();
+  const { data: collections, isLoading } = trpc.collections.getWithSelectionsCount.useQuery();
   const [selectedCollectionId, setSelectedCollectionId] = useState<number | null>(null);
   
-  const { data: selections, refetch } = trpc.photoSelections.getSelectedPhotos.useWhatry(
+  const { data: selections, refetch } = trpc.photoSelections.getSelectedPhotos.useQuery(
     { collectionId: selectedCollectionId || 0 },
     { enabled: !!selectedCollectionId }
   );

@@ -5,7 +5,7 @@ interface ThemeWrapperProps {
   children: ReactNode;
 }
 export default function ThemeWrapper({ children }: ThemeWrapperProps) {
-  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
+  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
   const [location] = useLocation();
   
   // Aplica tema custom em rotas do site do photographer

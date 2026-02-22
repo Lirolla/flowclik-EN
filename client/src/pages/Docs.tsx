@@ -295,7 +295,7 @@ Valor: [IP fornecido pelo sistema]
 export default function Docs() {
   const [selectedCategory, setSelectedCategory] = useState("Firsts Steps");
   const [selectedArticle, setSelectedArticle] = useState(docsStructure["Firsts Steps"].articles[0]);
-  const [searchWhatry, setSearchWhatry] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const categories = Object.keys(docsStructure);
@@ -337,8 +337,8 @@ export default function Docs() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
               <Input
                 placeholder="Buscar artigos..."
-                value={searchWhatry}
-                onChange={(e) => setSearchWhatry(e.target.value)}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
               />
             </div>

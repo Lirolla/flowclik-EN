@@ -23,8 +23,8 @@ export default function AdminStock() {
 function AdminStockContent() {
   const utils = trpc.useUtils();
   
-  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
-  const { data: stockPhotos, isLoading } = trpc.stock.listAll.useWhatry();
+  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
+  const { data: stockPhotos, isLoading } = trpc.stock.listAll.useQuery();
   
   // Usar símbolo de moeda (Brasil hardcoded)
   const currencySymbol = getCurrencySymbol();

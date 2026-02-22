@@ -9,7 +9,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 
 export default function AdminUsage() {
   const [, navigate] = useLocation();
-  const { data: stats, isLoading } = trpc.usage.getStats.useWhatry();
+  const { data: stats, isLoading } = trpc.usage.getStats.useQuery();
 
   if (isLoading) {
     return (

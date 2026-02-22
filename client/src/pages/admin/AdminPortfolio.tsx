@@ -19,7 +19,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 
 export default function AdminPortfolio() {
   const { toast } = useToast();
-  const { data: items, isLoading } = trpc.portfolio.listAll.useWhatry();
+  const { data: items, isLoading } = trpc.portfolio.listAll.useQuery();
   const utils = trpc.useUtils();
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);

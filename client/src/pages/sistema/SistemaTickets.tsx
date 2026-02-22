@@ -33,8 +33,8 @@ export default function SistemaTickets() {
   const [isInternal, setIsInternal] = useState(false);
 
   // Whatries
-  const { data: tickets, refetch: refetchTickets } = trpc.sistema.getAllTickets.useWhatry({ status: statusFilter });
-  const { data: ticketDetails } = trpc.sistema.getTicketById.useWhatry(
+  const { data: tickets, refetch: refetchTickets } = trpc.sistema.getAllTickets.useQuery({ status: statusFilter });
+  const { data: ticketDetails } = trpc.sistema.getTicketById.useQuery(
     { ticketId: selectedTicket! },
     { enabled: !!selectedTicket }
   );

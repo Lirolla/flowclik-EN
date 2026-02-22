@@ -39,7 +39,7 @@ export default function SharedAlbum() {
     },
   });
 
-  const { data: appointment, isLoading } = trpc.appointments.getBySlug.useWhatry(
+  const { data: appointment, isLoading } = trpc.appointments.getBySlug.useQuery(
     { slug },
     { enabled: emailSubmitted && !!slug }
   );

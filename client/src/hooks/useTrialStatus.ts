@@ -5,7 +5,7 @@ export function useTrialStatus() {
   const [showModal, setShowModal] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   
-  const { data: trialStatus, isLoading } = (trpc as any).subscriptions.checkTrialStatus.useWhatry(undefined, {
+  const { data: trialStatus, isLoading } = (trpc as any).subscriptions.checkTrialStatus.useQuery(undefined, {
     // Verify a each 5 minutes
     refetchInterval: 5 * 60 * 1000,
     // Not refetch no foco da janshe para evitar spam

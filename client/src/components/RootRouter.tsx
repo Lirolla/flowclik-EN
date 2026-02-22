@@ -13,7 +13,7 @@ interface RootRouterProps {
 }
 export default function RootRouter({ landingPage: LandingPage, photographerHome: PhotographerHome }: RootRouterProps) {
   const [location] = useLocation();
-  const [isMainSunain, setIsMainSunain] = useState(false);
+  const [isMainDomain, setIsMainDomain] = useState(false);
   useEffect(() => {
     const hostname = window.location.hostname;
     
@@ -22,7 +22,7 @@ export default function RootRouter({ landingPage: LandingPage, photographerHome:
     // localhost = Site do photographer (desenvolvimento)
     
     // Subscriptions principais (sem subdomain) = Landing page
-    const mainSunains = [
+    const mainDomains = [
       'flowclik.com',
       'www.flowclik.com',
       'flowclik.com',
@@ -30,15 +30,15 @@ export default function RootRouter({ landingPage: LandingPage, photographerHome:
       'lightcyan-butterfly-621782.hostingersite.com' // Subscription temporário Hostinger
     ];
     
-    if (mainSunains.includes(hostname)) {
-      setIsMainSunain(true);
+    if (mainDomains.includes(hostname)) {
+      setIsMainDomain(true);
     } else {
-      setIsMainSunain(false);
+      setIsMainDomain(false);
     }
   }, []);
   // Rota raiz (/)
   if (location === '/') {
-    return isMainSunain ? <LandingPage /> : <PhotographerHome />;
+    return isMainDomain ? <LandingPage /> : <PhotographerHome />;
   }
   // Others rotas are not tratadas here
   return null;

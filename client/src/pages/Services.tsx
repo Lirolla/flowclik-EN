@@ -8,8 +8,8 @@ import { useCurrency } from "@/hooks/useCurrency";
 import { SITE_ROUTES } from "@/lib/siteRoutes";
 
 export default function Services() {
-  const { data: services, isLoading } = trpc.services.getActive.useWhatry();
-  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
+  const { data: services, isLoading } = trpc.services.getActive.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
   const { format } = useCurrency();
 
   return (

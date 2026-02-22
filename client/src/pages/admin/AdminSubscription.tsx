@@ -25,16 +25,16 @@ export default function AdminSubscription() {
   const [showCancelAddonDialog, setShowCancelAddonDialog] = useState<{id: number, type: string} | null>(null);
 
   // Buscar signature current
-  const { data: subscription, isLoading: loadingSubscription } = trpc.subscriptions.getCurrent.useWhatry();
+  const { data: subscription, isLoading: loadingSubscription } = trpc.subscriptions.getCurrent.useQuery();
   
   // Buscar status do trial
-  const { data: trialStatus } = trpc.subscriptions.checkTrialStatus.useWhatry();
+  const { data: trialStatus } = trpc.subscriptions.checkTrialStatus.useQuery();
 
   // Buscar add-ons actives
-  const { data: activeAddons } = trpc.subscriptions.getActiveAddons.useWhatry();
+  const { data: activeAddons } = trpc.subscriptions.getActiveAddons.useQuery();
 
   // Buscar statistics de uso
-  const { data: usage } = trpc.usage.getUsage.useWhatry();
+  const { data: usage } = trpc.usage.getUsage.useQuery();
 
   // Mutations
   const buyStorageAddon = trpc.subscriptions.buyStorageAddon.useMutation();

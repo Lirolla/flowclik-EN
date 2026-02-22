@@ -15,7 +15,7 @@ export default function AdminVideos() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<any>(null);
 
-  const { data: items, refetch } = trpc.portfolio.listAll.useWhatry();
+  const { data: items, refetch } = trpc.portfolio.listAll.useQuery();
   const createMutation = trpc.portfolio.create.useMutation({
     onSuccess: () => {
       toast.success("Video criado com sucesso!");

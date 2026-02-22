@@ -10,8 +10,8 @@ interface PublicNavbarProps {
 
 export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
-  const { data: oldSiteConfig } = trpc.site.getConfig.useWhatry();
+  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
+  const { data: oldSiteConfig } = trpc.site.getConfig.useQuery();
   
   // Merge configs (siteConfig has businessMode, oldSiteConfig has other fields)
   const config = { ...oldSiteConfig, ...siteConfig };

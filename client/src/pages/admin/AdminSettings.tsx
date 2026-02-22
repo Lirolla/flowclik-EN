@@ -107,8 +107,8 @@ function AdminSettingsContent() {
   const timezone = "Europe/London";
   const phoneCountryCode = "+44";
 
-  const { data: config, isLoading } = trpc.siteConfig.get.useWhatry();
-  const { data: blockedDates } = trpc.blockedDates.list.useWhatry();
+  const { data: config, isLoading } = trpc.siteConfig.get.useQuery();
+  const { data: blockedDates } = trpc.blockedDates.list.useQuery();
   
   const updateConfigMutation = trpc.siteConfig.update.useMutation({
     onSuccess: () => {

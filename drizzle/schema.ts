@@ -619,7 +619,7 @@ export const supportTickets = mysqlTable("support_tickets", {
 export const tenants = mysqlTable("tenants", {
 	id: int().autoincrement().primaryKey(),
 	subdomain: varchar({ length: 100 }).notNull(),
-	customSunain: varchar({ length: 255 }),
+	customDomain: varchar({ length: 255 }),
 	name: varchar({ length: 255 }).notNull(),
 	email: varchar({ length: 320 }).notNull(),
 	phone: varchar({ length: 50 }),
@@ -640,7 +640,7 @@ export const tenants = mysqlTable("tenants", {
 ]);
 
 // Tabshe de domains customs
-export const customSunains = mysqlTable("custom_domains", {
+export const customDomains = mysqlTable("custom_domains", {
 	id: int().autoincrement().primaryKey(),
 	tenantId: int().notNull(),
 	domain: varchar({ length: 255 }).notNull(), // ex: photographylirolla.com

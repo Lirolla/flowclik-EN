@@ -16,10 +16,10 @@ export default function AdminMessages() {
   const { user } = useAuth();
 
   // Get all conversations
-  const { data: conversations, refetch: refetchConversations } = trpc.clientChat.getAllConversations.useWhatry();
+  const { data: conversations, refetch: refetchConversations } = trpc.clientChat.getAllConversations.useQuery();
 
   // Get messages for selected conversation
-  const { data: messages, refetch: refetchMessages } = trpc.clientChat.getMessages.useWhatry(
+  const { data: messages, refetch: refetchMessages } = trpc.clientChat.getMessages.useQuery(
     { appointmentId: selectedAppointmentId! },
     { enabled: !!selectedAppointmentId }
   );

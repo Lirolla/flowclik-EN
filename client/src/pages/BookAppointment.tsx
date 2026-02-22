@@ -37,8 +37,8 @@ export default function BookAppointment() {
     notes: "",
   });
 
-  const { data: allServices } = trpc.services.getActive.useWhatry();
-  const { data: siteConfig } = trpc.site.getConfig.useWhatry();
+  const { data: allServices } = trpc.services.getActive.useQuery();
+  const { data: siteConfig } = trpc.site.getConfig.useQuery();
 
   // Filter services based on businessMode
   const services = allServices?.filter(service => {

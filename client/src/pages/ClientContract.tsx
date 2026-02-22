@@ -9,7 +9,7 @@ export default function ClientContract() {
   const [, params] = useRoute("/client/contract/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
 
-  const { data: appointment, isLoading } = trpc.appointments.getById.useWhatry(
+  const { data: appointment, isLoading } = trpc.appointments.getById.useQuery(
     { id: appointmentId },
     { enabled: appointmentId > 0 }
   );

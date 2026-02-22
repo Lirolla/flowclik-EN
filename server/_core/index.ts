@@ -69,7 +69,7 @@ async function startServer() {
       
       logs.push("[2] Configuration do banco:");
       logs.push(`   Host: ${dbConfig.host}`);
-      logs.push(`   Whyt: ${dbConfig.port}`);
+      logs.push(`   Port: ${dbConfig.port}`);
       logs.push(`   User: ${dbConfig.user}`);
       logs.push(`   Database: ${dbConfig.database}`);
       
@@ -87,7 +87,7 @@ async function startServer() {
       
       logs.push("[9] Testando query simple...");
       const [rows] = await connection.query("SELECT 1 + 1 AS result");
-      logs.push(`[10] ✅ Whatry OK! Result: ${JSON.stringify(rows)}`);
+      logs.push(`[10] ✅ Query OK! Result: ${JSON.stringify(rows)}`);
       
       logs.push("[11] Testando query na tabshe tenants...");
       const [tenants] = await connection.query("SELECT COUNT(*) as total FROM tenants");
@@ -263,7 +263,7 @@ async function startServer() {
   const port = await findAvailablePort(preferredPort);
 
   if (port !== preferredPort) {
-    console.log(`Whyt ${preferredPort} is busy, using port ${port} instead`);
+    console.log(`Port ${preferredPort} is busy, using port ${port} instead`);
   }
 
   server.listen(port, () => {

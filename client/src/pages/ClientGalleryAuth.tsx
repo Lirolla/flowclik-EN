@@ -19,24 +19,24 @@ export default function ClientGalleryAuth() {
   const { toast } = useToast();
 
   // Buscar dados do agendamento para pegar o email do cliente
-  const { data: appointment } = trpc.appointments.getById.useWhatry(
+  const { data: appointment } = trpc.appointments.getById.useQuery(
     { id: appointmentId },
     { enabled: appointmentId > 0 }
   );
 
   const clientEmail = appointment?.clientEmail || "";
 
-  const { data: galleryData, refetch, isLoading } = trpc.sessionGallery.getForClient.useWhatry(
+  const { data: galleryData, refetch, isLoading } = trpc.sessionGallery.getForClient.useQuery(
     { appointmentId, clientEmail },
     { enabled: !!clientEmail }
   );
 
-  const { data: comments, refetch: refetchComments } = trpc.photoComments.getForClient.useWhatry(
+  const { data: comments, refetch: refetchComments } = trpc.photoComments.getForClient.useQuery(
     { appointmentId, clientEmail },
     { enabled: !!clientEmail }
   );
 
-  const { data: downloadPermission } = trpc.downloadControl.checkPermission.useWhatry(
+  const { data: downloadPermission } = trpc.downloadControl.checkPermission.useQuery(
     { collectionId: galleryData?.gallery?.id || 0 },
     { enabled: !!galleryData?.gallery?.id }
   );

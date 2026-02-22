@@ -32,8 +32,8 @@ export default function AdminGalleryUpload() {
   const [isDragging, setIsDragging] = useState(false);
 
   const utils = trpc.useUtils();
-  const { data: collection, isLoading, error } = trpc.collections.getById.useWhatry({ id: collectionId });
-  const { data: medayList } = trpc.meday.listByCollection.useWhatry({ collectionId });
+  const { data: collection, isLoading, error } = trpc.collections.getById.useQuery({ id: collectionId });
+  const { data: medayList } = trpc.meday.listByCollection.useQuery({ collectionId });
 
   const uploadMutation = trpc.meday.upload.useMutation({
     onSuccess: () => {

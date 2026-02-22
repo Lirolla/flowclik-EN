@@ -41,7 +41,7 @@ import { customAuthRouter } from './routers/customAuth';
 import { systemRouter as adminSystemRouter } from './routers/system';
 import { saasSystemRouter } from './routers/saasSystem';
 import { subscriptionsRouter } from './routers/subscriptions';
-import { customSunainsRouter } from './routers/customSunains';
+import { customDomainsRouter } from './routers/customDomains';
 import { emailRouter } from './routers/email';
 import { emailMarketingRouter } from './routers/emailMarketing';
 import { tenantsRouter } from './routers/tenants';
@@ -50,7 +50,7 @@ export const appRouter = router({
   // System routers
   system: adminSystemRouter,
   saasSystem: saasSystemRouter,
-  customSunains: customSunainsRouter,
+  customDomains: customDomainsRouter,
 
   // Authentication
   auth: router({

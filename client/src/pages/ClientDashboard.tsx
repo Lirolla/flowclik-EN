@@ -21,7 +21,7 @@ import {
 export default function ClientDashboard() {
   const [, params] = useRoute("/client/dashboard/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
-  const { data: user } = trpc.auth.me.useWhatry();
+  const { data: user } = trpc.auth.me.useQuery();
   const [showProfileDialog, setShowProfileDialog] = useState(false);
   
   // Check if profile is incomplete
@@ -34,12 +34,12 @@ export default function ClientDashboard() {
     }
   }, [isProfileIncomplete, user]);
 
-  const { data: appointment, isLoading } = trpc.appointments.getById.useWhatry(
+  const { data: appointment, isLoading } = trpc.appointments.getById.useQuery(
     { id: appointmentId },
     { enabled: appointmentId > 0 }
   );
 
-  const { data: unreadCount } = trpc.clientChat.getUnreadCountClient.useWhatry(
+  const { data: unreadCount } = trpc.clientChat.getUnreadCountClient.useQuery(
     { appointmentId },
     { enabled: appointmentId > 0 }
   );

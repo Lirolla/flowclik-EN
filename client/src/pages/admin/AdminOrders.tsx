@@ -17,7 +17,7 @@ export default function AdminOrders() {
   const utils = trpc.useUtils();
   const { format: formatCurrency } = useCurrency();
 
-  const { data: orders, isLoading } = trpc.orders.getAll.useWhatry();
+  const { data: orders, isLoading } = trpc.orders.getAll.useQuery();
 
   const updateStatusMutation = trpc.orders.updateStatus.useMutation({
     onSuccess: () => {

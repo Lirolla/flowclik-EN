@@ -8,8 +8,8 @@ interface SidebarNavbarProps {
 }
 
 export default function SidebarNavbar({ currentPage }: SidebarNavbarProps) {
-  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
-  const { data: oldSiteConfig } = trpc.site.getConfig.useWhatry();
+  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
+  const { data: oldSiteConfig } = trpc.site.getConfig.useQuery();
   
   const config = { ...oldSiteConfig, ...siteConfig };
   const showVideo = config?.businessMode === "video_only" || config?.businessMode === "both";

@@ -173,7 +173,7 @@ export function AIChatBox({
     onSendMessage(trimmedInput);
     setInput("");
 
-    // Scroll immedaytely after sending
+    // Scroll immediately after sending
     scrollToBottom();
 
     // Keep focus on input

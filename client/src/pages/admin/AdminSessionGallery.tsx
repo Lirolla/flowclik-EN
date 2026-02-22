@@ -21,7 +21,7 @@ function AdminSessionGalleryContent() {
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
 
-  const { data: galleryData } = trpc.sessionGallery.getByAppointment.useWhatry(
+  const { data: galleryData } = trpc.sessionGallery.getByAppointment.useQuery(
     { appointmentId },
     { enabled: !!appointmentId }
   );
