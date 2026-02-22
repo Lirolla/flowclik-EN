@@ -14,7 +14,7 @@ interface TrialExpiredModalProps {
 export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpiredModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   
-  // createCheckoutSession not implementado para Assas
+  // createCheckoutSession not implemented yet
   // const createCheckout = trpc.signatures.createCheckoutSession.useMutation(...);
   const createCheckout = { mutate: () => {
     toast.error("Checkout session not available. Please contact support.");
@@ -63,25 +63,25 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
             <div className="flex items-center justify-between mb-3">
               <div>
                 <h3 className="font-semibold text-white">Basic Plan</h3>
-                <p className="text-sm text-gray-400">Perfeito para start</p>
+                <p className="text-sm text-gray-400">Perfect to get started</p>
               </div>
               <div className="text-right">
-                <span className="text-2xl font-bold text-white">£ 69,90</span>
+                <span className="text-2xl font-bold text-white">£ 8.99</span>
                 <span className="text-gray-400">/month</span>
               </div>
             </div>
             <ul className="space-y-2 mb-4">
               <li className="flex items-center text-sm text-gray-300">
                 <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                10GB de storage
+                10GB Storage
               </li>
               <li className="flex items-center text-sm text-gray-300">
                 <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                10 galerias
+                10 Galleries
               </li>
               <li className="flex items-center text-sm text-gray-300">
                 <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                Support por email
+                Email support
               </li>
             </ul>
             <Button
@@ -90,7 +90,7 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
               className="w-full bg-purple-600 hover:bg-purple-700"
             >
               <CreditCard className="w-4 h-4 mr-2" />
-              {isLoading ? "Processing..." : "Assinar Now"}
+              {isLoading ? "Processing..." : "Subscribe Now"}
             </Button>
           </div>
 
@@ -99,7 +99,7 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
         {!isExpired && onClose && (
           <div className="mt-4 text-center">
             <Button variant="ghost" onClick={onClose} className="text-gray-400 hover:text-white">
-              Continuar testando ({daysRemaining} days remaining)
+              Continue testing ({daysRemaining} days remaining)
             </Button>
           </div>
         )}

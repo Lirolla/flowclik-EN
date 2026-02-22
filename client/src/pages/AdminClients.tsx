@@ -19,10 +19,10 @@ export default function AdminClients() {
       utils.clients.list.invalidate();
       setShowCreateDialog(false);
       setFormData({});
-      alert('Cliente criado com sucesso!');
+      alert('Client created successfully!');
     },
     onError: (error) => {
-      alert(`Erro: ${error.message}`);
+      alert(`Error: ${error.message}`);
     },
   });
   
@@ -39,10 +39,10 @@ export default function AdminClients() {
       setShowEditDialog(false);
       setEditingClient(null);
       setFormData({});
-      alert('Cliente atualizado com sucesso!');
+      alert('Client updated successfully!');
     },
     onError: (error) => {
-      alert(`Erro: ${error.message}`);
+      alert(`Error: ${error.message}`);
     },
   });
 
@@ -56,10 +56,9 @@ export default function AdminClients() {
     if (editingClient) {
       updateMutation.mutate({ id: editingClient.id, ...formData });
     } else {
-      // Adiciona country da configuration global ao criar cliente
       createMutation.mutate({
         ...formData,
-        country: 'Brasil'
+        country: 'United Kingdom'
       });
     }
   };
@@ -74,13 +73,12 @@ export default function AdminClients() {
       city: client.city || '',
       state: client.state || '',
       zipCode: client.zipCode || '',
-      cpf: client.cpf || '',
     });
     setShowEditDialog(true);
   };
 
   const handleDelete = (id: number) => {
-    if (confirm('Tem certeza que deseja excluir este cliente?')) {
+    if (confirm('Are you sure you want to delete this client?')) {
       deleteMutation.mutate({ id });
     }
   };
@@ -111,7 +109,7 @@ export default function AdminClients() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
-                  <Label>Nome Complete *</Label>
+                  <Label>Full Name *</Label>
                   <Input
                     required
                     value={formData.name || ''}
@@ -145,7 +143,7 @@ export default function AdminClients() {
                   />
                 </div>
 
-                {/* Country fixo baseado na configuration global */}
+                {/* Country fixed based on global configuration */}
                 <div>
                   <Label>Country</Label>
                   <Input
@@ -155,29 +153,18 @@ export default function AdminClients() {
                   />
                 </div>
 
-                {/* CPF (Brasil) */}
-                <div>
-                  <Label>CPF</Label>
-                  <Input
-                    value={formData.cpf || ''}
-                    onChange={(e) => setFormData({ ...formData, cpf: e.target.value })}
-                    placeholder="000.000.000-00"
-                    className="bg-gray-800 border-gray-700"
-                  />
-                </div>
-
                 <div className="col-span-2">
                   <Label>Address</Label>
                   <Input
                     value={formData.address || ''}
                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    placeholder="Rua, number, complemento"
+                    placeholder="Street, number, flat"
                     className="bg-gray-800 border-gray-700"
                   />
                 </div>
 
                 <div>
-                  <Label>Cidade</Label>
+                  <Label>City</Label>
                   <Input
                     value={formData.city || ''}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
@@ -186,21 +173,21 @@ export default function AdminClients() {
                 </div>
 
                 <div>
-                  <Label>Estado</Label>
+                  <Label>County</Label>
                   <Input
                     value={formData.state || ''}
                     onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                    placeholder="SP, RJ, MG..."
+                    placeholder="Greater London"
                     className="bg-gray-800 border-gray-700"
                   />
                 </div>
 
                 <div>
-                  <Label>CEP</Label>
+                  <Label>Postcode</Label>
                   <Input
                     value={formData.postalCode || ''}
                     onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
-                    placeholder="00000-000"
+                    placeholder="SW1A 1AA"
                     className="bg-gray-800 border-gray-700"
                   />
                 </div>
@@ -212,7 +199,7 @@ export default function AdminClients() {
                   Register Client
                 </Button>
                 <Button type="button" variant="outline" onClick={() => setShowCreateDialog(false)}>
-                  Cancsher
+                  Cancel
                 </Button>
               </div>
             </form>
@@ -235,7 +222,7 @@ export default function AdminClients() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
-                  <Label>Nome Complete *</Label>
+                  <Label>Full Name *</Label>
                   <Input
                     required
                     value={formData.name || ''}
@@ -274,13 +261,13 @@ export default function AdminClients() {
                   <Input
                     value={formData.address || ''}
                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    placeholder="Rua, number, bairro"
+                    placeholder="Street, number, flat"
                     className="bg-gray-800 border-gray-700"
                   />
                 </div>
 
                 <div>
-                  <Label>Cidade</Label>
+                  <Label>City</Label>
                   <Input
                     value={formData.city || ''}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
@@ -290,44 +277,34 @@ export default function AdminClients() {
                 </div>
 
                 <div>
-                  <Label>Estado</Label>
+                  <Label>County</Label>
                   <Input
                     value={formData.state || ''}
                     onChange={(e) => setFormData({ ...formData, state: e.target.value })}
-                    placeholder="SP, RJ, MG..."
+                    placeholder="Greater London"
                     className="bg-gray-800 border-gray-700"
                   />
                 </div>
 
                 <div className="col-span-2">
-                  <Label>CEP</Label>
+                  <Label>Postcode</Label>
                   <Input
                     value={formData.zipCode || ''}
                     onChange={(e) => setFormData({ ...formData, zipCode: e.target.value })}
-                    placeholder="00000-000"
+                    placeholder="SW1A 1AA"
                     className="bg-gray-800 border-gray-700"
                   />
                 </div>
 
-                {/* CPF (Brasil) */}
-                <div className="col-span-2">
-                  <Label>CPF</Label>
-                  <Input
-                    value={formData.cpf || ''}
-                    onChange={(e) => setFormData({ ...formData, cpf: e.target.value })}
-                    placeholder="000.000.000-00"
-                    className="bg-gray-800 border-gray-700"
-                  />
-                </div>
 
               </div>
 
               <div className="flex gap-4">
                 <Button type="submit" className="bg-yellow-600 hover:bg-yellow-700">
-                  Salvar Changes
+                  Save Changes
                 </Button>
                 <Button type="button" variant="outline" onClick={() => setShowEditDialog(false)}>
-                  Cancsher
+                  Cancel
                 </Button>
               </div>
             </form>
@@ -340,7 +317,7 @@ export default function AdminClients() {
           <table className="w-full">
             <thead className="bg-red-900">
               <tr>
-                <th className="px-6 py-4 text-left text-white font-semibold">Nome</th>
+                <th className="px-6 py-4 text-left text-white font-semibold">Name</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Email</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Phone</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">City/County</th>
@@ -353,9 +330,9 @@ export default function AdminClients() {
                 <tr>
                   <td colSpan={6} className="px-6 py-12 text-center text-gray-400">
                     <div className="flex flex-col items-center">
-                      <p className="text-xl mb-4">None cliente cadastrado</p>
+                      <p className="text-xl mb-4">No clients registered yet</p>
                       <Button onClick={() => setShowCreateDialog(true)} className="bg-red-600 hover:bg-red-700">
-                        Add First Cliente
+                        Add First Client
                       </Button>
                     </div>
                   </td>
@@ -369,7 +346,7 @@ export default function AdminClients() {
                     <td className="px-6 py-4 text-gray-300">
                       {client.city && client.state ? `${client.city}/${client.state}` : '-'}
                     </td>
-                    <td className="px-6 py-4 text-gray-300">Brasil</td>
+                    <td className="px-6 py-4 text-gray-300">United Kingdom</td>
                     <td className="px-6 py-4">
                       <div className="flex justify-center gap-2">
                         <Button
@@ -388,7 +365,7 @@ export default function AdminClients() {
                           className="bg-yellow-600 hover:bg-yellow-700 text-white border-0"
                           onClick={() => handleEdit(client)}
                         >
-                          Editar
+                          Edit
                         </Button>
                         <Button
                           size="sm"
@@ -396,7 +373,7 @@ export default function AdminClients() {
                           className="bg-red-600 hover:bg-red-700 text-white border-0"
                           onClick={() => handleDelete(client.id)}
                         >
-                          Excluir
+                          Delete
                         </Button>
                       </div>
                     </td>

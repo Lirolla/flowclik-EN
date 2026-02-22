@@ -23,7 +23,7 @@ export function PhoneInput({
     <div className={cn("phone-input-wrapper", className)}>
       <PhoneInputWithCountry
         international
-        defaultCountry="BR"
+        defaultCountry="GB"
         value={value}
         onChange={onChange}
         placeholder={placeholder}

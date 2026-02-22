@@ -34,10 +34,10 @@ const menuItems = [
   // Dashboard
   { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
   
-  // Separapain
+  // Separator
   { type: "separator" },
   
-  // Management Principal
+  // Main Management
   { icon: Users, label: "Clients", path: "/admin/clients" },
   { icon: Calendar, label: "Appointments", path: "/admin/appointments" },
   { icon: FolderOpen, label: "Gallery", path: "/admin/galleries" },
@@ -45,15 +45,15 @@ const menuItems = [
   { icon: MessageSquare, label: "Messages", path: "/admin/messages" },
   { icon: Mail, label: "Email Marketing", path: "/admin/email-marketing" },
   
-  // Separapain
+  // Separator
   { type: "separator", label: "Sales" },
   
-  // Vendas
+  // Sales
   { icon: DollarSign, label: "Event Sales", path: "/admin/event-sales", group: "vendas" },
   { icon: ImageIcon, label: "Stock Photos", path: "/admin/stock", group: "vendas" },
   { icon: ShoppingCart, label: "Orders", path: "/admin/orders", group: "vendas" },
   
-  // Separapain
+  // Separator
   { type: "separator", label: "Settings" },
   
   // Settings
@@ -62,20 +62,20 @@ const menuItems = [
   { icon: Camera, label: "Portfolio", path: "/admin/portfolio", group: "config" },
   { icon: FileText, label: "Contracts", path: "/admin/contracts", group: "config" },
   
-  // Separapain
+  // Separator
   { type: "separator", label: "System" },
   
-  // Sistema
-  { icon: CreditCard, label: "Signature", path: "/admin/subscription", group: "sistema" },
-  { icon: Globe, label: "Subscription", path: "/admin/domain-email", group: "sistema" },
+  // System
+  { icon: CreditCard, label: "Subscription", path: "/admin/subscription", group: "sistema" },
+  { icon: Globe, label: "Domain & Email", path: "/admin/domain-email", group: "sistema" },
   { icon: MessageSquare, label: "Support", path: "/admin/support", group: "sistema" },
   { icon: Settings, label: "Settings", path: "/admin/settings", group: "sistema" },
   
-  // Separapain
+  // Separator
   { type: "separator" },
   
-  // Link Externo
-  { icon: ExternalLink, label: "Ver Site", path: "/", external: true },
+  // External Link
+  { icon: ExternalLink, label: "View Site", path: "/", external: true },
 ];
 
 const SIDEBAR_WIDTH_KEY = "sidebar-width";
@@ -303,7 +303,7 @@ function DashboardLayoutContent({
                 const isActive = location === item.path;
                 const groupClass = item.group ? `group-${item.group}` : "";
                 
-                // Verify se item is bloqueado (tudo exceto Assinatura when expired)
+                // Check if item is locked (everything except Subscription when expired)
                 const isLocked = isExpired && item.path !== '/admin/subscription';
                 
                 return (
@@ -318,7 +318,7 @@ function DashboardLayoutContent({
                         }
                         item.path && setLocation(item.path);
                       }}
-                      tooltip={isLocked ? `${item.label} (Bloqueado)` : item.label}
+                      tooltip={isLocked ? `${item.label} (Locked)` : item.label}
                       className={`h-10 transition-all font-normal ${groupClass} ${isLocked ? 'opacity-50 cursor-not-allowed' : ''}`}
                     >
                       {isLocked ? (
@@ -395,14 +395,14 @@ function DashboardLayoutContent({
         <main className={`flex-1 p-4 ${isExpired ? "pt-12" : ""}`}>{children}</main>
       </SidebarInset>
       
-      {/* Banner de conta suspended */}
+      {/* Account suspended banner */}
       {isExpired && (
         <div className="fixed top-0 left-0 right-0 z-50 bg-red-600 text-white text-center py-2 px-4 text-sm font-medium shadow-lg">
-          🔒 Your conta is suspended. Acesse <button onClick={() => setLocation('/admin/subscription')} className="underline font-bold hover:text-red-100">Assinatura</button> para regularizar.
+          🔒 Your account is suspended. Go to <button onClick={() => setLocation('/admin/subscription')} className="underline font-bold hover:text-red-100">Subscription</button> to reactivate.
         </div>
       )}
       
-      {/* Modal de aviso de trial (only when not expirou still, faltam littles days) */}
+      {/* Trial warning modal (only when not expired yet, few days remaining) */}
       {!isExpired && showModal && (
         <TrialExpiredModal 
           isOpen={showModal} 
