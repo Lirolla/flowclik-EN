@@ -144,7 +144,7 @@ export default function AdminServices() {
             <Briefcase className="w-8 h-8" />
             Services
           </h1>
-          <p className="text-muted-foreground mt-2">Gerencie os photography services oferecidos</p>
+          <p className="text-muted-foreground mt-2">Manage the photography services offered</p>
         </div>
 
         <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
@@ -177,7 +177,7 @@ export default function AdminServices() {
                   id="slug"
                   value={slug}
                   onChange={(e) => setSlug(e.target.value)}
-                  placeholder="ensaio-fotografico"
+                  placeholder="photo-session"
                 />
               </div>
 
@@ -272,7 +272,7 @@ export default function AdminServices() {
                 id="edit-slug"
                 value={slug}
                 onChange={(e) => setSlug(e.target.value)}
-                placeholder="ensaio-fotografico"
+                placeholder="photo-session"
               />
             </div>
 

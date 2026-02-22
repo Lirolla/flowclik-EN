@@ -41,7 +41,7 @@ export default function EditorialNavbar({ currentPage }: EditorialNavbarProps) {
     { label: "Galleries", href: SITE_ROUTES.galleries(), id: "galerias" },
     { label: "Services", href: SITE_ROUTES.services(), id: "servicos" },
     { label: "Portfolio", href: SITE_ROUTES.portfolio(), id: "portfolio" },
-    ...(showStock ? [{ label: "Stock Photos", href: SITE_ROUTES.stockPhotos(), id: "fotos-stock" }] : []),
+    ...(showStock ? [{ label: "Stock Photos", href: SITE_ROUTES.stockPhotos(), id: "stock-photos" }] : []),
     ...(showVideo ? [{ label: "Videos", href: SITE_ROUTES.video(), id: "video" }] : []),
     { label: "About", href: SITE_ROUTES.about(), id: "about" },
     { label: "Contact", href: SITE_ROUTES.contact(), id: "contato" },

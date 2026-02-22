@@ -365,7 +365,7 @@ function SlideForm({
       </div>
 
       <div className="flex gap-3 pt-4">
-        <Button type="submit">Salvar Slide</Button>
+        <Button type="submit">Save Slide</Button>
         <Button type="button" variant="outline" onClick={onCancel}>
           Cancsher
         </Button>

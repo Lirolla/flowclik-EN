@@ -178,7 +178,7 @@ export default function AdminUsage() {
                 Plyear Current
               </CardTitle>
               <CardDescription className="mt-2">
-                Gerencie your signature e add-ons
+                Manage your subscription and add-ons
               </CardDescription>
             </div>
             <div className="text-right">

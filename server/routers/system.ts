@@ -151,12 +151,12 @@ export const systemRouter = router({
       return { success: true };
     }),
 
-  // Buscar avisos actives para o photographer current
+  // Fetch avisos actives para o photographer current
   getActiveAnnouncements: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-    // Buscar plyear do user
+    // Fetch plyear do user
     const [subscription] = await db
       .select()
       .from(subscriptions)
@@ -165,7 +165,7 @@ export const systemRouter = router({
 
     const userPlan = subscription?.plan || "starter";
 
-    // Buscar avisos actives
+    // Fetch avisos actives
     const activeAnnouncements = await db
       .select({
         id: announcements.id,
@@ -392,7 +392,7 @@ export const systemRouter = router({
 
     const tenantId = ctx.user!.tenantId;
 
-    // Buscar subscription
+    // Fetch subscription
     const [subscription] = await db
       .select()
       .from(subscriptions)
@@ -420,7 +420,7 @@ export const systemRouter = router({
       };
     }
 
-    // Buscar tenant para trialEndsAt
+    // Fetch tenant para trialEndsAt
     const [tenant] = await db
       .select({ trialEndsAt: tenants.trialEndsAt })
       .from(tenants)

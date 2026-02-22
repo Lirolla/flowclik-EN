@@ -113,7 +113,7 @@ export default function ClientGalleryAuth() {
     return (
       <ClientLayout appointmentId={appointmentId}>
         <div className="text-center py-12">
-          <p className="text-gray-400">Carregando galeria...</p>
+          <p className="text-gray-400">Loading gallery...</p>
         </div>
       </ClientLayout>
     );

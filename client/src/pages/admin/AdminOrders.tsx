@@ -110,7 +110,7 @@ export default function AdminOrders() {
             )}
           </h1>
           <p className="text-muted-foreground">
-            Gerencie pedidos de fotos stock — confirme pagamentos e libere downloads
+            Manage stock photo orders — confirm payments and release downloads
           </p>
         </div>
 

@@ -20,10 +20,10 @@ export default function AdminDomainEmail() {
   const [resendApiKey, setResendApiKey] = useState("");
   const [emailConfigured, setEmailConfigured] = useState(false);
 
-  // Buscar domains do tenant
+  // Fetch tenant domains
   const { data: domains, refetch: refetchDomains } = trpc.customDomains.list.useQuery();
 
-  // Buscar configuration de email
+  // Fetch email configuration
   const { data: emailConfig, refetch: refetchEmailConfig } = trpc.email.getConfig.useQuery();
 
   // Mutations de domain
@@ -56,7 +56,7 @@ export default function AdminDomainEmail() {
       toast.error("Digite um domain valid");
       return;
     }
-    // Limpar domain
+    // Clear domain
     let domain = customDomain.toLowerCase().trim();
     // Remover http:// ou https:// se o user colocou
     domain = domain.replace(/^https?:\/\//, "");

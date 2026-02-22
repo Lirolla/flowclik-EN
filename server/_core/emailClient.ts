@@ -1,5 +1,5 @@
 /**
- * Sistema de envio de emails para clientes
+ * Email sending system for clients
  * 
  * NOTA: Este is um sistema simulado que registra logs.
  * Para production, integre com:
@@ -35,7 +35,7 @@ const getEmailContent = (template: EmailTemplate, data: EmailData) => {
       body: `
 Hello ${data.clientName},
 
-Recebemos your pedido de agendamento!
+We have received your booking request!
 
 📅 Data: ${data.appointmentDate}
 ${data.appointmentTime ? `🕐 Time: ${data.appointmentTime}` : ''}
@@ -53,7 +53,7 @@ Team Lirolla
       body: `
 Hello ${data.clientName},
 
-Your agendamento foi CONFIRMADO! 🎉
+Your booking has been CONFIRMED! 🎉
 
 📅 Data: ${data.appointmentDate}
 ${data.appointmentTime ? `🕐 Time: ${data.appointmentTime}` : ''}
@@ -71,7 +71,7 @@ Team Lirolla
       body: `
 Hello ${data.clientName},
 
-Infelizmente your agendamento foi cancelled.
+Unfortunately your booking has been cancelled.
 
 Se you tiver alguma question ou quiser reagendar, get in touch conosco.
 
@@ -84,7 +84,7 @@ Team Lirolla
       body: `
 Hello ${data.clientName},
 
-Your ensaio photography foi realizado com sucesso! 📸
+Your photography session was completed successfully! 📸
 
 Now estamos trabalhando na editing das fotos. Em breve you will receive uma notification para shecionar yours favourite.
 
@@ -154,7 +154,7 @@ Team Lirolla
 };
 
 /**
- * Envia email para o cliente
+ * Send email to client
  * 
  * NOTA: Esta is uma implementação simulada que only registra logs.
  * Em production, substitua por integration real com service de email.
@@ -195,7 +195,7 @@ export async function sendClientEmail(
 }
 
 /**
- * Mapeia status do agendamento para template de email
+ * Map booking status to email template
  */
 export function getEmailTemplateForStatus(status: string): EmailTemplate | null {
   const mapping: Record<string, EmailTemplate> = {

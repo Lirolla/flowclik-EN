@@ -881,7 +881,7 @@ function AdminSettingsContent() {
                     ) : (
                       <label className="flex flex-col items-center justify-center w-full h-32 border-2 border-dashed rounded-lg cursor-pointer hover:bg-muted/50 transition-colors">
                         <Upload className="w-8 h-8 mb-2 text-muted-foreground" />
-                        <span className="text-sm text-muted-foreground">Clique para fazer upload</span>
+                        <span className="text-sm text-muted-foreground">Click to upload</span>
                         <input
                           type="file"
                           accept="image/*"
@@ -1128,7 +1128,7 @@ function AdminSettingsContent() {
                         ) : (
                           <label className="flex flex-col items-center justify-center w-full max-w-md aspect-video border-2 border-dashed rounded-lg cursor-pointer hover:bg-muted/50 transition-colors">
                             <Upload className="w-12 h-12 mb-2 text-muted-foreground" />
-                            <span className="text-sm font-medium text-muted-foreground">Clique para fazer upload</span>
+                            <span className="text-sm font-medium text-muted-foreground">Click to upload</span>
                             <span className="text-xs text-muted-foreground mt-1">Alta resolution (1920x1080 ou bigger)</span>
                             <input
                               type="file"

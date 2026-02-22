@@ -34,7 +34,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths } from "date-fns";
-import { ptBR } from "date-fns/locale";
+import { enGB } from "date-fns/locale";
 import DashboardLayout from "@/components/DashboardLayout";
 import { useCurrency } from "@/hooks/useCurrency";
 import { useToast } from "@/hooks/use-toast";
@@ -59,7 +59,7 @@ export default function AdminAppointments() {
   );
 }
 
-// Componente para aba de photography
+// Component for photography tab
 function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
@@ -72,7 +72,7 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
   const createGalleryMutation = trpc.sessionGallery.createForAppointment.useMutation({
     onSuccess: () => {
       toast({
-        title: "Gallery criada!",
+        title: "Gallery created!",
         description: "You can now upload the photos.",
       });
       window.location.reload();
@@ -91,12 +91,12 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
   };
 
   const handleCopyLink = () => {
-    const link = `${window.location.origin}/galeria-cliente/${appointmentId}`;
+    const link = `${window.location.origin}/client-gallery/${appointmentId}`;
     navigator.clipboard.writeText(link);
     setCopied(true);
     toast({
       title: "Link copied!",
-      description: "Envie este link para o cliente acessar as fotos.",
+      description: "Send this link to the client to access the photos.",
     });
     setTimeout(() => setCopied(false), 2000);
   };
@@ -109,16 +109,16 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
           No galleries created yet
         </h3>
         <p className="text-muted-foreground mb-6">
-          Crie uma galeria privada para fazer upload das fotos do ensaio
+          Create a private gallery to upload the session photos
         </p>
         <Button onClick={handleCreateGallery}>
-          Criar Gallery
+          Create Gallery
         </Button>
       </div>
     );
   }
 
-  const clientLink = `${window.location.origin}/galeria-cliente/${appointmentId}`;
+  const clientLink = `${window.location.origin}/client-gallery/${appointmentId}`;
 
   return (
     <div className="space-y-6">
@@ -127,7 +127,7 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
         <Card>
           <CardHeader>
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Total de Fotos
+              Total Photos
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -137,7 +137,7 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
         <Card>
           <CardHeader>
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Favourites do Cliente
+              Client Favourites
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -166,20 +166,20 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
       {/* Upload Section */}
       <Card>
         <CardHeader>
-          <CardTitle>Upload de Fotos</CardTitle>
+          <CardTitle>Photo Upload</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center py-6">
             <p className="text-muted-foreground mb-4">
-              Use a page de <strong>Galleries</strong> para fazer upload das fotos do ensaio
+              Use the <strong>Galleries</strong> page to upload the session photos
             </p>
             <Button asChild>
               <a href={`/admin/galleries/${galleryData.id}/upload`}>
-                Ir para Upload de Gallerys
+                Go to Gallery Upload
               </a>
             </Button>
             <p className="text-sm text-muted-foreground mt-4">
-              Dica: Select a galeria "{galleryData.name}" ao fazer upload
+              Tip: Select the gallery "{galleryData.name}" when uploading
             </p>
           </div>
         </CardContent>
@@ -247,13 +247,13 @@ function AdminAppointmentsContent() {
     onSuccess: () => {
       utils.downloadControl.getAllPermissions.invalidate();
       toast({
-        title: "Download atualizado!",
+        title: "Download updated!",
         description: "Download permission changed successfully.",
       });
     },
     onError: (error) => {
       toast({
-        title: "Erro ao atualizar download",
+        title: "Error updating download",
         description: error.message,
         variant: "destructive",
       });
@@ -272,13 +272,13 @@ function AdminAppointmentsContent() {
       }
       
       toast({
-        title: "Status atualizado!",
-        description: "O status do agendamento foi alterado com sucesso.",
+        title: "Status updated!",
+        description: "The booking status has been changed successfully.",
       });
     },
     onError: (error) => {
       toast({
-        title: "Erro ao atualizar status",
+        title: "Error updating status",
         description: error.message,
         variant: "destructive",
       });
@@ -309,13 +309,13 @@ function AdminAppointmentsContent() {
       utils.appointments.getAll.invalidate();
       toast({
         title: "Appointment deleted!",
-        description: "O agendamento foi removido com sucesso.",
+        description: "The booking has been removed successfully.",
       });
       setSelectedAppointment(null);
     },
     onError: (error) => {
       toast({
-        title: "Error dheting",
+        title: "Error deleting",
         description: error.message,
         variant: "destructive",
       });
@@ -327,7 +327,7 @@ function AdminAppointmentsContent() {
       utils.appointments.getAll.invalidate();
       toast({
         title: "Appointment created!",
-        description: "O agendamento manual foi criado com sucesso.",
+        description: "The manual booking has been created successfully.",
       });
       setIsCreateDialogOpen(false);
       setCreateFormData({
@@ -344,7 +344,7 @@ function AdminAppointmentsContent() {
     },
     onError: (error) => {
       toast({
-        title: "Erro ao criar agendamento",
+        title: "Error creating booking",
         description: error.message,
         variant: "destructive",
       });
@@ -381,7 +381,7 @@ function AdminAppointmentsContent() {
   };
 
   const handleDelete = (id: number) => {
-    if (confirm("Tem certeza que deseja excluir este agendamento?")) {
+    if (confirm("Are you sure you want to delete this booking?")) {
       deleteMutation.mutate({ id });
     }
   };
@@ -389,11 +389,11 @@ function AdminAppointmentsContent() {
   const getStatusConfig = (status: AppointmentStatus) => {
     const configs = {
       pending: { label: '⏳ Pending', color: 'bg-yellow-500/20 text-yellow-700 border-yellow-500/30' },
-      confirmed: { label: '✅ Confirmado', color: 'bg-green-500/20 text-green-700 border-green-500/30' },
-      session_done: { label: '📸 Ensaio Realizado', color: 'bg-blue-500/20 text-blue-700 border-blue-500/30' },
+      confirmed: { label: '✅ Confirmed', color: 'bg-green-500/20 text-green-700 border-green-500/30' },
+      session_done: { label: '📸 Session Done', color: 'bg-blue-500/20 text-blue-700 border-blue-500/30' },
       editing: { label: '🎨 Photos in Editing', color: 'bg-purple-500/20 text-purple-700 border-purple-500/30' },
       awaiting_selection: { label: '👀 Awaiting Selection', color: 'bg-orange-500/20 text-orange-700 border-orange-500/30' },
-      final_editing: { label: '✏️ Editando Shecionadas', color: 'bg-indigo-500/20 text-indigo-700 border-indigo-500/30' },
+      final_editing: { label: '✏️ Editing Selected', color: 'bg-indigo-500/20 text-indigo-700 border-indigo-500/30' },
       delivered: { label: '📦 Delivered', color: 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30' },
       cancelled: { label: '❌ Cancelled', color: 'bg-red-500/20 text-red-700 border-red-500/30' },
     };
@@ -432,10 +432,10 @@ function AdminAppointmentsContent() {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <Calendar className="w-8 h-8" />
-            Agendamentos
+            Bookings
           </h1>
           <p className="text-muted-foreground mt-2">
-            Gerencie o fluxo de trabalho complete dos agendamentos
+            Manage the complete booking workflow
           </p>
         </div>
         <div className="flex gap-3">
@@ -457,12 +457,12 @@ function AdminAppointmentsContent() {
               className="gap-2"
             >
               <List className="w-4 h-4" />
-              Lista
+              List
             </Button>
           </div>
           <Button onClick={() => setIsCreateDialogOpen(true)} className="gap-2">
             <Calendar className="w-4 h-4" />
-            New Agendamento
+            New Booking
           </Button>
         </div>
       </div>
@@ -480,7 +480,7 @@ function AdminAppointmentsContent() {
               <ChevronLeft className="w-4 h-4" />
             </Button>
             <CardTitle className="text-2xl">
-              {format(currentMonth, "MMMM 'de' yyyy", { locale: ptBR })}
+              {format(currentMonth, "MMMM yyyy", { locale: enGB })}
             </CardTitle>
             <Button
               variant="outline"
@@ -562,34 +562,34 @@ function AdminAppointmentsContent() {
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle>Everys os Agendamentos</CardTitle>
+              <CardTitle>All Bookings</CardTitle>
               <div className="flex gap-3">
-                {/* Busca */}
+                {/* Search */}
                 <Input
                   placeholder="Search by client..."
                   value={searchTerm}
                   onChange={(e) => {
                     setSearchTerm(e.target.value);
-                    setCurrentPage(1); // Resetar para first page
+                    setCurrentPage(1); // Reset to first page
                   }}
                   className="w-64"
                 />
-                {/* Filtro de Status */}
+                {/* Status Filter */}
                 <select
                   value={statusFilter}
                   onChange={(e) => {
                     setStatusFilter(e.target.value as AppointmentStatus | 'all');
-                    setCurrentPage(1); // Resetar para first page
+                    setCurrentPage(1); // Reset to first page
                   }}
                   className="border rounded px-3 py-2 bg-background"
                 >
-                  <option value="all">Everys os Status</option>
+                  <option value="all">All Statuses</option>
                   <option value="pending">⏳ Pending</option>
-                  <option value="confirmed">✅ Confirmado</option>
-                  <option value="session_done">📸 Ensaio Realizado</option>
+                  <option value="confirmed">✅ Confirmed</option>
+                  <option value="session_done">📸 Session Done</option>
                   <option value="editing">🎨 Photos in Editing</option>
                   <option value="awaiting_selection">👀 Awaiting Selection</option>
-                  <option value="final_editing">✏️ Editando Shecionadas</option>
+                  <option value="final_editing">✏️ Editing Selected</option>
                   <option value="delivered">📦 Delivered</option>
                   <option value="cancelled">❌ Cancelled</option>
                 </select>
@@ -601,17 +601,17 @@ function AdminAppointmentsContent() {
               <div className="text-center py-8 text-muted-foreground">Loading...</div>
             ) : !appointments || appointments.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
-                None agendamento encontrado
+                No bookings found
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
                     <tr className="border-b">
-                      <th className="text-left py-3 px-4 font-semibold">Data/Hour</th>
-                      <th className="text-left py-3 px-4 font-semibold">Cliente</th>
+                      <th className="text-left py-3 px-4 font-semibold">Date/Time</th>
+                      <th className="text-left py-3 px-4 font-semibold">Client</th>
                       <th className="text-left py-3 px-4 font-semibold">Service</th>
-                      <th className="text-left py-3 px-4 font-semibold">Local</th>
+                      <th className="text-left py-3 px-4 font-semibold">Location</th>
                       <th className="text-left py-3 px-4 font-semibold">Status</th>
                     </tr>
                   </thead>
@@ -620,11 +620,11 @@ function AdminAppointmentsContent() {
                       // Filtrar agendamentos
                       const filteredAppointments = appointments
                         .filter((apt) => {
-                          // Filtro de busca por nome do cliente
+                          // Search filter by client name
                           const matchesSearch = searchTerm === '' || 
                             apt.clientName.toLowerCase().includes(searchTerm.toLowerCase());
                           
-                          // Filtro de status
+                          // Status filter
                           const matchesStatus = statusFilter === 'all' || apt.status === statusFilter;
                           
                           return matchesSearch && matchesStatus;
@@ -652,7 +652,7 @@ function AdminAppointmentsContent() {
                             <td className="py-3 px-4">
                               <div className="flex flex-col">
                                 <span className="font-medium">
-                                  {format(new Date(apt.appointmentDate), "dd/MM/yyyy", { locale: ptBR })}
+                                  {format(new Date(apt.appointmentDate), "dd/MM/yyyy", { locale: enGB })}
                                 </span>
                                 <span className="text-sm text-muted-foreground">
                                   {apt.appointmentTime || '10:00'}
@@ -707,9 +707,9 @@ function AdminAppointmentsContent() {
 
               return (
                 <div className="mt-4 flex items-center justify-between">
-                  {/* Contapain */}
+                  {/* Counter */}
                   <div className="text-sm text-muted-foreground">
-                    Mostrando {startIndex + 1}-{endIndex} de {totalItems} agendamentos
+                    Showing {startIndex + 1}-{endIndex} of {totalItems} bookings
                   </div>
 
                   {/* Controles de navegação */}
@@ -724,10 +724,10 @@ function AdminAppointmentsContent() {
                         Previous
                       </Button>
 
-                      {/* Numbers de pages */}
+                      {/* Page numbers */}
                       <div className="flex gap-1">
                         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-                          // Show only 5 pages por vez
+                          // Show only 5 pages at a time
                           if (
                             page === 1 ||
                             page === totalPages ||
@@ -821,16 +821,16 @@ function AdminAppointmentsContent() {
                   variant="outline"
                   size="sm"
                   onClick={() => {
-                    const galleryUrl = `${window.location.origin}/galeria-cliente/${selectedAppointment.id}`;
+                    const galleryUrl = `${window.location.origin}/client-gallery/${selectedAppointment.id}`;
                     navigator.clipboard.writeText(galleryUrl);
                     toast({
                       title: "Link copied!",
-                      description: "Envie este link para o cliente visualizar as fotos.",
+                      description: "Send this link to the client to view the photos.",
                     });
                   }}
                 >
                   <Copy className="w-4 h-4 mr-2" />
-                  Copiar Link Cliente
+                  Copy Client Link
                 </Button>
                 {(() => {
                   // Find collection for this appointment
@@ -851,9 +851,9 @@ function AdminAppointmentsContent() {
                       className={isAllowed ? "bg-green-600 hover:bg-green-700" : ""}
                     >
                       {isAllowed ? (
-                        <><Unlock className="w-4 h-4 mr-2" /> Download Liberado</>
+                        <><Unlock className="w-4 h-4 mr-2" /> Download Enabled</>
                       ) : (
-                        <><Lock className="w-4 h-4 mr-2" /> Download Bloqueado</>
+                        <><Lock className="w-4 h-4 mr-2" /> Download Blocked</>
                       )}
                     </Button>
                   );
@@ -891,7 +891,7 @@ function AdminAppointmentsContent() {
             {/* Service Name - Destacado */}
             {(selectedAppointment.customServiceName || selectedAppointment.serviceName) && (
               <div className="p-4 bg-accent/10 border-l-4 border-accent rounded">
-                <div className="text-sm text-muted-foreground mb-1">Service Photographer</div>
+                <div className="text-sm text-muted-foreground mb-1">Photography Service</div>
                 <div className="text-xl font-bold text-accent">{selectedAppointment.customServiceName || selectedAppointment.serviceName}</div>
                 {selectedAppointment.servicePrice && (
                   <div className="text-sm text-muted-foreground mt-1">
@@ -952,7 +952,7 @@ function AdminAppointmentsContent() {
                   <div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                       <Users className="w-4 h-4" />
-                      Pessoas
+                      People
                     </div>
                     <div className="text-sm">{selectedAppointment.numberOfPeople}</div>
                   </div>
@@ -1055,7 +1055,7 @@ function AdminAppointmentsContent() {
                       disabled={updateStatusMutation.isPending}
                       className="flex-1"
                     >
-                      ❌ Recusar
+                      ❌ Decline
                     </Button>
                   </div>
                 )}
@@ -1083,12 +1083,12 @@ function AdminAppointmentsContent() {
       <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Editar Agendamento</DialogTitle>
+            <DialogTitle>Edit Booking</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="edit-date">Data</Label>
+                <Label htmlFor="edit-date">Date</Label>
                 <Input
                   id="edit-date"
                   type="date"
@@ -1107,7 +1107,7 @@ function AdminAppointmentsContent() {
               </div>
             </div>
             <div>
-              <Label htmlFor="edit-location">Local</Label>
+              <Label htmlFor="edit-location">Location</Label>
               <Input
                 id="edit-location"
                 value={editFormData.eventLocation}
@@ -1148,7 +1148,7 @@ function AdminAppointmentsContent() {
       <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>New Agendamento Manual</DialogTitle>
+            <DialogTitle>New Manual Booking</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div>
@@ -1163,7 +1163,7 @@ function AdminAppointmentsContent() {
                   setCreateFormData({ ...createFormData, clientId: newClientId });
                 }}
               >
-                <option value={0}>Select um cliente</option>
+                <option value={0}>Select a client</option>
                 {clients?.map((client) => (
                   <option key={client.id} value={client.id}>
                     {client.name} - {client.email}
@@ -1204,16 +1204,16 @@ function AdminAppointmentsContent() {
             <div className="p-3 bg-accent/5 border border-dashed border-accent/30 rounded-lg space-y-3">
               <p className="text-xs text-muted-foreground font-medium">Customise service and price (overrides the selected service above)</p>
               <div>
-                <Label htmlFor="create-custom-service">Description do Service</Label>
+                <Label htmlFor="create-custom-service">Service Description</Label>
                 <Input
                   id="create-custom-service"
-                  placeholder="Ex: Fotos Senyourl, Ensaio Gestante..."
+                  placeholder="Ex: Senior Photos, Maternity Shoot..."
                   value={createFormData.customServiceName}
                   onChange={(e) => setCreateFormData({ ...createFormData, customServiceName: e.target.value })}
                 />
               </div>
               <div>
-                <Label htmlFor="create-custom-price">Valor (£)</Label>
+                <Label htmlFor="create-custom-price">Price (£)</Label>
                 <Input
                   id="create-custom-price"
                   type="number"
@@ -1228,7 +1228,7 @@ function AdminAppointmentsContent() {
 
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="create-date">Data *</Label>
+                <Label htmlFor="create-date">Date *</Label>
                 <Input
                   id="create-date"
                   type="date"
@@ -1248,12 +1248,12 @@ function AdminAppointmentsContent() {
             </div>
 
             <div>
-              <Label htmlFor="create-location">Local do Evento</Label>
+              <Label htmlFor="create-location">Event Location</Label>
               <Input
                 id="create-location"
                 value={createFormData.eventLocation}
                 onChange={(e) => setCreateFormData({ ...createFormData, eventLocation: e.target.value })}
-                placeholder="Address do evento"
+                placeholder="Event address"
               />
             </div>
 
@@ -1275,7 +1275,7 @@ function AdminAppointmentsContent() {
                 value={createFormData.notes}
                 onChange={(e) => setCreateFormData({ ...createFormData, notes: e.target.value })}
                 rows={3}
-                placeholder="Details adicionais about o agendamento"
+                placeholder="Additional details about the booking"
               />
             </div>
 
@@ -1294,7 +1294,7 @@ function AdminAppointmentsContent() {
                   if (!createFormData.clientId || !createFormData.appointmentDate) {
                     toast({
                       title: "Required fields",
-                      description: "Select um cliente e uma data.",
+                      description: "Please select a client and a date.",
                       variant: "destructive",
                     });
                     return;
@@ -1321,7 +1321,7 @@ function AdminAppointmentsContent() {
                 disabled={createManualMutation.isPending}
                 className="flex-1"
               >
-                {createManualMutation.isPending ? "Creating..." : "Criar Agendamento"}
+                {createManualMutation.isPending ? "Creating..." : "Create Booking"}
               </Button>
             </div>
           </div>

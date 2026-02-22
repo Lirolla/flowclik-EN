@@ -81,7 +81,7 @@ export const defaultEmailTemplates = [
       <p style="font-size:14px;color:#555;margin:8px 0 0;">Confira os details e get in touch caso precise de alguma change.</p>
     </div>
     <p style="font-size:16px;color:#555;line-height:1.6;">Estamos ansiosos para esse day! Wedlquer question, is only respwherer este email.</p>
-    <p style="font-size:16px;color:#555;">Atis breve,<br><strong>{{fotografo}}</strong></p>
+    <p style="font-size:16px;color:#555;">See you soon,<br><strong>{{fotografo}}</strong></p>
   </div>
   <div style="background:#f8f9fa;padding:20px;text-align:center;border-top:1px solid #eee;">
     <p style="font-size:12px;color:#999;margin:0;">Shipped com ❤️ via FlowClik</p>

@@ -12,7 +12,7 @@ export async function checkStorageLimit(ctx: any, fileSizeBytes: number) {
   const db = await getDb();
   if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-  // Buscar signature do tenant
+  // Fetch signature do tenant
   const [subscription] = await db
     .select()
     .from(subscriptions)
@@ -51,7 +51,7 @@ export async function checkStorageLimit(ctx: any, fileSizeBytes: number) {
 }
 
 /**
- * Verifica se tenant atingiu limite de galerias
+ * Verifica se tenant atingiu limite de gallerys
  * Bloqueia criação se quantidade >= limite do plyear
  */
 export async function checkGalleryLimit(ctx: any) {
@@ -59,7 +59,7 @@ export async function checkGalleryLimit(ctx: any) {
   const db = await getDb();
   if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-  // Buscar signature do tenant
+  // Fetch signature do tenant
   const [subscription] = await db
     .select()
     .from(subscriptions)
@@ -73,7 +73,7 @@ export async function checkGalleryLimit(ctx: any) {
     });
   }
 
-  // Contar galerias existentes
+  // Contar gallerys existentes
   const [result] = await db
     .select({ count: sql<number>`COUNT(*)` })
     .from(collections)
@@ -81,7 +81,7 @@ export async function checkGalleryLimit(ctx: any) {
 
   const galleryCount = Number(result?.count || 0);
 
-  console.log(`[Gallery Check] Tenant ${tenantId}: ${galleryCount} / ${subscription.galleryLimit} galerias`);
+  console.log(`[Gallery Check] Tenant ${tenantId}: ${galleryCount} / ${subscription.galleryLimit} gallerys`);
 
   // Verify se atingiu o limite
   if (galleryCount >= subscription.galleryLimit) {
@@ -109,7 +109,7 @@ async function calculateStorageUsed(tenantId: number): Promise<number> {
   const db = await getDb();
   if (!db) return 0;
   
-  // Buscar everys as fotos do tenant
+  // Fetch everys as fotos do tenant
   const photos = await db
     .select()
     .from(mediaItems)
@@ -177,7 +177,7 @@ export async function checkUsageWarnings(ctx: any) {
     warnings.push(`⚠️ Storage alto: ${Math.round(storagePercent)}% used`);
   }
 
-  // Verify galerias
+  // Verify gallerys
   const [result] = await db
     .select({ count: sql<number>`COUNT(*)` })
     .from(collections)

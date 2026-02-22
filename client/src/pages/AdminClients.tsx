@@ -132,7 +132,7 @@ export default function AdminClients() {
                 </div>
 
                 <div>
-                  <Label>Telefone</Label>
+                  <Label>Phone</Label>
                   <PhoneInput
                     value={formData.phone || ''}
                     onChange={(value) => {
@@ -256,7 +256,7 @@ export default function AdminClients() {
                 </div>
 
                 <div>
-                  <Label>Telefone</Label>
+                  <Label>Phone</Label>
                   <PhoneInput
                     value={formData.phone || ''}
                     onChange={(value) => {
@@ -342,7 +342,7 @@ export default function AdminClients() {
               <tr>
                 <th className="px-6 py-4 text-left text-white font-semibold">Nome</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Email</th>
-                <th className="px-6 py-4 text-left text-white font-semibold">Telefone</th>
+                <th className="px-6 py-4 text-left text-white font-semibold">Phone</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Cidade/Estado</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Country</th>
                 <th className="px-6 py-4 text-center text-white font-semibold">Actions</th>

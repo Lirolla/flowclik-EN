@@ -487,7 +487,7 @@ export default function AdminSettings() {
                   Salvando...
                 </>
               ) : (
-                "Salvar Everys as Settings"
+                "Save All Settings"
               )}
             </Button>
           </div>

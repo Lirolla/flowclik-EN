@@ -137,7 +137,7 @@ export default function SharedAlbum() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-white text-xl">Carregando album...</div>
+        <div className="text-white text-xl">Loading album...</div>
       </div>
     );
   }

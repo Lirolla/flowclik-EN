@@ -204,7 +204,7 @@ export default function AdminSubscription() {
         {/* Header */}
         <div>
           <h1 className="text-3xl font-bold">Assinatura & Uso</h1>
-          <p className="text-muted-foreground">Gerencie your plyear, add-ons e monitore o uso de recursos</p>
+          <p className="text-muted-foreground">Manage your plan, add-ons and monitor resource usage</p>
         </div>
 
         {/* Banner de Trial */}

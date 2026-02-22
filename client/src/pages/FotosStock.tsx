@@ -14,7 +14,7 @@ export default function FotosStock() {
   const { format } = useCurrency();
 
   return (
-    <LayoutWrapper currentPage="fotos-stock">
+    <LayoutWrapper currentPage="stock-photos">
 
       <div className="pt-32 pb-24 px-4">
         <div className="container mx-auto max-w-7xl">
@@ -29,7 +29,7 @@ export default function FotosStock() {
           {/* Loading State */}
           {isLoading && (
             <div className="text-center py-12">
-              <p className="text-muted-foreground">Carregando fotos...</p>
+              <p className="text-muted-foreground">Loading photos...</p>
             </div>
           )}
 

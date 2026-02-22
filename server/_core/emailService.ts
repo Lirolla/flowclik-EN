@@ -195,7 +195,7 @@ export function templateShecaoFotos(data: {
 }): string {
   return baseTemplate(`
     <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">👀 Select Yours Fotos Favourites!</h1>
-    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Escolha as betteres para editing final</p>
+    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Choose the best ones for final editing</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
       Hello <strong>${data.clientName}</strong>,
@@ -217,7 +217,7 @@ export function templateShecaoFotos(data: {
   `, `Email sent por ${data.photographerName} via FlowClik`);
 }
 
-export function templateLinkPagamento(data: {
+export function templatePaymentLink(data: {
   clientName: string;
   photographerName: string;
   description: string;
@@ -225,8 +225,8 @@ export function templateLinkPagamento(data: {
   paymentUrl: string;
 }): string {
   return baseTemplate(`
-    <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">💳 Link de Pagamento</h1>
-    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Pagamento seguro e fast</p>
+    <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">💳 Payment Link</h1>
+    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Secure and fast payment</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
       Hello <strong>${data.clientName}</strong>,
@@ -240,10 +240,10 @@ export function templateLinkPagamento(data: {
       { label: "💰 Valor", value: data.amount },
     ])}
 
-    ${emailButton("💳 Realizar Pagamento", data.paymentUrl, "#22c55e")}
+    ${emailButton("💳 Make Payment", data.paymentUrl, "#22c55e")}
 
     <p style="color: #6b7280; font-size: 13px; margin-top: 15px; text-align: center;">
-      Pagamento processado de forma segura.
+      Payment processed securely.
     </p>
   `, `Email sent por ${data.photographerName} via FlowClik`);
 }
@@ -309,7 +309,7 @@ export function templateBoasVindasFotografo(data: {
       <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Adicione yours services e prices</td></tr>
       <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Make upload do your portfolio</td></tr>
       <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Configure yours times available</td></tr>
-      <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Compartilhe your link com clientes!</td></tr>
+      <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Share your link with clients!</td></tr>
     </table>
 
     ${emailButton("🚀 Acessar Meu Painel", data.loginUrl)}
@@ -329,19 +329,19 @@ export function templateNewAgendamento(data: {
 }): string {
   return baseTemplate(`
     <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">📅 New Agendamento!</h1>
-    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Um cliente acabou de agendar</p>
+    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">A client has just booked</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
       Hello <strong>${data.photographerName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      You recebeu um new agendamento! Confira os details:
+      You have received a new booking! Check the details:
     </p>
 
     ${detailsCard([
       { label: "👤 Cliente", value: data.clientName },
       { label: "📧 Email", value: data.clientEmail },
-      ...(data.clientPhone ? [{ label: "📱 Telefone", value: data.clientPhone }] : []),
+      ...(data.clientPhone ? [{ label: "📱 Phone", value: data.clientPhone }] : []),
       { label: "📸 Service", value: data.serviceName },
       { label: "📅 Data", value: data.date },
       { label: "🕐 Time", value: data.time },
@@ -431,7 +431,7 @@ export function templateExpiryPlyear(data: {
       Your plyear <strong style="color: #f59e0b;">${data.planName}</strong> vence em <strong style="color: #f59e0b;">${data.expiryDate}</strong>.
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Renove now para not perder acesso ao your site, galerias e agendamentos.
+      Renew now to keep access to your site, galleries and bookings.
     </p>
 
     ${detailsCard([
@@ -593,7 +593,7 @@ export async function enviarEmailShecaoFotos(data: {
   });
 }
 
-export async function enviarEmailLinkPagamento(data: {
+export async function sendPaymentLinkEmail(data: {
   clientName: string;
   clientEmail: string;
   photographerName: string;
@@ -603,8 +603,8 @@ export async function enviarEmailLinkPagamento(data: {
 }): Promise<boolean> {
   return sendFlowClikEmail({
     to: data.clientEmail,
-    subject: `💳 Link de Pagamento - ${data.photographerName}`,
-    html: templateLinkPagamento(data),
+    subject: `💳 Payment Link - ${data.photographerName}`,
+    html: templatePaymentLink(data),
   });
 }
 

@@ -5,7 +5,7 @@ import { users } from "../../drizzle/schema";
 import { eq, sql , and } from "drizzle-orm";
 
 export const clientsRouter = router({
-  // Listar everys os clientes
+  // Listar everys os clients
   list: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) return [];
@@ -34,7 +34,7 @@ export const clientsRouter = router({
     return clients;
   }),
 
-  // Buscar cliente por ID
+  // Fetch client por ID
   getById: protectedProcedure
     .input(z.object({ id: z.number() }))
     .query(async ({ input, ctx }) => {
@@ -54,7 +54,7 @@ export const clientsRouter = router({
       return client;
     }),
 
-  // Criar new cliente
+  // Criar new client
   create: protectedProcedure
     .input(
       z.object({
@@ -88,7 +88,7 @@ export const clientsRouter = router({
       }
 
 
-      // Criar cliente
+      // Criar client
       const [newClient] = await db.insert(users).values({
         tenantId: getTenantId(ctx),
         openId: `manual_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
@@ -111,7 +111,7 @@ export const clientsRouter = router({
       return { success: true, id: newClient.insertId };
     }),
 
-  // Atualizar cliente
+  // Atualizar client
   update: protectedProcedure
     .input(
       z.object({
@@ -141,7 +141,7 @@ export const clientsRouter = router({
       return { success: true };
     }),
 
-  // Dhetar cliente
+  // Dhetar client
   delete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {

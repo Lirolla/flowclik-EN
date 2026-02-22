@@ -91,7 +91,7 @@ export const mediaRouter = router({
         "image/jpeg"
       );
 
-      // Salvar no banco
+      // Save no banco
       await db
         .insert(mediaItems)
         .values({
@@ -110,7 +110,7 @@ export const mediaRouter = router({
           tenantId: getTenantId(ctx),
         });
 
-      // Buscar o item inserido
+      // Fetch o item inserido
       const inserted = await db
         .select()
         .from(mediaItems)
@@ -191,7 +191,7 @@ export const mediaRouter = router({
         .set(updateData)
         .where(and(eq(mediaItems.id, id), eq(mediaItems.tenantId, getTenantId(ctx))));
 
-      // Buscar item atualizado
+      // Fetch item atualizado
       const updated = await db
         .select()
         .from(mediaItems)

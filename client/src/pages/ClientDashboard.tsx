@@ -251,7 +251,7 @@ export default function ClientDashboard() {
         <Card className="bg-gradient-to-r from-red-900/20 to-gray-900 border-red-600 p-6">
           <h3 className="text-xl font-semibold mb-3">Nexts Steps</h3>
           {appointment.status === 'pending' && (
-            <p className="text-gray-300">Awaiting confirmation do photographer. You will receive uma notification em breve!</p>
+            <p className="text-gray-300">Awaiting confirmation from the photographer. You will receive a notification shortly!</p>
           )}
           {appointment.status === 'confirmed' && (
             <p className="text-gray-300">Your ensaio is confirmado para {appointment.date && new Date(appointment.date).toLocaleDateString('en-GB')}. Prepare-se!</p>

@@ -134,11 +134,11 @@ export async function initializeTenantStorage(tenantId: number): Promise<void> {
  */
 export const R2Paths = {
   /**
-   * Path para fotos de galeria
+   * Path para fotos de gallery
    * @example tenant-1/galleries/casamento-maria/originais/foto.jpg
    */
-  galeria: (tenantId: number, galeriaSlug: string, tipo: 'originais' | 'thumbnails' | 'preview', filename: string) => {
-    return `tenant-${tenantId}/galleries/${galeriaSlug}/${tipo}/${filename}`;
+  gallery: (tenantId: number, gallerySlug: string, tipo: 'originais' | 'thumbnails' | 'preview', filename: string) => {
+    return `tenant-${tenantId}/galleries/${gallerySlug}/${tipo}/${filename}`;
   },
 
   /**
@@ -184,7 +184,7 @@ export const R2Paths = {
   /**
    * Path para settings e uploads genisricos
    * @example tenant-1/config/logo.jpg
-   * @example tenant-1/config/capa-galeria-123.jpg
+   * @example tenant-1/config/capa-gallery-123.jpg
    */
   config: (tenantId: number, filename: string) => {
     return `tenant-${tenantId}/config/${filename}`;

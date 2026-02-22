@@ -30,10 +30,10 @@ export default function OrderStatus() {
 
   const getStatusInfo = (status: string) => {
     const map: Record<string, { label: string; icon: any; color: string; desc: string }> = {
-      pending: { label: "Awaiting Pagamento", icon: Clock, color: "text-yellow-500", desc: "Realize o pagamento para liberar o download das fotos." },
+      pending: { label: "Awaiting Payment", icon: Clock, color: "text-yellow-500", desc: "Complete the payment to unlock the photo download." },
       paid: { label: "Paid", icon: Check, color: "text-green-500", desc: "Payment confirmed! Yours fotos are available para download." },
       processing: { label: "Processing", icon: Clock, color: "text-blue-500", desc: "Your pedido is sendo processado." },
-      completed: { label: "Completed", icon: Check, color: "text-green-600", desc: "Pedido completed. Make o download das yours fotos." },
+      completed: { label: "Completed", icon: Check, color: "text-green-600", desc: "Order completed. Download your photos." },
       cancelled: { label: "Cancelled", icon: XIcon, color: "text-red-500", desc: "Este pedido foi cancelled." },
     };
     return map[status] || map.pending;
@@ -43,7 +43,7 @@ export default function OrderStatus() {
     if (!method) return "";
     const map: Record<string, string> = {
       pix: "Bank transfer",
-      payment_link: "Link de Pagamento",
+      payment_link: "Payment Link",
       bank_transfer: "Bank Transfer",
     };
     return map[method] || method;
@@ -79,7 +79,7 @@ export default function OrderStatus() {
                   </div>
                   <Button onClick={handleSearch} disabled={isLoading || !email.includes("@")} className="w-full">
                     <Search className="w-4 h-4 mr-2" />
-                    {isLoading ? "Verifying..." : "Verify Pedido"}
+                    {isLoading ? "Verifying..." : "Verify Order"}
                   </Button>
                   {searched && !order && !isLoading && (
                     <p className="text-red-500 text-sm text-center">
@@ -115,7 +115,7 @@ export default function OrderStatus() {
                   <Card className="border-purple-500/30">
                     <CardContent className="p-6 text-center space-y-3">
                       <Link2 className="w-8 h-8 mx-auto text-purple-500" />
-                      <h3 className="font-semibold">Link de Pagamento Available</h3>
+                      <h3 className="font-semibold">Payment Link Available</h3>
                       <Button onClick={() => window.open(order.paymentLink!, "_blank")} className="bg-purple-600 hover:bg-purple-700">
                         <ExternalLink className="w-4 h-4 mr-2" />
                         Ir para Pagamento

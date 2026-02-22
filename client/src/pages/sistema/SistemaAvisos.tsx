@@ -30,7 +30,7 @@ export default function SistemaAvisos() {
 
   const handleCreate = async () => {
     if (!title.trim() || !message.trim()) {
-      toast.error("Preencha title e message");
+      toast.error("Please fill in title and message");
       return;
     }
 
@@ -125,7 +125,7 @@ export default function SistemaAvisos() {
             </div>
 
             <div>
-              <label className="text-sm font-medium mb-2 block">Enviar para</label>
+              <label className="text-sm font-medium mb-2 block">Send to</label>
               <Select value={targetPlan} onValueChange={(v: any) => setTargetPlan(v)}>
                 <SelectTrigger>
                   <SelectValue />

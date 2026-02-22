@@ -251,7 +251,7 @@ export default function SistemaTickets() {
                   <div className="flex gap-2">
                     <Button onClick={handleReply} disabled={replyToTicket.isPending}>
                       <Send className="h-4 w-4 mr-2" />
-                      {replyToTicket.isPending ? "Sending..." : "Enviar Reply"}
+                      {replyToTicket.isPending ? "Sending..." : "Send Reply"}
                     </Button>
                     {ticketDetails.ticket.status !== "resolved" && (
                       <Button

@@ -54,7 +54,7 @@ export default function ClientFinalAlbum() {
     if (!downloadUrls || downloadUrls.length === 0) {
       toast({
         title: "Error",
-        description: "Nenhuma foto edited available para download.",
+        description: "No edited photos available for download.",
         variant: "destructive",
       });
       return;
@@ -116,7 +116,7 @@ export default function ClientFinalAlbum() {
   if (collectionLoading || photosLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background">
-        <div className="text-muted-foreground">Carregando album...</div>
+        <div className="text-muted-foreground">Loading album...</div>
       </div>
     );
   }

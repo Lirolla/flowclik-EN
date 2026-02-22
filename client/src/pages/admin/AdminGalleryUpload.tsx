@@ -294,7 +294,7 @@ export default function AdminGalleryUpload() {
             />
             <Button asChild>
               <label htmlFor="file-input" className="cursor-pointer">
-                Shecionar Arquivos
+                Select Files
               </label>
             </Button>
           </div>

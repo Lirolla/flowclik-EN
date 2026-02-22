@@ -48,7 +48,7 @@ function AdminSessionGalleryContent() {
   };
 
   const handleCopyLink = () => {
-    const link = `${window.location.origin}/galeria-cliente/${appointmentId}`;
+    const link = `${window.location.origin}/client-gallery/${appointmentId}`;
     navigator.clipboard.writeText(link);
     setCopied(true);
     toast({
@@ -86,7 +86,7 @@ function AdminSessionGalleryContent() {
     );
   }
 
-  const clientLink = `${window.location.origin}/galeria-cliente/${appointmentId}`;
+  const clientLink = `${window.location.origin}/client-gallery/${appointmentId}`;
 
   return (
     <div className="space-y-6">

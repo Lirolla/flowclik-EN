@@ -297,10 +297,10 @@ function AdminContractsContent() {
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground mb-4">
-            Select um agendamento e um modelo de contrato. Os dados do cliente, service, data e valor will be preenchidos automaticamente.
+            Please select a booking and a template de contrato. Os dados do cliente, service, data e valor will be preenchidos automaticamente.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Shecionar Agendamento */}
+            {/* Select Booking */}
             <div>
               <Label>1. Select o Agendamento</Label>
               <select
@@ -317,7 +317,7 @@ function AdminContractsContent() {
               </select>
             </div>
 
-            {/* Shecionar Template */}
+            {/* Select Template */}
             <div>
               <Label>2. Select o Contract Template</Label>
               <select
@@ -356,7 +356,7 @@ function AdminContractsContent() {
             <Button
               onClick={() => {
                 if (!selectedTemplateId || !selectedAppointmentId) {
-                  toast({ title: "Select um agendamento e um modelo", variant: "destructive" });
+                  toast({ title: "Please select a booking and a template", variant: "destructive" });
                   return;
                 }
                 generateFromAppointment.mutate({
@@ -374,7 +374,7 @@ function AdminContractsContent() {
               variant="outline"
               onClick={() => {
                 if (!selectedTemplateId || !selectedAppointmentId) {
-                  toast({ title: "Select um agendamento e um modelo", variant: "destructive" });
+                  toast({ title: "Please select a booking and a template", variant: "destructive" });
                   return;
                 }
                 generatePDF.mutate({
@@ -586,7 +586,7 @@ function AdminContractsContent() {
                         }
                       }}
                     >
-                      <Trash2 className="w-3 h-3 mr-1" /> Excluir
+                      <Trash2 className="w-3 h-3 mr-1" /> Delete
                     </Button>
                   </div>
                 </CardContent>

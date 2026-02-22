@@ -54,7 +54,7 @@ export default function AdminEmailMarketing() {
             Email Marketing
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Gerencie eventos, templates e envie emails para yours clientes
+            Manage events, templates and send emails to your clients
           </p>
         </div>
 
@@ -495,7 +495,7 @@ function TemplatesTab() {
         <div className="text-center py-12 text-muted-foreground bg-card border border-border/50 rounded-xl">
           <FileText className="w-12 h-12 mx-auto mb-3 opacity-50" />
           <p className="font-medium">None template criado</p>
-          <p className="text-xs mt-1">Clique em "Create Default Templates" para start com 5 templates readys</p>
+          <p className="text-xs mt-1">Click "Create Default Templates" to start with 5 ready-made templates</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">

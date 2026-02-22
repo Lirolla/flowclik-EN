@@ -82,7 +82,7 @@ function AdminEventoVendasContent() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Vendas de Fotos por Evento</h1>
         <p className="text-muted-foreground">
-          Gerencie vendas de fotos para convidados dos eventos
+          Manage photo sales for event guests
         </p>
       </div>
 

@@ -18,7 +18,7 @@ if (process.env.STRIPE_SECRET_KEY) {
 const PRICE_IDS = {
   PLAN_BASIC: "price_1T35MO3qmmbjfC9dAO6yM22s",      // £ 69,90/month
   ADDON_STORAGE: "price_1T35MR3qmmbjfC9dfpfFrAKJ",    // £ 29,90/month (+10GB)
-  ADDON_GALLERIES: "price_1T35MV3qmmbjfC9dGHxfo7cB",  // £ 29,90/month (+10 galerias)
+  ADDON_GALLERIES: "price_1T35MV3qmmbjfC9dGHxfo7cB",  // £29.90/month (+10 galleries)
 };
 
 export const subscriptionsRouter = router({
@@ -165,7 +165,7 @@ export const subscriptionsRouter = router({
     }),
 
   /**
-   * Comprar add-on de galerias (+10 galerias) - cria signature separada
+   * Buy gallery add-on (+10 galleries) - creates separate subscription
    */
   buyGalleriesAddon: protectedProcedure
     .input(z.object({
@@ -232,7 +232,7 @@ export const subscriptionsRouter = router({
       const dbInstance = await getDb();
       if (!dbInstance) throw new Error("Database not available");
 
-      // Buscar o add-on
+      // Fetch the add-on
       const [addon] = await dbInstance
         .select()
         .from(subscriptionAddons)
@@ -256,7 +256,7 @@ export const subscriptionsRouter = router({
         const totalPhotos = Number(photoCount.count || 0);
         const storageUsed = totalPhotos * 5 * 1024 * 1024; // 5MB por foto
 
-        // Buscar subscription para ver limites base
+        // Fetch subscription to check base limits
         const [subscription] = await dbInstance
           .select()
           .from(subscriptions)
@@ -281,7 +281,7 @@ export const subscriptionsRouter = router({
       }
 
       if (addon.addonType === "galleries") {
-        // Verify se as galerias extras are sendo usadas
+        // Verify if extra galleries are being used
         const [galleryCount] = await dbInstance
           .select({ count: sql<number>`count(*)` })
           .from(collections)
@@ -294,7 +294,7 @@ export const subscriptionsRouter = router({
           .where(eq(subscriptions.tenantId, tenantId))
           .limit(1);
 
-        // Contar others add-ons de galerias actives (exceto este)
+        // Count other active gallery add-ons (except this one)
         const otherGalleryAddons = await dbInstance
           .select()
           .from(subscriptionAddons)
@@ -307,7 +307,7 @@ export const subscriptionsRouter = router({
         const galleriesAfterCancel = (subscription?.galleryLimit || 10) + (otherGalleryCount * 10);
 
         if (galleriesUsed > galleriesAfterCancel) {
-          throw new Error("Not is possible cancsher este add-on. Your galleries usadas excedem o limite sem he. Remova galerias first.");
+          throw new Error("It is not possible to cancel this add-on. Your used galleries exceed the limit without it. Remove galleries first.");
         }
       }
 
@@ -396,7 +396,7 @@ export const subscriptionsRouter = router({
   }),
 
   /**
-   * Obter portal de gerenciamento do cliente Stripe
+   * Get Stripe customer management portal
    */
   createPortalSession: protectedProcedure
     .input(z.object({ returnUrl: z.string() }))
@@ -483,7 +483,7 @@ export const subscriptionsRouter = router({
       };
     }
 
-    // Buscar tenant para trialEndsAt
+    // Fetch tenant for trialEndsAt
     const [tenant] = await dbInstance
       .select({ trialEndsAt: tenants.trialEndsAt })
       .from(tenants)
@@ -522,14 +522,14 @@ export const subscriptionsRouter = router({
     const dbInstance = await getDb();
     if (!dbInstance) throw new Error("Database not available");
 
-    // Buscar subscription
+    // Fetch subscription
     const [subscription] = await dbInstance
       .select()
       .from(subscriptions)
       .where(eq(subscriptions.tenantId, tenantId))
       .limit(1);
 
-    // Buscar add-ons actives
+    // Fetch active add-ons
     const addons = await dbInstance
       .select()
       .from(subscriptionAddons)

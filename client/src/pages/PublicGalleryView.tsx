@@ -58,7 +58,7 @@ export default function PublicGalleryView() {
   if (collectionLoading || mediaLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background">
-        <div className="text-muted-foreground">Carregando galeria...</div>
+        <div className="text-muted-foreground">Loading gallery...</div>
       </div>
     );
   }
@@ -539,7 +539,7 @@ export default function PublicGalleryView() {
                         selections[items[lightboxIndex]?.id] ? "fill-red-500 text-red-500" : "text-white"
                       }`}
                     />
-                    <span>{selections[items[lightboxIndex]?.id] ? "Remover dos favourite" : "Mark as favourite"}</span>
+                    <span>{selections[items[lightboxIndex]?.id] ? "Remove from favourites" : "Mark as favourite"}</span>
                   </button>
                   
                   <div className="text-left">

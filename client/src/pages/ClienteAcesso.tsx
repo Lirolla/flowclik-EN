@@ -25,7 +25,7 @@ export default function ClienteAcesso() {
       setIsLoading(false);
     },
     onError: () => {
-      setError("Erro ao buscar agendamento. Try again.");
+      setError("Error fetching booking. Please try again.");
       setIsLoading(false);
     },
   });

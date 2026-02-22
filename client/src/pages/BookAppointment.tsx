@@ -57,7 +57,7 @@ export default function BookAppointment() {
     onSuccess: () => {
       toast({
         title: "Agendamento sent!",
-        description: "Entraremos em contato em breve para confirmar.",
+        description: "We will get in touch shortly to confirm.",
       });
       setSubmitted(true);
     },
@@ -298,7 +298,7 @@ export default function BookAppointment() {
 
                 <div className="flex gap-2">
                   <Button variant="outline" onClick={() => setStep(1)}>
-                    <ArrowLeft className="w-4 h-4 mr-2" /> Voltar
+                    <ArrowLeft className="w-4 h-4 mr-2" /> Back
                   </Button>
                   <Button
                     onClick={() => setStep(3)}
@@ -351,7 +351,7 @@ export default function BookAppointment() {
                 </div>
 
                 <div>
-                  <Label htmlFor="phone">Telefone</Label>
+                  <Label htmlFor="phone">Phone</Label>
                   <PhoneInput
                     value={formData.clientPhone}
                     onChange={(val) =>
@@ -425,14 +425,14 @@ export default function BookAppointment() {
 
                 <div className="flex gap-2">
                   <Button variant="outline" onClick={() => setStep(2)}>
-                    <ArrowLeft className="w-4 h-4 mr-2" /> Voltar
+                    <ArrowLeft className="w-4 h-4 mr-2" /> Back
                   </Button>
                   <Button
                     onClick={handleSubmit}
                     disabled={createAppointment.isPending}
                     className="flex-1"
                   >
-                    {createAppointment.isPending ? "Sending..." : "Enviar Agendamento"}
+                    {createAppointment.isPending ? "Sending..." : "Submit Booking"}
                   </Button>
                 </div>
               </div>

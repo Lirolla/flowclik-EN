@@ -91,7 +91,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
             {showStockPhotos && (
               <Link href={SITE_ROUTES.stockPhotos()}>
                 <a className={`text-sm font-medium transition-colors ${
-                  currentPage === "fotos-stock" ? "text-accent font-semibold" : "hover:text-accent"
+                  currentPage === "stock-photos" ? "text-accent font-semibold" : "hover:text-accent"
                 }`}>
                   Stock Photos
                 </a>
@@ -215,7 +215,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                   <a 
                     onClick={closeMenu}
                     className={`text-base font-medium py-2 px-3 rounded-lg transition-colors ${
-                      currentPage === "fotos-stock" 
+                      currentPage === "stock-photos" 
                         ? "bg-accent/10 text-accent font-semibold" 
                         : "hover:bg-muted"
                     }`}

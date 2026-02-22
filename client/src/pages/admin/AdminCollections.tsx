@@ -190,7 +190,7 @@ function AdminCollectionsContent() {
             <FolderOpen className="w-8 h-8" />
             Gallerys
           </h1>
-          <p className="text-muted-foreground mt-2">Gerencie as galerias de fotos e videos</p>
+          <p className="text-muted-foreground mt-2">Manage photo and video galleries</p>
         </div>
 
         <Dialog open={isCreateOpen || editingId !== null} onOpenChange={(open) => {

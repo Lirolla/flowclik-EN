@@ -108,13 +108,13 @@ export const contractsRouter = router({
           description: "For personal, boudoir, maternity, family, sweet 16, newborn sessions. Includes image rights and privacy clauses.",
           content: `PHOTOGRAPHY SERVICES CONTRACT - SESSION
 
-CLIENT: {cliente}
+CLIENT: {client}
 E-mail: {email}
-Telefone: {telefone}
+Phone: {phone}
 CPF: {cpf}
 Address: {endereco}
 
-PHOTOGRAPHER(A): {fotografo}
+PHOTOGRAPHER(A): {photographer}
 CPF/CNPJ: {fotografo_documento}
 Address Profissional: {fotografo_endereco}
 
@@ -180,11 +180,11 @@ For the resolution of any disputes, the parties hect the jurisdiction of the CLI
 {cidade}, {data_contrato}
 
 _______________________________
-CLIENT: {cliente}
+CLIENT: {client}
 CPF: {cpf}
 
 _______________________________
-PHOTOGRAPHER(A): {fotografo}
+PHOTOGRAPHER(A): {photographer}
 CPF/CNPJ: {fotografo_documento}`,
         },
         {
@@ -192,13 +192,13 @@ CPF/CNPJ: {fotografo_documento}`,
           description: "For weddings, graduations and ceremonies. Includes event coverage, second photographer and album clauses.",
           content: `PHOTOGRAPHY SERVICES CONTRACT - WEDDING / CEREMONY
 
-CLIENT(S): {cliente}
+CLIENT(S): {client}
 E-mail: {email}
-Telefone: {telefone}
+Phone: {phone}
 CPF: {cpf}
 Address: {endereco}
 
-PHOTOGRAPHER(A): {fotografo}
+PHOTOGRAPHER(A): {photographer}
 CPF/CNPJ: {fotografo_documento}
 Address Profissional: {fotografo_endereco}
 
@@ -257,11 +257,11 @@ Jurisdiction of the CLIENT's domicile.
 {cidade}, {data_contrato}
 
 _______________________________
-CLIENT: {cliente}
+CLIENT: {client}
 CPF: {cpf}
 
 _______________________________
-PHOTOGRAPHER(A): {fotografo}
+PHOTOGRAPHER(A): {photographer}
 CPF/CNPJ: {fotografo_documento}`,
         },
         {
@@ -269,13 +269,13 @@ CPF/CNPJ: {fotografo_documento}`,
           description: "For parties, birthdays, graduations, corporate events, chebrations and launches.",
           content: `PHOTOGRAPHY SERVICES CONTRACT - EVENT
 
-CLIENT: {cliente}
+CLIENT: {client}
 E-mail: {email}
-Telefone: {telefone}
+Phone: {phone}
 CPF/CNPJ: {cpf}
 Address: {endereco}
 
-PHOTOGRAPHER(A): {fotografo}
+PHOTOGRAPHER(A): {photographer}
 CPF/CNPJ: {fotografo_documento}
 Address Profissional: {fotografo_endereco}
 
@@ -325,11 +325,11 @@ Jurisdiction of the CLIENT's domicile.
 {cidade}, {data_contrato}
 
 _______________________________
-CLIENT: {cliente}
+CLIENT: {client}
 CPF/CNPJ: {cpf}
 
 _______________________________
-PHOTOGRAPHER(A): {fotografo}
+PHOTOGRAPHER(A): {photographer}
 CPF/CNPJ: {fotografo_documento}`,
         },
         {
@@ -337,11 +337,11 @@ CPF/CNPJ: {fotografo_documento}`,
           description: "Simple and straightforward template for any type of photography service. Ideal for quick jobs and one-off sessions.",
           content: `SIMPLIFIED PHOTOGRAPHY SERVICES CONTRACT
 
-CLIENT: {cliente}
-E-mail: {email} | Telefone: {telefone}
+CLIENT: {client}
+E-mail: {email} | Phone: {phone}
 CPF: {cpf}
 
-PHOTOGRAPHER(A): {fotografo}
+PHOTOGRAPHER(A): {photographer}
 CPF/CNPJ: {fotografo_documento}
 
 1. SERVICE: {servico}
@@ -366,7 +366,7 @@ CPF/CNPJ: {fotografo_documento}
 
 ___________________          ___________________
 CLIENT                  PHOTOGRAPHER(A)
-{cliente}                    {fotografo}
+{client}                    {photographer}
 CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         },
       ];
@@ -400,13 +400,13 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
 
       const tenantId = getTenantId(ctx);
 
-      // Buscar template
+      // Fetch template
       const [template] = await db.select().from(contractTemplates)
         .where(and(eq(contractTemplates.id, input.templateId), eq(contractTemplates.tenantId, tenantId)))
         .limit(1);
       if (!template) throw new Error("Template not found");
 
-      // Buscar appointment com dados do service
+      // Fetch appointment com dados do service
       const [appointment] = await db.select({
         id: appointments.id,
         clientName: appointments.clientName,
@@ -430,11 +430,11 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       
       if (!appointment) throw new Error("Appointment not found");
 
-      // Buscar dados do tenant (photographer)
+      // Fetch data do tenant (photographer)
       const [tenant] = await db.select().from(tenants)
         .where(eq(tenants.id, tenantId)).limit(1);
 
-      // Buscar dados do admin (photographer)
+      // Fetch data do admin (photographer)
       const [adminUser] = await db.select().from(users)
         .where(and(eq(users.tenantId, tenantId), eq(users.role, 'admin'))).limit(1);
 
@@ -451,12 +451,12 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       // Substituir variables
       let content = template.content;
       const replacements: Record<string, string> = {
-        '{cliente}': appointment.clientName || '________________________',
+        '{client}': appointment.clientName || '________________________',
         '{email}': appointment.clientEmail || '________________________',
-        '{telefone}': appointment.clientPhone || '________________________',
+        '{phone}': appointment.clientPhone || '________________________',
         '{cpf}': '________________________',
         '{endereco}': '________________________',
-        '{fotografo}': tenant?.name || adminUser?.name || '________________________',
+        '{photographer}': tenant?.name || adminUser?.name || '________________________',
         '{fotografo_documento}': '________________________',
         '{fotografo_endereco}': '________________________',
         '{servico}': serviceName,
@@ -475,7 +475,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         content = content.split(key).join(value);
       }
 
-      // Buscar siteConfig para logo
+      // Fetch siteConfig para logo
       const [config] = await db.select({
         logoUrl: siteConfig.logoUrl,
         siteName: siteConfig.siteName,
@@ -511,13 +511,13 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
 
       const tenantId = getTenantId(ctx);
 
-      // Buscar template
+      // Fetch template
       const [template] = await db.select().from(contractTemplates)
         .where(and(eq(contractTemplates.id, input.templateId), eq(contractTemplates.tenantId, tenantId)))
         .limit(1);
       if (!template) throw new Error("Template not found");
 
-      // Buscar appointment com service
+      // Fetch appointment com service
       const [appointment] = await db.select({
         id: appointments.id,
         clientName: appointments.clientName,
@@ -539,7 +539,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       
       if (!appointment) throw new Error("Appointment not found");
 
-      // Buscar tenant
+      // Fetch tenant
       const [tenant] = await db.select().from(tenants)
         .where(eq(tenants.id, tenantId)).limit(1);
       const [adminUser] = await db.select().from(users)
@@ -557,12 +557,12 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
 
       let content = template.content;
       const replacements: Record<string, string> = {
-        '{cliente}': appointment.clientName || '________________________',
+        '{client}': appointment.clientName || '________________________',
         '{email}': appointment.clientEmail || '________________________',
-        '{telefone}': appointment.clientPhone || '________________________',
+        '{phone}': appointment.clientPhone || '________________________',
         '{cpf}': '________________________',
         '{endereco}': '________________________',
-        '{fotografo}': tenant?.name || adminUser?.name || '________________________',
+        '{photographer}': tenant?.name || adminUser?.name || '________________________',
         '{fotografo_documento}': '________________________',
         '{fotografo_endereco}': '________________________',
         '{servico}': serviceName,
@@ -581,7 +581,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         content = content.split(key).join(value);
       }
 
-      // Buscar siteConfig para logo
+      // Fetch siteConfig para logo
       const [config] = await db.select({
         logoUrl: siteConfig.logoUrl,
         siteName: siteConfig.siteName,
@@ -639,7 +639,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       };
     }),
 
-  // Salvar contrato no banco
+  // Save contract no banco
   saveContract: protectedProcedure
     .input(z.object({
       appointmentId: z.number(),
@@ -656,7 +656,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const db = await getDb();
       if (!db) throw new Error("Database not available");
       
-      // Verify se already exists um contrato para este agendamento
+      // Verify if a contract already exists for this booking
       const existing = await db.select().from(contracts)
         .where(and(
           eq(contracts.appointmentId, input.appointmentId),
@@ -712,7 +712,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       
       const db = await getDb();
       if (!db) throw new Error("Database not available");
-      // Buscar siteConfig para nome do estúdio
+      // Fetch siteConfig para nome do estúdio
       const [config] = await db.select({
         siteName: siteConfig.siteName,
       }).from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);
@@ -746,7 +746,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       });
       
       if (sent) {
-        // Salvar/atualizar contrato as sent
+        // Save/update contract as sent
         const existing = await db.select().from(contracts)
           .where(and(
             eq(contracts.appointmentId, input.appointmentId),

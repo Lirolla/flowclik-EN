@@ -44,7 +44,7 @@ export const emailRouter = router({
       return { success: true };
     }),
 
-  // Buscar configuration de email
+  // Fetch configuration de email
   getConfig: protectedProcedure.query(async ({ ctx }) => {
     const tenantId = getTenantId(ctx);
 
@@ -74,11 +74,11 @@ export const emailRouter = router({
     };
   }),
 
-  // Enviar email de teste
+  // Send email de teste
   sendTestEmail: protectedProcedure.mutation(async ({ ctx }) => {
     const tenantId = getTenantId(ctx);
 
-    // Buscar configuration
+    // Fetch configuration
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
     
@@ -100,7 +100,7 @@ export const emailRouter = router({
     const resend = new Resend(config.resendApiKey);
 
     try {
-      // Enviar email de teste
+      // Send email de teste
       const { data, error } = await resend.emails.send({
         from: config?.emailSender || 'FlowClik <noreply@flowclik.com>',
         to: config.emailSender, // Envia para o own photographer
@@ -115,7 +115,7 @@ export const emailRouter = router({
               From now on, your clients will receive automatic emails:
             </p>
             <ul style="font-size: 14px; color: #666;">
-              <li>✅ Confirmation de agendamento</li>
+              <li>✅ Confirmation de booking</li>
               <li>⏰ Reminder 24h before do evento</li>
               <li>📸 Gallery pronta para visualizar</li>
               <li>💬 New message no chat</li>
@@ -146,7 +146,7 @@ export const emailRouter = router({
     }
   }),
 
-  // Enviar email transacional (confirmation, reminder, etc)
+  // Send email transacional (confirmation, reminder, etc)
   sendTransactionalEmail: protectedProcedure
     .input(
       z.object({
@@ -158,7 +158,7 @@ export const emailRouter = router({
     .mutation(async ({ input, ctx }) => {
       const tenantId = getTenantId(ctx);
 
-      // Buscar configuration
+      // Fetch configuration
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       

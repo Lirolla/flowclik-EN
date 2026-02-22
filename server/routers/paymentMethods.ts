@@ -107,7 +107,7 @@ export const paymentMethodsRouter = router({
         cash: "Cash",
         bank_transfer: "Bank Transfer",
         pix: "Bank transfer",
-        payment_link: "Link de Pagamento",
+        payment_link: "Payment Link",
       };
 
       // Send email if fully paid

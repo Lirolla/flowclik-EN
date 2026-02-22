@@ -169,7 +169,7 @@ export const collectionsRouter = router({
       const result = await db!.insert(collections).values(insertData);
       const insertId = result[0].insertId;
       
-      // Buscar o item inserido com o ID correto
+      // Fetch the inserted item with the correct ID
       const inserted = await db
         .select()
         .from(collections)
@@ -219,7 +219,7 @@ export const collectionsRouter = router({
 
       await db!.update(collections).set(dbData).where(and(eq(collections.id, id), eq(collections.tenantId, getTenantId(ctx))));
 
-      // Buscar item atualizado
+      // Fetch updated item
       const updated = await db
         .select()
         .from(collections)
@@ -240,7 +240,7 @@ export const collectionsRouter = router({
 
       const tenantId = getTenantId(ctx);
 
-      // 1. Buscar everys as fotos da galeria para pegar as URLs do R2
+      // 1. Fetch all gallery photos to get R2 URLs
       const photos = await db
         .select({
           id: mediaItems.id,
@@ -293,12 +293,12 @@ export const collectionsRouter = router({
 
           console.log(`[R2] Gallery ${input.id}: ${keysToDelete.length} arquivos deleted do R2`);
         } catch (r2Error: any) {
-          console.error(`[R2] Erro ao dhetar arquivos da galeria ${input.id}:`, r2Error.message);
+          console.error(`[R2] Error deleting gallery files ${input.id}:`, r2Error.message);
           // Continua same se falhar no R2 - not bloqueia a dheção do banco
         }
       }
 
-      // 4. Dhetar selections de fotos da galeria
+      // 4. Delete gallery photo selections
       await db.delete(photoSelections).where(
         sql`mediaItemId IN (SELECT id FROM mediaItems WHERE collectionId = ${input.id} AND tenantId = ${tenantId})`
       ).catch(() => {});
@@ -306,7 +306,7 @@ export const collectionsRouter = router({
       // 5. Dhetar mediaItems do banco
       await db.delete(mediaItems).where(and(eq(mediaItems.collectionId, input.id), eq(mediaItems.tenantId, tenantId)));
 
-      // 6. Dhetar a galeria do banco
+      // 6. Delete the gallery from database
       await db.delete(collections).where(and(eq(collections.id, input.id), eq(collections.tenantId, tenantId)));
 
       console.log(`[Gallery] Gallery ${input.id} deleted com ${photos.length} fotos e ${keysToDelete.length} arquivos R2`);
@@ -339,12 +339,12 @@ export const collectionsRouter = router({
       const baseUrl = process.env.VITE_FRONTEND_FORGE_API_URL?.replace('/api', '') || 'https://lirolla.com';
       const galleryUrl = `${baseUrl}/gallery/${collection[0].slug}`;
       
-      // Contar fotos na galeria
+      // Count photos in gallery
       const photos = await db!.select().from(mediaItems).where(eq(mediaItems.collectionId, input.collectionId));
       
-      // Enviar email usando template profissional
+      // Send email using professional template
       const emailSent = await sendGalleryReadyEmail({
-        clientName: input.clientEmail.split('@')[0], // TODO: buscar nome real do cliente
+        clientName: input.clientEmail.split('@')[0], // TODO: fetch real client name
         clientEmail: input.clientEmail,
         galleryTitle: collection[0].name,
         galleryUrl,
@@ -379,7 +379,7 @@ export const collectionsRouter = router({
       if (!db) throw new Error('Database not available');
 
       // Generate unique slug
-      const slug = `galeria-${input.collectionId}-${Date.now()}`;
+      const slug = `gallery-${input.collectionId}-${Date.now()}`;
 
       // Update collection
       await db
@@ -520,7 +520,7 @@ export const collectionsRouter = router({
     return result;
   }),
 
-  // TEMPORÁRIO: Dhetar galerias de teste
+  // TEMPORARY: Delete test galleries
   deleteTestGalleries: protectedProcedure.mutation(async ({ ctx }) => {
     const db = await getDb();
     const { mediaItems, collections } = await import('../../drizzle/schema');

@@ -183,7 +183,7 @@ export default function AdminPortfolio() {
         <div>
           <h1 className="text-3xl font-bold mb-2">Portfolio</h1>
           <p className="text-muted-foreground">
-            Gerencie as fotos do your portfolio profissional
+            Manage your professional portfolio photos
           </p>
         </div>
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>

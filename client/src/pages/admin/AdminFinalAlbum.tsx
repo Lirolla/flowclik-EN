@@ -146,7 +146,7 @@ export default function AdminFinalAlbum() {
           <label htmlFor="file-upload">
             <Button asChild disabled={uploading}>
               <span>
-                {uploading ? "Sending..." : "Shecionar Arquivos"}
+                {uploading ? "Sending..." : "Select Files"}
               </span>
             </Button>
           </label>

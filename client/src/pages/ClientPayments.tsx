@@ -58,7 +58,7 @@ export default function ClientPayments() {
               <>
                 <CheckCircle className="h-12 w-12 text-green-500" />
                 <div>
-                  <h2 className="text-2xl font-semibold text-green-500">Pagamento Confirmado</h2>
+                  <h2 className="text-2xl font-semibold text-green-500">Payment Confirmed</h2>
                   <p className="text-gray-300 mt-1">
                     Pagamento realizado em {appointment.paidAt && new Date(appointment.paidAt).toLocaleDateString('en-GB')}
                   </p>
@@ -68,7 +68,7 @@ export default function ClientPayments() {
               <>
                 <AlertCircle className="h-12 w-12 text-yellow-500" />
                 <div>
-                  <h2 className="text-2xl font-semibold text-yellow-500">Pagamento Pending</h2>
+                  <h2 className="text-2xl font-semibold text-yellow-500">Payment Pending</h2>
                   <p className="text-gray-300 mt-1">
                     Awaiting confirmation do pagamento
                   </p>
@@ -153,7 +153,7 @@ export default function ClientPayments() {
               <div className="flex items-center gap-3 p-3 bg-green-900/20 border border-green-600 rounded">
                 <CheckCircle className="h-5 w-5 text-green-500" />
                 <div className="flex-1">
-                  <p className="font-medium">Pagamento Confirmado</p>
+                  <p className="font-medium">Payment Confirmed</p>
                   <p className="text-sm text-gray-400">
                     {new Date(appointment.paidAt).toLocaleString('en-GB')}
                   </p>

@@ -44,7 +44,7 @@ function AdminClientDetailsContent() {
       session_done: { label: '📸 Ensaio Realizado', color: 'bg-blue-500/20 text-blue-700 border-blue-500/30' },
       editing: { label: '🎨 Photos in Editing', color: 'bg-purple-500/20 text-purple-700 border-purple-500/30' },
       awaiting_selection: { label: '👀 Awaiting Selection', color: 'bg-orange-500/20 text-orange-700 border-orange-500/30' },
-      final_editing: { label: '✏️ Editando Shecionadas', color: 'bg-indigo-500/20 text-indigo-700 border-indigo-500/30' },
+      final_editing: { label: '✏️ Editing Selected', color: 'bg-indigo-500/20 text-indigo-700 border-indigo-500/30' },
       delivered: { label: '📦 Delivered', color: 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30' },
       cancelled: { label: '❌ Cancelled', color: 'bg-red-500/20 text-red-700 border-red-500/30' },
     };

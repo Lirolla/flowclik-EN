@@ -113,7 +113,7 @@ export default function StockGallery() {
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
               type="text"
-              placeholder="Buscar fotos..."
+              placeholder="Search photos..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
@@ -147,12 +147,12 @@ export default function StockGallery() {
             <CardContent className="py-20 text-center">
               <ImageIcon className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
               <h3 className="text-xl font-semibold mb-2">
-                {searchTerm || categoryFilter !== "all" ? "No photos found" : "Nenhuma foto available"}
+                {searchTerm || categoryFilter !== "all" ? "No photos found" : "No photos available"}
               </h3>
               <p className="text-muted-foreground">
                 {searchTerm || categoryFilter !== "all"
                   ? "Tente buscar com others terms ou categorias"
-                  : "Volte em breve para ver news fotos"}
+                  : "Come back soon to see new photos"}
               </p>
             </CardContent>
           </Card>

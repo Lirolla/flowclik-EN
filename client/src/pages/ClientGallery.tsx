@@ -12,7 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 import { ProtectedImage } from "@/components/ProtectedImage";
 
 export default function ClientGallery() {
-  const [, params] = useRoute("/galeria-cliente/:appointmentId");
+  const [, params] = useRoute("/client-gallery/:appointmentId");
   const appointmentId = params?.appointmentId ? parseInt(params.appointmentId) : 0;
   
   const [clientEmail, setClientEmail] = useState("");
