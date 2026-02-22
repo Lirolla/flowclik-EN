@@ -288,7 +288,7 @@ export default function AdminDomainEmail() {
                             Procure a section de configuration DNS do your domain. Each provepain chama de um jeito diferente:
                           </p>
                           <div className="ml-8 text-sm text-muted-foreground space-y-1">
-                            <p><strong>Record.br:</strong> Clique no domain → "DNS" → "Editar zona"</p>
+                            <p><strong>DNS Provider:</strong> Go to your domain → "DNS" → "Edit zone"</p>
                             <p><strong>Hostinger:</strong> Subscriptions → Manage → Zona DNS</p>
                             <p><strong>GoDaddy:</strong> Meus Produtos → DNS → Manage Zonas</p>
                             <p><strong>Namecheap:</strong> Domain List → Manage → Advanced DNS</p>
@@ -421,7 +421,7 @@ export default function AdminDomainEmail() {
                         <div className="space-y-3">
                           <h4 className="font-bold text-base flex items-center gap-2">
                             <span className="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm shrink-0">5</span>
-                            Salve e clique em "Verify DNS e Ativar"
+                            Save and click "Verify DNS & Activate"
                           </h4>
                           <p className="text-sm text-muted-foreground ml-8">
                             After de salvar as settings no your provepain, volte here e clique no button below. 
@@ -452,7 +452,7 @@ export default function AdminDomainEmail() {
                           {verifying === d.id ? (
                             <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Verificando DNS...</>
                           ) : (
-                            <><RefreshCw className="w-4 h-4 mr-2" /> Verify DNS e Ativar</>
+                            <><RefreshCw className="w-4 h-4 mr-2" /> Verify DNS & Activate</>
                           )}
                         </Button>
                       </div>

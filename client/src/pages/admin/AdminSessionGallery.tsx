@@ -62,7 +62,7 @@ function AdminSessionGalleryContent() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold mb-2">Gallery do Ensaio</h1>
+          <h1 className="text-3xl font-bold mb-2">Session Gallery</h1>
           <p className="text-muted-foreground">
             Manage fotos do ensaio para o cliente
           </p>
@@ -91,7 +91,7 @@ function AdminSessionGalleryContent() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold mb-2">Gallery do Ensaio</h1>
+        <h1 className="text-3xl font-bold mb-2">Session Gallery</h1>
         <p className="text-muted-foreground">
           Manage fotos do ensaio #{appointmentId}
         </p>
@@ -102,7 +102,7 @@ function AdminSessionGalleryContent() {
         <Card>
           <CardHeader>
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Total de Fotos
+              Total Photos
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -170,7 +170,7 @@ function AdminSessionGalleryContent() {
       {/* Upload Section */}
       <Card>
         <CardHeader>
-          <CardTitle>Upload de Fotos</CardTitle>
+          <CardTitle>Photo Upload</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="text-center py-8">

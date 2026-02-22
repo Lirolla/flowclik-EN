@@ -69,7 +69,7 @@ export default function ClientDashboard() {
   const statusConfig = {
     pending: { label: "Pending", color: "text-yellow-500", icon: Clock, step: 1 },
     confirmed: { label: "Confirmed", color: "text-blue-500", icon: CheckCircle2, step: 2 },
-    session_done: { label: "Ensaio Realizado", color: "text-green-500", icon: Camera, step: 3 },
+    session_done: { label: "Session Completed", color: "text-green-500", icon: Camera, step: 3 },
     editing: { label: "Photos in Editing", color: "text-purple-500", icon: ImageIcon, step: 4 },
     awaiting_selection: { label: "Awaiting Selection", color: "text-orange-500", icon: ImageIcon, step: 5 },
     final_editing: { label: "Editando Shecionadas", color: "text-purple-500", icon: ImageIcon, step: 6 },
@@ -220,7 +220,7 @@ export default function ClientDashboard() {
             <a>
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <CreditCard className="h-8 w-8 text-red-600 mb-3" />
-                <h3 className="font-semibold mb-1">Pagamentos</h3>
+                <h3 className="font-semibold mb-1">Payments</h3>
                 <p className="text-sm text-gray-400">Ver pagamentos e recibos</p>
               </Card>
             </a>
@@ -230,7 +230,7 @@ export default function ClientDashboard() {
             <a>
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <Calendar className="h-8 w-8 text-red-600 mb-3" />
-                <h3 className="font-semibold mb-1">Contrato</h3>
+                <h3 className="font-semibold mb-1">Contract</h3>
                 <p className="text-sm text-gray-400">Ver contrato signed</p>
               </Card>
             </a>
@@ -241,7 +241,7 @@ export default function ClientDashboard() {
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <ImageIcon className="h-8 w-8 text-red-600 mb-3" />
                 <h3 className="font-semibold mb-1">Final Album</h3>
-                <p className="text-sm text-gray-400">Fotos edited final</p>
+                <p className="text-sm text-gray-400">Final edited photos</p>
               </Card>
             </a>
           </Link>

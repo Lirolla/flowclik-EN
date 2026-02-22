@@ -326,7 +326,7 @@ export default function AdminSettings() {
                 </div>
                 <div>
                   <ImageUpload
-                    label="Foto de Profile *"
+                    label="Profile Photo *"
                     value={aboutImage}
                     onChange={setAboutImage}
                   />

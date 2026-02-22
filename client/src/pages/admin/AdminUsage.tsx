@@ -145,7 +145,7 @@ export default function AdminUsage() {
             <div className="flex items-center justify-between">
               <CardTitle className="text-lg flex items-center gap-2">
                 <Image className="w-5 h-5 text-green-500" />
-                Fotos
+                Photos
               </CardTitle>
               <span className="text-2xl font-bold text-foreground">
                 {stats.photos.total}
@@ -157,11 +157,11 @@ export default function AdminUsage() {
           </CardHeader>
           <CardContent className="space-y-3">
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Fotos brutas:</span>
+              <span className="text-muted-foreground">Raw photos:</span>
               <span className="font-medium">{stats.photos.raw}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Fotos edited:</span>
+              <span className="text-muted-foreground">Edited photos:</span>
               <span className="font-medium">{stats.photos.edited}</span>
             </div>
           </CardContent>

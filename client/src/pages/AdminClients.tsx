@@ -97,15 +97,15 @@ export default function AdminClients() {
     <DashboardLayout>
       <div className="container mx-auto px-6 py-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold text-white">Manage Clientes</h1>
+        <h1 className="text-4xl font-bold text-white">Manage Clients</h1>
         
         <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
           <DialogTrigger asChild>
-            <Button className="bg-red-600 hover:bg-red-700">+ New Cliente</Button>
+            <Button className="bg-red-600 hover:bg-red-700">+ New Client</Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-gray-900 text-white">
             <DialogHeader>
-              <DialogTitle className="text-2xl">Cadastrar New Cliente</DialogTitle>
+              <DialogTitle className="text-2xl">Register New Client</DialogTitle>
             </DialogHeader>
             
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -209,7 +209,7 @@ export default function AdminClients() {
 
               <div className="flex gap-4">
                 <Button type="submit" className="bg-red-600 hover:bg-red-700">
-                  Cadastrar Cliente
+                  Register Client
                 </Button>
                 <Button type="button" variant="outline" onClick={() => setShowCreateDialog(false)}>
                   Cancsher
@@ -229,7 +229,7 @@ export default function AdminClients() {
         }}>
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-gray-900 text-white">
             <DialogHeader>
-              <DialogTitle className="text-2xl">Editar Cliente</DialogTitle>
+              <DialogTitle className="text-2xl">Edit Client</DialogTitle>
             </DialogHeader>
             
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -343,7 +343,7 @@ export default function AdminClients() {
                 <th className="px-6 py-4 text-left text-white font-semibold">Nome</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Email</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Phone</th>
-                <th className="px-6 py-4 text-left text-white font-semibold">Cidade/Estado</th>
+                <th className="px-6 py-4 text-left text-white font-semibold">City/County</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Country</th>
                 <th className="px-6 py-4 text-center text-white font-semibold">Actions</th>
               </tr>

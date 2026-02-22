@@ -41,7 +41,7 @@ export default function ClientContract() {
   return (
     <ClientLayout appointmentId={appointmentId}>
       <div className="max-w-4xl mx-auto space-y-6">
-        <h1 className="text-3xl font-bold mb-6">Contrato</h1>
+        <h1 className="text-3xl font-bold mb-6">Contract</h1>
 
         {/* Contract Status */}
         {hasContract ? (
@@ -51,7 +51,7 @@ export default function ClientContract() {
                 <>
                   <CheckCircle className="h-12 w-12 text-green-500" />
                   <div>
-                    <h2 className="text-2xl font-semibold text-green-500">Contrato Signed</h2>
+                    <h2 className="text-2xl font-semibold text-green-500">Contract Signed</h2>
                     <p className="text-gray-300 mt-1">
                       Contract signed e confirmado
                     </p>
@@ -61,7 +61,7 @@ export default function ClientContract() {
                 <>
                   <FileText className="h-12 w-12 text-blue-500" />
                   <div>
-                    <h2 className="text-2xl font-semibold text-blue-500">Contrato Available</h2>
+                    <h2 className="text-2xl font-semibold text-blue-500">Contract Available</h2>
                     <p className="text-gray-300 mt-1">
                       Your contract is ready para preview
                     </p>
@@ -75,7 +75,7 @@ export default function ClientContract() {
             <div className="flex items-center gap-4">
               <AlertCircle className="h-12 w-12 text-yellow-500" />
               <div>
-                <h2 className="text-2xl font-semibold text-yellow-500">Contrato Pending</h2>
+                <h2 className="text-2xl font-semibold text-yellow-500">Contract Pending</h2>
                 <p className="text-gray-300 mt-1">
                   O contrato still not foi gerado pelo photographer
                 </p>
@@ -94,7 +94,7 @@ export default function ClientContract() {
             
             <div className="space-y-4">
               <div className="flex justify-between items-center pb-4 border-b border-gray-800">
-                <span className="text-gray-400">Cliente</span>
+                <span className="text-gray-400">Client</span>
                 <span className="font-semibold">{appointment.clientName}</span>
               </div>
 
@@ -104,7 +104,7 @@ export default function ClientContract() {
               </div>
 
               <div className="flex justify-between items-center pb-4 border-b border-gray-800">
-                <span className="text-gray-400">Data do Ensaio</span>
+                <span className="text-gray-400">Session Date</span>
                 <span className="font-semibold">
                   {appointment.date && new Date(appointment.date).toLocaleDateString('en-GB')}
                 </span>
@@ -141,7 +141,7 @@ export default function ClientContract() {
         {/* Contract Preview */}
         {hasContract && (
           <Card className="bg-gray-900 border-gray-800 p-6">
-            <h3 className="text-xl font-semibold mb-4">Preview do Contrato</h3>
+            <h3 className="text-xl font-semibold mb-4">Contract Preview</h3>
             <div className="aspect-[8.5/11] bg-black rounded-lg overflow-hidden">
               <iframe
                 src={appointment.contractUrl!}

@@ -49,7 +49,7 @@ function AdminStockContent() {
   const createMutation = trpc.stock.create.useMutation({
     onSuccess: () => {
       utils.stock.listAll.invalidate();
-      toast.success("Foto adicionada ao stock!");
+      toast.success("Photo added to stock!");
       resetForm();
     },
   });
@@ -64,7 +64,7 @@ function AdminStockContent() {
   const updateMutation = trpc.stock.update.useMutation({
     onSuccess: () => {
       utils.stock.listAll.invalidate();
-      toast.success("Foto atualizada!");
+      toast.success("Photo updated!");
       setShowEditModal(false);
       setEditingPhoto(null);
     },
@@ -215,7 +215,7 @@ function AdminStockContent() {
       {/* Stock Photos List */}
       <div>
         <h2 className="text-xl font-semibold mb-4">
-          Fotos no Stock ({stockPhotos?.length || 0})
+          Photos in Stock ({stockPhotos?.length || 0})
         </h2>
         {isLoading ? (
           <div className="text-center py-12">Loading...</div>
@@ -372,7 +372,7 @@ function AdminStockContent() {
       <Dialog open={showEditModal} onOpenChange={setShowEditModal}>
         <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>Editar Foto Stock</DialogTitle>
+            <DialogTitle>Edit Stock Photo</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             {editingPhoto && (

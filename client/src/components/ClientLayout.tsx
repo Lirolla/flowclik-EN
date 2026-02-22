@@ -28,7 +28,7 @@ export function ClientLayout({ children, appointmentId }: ClientLayoutProps) {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-red-600">FlowClik</h1>
-              <p className="text-sm text-gray-400">Painel do Cliente</p>
+              <p className="text-sm text-gray-400">Client Panel</p>
             </div>
             <div className="flex items-center gap-4">
               <span className="text-sm text-gray-300">{user?.name}</span>

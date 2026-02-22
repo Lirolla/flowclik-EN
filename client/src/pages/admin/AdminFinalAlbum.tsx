@@ -26,7 +26,7 @@ export default function AdminFinalAlbum() {
     onSuccess: () => {
       toast({
         title: "Sucesso!",
-        description: "Fotos do album final enviadas com sucesso.",
+        description: "Final album photos uploaded successfully.",
       });
       refetch();
       setUploading(false);
@@ -44,8 +44,8 @@ export default function AdminFinalAlbum() {
   const deleteMutation = trpc.finalAlbums.deletePhoto.useMutation({
     onSuccess: () => {
       toast({
-        title: "Foto removida",
-        description: "Foto do album final removida com sucesso.",
+        title: "Photo removed",
+        description: "Final album photo removed successfully.",
       });
       refetch();
     },
@@ -120,7 +120,7 @@ export default function AdminFinalAlbum() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Final Album</h1>
         <p className="text-muted-foreground">
-          {collection?.name} - Fotos edited final do projeto
+          {collection?.name} - Final edited photos of the project
         </p>
       </div>
 
@@ -156,7 +156,7 @@ export default function AdminFinalAlbum() {
       {/* Photos Grid */}
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-xl font-semibold">
-          Fotos no Album ({finalPhotos?.length || 0})
+          Photos in Album ({finalPhotos?.length || 0})
         </h2>
       </div>
 

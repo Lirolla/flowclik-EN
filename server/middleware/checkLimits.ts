@@ -52,7 +52,7 @@ export async function checkStorageLimit(ctx: any, fileSizeBytes: number) {
 
 /**
  * Verifica se tenant atingiu limite de gallerys
- * Bloqueia criação se quantidade >= limite do plyear
+ * Blocks creation if quantity >= plan limit
  */
 export async function checkGalleryLimit(ctx: any) {
   const tenantId = getTenantId(ctx);
@@ -134,7 +134,7 @@ async function calculateStorageUsed(tenantId: number): Promise<number> {
 }
 
 /**
- * Formata bytes em formato legível (KB, MB, GB)
+ * Formats bytes in readable format (KB, MB, GB)
  */
 function formatBytes(bytes: number): string {
   if (bytes === 0) return "0 Bytes";

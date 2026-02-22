@@ -50,7 +50,7 @@ export default function StockGallery() {
     });
 
     localStorage.setItem("lirolla_cart", JSON.stringify(cart));
-    alert("Foto adicionada ao carrinho!");
+    alert("Photo added to cart!");
   };
 
   return (
@@ -124,7 +124,7 @@ export default function StockGallery() {
             <Filter className="w-4 h-4 text-muted-foreground" />
             <Select value={categoryFilter} onValueChange={setCategoryFilter}>
               <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="Filtrar por categoria" />
+                <SelectValue placeholder="Filter by category" />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="all">Everys as Categorias</SelectItem>

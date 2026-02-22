@@ -100,7 +100,7 @@ function AdminContractsContent() {
       setGeneratedInfo(data);
       setIsPreviewOpen(true);
       setIsGenerateOpen(false);
-      toast({ title: "Contrato gerado!", description: `Para ${data.clientName} - ${data.serviceName}` });
+      toast({ title: "Contract generated!", description: `For ${data.clientName} - ${data.serviceName}` });
     },
     onError: (error: any) => {
       toast({ title: "Erro ao gerar contrato", description: error.message, variant: "destructive" });
@@ -124,7 +124,7 @@ function AdminContractsContent() {
 
   const saveContract = trpc.contracts.saveContract.useMutation({
     onSuccess: (data: any) => {
-      toast({ title: data.updated ? "Contrato atualizado!" : "Contrato salvo com sucesso!" });
+      toast({ title: data.updated ? "Contract updated!" : "Contract saved successfully!" });
     },
     onError: () => {
       toast({ title: "Erro ao salvar contrato", variant: "destructive" });
@@ -184,7 +184,7 @@ function AdminContractsContent() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold">Contratos</h1>
+          <h1 className="text-3xl font-bold">Contracts</h1>
           <p className="text-muted-foreground mt-1">
             Gere contratos profissionais a partir dos yours agendamentos
           </p>
@@ -198,7 +198,7 @@ function AdminContractsContent() {
               className="border-accent text-accent hover:bg-accent/10"
             >
               <Sparkles className="w-4 h-4 mr-2" />
-              {seedDefaults.isPending ? "Loading..." : "Carregar Modelos Readys"}
+              {seedDefaults.isPending ? "Loading..." : "Load Ready Templates"}
             </Button>
           )}
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -211,7 +211,7 @@ function AdminContractsContent() {
             <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
               <DialogHeader>
                 <DialogTitle>
-                  {editingTemplate ? "Editar Template" : "New Template"}
+                  {editingTemplate ? "Edit Template" : "New Template"}
                 </DialogTitle>
               </DialogHeader>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -233,7 +233,7 @@ function AdminContractsContent() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="content">Content do Contrato *</Label>
+                  <Label htmlFor="content">Contract Content *</Label>
                   <Textarea
                     id="content"
                     rows={15}
@@ -258,7 +258,7 @@ function AdminContractsContent() {
                       <span><code>{"{valor_sinal}"}</code> - Valor do sinal (50%)</span>
                       <span><code>{"{fotografo}"}</code> - Nome do photographer</span>
                       <span><code>{"{fotografo_documento}"}</code> - CPF/CNPJ</span>
-                      <span><code>{"{cidade}"}</code> - Cidade</span>
+                      <span><code>{"{cidade}"}</code> - City</span>
                       <span><code>{"{data_contrato}"}</code> - Data de hoje</span>
                     </div>
                   </div>
@@ -343,7 +343,7 @@ function AdminContractsContent() {
             return (
               <div className="mt-4 p-3 bg-background rounded-lg border text-sm">
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                  <div><span className="text-muted-foreground">Cliente:</span> <strong>{apt.clientName}</strong></div>
+                  <div><span className="text-muted-foreground">Client:</span> <strong>{apt.clientName}</strong></div>
                   <div><span className="text-muted-foreground">Service:</span> <strong>{apt.customServiceName || apt.serviceName || 'N/A'}</strong></div>
                   <div><span className="text-muted-foreground">Data:</span> <strong>{apt.appointmentDate ? new Date(apt.appointmentDate).toLocaleDateString('en-GB') : 'N/A'}</strong></div>
                   <div><span className="text-muted-foreground">Valor:</span> <strong>£ {(price / 100).toFixed(2).replace('.', ',')}</strong></div>
@@ -368,7 +368,7 @@ function AdminContractsContent() {
               className="flex-1 md:flex-none"
             >
               <Eye className="w-4 h-4 mr-2" />
-              {generateFromAppointment.isPending ? "Gerando..." : "Visualizar Contrato"}
+              {generateFromAppointment.isPending ? "Generating..." : "Preview Contract"}
             </Button>
             <Button
               variant="outline"
@@ -386,7 +386,7 @@ function AdminContractsContent() {
               className="flex-1 md:flex-none"
             >
               <Download className="w-4 h-4 mr-2" />
-              {generatePDF.isPending ? "Gerando PDF..." : "Baixar PDF"}
+              {generatePDF.isPending ? "Generating PDF..." : "Download PDF"}
             </Button>
           </div>
         </CardContent>
@@ -403,7 +403,7 @@ function AdminContractsContent() {
           </DialogHeader>
           {generatedInfo && (
             <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mb-2">
-              <span className="bg-muted px-2 py-1 rounded">Cliente: {generatedInfo.clientName}</span>
+              <span className="bg-muted px-2 py-1 rounded">Client: {generatedInfo.clientName}</span>
               <span className="bg-muted px-2 py-1 rounded">Service: {generatedInfo.serviceName}</span>
               <span className="bg-muted px-2 py-1 rounded">Data: {generatedInfo.appointmentDate}</span>
               <span className="bg-muted px-2 py-1 rounded">Valor: £ {generatedInfo.price}</span>
@@ -481,7 +481,7 @@ function AdminContractsContent() {
               variant="outline"
               onClick={() => {
                 if (!generatedInfo?.clientEmail) {
-                  toast({ title: "Cliente sem email cadastrado", variant: "destructive" });
+                  toast({ title: "Client has no email registered", variant: "destructive" });
                   return;
                 }
                 if (!selectedTemplateId || !selectedAppointmentId) return;
@@ -521,7 +521,7 @@ function AdminContractsContent() {
                 toast({ title: "Copied!" });
               }}
             >
-              Copiar
+              Copy
             </Button>
           </div>
         </DialogContent>
@@ -529,7 +529,7 @@ function AdminContractsContent() {
 
       {/* Lista de Templates */}
       <div>
-        <h2 className="text-xl font-semibold mb-3">Modelos de Contrato</h2>
+        <h2 className="text-xl font-semibold mb-3">Contract Templates</h2>
         {!templates || templates.length === 0 ? (
           <Card>
             <CardContent className="py-16 text-center">
@@ -544,7 +544,7 @@ function AdminContractsContent() {
                 size="lg"
               >
                 <Sparkles className="w-5 h-5 mr-2" />
-                {seedDefaults.isPending ? "Loading..." : "Carregar 4 Modelos Readys"}
+                {seedDefaults.isPending ? "Loading..." : "Load 4 Ready Templates"}
               </Button>
             </CardContent>
           </Card>
@@ -574,7 +574,7 @@ function AdminContractsContent() {
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" variant="outline" onClick={() => openEditDialog(template)}>
-                      <Edit className="w-3 h-3 mr-1" /> Editar
+                      <Edit className="w-3 h-3 mr-1" /> Edit
                     </Button>
                     <Button
                       size="sm"

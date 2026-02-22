@@ -119,7 +119,7 @@ export default function AdminOrders() {
           {[
             { key: "all", label: "All" },
             { key: "pending", label: "Pendings" },
-            { key: "paid", label: "Pagos" },
+            { key: "paid", label: "Paid" },
             { key: "completed", label: "Completeds" },
             { key: "cancelled", label: "Cancelleds" },
           ].map((f) => (
@@ -215,7 +215,7 @@ export default function AdminOrders() {
                       ) : (
                         <div className="flex gap-2">
                           <Input
-                            placeholder="Cole o link de pagamento here (Stripe, Mercado Pago, etc.)"
+                            placeholder="Paste the payment link here (Stripe, PayPal, etc.)"
                             value={paymentLinks[order.id] || ""}
                             onChange={(e) =>
                               setPaymentLinks((prev) => ({ ...prev, [order.id]: e.target.value }))

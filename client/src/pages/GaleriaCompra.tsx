@@ -23,7 +23,7 @@ export default function GalleryCompra() {
     const itemId = `gallery-${photo.id}`;
     
     if (isInCart(itemId)) {
-      toast.info("Foto already is no carrinho");
+      toast.info("Photo is already in the cart");
       return;
     }
 
@@ -38,7 +38,7 @@ export default function GalleryCompra() {
       collectionName: gallery?.name,
     });
     
-    toast.success("Foto adicionada ao carrinho!");
+    toast.success("Photo added to cart!");
   };
 
   const handleCheckout = () => {

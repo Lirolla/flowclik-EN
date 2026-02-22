@@ -41,7 +41,7 @@ const menuItems = [
   { icon: Users, label: "Clients", path: "/admin/clients" },
   { icon: Calendar, label: "Appointments", path: "/admin/appointments" },
   { icon: FolderOpen, label: "Gallery", path: "/admin/galleries" },
-  { icon: Heart, label: "Selection do Cliente", path: "/admin/selections" },
+  { icon: Heart, label: "Client Selection", path: "/admin/selections" },
   { icon: MessageSquare, label: "Messages", path: "/admin/messages" },
   { icon: Mail, label: "Email Marketing", path: "/admin/email-marketing" },
   

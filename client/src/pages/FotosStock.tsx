@@ -67,7 +67,7 @@ export default function FotosStock() {
                               price: photo.price || 0,
                               type: "stock",
                             });
-                            toast.success("Foto adicionada ao carrinho!");
+                            toast.success("Photo added to cart!");
                           }}
                           className="opacity-0 group-hover:opacity-100 transition-opacity bg-white text-black px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-gray-100"
                         >

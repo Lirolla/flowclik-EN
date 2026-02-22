@@ -117,7 +117,7 @@ export const saasSystemRouter = router({
 
   /**
    * Verify se subdomain is available
-   * PUBLIC - Para validação em tempo real no formuthererio
+   * PUBLIC - For real-time validation in the form
    */
   checkSubdomain: publicProcedure
     .input(z.object({ subdomain: z.string() }))

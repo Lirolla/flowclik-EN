@@ -102,18 +102,18 @@ export default function LayoutWrapper({ children, currentPage }: LayoutWrapperPr
   const getContentClass = () => {
     switch (layout) {
       case "sidebar":
-        return "ml-64"; // Espaço para sidebar fixa
+        return "ml-64"; // Space for fixed sidebar
       case "wedding":
         return ""; // Fullscreen, sem padding extra
       case "wedding-videos":
-        return "pt-17"; // Espaço para navbar + borda dourada
+        return "pt-17"; // Space for navbar + gold border
       case "editorial":
         return ""; // Fullscreen editorial, sem padding
       case "cinematic":
-        return "pt-[72px]"; // Espaço para navbar cinematic
+        return "pt-[72px]"; // Space for cinematic navbar
       case "classic":
       default:
-        return "pt-20"; // Espaço para navbar fixa no topo
+        return "pt-20"; // Space for fixed top navbar
     }
   };
 

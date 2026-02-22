@@ -310,7 +310,7 @@ export default function AdminDashboard() {
               <thead className="bg-red-900">
                 <tr>
                   <th className="px-6 py-4 text-left text-white font-semibold">#ID</th>
-                  <th className="px-6 py-4 text-left text-white font-semibold">Cliente</th>
+                  <th className="px-6 py-4 text-left text-white font-semibold">Client</th>
                   <th className="px-6 py-4 text-left text-white font-semibold">Itens</th>
                   <th className="px-6 py-4 text-left text-white font-semibold">Total</th>
                   <th className="px-6 py-4 text-left text-white font-semibold">Status</th>
@@ -370,7 +370,7 @@ export default function AdminDashboard() {
               <thead className="bg-red-900">
                 <tr>
                   <th className="px-6 py-4 text-left text-white font-semibold">#ID</th>
-                  <th className="px-6 py-4 text-left text-white font-semibold">Cliente</th>
+                  <th className="px-6 py-4 text-left text-white font-semibold">Client</th>
                   <th className="px-6 py-4 text-left text-white font-semibold">Service</th>
                   <th className="px-6 py-4 text-left text-white font-semibold">Data/Hour</th>
                   <th className="px-6 py-4 text-left text-white font-semibold">Status</th>

@@ -252,7 +252,7 @@ function AdminCollectionsContent() {
               </div>
 
               <Button onClick={handleCreate} className="w-full" disabled={createMutation.isPending}>
-                {createMutation.isPending ? "Creating..." : "Criar Gallery"}
+                {createMutation.isPending ? "Creating..." : "Create Gallery"}
               </Button>
             </div>
           </DialogContent>

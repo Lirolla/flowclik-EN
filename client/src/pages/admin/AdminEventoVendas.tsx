@@ -31,7 +31,7 @@ function AdminEventoVendasContent() {
     onSuccess: () => {
       utils.collections.getByAppointmentId.invalidate();
       setSalesModalOpen(false);
-      toast.success("Vendas ativadas! Link public gerado.");
+      toast.success("Sales enabled! Public link generated.");
     },
     onError: (error) => {
       toast.error(`Erro: ${error.message}`);
@@ -80,7 +80,7 @@ function AdminEventoVendasContent() {
     <div className="container mx-auto py-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Vendas de Fotos por Evento</h1>
+        <h1 className="text-3xl font-bold mb-2">Photo Sales by Event</h1>
         <p className="text-muted-foreground">
           Manage photo sales for event guests
         </p>
@@ -142,7 +142,7 @@ function AdminEventoVendasContent() {
                             <p className="text-2xl font-bold">
                               {selectedEvent?.collectionSalesEnabled ? "Active" : "Inactive"}
                             </p>
-                            <p className="text-xs text-muted-foreground">Status de Vendas</p>
+                            <p className="text-xs text-muted-foreground">Sales Status</p>
                           </div>
                         </div>
                       </CardContent>
@@ -169,7 +169,7 @@ function AdminEventoVendasContent() {
                         className="flex-1"
                       >
                         <DollarSign className="w-4 h-4 mr-2" />
-                        Ativar Vendas de Fotos
+                        Enable Photo Sales
                       </Button>
                     ) : (
                       <>
@@ -179,7 +179,7 @@ function AdminEventoVendasContent() {
                           className="flex-1"
                         >
                           <Copy className="w-4 h-4 mr-2" />
-                          Copiar Link de Vendas
+                          Copy Sales Link
                         </Button>
                         <Button
                           onClick={handleSendEmails}
@@ -199,7 +199,7 @@ function AdminEventoVendasContent() {
                       <div className="flex items-start gap-3">
                         <Check className="w-5 h-5 text-green-600 mt-0.5" />
                         <div className="flex-1">
-                          <p className="font-semibold text-green-600">Vendas Ativas</p>
+                          <p className="font-semibold text-green-600">Sales Active</p>
                           <p className="text-sm text-muted-foreground mt-1">
                             Price por foto: £ {((selectedEvent.collectionPricePerPhoto || 0) / 100).toFixed(2)}
                           </p>
@@ -221,14 +221,14 @@ function AdminEventoVendasContent() {
       <Dialog open={salesModalOpen} onOpenChange={setSalesModalOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Ativar Vendas de Fotos</DialogTitle>
+            <DialogTitle>Enable Photo Sales</DialogTitle>
             <DialogDescription>
               Configure o price por foto. Um link public will be gerado para compartilhar com os leads.
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 mt-4">
             <div className="space-y-2">
-              <Label htmlFor="pricePerPhoto">Price por Foto (£)</Label>
+              <Label htmlFor="pricePerPhoto">Price per Photo (£)</Label>
               <Input
                 id="pricePerPhoto"
                 type="number"
@@ -253,7 +253,7 @@ function AdminEventoVendasContent() {
                     Ativando...
                   </>
                 ) : (
-                  "Ativar Vendas"
+                  "Enable Sales"
                 )}
               </Button>
               <Button

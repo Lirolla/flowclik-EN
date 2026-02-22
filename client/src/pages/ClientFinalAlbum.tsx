@@ -249,7 +249,7 @@ export default function ClientFinalAlbum() {
         <div className="mb-8 p-6 bg-card rounded-lg border">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-xl font-semibold mb-1">Final Album - Fotos Editadas</h2>
+              <h2 className="text-xl font-semibold mb-1">Final Album - Edited Photos</h2>
               <p className="text-sm text-muted-foreground">
                 {completedCount} de {photos.length} fotos edited
               </p>

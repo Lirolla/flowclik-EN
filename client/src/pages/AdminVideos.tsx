@@ -225,7 +225,7 @@ export default function AdminVideos() {
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>
-                {editingItem ? "Editar Video" : "New Video"}
+                {editingItem ? "Edit Video" : "New Video"}
               </DialogTitle>
             </DialogHeader>
 

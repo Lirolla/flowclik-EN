@@ -187,7 +187,7 @@ export default function ClientGalleryAuth() {
           <Card className="bg-gray-900 border-gray-800 p-4">
             <div className="text-center">
               <p className="text-3xl font-bold text-red-500">{photos.length}</p>
-              <p className="text-gray-400 text-sm mt-1">Total de Fotos</p>
+              <p className="text-gray-400 text-sm mt-1">Total Photos</p>
             </div>
           </Card>
           <Card className="bg-gray-900 border-gray-800 p-4">

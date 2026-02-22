@@ -464,7 +464,7 @@ function AdminSettingsContent() {
                   <div className="space-y-4 pt-6 border-t">
                     <div className="flex items-center justify-between">
                       <div className="space-y-1">
-                        <Label className="text-base font-semibold">Ativar Stock Photos</Label>
+                        <Label className="text-base font-semibold">Enable Stock Photos</Label>
                         <p className="text-sm text-muted-foreground">
                           Habilite uma page public para vender fotos avulsas
                         </p>
@@ -741,7 +741,7 @@ function AdminSettingsContent() {
                     onClick={handleSave}
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
-                    Salvar Changes
+                    Save Changes
                   </Button>
                 </div>
               </AccordionContent>
@@ -825,7 +825,7 @@ function AdminSettingsContent() {
                     onClick={handleSave}
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
-                    Salvar Basic Information
+                    Save Basic Information
                   </Button>
                 </div>
               </AccordionContent>
@@ -859,13 +859,13 @@ function AdminSettingsContent() {
                   />
                 </div>
                 <div>
-                  <Label>Foto de Profile *</Label>
+                  <Label>Profile Photo *</Label>
                   <div className="mt-2">
                     {aboutImage ? (
                       <div className="relative inline-block">
                         <img
                           src={aboutImage}
-                          alt="Foto de profile"
+                          alt="Profile photo"
                           className="w-32 h-32 object-cover rounded-lg border-2 border-border"
                         />
                         <Button
@@ -900,7 +900,7 @@ function AdminSettingsContent() {
                                   data: base64,
                                 });
                                 setAboutImage(result.url);
-                                toast.success("Foto enviada com sucesso!");
+                                toast.success("Photo uploaded successfully!");
                               } catch (error: any) {
                                 toast.error(`Erro ao enviar foto: ${error.message}`);
                               }
@@ -944,7 +944,7 @@ function AdminSettingsContent() {
                     onClick={handleSave}
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
-                    Salvar About
+                    Save About
                   </Button>
                 </div>
               </AccordionContent>
@@ -976,7 +976,7 @@ function AdminSettingsContent() {
                     onClick={handleSave}
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
-                    Salvar Services
+                    Save Services
                   </Button>
                 </div>
               </AccordionContent>
@@ -1030,7 +1030,7 @@ function AdminSettingsContent() {
                     onClick={handleSave}
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
-                    Salvar Contato
+                    Save Contact
                   </Button>
                 </div>
               </AccordionContent>
@@ -1074,7 +1074,7 @@ function AdminSettingsContent() {
                     onClick={handleSave}
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
-                    Salvar Redes Sociais
+                    Save Social Media
                   </Button>
                 </div>
               </AccordionContent>
@@ -1097,7 +1097,7 @@ function AdminSettingsContent() {
                     onChange={(e) => setParallaxEnabled(e.target.checked)}
                     className="w-5 h-5 cursor-pointer"
                   />
-                  <Label className="cursor-pointer">Ativar section parallax na Home</Label>
+                  <Label className="cursor-pointer">Enable parallax section on Home</Label>
                 </div>
                 
                 {parallaxEnabled && (

@@ -20,7 +20,7 @@ export default function AdminPhotoSelections() {
     onSuccess: () => {
       toast({
         title: "Success",
-        description: "Foto edited enviada com sucesso!",
+        description: "Edited photo uploaded successfully!",
       });
       refetch();
     },

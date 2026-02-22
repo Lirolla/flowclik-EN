@@ -190,13 +190,13 @@ export default function AdminPortfolio() {
           <DialogTrigger asChild>
             <Button onClick={() => resetForm()}>
               <Plus className="mr-2 h-4 w-4" />
-              New Foto
+              New Photo
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>
-                {editingItem ? "Editar Foto" : "Add Foto"}
+                {editingItem ? "Edit Photo" : "Add Photo"}
               </DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -210,7 +210,7 @@ export default function AdminPortfolio() {
                     setFormData({ ...formData, type: e.target.value as "photo" | "video" })
                   }
                 >
-                  <option value="photo">Foto</option>
+                  <option value="photo">Photo</option>
                   <option value="video">Video</option>
                 </select>
               </div>
@@ -494,7 +494,7 @@ export default function AdminPortfolio() {
           </p>
           <Button onClick={() => setIsDialogOpen(true)}>
             <Plus className="mr-2 h-4 w-4" />
-            Add First Foto
+            Add First Photo
           </Button>
         </Card>
       )}

@@ -233,7 +233,7 @@ function EventsTab() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="text-xs text-muted-foreground mb-1 block">Cliente *</label>
+              <label className="text-xs text-muted-foreground mb-1 block">Client *</label>
               <select
                 value={form.clientId}
                 onChange={e => setForm({ ...form, clientId: Number(e.target.value) })}
@@ -703,7 +703,7 @@ function CampaignsTab() {
               disabled={createCampaign.isPending}
               className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
             >
-              {createCampaign.isPending ? "Saving..." : "Criar Campaign"}
+              {createCampaign.isPending ? "Saving..." : "Create Campaign"}
             </button>
           </div>
         </div>

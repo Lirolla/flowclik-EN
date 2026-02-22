@@ -191,7 +191,7 @@ export default function AdminSupport() {
                     Cancel
                   </Button>
                   <Button onClick={handleCreateTicket} disabled={createTicket.isPending}>
-                    {createTicket.isPending ? "Creating..." : "Criar Ticket"}
+                    {createTicket.isPending ? "Creating..." : "Create Ticket"}
                   </Button>
                 </div>
               </div>

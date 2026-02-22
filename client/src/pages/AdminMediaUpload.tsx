@@ -24,7 +24,7 @@ export default function AdminMediaUpload() {
   const { data: collections } = trpc.collections.getAll.useQuery();
   const uploadMutation = trpc.media.upload.useMutation({
     onSuccess: () => {
-      alert("Foto enviada com sucesso!");
+      alert("Photo uploaded successfully!");
       // Reset form
       setSelectedFile(null);
       setPreview(null);
@@ -94,7 +94,7 @@ export default function AdminMediaUpload() {
         <CardContent className="space-y-6">
           {/* File Upload */}
           <div className="space-y-2">
-            <Label htmlFor="file">Shecionar Foto</Label>
+            <Label htmlFor="file">Select Photo</Label>
             <div className="flex items-center gap-4">
               <Input
                 id="file"

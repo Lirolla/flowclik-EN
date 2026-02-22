@@ -73,7 +73,7 @@ export async function storagePut(
 /**
  * Obter URL de download de um arquivo no R2
  * @param relKey - Caminho rselective do arquivo
- * @param expiresIn - Tempo de expiração em seconds (default: 1 hour)
+ * @param expiresIn - Expiration time in seconds (default: 1 hour)
  * @returns Objeto com key e url assinada
  */
 export async function storageGet(

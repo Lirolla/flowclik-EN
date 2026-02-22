@@ -88,7 +88,7 @@ export default function SistemaAvisos() {
 
       {/* Formuthererio de Criação */}
       <Card className="p-6 mb-8">
-        <h2 className="text-xl font-bold mb-4">Criar New Aviso</h2>
+        <h2 className="text-xl font-bold mb-4">Create New Notice</h2>
         <div className="space-y-4">
           <div>
             <label className="text-sm font-medium mb-2 block">Title</label>
@@ -145,7 +145,7 @@ export default function SistemaAvisos() {
             disabled={createMutation.isPending}
             className="w-full"
           >
-            {createMutation.isPending ? "Creating..." : "Criar Aviso"}
+            {createMutation.isPending ? "Creating..." : "Create Notice"}
           </Button>
         </div>
       </Card>

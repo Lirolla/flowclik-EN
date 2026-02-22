@@ -156,7 +156,7 @@ export default function AdminServices() {
           </DialogTrigger>
           <DialogContent className="max-w-2xl">
             <DialogHeader>
-              <DialogTitle>Criar New Service</DialogTitle>
+              <DialogTitle>Create New Service</DialogTitle>
               <DialogDescription>Fill in the details of the new service</DialogDescription>
             </DialogHeader>
 
@@ -240,7 +240,7 @@ export default function AdminServices() {
               </div>
 
               <Button onClick={handleCreate} className="w-full" disabled={createMutation.isPending}>
-                {createMutation.isPending ? "Creating..." : "Criar Service"}
+                {createMutation.isPending ? "Creating..." : "Create Service"}
               </Button>
             </div>
           </DialogContent>
@@ -321,7 +321,7 @@ export default function AdminServices() {
             </div>
 
             <Button onClick={handleUpdate} className="w-full" disabled={updateMutation.isPending}>
-              {updateMutation.isPending ? "Updating..." : "Atualizar Service"}
+              {updateMutation.isPending ? "Updating..." : "Update Service"}
             </Button>
           </div>
         </DialogContent>
@@ -403,7 +403,7 @@ export default function AdminServices() {
             </p>
             <Button onClick={() => setIsCreateOpen(true)}>
               <Plus className="w-4 h-4 mr-2" />
-              Criar First Service
+              Create First Service
             </Button>
           </CardContent>
         </Card>

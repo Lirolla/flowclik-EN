@@ -156,7 +156,7 @@ Team Lirolla
 /**
  * Send email to client
  * 
- * NOTA: Esta is uma implementação simulada que only registra logs.
+ * NOTE: This is a simulated implementation that only logs.
  * Em production, substitua por integration real com service de email.
  */
 export async function sendClientEmail(

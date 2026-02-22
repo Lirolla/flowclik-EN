@@ -45,7 +45,7 @@ export default function AdminGalleryUpload() {
     onSuccess: () => {
       utils.media.listByCollection.invalidate({ collectionId });
       toast({
-        title: "Foto deleted",
+        title: "Photo deleted",
         description: "A foto foi removida da galeria",
       });
     },
@@ -412,7 +412,7 @@ export default function AdminGalleryUpload() {
 
       {/* Existing Photos */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">Fotos na Gallery</h2>
+        <h2 className="text-2xl font-bold mb-4">Photos in Gallery</h2>
         
         {!mediaList || mediaList.length === 0 ? (
           <Card>

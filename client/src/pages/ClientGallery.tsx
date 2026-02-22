@@ -136,7 +136,7 @@ export default function ClientGallery() {
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <Card className="w-full max-w-md p-8">
           <div className="text-center mb-6">
-            <h1 className="text-3xl font-bold mb-2">Yours Fotos do Ensaio</h1>
+            <h1 className="text-3xl font-bold mb-2">Your Session Photos</h1>
             <p className="text-muted-foreground">
               Digite your email para acessar a galeria
             </p>

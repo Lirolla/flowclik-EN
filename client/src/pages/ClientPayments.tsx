@@ -49,7 +49,7 @@ export default function ClientPayments() {
   return (
     <ClientLayout appointmentId={appointmentId}>
       <div className="max-w-4xl mx-auto space-y-6">
-        <h1 className="text-3xl font-bold mb-6">Pagamentos</h1>
+        <h1 className="text-3xl font-bold mb-6">Payments</h1>
 
         {/* Payment Status */}
         <Card className={`p-6 ${isPaid ? 'bg-green-900/20 border-green-600' : 'bg-yellow-900/20 border-yellow-600'}`}>

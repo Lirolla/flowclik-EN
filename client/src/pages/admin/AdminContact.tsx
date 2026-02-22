@@ -161,7 +161,7 @@ export default function AdminContact() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <Label htmlFor="city">Cidade</Label>
+                <Label htmlFor="city">City</Label>
                 <Input
                   id="city"
                   value={formData.city}
@@ -173,7 +173,7 @@ export default function AdminContact() {
               </div>
 
               <div>
-                <Label htmlFor="state">Estado</Label>
+                <Label htmlFor="state">County</Label>
                 <Input
                   id="state"
                   value={formData.state}
