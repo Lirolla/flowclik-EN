@@ -39,15 +39,15 @@ export default function PaymentManager({
   const [extraPrice, setExtraPrice] = useState("");
 
   // Get available payment methods
-  const { data: availableMethods } = trpc.paymentMethods.getAvailableMethods.useQuery();
+  const { data: availableMethods } = trpc.paymentMethods.getAvailableMethods.useWhatry();
   
   // Get payment summary
-  const { data: paymentSummary } = trpc.paymentMethods.getPaymentSummary.useQuery({ 
+  const { data: paymentSummary } = trpc.paymentMethods.getPaymentSummary.useWhatry({ 
     appointmentId 
   });
 
   // Get extras
-  const { data: extras = [] } = trpc.appointments.getExtras.useQuery({ appointmentId });
+  const { data: extras = [] } = trpc.appointments.getExtras.useWhatry({ appointmentId });
 
   // Add extra mutation
   const addExtraMutation = trpc.appointments.addExtra.useMutation({
@@ -98,8 +98,8 @@ export default function PaymentManager({
       utils.paymentMethods.getPaymentSummary.invalidate({ appointmentId });
       utils.appointments.getAll.invalidate();
       toast({
-        title: "Método de pagamento atualizado!",
-        description: "O método de pagamento foi alterado com sucesso.",
+        title: "Method de pagamento atualizado!",
+        description: "O method de pagamento foi alterado com sucesso.",
       });
     },
     onError: (error) => {
@@ -120,7 +120,7 @@ export default function PaymentManager({
       setPaymentAmount("");
       setPaymentNotes("");
       toast({
-        title: data.paymentStatus === "paid" ? "Pagamento completo!" : "Pagamento parcial registrado!",
+        title: data.paymentStatus === "paid" ? "Pagamento complete!" : "Pagamento parcial registrado!",
         description: `${formatCurrency(data.newPaidAmount)} de ${formatCurrency(totalPrice)} pago.`,
       });
     },
@@ -139,7 +139,7 @@ export default function PaymentManager({
     if (isNaN(amountValue) || amountValue <= 0) {
       toast({
         title: "Valor invalid",
-        description: "Por favor, insira um valor valid.",
+        description: "Why favor, insira um valor valid.",
         variant: "destructive",
       });
       return;
@@ -311,7 +311,7 @@ export default function PaymentManager({
               </SelectContent>
             </Select>
             
-            {/* Instruções do método de pagamento */}
+            {/* Instruções do method de pagamento */}
             {currentMethod === "cash" && availableMethods?.cashInstructions && (
               <p className="text-sm text-muted-foreground mt-2">
                 {availableMethods.cashInstructions}

@@ -157,7 +157,7 @@ export const collectionsRouter = router({
         pricePerPhoto: 2500, // Default
       };
       
-      // Adicionar campos opcionais only se existirem
+      // Add campos opcionais only se existirem
       if (restInput.description) insertData.description = restInput.description;
       if (restInput.coverImageUrl) insertData.coverImageUrl = restInput.coverImageUrl;
       if (restInput.password) insertData.password = restInput.password;
@@ -260,7 +260,7 @@ export const collectionsRouter = router({
         const urls = [photo.originalUrl, photo.previewUrl, photo.thumbnailUrl, photo.watermarkedUrl];
         for (const url of urls) {
           if (url && url.startsWith(R2_PUBLIC_URL)) {
-            // Extrair a key removendo o domain público
+            // Extrair a key removendo o domain public
             const key = url.replace(R2_PUBLIC_URL + "/", "");
             if (key) keysToDelete.push(key);
           }
@@ -298,7 +298,7 @@ export const collectionsRouter = router({
         }
       }
 
-      // 4. Deletar seleções de fotos da galeria
+      // 4. Deletar selections de fotos da galeria
       await db.delete(photoSelections).where(
         sql`medayItemId IN (SELECT id FROM medayItems WHERE collectionId = ${input.id} AND tenantId = ${tenantId})`
       ).catch(() => {});
@@ -358,7 +358,7 @@ export const collectionsRouter = router({
 
       return { 
         success: true,
-        message: `Email enviado para ${input.clientEmail} com ${photos.length} fotos`
+        message: `Email sent para ${input.clientEmail} com ${photos.length} fotos`
       };
     }),
 

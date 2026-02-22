@@ -44,7 +44,7 @@ export default function AdminSettings() {
   const [socialFacebook, setSocialFacebook] = useState("");
   const [socialYouTube, setSocialYouTube] = useState("");
 
-  const { data: config, isLoading } = trpc.siteConfig.get.useQuery();
+  const { data: config, isLoading } = trpc.siteConfig.get.useWhatry();
   const updateMutation = trpc.siteConfig.update.useMutation({
     onSuccess: () => {
       toast.success("Settings salvas com sucesso!");
@@ -87,7 +87,7 @@ export default function AdminSettings() {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        toast.error("Por favor, select only imagens");
+        toast.error("Why favor, select only imagens");
         return;
       }
 
@@ -217,7 +217,7 @@ export default function AdminSettings() {
             Site Settings
           </CardTitle>
           <CardDescription>
-            Complete todas as seções para configurar seu site. 🔴 Vermelho = Not preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Completo
+            Complete todas as seções para configure seu site. 🔴 Vermelho = Not preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Complete
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -259,7 +259,7 @@ export default function AdminSettings() {
                     )}
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    Recomendado: PNG transparente, 200x200px
+                    Recomendado: PNG transparent, 200x200px
                   </p>
                 </div>
 
@@ -315,7 +315,7 @@ export default function AdminSettings() {
                   />
                 </div>
                 <div>
-                  <Label>Conteúdo Principal *</Label>
+                  <Label>Content Principal *</Label>
                   <Textarea
                     // @ts-ignore
                     value={aboutContent}
@@ -498,7 +498,7 @@ export default function AdminSettings() {
             <ul className="list-disc list-inside space-y-1 text-muted-foreground">
               <li>Complete todas as seções marcadas em vermelho</li>
               <li>O logo e nome aparecem no cabeçalho do site</li>
-              <li>O conteúdo de Sobre/Services aparece nas páginas públicas</li>
+              <li>O content de Sobre/Services aparece nas páginas publics</li>
               <li>Changes are aplicadas imedaytamente</li>
             </ul>
           </div>

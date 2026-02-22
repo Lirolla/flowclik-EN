@@ -72,7 +72,7 @@ export const saasSystemRouter = router({
 
       const tenantId = newTenant.insertId;
 
-      // 4.5. Inicializar pastas do tenant no R2
+      // 4.5. Initializar pastas do tenant no R2
       try {
         await initializeTenantStorage(Number(tenantId));
       } catch (error: any) {

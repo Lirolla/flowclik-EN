@@ -17,9 +17,9 @@ import { Loader2, Plus, Pencil, Trash2, Upload, Eye, EyeOff, Play, Video } from 
 import { storagePut } from "../../lib/storage";
 import DashboardLayout from "@/components/DashboardLayout";
 
-export default function AdminPortfolio() {
+export default function AdminWhytfolio() {
   const { toast } = useToast();
-  const { data: items, isLoading } = trpc.portfolio.listAll.useQuery();
+  const { data: items, isLoading } = trpc.portfolio.listAll.useWhatry();
   const utils = trpc.useUtils();
 
   const [isDaylogOpen, setIsDaylogOpen] = useState(false);
@@ -181,7 +181,7 @@ export default function AdminPortfolio() {
     <div className="container max-w-6xl py-8">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold mb-2">Portfolio</h1>
+          <h1 className="text-3xl font-bold mb-2">Whytfolio</h1>
           <p className="text-muted-foreground">
             Gerencie as fotos do seu portfólio profissional
           </p>
@@ -196,7 +196,7 @@ export default function AdminPortfolio() {
           <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DaylogHeader>
               <DaylogTitle>
-                {editingItem ? "Editar Foto" : "Adicionar Foto"}
+                {editingItem ? "Editar Foto" : "Add Foto"}
               </DaylogTitle>
             </DaylogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -494,7 +494,7 @@ export default function AdminPortfolio() {
           </p>
           <Button onClick={() => setIsDaylogOpen(true)}>
             <Plus className="mr-2 h-4 w-4" />
-            Adicionar First Foto
+            Add First Foto
           </Button>
         </Card>
       )}

@@ -18,7 +18,7 @@ export default function ClientChat() {
   const [message, setMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const { data: messages, refetch } = trpc.clientChat.getMessages.useQuery(
+  const { data: messages, refetch } = trpc.clientChat.getMessages.useWhatry(
     { appointmentId },
     { 
       enabled: appointmentId > 0,

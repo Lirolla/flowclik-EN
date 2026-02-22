@@ -18,7 +18,7 @@ export const defaultEmailTemplates = [
     <p style="font-size:16px;color:#555;line-height:1.6;">Hoje é um day muito especial e queremos te desejar um feliz birthday cheio de alegria, amor e moments incríveis!</p>
     <p style="font-size:16px;color:#555;line-height:1.6;">Foi uma honra registrar seus moments especiais e esperamos continuar fazendo parte da sua história. 📸</p>
     <div style="text-align:center;margin:30px 0;">
-      <p style="font-size:16px;color:#764ba2;font-weight:600;">🎉 Que venham muitos mais years de felicidade! 🎉</p>
+      <p style="font-size:16px;color:#764ba2;font-weight:600;">🎉 What venham muitos mais years de felicidade! 🎉</p>
     </div>
     <p style="font-size:16px;color:#555;">Com carinho,<br><strong>{{fotografo}}</strong></p>
   </div>
@@ -45,7 +45,7 @@ export const defaultEmailTemplates = [
   </div>
   <div style="padding:30px;">
     <p style="font-size:18px;color:#333;line-height:1.6;">Hello <strong>{{nome}}</strong>,</p>
-    <p style="font-size:16px;color:#555;line-height:1.6;">Preparamos uma promotion exclusive para you! Por tempo limitado, estamos oferecendo condições especiais nos nossos photography services.</p>
+    <p style="font-size:16px;color:#555;line-height:1.6;">Preparamos uma promotion exclusive para you! Why tempo limitado, estamos oferecendo conditions especiais nos nossos photography services.</p>
     <div style="background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);border-radius:8px;padding:20px;text-align:center;margin:20px 0;">
       <p style="color:#fff;font-size:24px;font-weight:700;margin:0;">Desconto Especial</p>
       <p style="color:rgba(255,255,255,0.9);font-size:14px;margin:5px 0 0;">Get in touch para saber mais!</p>
@@ -108,7 +108,7 @@ export const defaultEmailTemplates = [
     <p style="font-size:16px;color:#555;line-height:1.6;">Muito thank you pela trust em nosso trabalho! Foi um prazer registrar seus moments especiais.</p>
     <p style="font-size:16px;color:#555;line-height:1.6;">Suas fotos estão sendo tratadas com muito carinho e em breve estarão disponíveis para you.</p>
     <div style="text-align:center;margin:30px 0;">
-      <p style="font-size:16px;color:#a18cd1;font-weight:600;">Esperamos que tenha sido uma experiência incrível! ✨</p>
+      <p style="font-size:16px;color:#a18cd1;font-weight:600;">Esperamos que tenha sido uma experience incrível! ✨</p>
     </div>
     <p style="font-size:16px;color:#555;line-height:1.6;">Se needsr de algo, estamos à disposição. Ficaremos felizes em atendê-lo novamente!</p>
     <p style="font-size:16px;color:#555;">Com carinho,<br><strong>{{fotografo}}</strong></p>

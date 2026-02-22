@@ -9,7 +9,7 @@ export default function ClientContract() {
   const [, params] = useRoute("/client/contract/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
 
-  const { data: appointment, isLoading } = trpc.appointments.getById.useQuery(
+  const { data: appointment, isLoading } = trpc.appointments.getById.useWhatry(
     { id: appointmentId },
     { enabled: appointmentId > 0 }
   );
@@ -51,7 +51,7 @@ export default function ClientContract() {
                 <>
                   <CheckCircle className="h-12 w-12 text-green-500" />
                   <div>
-                    <h2 className="text-2xl font-semibold text-green-500">Contrato Assinado</h2>
+                    <h2 className="text-2xl font-semibold text-green-500">Contrato Signed</h2>
                     <p className="text-gray-300 mt-1">
                       Contract signed e confirmado
                     </p>
@@ -63,7 +63,7 @@ export default function ClientContract() {
                   <div>
                     <h2 className="text-2xl font-semibold text-blue-500">Contrato Available</h2>
                     <p className="text-gray-300 mt-1">
-                      Your contract is pronto para visualização
+                      Your contract is ready para visualização
                     </p>
                   </div>
                 </>
@@ -113,7 +113,7 @@ export default function ClientContract() {
               <div className="flex justify-between items-center pb-4 border-b border-gray-800">
                 <span className="text-gray-400">Status</span>
                 <span className={`font-semibold ${isSigned ? 'text-green-500' : 'text-blue-500'}`}>
-                  {isSigned ? 'Assinado' : 'Awaiting Assinatura'}
+                  {isSigned ? 'Signed' : 'Awaiting Assinatura'}
                 </span>
               </div>
 

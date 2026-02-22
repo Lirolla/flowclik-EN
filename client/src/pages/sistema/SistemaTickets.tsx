@@ -32,9 +32,9 @@ export default function SistemaTickets() {
   const [replyMessage, setReplyMessage] = useState("");
   const [isInternal, setIsInternal] = useState(false);
 
-  // Queries
-  const { data: tickets, refetch: refetchTickets } = trpc.sistema.getAllTickets.useQuery({ status: statusFilter });
-  const { data: ticketDetails } = trpc.sistema.getTicketById.useQuery(
+  // Whatries
+  const { data: tickets, refetch: refetchTickets } = trpc.sistema.getAllTickets.useWhatry({ status: statusFilter });
+  const { data: ticketDetails } = trpc.sistema.getTicketById.useWhatry(
     { ticketId: selectedTicket! },
     { enabled: !!selectedTicket }
   );
@@ -124,7 +124,7 @@ export default function SistemaTickets() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-3xl font-bold">Tickets de Support</h1>
-          <p className="text-muted-foreground">Gerenciar solicitações de todos os photographers</p>
+          <p className="text-muted-foreground">Manage solicitações de todos os photographers</p>
         </div>
 
         <Select value={statusFilter} onValueChange={(v: any) => setStatusFilter(v)}>
@@ -228,7 +228,7 @@ export default function SistemaTickets() {
                 </Card>
               ))}
 
-              {/* Adicionar Reply */}
+              {/* Add Reply */}
               {ticketDetails.ticket.status !== "closed" && (
                 <div className="space-y-2">
                   <Label>Reply Ticket</Label>

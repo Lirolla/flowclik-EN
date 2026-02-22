@@ -1,7 +1,7 @@
 import { trpc } from "@/lib/trpc";
 
 export function useSiteConfig() {
-  const { data: config, isLoading } = trpc.siteConfig.get.useQuery();
+  const { data: config, isLoading } = trpc.siteConfig.get.useWhatry();
 
   return {
     config,

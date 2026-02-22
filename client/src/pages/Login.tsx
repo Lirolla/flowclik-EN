@@ -46,7 +46,7 @@ export default function Login() {
         localStorage.setItem(AUTH_TOKEN_KEY, token);
         toast.success(`Bem-vindo, ${userName}!`);
         
-        // Usar window.location para forçar reload completo (igual ao /system/login)
+        // Usar window.location para forçar reload complete (igual ao /system/login)
         window.location.href = "/admin";
       } else {
         toast.error("Erro ao fazer login. Try again.");

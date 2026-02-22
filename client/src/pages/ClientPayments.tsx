@@ -8,12 +8,12 @@ export default function ClientPayments() {
   const [, params] = useRoute("/client/payments/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
 
-  const { data: appointment, isLoading } = trpc.appointments.getById.useQuery(
+  const { data: appointment, isLoading } = trpc.appointments.getById.useWhatry(
     { id: appointmentId },
     { enabled: appointmentId > 0 }
   );
 
-  const { data: extras = [] } = trpc.appointments.getExtras.useQuery(
+  const { data: extras = [] } = trpc.appointments.getExtras.useWhatry(
     { appointmentId },
     { enabled: appointmentId > 0 }
   );

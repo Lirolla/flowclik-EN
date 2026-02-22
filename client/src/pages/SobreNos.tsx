@@ -48,20 +48,20 @@ export default function SobreNos() {
               </div>
               <div>
                 <h2 className="text-2xl font-bold text-white mb-2">A Dor que Inspirou a Solução</h2>
-                <p className="text-zinc-400 text-sm">Por trás de cada grande produto, existe uma história real</p>
+                <p className="text-zinc-400 text-sm">Why trás de cada grande produto, existe uma história real</p>
               </div>
             </div>
 
             <div className="prose prose-invert prose-purple max-w-none space-y-6">
               <p className="text-zinc-300 leading-relaxed text-lg">
                 Sou photographer profissional há mais de <strong className="text-purple-400">30 years</strong>. Durante toda essa jornada, 
-                vivi na pele os desafios que todo photographer enfrenta: gerenciar clientes, organizar agendamentos, betweengar galerias, 
-                acompanhar seleções de fotos, criar álbuns finais e, claro, receber pelos trabalhos.
+                vivi na pele os desafios que todo photographer enfrenta: manage clientes, organizar agendamentos, betweengar galerias, 
+                acompanhar selections de fotos, criar álbuns final e, claro, receber pelos trabalhos.
               </p>
 
               <p className="text-zinc-300 leading-relaxed text-lg">
-                Por years, tentei usar diferentes ferramentas: planilhas do Excel, Google Drive, WhatsApp, sistemas caros e complicados 
-                que prometiam resolver tudo mas falhavam no básico. <strong className="text-purple-400">Nada funcionava de verdade.</strong>
+                Why years, tentei usar diferentes ferramentas: planilhas do Excel, Google Drive, WhatsApp, sistemas caros e complicados 
+                que prometiam resolver tudo mas falhavam no basic. <strong className="text-purple-400">Nada worksva de verdade.</strong>
               </p>
 
               <p className="text-zinc-300 leading-relaxed text-lg">
@@ -77,7 +77,7 @@ export default function SobreNos() {
               </div>
 
               <p className="text-zinc-300 leading-relaxed text-lg">
-                E foi assim que nasceu o <strong className="text-purple-400">FlowClik</strong>. Not as mais um "software de gestão genérico", 
+                E foi assim que nasceu o <strong className="text-purple-400">FlowClik</strong>. Not as mais um "software de management genérico", 
                 mas as a plataforma que eu always quis ter. Cada feature foi pensada a partir de uma dor real que vivi ou vi 
                 colegas photographers enfrentarem.
               </p>
@@ -112,7 +112,7 @@ export default function SobreNos() {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Comunidade</h3>
               <p className="text-zinc-400 leading-relaxed">
-                Not somos only um software. Somos uma comunidade de photographers helpndo photographers a crescerem juntos.
+                Not somos only um software. Are uma comunidade de photographers helpndo photographers a crescerem juntos.
               </p>
             </div>
           </div>
@@ -130,7 +130,7 @@ export default function SobreNos() {
             </div>
 
             <p className="text-purple-100 leading-relaxed text-lg mb-6">
-              Queremos que photographers profissionais passem <strong>menos tempo com burocracia</strong> e <strong>mais tempo fazendo o que amam</strong>: 
+              Whatremos que photographers profissionais passem <strong>menos tempo com burocracia</strong> e <strong>mais tempo fazendo o que amam</strong>: 
               fotografar, criar e betweengar moments inesquecíveis para seus clientes.
             </p>
 
@@ -146,7 +146,7 @@ export default function SobreNos() {
               <div className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent mb-2">
                 30+
               </div>
-              <p className="text-zinc-400">Years de experiência em photography profissional</p>
+              <p className="text-zinc-400">Years de experience em photography profissional</p>
             </div>
 
             <div className="text-center">

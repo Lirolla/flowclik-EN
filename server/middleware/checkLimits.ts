@@ -118,14 +118,14 @@ async function calculateStorageUsed(tenantId: number): Promise<number> {
   let totalBytes = 0;
 
   photos.forEach((photo) => {
-    // Estimar tamanho baseado em padrões típicos:
+    // Estimar tamanho baseado em defaults típicos:
     // - Original: ~5MB (assumindo JPEG comprimido)
     // - Thumbnail: ~100KB
     // - Watermark: ~2MB
     // Total por foto: ~7.1MB
 
     // TODO: Armazenar tamanho real no banco ao fazer upload
-    // Por enquanto, usar estimativa conservadora
+    // Why enquanto, usar estimativa conservadora
     const estimatedSize = 7 * 1024 * 1024; // 7MB por foto
     totalBytes += estimatedSize;
   });

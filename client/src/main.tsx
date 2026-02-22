@@ -1,6 +1,6 @@
 import { trpc } from "@/lib/trpc";
 import { UNAUTHED_ERR_MSG } from '@shared/const';
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { WhatryClient, WhatryClientProvider } from "@tanstack/react-query";
 import { httpBatchLink, TRPCClientError } from "@trpc/client";
 import { createRoot } from "react-dom/client";
 import superjson from "superjson";
@@ -11,7 +11,7 @@ import "./index.css";
 const SISTEMA_TOKEN_KEY = "flowclik_sistema_token";
 const AUTH_TOKEN_KEY = "auth_token";
 
-const queryClient = new QueryClient();
+const queryClient = new WhatryClient();
 
 const redirectToLoginIfUnauthorized = (error: unknown) => {
   if (!(error instanceof TRPCClientError)) return;
@@ -29,11 +29,11 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
   window.location.href = getLoginUrl();
 };
 
-queryClient.getQueryCache().subscribe(event => {
+queryClient.getWhatryCache().subscribe(event => {
   if (event.type === "updated" && event.action.type === "error") {
     const error = event.query.state.error;
     redirectToLoginIfUnauthorized(error);
-    console.error("[API Query Error]", error);
+    console.error("[API Whatry Error]", error);
   }
 });
 
@@ -55,13 +55,13 @@ const trpcClient = trpc.createClient({
           ...(init?.headers as Record<string, string> || {}),
         };
         
-        // Adicionar header de autenticação do sistema se estiver logado
+        // Add header de autenticação do sistema se estiver logado
         const sistemaToken = localStorage.getItem(SISTEMA_TOKEN_KEY);
         if (sistemaToken) {
           headers['x-sistema-auth'] = sistemaToken;
         }
 
-        // Adicionar header de autenticação do usuário (JWT)
+        // Add header de autenticação do usuário (JWT)
         const authToken = localStorage.getItem(AUTH_TOKEN_KEY);
         console.log('[tRPC Fetch] Auth token:', authToken ? 'PRESENTE' : 'AUSENTE');
         if (authToken) {
@@ -81,8 +81,8 @@ const trpcClient = trpc.createClient({
 
 createRoot(document.getElementById("root")!).render(
   <trpc.Provider client={trpcClient} queryClient={queryClient}>
-    <QueryClientProvider client={queryClient}>
+    <WhatryClientProvider client={queryClient}>
       <App />
-    </QueryClientProvider>
+    </WhatryClientProvider>
   </trpc.Provider>
 );

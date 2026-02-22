@@ -64,7 +64,7 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
 
-  const { data: galleryData } = trpc.sessionGallery.getByAppointment.useQuery(
+  const { data: galleryData } = trpc.sessionGallery.getByAppointment.useWhatry(
     { appointmentId },
     { enabled: !!appointmentId }
   );
@@ -237,11 +237,11 @@ function AdminAppointmentsContent() {
   });
 
   const utils = trpc.useUtils();
-  const { data: appointments, isLoading } = trpc.appointments.getAll.useQuery();
-  const { data: clients } = trpc.clients.list.useQuery();
-  const { data: services } = trpc.services.getAll.useQuery();
-  const { data: collections } = trpc.collections.getAll.useQuery();
-  const { data: downloadPermissions } = trpc.downloadControl.getAllPermissions.useQuery();
+  const { data: appointments, isLoading } = trpc.appointments.getAll.useWhatry();
+  const { data: clients } = trpc.clients.list.useWhatry();
+  const { data: services } = trpc.services.getAll.useWhatry();
+  const { data: collections } = trpc.collections.getAll.useWhatry();
+  const { data: downloadPermissions } = trpc.downloadControl.getAllPermissions.useWhatry();
 
   const toggleDownloadMutation = trpc.downloadControl.togglePermission.useMutation({
     onSuccess: () => {
@@ -435,7 +435,7 @@ function AdminAppointmentsContent() {
             Agendamentos
           </h1>
           <p className="text-muted-foreground mt-2">
-            Gerencie o fluxo de trabalho completo dos agendamentos
+            Gerencie o fluxo de trabalho complete dos agendamentos
           </p>
         </div>
         <div className="flex gap-3">

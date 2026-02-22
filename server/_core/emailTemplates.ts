@@ -33,7 +33,7 @@ export async function sendEmail(opts: {
       console.error("Resend error:", result.error);
       return false;
     }
-    console.log(`✅ Email enviado: ${opts.subject} → ${opts.to}`);
+    console.log(`✅ Email sent: ${opts.subject} → ${opts.to}`);
     return true;
   } catch (err: any) {
     console.error(`⚠️ Email falhou (${opts.subject}):`, err.message);
@@ -65,7 +65,7 @@ ${content}
 </td></tr>
 <tr><td align="center" style="padding:30px 20px;">
   <p style="color:#4b5563;font-size:12px;margin:0;line-height:1.6;">
-    ${footer || "Este email foi enviado automaticamente pela plataforma FlowClik."}<br>
+    ${footer || "Este email foi sent automaticamente pela plataforma FlowClik."}<br>
     <a href="https://flowclik.com" style="color:#e879f9;text-decoration:none;">flowclik.com</a>
   </p>
   <p style="color:#374151;font-size:11px;margin:15px 0 0 0;">&copy; ${new Date().getFullYear()} FlowClik - All rights reserved</p>
@@ -144,7 +144,7 @@ ${card([
 ])}
 <p style="color:#9ca3af;font-size:14px;line-height:1.7;margin-top:20px;">
 <strong style="color:#e5e7eb;">O que vem now?</strong><br>
-O photographer entrará em contato para confirmar os details finais. After a sesare, you receberá um link para visualizar e selecionar suas fotos favoritas.</p>
+O photographer entrará em contato para confirmar os details final. After a sesare, you receberá um link para visualizar e selecionar suas fotos favoritas.</p>
   `);
   return sendEmail({ to: data.clientEmail, subject: "📅 Agendamento Confirmado!", html });
 }
@@ -193,7 +193,7 @@ export async function sendSelectionNotificationEmail(data: SelectionData): Promi
 <h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">❤️ Photo Selection Recebida!</h1>
 <p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Thank you pela sua selection</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.clientName}</strong>,</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Recebemos suas seleções de fotos favoritas! Thank you por dedicar tempo para escolher as melhores imagens.</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Recebemos suas selections de fotos favoritas! Thank you por dedicar tempo para escolher as melhores imagens.</p>
 ${card([
   {label:"📁 Gallery", value: data.galleryTitle},
   {label:"❤️ Selected Photos", value: data.selectedCount + " de " + data.totalPhotos},
@@ -265,7 +265,7 @@ ${card([
 <tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Personalize seu site (cores, logo, about)</td></tr>
 <tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Adicione seus services e preços</td></tr>
 <tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Faça upload do seu portfólio</td></tr>
-<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Configure seus horários disponíveis</td></tr>
+<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Configure seus times disponíveis</td></tr>
 <tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Compartilhe seu link com clientes!</td></tr>
 </table>
 ${btn("🚀 Acessar Meu Painel", "https://" + data.subdomain + ".flowclik.com/admin")}

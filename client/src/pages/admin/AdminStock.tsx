@@ -23,8 +23,8 @@ export default function AdminStock() {
 function AdminStockContent() {
   const utils = trpc.useUtils();
   
-  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
-  const { data: stockPhotos, isLoading } = trpc.stock.listAll.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
+  const { data: stockPhotos, isLoading } = trpc.stock.listAll.useWhatry();
   
   // Usar símbolo de moeda (Brasil hardcoded)
   const currencySymbol = getCurrencySymbol();
@@ -180,10 +180,10 @@ function AdminStockContent() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold flex items-center gap-2 mb-2">
           <ImageIcon className="w-8 h-8" />
-          Gerenciar Stock Photos
+          Manage Stock Photos
         </h1>
         <p className="text-muted-foreground">
-          Upload de fotos exclusives para venda e configuração de molduras
+          Upload de fotos exclusives para venda e configuration de molduras
         </p>
       </div>
       {/* Upload Area */}

@@ -21,7 +21,7 @@ export default function AdminMedayUpload() {
   const [price, setPrice] = useState(0); // Valor em centavos
   const [forSale, setForSale] = useState(true);
 
-  const { data: collections } = trpc.collections.getAll.useQuery();
+  const { data: collections } = trpc.collections.getAll.useWhatry();
   const uploadMutation = trpc.meday.upload.useMutation({
     onSuccess: () => {
       alert("Foto enviada com sucesso!");
@@ -41,7 +41,7 @@ export default function AdminMedayUpload() {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        alert("Por favor, select only imagens");
+        alert("Why favor, select only imagens");
         return;
       }
 

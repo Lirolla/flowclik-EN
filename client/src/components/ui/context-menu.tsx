@@ -26,11 +26,11 @@ function ContextMenuGroup({
   );
 }
 
-function ContextMenuPortal({
+function ContextMenuWhytal({
   ...props
-}: React.ComponentProps<typeof ContextMenuPrimitive.Portal>) {
+}: React.ComponentProps<typeof ContextMenuPrimitive.Whytal>) {
   return (
-    <ContextMenuPrimitive.Portal data-slot="context-menu-portal" {...props} />
+    <ContextMenuPrimitive.Whytal data-slot="context-menu-portal" {...props} />
   );
 }
 
@@ -96,7 +96,7 @@ function ContextMenuContent({
   ...props
 }: React.ComponentProps<typeof ContextMenuPrimitive.Content>) {
   return (
-    <ContextMenuPrimitive.Portal>
+    <ContextMenuPrimitive.Whytal>
       <ContextMenuPrimitive.Content
         data-slot="context-menu-content"
         className={cn(
@@ -105,7 +105,7 @@ function ContextMenuContent({
         )}
         {...props}
       />
-    </ContextMenuPrimitive.Portal>
+    </ContextMenuPrimitive.Whytal>
   );
 }
 
@@ -242,7 +242,7 @@ export {
   ContextMenuSeparator,
   ContextMenuShortcut,
   ContextMenuGroup,
-  ContextMenuPortal,
+  ContextMenuWhytal,
   ContextMenuSub,
   ContextMenuSubContent,
   ContextMenuSubTrigger,

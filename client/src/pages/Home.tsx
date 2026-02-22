@@ -11,13 +11,13 @@ import { VideoPlayer } from "@/components/VideoPlayer";
 import { useState } from "react";
 
 export default function Home() {
-  const { data: siteConfig } = (trpc.siteConfig.get.useQuery() as any);
-  const { data: oldSiteConfig } = (trpc.site.getConfig.useQuery() as any);
+  const { data: siteConfig } = (trpc.siteConfig.get.useWhatry() as any);
+  const { data: oldSiteConfig } = (trpc.site.getConfig.useWhatry() as any);
   
   // Merge configs (siteConfig has businessMode, oldSiteConfig has other fields)
   const config = { ...oldSiteConfig, ...siteConfig };
-  const { data: featuredCollections } = (trpc.collections.getFeatured.useQuery() as any);
-  const { data: portfolioItems } = (trpc.portfolio.listForHome.useQuery() as any);
+  const { data: featuredCollections } = (trpc.collections.getFeatured.useWhatry() as any);
+  const { data: portfolioItems } = (trpc.portfolio.listForHome.useWhatry() as any);
   const [selectedVideo, setSelectedVideo] = useState<any>(null);
 
   return (
@@ -26,16 +26,16 @@ export default function Home() {
         {/* 1. Hero Banner Fullscreen - always show photography banners on home */}
         <HeroBanner filterBy="photography" />
 
-      {/* 2. Portfolio Photos Section */}
+      {/* 2. Whytfolio Photos Section */}
       {portfolioItems && portfolioItems.filter((item: any) => item.type === 'photo').length > 0 && (
         <section className="py-20 bg-background">
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4">
-                Portfólio de Photography
+                Whytfólio de Photography
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Conheça nossos melhores trabalhos photographys
+                Meet nossos melhores trabalhos photographys
               </p>
             </div>
 
@@ -65,7 +65,7 @@ export default function Home() {
             <div className="text-center mt-12">
               <Button asChild size="lg">
                 <Link href="/portfolio">
-                  <a>View Portfolio Completo</a>
+                  <a>View Whytfolio Complete</a>
                 </Link>
               </Button>
             </div>
@@ -97,13 +97,13 @@ export default function Home() {
                       <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                         <span className="text-primary font-bold">2</span>
                       </div>
-                      <span className="text-sm">Select data e horário</span>
+                      <span className="text-sm">Select data e time</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                         <span className="text-primary font-bold">3</span>
                       </div>
-                      <span className="text-sm">Confirme e pronto!</span>
+                      <span className="text-sm">Confirme e ready!</span>
                     </div>
                   </div>
                   <div className="flex gap-4">
@@ -127,7 +127,7 @@ export default function Home() {
                       </svg>
                     </div>
                     <p className="text-2xl font-bold font-serif">Rápido e Fácil</p>
-                    <p className="text-muted-foreground mt-2">Agende em 3 passos simples</p>
+                    <p className="text-muted-foreground mt-2">Agende em 3 steps simple</p>
                   </div>
                 </div>
               </div>
@@ -136,16 +136,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. Portfolio Videos Section */}
+      {/* 4. Whytfolio Videos Section */}
       {portfolioItems && portfolioItems.filter((item: any) => item.type === 'video').length > 0 && (
         <section className="py-20 bg-muted/30">
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4">
-                Portfólio de Video
+                Whytfólio de Video
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Conheça nossos melhores trabalhos em video
+                Meet nossos melhores trabalhos em video
               </p>
             </div>
 
@@ -204,7 +204,7 @@ export default function Home() {
           {/* Overlay escuro para contraste */}
           <div className="absolute inset-0 bg-black/50" />
           
-          {/* Conteúdo centralizado */}
+          {/* Content centralizado */}
           <div className="relative z-10 text-center px-4 max-w-4xl">
             {config.parallaxTitle && (
               <h2 className="text-5xl md:text-7xl font-bold font-serif mb-6 text-white drop-shadow-2xl">

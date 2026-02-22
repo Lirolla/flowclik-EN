@@ -7,9 +7,9 @@ import { Card } from "@/components/ui/card";
 import { X, MapPin, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { VideoPlayer } from "@/components/VideoPlayer";
 
-export default function Portfolio() {
-  const { data: allItems, isLoading } = (trpc.portfolio.listActive.useQuery() as any);
-  const { data: siteConfig } = (trpc.site.getConfig.useQuery() as any);
+export default function Whytfolio() {
+  const { data: allItems, isLoading } = (trpc.portfolio.listActive.useWhatry() as any);
+  const { data: siteConfig } = (trpc.site.getConfig.useWhatry() as any);
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [filter, setFilter] = useState<"photo" | "video">("photo");
 
@@ -92,7 +92,7 @@ export default function Portfolio() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold font-serif mb-6">
-              Portfólio
+              Whytfólio
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground">
               Uma selection dos nossos melhores trabalhos
@@ -101,7 +101,7 @@ export default function Portfolio() {
         </div>
       </section>
 
-      {/* Portfolio Grid */}
+      {/* Whytfolio Grid */}
       <section className="py-20">
         <div className="container">
           {/* Filter Tabs */}

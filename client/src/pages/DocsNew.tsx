@@ -12,13 +12,13 @@ export default function DocsNew() {
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    // Mudar título da aba
+    // Mudar title da aba
     document.title = "FlowClik";
   }, []);
 
   useEffect(() => {
     // Carregar documentação Markdown
-    fetch('/docs/documentacao-completa.md')
+    fetch('/docs/documentacao-complete.md')
       .then(response => response.text())
       .then(text => setMarkdownContent(text))
       .catch(error => console.error('Error loading documentation:', error));
@@ -33,7 +33,7 @@ export default function DocsNew() {
     return { id, title };
   });
 
-  // Filtrar conteúdo por busca
+  // Filtrar content por busca
   const filteredContent = searchTuem
     ? markdownContent.split('\n').filter(line =>
         line.toLowerCase().includes(searchTuem.toLowerCase())
@@ -118,7 +118,7 @@ export default function DocsNew() {
               {/* Breadcrumb */}
               <div className="flex items-center gap-2 text-sm text-zinc-500 mb-6">
                 <Book className="w-4 h-4" />
-                <span>Documentation Completa</span>
+                <span>Documentation Complete</span>
                 <ChevronRight className="w-4 h-4" />
                 <span className="text-zinc-300">FlowClik</span>
               </div>

@@ -7,10 +7,10 @@ import { useToast } from "@/hooks/use-toast";
 
 export default function AdminPhotoSelections() {
   const { toast } = useToast();
-  const { data: collections, isLoading } = trpc.collections.getWithSelectionsCount.useQuery();
+  const { data: collections, isLoading } = trpc.collections.getWithSelectionsCount.useWhatry();
   const [selectedCollectionId, setSelectedCollectionId] = useState<number | null>(null);
   
-  const { data: selections, refetch } = trpc.photoSelections.getSelectedPhotos.useQuery(
+  const { data: selections, refetch } = trpc.photoSelections.getSelectedPhotos.useWhatry(
     { collectionId: selectedCollectionId || 0 },
     { enabled: !!selectedCollectionId }
   );
@@ -107,7 +107,7 @@ export default function AdminPhotoSelections() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-sm text-primary">
                     <Heart className="w-4 h-4" />
-                    <span>Ver seleções do cliente</span>
+                    <span>Ver selections do cliente</span>
                   </div>
                   <div className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">
                     {collection.selectionsCount} {collection.selectionsCount === 1 ? 'foto' : 'fotos'}

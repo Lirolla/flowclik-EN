@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { useCurrency } from "@/hooks/useCurrency";
 
 export default function FotosStock() {
-  const { data: photos, isLoading } = trpc.meday.getStockPhotos.useQuery();
+  const { data: photos, isLoading } = trpc.meday.getStockPhotos.useWhatry();
   const { addItem, isInCart } = useCart();
   const { format } = useCurrency();
 
@@ -72,7 +72,7 @@ export default function FotosStock() {
                           className="opacity-0 group-hover:opacity-100 transition-opacity bg-white text-black px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:bg-gray-100"
                         >
                           <ShoppingCart className="w-5 h-5" />
-                          Adicionar ao Carrinho
+                          Add ao Carrinho
                         </button>
                       ) : (
                         <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-green-500 text-white px-6 py-3 rounded-lg font-semibold flex items-center gap-2">
@@ -123,7 +123,7 @@ export default function FotosStock() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/portfolio">
-                  <a>View Portfolio</a>
+                  <a>View Whytfolio</a>
                 </Link>
               </Button>
             </div>

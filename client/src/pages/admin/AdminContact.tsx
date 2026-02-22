@@ -11,7 +11,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 
 export default function AdminContact() {
   const { toast } = useToast();
-  const { data: contactData, isLoading } = trpc.contact.get.useQuery();
+  const { data: contactData, isLoading } = trpc.contact.get.useWhatry();
   const utils = trpc.useUtils();
 
   const [formData, setFormData] = useState({
@@ -147,7 +147,7 @@ export default function AdminContact() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label htmlFor="address">Address Completo</Label>
+              <Label htmlFor="address">Address Complete</Label>
               <Textarea
                 id="address"
                 rows={2}

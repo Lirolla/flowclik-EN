@@ -13,13 +13,13 @@ export default function AdminAppointmentStats() {
 }
 
 function AdminAppointmentStatsContent() {
-  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
-  const { data: statusStats } = trpc.appointmentStats.getByStatus.useQuery();
-  const { data: monthlyStats } = trpc.appointmentStats.getMonthly.useQuery();
-  const { data: revenueStats } = trpc.appointmentStats.getRevenue.useQuery();
-  const { data: conversionStats } = trpc.appointmentStats.getConversionRate.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
+  const { data: statusStats } = trpc.appointmentStats.getByStatus.useWhatry();
+  const { data: monthlyStats } = trpc.appointmentStats.getMonthly.useWhatry();
+  const { data: revenueStats } = trpc.appointmentStats.getRevenue.useWhatry();
+  const { data: conversionStats } = trpc.appointmentStats.getConversionRate.useWhatry();
 
-  // Usar símbolo de moeda da configuração global
+  // Usar símbolo de moeda da configuration global
   const currencySymbol = getCurrencySymbol();
 
   const getStatusLabel = (status: string) => {
@@ -61,7 +61,7 @@ function AdminAppointmentStatsContent() {
           Estatísticas de Agendamentos
         </h1>
         <p className="text-muted-foreground mt-2">
-          Análise completa do desempenho e conversion
+          Análise complete do desempenho e conversion
         </p>
       </div>
 

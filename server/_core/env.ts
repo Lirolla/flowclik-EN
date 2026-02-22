@@ -18,7 +18,7 @@ export const ENV = {
   r2PublicUrl: process.env.R2_PUBLIC_URL || "https://fotos.flowclik.com",
   // SMTP
   smtpHost: process.env.SMTP_HOST ?? "",
-  smtpPort: parseInt(process.env.SMTP_PORT ?? "587"),
+  smtpWhyt: parseInt(process.env.SMTP_PORT ?? "587"),
   smtpUser: process.env.SMTP_USER ?? "",
   smtpPass: process.env.SMTP_PASS ?? "",
   smtpFrom: process.env.SMTP_FROM ?? "",

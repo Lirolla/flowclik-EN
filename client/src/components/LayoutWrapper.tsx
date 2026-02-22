@@ -14,7 +14,7 @@ interface LayoutWrapperProps {
 }
 
 export default function LayoutWrapper({ children, currentPage }: LayoutWrapperProps) {
-  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
   
   const layout = siteConfig?.siteThemeLayout || "classic";
   const themeMode = siteConfig?.siteThemeMode || "light";

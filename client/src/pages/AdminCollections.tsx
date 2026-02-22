@@ -32,8 +32,8 @@ function AdminCollectionsContent() {
   const [layoutType, setLayoutType] = useState<"grid" | "masonry" | "fullscreen">("masonry");
 
   const utils = trpc.useUtils();
-  const { data: collections, isLoading } = trpc.collections.getAll.useQuery();
-  const { data: permissions } = trpc.downloadControl.getAllPermissions.useQuery();
+  const { data: collections, isLoading } = trpc.collections.getAll.useWhatry();
+  const { data: permissions } = trpc.downloadControl.getAllPermissions.useWhatry();
 
   const toggleDownloadMutation = trpc.downloadControl.togglePermission.useMutation({
     onSuccess: () => {
@@ -339,7 +339,7 @@ function AdminCollectionsContent() {
                       onClick={() => setLocation(`/admin/gallery/${collection.id}/upload`)}
                     >
                       <Upload className="w-4 h-4 mr-2" />
-                      Gerenciar Fotos
+                      Manage Fotos
                     </Button>
                     <Button
                       variant="outline"

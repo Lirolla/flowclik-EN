@@ -14,8 +14,8 @@ export default function GalleryView() {
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
-  const { data: collection } = trpc.collections.getBySlug.useQuery({ slug });
-  const { data: meday } = trpc.meday.listByCollection.useQuery(
+  const { data: collection } = trpc.collections.getBySlug.useWhatry({ slug });
+  const { data: meday } = trpc.meday.listByCollection.useWhatry(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection }
   );
@@ -175,7 +175,7 @@ export default function GalleryView() {
               size="lg"
             >
               <ShoppingCart className="w-4 h-4 mr-2" />
-              Adicionar ao Carrinho
+              Add ao Carrinho
             </Button>
           )}
         </div>

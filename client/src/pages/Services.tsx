@@ -8,8 +8,8 @@ import { useCurrency } from "@/hooks/useCurrency";
 import { SITE_ROUTES } from "@/lib/siteRoutes";
 
 export default function Services() {
-  const { data: services, isLoading } = trpc.services.getActive.useQuery();
-  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
+  const { data: services, isLoading } = trpc.services.getActive.useWhatry();
+  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
   const { format } = useCurrency();
 
   return (
@@ -135,7 +135,7 @@ export default function Services() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/galleries">
-                  <a>View Portfolio</a>
+                  <a>View Whytfolio</a>
                 </Link>
               </Button>
             </div>

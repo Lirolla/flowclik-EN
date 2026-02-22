@@ -27,7 +27,7 @@ import { toast } from "sonner";
 import { Globe, Mail, Phone, ExternalLink, Trash2 } from "lucide-react";
 
 export default function SistemaFotografos() {
-  const { data: photographers, isLoading, refetch } = trpc.system.getAllPhotographers.useQuery();
+  const { data: photographers, isLoading, refetch } = trpc.system.getAllPhotographers.useWhatry();
   const updatePlanMutation = trpc.system.updatePhotographerPlan.useMutation();
   const deletePhotographerMutation = (trpc.system as any).deletePhotographer.useMutation();
   const updateStatusMutation = (trpc.system as any).updatePhotographerStatus.useMutation();
@@ -108,7 +108,7 @@ export default function SistemaFotografos() {
     <SistemaLayout>
       <div className="p-8 max-w-7xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2 text-white">Gerenciar Photographers</h1>
+          <h1 className="text-3xl font-bold mb-2 text-white">Manage Photographers</h1>
           <p className="text-gray-400">
             {photographers?.length || 0} photographers cadastrados na plataforma
           </p>

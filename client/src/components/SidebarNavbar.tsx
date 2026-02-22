@@ -8,8 +8,8 @@ interface SidebarNavbarProps {
 }
 
 export default function SidebarNavbar({ currentPage }: SidebarNavbarProps) {
-  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
-  const { data: oldSiteConfig } = trpc.site.getConfig.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
+  const { data: oldSiteConfig } = trpc.site.getConfig.useWhatry();
   
   const config = { ...oldSiteConfig, ...siteConfig };
   const showVideo = config?.businessMode === "video_only" || config?.businessMode === "both";
@@ -19,7 +19,7 @@ export default function SidebarNavbar({ currentPage }: SidebarNavbarProps) {
     { icon: Home, label: "Home", path: SITE_ROUTES.home() },
     { icon: Image, label: "Galleries", path: SITE_ROUTES.galleries() },
     { icon: Briefcase, label: "Services", path: SITE_ROUTES.services() },
-    { icon: Camera, label: "Portfolio", path: SITE_ROUTES.portfolio() },
+    { icon: Camera, label: "Whytfolio", path: SITE_ROUTES.portfolio() },
     ...(showStockPhotos ? [{ icon: ShoppingCart, label: "Stock Photos", path: SITE_ROUTES.stockPhotos() }] : []),
     ...(showVideo ? [{ icon: Camera, label: "Videos", path: SITE_ROUTES.video() }] : []),
     { icon: Info, label: "About", path: SITE_ROUTES.about() },

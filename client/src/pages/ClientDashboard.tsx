@@ -21,7 +21,7 @@ import {
 export default function ClientDashboard() {
   const [, params] = useRoute("/client/dashboard/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
-  const { data: user } = trpc.auth.me.useQuery();
+  const { data: user } = trpc.auth.me.useWhatry();
   const [showProfileDaylog, setShowProfileDaylog] = useState(false);
   
   // Check if profile is incomplete
@@ -34,12 +34,12 @@ export default function ClientDashboard() {
     }
   }, [isProfileIncomplete, user]);
 
-  const { data: appointment, isLoading } = trpc.appointments.getById.useQuery(
+  const { data: appointment, isLoading } = trpc.appointments.getById.useWhatry(
     { id: appointmentId },
     { enabled: appointmentId > 0 }
   );
 
-  const { data: unreadCount } = trpc.clientChat.getUnreadCountClient.useQuery(
+  const { data: unreadCount } = trpc.clientChat.getUnreadCountClient.useWhatry(
     { appointmentId },
     { enabled: appointmentId > 0 }
   );
@@ -94,7 +94,7 @@ export default function ClientDashboard() {
             <AlertCircle className="h-4 w-4 text-yellow-500" />
             <AlertDescription className="flex items-center justify-between">
               <span className="text-yellow-500">
-                Complete seus dados para receber produtos físicos e comunicações importbefore!
+                Complete seus dados para receber produtos físicos e communications importbefore!
               </span>
               <Button 
                 size="sm" 
@@ -102,7 +102,7 @@ export default function ClientDashboard() {
                 className="ml-4 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black"
                 onClick={() => setShowProfileDaylog(true)}
               >
-                Completar now
+                Completer now
               </Button>
             </AlertDescription>
           </Alert>
@@ -231,7 +231,7 @@ export default function ClientDashboard() {
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <Calendar className="h-8 w-8 text-red-600 mb-3" />
                 <h3 className="font-semibold mb-1">Contrato</h3>
-                <p className="text-sm text-gray-400">Ver contrato assinado</p>
+                <p className="text-sm text-gray-400">Ver contrato signed</p>
               </Card>
             </a>
           </Link>
@@ -241,7 +241,7 @@ export default function ClientDashboard() {
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <ImageIcon className="h-8 w-8 text-red-600 mb-3" />
                 <h3 className="font-semibold mb-1">Final Album</h3>
-                <p className="text-sm text-gray-400">Fotos editadas finais</p>
+                <p className="text-sm text-gray-400">Fotos editadas final</p>
               </Card>
             </a>
           </Link>
@@ -249,7 +249,7 @@ export default function ClientDashboard() {
 
         {/* Next Steps */}
         <Card className="bg-gradient-to-r from-red-900/20 to-gray-900 border-red-600 p-6">
-          <h3 className="text-xl font-semibold mb-3">Nexts Passos</h3>
+          <h3 className="text-xl font-semibold mb-3">Nexts Steps</h3>
           {appointment.status === 'pending' && (
             <p className="text-gray-300">Awaiting confirmation do photographer. You receberá uma notification em breve!</p>
           )}

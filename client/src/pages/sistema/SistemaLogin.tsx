@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
 import { Camera, Lock, Mail } from "lucide-react";
 
-// Credenciais do Admin Master (hardcoded para segurança máxima)
+// Credenciais do Admin Master (hardcoded para security maximum)
 const ADMIN_MASTER_EMAIL = "contato@flowclik.com";
 const ADMIN_MASTER_PASSWORD = "Pagotto24";
 const SISTEMA_TOKEN_KEY = "flowclik_sistema_token";
@@ -41,7 +41,7 @@ export default function SistemaLogin() {
       // Usar window.location para forçar reload e atualizar o cliente tRPC
       window.location.href = "/system";
     } else {
-      toast.error("Credenciais inválidas");
+      toast.error("Credenciais invalids");
     }
 
     setIsLoading(false);

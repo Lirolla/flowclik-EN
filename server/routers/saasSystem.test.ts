@@ -94,7 +94,7 @@ describe("SaaS System - Cadastro de Tenants", () => {
     ).rejects.toThrow("Subdomain is already in use");
   });
 
-  it("must verificar disponibilidade de subdomain", async () => {
+  it("must verify disponibilidade de subdomain", async () => {
     const caller = appRouter.createCaller({
       user: null,
       req: {} as any,

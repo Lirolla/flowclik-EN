@@ -84,7 +84,7 @@ export const contractsRouter = router({
     }),
 
   /**
-   * Seed default templates (insere os 4 modelos prontos)
+   * Seed default templates (insere os 4 modelos readys)
    */
   seedDefaults: protectedProcedure
     .mutation(async ({ ctx }) => {
@@ -591,14 +591,14 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const doc = new jsPDF();
       let startY = 20;
       
-      // Adicionar logo se available
+      // Add logo se available
       if (config?.logoUrl) {
         try {
           doc.addImage(config.logoUrl, 'PNG', 20, 10, 50, 25);
           startY = 42;
         } catch (e) {
-          // Se falhar ao adicionar imagem, continua sem logo
-          console.log('Erro ao adicionar logo ao PDF:', e);
+          // Se falhar ao add imagem, continua sem logo
+          console.log('Erro ao add logo ao PDF:', e);
         }
       }
       
@@ -608,7 +608,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const titleLines = doc.splitTextToSize(template.name.toUpperCase(), 170);
       doc.text(titleLines, 20, startY);
       
-      // Conteúdo
+      // Content
       doc.setFontSize(10);
       doc.setFont("helvetica", "normal");
       const lines = doc.splitTextToSize(content, 170);
@@ -746,7 +746,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       });
       
       if (sent) {
-        // Salvar/atualizar contrato as enviado
+        // Salvar/atualizar contrato as sent
         const existing = await db.select().from(contracts)
           .where(and(
             eq(contracts.appointmentId, input.appointmentId),

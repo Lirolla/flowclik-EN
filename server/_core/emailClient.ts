@@ -42,7 +42,7 @@ ${data.appointmentTime ? `🕐 Time: ${data.appointmentTime}` : ''}
 ${data.serviceName ? `📸 Service: ${data.serviceName}` : ''}
 ${data.eventLocation ? `📍 Local: ${data.eventLocation}` : ''}
 
-Estamos analisando sua solicitação e entraremos em contato em breve para confirmar.
+Estamos analisando sua request e entraremos em contato em breve para confirmar.
 
 Kind regards,
 Team Lirolla

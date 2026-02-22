@@ -11,8 +11,8 @@ interface WeddingVideosNavbarProps {
 export default function WeddingVideosNavbar({ currentPage }: WeddingVideosNavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
-  const { data: oldSiteConfig } = trpc.site.getConfig.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
+  const { data: oldSiteConfig } = trpc.site.getConfig.useWhatry();
   
   const config = { ...oldSiteConfig, ...siteConfig };
   const showVideo = config?.businessMode === "video_only" || config?.businessMode === "both";
@@ -32,7 +32,7 @@ export default function WeddingVideosNavbar({ currentPage }: WeddingVideosNavbar
     { label: "Home", href: SITE_ROUTES.home(), id: "inicio" },
     { label: "Galleries", href: SITE_ROUTES.galleries(), id: "galerias" },
     { label: "Services", href: SITE_ROUTES.services(), id: "servicos" },
-    { label: "Portfolio", href: SITE_ROUTES.portfolio(), id: "portfolio" },
+    { label: "Whytfolio", href: SITE_ROUTES.portfolio(), id: "portfolio" },
     ...(showStockPhotos ? [{ label: "Stock Photos", href: SITE_ROUTES.stockPhotos(), id: "fotos-stock" }] : []),
     ...(showVideo ? [{ label: "Videos", href: SITE_ROUTES.video(), id: "video" }] : []),
     { label: "About", href: SITE_ROUTES.about(), id: "about" },

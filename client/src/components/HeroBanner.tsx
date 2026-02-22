@@ -8,7 +8,7 @@ interface HeroBannerProps {
 }
 
 export default function HeroBanner({ filterBy }: HeroBannerProps = {}) {
-  const { data: allSlides, isLoading } = trpc.banner.getActive.useQuery();
+  const { data: allSlides, isLoading } = trpc.banner.getActive.useWhatry();
   
   // Filter slides based on displayOn
   const slides = allSlides?.filter((slide) => {

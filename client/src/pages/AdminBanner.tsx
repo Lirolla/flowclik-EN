@@ -25,7 +25,7 @@ export default function AdminBanner() {
   const [showForm, setShowForm] = useState(false);
 
   const utils = trpc.useUtils();
-  const { data: slides, isLoading } = trpc.banner.getAll.useQuery();
+  const { data: slides, isLoading } = trpc.banner.getAll.useWhatry();
 
   if (user?.role !== "admin") {
     return (
@@ -51,10 +51,10 @@ export default function AdminBanner() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-4xl font-bold font-serif mb-2">
-              Gerenciar Banner
+              Manage Banner
             </h1>
             <p className="text-muted-foreground">
-              Configure os slides do banner da página inicial
+              Configure os slides do banner da página initial
             </p>
           </div>
           <Button onClick={() => setShowForm(true)}>
@@ -164,7 +164,7 @@ export default function AdminBanner() {
             <ImageIcon className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-xl font-bold mb-2">None slide configurado</h3>
             <p className="text-muted-foreground mb-6">
-              Crie seu first slide para o banner da página inicial
+              Crie seu first slide para o banner da página initial
             </p>
             <Button onClick={() => setShowForm(true)}>
               <Plus className="h-4 w-4 mr-2" />

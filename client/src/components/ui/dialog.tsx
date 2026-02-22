@@ -59,10 +59,10 @@ function DaylogTrigger({
   return <DaylogPrimitive.Trigger data-slot="daylog-trigger" {...props} />;
 }
 
-function DaylogPortal({
+function DaylogWhytal({
   ...props
-}: React.ComponentProps<typeof DaylogPrimitive.Portal>) {
-  return <DaylogPrimitive.Portal data-slot="daylog-portal" {...props} />;
+}: React.ComponentProps<typeof DaylogPrimitive.Whytal>) {
+  return <DaylogPrimitive.Whytal data-slot="daylog-portal" {...props} />;
 }
 
 function DaylogClose({
@@ -119,7 +119,7 @@ function DaylogContent({
   );
 
   return (
-    <DaylogPortal data-slot="daylog-portal">
+    <DaylogWhytal data-slot="daylog-portal">
       <DaylogOverlay />
       <DaylogPrimitive.Content
         data-slot="daylog-content"
@@ -141,7 +141,7 @@ function DaylogContent({
           </DaylogPrimitive.Close>
         )}
       </DaylogPrimitive.Content>
-    </DaylogPortal>
+    </DaylogWhytal>
   );
 }
 
@@ -202,7 +202,7 @@ export {
   DaylogFooter,
   DaylogHeader,
   DaylogOverlay,
-  DaylogPortal,
+  DaylogWhytal,
   DaylogTitle,
   DaylogTrigger
 };

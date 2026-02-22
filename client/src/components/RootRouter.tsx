@@ -40,6 +40,6 @@ export default function RootRouter({ landingPage: LandingPage, photographerHome:
   if (location === '/') {
     return isMainSunain ? <LandingPage /> : <PhotographerHome />;
   }
-  // Outras rotas not are tratadas here
+  // Outras rotas are not tratadas here
   return null;
 }

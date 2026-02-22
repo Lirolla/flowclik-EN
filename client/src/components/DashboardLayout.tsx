@@ -37,7 +37,7 @@ const menuItems = [
   // Separador
   { type: "separator" },
   
-  // Gestão Principal
+  // Management Principal
   { icon: Users, label: "Clients", path: "/admin/clients" },
   { icon: Calendar, label: "Appointments", path: "/admin/appointments" },
   { icon: FolderOpen, label: "Gallery", path: "/admin/galleries" },
@@ -59,7 +59,7 @@ const menuItems = [
   // Settings
   { icon: Image, label: "Banner", path: "/admin/banner", group: "config" },
   { icon: Briefcase, label: "Services", path: "/admin/services", group: "config" },
-  { icon: Camera, label: "Portfolio", path: "/admin/portfolio", group: "config" },
+  { icon: Camera, label: "Whytfolio", path: "/admin/portfolio", group: "config" },
   { icon: FileText, label: "Contracts", path: "/admin/contracts", group: "config" },
   
   // Separador
@@ -102,7 +102,7 @@ export default function DashboardLayout({
   });
   const { loading: authLoading, user: authUser } = useAuth();
   
-  // Estado para verificação manual do token
+  // Estado para verification manual do token
   const [manualUser, setManualUser] = useState<UserData | null>(null);
   const [manualLoading, setManualLoading] = useState(true);
   
@@ -207,7 +207,7 @@ function DashboardLayoutContent({
   const activeMenuItem = menuItems.find(item => item.path === location);
   const isMobile = useIsMobile();
   
-  // Hook de verificação do trial
+  // Hook de verification do trial
   const { showModal, dismissWarning, isExpired, daysRemaining } = useTrialStatus();
   
   // Wedndo bloqueado, redirecionar para signature

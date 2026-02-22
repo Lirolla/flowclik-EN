@@ -32,8 +32,8 @@ export default function AdminGalleryUpload() {
   const [isDragging, setIsDragging] = useState(false);
 
   const utils = trpc.useUtils();
-  const { data: collection, isLoading, error } = trpc.collections.getById.useQuery({ id: collectionId });
-  const { data: medayList } = trpc.meday.listByCollection.useQuery({ collectionId });
+  const { data: collection, isLoading, error } = trpc.collections.getById.useWhatry({ id: collectionId });
+  const { data: medayList } = trpc.meday.listByCollection.useWhatry({ collectionId });
 
   const uploadMutation = trpc.meday.upload.useMutation({
     onSuccess: () => {
@@ -152,7 +152,7 @@ export default function AdminGalleryUpload() {
       
       toast({
         title: "Erro no upload",
-        description: error.message || "Not foi possível enviar a foto",
+        description: error.message || "Not foi possible enviar a foto",
         variant: "destructive",
       });
     }

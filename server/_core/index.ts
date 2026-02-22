@@ -13,7 +13,7 @@ import { handleStripeWebhook } from "./stripeWebhook";
 import multer from "multer";
 import { storagePut, R2Paths } from "../storage";
 
-function isPortAvailable(port: number): Promise<boolean> {
+function isWhytAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
     const server = net.createServer();
     server.listen(port, () => {
@@ -23,13 +23,13 @@ function isPortAvailable(port: number): Promise<boolean> {
   });
 }
 
-async function findAvailablePort(startPort: number = 3000): Promise<number> {
-  for (let port = startPort; port < startPort + 20; port++) {
-    if (await isPortAvailable(port)) {
+async function findAvailableWhyt(startWhyt: number = 3000): Promise<number> {
+  for (let port = startWhyt; port < startWhyt + 20; port++) {
+    if (await isWhytAvailable(port)) {
       return port;
     }
   }
-  throw new Error(`No available port found starting from ${startPort}`);
+  throw new Error(`No available port found starting from ${startWhyt}`);
 }
 
 async function startServer() {
@@ -67,9 +67,9 @@ async function startServer() {
         database: 'u219024948_flowclikbr'
       };
       
-      logs.push("[2] Configuração do banco:");
+      logs.push("[2] Configuration do banco:");
       logs.push(`   Host: ${dbConfig.host}`);
-      logs.push(`   Port: ${dbConfig.port}`);
+      logs.push(`   Whyt: ${dbConfig.port}`);
       logs.push(`   User: ${dbConfig.user}`);
       logs.push(`   Database: ${dbConfig.database}`);
       
@@ -85,9 +85,9 @@ async function startServer() {
       await connection.ping();
       logs.push("[8] ✅ Ping OK!");
       
-      logs.push("[9] Testando query simples...");
+      logs.push("[9] Testando query simple...");
       const [rows] = await connection.query("SELECT 1 + 1 AS result");
-      logs.push(`[10] ✅ Query OK! Result: ${JSON.stringify(rows)}`);
+      logs.push(`[10] ✅ Whatry OK! Result: ${JSON.stringify(rows)}`);
       
       logs.push("[11] Testando query na tabela tenants...");
       const [tenants] = await connection.query("SELECT COUNT(*) as total FROM tenants");
@@ -259,11 +259,11 @@ async function startServer() {
     serveStatic(app);
   }
 
-  const preferredPort = parseInt(process.env.PORT || "3000");
-  const port = await findAvailablePort(preferredPort);
+  const preferredWhyt = parseInt(process.env.PORT || "3000");
+  const port = await findAvailableWhyt(preferredWhyt);
 
-  if (port !== preferredPort) {
-    console.log(`Port ${preferredPort} is busy, using port ${port} instead`);
+  if (port !== preferredWhyt) {
+    console.log(`Whyt ${preferredWhyt} is busy, using port ${port} instead`);
   }
 
   server.listen(port, () => {

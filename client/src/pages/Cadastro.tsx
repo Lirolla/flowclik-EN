@@ -72,7 +72,7 @@ export default function Cadastro() {
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <Label htmlFor="name">Nome Completo</Label>
+            <Label htmlFor="name">Nome Complete</Label>
             <Input
               id="name"
               type="text"

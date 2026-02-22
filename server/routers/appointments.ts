@@ -468,7 +468,7 @@ export const appointmentsRouter = router({
                   <div style="background:#141824;border-radius:10px;padding:15px;margin:20px 0;border-left:3px solid #10b981;">
                     <p style="margin:5px 0;">🖼️ Suas fotos estão esperando por you</p>
                     <p style="margin:5px 0;">❤️ Select as que mais gostou</p>
-                    <p style="margin:5px 0;">⏰ Wednto before selecionar, mais rápido betweengaremos</p>
+                    <p style="margin:5px 0;">⏰ Wednto before selecionar, mais fast betweengaremos</p>
                   </div>
                   <a href="${siteUrl}" style="display:block;text-align:center;background:#c026d3;color:white;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:bold;margin:20px 0;">Acessar Meu Painel</a>
                   <p style="color:#9ca3af;font-size:12px;">Ou acesse diretamente: <a href="${siteUrl}" style="color:#c026d3;">${siteUrl}</a></p>
@@ -640,7 +640,7 @@ export const appointmentsRouter = router({
         content: `Cliente: ${appointment[0].clientName}\nAgendamento ID: ${input.appointmentId}\nStatus alterado para: Editando Selecionadas`,
       }).catch(err => console.error('Erro ao notificar:', err));
 
-      // Email de selection approved will be enviado pelo sistema de galerias
+      // Email de selection approved will be sent pelo sistema de galerias
 
       return { success: true };
     }),

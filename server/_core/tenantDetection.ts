@@ -72,7 +72,7 @@ export async function detectTenantFromRequest(req: Request): Promise<number> {
 
   // Caso 3: Sunínio principal (lirolla.com)
   // Retorna tenant default (id=1)
-  console.log(`[Tenant Detection] None tenant específico encontrado, usando tenant default (id=1)`);
+  console.log(`[Tenant Detection] None tenant specific encontrado, usando tenant default (id=1)`);
   return 1;
 }
 

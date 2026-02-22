@@ -100,7 +100,7 @@ describe('siteRoutes', () => {
       expect(getSiteUrl('servicos')).toBe('/services');
     });
 
-    it('must remover / inicial do path se fornecido', () => {
+    it('must remover / initial do path se fornecido', () => {
       Object.defineProperty(window, 'location', {
         value: { hostname: 'localhost' },
         writable: true,

@@ -5,7 +5,7 @@ import { users, subscriptions, tenants, supportTickets, announcements, announcem
 import { eq, and, sql, desc } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 
-// Middleware para verificar se é admin (aceita JWT ou x-sistema-auth)
+// Middleware para verify se é admin (aceita JWT ou x-sistema-auth)
 const adminProcedure = publicProcedure.use(({ ctx, next }) => {
   // Check 1: JWT auth with admin/master role
   if (ctx.user?.role === "admin" || ctx.user?.role === "master") {
@@ -207,7 +207,7 @@ export const systemRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-      // Verify se already exists registro
+      // Verify se already exists record
       const [existing] = await db
         .select()
         .from(announcementViews)
@@ -226,7 +226,7 @@ export const systemRouter = router({
           .set({ dismissed: 1 })
           .where(eq(announcementViews.id, existing.id));
       } else {
-        // Criar novo registro
+        // Criar novo record
         await db.insert(announcementViews).values({
           tenantId: ctx.user!.tenantId,
           announcementId: input.announcementId,
@@ -263,7 +263,7 @@ export const systemRouter = router({
         storageLimit = 1073741824; // 1GB
         galleryLimit = 2;
       } else if (input.plan === "full") {
-        storageLimit = 107374182400; // 100GB (unlimited na prática)
+        storageLimit = 107374182400; // 100GB (unlimited na practical)
         galleryLimit = 9999;
       }
 
@@ -281,7 +281,7 @@ export const systemRouter = router({
       return { success: true };
     }),
 
-  // Excluir photographer completamente (banco + R2)
+  // Excluir photographer completemente (banco + R2)
   deletePhotographer: adminProcedure
     .input(z.object({ tenantId: z.number() }))
     .mutation(async ({ input }) => {

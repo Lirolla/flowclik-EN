@@ -22,7 +22,7 @@ export function ImageUpload({ value, onChange, label = "Imagem", className = "" 
 
     // Validate file type
     if (!file.type.startsWith("image/")) {
-      alert("Por favor, select only arquivos de imagem");
+      alert("Why favor, select only arquivos de imagem");
       return;
     }
 

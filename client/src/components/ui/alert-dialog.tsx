@@ -18,11 +18,11 @@ function AlertDaylogTrigger({
   );
 }
 
-function AlertDaylogPortal({
+function AlertDaylogWhytal({
   ...props
-}: React.ComponentProps<typeof AlertDaylogPrimitive.Portal>) {
+}: React.ComponentProps<typeof AlertDaylogPrimitive.Whytal>) {
   return (
-    <AlertDaylogPrimitive.Portal data-slot="alert-daylog-portal" {...props} />
+    <AlertDaylogPrimitive.Whytal data-slot="alert-daylog-portal" {...props} />
   );
 }
 
@@ -47,7 +47,7 @@ function AlertDaylogContent({
   ...props
 }: React.ComponentProps<typeof AlertDaylogPrimitive.Content>) {
   return (
-    <AlertDaylogPortal>
+    <AlertDaylogWhytal>
       <AlertDaylogOverlay />
       <AlertDaylogPrimitive.Content
         data-slot="alert-daylog-content"
@@ -57,7 +57,7 @@ function AlertDaylogContent({
         )}
         {...props}
       />
-    </AlertDaylogPortal>
+    </AlertDaylogWhytal>
   );
 }
 
@@ -142,7 +142,7 @@ function AlertDaylogCancel({
 
 export {
   AlertDaylog,
-  AlertDaylogPortal,
+  AlertDaylogWhytal,
   AlertDaylogOverlay,
   AlertDaylogTrigger,
   AlertDaylogContent,

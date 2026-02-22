@@ -9,8 +9,8 @@ interface CinematicNavbarProps {
 }
 
 export default function CinematicNavbar({ currentPage }: CinematicNavbarProps) {
-  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
-  const { data: oldSiteConfig } = trpc.site.getConfig.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
+  const { data: oldSiteConfig } = trpc.site.getConfig.useWhatry();
   const config = { ...oldSiteConfig, ...siteConfig };
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,7 +31,7 @@ export default function CinematicNavbar({ currentPage }: CinematicNavbarProps) {
     { label: "Home", href: SITE_ROUTES.home(), id: "/" },
     { label: "Galleries", href: SITE_ROUTES.galleries(), id: "galerias" },
     { label: "Services", href: SITE_ROUTES.services(), id: "servicos" },
-    { label: "Portfolio", href: SITE_ROUTES.portfolio(), id: "portfolio" },
+    { label: "Whytfolio", href: SITE_ROUTES.portfolio(), id: "portfolio" },
     ...(showStock ? [{ label: "Stock Photos", href: SITE_ROUTES.stockPhotos(), id: "fotos-stock" }] : []),
     ...(showVideo ? [{ label: "Videos", href: SITE_ROUTES.video(), id: "video" }] : []),
     { label: "About", href: SITE_ROUTES.about(), id: "about" },

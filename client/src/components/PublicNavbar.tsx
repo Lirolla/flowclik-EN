@@ -10,8 +10,8 @@ interface PublicNavbarProps {
 
 export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
-  const { data: oldSiteConfig } = trpc.site.getConfig.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
+  const { data: oldSiteConfig } = trpc.site.getConfig.useWhatry();
   
   // Merge configs (siteConfig has businessMode, oldSiteConfig has other fields)
   const config = { ...oldSiteConfig, ...siteConfig };
@@ -108,7 +108,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
               <a className={`text-sm font-medium transition-colors ${
                 currentPage === "portfolio" ? "text-accent font-semibold" : "hover:text-accent"
               }`}>
-                Portfólio
+                Whytfólio
               </a>
             </Link>
             <Link href={SITE_ROUTES.about()}>
@@ -247,7 +247,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                       : "hover:bg-muted"
                   }`}
                 >
-                  Portfólio
+                  Whytfólio
                 </a>
               </Link>
 

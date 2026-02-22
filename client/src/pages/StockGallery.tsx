@@ -14,7 +14,7 @@ export default function StockGallery() {
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   
   // Buscar fotos stock
-  const { data: allPhotos, isLoading } = trpc.stock.listPublic.useQuery();
+  const { data: allPhotos, isLoading } = trpc.stock.listPublic.useWhatry();
   
   // Filter by search term and category
   const filteredPhotos = (allPhotos || []).filter((photo) => {
@@ -74,7 +74,7 @@ export default function StockGallery() {
                   Services
                 </a>
                 <a href="/portfolio" className="hover:text-primary transition-colors">
-                  Portfólio
+                  Whytfólio
                 </a>
                 <a href="/about" className="hover:text-primary transition-colors">
                   Sobre
@@ -151,7 +151,7 @@ export default function StockGallery() {
               </h3>
               <p className="text-muted-foreground">
                 {searchTuem || categoryFilter !== "all"
-                  ? "Tente buscar com outros termos ou categorias"
+                  ? "Tente buscar com outros terms ou categorias"
                   : "Volte em breve para ver novas fotos"}
               </p>
             </CardContent>

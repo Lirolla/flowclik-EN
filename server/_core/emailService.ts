@@ -66,7 +66,7 @@ function baseTemplate(content: string, footerText?: string): string {
           <tr>
             <td align="center" style="padding: 30px 20px;">
               <p style="color: #4b5563; font-size: 12px; margin: 0; line-height: 1.6;">
-                ${footerText || "Este email foi enviado automaticamente pela plataforma FlowClik."}
+                ${footerText || "Este email foi sent automaticamente pela plataforma FlowClik."}
                 <br>
                 <a href="https://flowclik.com" style="color: #22c55e; text-decoration: none;">flowclik.com</a>
               </p>
@@ -148,11 +148,11 @@ export function templateConfirmacaoAgendamento(data: {
 
     <p style="color: #9ca3af; font-size: 14px; line-height: 1.7; margin-top: 20px;">
       <strong style="color: #e5e7eb;">O que vem now?</strong><br>
-      O photographer entrará em contato para confirmar os details finais. After a sesare, you receberá um link para visualizar e selecionar suas fotos favoritas.
+      O photographer entrará em contato para confirmar os details final. After a sesare, you receberá um link para visualizar e selecionar suas fotos favoritas.
     </p>
 
     ${emailButton("Ver Meu Agendamento", data.siteUrl)}
-  `, `Email enviado por ${data.photographerName} via FlowClik`);
+  `, `Email sent por ${data.photographerName} via FlowClik`);
 }
 
 export function templateFotosProntas(data: {
@@ -183,7 +183,7 @@ export function templateFotosProntas(data: {
     </p>
 
     ${emailButton("🖼️ Ver Minhas Fotos", data.galleryUrl)}
-  `, `Email enviado por ${data.photographerName} via FlowClik`);
+  `, `Email sent por ${data.photographerName} via FlowClik`);
 }
 
 export function templateSelecaoFotos(data: {
@@ -214,7 +214,7 @@ export function templateSelecaoFotos(data: {
     <p style="color: #6b7280; font-size: 13px; margin-top: 15px; text-align: center;">
       After selecionar, o photographer iniciará a editing final.
     </p>
-  `, `Email enviado por ${data.photographerName} via FlowClik`);
+  `, `Email sent por ${data.photographerName} via FlowClik`);
 }
 
 export function templateLinkPagamento(data: {
@@ -226,7 +226,7 @@ export function templateLinkPagamento(data: {
 }): string {
   return baseTemplate(`
     <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">💳 Link de Pagamento</h1>
-    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Pagamento seguro e rápido</p>
+    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Pagamento seguro e fast</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
       Hello <strong>${data.clientName}</strong>,
@@ -245,7 +245,7 @@ export function templateLinkPagamento(data: {
     <p style="color: #6b7280; font-size: 13px; margin-top: 15px; text-align: center;">
       Pagamento processado de forma segura.
     </p>
-  `, `Email enviado por ${data.photographerName} via FlowClik`);
+  `, `Email sent por ${data.photographerName} via FlowClik`);
 }
 
 export function templateFotosDelivereds(data: {
@@ -275,7 +275,7 @@ export function templateFotosDelivereds(data: {
       Thank you for choosing <strong style="color: #22c55e;">${data.photographerName}</strong>! 
       Se gostou do trabalho, share with friends and family. 💚
     </p>
-  `, `Email enviado por ${data.photographerName} via FlowClik`);
+  `, `Email sent por ${data.photographerName} via FlowClik`);
 }
 
 // --- EMAILS PARA FOTÓGRAFOS ---
@@ -308,7 +308,7 @@ export function templateBoasVindasFotografo(data: {
       <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Personalize seu site (cores, logo, about)</td></tr>
       <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Adicione seus services e preços</td></tr>
       <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Faça upload do seu portfólio</td></tr>
-      <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Configure seus horários disponíveis</td></tr>
+      <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Configure seus times disponíveis</td></tr>
       <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Compartilhe seu link com clientes!</td></tr>
     </table>
 
@@ -410,7 +410,7 @@ export function templateTicketAnswered(data: {
       </p>
     </div>
 
-    ${emailButton("Ver Ticket Completo", data.ticketUrl)}
+    ${emailButton("Ver Ticket Complete", data.ticketUrl)}
   `);
 }
 
@@ -531,7 +531,7 @@ export async function sendFlowClikEmail(options: SendEmailOptions): Promise<bool
       return false;
     }
 
-    console.log(`✅ Email enviado: ${options.subject} → ${options.to}`);
+    console.log(`✅ Email sent: ${options.subject} → ${options.to}`);
     return true;
   } catch (error: any) {
     console.error(`⚠️ Falha ao enviar email (${options.subject}):`, error.message);

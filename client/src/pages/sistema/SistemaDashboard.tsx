@@ -5,7 +5,7 @@ import { Users, DollarSign, Package, AlertCircle } from "lucide-react";
 import { Link } from "wouter";
 
 export default function SistemaDashboard() {
-  const { data: dashboard, isLoading } = trpc.system.getDashboard.useQuery();
+  const { data: dashboard, isLoading } = trpc.system.getDashboard.useWhatry();
 
   if (isLoading) {
     return (
@@ -98,7 +98,7 @@ export default function SistemaDashboard() {
         <Link href="/system/photographers">
           <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer">
             <Users className="w-8 h-8 text-blue-600 mb-3" />
-            <h3 className="font-bold text-lg mb-2">Gerenciar Photographers</h3>
+            <h3 className="font-bold text-lg mb-2">Manage Photographers</h3>
             <p className="text-sm text-muted-foreground">
               Ver todos os photographers, plyears e signatures
             </p>

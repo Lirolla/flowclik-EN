@@ -37,9 +37,9 @@ export default function AdminSupport() {
   const [priority, setPriority] = useState<"low" | "normal" | "high" | "urgent">("normal");
   const [replyMessage, setReplyMessage] = useState("");
 
-  // Queries
-  const { data: tickets, refetch: refetchTickets } = trpc.supportTickets.getMyTickets.useQuery();
-  const { data: ticketDetails } = trpc.supportTickets.getTicketById.useQuery(
+  // Whatries
+  const { data: tickets, refetch: refetchTickets } = trpc.supportTickets.getMyTickets.useWhatry();
+  const { data: ticketDetails } = trpc.supportTickets.getTicketById.useWhatry(
     { ticketId: selectedTicket! },
     { enabled: !!selectedTicket }
   );
@@ -277,10 +277,10 @@ export default function AdminSupport() {
                   </Card>
                 ))}
 
-                {/* Adicionar Reply */}
+                {/* Add Reply */}
                 {ticketDetails.ticket.status !== "closed" && ticketDetails.ticket.status !== "resolved" && (
                   <div className="space-y-2">
-                    <Label>Adicionar Reply</Label>
+                    <Label>Add Reply</Label>
                     <Textarea
                       placeholder="Type your message..."
                       rows={4}

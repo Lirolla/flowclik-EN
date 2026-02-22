@@ -9,7 +9,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 
 export default function AdminUsage() {
   const [, navigate] = useLocation();
-  const { data: stats, isLoading } = trpc.usage.getStats.useQuery();
+  const { data: stats, isLoading } = trpc.usage.getStats.useWhatry();
 
   if (isLoading) {
     return (
@@ -196,12 +196,12 @@ export default function AdminUsage() {
             <div>
               <div className="font-medium">Plyear {stats.plan.name}</div>
               <div className="text-sm text-muted-foreground">
-                Next cobrança: {new Date(stats.plan.nextBilling).toLocaleDateString('en-GB')}
+                Next charge: {new Date(stats.plan.nextBilling).toLocaleDateString('en-GB')}
               </div>
             </div>
             <Button variant="outline" onClick={() => navigate("/admin/subscription")}>
               <TrendingUp className="w-4 h-4 mr-2" />
-              Gerenciar Plyear
+              Manage Plyear
             </Button>
           </div>
 

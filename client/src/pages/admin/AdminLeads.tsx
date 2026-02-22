@@ -7,8 +7,8 @@ import { useToast } from "@/hooks/use-toast";
 
 export default function AdminLeads() {
   const { toast } = useToast();
-  const { data: leads, isLoading } = trpc.albumGuests.listAll.useQuery();
-  const { data: stats } = trpc.albumGuests.getStats.useQuery();
+  const { data: leads, isLoading } = trpc.albumGuests.listAll.useWhatry();
+  const { data: stats } = trpc.albumGuests.getStats.useWhatry();
 
   const handleExportCSV = () => {
     if (!leads || leads.length === 0) {

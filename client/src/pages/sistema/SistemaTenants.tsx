@@ -7,7 +7,7 @@ import { ptBR } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 
 export default function SistemaTenants() {
-  const { data: tenants, isLoading } = trpc.sistema.getAllTenants.useQuery();
+  const { data: tenants, isLoading } = trpc.sistema.getAllTenants.useWhatry();
 
   const formatBytes = (bytes: number) => {
     if (bytes === 0) return "0 Bytes";
@@ -73,7 +73,7 @@ export default function SistemaTenants() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold">Photographers Cadastrados</h1>
         <p className="text-muted-foreground">
-          Gerenciar todos os photographers da plataforma
+          Manage todos os photographers da plataforma
         </p>
       </div>
 

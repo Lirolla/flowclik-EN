@@ -19,7 +19,7 @@ import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
 export default function SistemaAvisos() {
-  const { data: announcements, refetch } = trpc.system.getAllAnnouncements.useQuery();
+  const { data: announcements, refetch } = trpc.system.getAllAnnouncements.useWhatry();
   const createMutation = trpc.system.createAnnouncement.useMutation();
   const deactivateMutation = trpc.system.deactivateAnnouncement.useMutation();
 
@@ -30,7 +30,7 @@ export default function SistemaAvisos() {
 
   const handleCreate = async () => {
     if (!title.trim() || !message.trim()) {
-      toast.error("Preencha título e mensagem");
+      toast.error("Preencha title e mensagem");
       return;
     }
 

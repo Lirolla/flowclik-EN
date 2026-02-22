@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 import { ENV } from "./_core/env";
 
-// Stripe desabilitado temporariamente - configurar STRIPE_SECRET_KEY para habilitar
+// Stripe desabilitado temporariamente - configure STRIPE_SECRET_KEY para habilitar
 let stripe: Stripe | null = null;
 
 if (ENV.stripeSecretKey) {

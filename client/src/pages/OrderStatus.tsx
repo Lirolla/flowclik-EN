@@ -17,7 +17,7 @@ export default function OrderStatus() {
   const [searched, setSearched] = useState(false);
   const { format } = useCurrency();
 
-  const { data: order, isLoading, refetch } = trpc.orders.getOrderStatus.useQuery(
+  const { data: order, isLoading, refetch } = trpc.orders.getOrderStatus.useWhatry(
     { id: orderId!, email },
     { enabled: !!orderId && !!email && searched }
   );
@@ -64,7 +64,7 @@ export default function OrderStatus() {
               <Card>
                 <CardContent className="p-6 space-y-4">
                   <p className="text-muted-foreground">
-                    Informe o e-mail usado na compra para verificar o status do seu pedido.
+                    Informe o e-mail usado na compra para verify o status do seu pedido.
                   </p>
                   <div>
                     <Label htmlFor="email">E-mail</Label>

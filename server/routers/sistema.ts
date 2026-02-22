@@ -194,7 +194,7 @@ export const sistemaRouter = router({
         throw new TRPCError({ code: "NOT_FOUND", message: "Ticket not found" });
       }
 
-      // Adicionar resposta
+      // Add resposta
       await db.insert(supportTicketReplies).values({
         tenantId: ticket.tenantId, // Herdar tenantId do ticket
         ticketId: input.ticketId,

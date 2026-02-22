@@ -19,24 +19,24 @@ export default function ClientGalleryAuth() {
   const { toast } = useToast();
 
   // Buscar dados do agendamento para pegar o email do cliente
-  const { data: appointment } = trpc.appointments.getById.useQuery(
+  const { data: appointment } = trpc.appointments.getById.useWhatry(
     { id: appointmentId },
     { enabled: appointmentId > 0 }
   );
 
   const clientEmail = appointment?.clientEmail || "";
 
-  const { data: galleryData, refetch, isLoading } = trpc.sessionGallery.getForClient.useQuery(
+  const { data: galleryData, refetch, isLoading } = trpc.sessionGallery.getForClient.useWhatry(
     { appointmentId, clientEmail },
     { enabled: !!clientEmail }
   );
 
-  const { data: comments, refetch: refetchComments } = trpc.photoComments.getForClient.useQuery(
+  const { data: comments, refetch: refetchComments } = trpc.photoComments.getForClient.useWhatry(
     { appointmentId, clientEmail },
     { enabled: !!clientEmail }
   );
 
-  const { data: downloadPermission } = trpc.downloadControl.checkPermission.useQuery(
+  const { data: downloadPermission } = trpc.downloadControl.checkPermission.useWhatry(
     { collectionId: galleryData?.gallery?.id || 0 },
     { enabled: !!galleryData?.gallery?.id }
   );
@@ -335,7 +335,7 @@ export default function ClientGalleryAuth() {
                       selectedPhoto?.isFavorite ? 'fill-white' : ''
                     }`}
                   />
-                  {selectedPhoto?.isFavorite ? 'Remover dos Favoritos' : 'Adicionar aos Favoritos'}
+                  {selectedPhoto?.isFavorite ? 'Remover dos Favoritos' : 'Add aos Favoritos'}
                 </Button>
               </div>
 
@@ -378,7 +378,7 @@ export default function ClientGalleryAuth() {
                     className="w-full bg-red-600 hover:bg-red-700"
                   >
                     <MessageSquare className="h-4 w-4 mr-2" />
-                    Adicionar Comment
+                    Add Comment
                   </Button>
                 </div>
               </div>

@@ -12,12 +12,12 @@ export default function AdminFinalAlbum() {
   const { toast } = useToast();
   const [uploading, setUploading] = useState(false);
 
-  const { data: collection } = trpc.collections.getById.useQuery(
+  const { data: collection } = trpc.collections.getById.useWhatry(
     { id: collectionId },
     { enabled: collectionId > 0 }
   );
 
-  const { data: finalPhotos, refetch } = trpc.finalAlbums.getByAppointment.useQuery(
+  const { data: finalPhotos, refetch } = trpc.finalAlbums.getByAppointment.useWhatry(
     { appointmentId: collection?.appointmentId || 0 },
     { enabled: !!collection?.appointmentId }
   );
@@ -120,7 +120,7 @@ export default function AdminFinalAlbum() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Final Album</h1>
         <p className="text-muted-foreground">
-          {collection?.name} - Fotos editadas finais do projeto
+          {collection?.name} - Fotos editadas final do projeto
         </p>
       </div>
 
@@ -129,7 +129,7 @@ export default function AdminFinalAlbum() {
         <div className="text-center">
           <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
           <h3 className="text-lg font-semibold mb-2">
-            Enviar Fotos Finais Editadas
+            Enviar Fotos Final Editadas
           </h3>
           <p className="text-sm text-muted-foreground mb-4">
             Arraste fotos here or click to select

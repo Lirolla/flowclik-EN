@@ -23,7 +23,7 @@ export default function PaymentCanceled() {
 
         <div className="bg-gray-50 rounded-lg p-6 mb-8">
           <p className="text-sm text-gray-700">
-            Not se preocupe, nonea cobrança foi realizada.
+            Not se preocupe, nonea charge foi realizada.
           </p>
         </div>
 

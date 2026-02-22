@@ -79,7 +79,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const stripeSubscriptionId = session.subscription as string;
 
   if (type === "addon" && addonType) {
-    // ===== ADD-ON: criar registro na tabela subscription_addons =====
+    // ===== ADD-ON: criar record na tabela subscription_addons =====
     console.log(`[Stripe] Add-on ${addonType} purchased for tenant ${tenantId}`);
 
     // Buscar subscription principal para pegar o ID

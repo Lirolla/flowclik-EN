@@ -37,7 +37,7 @@ export default function CadastroSaaS() {
       const result = await utils.client.saasSystem.checkSubdomain.query({ subdomain });
       setSubdomainCheck(result.available ? "available" : "taken");
     } catch (err) {
-      console.error('Erro ao verificar subdomain:', err);
+      console.error('Erro ao verify subdomain:', err);
       setSubdomainCheck("idle");
     }
   };
@@ -114,7 +114,7 @@ export default function CadastroSaaS() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Nome */}
             <div>
-              <Label htmlFor="name">Nome completo</Label>
+              <Label htmlFor="name">Nome complete</Label>
               <Input
                 id="name"
                 type="text"
@@ -153,7 +153,7 @@ export default function CadastroSaaS() {
 
             {/* Subdomain */}
             <div>
-              <Label htmlFor="subdomain">Escolha seu subdomain</Label>
+              <Label htmlFor="subdomain">Choose your subdomain</Label>
               <div className="mt-2 flex items-center gap-2">
                 <Input
                   id="subdomain"
@@ -222,11 +222,11 @@ export default function CadastroSaaS() {
           </div>
         </div>
 
-        {/* Benefícios */}
+        {/* Benefits */}
         <div className="mt-8 space-y-3">
           {[
-            "Site profissional pronto em minutes",
-            "7 days grátis para testar tudo",
+            "Site profissional ready em minutes",
+            "7 days free to test tudo",
             "Cancele when quiser, sem burocracia",
           ].map((benefit, i) => (
             <div key={i} className="flex items-center gap-3 text-sm text-zinc-400">

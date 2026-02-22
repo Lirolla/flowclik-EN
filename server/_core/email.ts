@@ -33,7 +33,7 @@ export async function sendEmail(options: EmailOptions): Promise<boolean> {
       console.error("Resend error:", result.error);
       return false;
     }
-    console.log(`✅ Email enviado: ${options.subject} → ${options.to}`);
+    console.log(`✅ Email sent: ${options.subject} → ${options.to}`);
     return true;
   } catch (error: any) {
     console.error(`⚠️ Falha ao enviar email (${options.subject}):`, error.message);

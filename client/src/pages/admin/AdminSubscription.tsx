@@ -25,16 +25,16 @@ export default function AdminSubscription() {
   const [showCancelAddonDaylog, setShowCancelAddonDaylog] = useState<{id: number, type: string} | null>(null);
 
   // Buscar signature atual
-  const { data: subscription, isLoading: loadingSubscription } = trpc.subscriptions.getCurrent.useQuery();
+  const { data: subscription, isLoading: loadingSubscription } = trpc.subscriptions.getCurrent.useWhatry();
   
   // Buscar status do trial
-  const { data: trialStatus } = trpc.subscriptions.checkTrialStatus.useQuery();
+  const { data: trialStatus } = trpc.subscriptions.checkTrialStatus.useWhatry();
 
   // Buscar add-ons actives
-  const { data: activeAddons } = trpc.subscriptions.getActiveAddons.useQuery();
+  const { data: activeAddons } = trpc.subscriptions.getActiveAddons.useWhatry();
 
   // Buscar estatísticas de uso
-  const { data: usage } = trpc.usage.getUsage.useQuery();
+  const { data: usage } = trpc.usage.getUsage.useWhatry();
 
   // Mutations
   const buyStorageAddon = trpc.subscriptions.buyStorageAddon.useMutation();
@@ -64,7 +64,7 @@ export default function AdminSubscription() {
     const plan = subscription?.plan || 'starter';
     switch (plan) {
       case 'full':
-        return { name: 'Lifetime Plan', price: 'Free', priceNum: '0,00', description: 'Acesso completo e unlimited', storageText: 'Storage Unlimited', galleryText: 'Gallerys Unlimiteds', color: 'text-green-500', badge: 'Lifetime' };
+        return { name: 'Lifetime Plan', price: 'Free', priceNum: '0,00', description: 'Acesso complete e unlimited', storageText: 'Storage Unlimited', galleryText: 'Gallerys Unlimiteds', color: 'text-green-500', badge: 'Lifetime' };
       case 'courtesy':
         return { name: 'Plyear Courtesy', price: 'Free', priceNum: '0,00', description: 'Courtesy plan with add-on options', storageText: '1GB de armazenamento', galleryText: '2 galerias', color: 'text-amber-500', badge: 'Courtesy' };
       case 'starter':
@@ -273,7 +273,7 @@ export default function AdminSubscription() {
                   <div>
                     <h3 className="text-lg font-bold text-red-500">Acesso suspended</h3>
                     <p className="text-sm text-muted-foreground mt-1">
-                      Seu trial period acabou e o plyear not foi ativado. Subscribe now para recuperar o acesso completo a todas as features.
+                      Seu trial period acabou e o plyear not foi ativado. Subscribe now para recuperar o acesso complete a todas as features.
                     </p>
                   </div>
                 </div>
@@ -336,7 +336,7 @@ export default function AdminSubscription() {
                 </div>
               </div>
               
-              {/* Benefícios Inclusos */}
+              {/* Benefits Inclusos */}
               <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm">
                   <CheckCircle2 className="w-4 h-4 text-green-500" />
@@ -448,7 +448,7 @@ export default function AdminSubscription() {
           <div>
             <h2 className="text-2xl font-bold mb-2">Meus Add-ons Actives</h2>
             <p className="text-sm text-muted-foreground mb-4">
-              {activeAddons.length} add-on{activeAddons.length > 1 ? 's' : ''} active{activeAddons.length > 1 ? 's' : ''} — cada um com cobrança mensal independing
+              {activeAddons.length} add-on{activeAddons.length > 1 ? 's' : ''} active{activeAddons.length > 1 ? 's' : ''} — cada um com charge mensal independing
             </p>
 
             <div className="space-y-3">
@@ -475,7 +475,7 @@ export default function AdminSubscription() {
                             </span>
                             <span className="flex items-center gap-1">
                               <CreditCard className="w-3.5 h-3.5" />
-                              Próx. cobrança: {formatDate(addon.currentPeriodEnd)}
+                              Próx. charge: {formatDate(addon.currentPeriodEnd)}
                             </span>
                           </div>
                         </div>
@@ -513,9 +513,9 @@ export default function AdminSubscription() {
 
         {/* Add-ons Disponíveis */}
         <div>
-          <h2 className="text-2xl font-bold mb-2">Adicionar Add-ons</h2>
+          <h2 className="text-2xl font-bold mb-2">Add Add-ons</h2>
           <p className="text-sm text-muted-foreground mb-6">
-            Expanda seu plyear de acordo com suas necessidades. Cada add-on tem cobrança mensal independing.
+            Expanda seu plyear de acordo com suas necessidades. Cada add-on tem charge mensal independing.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -547,7 +547,7 @@ export default function AdminSubscription() {
                     ) : (
                       <ShoppingCart className="w-4 h-4 mr-2" />
                     )}
-                    Adicionar +10GB
+                    Add +10GB
                   </Button>
                   {storageAddonsCount > 0 && (
                     <p className="text-xs text-center text-muted-foreground">
@@ -586,7 +586,7 @@ export default function AdminSubscription() {
                     ) : (
                       <ShoppingCart className="w-4 h-4 mr-2" />
                     )}
-                    Adicionar +10 Gallerys
+                    Add +10 Gallerys
                   </Button>
                   {galleryAddonsCount > 0 && (
                     <p className="text-xs text-center text-muted-foreground">
@@ -609,12 +609,12 @@ export default function AdminSubscription() {
           </CardHeader>
           <CardContent>
             <ul className="space-y-2 text-sm text-yellow-600">
-              <li>• Todos começam com 7 days grátis para testar</li>
+              <li>• Todos começam com 7 days free to test</li>
               <li>• After o teste, o plyear é £ 69,90/month</li>
               <li>• You can assinar before do teste acabar clicando em "Subscribe Already"</li>
               <li>• Add-ons canm ser adicionados a qualquer momento</li>
               <li>• You can comprar quantos add-ons quiser</li>
-              <li>• Cada add-on tem sua própria data de cobrança mensal</li>
+              <li>• Cada add-on tem sua própria data de charge mensal</li>
               <li>• Ao cancelar, o add-on permanece active until o fim do period pago</li>
             </ul>
           </CardContent>

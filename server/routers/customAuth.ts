@@ -18,7 +18,7 @@ export const customAuthRouter = router({
         email: z.string().email("Invalid email"),
         password: z.string().min(6, "Senha must ter pelo menos 6 caracteres"),
         name: z.string().min(2, "Nome must ter pelo menos 2 caracteres"),
-        tenantId: z.number().optional(), // Para associar a um tenant específico
+        tenantId: z.number().optional(), // Para associar a um tenant specific
       })
     )
     .mutation(async ({ input }) => {

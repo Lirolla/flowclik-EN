@@ -37,8 +37,8 @@ export default function BookAppointment() {
     notes: "",
   });
 
-  const { data: allServices } = trpc.services.getActive.useQuery();
-  const { data: siteConfig } = trpc.site.getConfig.useQuery();
+  const { data: allServices } = trpc.services.getActive.useWhatry();
+  const { data: siteConfig } = trpc.site.getConfig.useWhatry();
 
   // Filter services based on businessMode
   const services = allServices?.filter(service => {
@@ -56,7 +56,7 @@ export default function BookAppointment() {
   const createAppointment = trpc.appointments.create.useMutation({
     onSuccess: () => {
       toast({
-        title: "Agendamento enviado!",
+        title: "Agendamento sent!",
         description: "Entraremos em contato em breve para confirmar.",
       });
       setSubmitted(true);
@@ -114,8 +114,8 @@ export default function BookAppointment() {
                   Agendamento Shipped!
                 </h1>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Recebemos sua solicitação de agendamento. Entraremos em contato
-                  em breve para confirmar a data e horário.
+                  Recebemos sua request de agendamento. Entraremos em contato
+                  em breve para confirmar a data e time.
                 </p>
                 <div className="flex gap-4 justify-center">
                   <Button asChild variant="outline">
@@ -146,7 +146,7 @@ export default function BookAppointment() {
             Agende seu Service
           </h1>
           <p className="text-lg text-muted-foreground">
-            Preencha o formulário em 3 etapas simples
+            Preencha o formulário em 3 etapas simple
           </p>
         </div>
       </div>
@@ -259,7 +259,7 @@ export default function BookAppointment() {
                     <Calendar className="w-5 h-5" /> Data e Time
                   </CardTitle>
                   <CardDescription>
-                    Escolha a data e horário preferidos
+                    Escolha a data e time preferidos
                   </CardDescription>
                 </CardHeader>
 
@@ -323,14 +323,14 @@ export default function BookAppointment() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
-                    <Label htmlFor="name">Nome Completo *</Label>
+                    <Label htmlFor="name">Nome Complete *</Label>
                     <Input
                       id="name"
                       value={formData.clientName}
                       onChange={(e) =>
                         setFormData({ ...formData, clientName: e.target.value })
                       }
-                      placeholder="Seu nome completo"
+                      placeholder="Seu nome complete"
                     />
                   </div>
                   <div>

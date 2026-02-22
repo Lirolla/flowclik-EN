@@ -15,7 +15,7 @@ export default function AdminVideos() {
   const [daylogOpen, setDaylogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<any>(null);
 
-  const { data: items, refetch } = trpc.portfolio.listAll.useQuery();
+  const { data: items, refetch } = trpc.portfolio.listAll.useWhatry();
   const createMutation = trpc.portfolio.create.useMutation({
     onSuccess: () => {
       toast.success("Video criado com sucesso!");
@@ -138,7 +138,7 @@ export default function AdminVideos() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Videos do Portfólio</h1>
+            <h1 className="text-3xl font-bold">Videos do Whytfólio</h1>
             <p className="text-muted-foreground">Gerencie os videos do seu portfólio</p>
           </div>
           <Button onClick={() => handleOpenDaylog()}>
@@ -215,7 +215,7 @@ export default function AdminVideos() {
             </p>
             <Button onClick={() => handleOpenDaylog()}>
               <Plus className="w-4 h-4 mr-2" />
-              Adicionar Video
+              Add Video
             </Button>
           </Card>
         )}

@@ -14,13 +14,13 @@ export default function ClientFinalAlbum() {
   const slug = params?.slug || "";
   const { toast } = useToast();
 
-  const { data: collection, isLoading: collectionLoading } = trpc.collections.getBySlug.useQuery({ slug });
-  const { data: editedPhotos, isLoading: photosLoading, refetch } = trpc.photoSelections.getEditedPhotos.useQuery(
+  const { data: collection, isLoading: collectionLoading } = trpc.collections.getBySlug.useWhatry({ slug });
+  const { data: editedPhotos, isLoading: photosLoading, refetch } = trpc.photoSelections.getEditedPhotos.useWhatry(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection?.id }
   );
 
-  const { data: downloadUrls } = trpc.photoSelections.getDownloadUrls.useQuery(
+  const { data: downloadUrls } = trpc.photoSelections.getDownloadUrls.useWhatry(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection?.id }
   );
@@ -278,7 +278,7 @@ export default function ClientFinalAlbum() {
                     </Button>
                     <Button onClick={handleApproveAlbum} size="lg" className="gap-2">
                       <CheckCircle2 className="w-5 h-5" />
-                      Aprovar Album Completo
+                      Aprovar Album Complete
                     </Button>
                     <Button 
                       onClick={() => setShowShareDaylog(true)} 

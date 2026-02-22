@@ -33,18 +33,18 @@ export default function PoliticaDeRefund() {
 
           <div className="prose prose-invert prose-purple max-w-none space-y-6">
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">1. Garantia de Satisfação</h2>
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">1. Satisfaction Guarantee</h2>
               <p className="text-zinc-300 leading-relaxed">
-                A TV Londres Ltd, operadora da plataforma FlowClik, is comprometida com a satisfação de nossos 
-                clientes. Oferecemos uma política de reembolso justa e transparente para signatures de nossa 
-                plataforma SaaS de gestão para photographers.
+                TV Londres Ltd, operator of the FlowClik platform, is committed to the satisfaction of our 
+                clients. We offer a fair and transparent refund policy for subscriptions to our 
+                SaaS management platform for photographers.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">2. Period de Teste Gratuito</h2>
               <p className="text-zinc-300 leading-relaxed">
-                Todos os novos assinbefore têm direito a <strong>7 days de free trial</strong>. Durante este 
+                All new subscribers are entitled to <strong>7 days free trial</strong>. During this 
                 period, you can cancelar a qualquer momento sem none custo. Not will be cobrado nada se you 
                 cancelar before do end do trial period.
               </p>
@@ -53,42 +53,42 @@ export default function PoliticaDeRefund() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">3. Refund Policy - 14 Days</h2>
               <p className="text-zinc-300 leading-relaxed mb-4">
-                Oferecemos reembolso integral para novos assinbefore que solicitarem o cancellation inside de 
+                Oferecemos refund integral para novos assinbefore que solicitarem o cancellation inside de 
                 <strong> 14 days corridos</strong> after o first pagamento (after o end do trial period 
                 gratuito).
               </p>
               <p className="text-zinc-300 leading-relaxed">
-                <strong>Condições para reembolso:</strong>
+                <strong>Conditions for refund:</strong>
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
-                <li>Solicitação feita inside de 14 days after o first pagamento</li>
-                <li>Aplicável only para a first signature (novos clientes)</li>
+                <li>Request made within 14 days after the first payment</li>
+                <li>Applicable only to the first subscription (new clients)</li>
                 <li>Refund processado em until 10 business days</li>
-                <li>Valor devolvido pelo mesmo método de pagamento utilizado</li>
+                <li>Amount refunded via the same payment method used</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">4. Renovações e Assinaturas Recorrentes</h2>
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">4. Renewals and Recurring Subscriptions</h2>
               <p className="text-zinc-300 leading-relaxed mb-4">
-                <strong>Importante:</strong> A política de reembolso de 14 days aplica-se APENAS ao first 
-                pagamento de novos assinbefore. Renovações mensais ou anuais subsequentes <strong>not are 
-                elegíveis para reembolso</strong>.
+                <strong>Importante:</strong> The 14-day refund policy applies ONLY to the first 
+                payment from new subscribers. Subsequent monthly or annual renewals <strong>are not 
+                eligible for refund</strong>.
               </p>
               <p className="text-zinc-300 leading-relaxed">
-                You can cancelar sua signature a qualquer momento through do painel de configurações, e terá 
-                acesso aos services until o final do period already pago. Not haverá cobrança futura after o cancellation.
+                You can cancel your subscription at any time through the settings panel, and will have 
+                access to services until the end of the already paid period. There will be no future charges after cancellation.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">5. Add-ons e Services Adicionais</h2>
               <p className="text-zinc-300 leading-relaxed mb-4">
-                Add-ons adquiridos (as armazenamento extra ou galerias adicionais) seguem a mesma política:
+                Add-ons adquiridos (as armazenamento extra ou galerias adicionais) seguem a mesma policy:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li>Refund available inside de 14 days after a first compra do add-on</li>
-                <li>Renovações mensais de add-ons not are reembolsáveis</li>
+                <li>Renewals mensais de add-ons are not reembolsáveis</li>
                 <li>Cancellation de add-ons can ser feito a qualquer momento</li>
               </ul>
             </section>
@@ -96,14 +96,14 @@ export default function PoliticaDeRefund() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">6. Como Solicitar Refund</h2>
               <p className="text-zinc-300 leading-relaxed mb-4">
-                Para solicitar um reembolso elegível, siga os passos below:
+                Para solicitar um refund eligible, siga os steps below:
               </p>
               <ol className="list-decimal ml-6 mb-4 text-zinc-300 space-y-2">
                 <li>Envie um email para <strong className="text-purple-400">suporte@flowclik.com</strong></li>
-                <li>Inclua no assunto: "Solicitação de Refund - [Seu Email de Cadastro]"</li>
+                <li>Inclua no assunto: "Request de Refund - [Seu Email de Cadastro]"</li>
                 <li>No corpo do email, informe:
                   <ul className="list-disc ml-6 mt-2 space-y-1">
-                    <li>Seu nome completo e email de cadastro</li>
+                    <li>Seu nome complete e email de cadastro</li>
                     <li>Data da signature</li>
                     <li>Motivo do cancellation (optional, mas nos help a melhourr)</li>
                   </ul>
@@ -116,13 +116,13 @@ export default function PoliticaDeRefund() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">7. Exceções e Casos Especiais</h2>
               <p className="text-zinc-300 leading-relaxed mb-4">
-                A política de reembolso <strong>NÃO se aplica</strong> nos seguintes casos:
+                A policy de refund <strong>NÃO se aplica</strong> nos seguintes casos:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li>Contas suspendeds por violação dos Tuemos de Service</li>
                 <li>Uso abusivo ou fraudulento da plataforma</li>
                 <li>Solicitações feitas after o period de 14 days</li>
-                <li>Renovações automatics (segunda cobrança em daynte)</li>
+                <li>Renewals automatics (segunda charge em daynte)</li>
                 <li>Downgrade de plyear (mudança para plyear inferior)</li>
               </ul>
             </section>
@@ -150,10 +150,10 @@ export default function PoliticaDeRefund() {
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li><strong>Cartão de Crédito:</strong> 5-10 business days (depende do banco emissor)</li>
                 <li><strong>PayPal:</strong> 3-5 business days</li>
-                <li><strong>Outros métodos:</strong> Até 10 business days</li>
+                <li><strong>Outros methods:</strong> Até 10 business days</li>
               </ul>
               <p className="text-zinc-300 leading-relaxed">
-                O valor will be devolvido pelo mesmo método de pagamento utilizado na compra original.
+                O valor will be refunded pelo mesmo method de pagamento utilizado na compra original.
               </p>
             </section>
 
@@ -167,18 +167,18 @@ export default function PoliticaDeRefund() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">11. Changes nesta Política</h2>
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">11. Changes nesta Policy</h2>
               <p className="text-zinc-300 leading-relaxed">
                 Reservamo-nos o direito de modificar esta Refund Policy a qualquer momento. Mudanças 
                 significativas serão comunicadas por email com pelo menos 30 days de notice. Assinaturas 
-                ativas no momento da mudança continuarão regidas pela política vigente no momento da booking.
+                ativas no momento da mudança continuarão regidas pela policy vigente no momento da booking.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">12. Contact Information</h2>
               <p className="text-zinc-300 leading-relaxed mb-4">
-                Para questions about esta Refund Policy ou para solicitar reembolso:
+                Para questions about esta Refund Policy ou para solicitar refund:
               </p>
               <p className="text-purple-400">
                 <strong>TV Londres Ltd</strong><br />

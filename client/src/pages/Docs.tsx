@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 
 // Estrutura de documentação
 const docsStructure: Record<string, { icon: any; articles: { id: string; title: string; content: string }[] }> = {
-  "Firsts Passos": {
+  "Firsts Steps": {
     icon: Home,
     articles: [
       { id: "login", title: "Como fazer login", content: `
@@ -22,10 +22,10 @@ const docsStructure: Record<string, { icon: any; articles: { id: string; title: 
 - Digite seu email
 - You receberá um link para redefinir
 
-**Dica:** Salve seu site nos favoritos para acesso rápido!
+**Dica:** Salve seu site nos favoritos para acesso fast!
       ` },
-      { id: "configurar-profile", title: "Configurar profile e customisation", content: `
-# Configurar profile e customisation
+      { id: "configure-profile", title: "Configure profile e customisation", content: `
+# Configure profile e customisation
 
 ## Personalize seu site
 
@@ -38,7 +38,7 @@ const docsStructure: Record<string, { icon: any; articles: { id: string; title: 
 
 1. Vá em **Banner** no menu
 2. Faça upload de uma foto impactante
-3. Adicione título e description
+3. Adicione title e description
 4. Salve as changes
 
 **Dica:** Use fotos de alta qualidade para impressionar visitbefore!
@@ -51,13 +51,13 @@ const docsStructure: Record<string, { icon: any; articles: { id: string; title: 
 3. Preencha os dados:
    - Cliente (ou crie novo)
    - Service
-   - Data e horário
+   - Data e time
    - Local
 4. Clique em **Salvar**
 
 O cliente receberá email de confirmation automaticamente!
 
-**Dica:** Configure seus services before em **Services** no menu.
+**Dica:** Set up your services before em **Services** no menu.
       ` },
     ],
   },
@@ -75,7 +75,7 @@ O cliente receberá email de confirmation automaticamente!
    - Senha de acesso (optional)
 4. Clique em **Criar**
 
-Pronto! Agora you can fazer upload de fotos.
+Ready! Agora you can fazer upload de fotos.
 
 **Tipos de galeria:**
 - **Privada:** Apenas com senha
@@ -106,11 +106,11 @@ Pronto! Agora you can fazer upload de fotos.
 
 **Com senha:**
 - Cliente needs digitar senha para acessar
-- Mais segurança para fotos privadas
+- Mais security para fotos privadas
 
 **Sem senha:**
 - Wedlquer pessoa com link acessa
-- Ideal para álbuns públicos
+- Ideal para álbuns publics
       ` },
       { id: "habilitar-vendas", title: "Habilitar vendas na galeria", content: `
 # Habilitar vendas na galeria
@@ -122,7 +122,7 @@ Pronto! Agora you can fazer upload de fotos.
 5. Copie o link de vendas
 6. Envie para clientes interessados
 
-**Como funciona:**
+**Como works:**
 - Cliente vê fotos com watermark
 - Seleciona fotos que quer comprar
 - Finaliza compra com cartão
@@ -142,8 +142,8 @@ Pronto! Agora you can fazer upload de fotos.
 2. Clique em **+ Novo Agendamento**
 3. Select ou crie cliente
 4. Escolha o service
-5. Defina data, horário e local
-6. Adicione observações (optional)
+5. Defina data, time e local
+6. Adicione notes (optional)
 7. Clique em **Salvar**
 
 **Status do agendamento:**
@@ -152,8 +152,8 @@ Pronto! Agora you can fazer upload de fotos.
 - **Completed:** Ensaio realizado
 - **Cancelled:** Agendamento cancelled
       ` },
-      { id: "gerenciar-status", title: "Gerenciar status de agendamentos", content: `
-# Gerenciar status de agendamentos
+      { id: "manage-status", title: "Manage status de agendamentos", content: `
+# Manage status de agendamentos
 
 1. Abra o agendamento
 2. Clique em **Mudar Status**
@@ -165,8 +165,8 @@ Pronto! Agora you can fazer upload de fotos.
 2. Confirmado → Completed (ensaio realizado)
 3. Completed → Delivered (fotos enviadas)
       ` },
-      { id: "pagamentos-agendamento", title: "Gerenciar pagamentos", content: `
-# Gerenciar pagamentos de agendamentos
+      { id: "pagamentos-agendamento", title: "Manage pagamentos", content: `
+# Manage pagamentos de agendamentos
 
 1. Abra o agendamento
 2. Vá na aba **Pagamento**
@@ -177,7 +177,7 @@ Pronto! Agora you can fazer upload de fotos.
 
 **Tipos de pagamento:**
 - **Sinal:** Parte do valor (ex: 50%)
-- **Total:** Valor completo
+- **Total:** Valor complete
 - **Restante:** After betweengar fotos
       ` },
     ],
@@ -191,7 +191,7 @@ Pronto! Agora you can fazer upload de fotos.
 1. Acesse **Clientes** no menu
 2. Clique em **+ Novo Cliente**
 3. Preencha:
-   - Nome completo
+   - Nome complete
    - Email
    - Telefone
    - Address (optional)
@@ -211,7 +211,7 @@ Pronto! Agora you can fazer upload de fotos.
 
 **Vantagens:**
 - Sem impresare
-- Assinatura digital válida
+- Assinatura digital valid
 - Arquivamento automatic
       ` },
       { id: "chat-cliente", title: "Chat com cliente", content: `
@@ -223,7 +223,7 @@ Pronto! Agora you can fazer upload de fotos.
 4. Cliente recebe notification
 
 **Recursos:**
-- History completo de conversas
+- History complete de conversas
 - Notifications em tempo real
 - Anexar fotos e documentos
       ` },
@@ -232,8 +232,8 @@ Pronto! Agora you can fazer upload de fotos.
   "Settings": {
     icon: Settings,
     articles: [
-      { id: "configurar-servicos", title: "Configurar services e preços", content: `
-# Configurar services e preços
+      { id: "configure-servicos", title: "Configure services e preços", content: `
+# Configure services e preços
 
 1. Acesse **Services** no menu
 2. Clique em **+ Novo Service**
@@ -250,13 +250,13 @@ Pronto! Agora you can fazer upload de fotos.
 - Casamento: £ 2.500
 - Graduation: £ 1.800
       ` },
-      { id: "portfolio", title: "Gerenciar portfólio", content: `
-# Gerenciar portfólio
+      { id: "portfolio", title: "Manage portfólio", content: `
+# Manage portfólio
 
-1. Acesse **Portfólio** no menu
-2. Clique em **+ Adicionar Foto**
+1. Acesse **Whytfólio** no menu
+2. Clique em **+ Add Foto**
 3. Faça upload da imagem
-4. Adicione título e description
+4. Adicione title e description
 5. Organize a ordem arrastando
 
 **Dicas:**
@@ -265,11 +265,11 @@ Pronto! Agora you can fazer upload de fotos.
 - Atualize regularmente
 - Mostre variedade de trabalhos
       ` },
-      { id: "dominio-proprio", title: "Configurar domain próprio", content: `
-# Configurar domain próprio
+      { id: "dominio-proprio", title: "Configure domain próprio", content: `
+# Configure domain próprio
 
 **You tem:** seusite.flowclik.com
-**Quer ter:** www.seusite.com.br
+**Whatr ter:** www.seusite.com.br
 
 ## Step by step:
 
@@ -279,23 +279,23 @@ Pronto! Agora you can fazer upload de fotos.
 4. Configure DNS conforme instruções
 5. Aguarde propagação (24-48h)
 
-**Configuração DNS:**
+**Configuration DNS:**
 \`\`\`
 Tipo: A
 Nome: @
 Valor: [IP fornecido pelo sistema]
 \`\`\`
 
-**Questions?** Get in touch com suporte!
+**Whatstions?** Get in touch com suporte!
       ` },
     ],
   },
 };
 
 export default function Docs() {
-  const [selectedCategory, setSelectedCategory] = useState("Firsts Passos");
-  const [selectedArticle, setSelectedArticle] = useState(docsStructure["Firsts Passos"].articles[0]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("Firsts Steps");
+  const [selectedArticle, setSelectedArticle] = useState(docsStructure["Firsts Steps"].articles[0]);
+  const [searchWhatry, setSearchWhatry] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const categories = Object.keys(docsStructure);
@@ -337,8 +337,8 @@ export default function Docs() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
               <Input
                 placeholder="Buscar artigos..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
+                value={searchWhatry}
+                onChange={(e) => setSearchWhatry(e.target.value)}
                 className="pl-10"
               />
             </div>
@@ -421,7 +421,7 @@ export default function Docs() {
 
           {/* Feedback */}
           <div className="mt-12 pt-8 border-t border-zinc-800">
-            <p className="text-sm text-zinc-500 mb-4">Este artigo foi útil?</p>
+            <p className="text-sm text-zinc-500 mb-4">Este artigo foi useful?</p>
             <div className="flex gap-3">
               <Button variant="outline" size="sm">
                 👍 Sim

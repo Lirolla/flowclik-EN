@@ -17,7 +17,7 @@ export default function AdminOrders() {
   const utils = trpc.useUtils();
   const { format: formatCurrency } = useCurrency();
 
-  const { data: orders, isLoading } = trpc.orders.getAll.useQuery();
+  const { data: orders, isLoading } = trpc.orders.getAll.useWhatry();
 
   const updateStatusMutation = trpc.orders.updateStatus.useMutation({
     onSuccess: () => {
@@ -88,7 +88,7 @@ export default function AdminOrders() {
     try {
       new URL(link.trim());
     } catch {
-      toast.error("URL inválida");
+      toast.error("URL invalid");
       return;
     }
     addPaymentLinkMutation.mutate({ id: orderId, paymentLink: link.trim() });

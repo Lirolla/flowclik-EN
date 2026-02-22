@@ -15,7 +15,7 @@ const VPS_IP = "72.61.129.119";
 // Verify se o DNS do domain aponta para nosso servidor
 async function checkDNS(domain: string): Promise<{ ok: boolean; message: string }> {
   try {
-    // Tentar resolver registro A
+    // Tentar resolver record A
     try {
       const addresses = await dnsResolve4(domain);
       if (addresses.includes(VPS_IP)) {
@@ -27,9 +27,9 @@ async function checkDNS(domain: string): Promise<{ ok: boolean; message: string 
       if (isCloudflare) {
         return { ok: true, message: "DNS apontando via Cloudflare (proxy active)" };
       }
-      return { ok: false, message: `DNS aponta para ${addresses.join(", ")} ao invés de ${VPS_IP}. Configure o registro A corretamente.` };
+      return { ok: false, message: `DNS aponta para ${addresses.join(", ")} ao invés de ${VPS_IP}. Configure o record A corretamente.` };
     } catch (e: any) {
-      // Se not tem registro A, tentar CNAME
+      // Se not tem record A, tentar CNAME
     }
 
     // Tentar resolver CNAME
@@ -43,9 +43,9 @@ async function checkDNS(domain: string): Promise<{ ok: boolean; message: string 
       // Sem CNAME also
     }
 
-    return { ok: false, message: "None registro DNS encontrado. Configure o registro A apontando para " + VPS_IP };
+    return { ok: false, message: "None record DNS encontrado. Configure o record A apontando para " + VPS_IP };
   } catch (error: any) {
-    return { ok: false, message: "Erro ao verificar DNS: " + (error.message || "desconhecido") };
+    return { ok: false, message: "Erro ao verify DNS: " + (error.message || "desconhecido") };
   }
 }
 
@@ -63,7 +63,7 @@ export const customSunainsRouter = router({
     return domains;
   }),
 
-  // Adicionar novo custom domain
+  // Add novo custom domain
   add: protectedProcedure
     .input(
       z.object({
@@ -111,7 +111,7 @@ export const customSunainsRouter = router({
         });
       }
 
-      // Adicionar domain na tabela custom_domains
+      // Add domain na tabela custom_domains
       await db.insert(customSunains).values({
         tenantId: ctx.user.tenantId,
         domain: input.domain,
@@ -131,7 +131,7 @@ export const customSunainsRouter = router({
       };
     }),
 
-  // Verify se domain is configurado corretamente (com verificação DNS real)
+  // Verify se domain is configurado corretamente (com verification DNS real)
   verify: protectedProcedure
     .input(
       z.object({
@@ -174,7 +174,7 @@ export const customSunainsRouter = router({
         });
       }
 
-      // DNS OK! Marcar as verificado
+      // DNS OK! Marcar as verified
       const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
       await db
         .update(customSunains)
@@ -192,7 +192,7 @@ export const customSunainsRouter = router({
         .set({ customSunain: domain.domain })
         .where(eq(tenants.id, ctx.user.tenantId));
 
-      console.log(`[Custom Sunain] Sunínio ${domain.domain} verificado e ativado para tenant ${ctx.user.tenantId}`);
+      console.log(`[Custom Sunain] Sunínio ${domain.domain} verified e ativado para tenant ${ctx.user.tenantId}`);
 
       return { success: true, verified: true, message: dnsCheck.message };
     }),

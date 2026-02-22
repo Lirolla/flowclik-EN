@@ -3,7 +3,7 @@ import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 // ============================================================
-// Configuração do R2 - HARDCODED para produção Hostinger
+// Configuration do R2 - HARDCODED para produção Hostinger
 // Conta Cloudflare: flowclikbr
 // ============================================================
 const R2_ACCOUNT_ID = "023a0bad3f17632316cd10358db2201f";
@@ -12,7 +12,7 @@ const R2_SECRET_ACCESS_KEY = "83ebf944befd8c04123d483619ac174bd83a7fdd2aa9cdba31
 const R2_BUCKET_NAME = "flowclikbr";
 const R2_PUBLIC_URL = "https://fotos.flowclik.com";
 
-// Endpoint de API do R2 (diferente do domain público)
+// Endpoint de API do R2 (diferente do domain public)
 const R2_API_ENDPOINT = `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`;
 
 // Cliente S3 configurado para Cloudflare R2
@@ -31,7 +31,7 @@ const s3Client = new S3Client({
  * @param relKey - Caminho relactive do arquivo (ex: "tenants/1/photos/image.jpg")
  * @param data - Dados do arquivo (Buffer, Uint8Array ou string)
  * @param contentType - MIME type do arquivo
- * @returns Objeto com key e url pública do arquivo
+ * @returns Objeto com key e url public do arquivo
  */
 export async function storagePut(
   relKey: string,
@@ -64,7 +64,7 @@ export async function storagePut(
     throw new Error(`Erro ao fazer upload para R2: ${error.message}`);
   }
 
-  // URL pública do arquivo
+  // URL public do arquivo
   const url = `${R2_PUBLIC_URL}/${key}`;
 
   return { key, url };
@@ -182,7 +182,7 @@ export const R2Paths = {
   },
 
   /**
-   * Path para configurações e uploads genéricos
+   * Path para settings e uploads genéricos
    * @example tenant-1/config/logo.jpg
    * @example tenant-1/config/capa-galeria-123.jpg
    */

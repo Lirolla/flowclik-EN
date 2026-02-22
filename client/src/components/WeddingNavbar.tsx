@@ -10,8 +10,8 @@ interface WeddingNavbarProps {
 
 export default function WeddingNavbar({ currentPage }: WeddingNavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
-  const { data: oldSiteConfig } = trpc.site.getConfig.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
+  const { data: oldSiteConfig } = trpc.site.getConfig.useWhatry();
   
   const config = { ...oldSiteConfig, ...siteConfig };
   const showVideo = config?.businessMode === "video_only" || config?.businessMode === "both";
@@ -23,7 +23,7 @@ export default function WeddingNavbar({ currentPage }: WeddingNavbarProps) {
     { label: "Home", path: SITE_ROUTES.home() },
     { label: "Galleries", path: SITE_ROUTES.galleries() },
     { label: "Services", path: SITE_ROUTES.services() },
-    { label: "Portfolio", path: SITE_ROUTES.portfolio() },
+    { label: "Whytfolio", path: SITE_ROUTES.portfolio() },
     ...(showStockPhotos ? [{ label: "Stock Photos", path: SITE_ROUTES.stockPhotos() }] : []),
     ...(showVideo ? [{ label: "Videos", path: SITE_ROUTES.video() }] : []),
     { label: "About", path: SITE_ROUTES.about() },

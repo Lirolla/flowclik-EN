@@ -35,7 +35,7 @@ function AdminCollectionsContent() {
   });
 
   const utils = trpc.useUtils();
-  const { data: collections, isLoading } = trpc.collections.getAll.useQuery();
+  const { data: collections, isLoading } = trpc.collections.getAll.useWhatry();
 
   const createMutation = trpc.collections.create.useMutation({
     onSuccess: () => {
@@ -355,7 +355,7 @@ function AdminCollectionsContent() {
                     className="w-4 h-4"
                   />
                   <Label htmlFor="isPublic" className="cursor-pointer">
-                    Gallery pública (visible on site)
+                    Gallery public (visible on site)
                   </Label>
                 </div>
 

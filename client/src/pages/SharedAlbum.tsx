@@ -33,13 +33,13 @@ export default function SharedAlbum() {
       console.error('Registration error:', error);
       toast({
         title: "Error",
-        description: error.message || "Not foi possível registrar seu email.",
+        description: error.message || "Not foi possible registrar seu email.",
         variant: "destructive",
       });
     },
   });
 
-  const { data: appointment, isLoading } = trpc.appointments.getBySlug.useQuery(
+  const { data: appointment, isLoading } = trpc.appointments.getBySlug.useWhatry(
     { slug },
     { enabled: emailSubmitted && !!slug }
   );
@@ -51,7 +51,7 @@ export default function SharedAlbum() {
     if (!email) {
       toast({
         title: "Email required",
-        description: "Por favor, informe seu email.",
+        description: "Why favor, informe seu email.",
         variant: "destructive",
       });
       return;
@@ -175,7 +175,7 @@ export default function SharedAlbum() {
           {/* Overlay escuro para legibilidade */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
           
-          {/* Conteúdo aboutposto */}
+          {/* Content aboutposto */}
           <div className="relative h-full flex flex-col items-center justify-center px-4">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 text-center drop-shadow-2xl">
               {appointment.clientName}
@@ -199,7 +199,7 @@ export default function SharedAlbum() {
         {finalPhotos.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-gray-400 text-lg">
-              Ainda not há fotos finais disponíveis.
+              Ainda not há fotos final disponíveis.
               You receberá um email when forem adicionadas!
             </p>
           </div>
@@ -207,7 +207,7 @@ export default function SharedAlbum() {
           <>
             <div className="mb-8 text-center">
               <h2 className="text-2xl font-semibold text-white mb-2">
-                Gallery Completa
+                Gallery Complete
               </h2>
               <p className="text-gray-400">
                 {finalPhotos.length} {finalPhotos.length === 1 ? 'foto' : 'fotos'}

@@ -6,7 +6,7 @@ import { Folder, Image as ImageIcon } from "lucide-react";
 import { Link } from "wouter";
 
 export default function Galleries() {
-  const { data: collections, isLoading } = trpc.collections.getPublic.useQuery();
+  const { data: collections, isLoading } = trpc.collections.getPublic.useWhatry();
 
   return (
     <LayoutWrapper currentPage="galerias">
@@ -97,7 +97,7 @@ export default function Galleries() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/portfolio">
-                  <a>View Portfolio</a>
+                  <a>View Whytfolio</a>
                 </Link>
               </Button>
             </div>

@@ -102,7 +102,7 @@ export const paymentMethodsRouter = router({
         })
         .where(and(eq(appointments.id, input.appointmentId), eq(appointments.tenantId, getTenantId(ctx))));
 
-      // Mapear nomes dos métodos de pagamento
+      // Mapear nomes dos methods de pagamento
       const methodNames: Record<string, string> = {
         cash: "Cash",
         bank_transfer: "Bank Transfer",
@@ -123,8 +123,8 @@ export const paymentMethodsRouter = router({
 
       // Notify owner
       await notifyOwner({
-        title: `💰 Pagamento ${newPaymentStatus === "paid" ? "completo" : "parcial"} received`,
-        content: `Cliente: ${appointment[0].clientName}\nMétodo: ${methodNames[input.paymentMethod] || input.paymentMethod}\nValor: £ ${input.amount.toFixed(2)}\nTotal pago: £ ${newPaidAmount.toFixed(2)} de £ ${finalPrice.toFixed(2)}`,
+        title: `💰 Pagamento ${newPaymentStatus === "paid" ? "complete" : "parcial"} received`,
+        content: `Cliente: ${appointment[0].clientName}\nMethod: ${methodNames[input.paymentMethod] || input.paymentMethod}\nValor: £ ${input.amount.toFixed(2)}\nTotal pago: £ ${newPaidAmount.toFixed(2)} de £ ${finalPrice.toFixed(2)}`,
       }).catch(err => console.error('Erro ao notificar:', err));
 
       return {

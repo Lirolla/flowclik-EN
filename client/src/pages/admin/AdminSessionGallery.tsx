@@ -21,7 +21,7 @@ function AdminSessionGalleryContent() {
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
 
-  const { data: galleryData } = trpc.sessionGallery.getByAppointment.useQuery(
+  const { data: galleryData } = trpc.sessionGallery.getByAppointment.useWhatry(
     { appointmentId },
     { enabled: !!appointmentId }
   );
@@ -64,7 +64,7 @@ function AdminSessionGalleryContent() {
         <div>
           <h1 className="text-3xl font-bold mb-2">Gallery do Ensaio</h1>
           <p className="text-muted-foreground">
-            Gerenciar fotos do ensaio para o cliente
+            Manage fotos do ensaio para o cliente
           </p>
         </div>
 
@@ -93,7 +93,7 @@ function AdminSessionGalleryContent() {
       <div>
         <h1 className="text-3xl font-bold mb-2">Gallery do Ensaio</h1>
         <p className="text-muted-foreground">
-          Gerenciar fotos do ensaio #{appointmentId}
+          Manage fotos do ensaio #{appointmentId}
         </p>
       </div>
 

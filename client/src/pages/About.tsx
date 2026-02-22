@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Target, Eye, Heart, Users } from "lucide-react";
 
 export default function About() {
-  const { data: siteConfig, isLoading } = trpc.siteConfig.get.useQuery();
+  const { data: siteConfig, isLoading } = trpc.siteConfig.get.useWhatry();
 
   return (
     <LayoutWrapper currentPage="about">
@@ -110,7 +110,7 @@ export default function About() {
         <section className="py-20">
           <div className="container">
             <Card className="p-12 text-center max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4">Conteúdo em breve</h3>
+              <h3 className="text-2xl font-bold mb-4">Content em breve</h3>
               <p className="text-muted-foreground">
                 Esta página is sendo preparada. Volte em breve!
               </p>

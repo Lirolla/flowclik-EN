@@ -10,7 +10,7 @@ import { initializeTenantStorage } from "../storage";
 
 export const tenantsRouter = router({
   /**
-   * Registrar novo tenant (cadastro público)
+   * Registrar novo tenant (cadastro public)
    */
   register: publicProcedure
     .input(
@@ -84,7 +84,7 @@ export const tenantsRouter = router({
 
       const tenantId = createdTenant.id;
 
-      // 1.5. Inicializar pastas do tenant no R2
+      // 1.5. Initializar pastas do tenant no R2
       try {
         await initializeTenantStorage(tenantId);
       } catch (error: any) {

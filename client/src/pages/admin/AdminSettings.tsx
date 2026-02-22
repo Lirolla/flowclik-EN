@@ -107,8 +107,8 @@ function AdminSettingsContent() {
   const timezone = "Europe/London";
   const phoneCountryCode = "+44";
 
-  const { data: config, isLoading } = trpc.siteConfig.get.useQuery();
-  const { data: blockedDates } = trpc.blockedDates.list.useQuery();
+  const { data: config, isLoading } = trpc.siteConfig.get.useWhatry();
+  const { data: blockedDates } = trpc.blockedDates.list.useWhatry();
   
   const updateConfigMutation = trpc.siteConfig.update.useMutation({
     onSuccess: () => {
@@ -123,7 +123,7 @@ function AdminSettingsContent() {
 
   const updateBusinessModeMutation = trpc.siteConfig.updateBusinessMode.useMutation({
     onSuccess: () => {
-      toast.success("Modo de negócio atualizado!");
+      toast.success("Modo de business atualizado!");
     },
   });
 
@@ -202,7 +202,7 @@ function AdminSettingsContent() {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        toast.error("Por favor, select only imagens");
+        toast.error("Why favor, select only imagens");
         return;
       }
 
@@ -389,7 +389,7 @@ function AdminSettingsContent() {
             Site Settings
           </CardTitle>
           <CardDescription>
-            Complete todas as seções para configurar seu site. 🔴 Vermelho = Not preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Completo
+            Complete todas as seções para configure seu site. 🔴 Vermelho = Not preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Complete
           </CardDescription>
         </CardHeader>
       </Card>
@@ -404,7 +404,7 @@ function AdminSettingsContent() {
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getBusinessModeStatus()} />
                   <Briefcase className="w-5 h-5" />
-                  <span className="font-semibold">Modo de Negócio</span>
+                  <span className="font-semibold">Modo de Business</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-6 pt-4">
@@ -466,7 +466,7 @@ function AdminSettingsContent() {
                       <div className="space-y-1">
                         <Label className="text-base font-semibold">Ativar Stock Photos</Label>
                         <p className="text-sm text-muted-foreground">
-                          Habilite uma página pública para vender fotos avulsas
+                          Habilite uma página public para vender fotos avulsas
                         </p>
                       </div>
                       <button
@@ -784,7 +784,7 @@ function AdminSettingsContent() {
                     )}
                   </div>
                   <p className="text-xs text-muted-foreground">
-                    Recomendado: PNG transparente, 200x200px
+                    Recomendado: PNG transparent, 200x200px
                   </p>
                 </div>
 
@@ -849,7 +849,7 @@ function AdminSettingsContent() {
                   />
                 </div>
                 <div>
-                  <Label>Conteúdo Principal *</Label>
+                  <Label>Content Principal *</Label>
                   <Textarea
                     // @ts-ignore
                     value={aboutContent}
@@ -1172,7 +1172,7 @@ function AdminSettingsContent() {
                     </div>
                     
                     <div>
-                      <Label>Subtítulo</Label>
+                      <Label>Subtitle</Label>
                       <Textarea
                         value={parallaxSubtitle}
                         onChange={(e) => setParallaxSubtitle(e.target.value)}
@@ -1365,10 +1365,10 @@ function AdminSettingsContent() {
             <p className="font-semibold">ℹ️ Information:</p>
             <ul className="list-disc list-inside space-y-1 text-muted-foreground">
               <li>Complete todas as seções marcadas em vermelho</li>
-              <li>O modo de negócio define quais services aparecem no site</li>
+              <li>O modo de business define quais services aparecem no site</li>
               <li>Bloqueios de data impedem agendamentos nos periods escolhidos</li>
               <li>O logo e nome aparecem no cabeçalho do site</li>
-              <li>O conteúdo de Sobre/Services aparece nas páginas públicas</li>
+              <li>O content de Sobre/Services aparece nas páginas publics</li>
               <li>Changes are aplicadas imedaytamente</li>
             </ul>
           </div>
@@ -1422,7 +1422,7 @@ function AdminSettingsContent() {
               </div>
               <Button onClick={handleAddBlock} disabled={createBlockMutation.isPending}>
                 <Plus className="w-4 h-4 mr-2" />
-                Adicionar
+                Add
               </Button>
             </div>
 

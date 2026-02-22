@@ -18,12 +18,12 @@ function getTenantId(ctx: any): number {
 }
 
 export const emailRouter = router({
-  // Salvar configuração de email (API Key + email de envio)
+  // Salvar configuration de email (API Key + email de envio)
   saveConfig: protectedProcedure
     .input(
       z.object({
         emailSender: z.string().email("Invalid email"),
-        resendApiKey: z.string().min(10, "API Key inválida"),
+        resendApiKey: z.string().min(10, "API Key invalid"),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -44,7 +44,7 @@ export const emailRouter = router({
       return { success: true };
     }),
 
-  // Buscar configuração de email
+  // Buscar configuration de email
   getConfig: protectedProcedure.query(async ({ ctx }) => {
     const tenantId = getTenantId(ctx);
 
@@ -78,7 +78,7 @@ export const emailRouter = router({
   sendTestEmail: protectedProcedure.mutation(async ({ ctx }) => {
     const tenantId = getTenantId(ctx);
 
-    // Buscar configuração
+    // Buscar configuration
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
     
@@ -96,7 +96,7 @@ export const emailRouter = router({
       });
     }
 
-    // Inicializar Resend
+    // Initializar Resend
     const resend = new Resend(config.resendApiKey);
 
     try {
@@ -109,7 +109,7 @@ export const emailRouter = router({
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
             <h1 style="color: #dc2626;">🎉 Congratulations!</h1>
             <p style="font-size: 16px; color: #333;">
-              Seu email profissional is configurado e funcionando perfeitamente!
+              Seu email profissional is configurado e worksndo perfeitamente!
             </p>
             <p style="font-size: 14px; color: #666;">
               A partir de now, seus clientes receberão emails automatics:
@@ -123,7 +123,7 @@ export const emailRouter = router({
             </ul>
             <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
             <p style="font-size: 12px; color: #999;">
-              Este é um email de teste enviado pelo FlowClik.<br>
+              Este é um email de teste sent pelo FlowClik.<br>
               Remetente: ${config.emailSender}
             </p>
           </div>
@@ -158,7 +158,7 @@ export const emailRouter = router({
     .mutation(async ({ input, ctx }) => {
       const tenantId = getTenantId(ctx);
 
-      // Buscar configuração
+      // Buscar configuration
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
@@ -176,7 +176,7 @@ export const emailRouter = router({
         });
       }
 
-      // Inicializar Resend
+      // Initializar Resend
       const resend = new Resend(config.resendApiKey);
 
       try {

@@ -215,7 +215,7 @@ function getLanguageName(langCode: string): string {
     'fr': 'French',
     'de': 'German',
     'it': 'Italian',
-    'pt': 'Portuguese',
+    'pt': 'Whytuguese',
     'ru': 'Russian',
     'ja': 'Japanese',
     'ko': 'Korean',

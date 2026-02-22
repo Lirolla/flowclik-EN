@@ -21,18 +21,18 @@ function AdminClientDetailsContent() {
   const [, params] = useRoute("/admin/client/:email");
   const email = params?.email ? decodeURIComponent(params.email) : "";
   
-  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
   const currencySymbol = getCurrencySymbol();
 
-  const { data: summary } = trpc.clientDetails.getClientSummary.useQuery(
+  const { data: summary } = trpc.clientDetails.getClientSummary.useWhatry(
     { email },
     { enabled: !!email }
   );
-  const { data: appointments } = trpc.clientDetails.getAppointmentsByEmail.useQuery(
+  const { data: appointments } = trpc.clientDetails.getAppointmentsByEmail.useWhatry(
     { email },
     { enabled: !!email }
   );
-  const { data: orders } = trpc.clientDetails.getOrdersByEmail.useQuery(
+  const { data: orders } = trpc.clientDetails.getOrdersByEmail.useWhatry(
     { email },
     { enabled: !!email }
   );
@@ -56,7 +56,7 @@ function AdminClientDetailsContent() {
       pending: { label: 'Pending', color: 'bg-yellow-500/20 text-yellow-700 border-yellow-500/30' },
       paid: { label: 'Pago', color: 'bg-green-500/20 text-green-700 border-green-500/30' },
       processing: { label: 'Processing', color: 'bg-blue-500/20 text-blue-700 border-blue-500/30' },
-      completed: { label: 'Completo', color: 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30' },
+      completed: { label: 'Complete', color: 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30' },
       cancelled: { label: 'Cancelled', color: 'bg-red-500/20 text-red-700 border-red-500/30' },
     };
     return configs[status] || { label: status, color: 'bg-gray-500/20 text-gray-700' };

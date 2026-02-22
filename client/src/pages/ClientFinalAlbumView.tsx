@@ -21,7 +21,7 @@ export default function ClientFinalAlbumView() {
   const [shareUrl, setShareUrl] = useState("");
   const [, setLocation] = useLocation();
 
-  // Proteção anti-cópia: desabilitar clique direito e arrastar
+  // Protection anti-cópia: desabilitar clique direito e arrastar
   useEffect(() => {
     const preventContextMenu = (e: MouseEvent) => e.preventDefault();
     const preventDragStart = (e: DragEvent) => e.preventDefault();
@@ -35,12 +35,12 @@ export default function ClientFinalAlbumView() {
     };
   }, []);
 
-  const { data: appointment } = trpc.appointments.getById.useQuery(
+  const { data: appointment } = trpc.appointments.getById.useWhatry(
     { id: appointmentId },
     { enabled: appointmentId > 0 }
   );
 
-  const { data: finalPhotos } = trpc.finalAlbums.getByAppointment.useQuery(
+  const { data: finalPhotos } = trpc.finalAlbums.getByAppointment.useWhatry(
     { appointmentId },
     { enabled: appointmentId > 0 }
   );
@@ -49,7 +49,7 @@ export default function ClientFinalAlbumView() {
     if (!appointment?.slug) {
       toast({
         title: "Error",
-        description: "Not foi possível gerar link de compartilhamento.",
+        description: "Not foi possible gerar link de compartilhamento.",
         variant: "destructive",
       });
       return;
@@ -82,7 +82,7 @@ export default function ClientFinalAlbumView() {
       console.error("Erro ao gerar ZIP:", error);
       toast({
         title: "Erro no download",
-        description: "Not foi possível preparar o download. Try again.",
+        description: "Not foi possible preparar o download. Try again.",
         variant: "destructive",
       });
     },
@@ -185,7 +185,7 @@ export default function ClientFinalAlbumView() {
                   draggable={false}
                   onContextMenu={(e) => e.preventDefault()}
                 />
-                {/* Overlay invisível para bloquear cliques na imagem */}
+                {/* Overlay invisible para bloquear cliques na imagem */}
                 <div className="absolute inset-0 bg-transparent" style={{ pointerEvents: 'auto' }} onClick={() => openLightbox(index)} />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors pointer-events-none" />
                 {/* Watermark CSS contra print screen */}

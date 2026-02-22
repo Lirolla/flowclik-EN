@@ -113,7 +113,7 @@ export default function SendPaymentLinkDaylog({
 
           {/* Dica informativa */}
           <div className="bg-blue-50 dark:bg-blue-950 rounded-lg p-4 space-y-2">
-            <p className="text-sm font-medium text-blue-900 dark:text-blue-100">💡 Como funciona:</p>
+            <p className="text-sm font-medium text-blue-900 dark:text-blue-100">💡 Como works:</p>
             <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1 list-disc list-inside">
               <li>Gere um link de pagamento no seu gateway preferido</li>
               <li>Cole o link above e copie a mensagem</li>

@@ -43,8 +43,8 @@ function AdminContractsContent() {
   const [generatedInfo, setGeneratedInfo] = useState<any>(null);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
 
-  const { data: templates, refetch } = trpc.contracts.getAll.useQuery();
-  const { data: appointmentsList } = trpc.appointments.getAll.useQuery();
+  const { data: templates, refetch } = trpc.contracts.getAll.useWhatry();
+  const { data: appointmentsList } = trpc.appointments.getAll.useWhatry();
 
   const createTemplate = trpc.contracts.create.useMutation({
     onSuccess: () => {
@@ -83,7 +83,7 @@ function AdminContractsContent() {
   const seedDefaults = trpc.contracts.seedDefaults.useMutation({
     onSuccess: (data: any) => {
       if (data.success) {
-        toast({ title: `${data.count} templates prontos adicionados!`, description: "Modelos baseados na legislação brasileira." });
+        toast({ title: `${data.count} templates readys adicionados!`, description: "Modelos baseados na legislação brasileira." });
         refetch();
       } else {
         toast({ title: "Notice", description: data.message, variant: "destructive" });
@@ -134,9 +134,9 @@ function AdminContractsContent() {
   const sendEmail = trpc.contracts.sendContractEmail.useMutation({
     onSuccess: (data: any) => {
       if (data.success) {
-        toast({ title: "Email enviado com sucesso para " + (generatedInfo?.clientEmail || 'o cliente') + "!" });
+        toast({ title: "Email sent com sucesso para " + (generatedInfo?.clientEmail || 'o cliente') + "!" });
       } else {
-        toast({ title: "Falha ao enviar email. Verifique as configurações.", variant: "destructive" });
+        toast({ title: "Falha ao enviar email. Verifique as settings.", variant: "destructive" });
       }
     },
     onError: () => {
@@ -198,7 +198,7 @@ function AdminContractsContent() {
               className="border-accent text-accent hover:bg-accent/10"
             >
               <Sparkles className="w-4 h-4 mr-2" />
-              {seedDefaults.isPending ? "Loading..." : "Carregar Modelos Prontos"}
+              {seedDefaults.isPending ? "Loading..." : "Carregar Modelos Readys"}
             </Button>
           )}
           <Daylog open={isDaylogOpen} onOpenChange={setIsDaylogOpen}>
@@ -233,7 +233,7 @@ function AdminContractsContent() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="content">Conteúdo do Contrato *</Label>
+                  <Label htmlFor="content">Content do Contrato *</Label>
                   <Textarea
                     id="content"
                     rows={15}
@@ -507,7 +507,7 @@ function AdminContractsContent() {
               onClick={() => {
                 const phone = generatedInfo?.clientPhone?.replace(/\D/g, '') || '';
                 const phoneFormatted = phone.startsWith('55') ? phone : `55${phone}`;
-                const message = encodeURIComponent(`*${generatedInfo?.templateName || 'Contrato'}*\n\nHello ${generatedInfo?.clientName || ''}! Monue seu contrato:\n\n${generatedContent.substring(0, 1000)}...\n\n_Contrato completo will be enviado em PDF._`);
+                const message = encodeURIComponent(`*${generatedInfo?.templateName || 'Contrato'}*\n\nHello ${generatedInfo?.clientName || ''}! Monue seu contrato:\n\n${generatedContent.substring(0, 1000)}...\n\n_Contrato complete will be sent em PDF._`);
                 window.open(`https://wa.me/${phoneFormatted}?text=${message}`, '_blank');
               }}
             >
@@ -536,7 +536,7 @@ function AdminContractsContent() {
               <FileText className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
               <h3 className="text-xl font-semibold mb-2">None modelo cadastrado</h3>
               <p className="text-muted-foreground mb-6">
-                Clique em "Carregar Modelos Prontos" para adicionar 4 contratos profissionais baseados na legislação brasileira, ou crie o seu próprio.
+                Clique em "Carregar Modelos Readys" para add 4 contratos profissionais baseados na legislação brasileira, ou crie o seu próprio.
               </p>
               <Button
                 onClick={() => seedDefaults.mutate()}
@@ -544,7 +544,7 @@ function AdminContractsContent() {
                 size="lg"
               >
                 <Sparkles className="w-5 h-5 mr-2" />
-                {seedDefaults.isPending ? "Loading..." : "Carregar 4 Modelos Prontos"}
+                {seedDefaults.isPending ? "Loading..." : "Carregar 4 Modelos Readys"}
               </Button>
             </CardContent>
           </Card>

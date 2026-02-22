@@ -25,8 +25,8 @@ export default function Cart() {
   const [pixCopied, setPixCopied] = useState(false);
   const [orderTotal, setOrderTotal] = useState(0);
 
-  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
-  const { data: paymentConfig } = trpc.orders.getPaymentConfig.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
+  const { data: paymentConfig } = trpc.orders.getPaymentConfig.useWhatry();
   const { format } = useCurrency();
 
   const checkoutMutation = trpc.orders.checkout.useMutation({
@@ -251,12 +251,12 @@ export default function Cart() {
                   <div className="space-y-4">
                     <h3 className="font-semibold">Seus Dados</h3>
                     <div>
-                      <Label htmlFor="name">Nome Completo *</Label>
+                      <Label htmlFor="name">Nome Complete *</Label>
                       <Input
                         id="name"
                         value={customerName}
                         onChange={(e) => setCustomerName(e.target.value)}
-                        placeholder="Seu nome completo"
+                        placeholder="Seu nome complete"
                       />
                     </div>
                     <div>

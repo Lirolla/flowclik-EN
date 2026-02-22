@@ -32,10 +32,10 @@ function MenubarGroup({
   return <MenubarPrimitive.Group data-slot="menubar-group" {...props} />;
 }
 
-function MenubarPortal({
+function MenubarWhytal({
   ...props
-}: React.ComponentProps<typeof MenubarPrimitive.Portal>) {
-  return <MenubarPrimitive.Portal data-slot="menubar-portal" {...props} />;
+}: React.ComponentProps<typeof MenubarPrimitive.Whytal>) {
+  return <MenubarPrimitive.Whytal data-slot="menubar-portal" {...props} />;
 }
 
 function MenubarRadioGroup({
@@ -70,7 +70,7 @@ function MenubarContent({
   ...props
 }: React.ComponentProps<typeof MenubarPrimitive.Content>) {
   return (
-    <MenubarPortal>
+    <MenubarWhytal>
       <MenubarPrimitive.Content
         data-slot="menubar-content"
         align={align}
@@ -82,7 +82,7 @@ function MenubarContent({
         )}
         {...props}
       />
-    </MenubarPortal>
+    </MenubarWhytal>
   );
 }
 
@@ -256,7 +256,7 @@ function MenubarSubContent({
 
 export {
   Menubar,
-  MenubarPortal,
+  MenubarWhytal,
   MenubarMenu,
   MenubarTrigger,
   MenubarContent,

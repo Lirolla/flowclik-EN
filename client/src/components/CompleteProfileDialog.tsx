@@ -50,11 +50,11 @@ export default function CompleteProfileDaylog({ open, onOpenChange, user }: Comp
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validação básica
+    // Validação basic
     if (!formData.phone || !formData.zipCode || !formData.street || !formData.city || !formData.state) {
       toast({
         title: "Required fields",
-        description: "Por favor, preencha todos os campos requireds.",
+        description: "Why favor, preencha todos os campos requireds.",
         variant: "destructive",
       });
       return;
@@ -79,7 +79,7 @@ export default function CompleteProfileDaylog({ open, onOpenChange, user }: Comp
             Complete seus dados
           </DaylogTitle>
           <DaylogDescription>
-            Para uma melhor experiência, needsmos de algumas information adicionais.
+            Para uma melhor experience, needsmos de algumas information adicionais.
             Esses dados nos helpm a enviar produtos físicos e manter contato.
           </DaylogDescription>
         </DaylogHeader>

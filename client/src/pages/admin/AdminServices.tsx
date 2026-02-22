@@ -24,7 +24,7 @@ export default function AdminServices() {
   const [isActive, setIsActive] = useState(true);
 
   const utils = trpc.useUtils();
-  const { data: services, isLoading } = trpc.services.getAll.useQuery();
+  const { data: services, isLoading } = trpc.services.getAll.useWhatry();
 
   const createMutation = trpc.services.create.useMutation({
     onSuccess: () => {

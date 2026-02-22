@@ -5,20 +5,20 @@ interface ThemeWrapperProps {
   children: ReactNode;
 }
 export default function ThemeWrapper({ children }: ThemeWrapperProps) {
-  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
   const [location] = useLocation();
   
   // Aplica tema custom em rotas do site do photographer
-  // Exclui: /admin, /system, /register, /login, /docs, /termos, /politica, /about-nos, /cliente
+  // Exclui: /admin, /system, /register, /login, /docs, /terms, /politica, /about-nos, /cliente
   const isAdminRoute = location.startsWith('/admin') || location.startsWith('/system');
   const isFlowClikRoute = location === '/register' || location === '/login' || location === '/docs' || 
-                          location.startsWith('/termos') || location.startsWith('/politica') || location === '/about-nos';
+                          location.startsWith('/terms') || location.startsWith('/politica') || location === '/about-nos';
   const isClientRoute = location.startsWith('/cliente');
   
   const shouldApplyTheme = !isAdminRoute && !isFlowClikRoute && !isClientRoute;
   useEffect(() => {
     if (!siteConfig || !shouldApplyTheme) {
-      // Resetar para tema default se not for rota pública
+      // Resetar para tema default se not for rota public
       const root = document.documentElement;
       root.removeAttribute("data-theme-mode");
       root.removeAttribute("data-accent-color");

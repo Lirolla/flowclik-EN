@@ -11,7 +11,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 
 export default function AdminAbout() {
   const { toast } = useToast();
-  const { data: aboutData, isLoading } = trpc.about.get.useQuery();
+  const { data: aboutData, isLoading } = trpc.about.get.useWhatry();
   const utils = trpc.useUtils();
 
   const [formData, setFormData] = useState({
@@ -76,7 +76,7 @@ export default function AdminAbout() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Page Sobre</h1>
         <p className="text-muted-foreground">
-          Configure o conteúdo da página "About" do seu site
+          Configure o content da página "About" do seu site
         </p>
       </div>
 
@@ -99,7 +99,7 @@ export default function AdminAbout() {
             </div>
 
             <div>
-              <Label htmlFor="subtitle">Subtítulo</Label>
+              <Label htmlFor="subtitle">Subtitle</Label>
               <Input
                 id="subtitle"
                 value={formData.subtitle}
@@ -111,7 +111,7 @@ export default function AdminAbout() {
             </div>
 
             <div>
-              <Label htmlFor="mainContent">Conteúdo Principal</Label>
+              <Label htmlFor="mainContent">Content Principal</Label>
               <Textarea
                 id="mainContent"
                 rows={6}

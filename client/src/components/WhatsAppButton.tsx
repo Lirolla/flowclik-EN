@@ -2,7 +2,7 @@ import { MessageCircle } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 
 export function WhatsAppButton() {
-  const { data: config } = trpc.siteConfig.get.useQuery();
+  const { data: config } = trpc.siteConfig.get.useWhatry();
 
   if (!config?.contactWhatsApp) {
     return null;

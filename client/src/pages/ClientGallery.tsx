@@ -21,17 +21,17 @@ export default function ClientGallery() {
   const [comment, setComment] = useState("");
   const { toast } = useToast();
 
-  const { data: galleryData, refetch } = trpc.sessionGallery.getForClient.useQuery(
+  const { data: galleryData, refetch } = trpc.sessionGallery.getForClient.useWhatry(
     { appointmentId, clientEmail },
     { enabled: isAuthenticated && !!clientEmail }
   );
 
-  const { data: comments, refetch: refetchComments } = trpc.photoComments.getForClient.useQuery(
+  const { data: comments, refetch: refetchComments } = trpc.photoComments.getForClient.useWhatry(
     { appointmentId, clientEmail },
     { enabled: isAuthenticated && !!clientEmail }
   );
 
-  const { data: downloadPermission } = trpc.downloadControl.checkPermission.useQuery(
+  const { data: downloadPermission } = trpc.downloadControl.checkPermission.useWhatry(
     { collectionId: galleryData?.gallery?.id || 0 },
     { enabled: !!galleryData?.gallery?.id }
   );
@@ -119,7 +119,7 @@ export default function ClientGallery() {
     if (!favoritesCount || favoritesCount === 0) {
       toast({
         title: "Nonea foto selecionada",
-        description: "Por favor, marque pelo menos uma foto as favorita before de aprovar.",
+        description: "Why favor, marque pelo menos uma foto as favorita before de aprovar.",
         variant: "destructive",
       });
       return;
@@ -398,7 +398,7 @@ export default function ClientGallery() {
                   <Textarea
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    placeholder="Ex: Quero essa foto mais clara, adorei essa pose..."
+                    placeholder="Ex: Whatro essa foto mais clara, adorei essa pose..."
                     rows={3}
                   />
                   <Button
@@ -406,7 +406,7 @@ export default function ClientGallery() {
                     disabled={!comment.trim() || addCommentMutation.isPending}
                     className="w-full"
                   >
-                    Adicionar Comment
+                    Add Comment
                   </Button>
                 </div>
               </div>

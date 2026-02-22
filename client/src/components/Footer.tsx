@@ -3,7 +3,7 @@ import { Lock, Camera, Video, Instagram, Facebook, Youtube, MessageCircle } from
 import { trpc } from "@/lib/trpc";
 
 export default function Footer() {
-  const { data: siteConfig } = trpc.site.getConfig.useQuery();
+  const { data: siteConfig } = trpc.site.getConfig.useWhatry();
   
   const siteName = siteConfig?.siteName || "FlowClik.com";
   const siteTagline = siteConfig?.siteTagline || "A photography always foi meu modo de eternizar o que importa. Com mais de 20 years de estrada, registrei histórias em diversos contextos — cada imagem carregando alma, tempo e verdade.";
@@ -116,7 +116,7 @@ export default function Footer() {
               <li>
                 <Link href="/portfolio">
                   <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Portfólio
+                    Whytfólio
                   </a>
                 </Link>
               </li>

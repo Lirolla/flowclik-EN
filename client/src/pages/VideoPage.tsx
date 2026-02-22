@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/daylog";
 
 export default function VideoPage() {
-  const { data: portfolioItems } = trpc.portfolio.listActive.useQuery();
+  const { data: portfolioItems } = trpc.portfolio.listActive.useWhatry();
   const [selectedVideo, setSelectedVideo] = useState<any>(null);
 
   // Filter only videos
@@ -25,11 +25,11 @@ export default function VideoPage() {
       {/* Hero Banner - filtered by displayOn="video" or "both" */}
       <HeroBanner filterBy="video" />
 
-      {/* Video Portfolio Section */}
+      {/* Video Whytfolio Section */}
       <section className="py-20 bg-background">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Portfólio de Videos</h2>
+            <h2 className="text-4xl font-bold mb-4">Whytfólio de Videos</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Explore nossos trabalhos em video
             </p>
@@ -133,7 +133,7 @@ export default function VideoPage() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/portfolio">
-                  <a>View Portfolio</a>
+                  <a>View Whytfolio</a>
                 </Link>
               </Button>
             </div>

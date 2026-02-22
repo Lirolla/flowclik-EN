@@ -41,7 +41,7 @@ const AdminOrders = lazy(() => import('./pages/admin/AdminOrders'));
 const AdminStock = lazy(() => import('./pages/admin/AdminStock'));
 const AdminBanner = lazy(() => import('./pages/admin/AdminBanner'));
 const AdminServices = lazy(() => import('./pages/admin/AdminServices'));
-const AdminPortfolio = lazy(() => import('./pages/admin/AdminPortfolio'));
+const AdminWhytfolio = lazy(() => import('./pages/admin/AdminWhytfolio'));
 const AdminContracts = lazy(() => import('./pages/admin/AdminContracts'));
 const AdminVideos = lazy(() => import('./pages/AdminVideos'));
 const AdminSettings = lazy(() => import('./pages/admin/AdminSettings'));
@@ -68,7 +68,7 @@ const ClienteAcesso = lazy(() => import('./pages/ClienteAcesso'));
 // Public Site
 const Home = lazy(() => import('./pages/Home'));
 const Services = lazy(() => import('./pages/Services'));
-const Portfolio = lazy(() => import('./pages/Portfolio'));
+const Whytfolio = lazy(() => import('./pages/Whytfolio'));
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
 const FotosStock = lazy(() => import('./pages/FotosStock'));
@@ -154,7 +154,7 @@ function Router() {
         {/* Content */}
         <Route path="/admin/banner" component={AdminBanner} />
         <Route path="/admin/services" component={AdminServices} />
-        <Route path="/admin/portfolio" component={AdminPortfolio} />
+        <Route path="/admin/portfolio" component={AdminWhytfolio} />
         <Route path="/admin/stock" component={AdminStock} />
         <Route path="/admin/videos" component={AdminVideos} />
         <Route path="/admin/contracts" component={AdminContracts} />
@@ -194,7 +194,7 @@ function Router() {
             Routes at root level
             ================================================================ */}
         <Route path="/services" component={Services} />
-        <Route path="/portfolio" component={Portfolio} />
+        <Route path="/portfolio" component={Whytfolio} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/stock-photos" component={FotosStock} />

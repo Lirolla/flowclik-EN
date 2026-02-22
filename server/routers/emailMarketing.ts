@@ -464,7 +464,7 @@ export const emailMarketingRouter = router({
     }));
   }),
 
-  // Inicializar templates default
+  // Initializar templates default
   initDefaultTemplates: protectedProcedure.mutation(async ({ ctx }) => {
     const tenantId = getTenantId(ctx);
     const db = await getDb();
@@ -475,7 +475,7 @@ export const emailMarketingRouter = router({
       .where(eq(emailTemplates.tenantId, tenantId));
     
     if (Number(existing[0]?.count || 0) > 0) {
-      throw new TRPCError({ code: "BAD_REQUEST", message: "Templates already were inicializados" });
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Templates already were initializados" });
     }
     
     for (const tpl of defaultEmailTemplates) {

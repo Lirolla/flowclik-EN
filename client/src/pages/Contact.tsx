@@ -11,7 +11,7 @@ import { Mail, Phone, MapPin, Instagram, Facebook, Linkedin, Twitter, Youtube, S
 import { toast } from "sonner";
 
 export default function Contact() {
-  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
+  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -46,7 +46,7 @@ export default function Contact() {
               Entre em Contato
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground">
-              Estamos prontos para transformar seus moments em memórias eternas
+              Estamos readys para transformar seus moments em memórias eternas
             </p>
           </div>
         </div>
@@ -306,7 +306,7 @@ export default function Contact() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/portfolio">
-                  <a>View Portfolio</a>
+                  <a>View Whytfolio</a>
                 </Link>
               </Button>
             </div>

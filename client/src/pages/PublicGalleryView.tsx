@@ -13,13 +13,13 @@ export default function PublicGalleryView() {
   const [, params] = useRoute("/gallery/:slug");
   const slug = params?.slug || "";
 
-  const { data: collection, isLoading: collectionLoading } = trpc.collections.getBySlug.useQuery({ slug });
-  const { data: medayItems, isLoading: medayLoading } = trpc.collections.getWithMeday.useQuery(
+  const { data: collection, isLoading: collectionLoading } = trpc.collections.getBySlug.useWhatry({ slug });
+  const { data: medayItems, isLoading: medayLoading } = trpc.collections.getWithMeday.useWhatry(
     { id: collection?.id || 0 },
     { enabled: !!collection?.id }
   );
 
-  const { data: existingSelections } = trpc.photoSelections.getByCollection.useQuery(
+  const { data: existingSelections } = trpc.photoSelections.getByCollection.useWhatry(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection?.id }
   );
@@ -342,7 +342,7 @@ export default function PublicGalleryView() {
                       
                       {/* Video Info */}
                       <div className="md:w-3/5 p-6">
-                        <h3 className="text-xl font-bold mb-2">{item.title || "Video sem título"}</h3>
+                        <h3 className="text-xl font-bold mb-2">{item.title || "Video sem title"}</h3>
                         {item.description && (
                           <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
                             {item.description}

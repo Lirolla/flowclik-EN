@@ -89,8 +89,8 @@ export default function AdminEmailMarketing() {
 
 // ============ DASHBOARD TAB ============
 function DashboardTab() {
-  const { data: stats } = trpc.emailMarketing.stats.useQuery();
-  const { data: upcoming } = trpc.emailMarketing.upcomingEvents.useQuery();
+  const { data: stats } = trpc.emailMarketing.stats.useWhatry();
+  const { data: upcoming } = trpc.emailMarketing.upcomingEvents.useWhatry();
 
   const statCards = [
     { label: "Eventos Cadastrados", value: stats?.totalEvents || 0, icon: Calendar, color: "text-blue-400" },
@@ -159,13 +159,13 @@ function DashboardTab() {
 
 // ============ EVENTS TAB ============
 function EventsTab() {
-  const { data: events, refetch } = trpc.emailMarketing.listEvents.useQuery();
-  const { data: clientsList } = trpc.clients.list.useQuery();
-  const { data: templates } = trpc.emailMarketing.listTemplates.useQuery();
+  const { data: events, refetch } = trpc.emailMarketing.listEvents.useWhatry();
+  const { data: clientsList } = trpc.clients.list.useWhatry();
+  const { data: templates } = trpc.emailMarketing.listTemplates.useWhatry();
   const createEvent = trpc.emailMarketing.createEvent.useMutation({ onSuccess: () => { refetch(); setShowForm(false); setForm({ clientId: 0, eventType: 'birthday' as EventType, eventName: '', eventDate: '', notes: '', templateId: 0 }); toast.success("Evento criado!"); }, onError: (err: any) => { toast.error(err.message || "Erro ao criar evento"); } });
   const deleteEvent = trpc.emailMarketing.deleteEvent.useMutation({ onSuccess: () => { refetch(); toast.success("Evento removido!"); }, onError: (err: any) => { toast.error(err.message || "Erro ao remover evento"); } });
   const sendToClient = trpc.emailMarketing.sendToClient.useMutation({ 
-    onSuccess: () => { toast.success("Email enviado com sucesso!"); },
+    onSuccess: () => { toast.success("Email sent com sucesso!"); },
     onError: (err: any) => { toast.error(err.message || "Erro ao enviar email"); }
   });
 
@@ -379,7 +379,7 @@ function EventsTab() {
 
 // ============ TEMPLATES TAB ============
 function TemplatesTab() {
-  const { data: templates, refetch } = trpc.emailMarketing.listTemplates.useQuery();
+  const { data: templates, refetch } = trpc.emailMarketing.listTemplates.useWhatry();
   const createTemplate = trpc.emailMarketing.createTemplate.useMutation({ onSuccess: () => { refetch(); setShowForm(false); toast.success("Template criado!"); } });
   const deleteTemplate = trpc.emailMarketing.deleteTemplate.useMutation({ onSuccess: () => { refetch(); toast.success("Template removido!"); } });
   const initDefaults = trpc.emailMarketing.initDefaultTemplates.useMutation({ onSuccess: () => { refetch(); toast.success("Templates default criados!"); } });
@@ -460,7 +460,7 @@ function TemplatesTab() {
             />
           </div>
           <div>
-            <label className="text-xs text-muted-foreground mb-1 block">Conteúdo HTML *</label>
+            <label className="text-xs text-muted-foreground mb-1 block">Content HTML *</label>
             <textarea
               value={form.htmlContent}
               onChange={e => setForm({ ...form, htmlContent: e.target.value })}
@@ -495,7 +495,7 @@ function TemplatesTab() {
         <div className="text-center py-12 text-muted-foreground bg-card border border-border/50 rounded-xl">
           <FileText className="w-12 h-12 mx-auto mb-3 opacity-50" />
           <p className="font-medium">None template criado</p>
-          <p className="text-xs mt-1">Clique em "Create Default Templates" para começar com 5 templates prontos</p>
+          <p className="text-xs mt-1">Clique em "Create Default Templates" para começar com 5 templates readys</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -554,14 +554,14 @@ function TemplatesTab() {
 
 // ============ CAMPAIGNS TAB ============
 function CampaignsTab() {
-  const { data: campaigns, refetch } = trpc.emailMarketing.listCampaigns.useQuery();
-  const { data: templates } = trpc.emailMarketing.listTemplates.useQuery();
-  const { data: clientsList } = trpc.clients.list.useQuery();
+  const { data: campaigns, refetch } = trpc.emailMarketing.listCampaigns.useWhatry();
+  const { data: templates } = trpc.emailMarketing.listTemplates.useWhatry();
+  const { data: clientsList } = trpc.clients.list.useWhatry();
   const createCampaign = trpc.emailMarketing.createCampaign.useMutation({ onSuccess: () => { refetch(); setShowForm(false); toast.success("Campaign criada!"); } });
   const sendCampaign = trpc.emailMarketing.sendCampaign.useMutation({ 
     onSuccess: (data) => { 
       refetch(); 
-      toast.success(`Campaign enviada! ${data.sentCount} enviados, ${data.failedCount} falharam`); 
+      toast.success(`Campaign enviada! ${data.sentCount} sents, ${data.failedCount} falharam`); 
     },
     onError: (err) => toast.error(err.message),
   });
@@ -672,7 +672,7 @@ function CampaignsTab() {
             />
           </div>
           <div>
-            <label className="text-xs text-muted-foreground mb-1 block">Conteúdo HTML *</label>
+            <label className="text-xs text-muted-foreground mb-1 block">Content HTML *</label>
             <textarea
               value={form.htmlContent}
               onChange={e => setForm({ ...form, htmlContent: e.target.value })}
@@ -744,7 +744,7 @@ function CampaignsTab() {
                     <p className="text-xs text-muted-foreground">{campaign.subject}</p>
                     {campaign.status === 'sent' && (
                       <p className="text-xs text-muted-foreground mt-1">
-                        ✅ {campaign.sentCount} enviados {campaign.failedCount > 0 && `• ❌ ${campaign.failedCount} falharam`}
+                        ✅ {campaign.sentCount} sents {campaign.failedCount > 0 && `• ❌ ${campaign.failedCount} falharam`}
                       </p>
                     )}
                   </div>
@@ -752,7 +752,7 @@ function CampaignsTab() {
                     {campaign.status === 'draft' && (
                       <button
                         onClick={() => {
-                          if (confirm("Enviar esta campanha now? Os emails serão enviados para todos os destinatários.")) {
+                          if (confirm("Enviar esta campanha now? Os emails serão sents para todos os destinatários.")) {
                             sendCampaign.mutate({ campaignId: campaign.id });
                           }
                         }}
@@ -782,18 +782,18 @@ function CampaignsTab() {
 
 // ============ LOGS TAB ============
 function LogsTab() {
-  const { data: logs } = trpc.emailMarketing.listLogs.useQuery();
+  const { data: logs } = trpc.emailMarketing.listLogs.useWhatry();
 
   return (
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground">
-        History de todos os emails enviados
+        History de todos os emails sents
       </p>
 
       {!logs || logs.length === 0 ? (
         <div className="text-center py-12 text-muted-foreground bg-card border border-border/50 rounded-xl">
           <Clock className="w-12 h-12 mx-auto mb-3 opacity-50" />
-          <p className="font-medium">None email enviado still</p>
+          <p className="font-medium">None email sent still</p>
           <p className="text-xs mt-1">O history aparecerá here when you enviar emails</p>
         </div>
       ) : (

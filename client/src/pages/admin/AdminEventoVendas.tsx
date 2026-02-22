@@ -25,13 +25,13 @@ function AdminEventoVendasContent() {
   const utils = trpc.useUtils();
   
   // OPTIMIZED: 1 query traz tudo (appointments + leads count + collection data)
-  const { data: appointments, isLoading } = trpc.appointments.getWithFinalAlbums.useQuery();
+  const { data: appointments, isLoading } = trpc.appointments.getWithFinalAlbums.useWhatry();
 
   const enableSalesMutation = trpc.collections.enableSales.useMutation({
     onSuccess: () => {
       utils.collections.getByAppointmentId.invalidate();
       setSalesModalOpen(false);
-      toast.success("Vendas ativadas! Link público gerado.");
+      toast.success("Vendas ativadas! Link public gerado.");
     },
     onError: (error) => {
       toast.error(`Erro: ${error.message}`);
@@ -112,7 +112,7 @@ function AdminEventoVendasContent() {
                     size="sm"
                     onClick={() => setSelectedEvent(selectedEvent?.id === event.id ? null : event)}
                   >
-                    {selectedEvent?.id === event.id ? "Hide" : "Gerenciar"}
+                    {selectedEvent?.id === event.id ? "Hide" : "Manage"}
                   </Button>
                 </div>
               </CardHeader>
@@ -223,7 +223,7 @@ function AdminEventoVendasContent() {
           <DaylogHeader>
             <DaylogTitle>Ativar Vendas de Fotos</DaylogTitle>
             <DaylogDescription>
-              Configure o preço por foto. Um link público will be gerado para compartilhar com os leads.
+              Configure o preço por foto. Um link public will be gerado para compartilhar com os leads.
             </DaylogDescription>
           </DaylogHeader>
           <div className="space-y-4 mt-4">

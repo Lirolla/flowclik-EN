@@ -35,12 +35,12 @@ export default function ClienteAcesso() {
     setError("");
     
     if (!email.trim()) {
-      setError("Por favor, digite seu email.");
+      setError("Why favor, digite seu email.");
       return;
     }
 
     if (!password.trim()) {
-      setError("Por favor, digite a senha.");
+      setError("Why favor, digite a senha.");
       return;
     }
 

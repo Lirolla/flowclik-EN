@@ -12,8 +12,8 @@ import { PhoneInput } from '@/components/PhoneInput';
 
 export default function AdminClients() {
   const utils = trpc.useUtils();
-  const { data: clients = [], isLoading } = trpc.clients.list.useQuery();
-  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
+  const { data: clients = [], isLoading } = trpc.clients.list.useWhatry();
+  const { data: siteConfig } = trpc.siteConfig.get.useWhatry();
   const createMutation = trpc.clients.create.useMutation({
     onSuccess: () => {
       utils.clients.list.invalidate();
@@ -56,7 +56,7 @@ export default function AdminClients() {
     if (editingClient) {
       updateMutation.mutate({ id: editingClient.id, ...formData });
     } else {
-      // Adiciona país da configuração global ao criar cliente
+      // Adiciona país da configuration global ao criar cliente
       createMutation.mutate({
         ...formData,
         country: 'Brasil'
@@ -97,7 +97,7 @@ export default function AdminClients() {
     <DashboardLayout>
       <div className="container mx-auto px-6 py-8">
       <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold text-white">Gerenciar Clientes</h1>
+        <h1 className="text-4xl font-bold text-white">Manage Clientes</h1>
         
         <Daylog open={showCreateDaylog} onOpenChange={setShowCreateDaylog}>
           <DaylogTrigger asChild>
@@ -111,7 +111,7 @@ export default function AdminClients() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
-                  <Label>Nome Completo *</Label>
+                  <Label>Nome Complete *</Label>
                   <Input
                     required
                     value={formData.name || ''}
@@ -145,7 +145,7 @@ export default function AdminClients() {
                   />
                 </div>
 
-                {/* Country fixo baseado na configuração global */}
+                {/* Country fixo baseado na configuration global */}
                 <div>
                   <Label>Country</Label>
                   <Input
@@ -235,7 +235,7 @@ export default function AdminClients() {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="col-span-2">
-                  <Label>Nome Completo *</Label>
+                  <Label>Nome Complete *</Label>
                   <Input
                     required
                     value={formData.name || ''}
@@ -355,7 +355,7 @@ export default function AdminClients() {
                     <div className="flex flex-col items-center">
                       <p className="text-xl mb-4">None cliente cadastrado</p>
                       <Button onClick={() => setShowCreateDaylog(true)} className="bg-red-600 hover:bg-red-700">
-                        Adicionar First Cliente
+                        Add First Cliente
                       </Button>
                     </div>
                   </td>

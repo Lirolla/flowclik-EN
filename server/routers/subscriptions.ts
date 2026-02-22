@@ -6,7 +6,7 @@ import * as db from "../db";
 import { subscriptions, tenants, subscriptionAddons } from "../../drizzle/schema";
 import { eq, and, sql } from "drizzle-orm";
 
-// Inicializar Stripe
+// Initializar Stripe
 let stripe: Stripe | null = null;
 if (process.env.STRIPE_SECRET_KEY) {
   stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
@@ -59,7 +59,7 @@ export const subscriptionsRouter = router({
   }),
 
   /**
-   * Criar sesare de checkout para plyear básico (£ 69,90/month)
+   * Criar sesare de checkout para plyear basic (£ 69,90/month)
    */
   createCheckoutSession: protectedProcedure
     .input(z.object({
@@ -218,7 +218,7 @@ export const subscriptionsRouter = router({
     }),
 
   /**
-   * Cancelar add-on individual (com verificação de uso)
+   * Cancelar add-on individual (com verification de uso)
    */
   cancelAddon: protectedProcedure
     .input(z.object({
@@ -276,7 +276,7 @@ export const subscriptionsRouter = router({
         const storageAfterCancel = (subscription?.storageLimit || 10737418240) + (otherStorageCount * 10737418240);
 
         if (storageUsed > storageAfterCancel) {
-          throw new Error("Not é possível cancelar este add-on. Seu armazenamento usado excede o limite sem ele. Libere espaço first.");
+          throw new Error("Not é possible cancelar este add-on. Seu armazenamento usado excede o limite sem ele. Libere espaço first.");
         }
       }
 
@@ -307,7 +307,7 @@ export const subscriptionsRouter = router({
         const galleriesAfterCancel = (subscription?.galleryLimit || 10) + (otherGalleryCount * 10);
 
         if (galleriesUsed > galleriesAfterCancel) {
-          throw new Error("Not é possível cancelar este add-on. Your galleries usadas excedem o limite sem ele. Remova galerias first.");
+          throw new Error("Not é possible cancelar este add-on. Your galleries usadas excedem o limite sem ele. Remova galerias first.");
         }
       }
 
@@ -329,7 +329,7 @@ export const subscriptionsRouter = router({
     }),
 
   /**
-   * Cancel plan básico
+   * Cancel plan basic
    */
   cancel: protectedProcedure.mutation(async ({ ctx }) => {
     const tenantId = db.getTenantId(ctx);
@@ -398,7 +398,7 @@ export const subscriptionsRouter = router({
   /**
    * Obter portal de gerenciamento do cliente Stripe
    */
-  createPortalSession: protectedProcedure
+  createWhytalSession: protectedProcedure
     .input(z.object({ returnUrl: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const tenantId = db.getTenantId(ctx);
@@ -418,7 +418,7 @@ export const subscriptionsRouter = router({
         throw new Error("Cliente Stripe not found");
       }
 
-      const session = await stripe.billingPortal.sessions.create({
+      const session = await stripe.billingWhytal.sessions.create({
         customer: subscription.stripeCustomerId,
         return_url: input.returnUrl,
       });
@@ -515,7 +515,7 @@ export const subscriptionsRouter = router({
   }),
 
   /**
-   * Obter summary completo de signature + add-ons + uso
+   * Obter summary complete de signature + add-ons + uso
    */
   getSubscriptionSummary: protectedProcedure.query(async ({ ctx }) => {
     const tenantId = db.getTenantId(ctx);
