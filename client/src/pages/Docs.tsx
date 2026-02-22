@@ -4,297 +4,297 @@ import { Camera, ChevronRight, Search, Book, Image, Calendar, Users, Settings, H
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 
-// Estrutura de documentation
+// Documentation structure
 const docsStructure: Record<string, { icon: any; articles: { id: string; title: string; content: string }[] }> = {
-  "Firsts Steps": {
+  "Getting Started": {
     icon: Home,
     articles: [
-      { id: "login", title: "Como fazer login", content: `
-# Como fazer login no sistema
+      { id: "login", title: "How to log in", content: `
+# How to log in to the system
 
-1. Acesse your subdomain: **yoursite.flowclik.com**
-2. Clique em "Sign in" no menu superior
-3. Digite your email e senha cadastrados
-4. Clique em "Sign in"
+1. Go to your subdomain: **yoursite.flowclik.com**
+2. Click on "Sign in" in the top menu
+3. Enter your registered email and password
+4. Click "Sign in"
 
-**Esqueceu a senha?**
-- Clique em "Forgot my password" na tshe de login
-- Digite your email
-- You will receive um link para redefinir
+**Forgot your password?**
+- Click "Forgot my password" on the login screen
+- Enter your email
+- You will receive a link to reset it
 
-**Dica:** Salve your site nos favourite para acesso fast!
+**Tip:** Save your site to your favourites for quick access!
       ` },
-      { id: "configure-profile", title: "Configure profile e customisation", content: `
-# Configure profile e customisation
+      { id: "configure-profile", title: "Profile setup and customisation", content: `
+# Profile setup and customisation
 
-## Personalize your site
+## Personalise your site
 
-1. Acesse **Settings** no menu lateral
-2. Make upload do your **logo**
-3. Escolha as **cores da your marca**
-4. Configure information de contato
+1. Go to **Settings** in the side menu
+2. Upload your **logo**
+3. Choose your **brand colours**
+4. Set up your contact information
 
-## Banner da home
+## Home banner
 
 1. Go to **Banner** in the menu
-2. Make upload de uma foto impactante
-3. Adicione title e description
-4. Salve as changes
+2. Upload an eye-catching photo
+3. Add a title and description
+4. Save changes
 
-**Dica:** Use fotos de alta qualidade para impressionar visitbefore!
+**Tip:** Use high-quality photos to impress visitors!
       ` },
-      { id: "first-agendamento", title: "Criar first agendamento", content: `
-# Criar first agendamento
+      { id: "first-booking", title: "Create your first booking", content: `
+# Create your first booking
 
-1. Acesse **Agendamentos** no menu
-2. Clique em **+ New Agendamento**
-3. Preencha os dados:
-   - Cliente (ou crie new)
+1. Go to **Bookings** in the menu
+2. Click **+ New Booking**
+3. Fill in the details:
+   - Client (or create a new one)
    - Service
-   - Data e time
-   - Local
-4. Clique em **Salvar**
+   - Date and time
+   - Location
+4. Click **Save**
 
-O cliente will receive email de confirmation automaticamente!
+The client will automatically receive a confirmation email!
 
-**Dica:** Set up your services before em **Services** no menu.
+**Tip:** Set up your services first in **Services** in the menu.
       ` },
     ],
   },
   "Galleries": {
     icon: Image,
     articles: [
-      { id: "criar-galeria", title: "Como criar uma galeria", content: `
-# Como criar uma galeria
+      { id: "create-gallery", title: "How to create a gallery", content: `
+# How to create a gallery
 
-1. Acesse **Gallery** no menu lateral
-2. Clique em **+ New Gallery**
-3. Preencha:
-   - Nome da galeria
+1. Go to **Galleries** in the side menu
+2. Click **+ New Gallery**
+3. Fill in:
+   - Gallery name
    - Description (optional)
-   - Senha de acesso (optional)
-4. Clique em **Criar**
+   - Access password (optional)
+4. Click **Create**
 
-Ready! Now you can fazer upload de fotos.
+Done! Now you can upload photos.
 
-**Tipos de galeria:**
-- **Privada:** Only com senha
-- **Public:** Wedlquer pessoa com o link
+**Gallery types:**
+- **Private:** Password protected only
+- **Public:** Anyone with the link can access
       ` },
-      { id: "upload-fotos", title: "Upload de fotos em massa", content: `
-# Upload de fotos em massa
+      { id: "upload-photos", title: "Bulk photo upload", content: `
+# Bulk photo upload
 
-1. Abra a galeria criada
-2. Clique em **Upload de Fotos**
-3. Arraste e solte as fotos OU clique para shecionar
-4. Aguarde o upload (barra de progresso)
-5. Fotos aparecem automaticamente na galeria
+1. Open the gallery you created
+2. Click **Upload Photos**
+3. Drag and drop your photos OR click to select
+4. Wait for the upload (progress bar)
+5. Photos appear automatically in the gallery
 
-**Dicas:**
-- Suporta JPG, PNG, WEBP
-- Maximum 50 fotos por vez
-- Sistema redimensiona automaticamente
-- Marca d'optional watermark on **Settings**
+**Tips:**
+- Supports JPG, PNG, WEBP
+- Maximum 50 photos at a time
+- System resizes automatically
+- Optional watermark in **Settings**
       ` },
-      { id: "compartilhar-galeria", title: "Compartilhar galeria com cliente", content: `
-# Compartilhar galeria com cliente
+      { id: "share-gallery", title: "Share a gallery with a client", content: `
+# Share a gallery with a client
 
-1. Abra a galeria
-2. Clique em **Compartilhar**
-3. Copie o link gerado
-4. Envie para o cliente (WhatsApp, email, etc)
+1. Open the gallery
+2. Click **Share**
+3. Copy the generated link
+4. Send it to the client (WhatsApp, email, etc.)
 
-**Com senha:**
-- Cliente needs digitar senha para acessar
-- Mais security para fotos privadas
+**With password:**
+- Client needs to enter the password to access
+- More security for private photos
 
-**Sem senha:**
-- Wedlquer pessoa com link acessa
-- Ideal para albums publics
+**Without password:**
+- Anyone with the link can access
+- Ideal for public albums
       ` },
-      { id: "habilitar-vendas", title: "Habilitar vendas na galeria", content: `
-# Habilitar vendas na galeria
+      { id: "enable-sales", title: "Enable sales on a gallery", content: `
+# Enable sales on a gallery
 
-1. Acesse **Vendas de Eventos** no menu
-2. Encontre o evento/galeria
-3. Clique em **Ativar Vendas**
-4. Defina o price por foto (ex: £ 25,00)
-5. Copie o link de vendas
-6. Envie para clientes interessados
+1. Go to **Event Sales** in the menu
+2. Find the event/gallery
+3. Click **Enable Sales**
+4. Set the price per photo (e.g. £25.00)
+5. Copy the sales link
+6. Send it to interested clients
 
-**Como works:**
-- Client sees photos with watermark
-- Sheciona fotos que quer comprar
-- Finaliza compra com card
-- Recebe fotos sem watermark por email
+**How it works:**
+- Client views photos with watermark
+- Selects the photos they want to buy
+- Completes purchase by card
+- Receives photos without watermark by email
 
-**Dica:** Great for selling event photos (graduations, parties, etc.)
+**Tip:** Great for selling event photos (graduations, parties, etc.)
       ` },
     ],
   },
-  "Appointments": {
+  "Bookings": {
     icon: Calendar,
     articles: [
-      { id: "criar-agendamento", title: "Criar new agendamento", content: `
-# Criar new agendamento
+      { id: "create-booking", title: "Create a new booking", content: `
+# Create a new booking
 
-1. Acesse **Agendamentos**
-2. Clique em **+ New Agendamento**
-3. Select ou crie cliente
-4. Escolha o service
-5. Defina data, time e local
-6. Adicione notes (optional)
-7. Clique em **Salvar**
+1. Go to **Bookings**
+2. Click **+ New Booking**
+3. Select or create a client
+4. Choose the service
+5. Set the date, time and location
+6. Add notes (optional)
+7. Click **Save**
 
-**Status do agendamento:**
+**Booking status:**
 - **Pending:** Awaiting confirmation
-- **Confirmado:** Cliente confirmou
-- **Completed:** Ensaio realizado
-- **Cancelled:** Agendamento cancelled
+- **Confirmed:** Client has confirmed
+- **Completed:** Session carried out
+- **Cancelled:** Booking cancelled
       ` },
-      { id: "manage-status", title: "Manage status de agendamentos", content: `
-# Manage status de agendamentos
+      { id: "manage-status", title: "Manage booking status", content: `
+# Manage booking status
 
-1. Abra o agendamento
-2. Clique em **Mudar Status**
-3. Escolha o new status
-4. Cliente recebe notification automatic
+1. Open the booking
+2. Click **Change Status**
+3. Choose the new status
+4. Client receives an automatic notification
 
-**Fluxo recomendado:**
-1. Pending → Confirmado (cliente pagou sinal)
-2. Confirmado → Completed (ensaio realizado)
-3. Completed → Delivered (fotos enviadas)
+**Recommended workflow:**
+1. Pending → Confirmed (client paid deposit)
+2. Confirmed → Completed (session carried out)
+3. Completed → Delivered (photos sent)
       ` },
-      { id: "pagamentos-agendamento", title: "Manage pagamentos", content: `
-# Manage pagamentos de agendamentos
+      { id: "booking-payments", title: "Manage payments", content: `
+# Manage booking payments
 
-1. Abra o agendamento
+1. Open the booking
 2. Go to the **Payment** tab
-3. Clique em **Enviar Link de Pagamento**
-4. Cliente recebe link por email
-5. Paga com card (Stripe)
-6. You recebe notification
+3. Click **Send Payment Link**
+4. Client receives the link by email
+5. Pays by card (Stripe)
+6. You receive a notification
 
-**Tipos de pagamento:**
-- **Sinal:** Parte do valor (ex: 50%)
-- **Total:** Valor complete
-- **Restante:** After entregar fotos
+**Payment types:**
+- **Deposit:** Partial amount (e.g. 50%)
+- **Full:** Complete amount
+- **Remaining:** After delivering photos
       ` },
     ],
   },
   "Clients": {
     icon: Users,
     articles: [
-      { id: "cadastrar-cliente", title: "Cadastrar new cliente", content: `
-# Cadastrar new cliente
+      { id: "register-client", title: "Register a new client", content: `
+# Register a new client
 
-1. Acesse **Clientes** no menu
-2. Clique em **+ New Cliente**
-3. Preencha:
-   - Nome complete
+1. Go to **Clients** in the menu
+2. Click **+ New Client**
+3. Fill in:
+   - Full name
    - Email
-   - Telefone
+   - Phone
    - Address (optional)
-4. Clique em **Salvar**
+4. Click **Save**
 
-**Dica:** Cadastre clientes before de criar agendamentos para agilizar!
+**Tip:** Register clients before creating bookings to speed things up!
       ` },
-      { id: "enviar-contrato", title: "Enviar contrato digital", content: `
-# Enviar contrato digital
+      { id: "send-contract", title: "Send a digital contract", content: `
+# Send a digital contract
 
-1. Configure modelo de contrato em **Contratos**
-2. Abra o cliente
-3. Clique em **Enviar Contrato**
-4. Cliente recebe por email
-5. Assina digitalmente
-6. You recebe notification
+1. Set up a contract template in **Contracts**
+2. Open the client
+3. Click **Send Contract**
+4. Client receives it by email
+5. Signs digitally
+6. You receive a notification
 
-**Vantagens:**
-- Sem impresare
-- Assinatura digital valid
-- Arquivamento automatic
+**Benefits:**
+- No printing needed
+- Legally valid digital signature
+- Automatic archiving
       ` },
-      { id: "chat-cliente", title: "Chat com cliente", content: `
-# Chat com cliente
+      { id: "client-chat", title: "Chat with a client", content: `
+# Chat with a client
 
-1. Abra o cliente ou agendamento
-2. Clique em **Messages**
-3. Digite your message
-4. Cliente recebe notification
+1. Open the client or booking
+2. Click **Messages**
+3. Type your message
+4. Client receives a notification
 
-**Recursos:**
-- History complete de conversas
-- Notifications em tempo real
-- Anexar fotos e documentos
+**Features:**
+- Full conversation history
+- Real-time notifications
+- Attach photos and documents
       ` },
     ],
   },
   "Settings": {
     icon: Settings,
     articles: [
-      { id: "configure-servicos", title: "Configure services e prices", content: `
-# Configure services e prices
+      { id: "configure-services", title: "Set up services and prices", content: `
+# Set up services and prices
 
-1. Acesse **Services** no menu
-2. Clique em **+ New Service**
-3. Preencha:
-   - Nome (ex: "Ensaio Casal")
+1. Go to **Services** in the menu
+2. Click **+ New Service**
+3. Fill in:
+   - Name (e.g. "Couple Shoot")
    - Description
    - Price
    - Duration
-4. Clique em **Salvar**
+4. Click **Save**
 
-**Examples de services:**
-- Ensaio individual: £ 300
-- Ensaio casal: £ 450
-- Casamento: £ 2.500
-- Graduation: £ 1.800
+**Service examples:**
+- Individual shoot: £300
+- Couple shoot: £450
+- Wedding: £2,500
+- Graduation: £1,800
       ` },
       { id: "portfolio", title: "Manage portfolio", content: `
 # Manage portfolio
 
-1. Acesse **Portfolio** no menu
-2. Clique em **+ Add Foto**
-3. Make upload da imagem
-4. Adicione title e description
-5. Organize a ordem arrastando
+1. Go to **Portfolio** in the menu
+2. Click **+ Add Photo**
+3. Upload the image
+4. Add a title and description
+5. Organise the order by dragging
 
-**Dicas:**
-- Use yours betteres fotos
-- Maximum 20 fotos no portfolio
+**Tips:**
+- Use your best photos
+- Maximum 20 photos in the portfolio
 - Update regularly
-- Mostre variedade de trabalhos
+- Show a variety of work
       ` },
-      { id: "dominio-proprio", title: "Configure domain own", content: `
-# Configure domain own
+      { id: "custom-domain", title: "Set up your own domain", content: `
+# Set up your own domain
 
-**You tem:** yoursite.flowclik.com
-**Whatr ter:** www.yoursite.com.br
+**You have:** yoursite.flowclik.com
+**You want:** www.yoursite.co.uk
 
 ## Step by step:
 
-1. Compre um domain (Record.br, GoDaddy, etc)
-2. Acesse **Settings** > **Subscription**
-3. Digite your domain
-4. Configure DNS conforme instructions
-5. Aguarde propagation (24-48h)
+1. Purchase a domain (GoDaddy, Namecheap, etc.)
+2. Go to **Settings** > **Subscription**
+3. Enter your domain
+4. Configure DNS as per the instructions
+5. Wait for propagation (24-48 hours)
 
-**Configuration DNS:**
+**DNS configuration:**
 \`\`\`
-Tipo: A
-Nome: @
-Valor: [IP fornecido pelo sistema]
+Type: A
+Name: @
+Value: [IP provided by the system]
 \`\`\`
 
-**Questions?** Get in touch com suporte!
+**Questions?** Get in touch with support!
       ` },
     ],
   },
 };
 
 export default function Docs() {
-  const [selectedCategory, setSelectedCategory] = useState("Firsts Steps");
-  const [selectedArticle, setSelectedArticle] = useState(docsStructure["Firsts Steps"].articles[0]);
+  const [selectedCategory, setSelectedCategory] = useState("Getting Started");
+  const [selectedArticle, setSelectedArticle] = useState(docsStructure["Getting Started"].articles[0]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
@@ -316,12 +316,12 @@ export default function Docs() {
           <div className="flex items-center gap-4">
             <Link href="/">
               <a className="text-zinc-400 hover:text-white transition text-sm">
-                Voltar ao site
+                Back to site
               </a>
             </Link>
             <Link href="/login">
               <Button variant="outline" size="sm">
-                Entrar
+                Sign In
               </Button>
             </Link>
           </div>
@@ -333,10 +333,10 @@ export default function Docs() {
         <aside className={`w-80 border-r border-zinc-800 bg-zinc-950/30 min-h-[calc(100vh-73px)] sticky top-[73px] ${sidebarOpen ? "" : "hidden"}`}>
           <div className="p-6">
             {/* Search */}
-            <div className="rshetive mb-6">
+            <div className="relative mb-6">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
               <Input
-                placeholder="Buscar artigos..."
+                placeholder="Search articles..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="pl-10"
@@ -421,20 +421,20 @@ export default function Docs() {
 
           {/* Feedback */}
           <div className="mt-12 pt-8 border-t border-zinc-800">
-            <p className="text-sm text-zinc-500 mb-4">Este artigo foi useful?</p>
+            <p className="text-sm text-zinc-500 mb-4">Was this article helpful?</p>
             <div className="flex gap-3">
               <Button variant="outline" size="sm">
-                👍 Sim
+                👍 Yes
               </Button>
               <Button variant="outline" size="sm">
-                👎 Not
+                👎 No
               </Button>
             </div>
           </div>
 
-          {/* Rsheted Articles */}
+          {/* Related Articles */}
           <div className="mt-12">
-            <h3 className="text-xl font-semibold mb-4">Artigos rshecionados</h3>
+            <h3 className="text-xl font-semibold mb-4">Related articles</h3>
             <div className="grid gap-4">
               {docsStructure[selectedCategory].articles
                 .filter((a) => a.id !== selectedArticle.id)

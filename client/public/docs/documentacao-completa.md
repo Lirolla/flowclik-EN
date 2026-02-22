@@ -1,492 +1,492 @@
-# Documentação Completa FlowClik
+# FlowClik Complete Documentation
 
-**Manual completo do sistema de gestão para fotógrafos**
+**Full guide to the photography management system**
 
 ---
 
-## 📚 Índice
+## Contents
 
-1. [Primeiros Passos](#primeiros-passos)
-2. [Jornada Completa do Cliente](#jornada-completa-do-cliente)
-3. [Painel Admin Detalhado](#painel-admin-detalhado)
-4. [Pagamentos e Vendas](#pagamentos-e-vendas)
-5. [Comunicação com Clientes](#comunicacao-com-clientes)
+1. [Getting Started](#getting-started)
+2. [Complete Client Journey](#complete-client-journey)
+3. [Admin Panel in Detail](#admin-panel-in-detail)
+4. [Payments and Sales](#payments-and-sales)
+5. [Client Communication](#client-communication)
 6. [Troubleshooting](#troubleshooting)
-7. [Dicas Práticas](#dicas-praticas)
+7. [Practical Tips](#practical-tips)
 
 ---
 
-## 🚀 Primeiros Passos
+## Getting Started
 
-### Como fazer login
+### How to log in
 
-**Acessando seu painel:**
+**Accessing your dashboard:**
 
-Acesse seu subdomínio personalizado (exemplo: **seusite.flowclick.com**) e clique no botão "Entrar" no canto superior direito. Digite seu email e senha cadastrados durante o registro e clique em "Entrar" para acessar o painel administrativo.
+Go to your personalised subdomain (e.g. **yoursite.flowclik.com**) and click the "Sign In" button in the top right corner. Enter the email and password you registered with and click "Sign In" to access the admin dashboard.
 
-**Se você esqueceu sua senha:**
+**If you forgot your password:**
 
-Na tela de login, clique em "Esqueci minha senha", digite o email cadastrado e você receberá um link de redefinição por email em até 5 minutos. Clique no link recebido, crie uma nova senha e faça login com a nova senha.
+On the login screen, click "Forgot my password", enter your registered email and you will receive a reset link by email within 5 minutes. Click the link, create a new password and log in with your new password.
 
-**Dicas de segurança:**
+**Security tips:**
 
-Nunca compartilhe sua senha com ninguém. Use uma senha forte com mínimo 8 caracteres combinando letras e números. Salve seu site nos favoritos do navegador para acesso rápido. Sempre faça logout ao usar computadores compartilhados.
+Never share your password with anyone. Use a strong password with at least 8 characters combining letters and numbers. Save your site to your browser favourites for quick access. Always log out when using shared computers.
 
-**No primeiro acesso:**
+**On your first login:**
 
-Você verá o Dashboard com resumo de agendamentos, receita prevista, galerias criadas e atalhos rápidos para funções principais.
-
----
-
-### Configurar seu site pela primeira vez
-
-**Passo 1: Informações Básicas**
-
-Acesse "Configurações" no menu lateral esquerdo. Na seção "Informações Básicas", preencha o nome do site (exemplo: "Fotografia Silva"), slogan (exemplo: "Eternizando seus momentos") e faça upload da sua logo clicando em "Upload" e selecionando arquivo PNG ou JPG.
-
-**Passo 2: Configurar Banner da Home**
-
-No menu lateral, clique em "Banner", depois em "+ Novo Slide". Faça upload de uma foto impactante (recomendado 1920x1080px), adicione título (exemplo: "Fotografia Profissional") e descrição (exemplo: "Eternize seus melhores momentos"), depois clique em "Salvar". Você pode adicionar até 5 slides que alternam automaticamente.
-
-**Passo 3: Criar Serviços**
-
-Acesse "Serviços" no menu lateral e clique em "+ Novo Serviço". Preencha nome (exemplo: "Ensaio Fotográfico"), descrição detalhada do que está incluído, preço (exemplo: £250.00), duração em minutos (exemplo: 300 = 5 horas) e tipo (Fotografia, Vídeo ou Ambos). Clique em "Salvar" e repita para cada serviço que você oferece.
-
-**Passo 4: Configurar Informações de Contato**
-
-Volte em "Configurações" e na seção "Informações de Contato", preencha telefone (com código do país), email profissional, WhatsApp (aparecerá botão flutuante no site) e endereço completo.
-
-**Passo 5: Redes Sociais**
-
-Ainda em "Configurações", na seção "Redes Sociais", adicione URLs completas do Instagram, Facebook e YouTube. Os ícones aparecerão automaticamente no rodapé do seu site.
-
-**Passo 6: Adicionar Portfólio**
-
-Acesse "Portfólio" no menu lateral e clique em "+ Adicionar ao Portfólio". Faça upload de suas melhores fotos e para cada uma adicione título (exemplo: "Ensaio Newborn - Maria"), localização (exemplo: "Londres, UK") e descrição (conte a história por trás da foto). Marque "Mostrar na Home" para destacar. Adicione pelo menos 8 fotos para preencher bem a home.
-
-**Pronto! Seu site já está no ar.** Acesse seusite.flowclick.com para ver como ficou.
+You will see the Dashboard with a summary of bookings, projected revenue, galleries created and quick shortcuts to key features.
 
 ---
 
-### Cadastrar primeiro cliente
+### Setting up your site for the first time
 
-**Por que cadastrar clientes?**
+**Step 1: Basic Information**
 
-Ao cadastrar clientes no sistema, você pode criar agendamentos vinculados ao cliente, acompanhar histórico de serviços, enviar galerias personalizadas, gerenciar pagamentos e ter relatórios de clientes mais ativos.
+Go to "Settings" in the left side menu. In the "Basic Information" section, fill in the site name (e.g. "Smith Photography"), tagline (e.g. "Capturing your moments") and upload your logo by clicking "Upload" and selecting a PNG or JPG file.
 
-**Como cadastrar:**
+**Step 2: Set Up Home Banner**
 
-Acesse "Clientes" no menu lateral e clique em "+ Novo Cliente". Preencha nome completo (exemplo: "Maria Silva"), email (usado para login do cliente e notificações) e telefone (com código do país, exemplo: +44 7545 335396).
+In the side menu, click "Banner", then "+ New Slide". Upload an eye-catching photo (recommended 1920x1080px), add a title (e.g. "Professional Photography") and description (e.g. "Capture your best moments"), then click "Save". You can add up to 5 slides that rotate automatically.
 
-Opcionalmente, preencha endereço completo: CEP/Postcode, endereço (rua e número), complemento (apartamento, bloco), cidade e estado/county. O sistema detecta automaticamente o país baseado na configuração, mas você pode alterar manualmente se necessário. Clique em "Salvar" para finalizar.
+**Step 3: Create Services**
 
-**Cliente cadastrado automaticamente:**
+Go to "Services" in the side menu and click "+ New Service". Fill in the name (e.g. "Photo Shoot"), a detailed description of what is included, the price (e.g. £250.00), duration in minutes (e.g. 300 = 5 hours) and type (Photography, Video or Both). Click "Save" and repeat for each service you offer.
 
-Quando um cliente faz um agendamento pelo site público (em /agendar), ele é cadastrado automaticamente no sistema. Você só precisa cadastrar manualmente se quiser criar um agendamento antes do cliente solicitar.
+**Step 4: Set Up Contact Information**
 
-**Visualizar histórico do cliente:**
+Go back to "Settings" and in the "Contact Information" section, fill in your phone number (with country code), professional email, WhatsApp (a floating button will appear on your site) and full address.
 
-Na lista de clientes, clique no botão "Histórico" para ver todos os agendamentos do cliente, valores gastos, status de cada serviço e pedidos de fotos.
+**Step 5: Social Media**
 
----
+Still in "Settings", in the "Social Media" section, add the full URLs for your Instagram, Facebook and YouTube. The icons will appear automatically in your site footer.
 
-## 👤 Jornada Completa do Cliente
+**Step 6: Add Portfolio**
 
-### Etapa 1: Cliente descobre seu site
+Go to "Portfolio" in the side menu and click "+ Add to Portfolio". Upload your best photos and for each one add a title (e.g. "Newborn Shoot - Emily"), location (e.g. "London, UK") and description (tell the story behind the photo). Tick "Show on Home" to feature it. Add at least 8 photos to fill the home page nicely.
 
-O cliente acessa **seusite.flowclick.com** e vê banner com suas melhores fotos, portfólio de trabalhos anteriores, serviços oferecidos com preços e informações de contato.
-
-O cliente pode navegar pelas galerias públicas, ver seus vídeos (se habilitado), clicar no botão WhatsApp flutuante para falar com você ou clicar em "Agendar Agora" para solicitar serviço.
-
-### Etapa 2: Cliente agenda serviço
-
-O cliente clica em "Agendar Agora" ou acessa /agendar e preenche formulário em 3 etapas:
-
-**Etapa 1:** Escolhe o serviço (vê nome, descrição, preço, duração)  
-**Etapa 2:** Escolhe data e horário preferido  
-**Etapa 3:** Preenche dados pessoais (nome, email, telefone, local do evento, número de pessoas, observações)
-
-Ao clicar em "Enviar Solicitação", o agendamento é criado no sistema com status "Pendente", cliente é cadastrado automaticamente, você recebe notificação por email e cliente vê mensagem de sucesso.
-
-### Etapa 3: Você aprova o agendamento
-
-Você recebe email "Novo agendamento recebido!", acessa "Agendamentos" no painel admin, clica no agendamento pendente, revisa informações do cliente e clica em "Aprovar" (ou "Recusar" se não puder atender).
-
-O status muda para "Confirmado" e cliente recebe email de confirmação com data e horário confirmados, local do evento, instruções para o dia e seu contato para dúvidas.
-
-### Etapa 4: Você gerencia o pagamento
-
-No painel de detalhes do agendamento, na seção "Gerenciar Pagamento", você vê valor do serviço (preço base), botão "+ Adicionar Serviço Extra" (se cliente pediu algo a mais), total (serviço base + extras), quanto cliente já pagou e quanto ainda falta.
-
-Se cliente pediu extras (exemplo: "30 fotos a mais", "Álbum físico"), clique em "+ Adicionar Serviço Extra", digite descrição e valor, e o total atualiza automaticamente.
-
-Para registrar pagamento, clique em "Registrar Pagamento" e escolha forma de pagamento:
-
-- **Dinheiro:** registra pagamento completo
-- **Transferência 50%:** registra metade agora
-- **Cartão 100%:** envia link Stripe para cliente pagar online
-
-Clique em "Confirmar" e o pagamento é registrado no histórico, cliente recebe email de confirmação de pagamento e você vê quanto ainda falta receber.
-
-### Etapa 5: Dia do ensaio fotográfico
-
-Status muda para "Ensaio Realizado" (você muda manualmente), você faz as fotos/vídeos e cliente vai para casa feliz aguardando as fotos.
-
-### Etapa 6: Você envia fotos para seleção
-
-Acesse "Agendamentos", abra o agendamento, clique na aba "Fotografia", clique em "Upload de Fotos" e arraste e solte TODAS as fotos do ensaio (tratadas mas não editadas). O sistema cria galeria automaticamente.
-
-Para enviar link para cliente, no painel do agendamento, clique em "Copiar Link Cliente" e envie link por WhatsApp/Email para o cliente. Cliente acessa com email + senha da galeria.
-
-O status muda para "Aguardando Seleção do Cliente", cliente recebe email "Suas fotos estão prontas para seleção!" e cliente acessa galeria vendo TODAS as fotos com marca d'água "LIROLLA - PREVIEW".
-
-### Etapa 7: Cliente seleciona fotos favoritas
-
-Cliente acessa link que você enviou, faz login com email + senha e vê painel do cliente com status do projeto (barra de progresso), atalho para "Ver Galeria", chat para falar com você e histórico de pagamentos.
-
-Cliente clica em "Ver Galeria", vê todas as fotos em grid, clica no coração ❤️ nas fotos que mais gostou, pode adicionar comentários em cada foto (exemplo: "Quero essa mais clara", "Tirar o fundo dessa") e quando terminar, clica em "Enviar Seleção".
-
-O status muda para "Editando Fotos Selecionadas", você recebe notificação por email "Cliente selecionou X fotos!" e cliente recebe confirmação "Seleção recebida! Em breve você receberá as fotos editadas."
-
-### Etapa 8: Você edita as fotos selecionadas
-
-Você recebe email "Cliente selecionou fotos!", acessa "Seleções de Clientes" no menu lateral, vê a galeria do cliente com contador "12 fotos selecionadas", clica para ver quais fotos cliente escolheu, vê comentários/palpites do cliente em cada foto e edita as fotos no Photoshop/Lightroom.
-
-Volta ao sistema e faz upload das fotos editadas finais clicando em "Upload Foto Editada" em cada foto. Sistema mostra lado a lado: Original vs Editada.
-
-### Etapa 9: Cliente aprova álbum final
-
-Quando TODAS as fotos estiverem editadas, clique em "Copiar Link do Álbum Final" e envie link para cliente.
-
-Cliente acessa e vê banner impactante com foto aleatória do álbum, galeria completa de fotos editadas (SEM marca d'água), barra de progresso "12/12 fotos editadas", botão "Baixar Todas as Fotos" (gera ZIP) e botão "Aprovar Álbum Completo".
-
-Cliente baixa fotos e clica em "Aprovar Álbum". O status muda para "Entregue", você recebe notificação "Cliente aprovou o álbum final!", cliente recebe email "Obrigado! Seu álbum foi aprovado." e trabalho concluído! 🎉
-
-### Etapa 10: Cliente compartilha com amigos (Marketing Viral!)
-
-Cliente clica em "Compartilhar Álbum" no painel dele e sistema gera link compartilhável: **seusite.flowclick.com/album-compartilhavel/maria-silva**. Cliente envia para amigos e família.
-
-Quando amigos acessam, veem wall de email (precisam informar email para ver fotos) e emails ficam salvos em "Leads" no seu painel admin. Você pode enviar email marketing para esses leads depois. Esses leads são QUENTES porque já viram seu trabalho e gostaram!
-
-**Resumo do Fluxo:**
-
-1. Cliente agenda pelo site
-2. Você aprova agendamento
-3. Cliente paga (dinheiro/transferência/cartão)
-4. Você faz o ensaio
-5. Você envia fotos para seleção
-6. Cliente escolhe favoritas e comenta
-7. Você edita fotos selecionadas
-8. Cliente aprova álbum final
-9. Cliente baixa fotos
-10. Cliente compartilha e você ganha leads!
+**Done! Your site is now live.** Go to yoursite.flowclik.com to see how it looks.
 
 ---
 
-## ⚙️ Painel Admin Detalhado
+### Registering your first client
 
-### Dashboard - Visão Geral
+**Why register clients?**
 
-O Dashboard é a primeira página que você vê ao fazer login. Ele mostra um resumo completo do seu negócio.
+By registering clients in the system, you can create bookings linked to the client, track service history, send personalised galleries, manage payments and get reports on your most active clients.
 
-**Cards de Estatísticas:**
+**How to register:**
 
-**Total de Agendamentos:** Mostra quantos agendamentos você tem no total, incluindo todos os status (pendentes, confirmados, entregues). Clique para ir direto para Agendamentos.
+Go to "Clients" in the side menu and click "+ New Client". Fill in the full name (e.g. "Emily Smith"), email (used for client login and notifications) and phone number (with country code, e.g. +44 7545 335396).
 
-**Receita Prevista:** Soma de TODOS os agendamentos (confirmados + pendentes). Valor em libras (£), reais (R$) ou dólares ($) conforme configuração. Não conta agendamentos cancelados.
+Optionally, fill in the full address: postcode, address (street and number), additional details (flat, building), city and county. The system automatically detects the country based on the configuration, but you can change it manually if needed. Click "Save" to finish.
 
-**Taxa de Confirmação:** Porcentagem de agendamentos aprovados vs pendentes. Exemplo: 85% = 17 confirmados de 20 solicitações. Quanto maior, melhor!
+**Automatically registered clients:**
 
-**Taxa de Entrega:** Porcentagem de trabalhos concluídos. Exemplo: 60% = 12 entregues de 20 confirmados. Mostra sua produtividade.
+When a client makes a booking through the public site (at /book), they are automatically registered in the system. You only need to register manually if you want to create a booking before the client requests one.
 
-**Gráficos:**
+**Viewing client history:**
 
-**Agendamentos por Status:** Barras de progresso coloridas mostrando quantos agendamentos em cada etapa (Pendente amarelo, Confirmado verde, Ensaio Realizado azul, Fotos em Edição roxo, Aguardando Seleção laranja, Editando Selecionadas índigo, Entregue verde esmeralda).
-
-**Receita por Status:** Mostra quanto dinheiro está em cada etapa. Exemplo: £500 em "Confirmado", £300 em "Entregue". Ajuda a prever fluxo de caixa.
-
-**Agendamentos por Mês:** Gráfico dos últimos 12 meses mostrando quantos agendamentos você teve em cada mês. Identifica alta temporada vs baixa temporada.
-
-**Tabelas:**
-
-**Pedidos Recentes:** Últimos 5 pedidos de fotos stock mostrando ID, Cliente, Email, Total, Status, Data. Clique no ID para ver detalhes.
-
-**Próximos Agendamentos:** Próximos 5 agendamentos confirmados mostrando ID, Cliente, Serviço, Data/Hora, Status. Ordenado por data (mais próximo primeiro). Ajuda a se preparar para os ensaios.
-
-**Atalhos Rápidos:** Botões para acessar rapidamente "+ Novo Agendamento", "Ver Todos os Agendamentos", "Mensagens de Clientes" e "Seleções Pendentes".
+In the client list, click the "History" button to see all of the client's bookings, amounts spent, status of each service and photo orders.
 
 ---
 
-### Agendamentos - Gerenciar Trabalhos
+## Complete Client Journey
 
-A seção Agendamentos é onde você gerencia todos os trabalhos dos clientes.
+### Step 1: Client discovers your site
 
-**Visualizações:**
+The client visits **yoursite.flowclik.com** and sees a banner with your best photos, portfolio of previous work, services offered with prices and contact information.
 
-**Calendário (Padrão):** Calendário mensal estilo Google Calendar com cards coloridos por status em cada dia. Navegação com setas esquerda/direita. Clique no card para abrir detalhes.
+The client can browse public galleries, watch your videos (if enabled), click the floating WhatsApp button to message you or click "Book Now" to request a service.
 
-**Lista:** Botão "Lista" no topo mostra tabela com TODOS os agendamentos. Filtros disponíveis: buscar por nome do cliente e filtrar por status (dropdown). Paginação: 10 agendamentos por página. Clique na linha para abrir detalhes.
+### Step 2: Client books a service
 
-**Criar Novo Agendamento:**
+The client clicks "Book Now" or goes to /book and fills in a 3-step form:
 
-Clique em "+ Novo Agendamento" e preencha formulário:
+**Step 1:** Chooses the service (sees name, description, price, duration)
+**Step 2:** Chooses preferred date and time
+**Step 3:** Fills in personal details (name, email, phone, event location, number of people, notes)
 
-- **Selecionar Cliente:** Dropdown com clientes cadastrados ou clique "+ Novo Cliente" para cadastrar na hora
-- **Selecionar Serviço:** Dropdown com serviços criados mostrando nome, preço e duração
-- **Data e Horário:** Escolha data no calendário e digite horário preferido (exemplo: 14:00)
-- **Detalhes do Evento:** Local (endereço onde será o ensaio), número de pessoas (quantas participarão), duração estimada em horas, observações (pedidos especiais do cliente)
+When they click "Submit Request", the booking is created in the system with "Pending" status, the client is registered automatically, you receive an email notification and the client sees a success message.
 
-Clique em "Criar Agendamento". Agendamento criado com status "Pendente", cliente recebe email de confirmação e aparece no calendário.
+### Step 3: You approve the booking
 
-**Painel de Detalhes do Agendamento:**
+You receive an email "New booking received!", go to "Bookings" in the admin panel, click the pending booking, review the client's information and click "Approve" (or "Decline" if you cannot take it on).
 
-Quando você clica em um agendamento, abre painel lateral com 2 abas:
+The status changes to "Confirmed" and the client receives a confirmation email with the confirmed date and time, event location, instructions for the day and your contact details for questions.
 
-**Aba "Detalhes":**
+### Step 4: You manage the payment
 
-- **Informações do Cliente:** Nome, Email, Telefone, Data, Horário, Local, Número de pessoas, Duração, Observações
-- **Timeline do Workflow:** 7 etapas visuais com ícones, etapa atual destacada em verde, botão "Avançar" para próximo status, histórico de mudanças de status
-- **Gerenciar Pagamento:** Valor do Serviço (preço base com botão editar), Serviços Extras (lista de itens adicionais com botão "+ Adicionar Serviço Extra", cada extra mostra descrição e valor, botão lixeira para remover), Total (soma automática serviço + extras), Pago (quanto cliente já pagou), Restante (quanto ainda falta), botão "Registrar Pagamento", histórico de transações
-- **Ações Rápidas:** Aprovar (se pendente), Recusar (se pendente), Editar agendamento, Excluir agendamento
+In the booking details panel, in the "Manage Payment" section, you can see the service price (base price), the "+ Add Extra Service" button (if the client requested something additional), total (base service + extras), how much the client has already paid and how much is still outstanding.
 
-**Aba "Fotografia":**
+If the client requested extras (e.g. "30 extra photos", "Physical album"), click "+ Add Extra Service", enter the description and amount, and the total updates automatically.
 
-- **Estatísticas da Galeria:** Total de fotos (quantas você enviou), Fotos favoritas (quantas cliente marcou), Taxa de seleção (porcentagem de fotos escolhidas)
-- **Ações:** Upload de Fotos (abre página para enviar fotos), Copiar Link Cliente (copia link da galeria), Liberar/Bloquear Download (toggle para permitir cliente baixar)
+To record a payment, click "Record Payment" and choose the payment method:
 
-**Botões no Header do Painel:** Galeria do Ensaio (gerenciar fotos do ensaio), Álbum Final (upload de fotos editadas finais), Copiar Link Cliente (link para cliente acessar painel), Liberar/Bloquear Download (status do download).
+- **Cash:** records the full payment
+- **Bank Transfer 50%:** records half now
+- **Card 100%:** sends a Stripe link for the client to pay online
 
-**Workflow Automático:**
+Click "Confirm" and the payment is recorded in the history, the client receives a payment confirmation email and you can see how much is still outstanding.
 
-O sistema avança automaticamente em alguns casos: cliente envia seleção muda para "Editando Selecionadas", cliente aprova álbum muda para "Entregue", você aprova agendamento envia email para cliente, você muda status envia email para cliente.
+### Step 5: Day of the photo shoot
 
-**Notificações por Email:**
+The status changes to "Session Completed" (you change it manually), you take the photos/videos and the client goes home happy, waiting for their photos.
 
-Cliente recebe email automaticamente quando agendamento é aprovado, status muda, fotos são enviadas para seleção e álbum final está pronto.
+### Step 6: You send photos for selection
 
----
+Go to "Bookings", open the booking, click the "Photography" tab, click "Upload Photos" and drag and drop ALL the photos from the shoot (processed but not edited). The system creates a gallery automatically.
 
-## 💰 Pagamentos e Vendas
+To send the link to the client, in the booking panel, click "Copy Client Link" and send the link via WhatsApp/Email. The client accesses it with their email + gallery password.
 
-### Como gerenciar pagamentos de clientes
+The status changes to "Awaiting Client Selection", the client receives an email "Your photos are ready for selection!" and the client accesses the gallery seeing ALL photos with a "PREVIEW" watermark.
 
-O sistema oferece 3 formas de pagamento para você receber dos clientes.
+### Step 7: Client selects favourite photos
 
-**Acessar Gerenciamento de Pagamento:**
+The client accesses the link you sent, logs in with their email + password and sees the client panel with project status (progress bar), shortcut to "View Gallery", chat to message you and payment history.
 
-Acesse "Agendamentos", clique no agendamento do cliente e na aba "Detalhes", role até "Gerenciar Pagamento".
+The client clicks "View Gallery", sees all photos in a grid, clicks the heart on their favourite photos, can add comments to each photo (e.g. "I want this one brighter", "Remove the background on this one") and when finished, clicks "Submit Selection".
 
-**Estrutura de Pagamento:**
+The status changes to "Editing Selected Photos", you receive an email notification "Client selected X photos!" and the client receives confirmation "Selection received! You will receive the edited photos shortly."
 
-**Valor do Serviço:** Preço base do serviço contratado, copiado automaticamente ao criar agendamento, botão "Editar" para ajustar se necessário.
+### Step 8: You edit the selected photos
 
-**Serviços Extras:** Lista de itens adicionais cobrados. Exemplos: "30 fotos a mais (£50)", "Álbum físico (£100)". Botão "+ Adicionar Serviço Extra": clique no botão, digite descrição (exemplo: "Álbum físico 20x30cm"), digite valor em libras/reais/dólares (exemplo: 100), clique "Adicionar", extra aparece na lista. Botão lixeira para remover extra.
+You receive an email "Client selected photos!", go to "Client Selections" in the side menu, see the client's gallery with a counter "12 photos selected", click to see which photos the client chose, see the client's comments/feedback on each photo and edit the photos in Photoshop/Lightroom.
 
-**Total:** Soma automática: Serviço Base + Todos os Extras. Atualiza em tempo real ao adicionar/remover extras. Exemplo: £250 (serviço) + £50 (extra) + £100 (extra) = £400.
+Return to the system and upload the final edited photos by clicking "Upload Edited Photo" on each photo. The system shows side by side: Original vs Edited.
 
-**Pago:** Quanto cliente já pagou. Soma de todos os pagamentos registrados.
+### Step 9: Client approves the final album
 
-**Restante:** Quanto ainda falta receber. Cálculo: Total - Pago. Quando chega a £0.00, está quitado!
+When ALL photos have been edited, click "Copy Final Album Link" and send the link to the client.
 
-**Registrar Pagamento:**
+The client accesses it and sees an eye-catching banner with a random photo from the album, the complete gallery of edited photos (WITHOUT watermark), a progress bar "12/12 photos edited", a "Download All Photos" button (generates a ZIP) and an "Approve Complete Album" button.
 
-Clique em "Registrar Pagamento" e escolha forma de pagamento:
+The client downloads the photos and clicks "Approve Album". The status changes to "Delivered", you receive a notification "Client approved the final album!", the client receives an email "Thank you! Your album has been approved." and the job is done!
 
-**Opção 1: Dinheiro** - Cliente pagou em dinheiro. Sistema registra 100% do valor total. Clique em "Confirmar". Pagamento adicionado ao histórico. Cliente recebe email de confirmação.
+### Step 10: Client shares with friends (Viral Marketing!)
 
-**Opção 2: Transferência 50%** - Cliente fez transferência bancária de metade. Sistema registra 50% do valor total. Clique em "Confirmar". Você pode registrar outra transferência depois para completar.
+The client clicks "Share Album" in their panel and the system generates a shareable link: **yoursite.flowclik.com/shared-album/emily-smith**. The client sends it to friends and family.
 
-**Opção 3: Cartão 100% (Stripe)** - Envia link de pagamento Stripe para cliente. Cliente paga online com cartão. Sistema registra automaticamente quando pagamento for aprovado. Requer configuração do Stripe (veja guia de configuração).
+When friends access it, they see an email wall (they need to provide their email to view photos) and the emails are saved in "Leads" in your admin panel. You can send email marketing to these leads later. These leads are HOT because they have already seen your work and liked it!
 
-**Histórico de Transações:**
+**Flow Summary:**
 
-Abaixo do gerenciamento, você vê lista de todos os pagamentos recebidos. Cada transação mostra data e hora, forma de pagamento, valor pago e status (Pago / Pendente).
-
-**Editar Valor Total:**
-
-Se cliente pediu algo extra DEPOIS de criar agendamento, clique no botão "Editar" ao lado do Valor do Serviço, digite novo valor total, clique em "Salvar", total atualiza automaticamente e restante recalcula. Ou use "Adicionar Serviço Extra" para manter histórico detalhado!
-
-**Notificações Automáticas:**
-
-Cliente recebe email quando você registra pagamento, pagamento Stripe é aprovado ou pagamento Stripe falha.
-
-**Dicas:**
-
-- Registre pagamentos imediatamente para não esquecer
-- Use Serviços Extras para transparência (cliente vê detalhamento)
-- Peça 50% adiantado antes do ensaio (transferência)
-- Restante após entrega das fotos editadas
+1. Client books through the site
+2. You approve the booking
+3. Client pays (cash/bank transfer/card)
+4. You do the shoot
+5. You send photos for selection
+6. Client chooses favourites and comments
+7. You edit selected photos
+8. Client approves the final album
+9. Client downloads photos
+10. Client shares and you gain leads!
 
 ---
 
-## 💬 Comunicação com Clientes
+## Admin Panel in Detail
 
-### Sistema de mensagens integrado
+### Dashboard - Overview
 
-O sistema tem chat integrado para você conversar com clientes em tempo real.
+The Dashboard is the first page you see when you log in. It shows a complete summary of your business.
 
-**Painel de Mensagens (Admin):**
+**Statistics Cards:**
 
-Acesse "Mensagens" no menu lateral e vê layout estilo WhatsApp Web com lista de conversas à esquerda e chat ativo à direita.
+**Total Bookings:** Shows how many bookings you have in total, including all statuses (pending, confirmed, delivered). Click to go directly to Bookings.
 
-**Lista de Conversas:**
+**Projected Revenue:** Sum of ALL bookings (confirmed + pending). Amount in pounds (£) as configured. Does not count cancelled bookings.
 
-Cada conversa mostra nome do cliente, preview da última mensagem, tempo relativo (exemplo: "5 minutos atrás") e badge vermelho com número de mensagens não lidas.
+**Confirmation Rate:** Percentage of approved bookings vs pending. Example: 85% = 17 confirmed out of 20 requests. The higher the better!
 
-**Chat Ativo:**
+**Delivery Rate:** Percentage of completed jobs. Example: 60% = 12 delivered out of 20 confirmed. Shows your productivity.
 
-Quando você clica em uma conversa, header mostra nome do cliente, histórico de mensagens no centro (mensagens do cliente lado esquerdo cinza, suas mensagens lado direito azul, data e hora em cada mensagem), campo de texto embaixo e botão "Enviar".
+**Charts:**
 
-**Enviar Mensagem:**
+**Bookings by Status:** Coloured progress bars showing how many bookings are at each stage (Pending yellow, Confirmed green, Session Completed blue, Photos in Editing purple, Awaiting Selection orange, Editing Selected indigo, Delivered emerald green).
 
-Digite mensagem no campo de texto, clique em "Enviar" ou pressione Enter, mensagem aparece instantaneamente e cliente recebe notificação.
+**Revenue by Status:** Shows how much money is at each stage. Example: £500 in "Confirmed", £300 in "Delivered". Helps forecast cash flow.
 
-**Marcar como Lida:**
+**Bookings by Month:** Chart of the last 12 months showing how many bookings you had each month. Identifies peak season vs quiet season.
 
-Quando você abre uma conversa, mensagens são marcadas como lidas automaticamente e badge de não lidas desaparece.
+**Tables:**
 
-**Chat do Cliente:**
+**Recent Orders:** Last 5 stock photo orders showing ID, Client, Email, Total, Status, Date. Click the ID to see details.
 
-Cliente acessa chat em /cliente/chat/:id. Cliente acessa painel do cliente, clica em "Chat" nos atalhos rápidos, vê histórico de mensagens, digita mensagem e clica "Enviar", vê sua resposta instantaneamente.
+**Upcoming Bookings:** Next 5 confirmed bookings showing ID, Client, Service, Date/Time, Status. Sorted by date (nearest first). Helps you prepare for shoots.
 
-Cliente recebe notificação quando você responde. Você recebe notificação quando cliente envia mensagem.
-
-**Casos de Uso:**
-
-- Cliente tira dúvidas: "Posso levar meu cachorro no ensaio?" / "Claro! Adoramos pets nas fotos 🐶"
-- Cliente pede alteração: "Pode deixar a foto 5 mais clara?" / "Vou ajustar e enviar novamente!"
-- Você envia atualizações: "Oi Maria! Suas fotos editadas estão prontas. Acesse o álbum final para baixar 📸"
-- Combinar detalhes: "Podemos mudar o horário para 15h?" / "Sem problemas! Já atualizei o agendamento."
-
-**Dicas:**
-
-- Responda rápido para melhorar experiência do cliente
-- Use emojis para deixar conversa mais amigável
-- Seja claro e objetivo nas respostas
-- Confirme recebimento de pedidos do cliente
-- Envie atualizações proativas sobre andamento do trabalho
+**Quick Shortcuts:** Buttons to quickly access "+ New Booking", "View All Bookings", "Client Messages" and "Pending Selections".
 
 ---
 
-## 🔧 Troubleshooting
+### Bookings - Managing Jobs
 
-### Problemas comuns e soluções
+The Bookings section is where you manage all client jobs.
 
-**Upload de Fotos:**
+**Views:**
 
-**Problema: "Erro ao fazer upload"**
+**Calendar (Default):** Monthly calendar in Google Calendar style with colour-coded cards by status on each day. Navigate with left/right arrows. Click a card to open details.
 
-Causas possíveis: Foto muito grande (> 25MB), formato não suportado, conexão de internet instável.
+**List:** The "List" button at the top shows a table with ALL bookings. Available filters: search by client name and filter by status (dropdown). Pagination: 10 bookings per page. Click a row to open details.
 
-Soluções: Comprima foto antes de enviar (use Photoshop/Lightroom), converta para JPG se estiver em formato diferente, tente enviar uma foto por vez, verifique sua conexão de internet.
+**Create New Booking:**
 
-**Problema: "Upload trava em 50%"**
+Click "+ New Booking" and fill in the form:
 
-Solução: Aguarde até 2 minutos (fotos grandes demoram). Se não completar, recarregue página e tente novamente. Reduza resolução da foto para 4000px.
+- **Select Client:** Dropdown with registered clients or click "+ New Client" to register on the spot
+- **Select Service:** Dropdown with created services showing name, price and duration
+- **Date and Time:** Choose a date on the calendar and enter the preferred time (e.g. 14:00)
+- **Event Details:** Location (address where the shoot will be), number of people (how many will participate), estimated duration in hours, notes (special requests from the client)
 
-**Pagamentos:**
+Click "Create Booking". The booking is created with "Pending" status, the client receives a confirmation email and it appears on the calendar.
 
-**Problema: "Cliente não recebeu link de pagamento Stripe"**
+**Booking Details Panel:**
 
-Soluções: Verifique se email do cliente está correto, peça para cliente verificar spam/lixo eletrônico, reenvie link clicando em "Registrar Pagamento" novamente.
+When you click a booking, a side panel opens with 2 tabs:
 
-**Problema: "Pagamento Stripe não foi registrado"**
+**"Details" Tab:**
 
-Causas: Webhook do Stripe não configurado, cliente não completou pagamento.
+- **Client Information:** Name, Email, Phone, Date, Time, Location, Number of people, Duration, Notes
+- **Workflow Timeline:** 7 visual stages with icons, current stage highlighted in green, "Advance" button for next status, history of status changes
+- **Manage Payment:** Service Price (base price with edit button), Extra Services (list of additional items with "+ Add Extra Service" button, each extra shows description and amount, bin button to remove), Total (automatic sum of service + extras), Paid (how much client has paid), Remaining (how much is still owed), "Record Payment" button, transaction history
+- **Quick Actions:** Approve (if pending), Decline (if pending), Edit booking, Delete booking
 
-Soluções: Verifique no dashboard do Stripe se pagamento foi aprovado. Se aprovado mas não registrado, configure webhook (veja guia). Se pendente, peça para cliente completar pagamento.
+**"Photography" Tab:**
 
-**Galerias:**
+- **Gallery Statistics:** Total photos (how many you uploaded), Favourite photos (how many client marked), Selection rate (percentage of photos chosen)
+- **Actions:** Upload Photos (opens page to send photos), Copy Client Link (copies gallery link), Enable/Disable Download (toggle to allow client to download)
 
-**Problema: "Cliente não consegue acessar galeria"**
+**Header Buttons:** Shoot Gallery (manage shoot photos), Final Album (upload final edited photos), Copy Client Link (link for client to access panel), Enable/Disable Download (download status).
 
-Soluções: Verifique se senha está correta, envie link correto (seusite.flowclick.com/galeria/:slug), peça para cliente usar navegador atualizado (Chrome, Safari, Edge), verifique se galeria não foi excluída.
+**Automatic Workflow:**
 
-**Problema: "Fotos não aparecem na galeria"**
+The system advances automatically in some cases: client submits selection changes to "Editing Selected", client approves album changes to "Delivered", you approve booking sends email to client, you change status sends email to client.
 
-Soluções: Verifique se upload foi concluído (veja lista de fotos existentes), recarregue página da galeria (Ctrl+F5 ou Cmd+R), limpe cache do navegador, tente em navegador diferente.
+**Email Notifications:**
 
----
-
-## 💡 Dicas Práticas
-
-### Organização
-
-**Nomeie Galerias de Forma Clara:**
-
-Bom: "Ensaio Newborn - Maria Silva - 15/01/2025"  
-Ruim: "Galeria 1"
-
-Por quê: Facilita encontrar galeria depois.
-
-**Use Descrições Detalhadas:**
-
-Adicione na descrição da galeria tipo de ensaio, localização, número de fotos e observações especiais.
-
-Exemplo: "Ensaio newborn em estúdio. 50 fotos tratadas. Cliente pediu tons pastéis."
-
-**Organize Clientes por Tags:**
-
-Crie sistema próprio de organização: adicione prefixo no nome ("[VIP] Maria Silva"), use observações para anotar preferências, mantenha histórico atualizado.
-
-### Workflow Eficiente
-
-**Fluxo Recomendado:**
-
-1. Cliente agenda → Você aprova em até 24h
-2. Peça 50% adiantado → Registre pagamento
-3. Dia do ensaio → Mude status para "Ensaio Realizado"
-4. Envie TODAS as fotos em até 7 dias → Cliente seleciona
-5. Edite fotos selecionadas em até 14 dias
-6. Envie álbum final → Cliente aprova
-7. Receba restante → Registre pagamento
-8. Mude para "Entregue" → Trabalho concluído!
-
-**Prazos Sugeridos:**
-
-- Aprovação de agendamento: 24 horas
-- Envio de fotos para seleção: 7 dias após ensaio
-- Edição de fotos selecionadas: 14 dias após seleção
-- Entrega final: 21 dias após ensaio (total)
-
-### Comunicação
-
-**Seja Proativo:**
-
-Envie atualizações sem cliente pedir: "Oi Maria! Ensaio foi ótimo. Fotos estarão prontas em 5 dias!", "Recebi sua seleção! Vou começar a editar hoje.", "Suas fotos estão 50% editadas. Em breve você recebe!"
-
-**Use Chat para Tudo:**
-
-Confirmar detalhes do ensaio, avisar atrasos, pedir informações adicionais, enviar previews, agradecer após aprovação.
-
-**Responda Rápido:**
-
-Mensagens: até 2 horas. Emails: até 24 horas. WhatsApp: imediato (se possível).
-
-### Vendas
-
-**Maximize Vendas de Eventos:**
-
-1. Faça fotos de TODOS no evento (não só contratante)
-2. Ative vendas logo após cliente aprovar álbum
-3. Envie email para leads imediatamente
-4. Compartilhe em redes sociais do evento
-5. Defina prazo (exemplo: "Vendas até 31/01")
-6. Ofereça desconto para compras acima de 10 fotos
-
-**Preços Competitivos:**
-
-- Fotos digitais avulsas: £15-£25
-- Fotos emolduradas: £50-£100
-- Fotos stock: £20-£50
-- Pacotes: Desconto de 10-20%
-
-**Upsell Inteligente:**
-
-Ofereça extras durante agendamento: "Quer 30 fotos a mais editadas? +£50", "Álbum físico 20x30cm? +£100", "Vídeo curto do ensaio? +£80".
+The client automatically receives an email when the booking is approved, status changes, photos are sent for selection and the final album is ready.
 
 ---
 
-**Fim da Documentação Completa FlowClik**
+## Payments and Sales
 
-*Última atualização: Janeiro 2025*
+### How to manage client payments
+
+The system offers 3 payment methods for you to receive from clients.
+
+**Accessing Payment Management:**
+
+Go to "Bookings", click the client's booking and in the "Details" tab, scroll to "Manage Payment".
+
+**Payment Structure:**
+
+**Service Price:** Base price of the contracted service, copied automatically when creating the booking, "Edit" button to adjust if needed.
+
+**Extra Services:** List of additional items charged. Examples: "30 extra photos (£50)", "Physical album (£100)". "+ Add Extra Service" button: click the button, enter description (e.g. "Physical album 20x30cm"), enter amount in pounds (e.g. 100), click "Add", the extra appears in the list. Bin button to remove an extra.
+
+**Total:** Automatic sum: Base Service + All Extras. Updates in real time when adding/removing extras. Example: £250 (service) + £50 (extra) + £100 (extra) = £400.
+
+**Paid:** How much the client has already paid. Sum of all recorded payments.
+
+**Remaining:** How much is still owed. Calculation: Total - Paid. When it reaches £0.00, it is fully paid!
+
+**Recording a Payment:**
+
+Click "Record Payment" and choose the payment method:
+
+**Option 1: Cash** - Client paid in cash. System records 100% of the total amount. Click "Confirm". Payment added to history. Client receives confirmation email.
+
+**Option 2: Bank Transfer 50%** - Client made a bank transfer for half. System records 50% of the total amount. Click "Confirm". You can record another transfer later to complete the balance.
+
+**Option 3: Card 100% (Stripe)** - Sends a Stripe payment link to the client. Client pays online by card. System records automatically when payment is approved. Requires Stripe configuration (see setup guide).
+
+**Transaction History:**
+
+Below the management section, you see a list of all payments received. Each transaction shows date and time, payment method, amount paid and status (Paid / Pending).
+
+**Editing the Total Amount:**
+
+If the client requested something extra AFTER creating the booking, click the "Edit" button next to the Service Price, enter the new total amount, click "Save", the total updates automatically and the remaining balance recalculates. Or use "Add Extra Service" to keep a detailed breakdown!
+
+**Automatic Notifications:**
+
+The client receives an email when you record a payment, a Stripe payment is approved or a Stripe payment fails.
+
+**Tips:**
+
+- Record payments immediately so you don't forget
+- Use Extra Services for transparency (client sees the breakdown)
+- Ask for 50% upfront before the shoot (bank transfer)
+- Remaining balance after delivering the edited photos
+
+---
+
+## Client Communication
+
+### Integrated messaging system
+
+The system has an integrated chat for you to communicate with clients in real time.
+
+**Messages Panel (Admin):**
+
+Go to "Messages" in the side menu and you will see a WhatsApp Web-style layout with a conversation list on the left and the active chat on the right.
+
+**Conversation List:**
+
+Each conversation shows the client's name, preview of the last message, relative time (e.g. "5 minutes ago") and a red badge with the number of unread messages.
+
+**Active Chat:**
+
+When you click a conversation, the header shows the client's name, message history in the centre (client messages on the left in grey, your messages on the right in blue, date and time on each message), text field at the bottom and "Send" button.
+
+**Sending a Message:**
+
+Type your message in the text field, click "Send" or press Enter, the message appears instantly and the client receives a notification.
+
+**Marking as Read:**
+
+When you open a conversation, messages are automatically marked as read and the unread badge disappears.
+
+**Client Chat:**
+
+The client accesses the chat at /client/chat/:id. The client goes to their panel, clicks "Chat" in the quick shortcuts, sees the message history, types a message and clicks "Send", and sees your reply instantly.
+
+The client receives a notification when you reply. You receive a notification when the client sends a message.
+
+**Use Cases:**
+
+- Client asks questions: "Can I bring my dog to the shoot?" / "Of course! We love pets in photos!"
+- Client requests a change: "Can you make photo 5 brighter?" / "I'll adjust it and send it again!"
+- You send updates: "Hi Emily! Your edited photos are ready. Access the final album to download them."
+- Arranging details: "Can we change the time to 3pm?" / "No problem! I've already updated the booking."
+
+**Tips:**
+
+- Reply quickly to improve the client experience
+- Use emojis to make the conversation friendlier
+- Be clear and to the point in your replies
+- Confirm receipt of client requests
+- Send proactive updates on the progress of the work
+
+---
+
+## Troubleshooting
+
+### Common problems and solutions
+
+**Photo Upload:**
+
+**Problem: "Error uploading"**
+
+Possible causes: Photo too large (> 25MB), unsupported format, unstable internet connection.
+
+Solutions: Compress the photo before uploading (use Photoshop/Lightroom), convert to JPG if it is in a different format, try uploading one photo at a time, check your internet connection.
+
+**Problem: "Upload stuck at 50%"**
+
+Solution: Wait up to 2 minutes (large photos take time). If it does not complete, reload the page and try again. Reduce the photo resolution to 4000px.
+
+**Payments:**
+
+**Problem: "Client did not receive the Stripe payment link"**
+
+Solutions: Check the client's email is correct, ask the client to check their spam/junk folder, resend the link by clicking "Record Payment" again.
+
+**Problem: "Stripe payment was not recorded"**
+
+Causes: Stripe webhook not configured, client did not complete payment.
+
+Solutions: Check in the Stripe dashboard whether the payment was approved. If approved but not recorded, configure the webhook (see guide). If pending, ask the client to complete the payment.
+
+**Galleries:**
+
+**Problem: "Client cannot access the gallery"**
+
+Solutions: Check the password is correct, send the correct link (yoursite.flowclik.com/gallery/:slug), ask the client to use an up-to-date browser (Chrome, Safari, Edge), check the gallery has not been deleted.
+
+**Problem: "Photos are not showing in the gallery"**
+
+Solutions: Check the upload was completed (see the list of existing photos), reload the gallery page (Ctrl+F5 or Cmd+R), clear the browser cache, try a different browser.
+
+---
+
+## Practical Tips
+
+### Organisation
+
+**Name Galleries Clearly:**
+
+Good: "Newborn Shoot - Emily Smith - 15/01/2025"
+Bad: "Gallery 1"
+
+Why: Makes it easier to find the gallery later.
+
+**Use Detailed Descriptions:**
+
+Add to the gallery description the type of shoot, location, number of photos and any special notes.
+
+Example: "Newborn shoot in studio. 50 processed photos. Client requested pastel tones."
+
+**Organise Clients with Tags:**
+
+Create your own organisation system: add a prefix to the name ("[VIP] Emily Smith"), use notes to record preferences, keep the history up to date.
+
+### Efficient Workflow
+
+**Recommended Flow:**
+
+1. Client books → You approve within 24 hours
+2. Request 50% upfront → Record payment
+3. Day of the shoot → Change status to "Session Completed"
+4. Send ALL photos within 7 days → Client selects
+5. Edit selected photos within 14 days
+6. Send final album → Client approves
+7. Receive remaining balance → Record payment
+8. Change to "Delivered" → Job done!
+
+**Suggested Timelines:**
+
+- Booking approval: 24 hours
+- Sending photos for selection: 7 days after the shoot
+- Editing selected photos: 14 days after selection
+- Final delivery: 21 days after the shoot (total)
+
+### Communication
+
+**Be Proactive:**
+
+Send updates without the client asking: "Hi Emily! The shoot went great. Photos will be ready in 5 days!", "I've received your selection! I'll start editing today.", "Your photos are 50% edited. You'll receive them soon!"
+
+**Use Chat for Everything:**
+
+Confirming shoot details, notifying of delays, requesting additional information, sending previews, thanking after approval.
+
+**Reply Quickly:**
+
+Messages: within 2 hours. Emails: within 24 hours. WhatsApp: immediately (if possible).
+
+### Sales
+
+**Maximise Event Sales:**
+
+1. Photograph EVERYONE at the event (not just the person who hired you)
+2. Enable sales as soon as the client approves the album
+3. Send an email to leads immediately
+4. Share on the event's social media
+5. Set a deadline (e.g. "Sales until 31/01")
+6. Offer a discount for purchases over 10 photos
+
+**Competitive Pricing:**
+
+- Individual digital photos: £15-£25
+- Framed photos: £50-£100
+- Stock photos: £20-£50
+- Packages: 10-20% discount
+
+**Smart Upselling:**
+
+Offer extras during booking: "Want 30 extra edited photos? +£50", "Physical album 20x30cm? +£100", "Short video of the shoot? +£80".
+
+---
+
+**End of FlowClik Complete Documentation**
+
+*Last updated: February 2025*

@@ -12,19 +12,19 @@ export default function DocsNew() {
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
-    // Mudar title da aba
+    // Set page title
     document.title = "FlowClik";
   }, []);
 
   useEffect(() => {
-    // Carregar documentation Markdown
-    fetch('/docs/documentacao-complete.md')
+    // Load documentation Markdown
+    fetch('/docs/documentacao-completa.md')
       .then(response => response.text())
       .then(text => setMarkdownContent(text))
       .catch(error => console.error('Error loading documentation:', error));
   }, []);
 
-  // Extrair sections do Markdown
+  // Extract sections from Markdown
   const sections = markdownContent.split(/^## /gm).filter(Boolean);
   const tableOfContents = sections.map(section => {
     const lines = section.split('\n');
@@ -33,7 +33,7 @@ export default function DocsNew() {
     return { id, title };
   });
 
-  // Filtrar content por busca
+  // Filter content by search
   const filteredContent = searchTerm
     ? markdownContent.split('\n').filter(line =>
         line.toLowerCase().includes(searchTerm.toLowerCase())
@@ -55,7 +55,7 @@ export default function DocsNew() {
           </Link>
           <Link href="/">
             <a className="text-zinc-400 hover:text-white transition text-sm">
-              Voltar ao site
+              Back to site
             </a>
           </Link>
         </div>
@@ -69,11 +69,11 @@ export default function DocsNew() {
             <div className="sticky top-24">
               {/* Search */}
               <div className="mb-6">
-                <div className="rshetive">
+                <div className="relative">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-zinc-500" />
                   <Input
                     type="text"
-                    placeholder="Buscar na documentation..."
+                    placeholder="Search documentation..."
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="pl-10 bg-zinc-900 border-zinc-800 text-white placeholder-zinc-500"
@@ -85,7 +85,7 @@ export default function DocsNew() {
               <nav className="space-y-1">
                 <div className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-purple-400">
                   <Book className="w-4 h-4" />
-                  <span>Index</span>
+                  <span>Contents</span>
                 </div>
                 {tableOfContents.map((section) => (
                   <a
@@ -118,7 +118,7 @@ export default function DocsNew() {
               {/* Breadcrumb */}
               <div className="flex items-center gap-2 text-sm text-zinc-500 mb-6">
                 <Book className="w-4 h-4" />
-                <span>Documentation Complete</span>
+                <span>Full Documentation</span>
                 <ChevronRight className="w-4 h-4" />
                 <span className="text-zinc-300">FlowClik</span>
               </div>
@@ -145,7 +145,7 @@ export default function DocsNew() {
                       <h4 className="text-lg font-semibold text-zinc-300 mt-4 mb-2" {...props} />
                     ),
                     p: ({ node, ...props }) => (
-                      <p className="text-zinc-300 leading-rshexed mb-4" {...props} />
+                      <p className="text-zinc-300 leading-relaxed mb-4" {...props} />
                     ),
                     strong: ({ node, ...props }) => (
                       <strong className="text-white font-semibold" {...props} />
