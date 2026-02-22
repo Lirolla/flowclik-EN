@@ -3,7 +3,7 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
 import { MessageSquare, Send, Plus } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
@@ -14,7 +14,7 @@ export default function AdminMessages() {
   const [isNewConversationModalOpen, setIsNewConversationModalOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Buscar conversas do fotógrafo (agendamentos com mensagens)
+  // Buscar conversas do photographer (agendamentos com mensagens)
   const { data: conversations, isLoading: loadingConversations, refetch: refetchConversations } = 
     trpc.clientChat.getAllConversations.useQuery();
 
@@ -103,7 +103,7 @@ export default function AdminMessages() {
               {/* Lista de conversas */}
               <div className="flex-1 overflow-y-auto space-y-2">
                 {loadingConversations ? (
-                  <p className="text-sm text-muted-foreground text-center py-8">Carregando...</p>
+                  <p className="text-sm text-muted-foreground text-center py-8">Loading...</p>
                 ) : conversations && conversations.length > 0 ? (
                   conversations.map((conv) => (
                     <button
@@ -129,7 +129,7 @@ export default function AdminMessages() {
                       </div>
                       {conv.lastMessageTime && (
                         <div className="text-xs text-muted-foreground mt-1">
-                          {new Date(conv.lastMessageTime).toLocaleString("pt-BR", {
+                          {new Date(conv.lastMessageTime).toLocaleString("en-GB", {
                             day: "2-digit",
                             month: "2-digit",
                             hour: "2-digit",
@@ -142,7 +142,7 @@ export default function AdminMessages() {
                 ) : (
                   <div className="flex flex-col items-center justify-center py-12 text-center">
                     <MessageSquare className="w-12 h-12 text-muted-foreground mb-3" />
-                    <p className="text-sm text-muted-foreground">Nenhuma conversa ainda</p>
+                    <p className="text-sm text-muted-foreground">Nonea conversa ainda</p>
                     <p className="text-xs text-muted-foreground mt-2">
                       As conversas aparecerão quando os clientes enviarem mensagens
                     </p>
@@ -164,7 +164,7 @@ export default function AdminMessages() {
                       {selectedConversation?.clientEmail}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      Serviço: {selectedConversation?.serviceName}
+                      Service: {selectedConversation?.serviceName}
                     </p>
                   </div>
 
@@ -192,7 +192,7 @@ export default function AdminMessages() {
                             >
                               <p className="text-sm">{msg.message}</p>
                               <p className="text-xs opacity-70 mt-1">
-                                {new Date(msg.createdAt).toLocaleString("pt-BR", {
+                                {new Date(msg.createdAt).toLocaleString("en-GB", {
                                   day: "2-digit",
                                   month: "2-digit",
                                   hour: "2-digit",
@@ -206,7 +206,7 @@ export default function AdminMessages() {
                       </>
                     ) : (
                       <p className="text-sm text-muted-foreground text-center py-8">
-                        Nenhuma mensagem ainda. Envie a primeira!
+                        Nonea mensagem ainda. Envie a primeira!
                       </p>
                     )}
                   </div>
@@ -235,7 +235,7 @@ export default function AdminMessages() {
               ) : (
                 <div className="flex-1 flex flex-col items-center justify-center text-center">
                   <MessageSquare className="w-16 h-16 text-muted-foreground mb-4" />
-                  <p className="text-muted-foreground">Selecione uma conversa para começar</p>
+                  <p className="text-muted-foreground">Select uma conversa para começar</p>
                 </div>
               )}
             </CardContent>
@@ -244,11 +244,11 @@ export default function AdminMessages() {
       </div>
 
       {/* Modal: Nova Conversa */}
-      <Dialog open={isNewConversationModalOpen} onOpenChange={setIsNewConversationModalOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Iniciar Nova Conversa</DialogTitle>
-          </DialogHeader>
+      <Daylog open={isNewConversationModalOpen} onOpenChange={setIsNewConversationModalOpen}>
+        <DaylogContent>
+          <DaylogHeader>
+            <DaylogTitle>Iniciar Nova Conversa</DaylogTitle>
+          </DaylogHeader>
           <div className="space-y-2 max-h-96 overflow-y-auto">
             {allAppointments && allAppointments.length > 0 ? (
               allAppointments.map((appointment: any) => (
@@ -263,18 +263,18 @@ export default function AdminMessages() {
                   <div className="font-medium">{appointment.clientName}</div>
                   <div className="text-sm text-muted-foreground">{appointment.clientEmail}</div>
                   <div className="text-xs text-muted-foreground mt-1">
-                    Agendamento: {new Date(appointment.appointmentDate).toLocaleDateString("pt-BR")}
+                    Agendamento: {new Date(appointment.appointmentDate).toLocaleDateString("en-GB")}
                   </div>
                 </button>
               ))
             ) : (
               <p className="text-sm text-muted-foreground text-center py-8">
-                Nenhum agendamento cadastrado
+                None agendamento cadastrado
               </p>
             )}
           </div>
-        </DialogContent>
-      </Dialog>
+        </DaylogContent>
+      </Daylog>
     </DashboardLayout>
   );
 }

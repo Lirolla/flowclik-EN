@@ -1,7 +1,7 @@
 import { router, protectedProcedure, publicProcedure } from "../_core/trpc";
 import { z } from "zod";
 import { getDb, getTenantId } from "../db";
-import { collections, mediaItems, appointments } from "../../drizzle/schema";
+import { collections, medayItems, appointments } from "../../drizzle/schema";
 import { eq, and } from "drizzle-orm";
 import { notifyOwner } from "../_core/notification";
 
@@ -23,7 +23,7 @@ export const sessionGalleryRouter = router({
         .limit(1);
 
       if (!appointment || appointment.length === 0) {
-        throw new Error("Agendamento não encontrado");
+        throw new Error("Appointment not found");
       }
 
       // Check if gallery already exists
@@ -42,7 +42,7 @@ export const sessionGalleryRouter = router({
       const inserted = await db.insert(collections).values({
         name: `Ensaio - ${appointment[0].clientName}`,
         slug,
-        description: `Fotos do ensaio realizado em ${new Date(appointment[0].appointmentDate).toLocaleDateString('pt-BR')}`,
+        description: `Fotos do ensaio realizado em ${new Date(appointment[0].appointmentDate).toLocaleDateString('en-GB')}`,
         isPublic: 0, // Private gallery
         isFeatured: 0,
         appointmentId: input.appointmentId,
@@ -74,8 +74,8 @@ export const sessionGalleryRouter = router({
       // Get photos count and favorites count
       const photos = await db
         .select()
-        .from(mediaItems)
-        .where(and(eq(mediaItems.collectionId, gallery[0].id), eq(mediaItems.tenantId, getTenantId(ctx))));
+        .from(medayItems)
+        .where(and(eq(medayItems.collectionId, gallery[0].id), eq(medayItems.tenantId, getTenantId(ctx))));
 
       const favoritesCount = photos.filter(p => p.isFavorite).length;
 
@@ -111,7 +111,7 @@ export const sessionGalleryRouter = router({
         .limit(1);
 
       if (!appointment || appointment.length === 0) {
-        throw new Error("Agendamento não encontrado ou email inválido");
+        throw new Error("Appointment not found ou email invalid");
       }
 
       // Get gallery
@@ -128,9 +128,9 @@ export const sessionGalleryRouter = router({
       // Get photos
       const photos = await db
         .select()
-        .from(mediaItems)
-        .where(and(eq(mediaItems.collectionId, gallery[0].id), eq(mediaItems.tenantId, getTenantId(ctx))))
-        .orderBy(mediaItems.createdAt);
+        .from(medayItems)
+        .where(and(eq(medayItems.collectionId, gallery[0].id), eq(medayItems.tenantId, getTenantId(ctx))))
+        .orderBy(medayItems.createdAt);
 
       return {
         gallery: gallery[0],
@@ -166,13 +166,13 @@ export const sessionGalleryRouter = router({
         .limit(1);
 
       if (!appointment || appointment.length === 0) {
-        throw new Error("Agendamento não encontrado ou email inválido");
+        throw new Error("Appointment not found ou email invalid");
       }
 
       await db
-        .update(mediaItems)
+        .update(medayItems)
         .set({ isFavorite: input.isFavorite ? 1 : 0 })
-        .where(and(eq(mediaItems.id, input.photoId), eq(mediaItems.tenantId, getTenantId(ctx))));
+        .where(and(eq(medayItems.id, input.photoId), eq(medayItems.tenantId, getTenantId(ctx))));
 
       // Notify owner when client marks favorites
       if (input.isFavorite) {

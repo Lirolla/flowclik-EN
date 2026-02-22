@@ -5,19 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Download, Share2, X, ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  Daylog,
+  DaylogContent,
+  DaylogDescription,
+  DaylogHeader,
+  DaylogTitle,
+} from "@/components/ui/daylog";
 
 export default function ClientFinalAlbumView() {
   const [, params] = useRoute("/client/final-album/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
   const { toast } = useToast();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [showShareDialog, setShowShareDialog] = useState(false);
+  const [showShareDaylog, setShowShareDaylog] = useState(false);
   const [shareUrl, setShareUrl] = useState("");
   const [, setLocation] = useLocation();
 
@@ -57,7 +57,7 @@ export default function ClientFinalAlbumView() {
 
     const url = `${window.location.origin}/shared-album/${appointment.slug}`;
     setShareUrl(url);
-    setShowShareDialog(true);
+    setShowShareDaylog(true);
   };
 
   const copyShareLink = () => {
@@ -82,7 +82,7 @@ export default function ClientFinalAlbumView() {
       console.error("Erro ao gerar ZIP:", error);
       toast({
         title: "Erro no download",
-        description: "Não foi possível preparar o download. Tente novamente.",
+        description: "Não foi possível preparar o download. Try again.",
         variant: "destructive",
       });
     },
@@ -96,7 +96,7 @@ export default function ClientFinalAlbumView() {
 
     toast({
       title: "Preparando download...",
-      description: "Criando arquivo ZIP com todas as fotos. Isso pode levar alguns segundos.",
+      description: "Criando arquivo ZIP com todas as fotos. Isso pode levar alguns seconds.",
     });
 
     generateZipMutation.mutate({ appointmentId });
@@ -131,7 +131,7 @@ export default function ClientFinalAlbumView() {
 
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold">Álbum Final</h1>
+              <h1 className="text-3xl font-bold">Final Album</h1>
               <p className="text-muted-foreground mt-1">
                 {appointment?.serviceType} - {finalPhotos?.length || 0} fotos editadas
               </p>
@@ -151,7 +151,7 @@ export default function ClientFinalAlbumView() {
                 disabled={!finalPhotos || finalPhotos.length === 0}
               >
                 <Share2 className="w-4 h-4" />
-                Compartilhar Álbum
+                Compartilhar Album
               </Button>
             </div>
           </div>
@@ -163,10 +163,10 @@ export default function ClientFinalAlbumView() {
         {!finalPhotos || finalPhotos.length === 0 ? (
           <div className="text-center py-16 bg-card rounded-lg border">
             <p className="text-muted-foreground text-lg">
-              Seu álbum final ainda não está disponível.
+              Seu álbum final ainda não está available.
             </p>
             <p className="text-sm text-muted-foreground mt-2">
-              Aguarde enquanto o fotógrafo finaliza a edição das suas fotos.
+              Aguarde enquanto o photographer finaliza a edição das suas fotos.
             </p>
           </div>
         ) : (
@@ -250,15 +250,15 @@ export default function ClientFinalAlbumView() {
         </div>
       )}
 
-      {/* Share Dialog */}
-      <Dialog open={showShareDialog} onOpenChange={setShowShareDialog}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Compartilhar Álbum</DialogTitle>
-            <DialogDescription>
+      {/* Share Daylog */}
+      <Daylog open={showShareDaylog} onOpenChange={setShowShareDaylog}>
+        <DaylogContent>
+          <DaylogHeader>
+            <DaylogTitle>Compartilhar Album</DaylogTitle>
+            <DaylogDescription>
               Compartilhe seu álbum com amigos e família!
-            </DialogDescription>
-          </DialogHeader>
+            </DaylogDescription>
+          </DaylogHeader>
           <div className="space-y-4">
             <div className="p-4 bg-muted rounded-lg">
               <p className="text-sm font-mono break-all">{shareUrl}</p>
@@ -275,8 +275,8 @@ export default function ClientFinalAlbumView() {
               </Button>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </DaylogContent>
+      </Daylog>
     </div>
   );
 }

@@ -24,7 +24,7 @@ describe('siteRoutes', () => {
       expect(isSubdomain()).toBe(false);
     });
 
-    it('deve retornar false para flowclik.com (domínio principal)', () => {
+    it('deve retornar false para flowclik.com (domain principal)', () => {
       Object.defineProperty(window, 'location', {
         value: { hostname: 'flowclik.com' },
         writable: true,
@@ -32,7 +32,7 @@ describe('siteRoutes', () => {
       expect(isSubdomain()).toBe(false);
     });
 
-    it('deve retornar true para joao.flowclik.com (subdomínio)', () => {
+    it('deve retornar true para joao.flowclik.com (subdomain)', () => {
       Object.defineProperty(window, 'location', {
         value: { hostname: 'joao.flowclik.com' },
         writable: true,
@@ -40,7 +40,7 @@ describe('siteRoutes', () => {
       expect(isSubdomain()).toBe(true);
     });
 
-    it('deve retornar true para maria.flowclik.com (subdomínio)', () => {
+    it('deve retornar true para maria.flowclik.com (subdomain)', () => {
       Object.defineProperty(window, 'location', {
         value: { hostname: 'maria.flowclik.com' },
         writable: true,
@@ -58,7 +58,7 @@ describe('siteRoutes', () => {
       expect(getSiteBaseUrl()).toBe('/site');
     });
 
-    it('deve retornar string vazia para subdomínio', () => {
+    it('deve retornar string vazia para subdomain', () => {
       Object.defineProperty(window, 'location', {
         value: { hostname: 'joao.flowclik.com' },
         writable: true,
@@ -84,7 +84,7 @@ describe('siteRoutes', () => {
       expect(getSiteUrl('servicos')).toBe('/site/services');
     });
 
-    it('deve gerar / para home em subdomínio', () => {
+    it('deve gerar / para home em subdomain', () => {
       Object.defineProperty(window, 'location', {
         value: { hostname: 'joao.flowclik.com' },
         writable: true,
@@ -92,7 +92,7 @@ describe('siteRoutes', () => {
       expect(getSiteUrl('')).toBe('/');
     });
 
-    it('deve gerar /services para servicos em subdomínio', () => {
+    it('deve gerar /services para servicos em subdomain', () => {
       Object.defineProperty(window, 'location', {
         value: { hostname: 'joao.flowclik.com' },
         writable: true,
@@ -127,7 +127,7 @@ describe('siteRoutes', () => {
       expect(SITE_ROUTES.book()).toBe('/site/book');
     });
 
-    it('deve gerar rotas corretas em subdomínio', () => {
+    it('deve gerar rotas corretas em subdomain', () => {
       Object.defineProperty(window, 'location', {
         value: { hostname: 'joao.flowclik.com' },
         writable: true,

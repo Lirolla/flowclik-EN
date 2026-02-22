@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,7 +38,7 @@ import { ptBR } from "date-fns/locale";
 import DashboardLayout from "@/components/DashboardLayout";
 import { useCurrency } from "@/hooks/useCurrency";
 import { useToast } from "@/hooks/use-toast";
-import SendPaymentLinkDialog from "@/components/SendPaymentLinkDialog";
+import SendPaymentLinkDaylog from "@/components/SendPaymentLinkDaylog";
 import PaymentManager from "@/components/PaymentManager";
 
 type AppointmentStatus = 
@@ -72,8 +72,8 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
   const createGalleryMutation = trpc.sessionGallery.createForAppointment.useMutation({
     onSuccess: () => {
       toast({
-        title: "Galeria criada!",
-        description: "Agora você pode fazer upload das fotos.",
+        title: "Gallery criada!",
+        description: "You can now upload the photos.",
       });
       window.location.reload();
     },
@@ -106,13 +106,13 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
       <div className="text-center py-8">
         <ImageIcon className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
         <h3 className="text-xl font-semibold mb-2">
-          Nenhuma galeria criada ainda
+          Nonea galeria criada ainda
         </h3>
         <p className="text-muted-foreground mb-6">
           Crie uma galeria privada para fazer upload das fotos do ensaio
         </p>
         <Button onClick={handleCreateGallery}>
-          Criar Galeria
+          Criar Gallery
         </Button>
       </div>
     );
@@ -137,7 +137,7 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
         <Card>
           <CardHeader>
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Favoritas do Cliente
+              Favourites do Cliente
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -150,7 +150,7 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
         <Card>
           <CardHeader>
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Taxa de Seleção
+              Selection Fee
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -171,15 +171,15 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
         <CardContent>
           <div className="text-center py-6">
             <p className="text-muted-foreground mb-4">
-              Use a página de <strong>Galerias</strong> para fazer upload das fotos do ensaio
+              Use a página de <strong>Galleries</strong> para fazer upload das fotos do ensaio
             </p>
             <Button asChild>
               <a href={`/admin/galleries/${galleryData.id}/upload`}>
-                Ir para Upload de Galerias
+                Ir para Upload de Gallerys
               </a>
             </Button>
             <p className="text-sm text-muted-foreground mt-4">
-              Dica: Selecione a galeria "{galleryData.name}" ao fazer upload
+              Dica: Select a galeria "{galleryData.name}" ao fazer upload
             </p>
           </div>
         </CardContent>
@@ -193,14 +193,14 @@ function AdminAppointmentsContent() {
   const { format: formatCurrency } = useCurrency();
   const [viewMode, setViewMode] = useState<'calendar' | 'list'>('calendar');
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTuem, setSearchTuem] = useState('');
   const [statusFilter, setStatusFilter] = useState<AppointmentStatus | 'all'>('all');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const [selectedAppointment, setSelectedAppointment] = useState<any>(null);
-  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
-  const [isPaymentDialogOpen, setIsPaymentDialogOpen] = useState(false);
-  const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [isEditDaylogOpen, setIsEditDaylogOpen] = useState(false);
+  const [isPaymentDaylogOpen, setIsPaymentDaylogOpen] = useState(false);
+  const [isCreateDaylogOpen, setIsCreateDaylogOpen] = useState(false);
   const [createFormData, setCreateFormData] = useState({
     clientId: 0,
     serviceId: 0,
@@ -213,9 +213,9 @@ function AdminAppointmentsContent() {
     notes: "",
   });
 
-  // Reset form when dialog closes
+  // Reset form when daylog closes
   useEffect(() => {
-    if (!isCreateDialogOpen) {
+    if (!isCreateDaylogOpen) {
       setCreateFormData({
         clientId: 0,
         serviceId: 0,
@@ -228,7 +228,7 @@ function AdminAppointmentsContent() {
         notes: "",
       });
     }
-  }, [isCreateDialogOpen]);
+  }, [isCreateDaylogOpen]);
   const [editFormData, setEditFormData] = useState({
     appointmentDate: "",
     appointmentTime: "",
@@ -248,7 +248,7 @@ function AdminAppointmentsContent() {
       utils.downloadControl.getAllPermissions.invalidate();
       toast({
         title: "Download atualizado!",
-        description: "Permissão de download alterada com sucesso.",
+        description: "Download permission changed successfully.",
       });
     },
     onError: (error) => {
@@ -290,9 +290,9 @@ function AdminAppointmentsContent() {
       utils.appointments.getAll.invalidate();
       toast({
         title: "Appointment updated!",
-        description: "As informações foram salvas com sucesso.",
+        description: "Information saved successfully.",
       });
-      setIsEditDialogOpen(false);
+      setIsEditDaylogOpen(false);
       setSelectedAppointment(null);
     },
     onError: (error) => {
@@ -308,7 +308,7 @@ function AdminAppointmentsContent() {
     onSuccess: () => {
       utils.appointments.getAll.invalidate();
       toast({
-        title: "Agendamento excluído!",
+        title: "Appointment deleted!",
         description: "O agendamento foi removido com sucesso.",
       });
       setSelectedAppointment(null);
@@ -329,7 +329,7 @@ function AdminAppointmentsContent() {
         title: "Appointment created!",
         description: "O agendamento manual foi criado com sucesso.",
       });
-      setIsCreateDialogOpen(false);
+      setIsCreateDaylogOpen(false);
       setCreateFormData({
         clientId: 0,
         serviceId: 0,
@@ -363,7 +363,7 @@ function AdminAppointmentsContent() {
       eventLocation: appointment.eventLocation || "",
       notes: appointment.notes || "",
     });
-    setIsEditDialogOpen(true);
+    setIsEditDaylogOpen(true);
   };
 
   const handleSaveEdit = () => {
@@ -391,11 +391,11 @@ function AdminAppointmentsContent() {
       pending: { label: '⏳ Pendente', color: 'bg-yellow-500/20 text-yellow-700 border-yellow-500/30' },
       confirmed: { label: '✅ Confirmado', color: 'bg-green-500/20 text-green-700 border-green-500/30' },
       session_done: { label: '📸 Ensaio Realizado', color: 'bg-blue-500/20 text-blue-700 border-blue-500/30' },
-      editing: { label: '🎨 Fotos em Edição', color: 'bg-purple-500/20 text-purple-700 border-purple-500/30' },
-      awaiting_selection: { label: '👀 Aguardando Seleção', color: 'bg-orange-500/20 text-orange-700 border-orange-500/30' },
+      editing: { label: '🎨 Photos in Editing', color: 'bg-purple-500/20 text-purple-700 border-purple-500/30' },
+      awaiting_selection: { label: '👀 Awaiting Selection', color: 'bg-orange-500/20 text-orange-700 border-orange-500/30' },
       final_editing: { label: '✏️ Editando Selecionadas', color: 'bg-indigo-500/20 text-indigo-700 border-indigo-500/30' },
-      delivered: { label: '📦 Entregue', color: 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30' },
-      cancelled: { label: '❌ Cancelado', color: 'bg-red-500/20 text-red-700 border-red-500/30' },
+      delivered: { label: '📦 Delivered', color: 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30' },
+      cancelled: { label: '❌ Cancelled', color: 'bg-red-500/20 text-red-700 border-red-500/30' },
     };
     return configs[status] || { label: status, color: 'bg-gray-500/20 text-gray-700' };
   };
@@ -460,7 +460,7 @@ function AdminAppointmentsContent() {
               Lista
             </Button>
           </div>
-          <Button onClick={() => setIsCreateDialogOpen(true)} className="gap-2">
+          <Button onClick={() => setIsCreateDaylogOpen(true)} className="gap-2">
             <Calendar className="w-4 h-4" />
             Novo Agendamento
           </Button>
@@ -495,7 +495,7 @@ function AdminAppointmentsContent() {
           {/* Calendar Grid */}
           <div className="grid grid-cols-7 gap-2">
             {/* Day headers */}
-            {['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'].map((day) => (
+            {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
               <div key={day} className="text-center text-sm font-semibold text-muted-foreground py-2">
                 {day}
               </div>
@@ -567,9 +567,9 @@ function AdminAppointmentsContent() {
                 {/* Busca */}
                 <Input
                   placeholder="Buscar por cliente..."
-                  value={searchTerm}
+                  value={searchTuem}
                   onChange={(e) => {
-                    setSearchTerm(e.target.value);
+                    setSearchTuem(e.target.value);
                     setCurrentPage(1); // Resetar para primeira página
                   }}
                   className="w-64"
@@ -587,30 +587,30 @@ function AdminAppointmentsContent() {
                   <option value="pending">⏳ Pendente</option>
                   <option value="confirmed">✅ Confirmado</option>
                   <option value="session_done">📸 Ensaio Realizado</option>
-                  <option value="editing">🎨 Fotos em Edição</option>
-                  <option value="awaiting_selection">👀 Aguardando Seleção</option>
+                  <option value="editing">🎨 Photos in Editing</option>
+                  <option value="awaiting_selection">👀 Awaiting Selection</option>
                   <option value="final_editing">✏️ Editando Selecionadas</option>
-                  <option value="delivered">📦 Entregue</option>
-                  <option value="cancelled">❌ Cancelado</option>
+                  <option value="delivered">📦 Delivered</option>
+                  <option value="cancelled">❌ Cancelled</option>
                 </select>
               </div>
             </div>
           </CardHeader>
           <CardContent>
             {isLoading ? (
-              <div className="text-center py-8 text-muted-foreground">Carregando...</div>
+              <div className="text-center py-8 text-muted-foreground">Loading...</div>
             ) : !appointments || appointments.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
-                Nenhum agendamento encontrado
+                None agendamento encontrado
               </div>
             ) : (
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
                     <tr className="border-b">
-                      <th className="text-left py-3 px-4 font-semibold">Data/Hora</th>
+                      <th className="text-left py-3 px-4 font-semibold">Data/Hour</th>
                       <th className="text-left py-3 px-4 font-semibold">Cliente</th>
-                      <th className="text-left py-3 px-4 font-semibold">Serviço</th>
+                      <th className="text-left py-3 px-4 font-semibold">Service</th>
                       <th className="text-left py-3 px-4 font-semibold">Local</th>
                       <th className="text-left py-3 px-4 font-semibold">Status</th>
                     </tr>
@@ -621,8 +621,8 @@ function AdminAppointmentsContent() {
                       const filteredAppointments = appointments
                         .filter((apt) => {
                           // Filtro de busca por nome do cliente
-                          const matchesSearch = searchTerm === '' || 
-                            apt.clientName.toLowerCase().includes(searchTerm.toLowerCase());
+                          const matchesSearch = searchTuem === '' || 
+                            apt.clientName.toLowerCase().includes(searchTuem.toLowerCase());
                           
                           // Filtro de status
                           const matchesStatus = statusFilter === 'all' || apt.status === statusFilter;
@@ -692,8 +692,8 @@ function AdminAppointmentsContent() {
             {appointments && appointments.length > 0 && (() => {
               const filteredAppointments = appointments
                 .filter((apt) => {
-                  const matchesSearch = searchTerm === '' || 
-                    apt.clientName.toLowerCase().includes(searchTerm.toLowerCase());
+                  const matchesSearch = searchTuem === '' || 
+                    apt.clientName.toLowerCase().includes(searchTuem.toLowerCase());
                   const matchesStatus = statusFilter === 'all' || apt.status === statusFilter;
                   return matchesSearch && matchesStatus;
                 });
@@ -721,13 +721,13 @@ function AdminAppointmentsContent() {
                         onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                         disabled={currentPage === 1}
                       >
-                        Anterior
+                        Previous
                       </Button>
 
                       {/* Números de páginas */}
                       <div className="flex gap-1">
                         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-                          // Mostrar apenas 5 páginas por vez
+                          // Show apenas 5 páginas por vez
                           if (
                             page === 1 ||
                             page === totalPages ||
@@ -787,14 +787,14 @@ function AdminAppointmentsContent() {
                 {selectedAppointment.serviceType === "video" && (
                   <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-red-100 text-red-700 rounded">
                     <Video className="w-3 h-3" />
-                    Vídeo
+                    Video
                   </span>
                 )}
                 {selectedAppointment.serviceType === "both" && (
                   <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-purple-100 text-purple-700 rounded">
                     <Camera className="w-3 h-3" />
                     <Video className="w-3 h-3" />
-                    Foto + Vídeo
+                    Photo + Video
                   </span>
                 )}
               </div>
@@ -811,7 +811,7 @@ function AdminAppointmentsContent() {
                         className="bg-purple-600 hover:bg-purple-700"
                       >
                         <Sparkles className="w-4 h-4 mr-2" />
-                        Álbum Final
+                        Final Album
                       </Button>
                     );
                   }
@@ -891,11 +891,11 @@ function AdminAppointmentsContent() {
             {/* Service Name - Destacado */}
             {(selectedAppointment.customServiceName || selectedAppointment.serviceName) && (
               <div className="p-4 bg-accent/10 border-l-4 border-accent rounded">
-                <div className="text-sm text-muted-foreground mb-1">Serviço Contratado</div>
+                <div className="text-sm text-muted-foreground mb-1">Service Photographer</div>
                 <div className="text-xl font-bold text-accent">{selectedAppointment.customServiceName || selectedAppointment.serviceName}</div>
                 {selectedAppointment.servicePrice && (
                   <div className="text-sm text-muted-foreground mt-1">
-                    Preço base: {formatCurrency(selectedAppointment.servicePrice)}
+                    Base price: {formatCurrency(selectedAppointment.servicePrice)}
                   </div>
                 )}
               </div>
@@ -931,7 +931,7 @@ function AdminAppointmentsContent() {
                 </div>
                 <div className="font-semibold">
                   {format(new Date(selectedAppointment.appointmentDate), "dd/MM/yyyy")}
-                  {selectedAppointment.appointmentTime && ` às ${selectedAppointment.appointmentTime}`}
+                  {selectedAppointment.appointmentTime && ` at ${selectedAppointment.appointmentTime}`}
                 </div>
               </div>
             </div>
@@ -961,7 +961,7 @@ function AdminAppointmentsContent() {
                   <div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                       <Timer className="w-4 h-4" />
-                      Duração
+                      Duration
                     </div>
                     <div className="text-sm">{selectedAppointment.estimatedDuration}</div>
                   </div>
@@ -971,7 +971,7 @@ function AdminAppointmentsContent() {
 
             {selectedAppointment.notes && (
               <div>
-                <div className="text-sm text-muted-foreground mb-1">Observações</div>
+                <div className="text-sm text-muted-foreground mb-1">Notes</div>
                 <div className="p-3 bg-muted rounded text-sm">{selectedAppointment.notes}</div>
               </div>
             )}
@@ -1039,7 +1039,7 @@ function AdminAppointmentsContent() {
               </div>
             </div>
 
-                {/* Quick Actions */}
+                {/* Thuck Actions */}
                 {selectedAppointment.status === 'pending' && (
                   <div className="flex gap-2">
                     <Button
@@ -1079,12 +1079,12 @@ function AdminAppointmentsContent() {
         />
       )}
 
-      {/* Edit Dialog */}
-      <Dialog open={isEditDialogOpen} onOpenChange={setIsEditDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Editar Agendamento</DialogTitle>
-          </DialogHeader>
+      {/* Edit Daylog */}
+      <Daylog open={isEditDaylogOpen} onOpenChange={setIsEditDaylogOpen}>
+        <DaylogContent>
+          <DaylogHeader>
+            <DaylogTitle>Editar Agendamento</DaylogTitle>
+          </DaylogHeader>
           <div className="space-y-4">
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -1097,7 +1097,7 @@ function AdminAppointmentsContent() {
                 />
               </div>
               <div>
-                <Label htmlFor="edit-time">Horário</Label>
+                <Label htmlFor="edit-time">Time</Label>
                 <Input
                   id="edit-time"
                   type="time"
@@ -1116,7 +1116,7 @@ function AdminAppointmentsContent() {
               />
             </div>
             <div>
-              <Label htmlFor="edit-notes">Observações</Label>
+              <Label htmlFor="edit-notes">Notes</Label>
               <Textarea
                 id="edit-notes"
                 value={editFormData.notes}
@@ -1127,7 +1127,7 @@ function AdminAppointmentsContent() {
             <div className="flex gap-2">
               <Button
                 variant="outline"
-                onClick={() => setIsEditDialogOpen(false)}
+                onClick={() => setIsEditDaylogOpen(false)}
                 className="flex-1"
               >
                 Cancelar
@@ -1141,15 +1141,15 @@ function AdminAppointmentsContent() {
               </Button>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </DaylogContent>
+      </Daylog>
 
-      {/* Create Manual Appointment Dialog */}
-      <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>
-        <DialogContent className="max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>Novo Agendamento Manual</DialogTitle>
-          </DialogHeader>
+      {/* Create Manual Appointment Daylog */}
+      <Daylog open={isCreateDaylogOpen} onOpenChange={setIsCreateDaylogOpen}>
+        <DaylogContent className="max-w-2xl">
+          <DaylogHeader>
+            <DaylogTitle>Novo Agendamento Manual</DaylogTitle>
+          </DaylogHeader>
           <div className="space-y-4">
             <div>
               <Label htmlFor="create-client">Cliente *</Label>
@@ -1163,7 +1163,7 @@ function AdminAppointmentsContent() {
                   setCreateFormData({ ...createFormData, clientId: newClientId });
                 }}
               >
-                <option value={0}>Selecione um cliente</option>
+                <option value={0}>Select um cliente</option>
                 {clients?.map((client) => (
                   <option key={client.id} value={client.id}>
                     {client.name} - {client.email}
@@ -1173,7 +1173,7 @@ function AdminAppointmentsContent() {
             </div>
 
             <div>
-              <Label htmlFor="create-service">Serviço</Label>
+              <Label htmlFor="create-service">Service</Label>
               <select
                 id="create-service"
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -1193,7 +1193,7 @@ function AdminAppointmentsContent() {
                   }
                 }}
               >
-                <option value={0}>Selecione um serviço (opcional)</option>
+                <option value={0}>Select a service (optional)</option>
                 {services?.map((service) => (
                   <option key={service.id} value={service.id}>
                     {service.name}
@@ -1202,9 +1202,9 @@ function AdminAppointmentsContent() {
               </select>
             </div>
             <div className="p-3 bg-accent/5 border border-dashed border-accent/30 rounded-lg space-y-3">
-              <p className="text-xs text-muted-foreground font-medium">Personalizar serviço e valor (sobrescreve o serviço selecionado acima)</p>
+              <p className="text-xs text-muted-foreground font-medium">Customise serviço e valor (sobrescreve o serviço selecionado acima)</p>
               <div>
-                <Label htmlFor="create-custom-service">Descrição do Serviço</Label>
+                <Label htmlFor="create-custom-service">Description do Service</Label>
                 <Input
                   id="create-custom-service"
                   placeholder="Ex: Fotos Sensual, Ensaio Gestante..."
@@ -1213,7 +1213,7 @@ function AdminAppointmentsContent() {
                 />
               </div>
               <div>
-                <Label htmlFor="create-custom-price">Valor (R$)</Label>
+                <Label htmlFor="create-custom-price">Valor (£)</Label>
                 <Input
                   id="create-custom-price"
                   type="number"
@@ -1237,7 +1237,7 @@ function AdminAppointmentsContent() {
                 />
               </div>
               <div>
-                <Label htmlFor="create-time">Horário</Label>
+                <Label htmlFor="create-time">Time</Label>
                 <Input
                   id="create-time"
                   type="time"
@@ -1253,7 +1253,7 @@ function AdminAppointmentsContent() {
                 id="create-location"
                 value={createFormData.eventLocation}
                 onChange={(e) => setCreateFormData({ ...createFormData, eventLocation: e.target.value })}
-                placeholder="Endereço do evento"
+                placeholder="Address do evento"
               />
             </div>
 
@@ -1269,7 +1269,7 @@ function AdminAppointmentsContent() {
             </div>
 
             <div>
-              <Label htmlFor="create-notes">Observações</Label>
+              <Label htmlFor="create-notes">Notes</Label>
               <Textarea
                 id="create-notes"
                 value={createFormData.notes}
@@ -1282,7 +1282,7 @@ function AdminAppointmentsContent() {
             <div className="flex gap-2">
               <Button
                 variant="outline"
-                onClick={() => setIsCreateDialogOpen(false)}
+                onClick={() => setIsCreateDaylogOpen(false)}
                 className="flex-1"
               >
                 Cancelar
@@ -1293,8 +1293,8 @@ function AdminAppointmentsContent() {
                   
                   if (!createFormData.clientId || !createFormData.appointmentDate) {
                     toast({
-                      title: "Campos obrigatórios",
-                      description: "Selecione um cliente e uma data.",
+                      title: "Required fields",
+                      description: "Select um cliente e uma data.",
                       variant: "destructive",
                     });
                     return;
@@ -1325,14 +1325,14 @@ function AdminAppointmentsContent() {
               </Button>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </DaylogContent>
+      </Daylog>
 
-      {/* Payment Link Dialog */}
-      <SendPaymentLinkDialog
+      {/* Payment Link Daylog */}
+      <SendPaymentLinkDaylog
         appointment={selectedAppointment}
-        open={isPaymentDialogOpen}
-        onOpenChange={setIsPaymentDialogOpen}
+        open={isPaymentDaylogOpen}
+        onOpenChange={setIsPaymentDaylogOpen}
       />
     </div>
   );

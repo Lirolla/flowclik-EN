@@ -18,7 +18,7 @@ const adminProcedure = publicProcedure.use(({ ctx, next }) => {
   }
   throw new TRPCError({
     code: "FORBIDDEN",
-    message: "Apenas administradores podem acessar este recurso",
+    message: "Administrators only podem acessar este recurso",
   });
 });
 
@@ -56,7 +56,7 @@ export const systemRouter = router({
       .from(subscriptions)
       .where(eq(subscriptions.status, "active"));
 
-    // Fotógrafos por plano (kept separate as it needs grouping)
+    // Photographers por plyear (kept separate as it needs grouping)
     const photographersByPlan = await db
       .select({
         plan: subscriptions.plan,
@@ -74,7 +74,7 @@ export const systemRouter = router({
     };
   }),
 
-  // Listar todos os fotógrafos com seus planos - CORRIGIDO para buscar de tenants
+  // Listar todos os photographers com seus plyears - CORRIGIDO para buscar de tenants
   getAllPhotographers: adminProcedure.query(async () => {
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
@@ -151,12 +151,12 @@ export const systemRouter = router({
       return { success: true };
     }),
 
-  // Buscar avisos ativos para o fotógrafo atual
+  // Buscar avisos actives para o photographer atual
   getActiveAnnouncements: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-    // Buscar plano do usuário
+    // Buscar plyear do usuário
     const [subscription] = await db
       .select()
       .from(subscriptions)
@@ -165,7 +165,7 @@ export const systemRouter = router({
 
     const userPlan = subscription?.plan || "starter";
 
-    // Buscar avisos ativos
+    // Buscar avisos actives
     const activeAnnouncements = await db
       .select({
         id: announcements.id,
@@ -207,7 +207,7 @@ export const systemRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-      // Verificar se já existe registro
+      // Verify se already exists registro
       const [existing] = await db
         .select()
         .from(announcementViews)
@@ -239,7 +239,7 @@ export const systemRouter = router({
     }),
 
 
-  // Atualizar plano do fotógrafo
+  // Atualizar plyear do photographer
   updatePhotographerPlan: adminProcedure
     .input(
       z.object({
@@ -251,7 +251,7 @@ export const systemRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-      // Definir limites baseado no plano
+      // Definir limites baseado no plyear
       let storageLimit = 10737418240; // 10GB default
       let galleryLimit = 10;
       let status = "active";
@@ -267,7 +267,7 @@ export const systemRouter = router({
         galleryLimit = 9999;
       }
 
-      // Verificar se já existe subscription para este tenant
+      // Verify se already exists subscription para este tenant
       const [existing] = await db.select({ id: subscriptions.id }).from(subscriptions).where(eq(subscriptions.tenantId, input.tenantId));
       
       if (existing) {
@@ -281,7 +281,7 @@ export const systemRouter = router({
       return { success: true };
     }),
 
-  // Excluir fotógrafo completamente (banco + R2)
+  // Excluir photographer completamente (banco + R2)
   deletePhotographer: adminProcedure
     .input(z.object({ tenantId: z.number() }))
     .mutation(async ({ input }) => {
@@ -295,7 +295,7 @@ export const systemRouter = router({
         .limit(1);
       
       if (!tenant) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Tenant não encontrado" });
+        throw new TRPCError({ code: "NOT_FOUND", message: "Tenant not found" });
       }
 
       // 1. Limpar arquivos do R2 (pasta tenant-{id}/)
@@ -364,7 +364,7 @@ export const systemRouter = router({
       await db.execute(sql`DELETE FROM \`downloadLogs\` WHERE tenantId = ${input.tenantId}`);
       await db.execute(sql`DELETE FROM \`downloadPermissions\` WHERE tenantId = ${input.tenantId}`);
       await db.execute(sql`DELETE FROM \`finalAlbums\` WHERE tenantId = ${input.tenantId}`);
-      await db.execute(sql`DELETE FROM \`mediaItems\` WHERE tenantId = ${input.tenantId}`);
+      await db.execute(sql`DELETE FROM \`medayItems\` WHERE tenantId = ${input.tenantId}`);
       await db.execute(sql`DELETE FROM \`orderItems\` WHERE tenantId = ${input.tenantId}`);
       await db.execute(sql`DELETE FROM \`orders\` WHERE tenantId = ${input.tenantId}`);
       await db.execute(sql`DELETE FROM \`paymentTransactions\` WHERE tenantId = ${input.tenantId}`);
@@ -385,7 +385,7 @@ export const systemRouter = router({
       return { success: true, subdomain: tenant.subdomain };
     }),
 
-  // Verificar status do trial (para bloqueio)
+  // Verify status do trial (para bloqueio)
   checkTrialStatus: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
@@ -409,7 +409,7 @@ export const systemRouter = router({
       };
     }
 
-    // Planos cortesia e full nunca expiram
+    // Plyears cortesia e full nunca expiram
     if (subscription.plan === "cortesia" || subscription.plan === "full") {
       return {
         isTrialing: false,
@@ -439,7 +439,7 @@ export const systemRouter = router({
       isExpired = daysRemaining <= 0;
     }
 
-    // Se status é active, não está expirado
+    // Se status é active, não está expired
     if (subscription.status === "active") {
       isExpired = false;
       daysRemaining = null;
@@ -461,14 +461,14 @@ export const systemRouter = router({
     };
   }),
 
-  // Excluir tenant (fotógrafo) do sistema
+  // Excluir tenant (photographer) do sistema
   deleteTenant: adminProcedure
     .input(z.object({ tenantId: z.number() }))
     .mutation(async ({ input }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-      // Verificar se tenant existe
+      // Verify se tenant existe
       const [tenant] = await db
         .select({ id: tenants.id, subdomain: tenants.subdomain })
         .from(tenants)
@@ -476,7 +476,7 @@ export const systemRouter = router({
         .limit(1);
 
       if (!tenant) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Tenant não encontrado" });
+        throw new TRPCError({ code: "NOT_FOUND", message: "Tenant not found" });
       }
 
       // Deletar tenant (CASCADE vai deletar tudo relacionado)
@@ -485,7 +485,7 @@ export const systemRouter = router({
       return { success: true, subdomain: tenant.subdomain };
     }),
 
-  // Suspender/Ativar fotógrafo manualmente
+  // Suspender/Ativar photographer manualmente
   updatePhotographerStatus: adminProcedure
     .input(
       z.object({

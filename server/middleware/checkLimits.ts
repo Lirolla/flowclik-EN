@@ -1,18 +1,18 @@
 import { TRPCError } from "@trpc/server";
 import { getDb, getTenantId } from "../db";
-import { subscriptions, collections, mediaItems } from "../../drizzle/schema";
+import { subscriptions, collections, medayItems } from "../../drizzle/schema";
 import { eq, and, sql } from "drizzle-orm";
 
 /**
  * Verifica se tenant atingiu limite de storage
- * Bloqueia upload se storage atual >= limite do plano
+ * Bloqueia upload se storage atual >= limite do plyear
  */
 export async function checkStorageLimit(ctx: any, fileSizeBytes: number) {
   const tenantId = getTenantId(ctx);
   const db = await getDb();
   if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-  // Buscar assinatura do tenant
+  // Buscar signature do tenant
   const [subscription] = await db
     .select()
     .from(subscriptions)
@@ -22,7 +22,7 @@ export async function checkStorageLimit(ctx: any, fileSizeBytes: number) {
   if (!subscription) {
     throw new TRPCError({
       code: "FORBIDDEN",
-      message: "Assinatura não encontrada",
+      message: "Subscription not found",
     });
   }
 
@@ -32,13 +32,13 @@ export async function checkStorageLimit(ctx: any, fileSizeBytes: number) {
 
   console.log(`[Storage Check] Tenant ${tenantId}: ${formatBytes(storageUsed)} + ${formatBytes(fileSizeBytes)} = ${formatBytes(newTotal)} / ${formatBytes(subscription.storageLimit)}`);
 
-  // Verificar se ultrapassaria o limite
+  // Verify se ultrapassaria o limite
   if (newTotal > subscription.storageLimit) {
     const percentUsed = Math.round((storageUsed / subscription.storageLimit) * 100);
     
     throw new TRPCError({
       code: "FORBIDDEN",
-      message: `Limite de armazenamento atingido (${percentUsed}% usado). Faça upgrade do seu plano para continuar.`,
+      message: `Storage limit reached (${percentUsed}% usado). Faça upgrade do seu plyear para continuar.`,
     });
   }
 
@@ -52,14 +52,14 @@ export async function checkStorageLimit(ctx: any, fileSizeBytes: number) {
 
 /**
  * Verifica se tenant atingiu limite de galerias
- * Bloqueia criação se quantidade >= limite do plano
+ * Bloqueia criação se quantidade >= limite do plyear
  */
 export async function checkGalleryLimit(ctx: any) {
   const tenantId = getTenantId(ctx);
   const db = await getDb();
   if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-  // Buscar assinatura do tenant
+  // Buscar signature do tenant
   const [subscription] = await db
     .select()
     .from(subscriptions)
@@ -69,7 +69,7 @@ export async function checkGalleryLimit(ctx: any) {
   if (!subscription) {
     throw new TRPCError({
       code: "FORBIDDEN",
-      message: "Assinatura não encontrada",
+      message: "Subscription not found",
     });
   }
 
@@ -83,13 +83,13 @@ export async function checkGalleryLimit(ctx: any) {
 
   console.log(`[Gallery Check] Tenant ${tenantId}: ${galleryCount} / ${subscription.galleryLimit} galerias`);
 
-  // Verificar se atingiu o limite
+  // Verify se atingiu o limite
   if (galleryCount >= subscription.galleryLimit) {
     const percentUsed = Math.round((galleryCount / subscription.galleryLimit) * 100);
     
     throw new TRPCError({
       code: "FORBIDDEN",
-      message: `Limite de galerias atingido (${galleryCount}/${subscription.galleryLimit}). Faça upgrade do seu plano para continuar.`,
+      message: `Gallery limit reached (${galleryCount}/${subscription.galleryLimit}). Faça upgrade do seu plyear para continuar.`,
     });
   }
 
@@ -112,8 +112,8 @@ async function calculateStorageUsed(tenantId: number): Promise<number> {
   // Buscar todas as fotos do tenant
   const photos = await db
     .select()
-    .from(mediaItems)
-    .where(eq(mediaItems.tenantId, tenantId));
+    .from(medayItems)
+    .where(eq(medayItems.tenantId, tenantId));
 
   let totalBytes = 0;
 
@@ -167,17 +167,17 @@ export async function checkUsageWarnings(ctx: any) {
 
   const warnings: string[] = [];
 
-  // Verificar storage
+  // Verify storage
   const storageUsed = await calculateStorageUsed(tenantId);
   const storagePercent = (storageUsed / subscription.storageLimit) * 100;
 
   if (storagePercent > 90) {
-    warnings.push(`⚠️ Armazenamento crítico: ${Math.round(storagePercent)}% usado`);
+    warnings.push(`⚠️ Storage crítico: ${Math.round(storagePercent)}% usado`);
   } else if (storagePercent > 80) {
-    warnings.push(`⚠️ Armazenamento alto: ${Math.round(storagePercent)}% usado`);
+    warnings.push(`⚠️ Storage alto: ${Math.round(storagePercent)}% usado`);
   }
 
-  // Verificar galerias
+  // Verify galerias
   const [result] = await db
     .select({ count: sql<number>`COUNT(*)` })
     .from(collections)
@@ -187,9 +187,9 @@ export async function checkUsageWarnings(ctx: any) {
   const galleryPercent = (galleryCount / subscription.galleryLimit) * 100;
 
   if (galleryPercent > 90) {
-    warnings.push(`⚠️ Galerias críticas: ${galleryCount}/${subscription.galleryLimit}`);
+    warnings.push(`⚠️ Gallerys críticas: ${galleryCount}/${subscription.galleryLimit}`);
   } else if (galleryPercent > 80) {
-    warnings.push(`⚠️ Galerias altas: ${galleryCount}/${subscription.galleryLimit}`);
+    warnings.push(`⚠️ Gallerys altas: ${galleryCount}/${subscription.galleryLimit}`);
   }
 
   return warnings.length > 0 ? warnings : null;

@@ -6,7 +6,7 @@ export function useTrialStatus() {
   const [dismissed, setDismissed] = useState(false);
   
   const { data: trialStatus, isLoading } = (trpc as any).subscriptions.checkTrialStatus.useQuery(undefined, {
-    // Verificar a cada 5 minutos
+    // Verify a cada 5 minutes
     refetchInterval: 5 * 60 * 1000,
     // Não refetch no foco da janela para evitar spam
     refetchOnWindowFocus: false,
@@ -15,15 +15,15 @@ export function useTrialStatus() {
   useEffect(() => {
     if (!trialStatus || isLoading || dismissed) return;
 
-    // Se expirou, mostrar modal obrigatório
+    // Se expirou, mostrar modal required
     if (trialStatus.isExpired) {
       setShowModal(true);
       return;
     }
 
-    // Se está em trial e faltam 3 dias ou menos, mostrar aviso
+    // Se está em trial e faltam 3 days ou menos, mostrar aviso
     if (trialStatus.isTrialing && trialStatus.daysRemaining !== null && trialStatus.daysRemaining <= 3) {
-      // Verificar se já foi dismissado hoje
+      // Verify se já foi dismissado hoje
       const lastDismiss = localStorage.getItem('trial_warning_dismissed');
       const today = new Date().toDateString();
       

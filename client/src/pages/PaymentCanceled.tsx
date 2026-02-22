@@ -14,22 +14,22 @@ export default function PaymentCanceled() {
         </div>
 
         <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          Pagamento Cancelado
+          Pagamento Cancelled
         </h1>
 
         <p className="text-lg text-gray-600 mb-8">
-          Seu pagamento foi cancelado ou ocorreu um erro durante o processamento.
+          Seu pagamento foi cancelled ou ocorreu um erro durante o processamento.
         </p>
 
         <div className="bg-gray-50 rounded-lg p-6 mb-8">
           <p className="text-sm text-gray-700">
-            Não se preocupe, nenhuma cobrança foi realizada.
+            Não se preocupe, nonea cobrança foi realizada.
           </p>
         </div>
 
         <div className="space-y-4">
           <p className="text-gray-600">
-            Se você encontrou algum problema, entre em contato conosco para que possamos ajudá-lo.
+            Se you encontrou algum problema, get in touch conosco para que possamos ajudá-lo.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
@@ -51,7 +51,7 @@ export default function PaymentCanceled() {
 
         <div className="mt-8 pt-6 border-t border-gray-200">
           <p className="text-sm text-gray-500">
-            Precisa de ajuda? Entre em contato conosco.
+            Precisa de help? Get in touch conosco.
           </p>
         </div>
       </Card>

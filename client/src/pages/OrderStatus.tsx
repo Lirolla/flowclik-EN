@@ -31,10 +31,10 @@ export default function OrderStatus() {
   const getStatusInfo = (status: string) => {
     const map: Record<string, { label: string; icon: any; color: string; desc: string }> = {
       pending: { label: "Aguardando Pagamento", icon: Clock, color: "text-yellow-500", desc: "Realize o pagamento para liberar o download das fotos." },
-      paid: { label: "Paid", icon: Check, color: "text-green-500", desc: "Pagamento confirmado! Suas fotos estão disponíveis para download." },
-      processing: { label: "Processando", icon: Clock, color: "text-blue-500", desc: "Seu pedido está sendo processado." },
+      paid: { label: "Paid", icon: Check, color: "text-green-500", desc: "Payment confirmed! Suas fotos estão disponíveis para download." },
+      processing: { label: "Processing", icon: Clock, color: "text-blue-500", desc: "Seu pedido está sendo processado." },
       completed: { label: "Completed", icon: Check, color: "text-green-600", desc: "Pedido concluído. Faça o download das suas fotos." },
-      cancelled: { label: "Cancelled", icon: XIcon, color: "text-red-500", desc: "Este pedido foi cancelado." },
+      cancelled: { label: "Cancelled", icon: XIcon, color: "text-red-500", desc: "Este pedido foi cancelled." },
     };
     return map[status] || map.pending;
   };
@@ -44,7 +44,7 @@ export default function OrderStatus() {
     const map: Record<string, string> = {
       pix: "Bank transfer",
       payment_link: "Link de Pagamento",
-      bank_transfer: "Transferência Bancária",
+      bank_transfer: "Bank Transfer",
     };
     return map[method] || method;
   };
@@ -54,9 +54,9 @@ export default function OrderStatus() {
       <div className="min-h-screen bg-background">
         <div className="pt-32 pb-24 px-4">
           <div className="container mx-auto max-w-2xl">
-            <h1 className="text-3xl font-bold mb-2 text-center">Status do Pedido</h1>
+            <h1 className="text-3xl font-bold mb-2 text-center">Order Status</h1>
             {orderId && (
-              <p className="text-center text-muted-foreground mb-8">Pedido #{orderId}</p>
+              <p className="text-center text-muted-foreground mb-8">Order #{orderId}</p>
             )}
 
             {/* Email verification */}
@@ -79,11 +79,11 @@ export default function OrderStatus() {
                   </div>
                   <Button onClick={handleSearch} disabled={isLoading || !email.includes("@")} className="w-full">
                     <Search className="w-4 h-4 mr-2" />
-                    {isLoading ? "Verificando..." : "Verificar Pedido"}
+                    {isLoading ? "Verifying..." : "Verify Pedido"}
                   </Button>
                   {searched && !order && !isLoading && (
                     <p className="text-red-500 text-sm text-center">
-                      Pedido não encontrado. Verifique o número do pedido e o e-mail.
+                      Pedido not found. Verifique o number do pedido e o e-mail.
                     </p>
                   )}
                 </CardContent>
@@ -115,7 +115,7 @@ export default function OrderStatus() {
                   <Card className="border-purple-500/30">
                     <CardContent className="p-6 text-center space-y-3">
                       <Link2 className="w-8 h-8 mx-auto text-purple-500" />
-                      <h3 className="font-semibold">Link de Pagamento Disponível</h3>
+                      <h3 className="font-semibold">Link de Pagamento Available</h3>
                       <Button onClick={() => window.open(order.paymentLink!, "_blank")} className="bg-purple-600 hover:bg-purple-700">
                         <ExternalLink className="w-4 h-4 mr-2" />
                         Ir para Pagamento
@@ -127,7 +127,7 @@ export default function OrderStatus() {
                 {/* Order details */}
                 <Card>
                   <CardContent className="p-6">
-                    <h3 className="font-semibold mb-3">Detalhes do Pedido</h3>
+                    <h3 className="font-semibold mb-3">Order Details</h3>
                     <div className="space-y-2 text-sm">
                       {order.items?.map((item: any) => (
                         <div key={item.id} className="flex justify-between">
@@ -149,7 +149,7 @@ export default function OrderStatus() {
                     <CardContent className="p-6 space-y-4">
                       <div className="flex items-center gap-2">
                         <Download className="w-5 h-5 text-green-500" />
-                        <h3 className="font-semibold text-green-500">Download Disponível</h3>
+                        <h3 className="font-semibold text-green-500">Download Available</h3>
                       </div>
                       <div className="space-y-2">
                         {order.downloadUrls.map((dl: any) => (
@@ -171,7 +171,7 @@ export default function OrderStatus() {
                 {/* Back button */}
                 <div className="text-center">
                   <Button variant="ghost" onClick={() => { setSearched(false); setEmail(""); }}>
-                    Verificar outro pedido
+                    Verify outro pedido
                   </Button>
                 </div>
               </div>

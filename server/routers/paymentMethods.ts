@@ -68,7 +68,7 @@ export const paymentMethodsRouter = router({
         .limit(1);
 
       if (!appointment[0]) {
-        throw new Error("Agendamento não encontrado");
+        throw new Error("Appointment not found");
       }
 
       // Create payment transaction
@@ -105,7 +105,7 @@ export const paymentMethodsRouter = router({
       // Mapear nomes dos métodos de pagamento
       const methodNames: Record<string, string> = {
         cash: "Cash",
-        bank_transfer: "Transferência Bancária",
+        bank_transfer: "Bank Transfer",
         pix: "Bank transfer",
         payment_link: "Link de Pagamento",
       };
@@ -115,16 +115,16 @@ export const paymentMethodsRouter = router({
         await sendPaymentConfirmationEmail({
           clientName: appointment[0].clientName,
           clientEmail: appointment[0].clientEmail,
-          serviceName: "Sessão Fotográfica",
+          serviceName: "Photo Session",
           amount: finalPrice,
-          paymentDate: new Date().toLocaleDateString('pt-BR'),
+          paymentDate: new Date().toLocaleDateString('en-GB'),
         }).catch(err => console.error('Erro ao enviar email:', err));
       }
 
       // Notify owner
       await notifyOwner({
         title: `💰 Pagamento ${newPaymentStatus === "paid" ? "completo" : "parcial"} recebido`,
-        content: `Cliente: ${appointment[0].clientName}\nMétodo: ${methodNames[input.paymentMethod] || input.paymentMethod}\nValor: R$ ${input.amount.toFixed(2)}\nTotal pago: R$ ${newPaidAmount.toFixed(2)} de R$ ${finalPrice.toFixed(2)}`,
+        content: `Cliente: ${appointment[0].clientName}\nMétodo: ${methodNames[input.paymentMethod] || input.paymentMethod}\nValor: £ ${input.amount.toFixed(2)}\nTotal pago: £ ${newPaidAmount.toFixed(2)} de £ ${finalPrice.toFixed(2)}`,
       }).catch(err => console.error('Erro ao notificar:', err));
 
       return {

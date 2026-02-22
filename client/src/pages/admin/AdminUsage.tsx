@@ -32,7 +32,7 @@ export default function AdminUsage() {
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            Erro ao carregar estatísticas de uso. Tente novamente mais tarde.
+            Error loading estatísticas de uso. Try again mais tarde.
           </AlertDescription>
         </Alert>
       </div>
@@ -77,7 +77,7 @@ export default function AdminUsage() {
             <div className="flex items-center justify-between">
               <CardTitle className="text-lg flex items-center gap-2">
                 <HardDrive className="w-5 h-5 text-blue-500" />
-                Armazenamento
+                Storage
               </CardTitle>
               <span className={`text-2xl font-bold ${getUsageColor(stats.storage.percentage)}`}>
                 {stats.storage.percentage}%
@@ -98,7 +98,7 @@ export default function AdminUsage() {
                 <AlertDescription className="text-sm">
                   {stats.storage.percentage >= 90 
                     ? "Limite quase atingido! Considere fazer upgrade."
-                    : "Você está usando mais de 80% do seu armazenamento."}
+                    : "You está usando mais de 80% do seu armazenamento."}
                 </AlertDescription>
               </Alert>
             )}
@@ -111,7 +111,7 @@ export default function AdminUsage() {
             <div className="flex items-center justify-between">
               <CardTitle className="text-lg flex items-center gap-2">
                 <FolderOpen className="w-5 h-5 text-purple-500" />
-                Galerias
+                Gallerys
               </CardTitle>
               <span className={`text-2xl font-bold ${getUsageColor(stats.galleries.percentage)}`}>
                 {stats.galleries.percentage}%
@@ -132,7 +132,7 @@ export default function AdminUsage() {
                 <AlertDescription className="text-sm">
                   {stats.galleries.percentage >= 90 
                     ? "Limite de galerias quase atingido!"
-                    : "Você está usando mais de 80% das suas galerias."}
+                    : "You está usando mais de 80% das suas galerias."}
                 </AlertDescription>
               </Alert>
             )}
@@ -175,10 +175,10 @@ export default function AdminUsage() {
             <div>
               <CardTitle className="text-2xl flex items-center gap-2">
                 <CreditCard className="w-6 h-6 text-primary" />
-                Plano Atual
+                Plyear Atual
               </CardTitle>
               <CardDescription className="mt-2">
-                Gerencie sua assinatura e add-ons
+                Gerencie sua signature e add-ons
               </CardDescription>
             </div>
             <div className="text-right">
@@ -186,7 +186,7 @@ export default function AdminUsage() {
                 {stats.plan.currency}{stats.plan.price}
               </div>
               <div className="text-sm text-muted-foreground">
-                por mês
+                por month
               </div>
             </div>
           </div>
@@ -194,25 +194,25 @@ export default function AdminUsage() {
         <CardContent className="space-y-4">
           <div className="flex items-center justify-between p-4 bg-background rounded-lg border">
             <div>
-              <div className="font-medium">Plano {stats.plan.name}</div>
+              <div className="font-medium">Plyear {stats.plan.name}</div>
               <div className="text-sm text-muted-foreground">
-                Próxima cobrança: {new Date(stats.plan.nextBilling).toLocaleDateString('pt-BR')}
+                Next cobrança: {new Date(stats.plan.nextBilling).toLocaleDateString('en-GB')}
               </div>
             </div>
             <Button variant="outline" onClick={() => navigate("/admin/subscription")}>
               <TrendingUp className="w-4 h-4 mr-2" />
-              Gerenciar Plano
+              Gerenciar Plyear
             </Button>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
             <Button variant="outline" className="w-full" onClick={() => navigate("/admin/subscription")}>
               Comprar +10GB
-              <span className="ml-auto text-muted-foreground">£3.99/mês</span>
+              <span className="ml-auto text-muted-foreground">£3.99/month</span>
             </Button>
             <Button variant="outline" className="w-full" onClick={() => navigate("/admin/subscription")}>
-              Comprar +10 Galerias
-              <span className="ml-auto text-muted-foreground">£2.99/mês</span>
+              Comprar +10 Gallerys
+              <span className="ml-auto text-muted-foreground">£2.99/month</span>
             </Button>
           </div>
         </CardContent>

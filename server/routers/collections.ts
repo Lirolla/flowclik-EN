@@ -1,7 +1,7 @@
 import { router, publicProcedure, protectedProcedure } from "../_core/trpc";
 import { z } from "zod";
 import { getDb, getTenantId } from "../db";
-import { collections, mediaItems, photoSelections } from "../../drizzle/schema";
+import { collections, medayItems, photoSelections } from "../../drizzle/schema";
 import { sql, eq, and } from "drizzle-orm";
 import { sendGalleryReadyEmail } from "../_core/emailTemplates";
 import { S3Client, ListObjectsV2Command, DeleteObjectsCommand } from "@aws-sdk/client-s3";
@@ -56,9 +56,9 @@ export const collectionsRouter = router({
     }),
 
   /**
-   * Get by ID with media items
+   * Get by ID with meday items
    */
-  getWithMedia: publicProcedure
+  getWithMeday: publicProcedure
     .input(z.object({ id: z.number() }))
     .query(async ({ input, ctx }) => {
       const db = await getDb();
@@ -72,15 +72,15 @@ export const collectionsRouter = router({
       
       if (!collection) return null;
       
-      // Get all media items for this collection
+      // Get all meday items for this collection
       const items = await db
         .select()
-        .from(mediaItems)
-        .where(eq(mediaItems.collectionId, input.id));
+        .from(medayItems)
+        .where(eq(medayItems.collectionId, input.id));
       
       return {
         ...collection,
-        mediaItems: items,
+        medayItems: items,
       };
     }),
 
@@ -105,12 +105,12 @@ export const collectionsRouter = router({
       const selections = await db
         .select({
           id: photoSelections.id,
-          mediaItemId: photoSelections.mediaItemId,
+          medayItemId: photoSelections.medayItemId,
           editedPhotoUrl: photoSelections.editedPhotoUrl,
-          mediaTitle: mediaItems.title,
+          medayTitle: medayItems.title,
         })
         .from(photoSelections)
-        .leftJoin(mediaItems, eq(photoSelections.mediaItemId, mediaItems.id))
+        .leftJoin(medayItems, eq(photoSelections.medayItemId, medayItems.id))
         .where(eq(photoSelections.collectionId, collection.id));
       
       return {
@@ -207,7 +207,7 @@ export const collectionsRouter = router({
 
       // Converter boolean para tinyint (0 ou 1)
       const dbData: any = { ...data };
-      console.log('[DEBUG collections.update] dbData ANTES conversão:', JSON.stringify(dbData, null, 2));
+      console.log('[DEBUG collections.update] dbData ANTES conversion:', JSON.stringify(dbData, null, 2));
       if (typeof data.isFeatured === 'boolean') {
         dbData.isFeatured = data.isFeatured ? 1 : 0;
       }
@@ -215,7 +215,7 @@ export const collectionsRouter = router({
         dbData.isPublic = data.isPublic ? 1 : 0;
       }
 
-      console.log('[DEBUG collections.update] dbData DEPOIS conversão:', JSON.stringify(dbData, null, 2));
+      console.log('[DEBUG collections.update] dbData DEPOIS conversion:', JSON.stringify(dbData, null, 2));
 
       await db!.update(collections).set(dbData).where(and(eq(collections.id, id), eq(collections.tenantId, getTenantId(ctx))));
 
@@ -243,14 +243,14 @@ export const collectionsRouter = router({
       // 1. Buscar todas as fotos da galeria para pegar as URLs do R2
       const photos = await db
         .select({
-          id: mediaItems.id,
-          originalUrl: mediaItems.originalUrl,
-          previewUrl: mediaItems.previewUrl,
-          thumbnailUrl: mediaItems.thumbnailUrl,
-          watermarkedUrl: mediaItems.watermarkedUrl,
+          id: medayItems.id,
+          originalUrl: medayItems.originalUrl,
+          previewUrl: medayItems.previewUrl,
+          thumbnailUrl: medayItems.thumbnailUrl,
+          watermarkedUrl: medayItems.watermarkedUrl,
         })
-        .from(mediaItems)
-        .where(and(eq(mediaItems.collectionId, input.id), eq(mediaItems.tenantId, tenantId)));
+        .from(medayItems)
+        .where(and(eq(medayItems.collectionId, input.id), eq(medayItems.tenantId, tenantId)));
 
       // 2. Extrair keys do R2 a partir das URLs
       const R2_PUBLIC_URL = "https://fotos.flowclik.com";
@@ -260,7 +260,7 @@ export const collectionsRouter = router({
         const urls = [photo.originalUrl, photo.previewUrl, photo.thumbnailUrl, photo.watermarkedUrl];
         for (const url of urls) {
           if (url && url.startsWith(R2_PUBLIC_URL)) {
-            // Extrair a key removendo o domínio público
+            // Extrair a key removendo o domain público
             const key = url.replace(R2_PUBLIC_URL + "/", "");
             if (key) keysToDelete.push(key);
           }
@@ -291,7 +291,7 @@ export const collectionsRouter = router({
             }));
           }
 
-          console.log(`[R2] Galeria ${input.id}: ${keysToDelete.length} arquivos deletados do R2`);
+          console.log(`[R2] Gallery ${input.id}: ${keysToDelete.length} arquivos deletados do R2`);
         } catch (r2Error: any) {
           console.error(`[R2] Erro ao deletar arquivos da galeria ${input.id}:`, r2Error.message);
           // Continua mesmo se falhar no R2 - não bloqueia a deleção do banco
@@ -300,16 +300,16 @@ export const collectionsRouter = router({
 
       // 4. Deletar seleções de fotos da galeria
       await db.delete(photoSelections).where(
-        sql`mediaItemId IN (SELECT id FROM mediaItems WHERE collectionId = ${input.id} AND tenantId = ${tenantId})`
+        sql`medayItemId IN (SELECT id FROM medayItems WHERE collectionId = ${input.id} AND tenantId = ${tenantId})`
       ).catch(() => {});
 
-      // 5. Deletar mediaItems do banco
-      await db.delete(mediaItems).where(and(eq(mediaItems.collectionId, input.id), eq(mediaItems.tenantId, tenantId)));
+      // 5. Deletar medayItems do banco
+      await db.delete(medayItems).where(and(eq(medayItems.collectionId, input.id), eq(medayItems.tenantId, tenantId)));
 
       // 6. Deletar a galeria do banco
       await db.delete(collections).where(and(eq(collections.id, input.id), eq(collections.tenantId, tenantId)));
 
-      console.log(`[Gallery] Galeria ${input.id} deletada com ${photos.length} fotos e ${keysToDelete.length} arquivos R2`);
+      console.log(`[Gallery] Gallery ${input.id} deletada com ${photos.length} fotos e ${keysToDelete.length} arquivos R2`);
       return { success: true, deletedPhotos: photos.length, deletedR2Files: keysToDelete.length };
     }),
 
@@ -333,14 +333,14 @@ export const collectionsRouter = router({
         .limit(1);
 
       if (!collection[0]) {
-        throw new Error("Galeria não encontrada");
+        throw new Error("Gallery not found");
       }
 
       const baseUrl = process.env.VITE_FRONTEND_FORGE_API_URL?.replace('/api', '') || 'https://lirolla.com';
       const galleryUrl = `${baseUrl}/gallery/${collection[0].slug}`;
       
       // Contar fotos na galeria
-      const photos = await db!.select().from(mediaItems).where(eq(mediaItems.collectionId, input.collectionId));
+      const photos = await db!.select().from(medayItems).where(eq(medayItems.collectionId, input.collectionId));
       
       // Enviar email usando template profissional
       const emailSent = await sendGalleryReadyEmail({
@@ -368,7 +368,7 @@ export const collectionsRouter = router({
   enableSales: protectedProcedure
     .input(z.object({ 
       collectionId: z.number(),
-      pricePerPhoto: z.number().default(2500), // R$ 25.00
+      pricePerPhoto: z.number().default(2500), // £ 25.00
     }))
     .mutation(async ({ input, ctx }) => {
       if (ctx.user?.role !== 'admin') {
@@ -393,10 +393,10 @@ export const collectionsRouter = router({
 
       // Mark all photos as available for sale
       await db
-        .update(mediaItems)
+        .update(medayItems)
         // @ts-ignore
         .set({ availableForSale: true })
-        .where(eq(mediaItems.collectionId, input.collectionId));
+        .where(eq(medayItems.collectionId, input.collectionId));
 
       return { 
         success: true,
@@ -469,8 +469,8 @@ export const collectionsRouter = router({
       // Get photos available for sale
       const photos = await db
         .select()
-        .from(mediaItems)
-        .where(eq(mediaItems.collectionId, collection.id));
+        .from(medayItems)
+        .where(eq(medayItems.collectionId, collection.id));
 
       return {
         ...collection,
@@ -523,13 +523,13 @@ export const collectionsRouter = router({
   // TEMPORÁRIO: Deletar galerias de teste
   deleteTestGalleries: protectedProcedure.mutation(async ({ ctx }) => {
     const db = await getDb();
-    const { mediaItems, collections } = await import('../../drizzle/schema');
+    const { medayItems, collections } = await import('../../drizzle/schema');
     const { sql } = await import('drizzle-orm');
     const dbConn = await getDb();
     if (!dbConn) throw new Error('Database not available');
     
     // Deletar fotos primeiro
-    await db!.delete(mediaItems).where(sql`collectionId >= 21`);
+    await db!.delete(medayItems).where(sql`collectionId >= 21`);
     
     // Deletar galerias
     const result = await db!.delete(collections).where(sql`id >= 21`);

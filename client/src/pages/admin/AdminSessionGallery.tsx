@@ -29,8 +29,8 @@ function AdminSessionGalleryContent() {
   const createGalleryMutation = trpc.sessionGallery.createForAppointment.useMutation({
     onSuccess: () => {
       toast({
-        title: "Galeria criada!",
-        description: "Agora você pode fazer upload das fotos.",
+        title: "Gallery criada!",
+        description: "You can now upload the photos.",
       });
       window.location.reload();
     },
@@ -62,7 +62,7 @@ function AdminSessionGalleryContent() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold mb-2">Galeria do Ensaio</h1>
+          <h1 className="text-3xl font-bold mb-2">Gallery do Ensaio</h1>
           <p className="text-muted-foreground">
             Gerenciar fotos do ensaio para o cliente
           </p>
@@ -72,13 +72,13 @@ function AdminSessionGalleryContent() {
           <CardContent className="py-12 text-center">
             <Upload className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-xl font-semibold mb-2">
-              Nenhuma galeria criada ainda
+              Nonea galeria criada ainda
             </h3>
             <p className="text-muted-foreground mb-6">
               Crie uma galeria privada para fazer upload das fotos do ensaio
             </p>
             <Button onClick={handleCreateGallery}>
-              Criar Galeria
+              Criar Gallery
             </Button>
           </CardContent>
         </Card>
@@ -91,7 +91,7 @@ function AdminSessionGalleryContent() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-3xl font-bold mb-2">Galeria do Ensaio</h1>
+        <h1 className="text-3xl font-bold mb-2">Gallery do Ensaio</h1>
         <p className="text-muted-foreground">
           Gerenciar fotos do ensaio #{appointmentId}
         </p>
@@ -112,7 +112,7 @@ function AdminSessionGalleryContent() {
         <Card>
           <CardHeader>
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Favoritas do Cliente
+              Favourites do Cliente
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -125,7 +125,7 @@ function AdminSessionGalleryContent() {
         <Card>
           <CardHeader>
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Taxa de Seleção
+              Selection Fee
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -176,15 +176,15 @@ function AdminSessionGalleryContent() {
           <div className="text-center py-8">
             <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
             <p className="text-muted-foreground mb-4">
-              Use a página de <strong>Galerias</strong> para fazer upload das fotos do ensaio
+              Use a página de <strong>Galleries</strong> para fazer upload das fotos do ensaio
             </p>
             <Button asChild>
               <Link href={`/admin/galleries/${galleryData.id}/upload`}>
-                <a>Ir para Upload de Galerias</a>
+                <a>Ir para Upload de Gallerys</a>
               </Link>
             </Button>
             <p className="text-sm text-muted-foreground mt-4">
-              Dica: Selecione a galeria "{galleryData.name}" ao fazer upload
+              Dica: Select a galeria "{galleryData.name}" ao fazer upload
             </p>
           </div>
         </CardContent>

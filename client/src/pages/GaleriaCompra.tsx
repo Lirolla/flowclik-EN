@@ -7,7 +7,7 @@ import { ShoppingCart, X, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useCart } from "@/contexts/CartContext";
 
-export default function GaleriaCompra() {
+export default function GalleryCompra() {
   const { slug } = useParams();
   const [, setLocation] = useLocation();
   const { addItem, isInCart, items } = useCart();
@@ -65,9 +65,9 @@ export default function GaleriaCompra() {
       <div className="min-h-screen flex items-center justify-center bg-background">
         <Card className="max-w-md">
           <CardContent className="p-8 text-center">
-            <h1 className="text-2xl font-bold mb-2">Galeria não encontrada</h1>
+            <h1 className="text-2xl font-bold mb-2">Gallery not found</h1>
             <p className="text-muted-foreground">
-              Esta galeria não existe ou não está disponível para venda.
+              Esta galeria não existe ou não está available para venda.
             </p>
           </CardContent>
         </Card>
@@ -94,7 +94,7 @@ export default function GaleriaCompra() {
             <div className="flex items-center gap-4">
               <div className="text-right">
                 <p className="text-sm text-muted-foreground">Preço por foto</p>
-                <p className="text-lg font-bold">R$ {pricePerPhoto.toFixed(2)}</p>
+                <p className="text-lg font-bold">£ {pricePerPhoto.toFixed(2)}</p>
               </div>
               <Button
                 size="lg"
@@ -106,7 +106,7 @@ export default function GaleriaCompra() {
                 Ir para Carrinho ({galleryItemsInCart.length})
                 {galleryItemsInCart.length > 0 && (
                   <span className="ml-2 text-sm">
-                    R$ {totalPrice.toFixed(2)}
+                    £ {totalPrice.toFixed(2)}
                   </span>
                 )}
               </Button>
@@ -158,7 +158,7 @@ export default function GaleriaCompra() {
 
                     {/* Price tag */}
                     <div className="absolute bottom-2 left-2 bg-black/70 text-white px-2 py-1 rounded text-sm font-semibold">
-                      R$ {pricePerPhoto.toFixed(2)}
+                      £ {pricePerPhoto.toFixed(2)}
                     </div>
 
                     {/* Hover overlay */}
@@ -177,7 +177,7 @@ export default function GaleriaCompra() {
         ) : (
           <Card>
             <CardContent className="py-12 text-center">
-              <p className="text-muted-foreground">Nenhuma foto disponível para venda</p>
+              <p className="text-muted-foreground">Nonea foto available para venda</p>
             </CardContent>
           </Card>
         )}

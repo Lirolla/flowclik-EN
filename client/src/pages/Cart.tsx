@@ -58,11 +58,11 @@ export default function Cart() {
       return;
     }
     if (!customerEmail.trim() || !customerEmail.includes("@")) {
-      toast.error("Informe um e-mail válido");
+      toast.error("Informe um e-mail valid");
       return;
     }
     if (!selectedMethod) {
-      toast.error("Selecione uma forma de pagamento");
+      toast.error("Select uma forma de pagamento");
       return;
     }
 
@@ -101,11 +101,11 @@ export default function Cart() {
                   <ShoppingCart className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
                   <h2 className="text-2xl font-bold mb-2">Carrinho Vazio</h2>
                   <p className="text-muted-foreground mb-6">
-                    Você ainda não adicionou nenhuma foto ao carrinho.
+                    You ainda não adicionou nonea foto ao carrinho.
                   </p>
                   <Button onClick={() => setLocation(SITE_ROUTES.stockPhotos())}>
                     <ArrowLeft className="w-4 h-4 mr-2" />
-                    Ver Fotos Stock
+                    Ver Stock Photos
                   </Button>
                 </CardContent>
               </Card>
@@ -131,7 +131,7 @@ export default function Cart() {
                     </div>
                     <h2 className="text-2xl font-bold mb-2">Pedido Criado!</h2>
                     <p className="text-muted-foreground">
-                      Pedido #{orderId} • Aguardando pagamento
+                      Order #{orderId} • Aguardando pagamento
                     </p>
                   </div>
 
@@ -158,7 +158,7 @@ export default function Cart() {
                         <p className="text-2xl font-bold text-green-500">{format(orderTotal)}</p>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Após realizar o pagamento, o fotógrafo irá confirmar e liberar o download das fotos.
+                        Após realizar o pagamento, o photographer irá confirmar e liberar o download das fotos.
                       </p>
                     </div>
                   )}
@@ -167,7 +167,7 @@ export default function Cart() {
                     <div className="bg-blue-500/5 border border-blue-500/20 rounded-lg p-6 space-y-4">
                       <div className="flex items-center gap-2">
                         <Building2 className="w-5 h-5 text-blue-500" />
-                        <h3 className="font-semibold text-blue-500">Transferência Bancária</h3>
+                        <h3 className="font-semibold text-blue-500">Bank Transfer</h3>
                       </div>
                       <div className="bg-background rounded p-3 text-sm whitespace-pre-line">
                         {paymentConfig.paymentBankTransferDetails}
@@ -177,7 +177,7 @@ export default function Cart() {
                         <p className="text-2xl font-bold text-blue-500">{format(orderTotal)}</p>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Após realizar a transferência, o fotógrafo irá confirmar e liberar o download das fotos.
+                        Após realizar a transferência, o photographer irá confirmar e liberar o download das fotos.
                       </p>
                     </div>
                   )}
@@ -193,7 +193,7 @@ export default function Cart() {
                         <p className="text-2xl font-bold text-purple-500">{format(orderTotal)}</p>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        O fotógrafo irá enviar um link de pagamento para o seu e-mail ({customerEmail}). 
+                        O photographer irá enviar um link de pagamento para o seu e-mail ({customerEmail}). 
                         Após o pagamento, as fotos serão liberadas para download.
                       </p>
                     </div>
@@ -202,7 +202,7 @@ export default function Cart() {
                   <div className="text-center pt-4">
                     <Button onClick={() => setLocation(SITE_ROUTES.stockPhotos())} variant="outline">
                       <ArrowLeft className="w-4 h-4 mr-2" />
-                      Voltar às Fotos
+                      Voltar at Fotos
                     </Button>
                   </div>
                 </CardContent>
@@ -270,7 +270,7 @@ export default function Cart() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="phone">Telefone (opcional)</Label>
+                      <Label htmlFor="phone">Telefone (optional)</Label>
                       <Input
                         id="phone"
                         value={customerPhone}
@@ -312,7 +312,7 @@ export default function Cart() {
                         >
                           <Building2 className={`w-6 h-6 ${selectedMethod === "bank_transfer" ? "text-blue-500" : "text-muted-foreground"}`} />
                           <div>
-                            <p className="font-medium">Transferência Bancária</p>
+                            <p className="font-medium">Bank Transfer</p>
                             <p className="text-sm text-muted-foreground">Depósito ou TED</p>
                           </div>
                         </button>
@@ -347,7 +347,7 @@ export default function Cart() {
                     {isCheckingOut ? (
                       <>
                         <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                        Processando...
+                        Processing...
                       </>
                     ) : (
                       <>
@@ -397,11 +397,11 @@ export default function Cart() {
                           <h3 className="font-semibold truncate">{item.title}</h3>
                           {item.collectionName && (
                             <p className="text-sm text-muted-foreground">
-                              Galeria: {item.collectionName}
+                              Gallery: {item.collectionName}
                             </p>
                           )}
                           <p className="text-sm text-muted-foreground capitalize">
-                            {item.type === "stock" ? "Foto Stock" : "Foto da Galeria"}
+                            {item.type === "stock" ? "Foto Stock" : "Foto da Gallery"}
                           </p>
                           <p className="text-lg font-bold mt-2">
                             {format(item.price)}

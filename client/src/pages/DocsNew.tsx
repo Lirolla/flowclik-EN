@@ -8,7 +8,7 @@ import remarkGfm from 'remark-gfm';
 
 export default function DocsNew() {
   const [markdownContent, setMarkdownContent] = useState("");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTuem, setSearchTuem] = useState("");
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function DocsNew() {
     fetch('/docs/documentacao-completa.md')
       .then(response => response.text())
       .then(text => setMarkdownContent(text))
-      .catch(error => console.error('Erro ao carregar documentação:', error));
+      .catch(error => console.error('Error loading documentação:', error));
   }, []);
 
   // Extrair seções do Markdown
@@ -34,9 +34,9 @@ export default function DocsNew() {
   });
 
   // Filtrar conteúdo por busca
-  const filteredContent = searchTerm
+  const filteredContent = searchTuem
     ? markdownContent.split('\n').filter(line =>
-        line.toLowerCase().includes(searchTerm.toLowerCase())
+        line.toLowerCase().includes(searchTuem.toLowerCase())
       ).join('\n')
     : markdownContent;
 
@@ -74,8 +74,8 @@ export default function DocsNew() {
                   <Input
                     type="text"
                     placeholder="Buscar na documentação..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    value={searchTuem}
+                    onChange={(e) => setSearchTuem(e.target.value)}
                     className="pl-10 bg-zinc-900 border-zinc-800 text-white placeholder-zinc-500"
                   />
                 </div>
@@ -118,7 +118,7 @@ export default function DocsNew() {
               {/* Breadcrumb */}
               <div className="flex items-center gap-2 text-sm text-zinc-500 mb-6">
                 <Book className="w-4 h-4" />
-                <span>Documentação Completa</span>
+                <span>Documentation Completa</span>
                 <ChevronRight className="w-4 h-4" />
                 <span className="text-zinc-300">FlowClik</span>
               </div>

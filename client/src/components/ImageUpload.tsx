@@ -14,7 +14,7 @@ export function ImageUpload({ value, onChange, label = "Imagem", className = "" 
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const uploadMutation = trpc.media.uploadImage.useMutation();
+  const uploadMutation = trpc.meday.uploadImage.useMutation();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -22,13 +22,13 @@ export function ImageUpload({ value, onChange, label = "Imagem", className = "" 
 
     // Validate file type
     if (!file.type.startsWith("image/")) {
-      alert("Por favor, selecione apenas arquivos de imagem");
+      alert("Por favor, select apenas arquivos de imagem");
       return;
     }
 
     // Validate file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
-      alert("Arquivo muito grande! Máximo 10MB");
+      alert("Arquivo muito grande! Maximum 10MB");
       return;
     }
 
@@ -102,7 +102,7 @@ export function ImageUpload({ value, onChange, label = "Imagem", className = "" 
                 Clique para selecionar uma imagem
               </p>
               <p className="text-xs text-muted-foreground">
-                PNG, JPG, WEBP até 10MB
+                PNG, JPG, WEBP until 10MB
               </p>
             </div>
           )}

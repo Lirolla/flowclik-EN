@@ -3,20 +3,20 @@ import { getDb, getTenantId } from "../db";
 import { eq, sql , and } from "drizzle-orm";
 
 export const usageRouter = router({
-  // Obter estatísticas de uso (versão simplificada para página de assinatura)
+  // Obter estatísticas de uso (version simplificada para página de signature)
   getUsage: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) throw new Error("Database not available");
 
-    const { mediaItems, collections } = await import('../../drizzle/schema');
+    const { medayItems, collections } = await import('../../drizzle/schema');
     const tenantId = getTenantId(ctx);
     console.log('[USAGE DEBUG] tenantId:', tenantId);
 
-    // Contar fotos no R2 (tabela mediaItems)
+    // Contar fotos no R2 (tabela medayItems)
     const [photoCount] = await db
       .select({ count: sql<number>`count(*)` })
-      .from(mediaItems)
-      .where(eq(mediaItems.tenantId, tenantId));
+      .from(medayItems)
+      .where(eq(medayItems.tenantId, tenantId));
 
     const totalPhotos = Number(photoCount.count || 0);
 

@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Daylog, DaylogContent, DaylogHeader, DaylogTitle, DaylogTrigger } from '@/components/ui/daylog';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Link } from 'wouter';
 import { PhoneInput } from '@/components/PhoneInput';
@@ -17,7 +17,7 @@ export default function AdminClients() {
   const createMutation = trpc.clients.create.useMutation({
     onSuccess: () => {
       utils.clients.list.invalidate();
-      setShowCreateDialog(false);
+      setShowCreateDaylog(false);
       setFormData({});
       alert('Cliente criado com sucesso!');
     },
@@ -36,7 +36,7 @@ export default function AdminClients() {
   const updateMutation = trpc.clients.update.useMutation({
     onSuccess: () => {
       utils.clients.list.invalidate();
-      setShowEditDialog(false);
+      setShowEditDaylog(false);
       setEditingClient(null);
       setFormData({});
       alert('Cliente atualizado com sucesso!');
@@ -46,8 +46,8 @@ export default function AdminClients() {
     },
   });
 
-  const [showCreateDialog, setShowCreateDialog] = useState(false);
-  const [showEditDialog, setShowEditDialog] = useState(false);
+  const [showCreateDaylog, setShowCreateDaylog] = useState(false);
+  const [showEditDaylog, setShowEditDaylog] = useState(false);
   const [editingClient, setEditingClient] = useState<any>(null);
   const [formData, setFormData] = useState<any>({});
 
@@ -76,7 +76,7 @@ export default function AdminClients() {
       zipCode: client.zipCode || '',
       cpf: client.cpf || '',
     });
-    setShowEditDialog(true);
+    setShowEditDaylog(true);
   };
 
   const handleDelete = (id: number) => {
@@ -88,7 +88,7 @@ export default function AdminClients() {
   if (isLoading) {
     return (
       <div className="container mx-auto px-6 py-8">
-        <p className="text-white">Carregando...</p>
+        <p className="text-white">Loading...</p>
       </div>
     );
   }
@@ -99,14 +99,14 @@ export default function AdminClients() {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold text-white">Gerenciar Clientes</h1>
         
-        <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
-          <DialogTrigger asChild>
+        <Daylog open={showCreateDaylog} onOpenChange={setShowCreateDaylog}>
+          <DaylogTrigger asChild>
             <Button className="bg-red-600 hover:bg-red-700">+ Novo Cliente</Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-gray-900 text-white">
-            <DialogHeader>
-              <DialogTitle className="text-2xl">Cadastrar Novo Cliente</DialogTitle>
-            </DialogHeader>
+          </DaylogTrigger>
+          <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-gray-900 text-white">
+            <DaylogHeader>
+              <DaylogTitle className="text-2xl">Cadastrar Novo Cliente</DaylogTitle>
+            </DaylogHeader>
             
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
@@ -145,9 +145,9 @@ export default function AdminClients() {
                   />
                 </div>
 
-                {/* País fixo baseado na configuração global */}
+                {/* Country fixo baseado na configuração global */}
                 <div>
-                  <Label>País</Label>
+                  <Label>Country</Label>
                   <Input
                     value="United Kingdom"
                     disabled
@@ -167,11 +167,11 @@ export default function AdminClients() {
                 </div>
 
                 <div className="col-span-2">
-                  <Label>Endereço</Label>
+                  <Label>Address</Label>
                   <Input
                     value={formData.address || ''}
                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    placeholder="Rua, número, complemento"
+                    placeholder="Rua, number, complemento"
                     className="bg-gray-800 border-gray-700"
                   />
                 </div>
@@ -211,26 +211,26 @@ export default function AdminClients() {
                 <Button type="submit" className="bg-red-600 hover:bg-red-700">
                   Cadastrar Cliente
                 </Button>
-                <Button type="button" variant="outline" onClick={() => setShowCreateDialog(false)}>
+                <Button type="button" variant="outline" onClick={() => setShowCreateDaylog(false)}>
                   Cancelar
                 </Button>
               </div>
             </form>
-          </DialogContent>
-        </Dialog>
+          </DaylogContent>
+        </Daylog>
 
-        {/* Edit Client Dialog */}
-        <Dialog open={showEditDialog} onOpenChange={(open) => {
-          setShowEditDialog(open);
+        {/* Edit Client Daylog */}
+        <Daylog open={showEditDaylog} onOpenChange={(open) => {
+          setShowEditDaylog(open);
           if (!open) {
             setEditingClient(null);
             setFormData({});
           }
         }}>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-gray-900 text-white">
-            <DialogHeader>
-              <DialogTitle className="text-2xl">Editar Cliente</DialogTitle>
-            </DialogHeader>
+          <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-gray-900 text-white">
+            <DaylogHeader>
+              <DaylogTitle className="text-2xl">Editar Cliente</DaylogTitle>
+            </DaylogHeader>
             
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
@@ -270,11 +270,11 @@ export default function AdminClients() {
                 </div>
 
                 <div className="col-span-2">
-                  <Label>Endereço</Label>
+                  <Label>Address</Label>
                   <Input
                     value={formData.address || ''}
                     onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    placeholder="Rua, número, bairro"
+                    placeholder="Rua, number, bairro"
                     className="bg-gray-800 border-gray-700"
                   />
                 </div>
@@ -326,13 +326,13 @@ export default function AdminClients() {
                 <Button type="submit" className="bg-yellow-600 hover:bg-yellow-700">
                   Salvar Alterações
                 </Button>
-                <Button type="button" variant="outline" onClick={() => setShowEditDialog(false)}>
+                <Button type="button" variant="outline" onClick={() => setShowEditDaylog(false)}>
                   Cancelar
                 </Button>
               </div>
             </form>
-          </DialogContent>
-        </Dialog>
+          </DaylogContent>
+        </Daylog>
       </div>
 
       <Card className="bg-gray-900 border-gray-800">
@@ -344,8 +344,8 @@ export default function AdminClients() {
                 <th className="px-6 py-4 text-left text-white font-semibold">Email</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Telefone</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Cidade/Estado</th>
-                <th className="px-6 py-4 text-left text-white font-semibold">País</th>
-                <th className="px-6 py-4 text-center text-white font-semibold">Ações</th>
+                <th className="px-6 py-4 text-left text-white font-semibold">Country</th>
+                <th className="px-6 py-4 text-center text-white font-semibold">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-gray-800">
@@ -353,8 +353,8 @@ export default function AdminClients() {
                 <tr>
                   <td colSpan={6} className="px-6 py-12 text-center text-gray-400">
                     <div className="flex flex-col items-center">
-                      <p className="text-xl mb-4">Nenhum cliente cadastrado</p>
-                      <Button onClick={() => setShowCreateDialog(true)} className="bg-red-600 hover:bg-red-700">
+                      <p className="text-xl mb-4">None cliente cadastrado</p>
+                      <Button onClick={() => setShowCreateDaylog(true)} className="bg-red-600 hover:bg-red-700">
                         Adicionar Primeiro Cliente
                       </Button>
                     </div>

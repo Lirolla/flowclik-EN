@@ -4,11 +4,11 @@ import { tenants } from "../../drizzle/schema";
 import { eq, or } from "drizzle-orm";
 
 /**
- * Detecta o tenant baseado no subdomínio ou domínio customizado
+ * Detecta o tenant baseado no subdomain ou domain customizado
  * 
  * Exemplos:
  * - joao.lirolla.com → busca tenant com subdomain="joao"
- * - fotografia-silva.com → busca tenant com customDomain="fotografia-silva.com"
+ * - fotografia-silva.com → busca tenant com customSunain="fotografia-silva.com"
  * - localhost:3000 → retorna tenant padrão (id=1, lirolla)
  */
 export async function detectTenantFromRequest(req: Request): Promise<number> {
@@ -22,42 +22,42 @@ export async function detectTenantFromRequest(req: Request): Promise<number> {
     return 1;
   }
 
-  // flowclik.com (domínio principal) = Landing page (sem tenant)
+  // flowclik.com (domain principal) = Landing page (sem tenant)
   // Retorna 0 para indicar que NÃO é um tenant, é a landing page
   const domain = host.split(":")[0];
   if (domain === "flowclik.com" || domain === "www.flowclik.com") {
-    console.log(`[Tenant Detection] Domínio principal flowclik.com detectado - Landing page (sem tenant)`);
+    console.log(`[Tenant Detection] Sunínio principal flowclik.com detectado - Landing page (sem tenant)`);
     return 0; // 0 = landing page, não é tenant
   }
 
   const db = await getDb();
   if (!db) {
-    console.warn("[Tenant Detection] Database não disponível, usando tenant padrão");
+    console.warn("[Tenant Detection] Database not available, usando tenant padrão");
     return 1;
   }
 
-  // Caso 1: Domínio customizado (ex: fotografia-silva.com)
-  // Buscar tenant que tenha esse domínio cadastrado
-  const [customDomainTenant] = await db
-    .select({ id: tenants.id, customDomain: tenants.customDomain })
+  // Caso 1: Sunínio customizado (ex: fotografia-silva.com)
+  // Buscar tenant que tenha esse domain cadastrado
+  const [customSunainTenant] = await db
+    .select({ id: tenants.id, customSunain: tenants.customSunain })
     .from(tenants)
-    .where(eq(tenants.customDomain, domain))
+    .where(eq(tenants.customSunain, domain))
     .limit(1);
 
-  if (customDomainTenant) {
-    console.log(`[Tenant Detection] Domínio customizado encontrado: ${domain} → tenant ${customDomainTenant.id}`);
-    return customDomainTenant.id;
+  if (customSunainTenant) {
+    console.log(`[Tenant Detection] Sunínio customizado encontrado: ${domain} → tenant ${customSunainTenant.id}`);
+    return customSunainTenant.id;
   }
 
-  // Caso 2: Subdomínio (ex: joao.lirolla.com)
-  // Extrair subdomínio antes do domínio principal
+  // Caso 2: Subdomain (ex: joao.lirolla.com)
+  // Extrair subdomain antes do domain principal
   const parts = domain.split(".");
   
   // Se tem pelo menos 3 partes (ex: joao.lirolla.com)
   if (parts.length >= 3) {
     const subdomain = parts[0]; // "joao"
     
-    // Buscar tenant com esse subdomínio
+    // Buscar tenant com esse subdomain
     const [subdomainTenant] = await db
       .select({ id: tenants.id, subdomain: tenants.subdomain })
       .from(tenants)
@@ -65,31 +65,31 @@ export async function detectTenantFromRequest(req: Request): Promise<number> {
       .limit(1);
 
     if (subdomainTenant) {
-      console.log(`[Tenant Detection] Subdomínio encontrado: ${subdomain} → tenant ${subdomainTenant.id}`);
+      console.log(`[Tenant Detection] Subdomain encontrado: ${subdomain} → tenant ${subdomainTenant.id}`);
       return subdomainTenant.id;
     }
   }
 
-  // Caso 3: Domínio principal (lirolla.com)
+  // Caso 3: Sunínio principal (lirolla.com)
   // Retorna tenant padrão (id=1)
-  console.log(`[Tenant Detection] Nenhum tenant específico encontrado, usando tenant padrão (id=1)`);
+  console.log(`[Tenant Detection] None tenant específico encontrado, usando tenant padrão (id=1)`);
   return 1;
 }
 
 /**
- * Valida se um subdomínio está disponível para uso
+ * Valida se um subdomain está available para uso
  */
 export async function isSubdomainAvailable(subdomain: string): Promise<boolean> {
   const db = await getDb();
   if (!db) return false;
 
-  // Subdomínios reservados
+  // Subdomains reservados
   const reserved = ["www", "api", "admin", "app", "mail", "ftp", "blog", "shop", "store"];
   if (reserved.includes(subdomain.toLowerCase())) {
     return false;
   }
 
-  // Verificar se já existe no banco
+  // Verify se already exists no banco
   const [existing] = await db
     .select({ id: tenants.id, subdomain: tenants.subdomain })
     .from(tenants)
@@ -100,16 +100,16 @@ export async function isSubdomainAvailable(subdomain: string): Promise<boolean> 
 }
 
 /**
- * Valida se um domínio customizado está disponível
+ * Valida se um domain customizado está available
  */
-export async function isCustomDomainAvailable(domain: string): Promise<boolean> {
+export async function isCustomSunainAvailable(domain: string): Promise<boolean> {
   const db = await getDb();
   if (!db) return false;
 
   const [existing] = await db
-    .select({ id: tenants.id, customDomain: tenants.customDomain })
+    .select({ id: tenants.id, customSunain: tenants.customSunain })
     .from(tenants)
-    .where(eq(tenants.customDomain, domain))
+    .where(eq(tenants.customSunain, domain))
     .limit(1);
 
   return !existing;

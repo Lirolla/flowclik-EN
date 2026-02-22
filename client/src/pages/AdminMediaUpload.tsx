@@ -11,7 +11,7 @@ import { Upload, Image as ImageIcon, Loader2 } from "lucide-react";
 import { CurrencyInput } from "@/components/CurrencyInput";
 import { useCurrency } from "@/hooks/useCurrency";
 
-export default function AdminMediaUpload() {
+export default function AdminMedayUpload() {
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -22,7 +22,7 @@ export default function AdminMediaUpload() {
   const [forSale, setForSale] = useState(true);
 
   const { data: collections } = trpc.collections.getAll.useQuery();
-  const uploadMutation = trpc.media.upload.useMutation({
+  const uploadMutation = trpc.meday.upload.useMutation({
     onSuccess: () => {
       alert("Foto enviada com sucesso!");
       // Reset form
@@ -41,7 +41,7 @@ export default function AdminMediaUpload() {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        alert("Por favor, selecione apenas imagens");
+        alert("Por favor, select apenas imagens");
         return;
       }
 
@@ -58,7 +58,7 @@ export default function AdminMediaUpload() {
 
   const handleUpload = async () => {
     if (!selectedFile || !collectionId) {
-      alert("Selecione uma foto e uma galeria");
+      alert("Select uma foto e uma galeria");
       return;
     }
 
@@ -113,10 +113,10 @@ export default function AdminMediaUpload() {
 
           {/* Collection Select */}
           <div className="space-y-2">
-            <Label htmlFor="collection">Galeria</Label>
+            <Label htmlFor="collection">Gallery</Label>
             <Select value={collectionId} onValueChange={setCollectionId}>
               <SelectTrigger>
-                <SelectValue placeholder="Selecione uma galeria" />
+                <SelectValue placeholder="Select uma galeria" />
               </SelectTrigger>
               <SelectContent>
                 {collections?.map((col) => (
@@ -130,7 +130,7 @@ export default function AdminMediaUpload() {
 
           {/* Title */}
           <div className="space-y-2">
-            <Label htmlFor="title">Título (opcional)</Label>
+            <Label htmlFor="title">Title (optional)</Label>
             <Input
               id="title"
               value={title}
@@ -141,7 +141,7 @@ export default function AdminMediaUpload() {
 
           {/* Description */}
           <div className="space-y-2">
-            <Label htmlFor="description">Descrição (opcional)</Label>
+            <Label htmlFor="description">Description (optional)</Label>
             <Textarea
               id="description"
               value={description}
@@ -169,7 +169,7 @@ export default function AdminMediaUpload() {
               className="w-4 h-4"
             />
             <Label htmlFor="forSale" className="cursor-pointer">
-              Disponível para venda
+              Available para venda
             </Label>
           </div>
 
@@ -200,7 +200,7 @@ export default function AdminMediaUpload() {
               <li>Imagem original salva em alta qualidade</li>
               <li>Thumbnail gerado (400x400px)</li>
               <li>Preview com watermark "© FlowClik" (1200px)</li>
-              <li>Armazenamento seguro no Manus Storage</li>
+              <li>Storage seguro no Manus Storage</li>
             </ul>
           </div>
         </CardContent>

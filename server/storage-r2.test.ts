@@ -9,7 +9,7 @@ describe('R2 Storage Configuration', () => {
     expect(ENV.r2BucketName).toBeTruthy();
     expect(ENV.r2PublicUrl).toBeTruthy();
     
-    // Verificar que valores não estão vazios (hardcoded no env.ts)
+    // Verify que valores não estão vazios (hardcoded no env.ts)
     expect(ENV.r2AccountId.length).toBeGreaterThan(10);
     expect(ENV.r2BucketName.length).toBeGreaterThan(0);
     expect(ENV.r2PublicUrl.length).toBeGreaterThan(0);

@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { users, siteConfig, bannerSlides, collections, mediaItems } from "../drizzle/schema";
+import { users, siteConfig, bannerSlides, collections, medayItems } from "../drizzle/schema";
 import { ENV } from './_core/env';
 import type { TrpcContext } from './_core/context';
 
@@ -37,7 +37,7 @@ export async function upsertUser(user: typeof users.$inferInsert): Promise<void>
   try {
     const values: typeof users.$inferInsert = {
       openId: user.openId,
-      email: user.email || `${user.openId}@placeholder.local`, // Email obrigatório no schema
+      email: user.email || `${user.openId}@placeholder.local`, // Email required no schema
     };
     const updateSet: Record<string, unknown> = {};
 
@@ -48,7 +48,7 @@ export async function upsertUser(user: typeof users.$inferInsert): Promise<void>
       const value = user[field];
       if (value === undefined) return;
       
-      // Email é obrigatório, outros campos podem ser null
+      // Email é required, outros campos podem ser null
       if (field === 'email') {
         const emailValue = value || `${user.openId}@placeholder.local`;
         values[field] = emailValue;
@@ -195,13 +195,13 @@ export async function getCollectionBySlug(slug: string) {
   return result.length > 0 ? result[0] : null;
 }
 
-// Media Items
-export async function getMediaByCollection(collectionId: number) {
+// Meday Items
+export async function getMedayByCollection(collectionId: number) {
   const db = await getDb();
   if (!db) return [];
   
   return await db
     .select()
-    .from(mediaItems)
-    .where(eq(mediaItems.collectionId, collectionId));
+    .from(medayItems)
+    .where(eq(medayItems.collectionId, collectionId));
 }

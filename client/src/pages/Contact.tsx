@@ -26,7 +26,7 @@ export default function Contact() {
       setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
     },
     onError: (error) => {
-      toast.error(error.message || "Erro ao enviar mensagem. Tente novamente.");
+      toast.error(error.message || "Erro ao enviar mensagem. Try again.");
     },
   });
 
@@ -115,7 +115,7 @@ export default function Contact() {
                         <MapPin className="h-8 w-8 text-accent" />
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold mb-2">Endereço</h3>
+                    <h3 className="text-xl font-bold mb-2">Address</h3>
                     <p className="text-muted-foreground whitespace-pre-wrap">
                       {siteConfig.contactAddress}
                     </p>
@@ -205,7 +205,7 @@ export default function Contact() {
               </CardContent>
             </Card>
 
-            {/* Social Media Cards - Mesmo estilo dos cards de contato */}
+            {/* Social Meday Cards - Mesmo estilo dos cards de contato */}
             {(siteConfig?.socialInstagram ||
               siteConfig?.socialFacebook ||
               siteConfig?.socialYouTube) && (
@@ -292,11 +292,11 @@ export default function Contact() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold font-serif mb-6">
-              Pronto para começar?
+              Ready to get started?
             </h2>
             <p className="text-lg mb-8 opacity-90">
-              Entre em contato conosco para discutir seu projeto e receber um
-              orçamento personalizado
+              Get in touch conosco para discutir seu projeto e receber um
+              custom quote
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
@@ -306,7 +306,7 @@ export default function Contact() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/portfolio">
-                  <a>Ver Portfólio</a>
+                  <a>View Portfolio</a>
                 </Link>
               </Button>
             </div>

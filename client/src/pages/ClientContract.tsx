@@ -18,7 +18,7 @@ export default function ClientContract() {
     return (
       <ClientLayout appointmentId={appointmentId}>
         <div className="text-center py-12">
-          <p className="text-gray-400">Carregando...</p>
+          <p className="text-gray-400">Loading...</p>
         </div>
       </ClientLayout>
     );
@@ -29,7 +29,7 @@ export default function ClientContract() {
       <ClientLayout appointmentId={appointmentId}>
         <div className="text-center py-12">
           <AlertCircle className="h-12 w-12 text-red-600 mx-auto mb-4" />
-          <p className="text-gray-400">Agendamento não encontrado</p>
+          <p className="text-gray-400">Appointment not found</p>
         </div>
       </ClientLayout>
     );
@@ -53,7 +53,7 @@ export default function ClientContract() {
                   <div>
                     <h2 className="text-2xl font-semibold text-green-500">Contrato Assinado</h2>
                     <p className="text-gray-300 mt-1">
-                      Contrato assinado e confirmado
+                      Contract signed e confirmado
                     </p>
                   </div>
                 </>
@@ -61,9 +61,9 @@ export default function ClientContract() {
                 <>
                   <FileText className="h-12 w-12 text-blue-500" />
                   <div>
-                    <h2 className="text-2xl font-semibold text-blue-500">Contrato Disponível</h2>
+                    <h2 className="text-2xl font-semibold text-blue-500">Contrato Available</h2>
                     <p className="text-gray-300 mt-1">
-                      Seu contrato está pronto para visualização
+                      Your contract está pronto para visualização
                     </p>
                   </div>
                 </>
@@ -77,7 +77,7 @@ export default function ClientContract() {
               <div>
                 <h2 className="text-2xl font-semibold text-yellow-500">Contrato Pendente</h2>
                 <p className="text-gray-300 mt-1">
-                  O contrato ainda não foi gerado pelo fotógrafo
+                  O contrato ainda não foi gerado pelo photographer
                 </p>
               </div>
             </div>
@@ -99,14 +99,14 @@ export default function ClientContract() {
               </div>
 
               <div className="flex justify-between items-center pb-4 border-b border-gray-800">
-                <span className="text-gray-400">Serviço</span>
-                <span className="font-semibold">{appointment.serviceName || "Não especificado"}</span>
+                <span className="text-gray-400">Service</span>
+                <span className="font-semibold">{appointment.serviceName || "Not specified"}</span>
               </div>
 
               <div className="flex justify-between items-center pb-4 border-b border-gray-800">
                 <span className="text-gray-400">Data do Ensaio</span>
                 <span className="font-semibold">
-                  {appointment.date && new Date(appointment.date).toLocaleDateString('pt-BR')}
+                  {appointment.date && new Date(appointment.date).toLocaleDateString('en-GB')}
                 </span>
               </div>
 
@@ -157,7 +157,7 @@ export default function ClientContract() {
           <Card className="bg-blue-900/20 border-blue-600 p-6">
             <p className="text-gray-300">
               <strong>Precisa assinar o contrato?</strong><br />
-              Entre em contato com o fotógrafo através do <a href={`/client/chat/${appointmentId}`} className="text-red-400 underline">chat</a> para combinar a assinatura.
+              Get in touch com o photographer através do <a href={`/client/chat/${appointmentId}`} className="text-red-400 underline">chat</a> para combinar a signature.
             </p>
           </Card>
         )}

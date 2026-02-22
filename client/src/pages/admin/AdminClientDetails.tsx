@@ -42,11 +42,11 @@ function AdminClientDetailsContent() {
       pending: { label: '⏳ Pendente', color: 'bg-yellow-500/20 text-yellow-700 border-yellow-500/30' },
       confirmed: { label: '✅ Confirmado', color: 'bg-green-500/20 text-green-700 border-green-500/30' },
       session_done: { label: '📸 Ensaio Realizado', color: 'bg-blue-500/20 text-blue-700 border-blue-500/30' },
-      editing: { label: '🎨 Fotos em Edição', color: 'bg-purple-500/20 text-purple-700 border-purple-500/30' },
-      awaiting_selection: { label: '👀 Aguardando Seleção', color: 'bg-orange-500/20 text-orange-700 border-orange-500/30' },
+      editing: { label: '🎨 Photos in Editing', color: 'bg-purple-500/20 text-purple-700 border-purple-500/30' },
+      awaiting_selection: { label: '👀 Awaiting Selection', color: 'bg-orange-500/20 text-orange-700 border-orange-500/30' },
       final_editing: { label: '✏️ Editando Selecionadas', color: 'bg-indigo-500/20 text-indigo-700 border-indigo-500/30' },
-      delivered: { label: '📦 Entregue', color: 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30' },
-      cancelled: { label: '❌ Cancelado', color: 'bg-red-500/20 text-red-700 border-red-500/30' },
+      delivered: { label: '📦 Delivered', color: 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30' },
+      cancelled: { label: '❌ Cancelled', color: 'bg-red-500/20 text-red-700 border-red-500/30' },
     };
     return configs[status] || { label: status, color: 'bg-gray-500/20 text-gray-700' };
   };
@@ -55,9 +55,9 @@ function AdminClientDetailsContent() {
     const configs: Record<string, { label: string; color: string }> = {
       pending: { label: 'Pendente', color: 'bg-yellow-500/20 text-yellow-700 border-yellow-500/30' },
       paid: { label: 'Pago', color: 'bg-green-500/20 text-green-700 border-green-500/30' },
-      processing: { label: 'Processando', color: 'bg-blue-500/20 text-blue-700 border-blue-500/30' },
+      processing: { label: 'Processing', color: 'bg-blue-500/20 text-blue-700 border-blue-500/30' },
       completed: { label: 'Completo', color: 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30' },
-      cancelled: { label: 'Cancelado', color: 'bg-red-500/20 text-red-700 border-red-500/30' },
+      cancelled: { label: 'Cancelled', color: 'bg-red-500/20 text-red-700 border-red-500/30' },
     };
     return configs[status] || { label: status, color: 'bg-gray-500/20 text-gray-700' };
   };
@@ -157,7 +157,7 @@ function AdminClientDetailsContent() {
         <CardContent>
           {!appointments || appointments.length === 0 ? (
             <div className="py-8 text-center text-muted-foreground">
-              Nenhum agendamento encontrado
+              None agendamento encontrado
             </div>
           ) : (
             <div className="space-y-4">
@@ -177,7 +177,7 @@ function AdminClientDetailsContent() {
                           <Calendar className="w-4 h-4" />
                           <span>
                             {format(new Date(appointment.appointmentDate), "dd/MM/yyyy", { locale: ptBR })}
-                            {appointment.appointmentTime && ` às ${appointment.appointmentTime}`}
+                            {appointment.appointmentTime && ` at ${appointment.appointmentTime}`}
                           </span>
                         </div>
                       </div>
@@ -213,7 +213,7 @@ function AdminClientDetailsContent() {
         <CardContent>
           {!orders || orders.length === 0 ? (
             <div className="py-8 text-center text-muted-foreground">
-              Nenhum pedido encontrado
+              None pedido encontrado
             </div>
           ) : (
             <div className="space-y-4">
@@ -230,7 +230,7 @@ function AdminClientDetailsContent() {
                           {statusConfig.label}
                         </span>
                         <span className="text-sm font-semibold">
-                          Pedido #{order.id}
+                          Order #{order.id}
                         </span>
                         <span className="text-sm text-muted-foreground">
                           {format(new Date(order.createdAt), "dd/MM/yyyy", { locale: ptBR })}

@@ -115,7 +115,7 @@ export default function HeroBanner({ filterBy }: HeroBannerProps = {}) {
                 playsInline
                 controls={false}
                 src={slide.videoUrl}
-                onError={(e) => console.error('Erro ao carregar vídeo:', e)}
+                onError={(e) => console.error('Error loading video:', e)}
               />
               <div className="absolute inset-0 bg-black/30"></div>
             </div>

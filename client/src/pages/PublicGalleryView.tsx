@@ -7,14 +7,14 @@ import LayoutWrapper from "@/components/LayoutWrapper";
 import { ArrowLeft, X, ChevronLeft, ChevronRight, Camera, Video, ShoppingCart, Heart, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { VideoPlayer } from "@/components/VideoPlayer";
-// import BuyPhotoDialog from "@/components/BuyPhotoDialog"; // Feature removed
+// import BuyPhotoDaylog from "@/components/BuyPhotoDaylog"; // Feature removed
 
 export default function PublicGalleryView() {
   const [, params] = useRoute("/gallery/:slug");
   const slug = params?.slug || "";
 
   const { data: collection, isLoading: collectionLoading } = trpc.collections.getBySlug.useQuery({ slug });
-  const { data: mediaItems, isLoading: mediaLoading } = trpc.collections.getWithMedia.useQuery(
+  const { data: medayItems, isLoading: medayLoading } = trpc.collections.getWithMeday.useQuery(
     { id: collection?.id || 0 },
     { enabled: !!collection?.id }
   );
@@ -30,7 +30,7 @@ export default function PublicGalleryView() {
   const utils = trpc.useUtils();
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  // const [buyPhotoDialogOpen, setBuyPhotoDialogOpen] = useState(false); // Feature removed
+  // const [buyPhotoDaylogOpen, setBuyPhotoDaylogOpen] = useState(false); // Feature removed
   // const [selectedPhoto, setSelectedPhoto] = useState<any>(null); // Feature removed
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
@@ -45,9 +45,9 @@ export default function PublicGalleryView() {
       const selectionsMap: Record<number, boolean> = {};
       const feedbacksMap: Record<number, string> = {};
       existingSelections.forEach((sel: any) => {
-        selectionsMap[sel.mediaItemId] = sel.isSelected;
+        selectionsMap[sel.medayItemId] = sel.isSelected;
         if (sel.clientFeedback) {
-          feedbacksMap[sel.mediaItemId] = sel.clientFeedback;
+          feedbacksMap[sel.medayItemId] = sel.clientFeedback;
         }
       });
       setSelections(selectionsMap);
@@ -55,7 +55,7 @@ export default function PublicGalleryView() {
     }
   }, [existingSelections]);
 
-  if (collectionLoading || mediaLoading) {
+  if (collectionLoading || medayLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background">
         <div className="text-muted-foreground">Carregando galeria...</div>
@@ -66,7 +66,7 @@ export default function PublicGalleryView() {
   if (!collection) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-background">
-        <h1 className="text-2xl font-bold mb-4">Galeria não encontrada</h1>
+        <h1 className="text-2xl font-bold mb-4">Gallery not found</h1>
         <Link href="/galleries">
           <Button variant="outline">
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -85,7 +85,7 @@ export default function PublicGalleryView() {
         setIsAuthenticated(true);
         setPasswordError("");
       } else {
-        setPasswordError("Senha incorreta. Tente novamente.");
+        setPasswordError("Incorrect password. Try again.");
       }
     };
 
@@ -115,7 +115,7 @@ export default function PublicGalleryView() {
             </div>
             
             <Button type="submit" className="w-full">
-              Acessar Galeria
+              Acessar Gallery
             </Button>
           </form>
           
@@ -130,10 +130,10 @@ export default function PublicGalleryView() {
     );
   }
 
-  const items = (mediaItems as any)?.mediaItems || [];
+  const items = (medayItems as any)?.medayItems || [];
   
   // Detect if gallery has only videos
-  const hasOnlyVideos = items.length > 0 && items.every((item: any) => item.mediaType === "video");
+  const hasOnlyVideos = items.length > 0 && items.every((item: any) => item.medayType === "video");
   const layoutType = hasOnlyVideos ? "youtube" : (collection.layoutType || "masonry");
 
   const openLightbox = (index: number) => {
@@ -156,23 +156,23 @@ export default function PublicGalleryView() {
     }
   };
 
-  const toggleSelection = async (mediaItemId: number, e?: React.MouseEvent) => {
+  const toggleSelection = async (medayItemId: number, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    const newValue = !selections[mediaItemId];
-    setSelections({ ...selections, [mediaItemId]: newValue });
+    const newValue = !selections[medayItemId];
+    setSelections({ ...selections, [medayItemId]: newValue });
     
     await toggleSelectionMutation.mutateAsync({
-      mediaItemId,
+      medayItemId,
       collectionId: collection?.id || 0,
       isSelected: newValue,
     });
   };
 
-  const saveFeedback = async (mediaItemId: number, feedback: string) => {
-    setFeedbacks({ ...feedbacks, [mediaItemId]: feedback });
+  const saveFeedback = async (medayItemId: number, feedback: string) => {
+    setFeedbacks({ ...feedbacks, [medayItemId]: feedback });
     
     await saveFeedbackMutation.mutateAsync({
-      mediaItemId,
+      medayItemId,
       collectionId: collection?.id || 0,
       feedback,
     });
@@ -181,13 +181,13 @@ export default function PublicGalleryView() {
   const handleSubmitSelection = async () => {
     const selectedCount = Object.values(selections).filter(Boolean).length;
     if (selectedCount === 0) {
-      alert("Selecione pelo menos uma foto antes de enviar.");
+      alert("Select pelo menos uma foto antes de enviar.");
       return;
     }
 
-    if (confirm(`Você selecionou ${selectedCount} foto(s). Deseja enviar sua seleção?`)) {
+    if (confirm(`You selecionou ${selectedCount} foto(s). Deseja enviar sua seleção?`)) {
       await submitSelectionMutation.mutateAsync({ collectionId: collection?.id || 0 });
-      alert("Seleção enviada com sucesso! O fotógrafo irá editar as fotos selecionadas.");
+      alert("Seleção enviada com sucesso! O photographer irá editar as fotos selecionadas.");
     }
   };
 
@@ -222,7 +222,7 @@ export default function PublicGalleryView() {
 
         {items.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Nenhuma mídia nesta galeria ainda.</p>
+            <p className="text-muted-foreground">Nonea míday nesta galeria ainda.</p>
           </div>
         ) : (
           <>
@@ -235,7 +235,7 @@ export default function PublicGalleryView() {
                     className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted"
                     onClick={() => openLightbox(index)}
                   >
-                    {item.mediaType === "photo" ? (
+                    {item.medayType === "photo" ? (
                       <img
                         src={item.thumbnailUrl || item.previewUrl || item.originalUrl}
                         alt={item.title}
@@ -280,7 +280,7 @@ export default function PublicGalleryView() {
                     className="relative break-inside-avoid mb-4 overflow-hidden rounded-lg cursor-pointer group"
                     onClick={() => openLightbox(index)}
                   >
-                    {item.mediaType === "photo" ? (
+                    {item.medayType === "photo" ? (
                       <img
                         src={item.previewUrl || item.originalUrl}
                         alt={item.title}
@@ -342,7 +342,7 @@ export default function PublicGalleryView() {
                       
                       {/* Video Info */}
                       <div className="md:w-3/5 p-6">
-                        <h3 className="text-xl font-bold mb-2">{item.title || "Vídeo sem título"}</h3>
+                        <h3 className="text-xl font-bold mb-2">{item.title || "Video sem título"}</h3>
                         {item.description && (
                           <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
                             {item.description}
@@ -351,7 +351,7 @@ export default function PublicGalleryView() {
                         <div className="flex items-center gap-4 text-sm text-muted-foreground">
                           <div className="flex items-center gap-1">
                             <Video className="w-4 h-4" />
-                            <span>Vídeo</span>
+                            <span>Video</span>
                           </div>
                           {collection.name && (
                             <div className="flex items-center gap-1">
@@ -387,13 +387,13 @@ export default function PublicGalleryView() {
                         </div>
                       </div>
                       <div className="md:w-3/5 p-6">
-                        <h3 className="text-xl font-bold mb-2">{item.title || "Vídeo"}</h3>
+                        <h3 className="text-xl font-bold mb-2">{item.title || "Video"}</h3>
                         {item.description && (
                           <p className="text-muted-foreground text-sm mb-3 line-clamp-2">{item.description}</p>
                         )}
                         <div className="flex items-center gap-2">
                           <Video className="w-4 h-4 text-muted-foreground" />
-                          <span className="text-sm text-muted-foreground">Vídeo</span>
+                          <span className="text-sm text-muted-foreground">Video</span>
                         </div>
                       </div>
                     </div>
@@ -406,7 +406,7 @@ export default function PublicGalleryView() {
             {layoutType === "fullscreen" && (
               <div className="max-w-6xl mx-auto">
                 <div className="relative bg-black rounded-lg overflow-hidden flex items-center justify-center" style={{ height: "75vh" }}>
-                  {items[lightboxIndex || 0]?.mediaType === "photo" ? (
+                  {items[lightboxIndex || 0]?.medayType === "photo" ? (
                     <img
                       src={items[lightboxIndex || 0]?.originalUrl}
                       alt={items[lightboxIndex || 0]?.title}
@@ -449,7 +449,7 @@ export default function PublicGalleryView() {
                       }`}
                       onClick={() => setLightboxIndex(index)}
                     >
-                      {item.mediaType === "photo" ? (
+                      {item.medayType === "photo" ? (
                         <img
                           src={item.thumbnailUrl || item.previewUrl || item.originalUrl}
                           alt={item.title}
@@ -510,7 +510,7 @@ export default function PublicGalleryView() {
           </Button>
 
           <div className="flex flex-col items-center justify-center max-w-7xl w-full h-[85vh] p-4">
-            {items[lightboxIndex]?.mediaType === "photo" ? (
+            {items[lightboxIndex]?.medayType === "photo" ? (
               <img
                 src={items[lightboxIndex]?.originalUrl}
                 alt={items[lightboxIndex]?.title}
@@ -539,11 +539,11 @@ export default function PublicGalleryView() {
                         selections[items[lightboxIndex]?.id] ? "fill-red-500 text-red-500" : "text-white"
                       }`}
                     />
-                    <span>{selections[items[lightboxIndex]?.id] ? "Remover dos favoritos" : "Marcar como favorita"}</span>
+                    <span>{selections[items[lightboxIndex]?.id] ? "Remover dos favoritos" : "Mark as favourite"}</span>
                   </button>
                   
                   <div className="text-left">
-                    <label className="block text-sm font-medium mb-2">Palpites de edição (opcional)</label>
+                    <label className="block text-sm font-medium mb-2">Palpites de edição (optional)</label>
                     <textarea
                       value={feedbacks[items[lightboxIndex]?.id] || ""}
                       onChange={(e) => {
@@ -560,17 +560,17 @@ export default function PublicGalleryView() {
               )}
 
               {/* Buy Button (only for photos with price) - Feature removed */}
-              {/* {items[lightboxIndex]?.mediaType === "photo" && items[lightboxIndex]?.price && items[lightboxIndex]?.price > 0 && (
+              {/* {items[lightboxIndex]?.medayType === "photo" && items[lightboxIndex]?.price && items[lightboxIndex]?.price > 0 && (
                 <Button
                   onClick={() => {
                     setSelectedPhoto(items[lightboxIndex]);
-                    setBuyPhotoDialogOpen(true);
+                    setBuyPhotoDaylogOpen(true);
                   }}
                   className="mt-4"
                   size="lg"
                 >
                   <ShoppingCart className="w-4 h-4 mr-2" />
-                  Comprar Foto - {new Intl.NumberFormat("pt-BR", { style: "currency", currency: "GBP" }).format(items[lightboxIndex]?.price)}
+                  Comprar Foto - {new Intl.NumberFormat("en-GB", { style: "currency", currency: "GBP" }).format(items[lightboxIndex]?.price)}
                 </Button>
               )} */}
             </div>
@@ -578,13 +578,13 @@ export default function PublicGalleryView() {
         </div>
       )}
 
-      {/* Buy Photo Dialog - Feature removed */}
+      {/* Buy Photo Daylog - Feature removed */}
       {/* {selectedPhoto && (
-        <BuyPhotoDialog
+        <BuyPhotoDaylog
           photo={selectedPhoto}
           basePrice={Math.round((selectedPhoto.price || 0) * 100)} // Convert to cents
-          open={buyPhotoDialogOpen}
-          onOpenChange={setBuyPhotoDialogOpen}
+          open={buyPhotoDaylogOpen}
+          onOpenChange={setBuyPhotoDaylogOpen}
         />
       )} */}
       

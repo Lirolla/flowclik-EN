@@ -124,17 +124,17 @@ export default function Portfolio() {
                   : "bg-muted text-muted-foreground hover:bg-accent/50"
               }`}
             >
-              🎥 Vídeos
+              🎥 Videos
             </button>
           </div>
 
           {isLoading ? (
             <div className="text-center py-12">
-              <p className="text-muted-foreground">Carregando...</p>
+              <p className="text-muted-foreground">Loading...</p>
             </div>
           ) : items && items.length > 0 ? (
             filter === "video" ? (
-              // Layout Grid 4 colunas para vídeos
+              // Layout Grid 4 colunas para videos
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {items.map((item: any, index: any) => (
                   <Card
@@ -339,11 +339,11 @@ export default function Portfolio() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold font-serif mb-6">
-              Pronto para começar?
+              Ready to get started?
             </h2>
             <p className="text-lg mb-8 opacity-90">
-              Entre em contato conosco para discutir seu projeto e receber um
-              orçamento personalizado
+              Get in touch conosco para discutir seu projeto e receber um
+              custom quote
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
@@ -353,7 +353,7 @@ export default function Portfolio() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/services">
-                  <a>Ver Serviços</a>
+                  <a>Ver Services</a>
                 </Link>
               </Button>
             </div>

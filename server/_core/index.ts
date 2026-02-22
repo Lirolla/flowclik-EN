@@ -87,7 +87,7 @@ async function startServer() {
       
       logs.push("[9] Testando query simples...");
       const [rows] = await connection.query("SELECT 1 + 1 AS result");
-      logs.push(`[10] ✅ Query OK! Resultado: ${JSON.stringify(rows)}`);
+      logs.push(`[10] ✅ Query OK! Result: ${JSON.stringify(rows)}`);
       
       logs.push("[11] Testando query na tabela tenants...");
       const [tenants] = await connection.query("SELECT COUNT(*) as total FROM tenants");

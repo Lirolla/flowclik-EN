@@ -65,7 +65,7 @@ export default function About() {
                         <Target className="h-8 w-8 text-accent" />
                       </div>
                     </div>
-                    <h3 className="text-2xl font-bold font-serif mb-4">Missão</h3>
+                    <h3 className="text-2xl font-bold font-serif mb-4">Mission</h3>
                     <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
                       {siteConfig.aboutMission}
                     </p>
@@ -79,7 +79,7 @@ export default function About() {
                         <Eye className="h-8 w-8 text-accent" />
                       </div>
                     </div>
-                    <h3 className="text-2xl font-bold font-serif mb-4">Visão</h3>
+                    <h3 className="text-2xl font-bold font-serif mb-4">Vision</h3>
                     <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
                       {siteConfig.aboutVision}
                     </p>

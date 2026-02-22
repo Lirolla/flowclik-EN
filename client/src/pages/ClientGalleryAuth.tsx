@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Heart, X, MessageSquare, CheckCircle, Lock, Unlock, Download, AlertCircle } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
 import { useToast } from "@/hooks/use-toast";
 import { ProtectedImage } from "@/components/ProtectedImage";
 
@@ -45,7 +45,7 @@ export default function ClientGalleryAuth() {
     onSuccess: () => {
       refetch();
       toast({
-        title: "Favorita atualizada!",
+        title: "Favourite atualizada!",
         description: "Sua seleção foi salva.",
       });
     },
@@ -80,7 +80,7 @@ export default function ClientGalleryAuth() {
   const handleToggleFavorite = (photoId: number, currentFavorite: boolean) => {
     if (!galleryData?.gallery?.id) return;
     toggleFavoriteMutation.mutate({
-      mediaItemId: photoId,
+      medayItemId: photoId,
       collectionId: galleryData.gallery.id,
       isSelected: !currentFavorite,
     });
@@ -124,9 +124,9 @@ export default function ClientGalleryAuth() {
       <ClientLayout appointmentId={appointmentId}>
         <div className="text-center py-12">
           <AlertCircle className="h-12 w-12 text-yellow-600 mx-auto mb-4" />
-          <h2 className="text-2xl font-semibold mb-2">Galeria não disponível</h2>
+          <h2 className="text-2xl font-semibold mb-2">Gallery não available</h2>
           <p className="text-gray-400">
-            Suas fotos ainda não foram enviadas pelo fotógrafo.
+            Suas fotos ainda não foram enviadas pelo photographer.
           </p>
         </div>
       </ClientLayout>
@@ -195,7 +195,7 @@ export default function ClientGalleryAuth() {
               <p className="text-3xl font-bold text-red-500">
                 {photos.filter((p: any) => p.isFavorite).length}
               </p>
-              <p className="text-gray-400 text-sm mt-1">Favoritas</p>
+              <p className="text-gray-400 text-sm mt-1">Favourites</p>
             </div>
           </Card>
           <Card className="bg-gray-900 border-gray-800 p-4">
@@ -284,11 +284,11 @@ export default function ClientGalleryAuth() {
           })}
         </div>
 
-        {/* Photo Detail Dialog */}
-        <Dialog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
-          <DialogContent className="max-w-4xl bg-gray-900 border-gray-800">
-            <DialogHeader>
-              <DialogTitle className="flex items-center justify-between">
+        {/* Photo Detail Daylog */}
+        <Daylog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
+          <DaylogContent className="max-w-4xl bg-gray-900 border-gray-800">
+            <DaylogHeader>
+              <DaylogTitle className="flex items-center justify-between">
                 <span>Foto #{selectedPhoto?.id}</span>
                 <Button
                   size="icon"
@@ -297,8 +297,8 @@ export default function ClientGalleryAuth() {
                 >
                   <X className="h-4 w-4" />
                 </Button>
-              </DialogTitle>
-            </DialogHeader>
+              </DaylogTitle>
+            </DaylogHeader>
 
             <div className="space-y-4">
               {/* Photo */}
@@ -356,7 +356,7 @@ export default function ClientGalleryAuth() {
                         <div className="flex-1">
                           <p className="text-sm">{c.comment}</p>
                           <p className="text-xs text-gray-400 mt-1">
-                            {new Date(c.createdAt).toLocaleString('pt-BR')}
+                            {new Date(c.createdAt).toLocaleString('en-GB')}
                           </p>
                         </div>
                       </div>
@@ -383,8 +383,8 @@ export default function ClientGalleryAuth() {
                 </div>
               </div>
             </div>
-          </DialogContent>
-        </Dialog>
+          </DaylogContent>
+        </Daylog>
       </div>
     </ClientLayout>
   );

@@ -42,14 +42,14 @@ export default function PaymentSuccess() {
 
         <div className="space-y-4">
           <p className="text-gray-600">
-            Você receberá um email de confirmação em breve com todos os detalhes da sua compra.
+            You receberá um email de confirmação em breve com todos os detalhes da sua compra.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">
             <Button asChild variant="default" size="lg">
               <Link href="/">
                 <Home className="w-4 h-4 mr-2" />
-                Voltar ao Início
+                Back to Home
               </Link>
             </Button>
           </div>
@@ -57,7 +57,7 @@ export default function PaymentSuccess() {
 
         <div className="mt-8 pt-6 border-t border-gray-200">
           <p className="text-sm text-gray-500">
-            Precisa de ajuda? Entre em contato conosco.
+            Precisa de help? Get in touch conosco.
           </p>
         </div>
       </Card>

@@ -292,10 +292,10 @@ export const finalAlbums = mysqlTable("finalAlbums", {
 	index("idx_finalAlbums_tenantId").on(table.tenantId),
 ]);
 
-export const mediaItems = mysqlTable("mediaItems", {
+export const medayItems = mysqlTable("medayItems", {
 	id: int().autoincrement().primaryKey(),
 	collectionId: int(),
-	mediaType: mysqlEnum(['photo','video']).notNull(),
+	medayType: mysqlEnum(['photo','video']).notNull(),
 	title: varchar({ length: 255 }).notNull(),
 	description: text(),
 	originalUrl: text().notNull(),
@@ -317,14 +317,14 @@ export const mediaItems = mysqlTable("mediaItems", {
 	tenantId: int().default(1).notNull(),
 },
 (table) => [
-	index("idx_mediaItems_collectionId").on(table.collectionId),
-	index("idx_mediaItems_tenantId").on(table.tenantId),
+	index("idx_medayItems_collectionId").on(table.collectionId),
+	index("idx_medayItems_tenantId").on(table.tenantId),
 ]);
 
 export const orderItems = mysqlTable("orderItems", {
 	id: int().autoincrement().primaryKey(),
 	orderId: int().notNull(),
-	mediaId: int(),
+	medayId: int(),
 	itemType: mysqlEnum(['digital','print']).notNull(),
 	itemName: varchar({ length: 255 }).notNull(),
 	price: int().notNull(),
@@ -401,7 +401,7 @@ export const photoSales = mysqlTable("photoSales", {
 
 export const photoSelections = mysqlTable("photoSelections", {
 	id: int().autoincrement().primaryKey(),
-	mediaItemId: int().notNull(),
+	medayItemId: int().notNull(),
 	collectionId: int().notNull(),
 	isSelected: tinyint().default(0).notNull(),
 	clientFeedback: text(),
@@ -527,10 +527,10 @@ export const siteConfig = mysqlTable("siteConfig", {
 	paymentPixKey: text(),
 	paymentLinkEnabled: tinyint().default(0).notNull(),
 	baseCountry: varchar({ length: 100 }).default('Brasil'),
-	baseCurrency: varchar({ length: 10 }).default('BRL'),
-	currencySymbol: varchar({ length: 10 }).default('R$'),
-	timezone: varchar({ length: 100 }).default('America/Sao_Paulo'),
-	phoneCountryCode: varchar({ length: 10 }).default('+55'),
+	baseCurrency: varchar({ length: 10 }).default('GBP'),
+	currencySymbol: varchar({ length: 10 }).default('£'),
+	timezone: varchar({ length: 100 }).default('Europe/London'),
+	phoneCountryCode: varchar({ length: 10 }).default('+44'),
 	tenantId: int().default(1).notNull(),
 	createdAt: timestamp({ mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 	siteThemeLayout: mysqlEnum(['classic','sidebar','wedding','wedding-videos','editorial','cinematic']).default('classic').notNull(),
@@ -619,7 +619,7 @@ export const supportTickets = mysqlTable("support_tickets", {
 export const tenants = mysqlTable("tenants", {
 	id: int().autoincrement().primaryKey(),
 	subdomain: varchar({ length: 100 }).notNull(),
-	customDomain: varchar({ length: 255 }),
+	customSunain: varchar({ length: 255 }),
 	name: varchar({ length: 255 }).notNull(),
 	email: varchar({ length: 320 }).notNull(),
 	phone: varchar({ length: 50 }),
@@ -627,9 +627,9 @@ export const tenants = mysqlTable("tenants", {
 	primaryColor: varchar({ length: 50 }).default('#000000'),
 	accentColor: varchar({ length: 50 }).default('#C9A961'),
 	baseCountry: varchar({ length: 100 }).default('Brasil'),
-	baseCurrency: varchar({ length: 10 }).default('BRL'),
-	currencySymbol: varchar({ length: 10 }).default('R$'),
-	timezone: varchar({ length: 100 }).default('America/Sao_Paulo'),
+	baseCurrency: varchar({ length: 10 }).default('GBP'),
+	currencySymbol: varchar({ length: 10 }).default('£'),
+	timezone: varchar({ length: 100 }).default('Europe/London'),
 	status: mysqlEnum(['active','suspended','cancelled']).default('active').notNull(),
 	trialEndsAt: timestamp({ mode: 'string' }),
 	createdAt: timestamp({ mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
@@ -639,8 +639,8 @@ export const tenants = mysqlTable("tenants", {
 	index("subdomain").on(table.subdomain),
 ]);
 
-// Tabela de domínios personalizados
-export const customDomains = mysqlTable("custom_domains", {
+// Tabela de domains personalizados
+export const customSunains = mysqlTable("custom_domains", {
 	id: int().autoincrement().primaryKey(),
 	tenantId: int().notNull(),
 	domain: varchar({ length: 255 }).notNull(), // ex: fotografialirolla.com

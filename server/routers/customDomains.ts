@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
 import { getDb } from "../db";
-import { customDomains, tenants } from "../../drizzle/schema";
+import { customSunains, tenants } from "../../drizzle/schema";
 import { eq, and, sql } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 import dns from "dns";
@@ -12,20 +12,20 @@ const dnsResolveCname = promisify(dns.resolveCname);
 
 const VPS_IP = "72.61.129.119";
 
-// Verificar se o DNS do domínio aponta para nosso servidor
+// Verify se o DNS do domain aponta para nosso servidor
 async function checkDNS(domain: string): Promise<{ ok: boolean; message: string }> {
   try {
     // Tentar resolver registro A
     try {
       const addresses = await dnsResolve4(domain);
       if (addresses.includes(VPS_IP)) {
-        return { ok: true, message: "Registro A apontando corretamente para " + VPS_IP };
+        return { ok: true, message: "Record A apontando corretamente para " + VPS_IP };
       }
-      // Verificar se aponta para Cloudflare (IPs comuns do Cloudflare)
+      // Verify se aponta para Cloudflare (IPs comuns do Cloudflare)
       const cloudflareRanges = ["104.21.", "172.67.", "104.16.", "104.17.", "104.18.", "104.19.", "104.20."];
       const isCloudflare = addresses.some((addr: string) => cloudflareRanges.some(range => addr.startsWith(range)));
       if (isCloudflare) {
-        return { ok: true, message: "DNS apontando via Cloudflare (proxy ativo)" };
+        return { ok: true, message: "DNS apontando via Cloudflare (proxy active)" };
       }
       return { ok: false, message: `DNS aponta para ${addresses.join(", ")} ao invés de ${VPS_IP}. Configure o registro A corretamente.` };
     } catch (e: any) {
@@ -43,27 +43,27 @@ async function checkDNS(domain: string): Promise<{ ok: boolean; message: string 
       // Sem CNAME também
     }
 
-    return { ok: false, message: "Nenhum registro DNS encontrado. Configure o registro A apontando para " + VPS_IP };
+    return { ok: false, message: "None registro DNS encontrado. Configure o registro A apontando para " + VPS_IP };
   } catch (error: any) {
     return { ok: false, message: "Erro ao verificar DNS: " + (error.message || "desconhecido") };
   }
 }
 
-export const customDomainsRouter = router({
-  // Listar domínios do tenant atual
+export const customSunainsRouter = router({
+  // Listar domains do tenant atual
   list: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
 
     const domains = await db
       .select()
-      .from(customDomains)
-      .where(eq(customDomains.tenantId, ctx.user.tenantId));
+      .from(customSunains)
+      .where(eq(customSunains.tenantId, ctx.user.tenantId));
 
     return domains;
   }),
 
-  // Adicionar novo domínio personalizado
+  // Adicionar novo custom domain
   add: protectedProcedure
     .input(
       z.object({
@@ -74,45 +74,45 @@ export const customDomainsRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
 
-      // Validar formato do domínio (aceita .com.br, .com, etc)
+      // Validar formato do domain (aceita .com.br, .com, etc)
       const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9.-]*\.[a-zA-Z]{2,}$/;
       if (!domainRegex.test(input.domain)) {
         throw new TRPCError({
           code: "BAD_REQUEST",
-          message: "Formato de domínio inválido. Ex: meufotografo.com.br",
+          message: "Formato de domain invalid. Ex: meufotografo.com.br",
         });
       }
 
-      // Verificar se domínio já está em uso na tabela custom_domains
+      // Verify se domain já está em uso na tabela custom_domains
       const [existing] = await db
         .select()
-        .from(customDomains)
-        .where(eq(customDomains.domain, input.domain))
+        .from(customSunains)
+        .where(eq(customSunains.domain, input.domain))
         .limit(1);
 
       if (existing) {
         throw new TRPCError({
           code: "CONFLICT",
-          message: "Este domínio já está sendo usado por outro fotógrafo.",
+          message: "Este domain já está sendo usado por outro photographer.",
         });
       }
 
-      // Verificar se já está em uso na tabela tenants
+      // Verify se já está em uso na tabela tenants
       const [existingTenant] = await db
         .select({ id: tenants.id })
         .from(tenants)
-        .where(eq(tenants.customDomain, input.domain))
+        .where(eq(tenants.customSunain, input.domain))
         .limit(1);
 
       if (existingTenant) {
         throw new TRPCError({
           code: "CONFLICT",
-          message: "Este domínio já está associado a outro fotógrafo.",
+          message: "Este domain já está associado a outro photographer.",
         });
       }
 
-      // Adicionar domínio na tabela custom_domains
-      await db.insert(customDomains).values({
+      // Adicionar domain na tabela custom_domains
+      await db.insert(customSunains).values({
         tenantId: ctx.user.tenantId,
         domain: input.domain,
         verified: 0,
@@ -131,7 +131,7 @@ export const customDomainsRouter = router({
       };
     }),
 
-  // Verificar se domínio está configurado corretamente (com verificação DNS real)
+  // Verify se domain está configurado corretamente (com verificação DNS real)
   verify: protectedProcedure
     .input(
       z.object({
@@ -142,31 +142,31 @@ export const customDomainsRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
 
-      // Buscar domínio
+      // Buscar domain
       const [domain] = await db
         .select()
-        .from(customDomains)
+        .from(customSunains)
         .where(
           and(
-            eq(customDomains.id, input.domainId),
-            eq(customDomains.tenantId, ctx.user.tenantId)
+            eq(customSunains.id, input.domainId),
+            eq(customSunains.tenantId, ctx.user.tenantId)
           )
         )
         .limit(1);
 
       if (!domain) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Domínio não encontrado" });
+        throw new TRPCError({ code: "NOT_FOUND", message: "Sunínio not found" });
       }
 
-      // Verificar DNS real
+      // Verify DNS real
       const dnsCheck = await checkDNS(domain.domain);
 
       if (!dnsCheck.ok) {
-        // Atualizar status para failed
+        // Update status para failed
         await db
-          .update(customDomains)
+          .update(customSunains)
           .set({ status: "failed" })
-          .where(eq(customDomains.id, input.domainId));
+          .where(eq(customSunains.id, input.domainId));
 
         throw new TRPCError({
           code: "BAD_REQUEST",
@@ -177,27 +177,27 @@ export const customDomainsRouter = router({
       // DNS OK! Marcar como verificado
       const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
       await db
-        .update(customDomains)
+        .update(customSunains)
         .set({
           verified: 1,
           verifiedAt: now,
           status: "active",
         })
-        .where(eq(customDomains.id, input.domainId));
+        .where(eq(customSunains.id, input.domainId));
 
-      // IMPORTANTE: Atualizar o campo customDomain na tabela tenants
+      // IMPORTANTE: Atualizar o campo customSunain na tabela tenants
       // Isso é o que o tenantDetection.ts usa para identificar o tenant
       await db
         .update(tenants)
-        .set({ customDomain: domain.domain })
+        .set({ customSunain: domain.domain })
         .where(eq(tenants.id, ctx.user.tenantId));
 
-      console.log(`[Custom Domain] Domínio ${domain.domain} verificado e ativado para tenant ${ctx.user.tenantId}`);
+      console.log(`[Custom Sunain] Sunínio ${domain.domain} verificado e ativado para tenant ${ctx.user.tenantId}`);
 
       return { success: true, verified: true, message: dnsCheck.message };
     }),
 
-  // Remover domínio personalizado
+  // Remover custom domain
   remove: protectedProcedure
     .input(
       z.object({
@@ -208,40 +208,40 @@ export const customDomainsRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
 
-      // Verificar se domínio pertence ao tenant
+      // Verify se domain pertence ao tenant
       const [domain] = await db
         .select()
-        .from(customDomains)
+        .from(customSunains)
         .where(
           and(
-            eq(customDomains.id, input.domainId),
-            eq(customDomains.tenantId, ctx.user.tenantId)
+            eq(customSunains.id, input.domainId),
+            eq(customSunains.tenantId, ctx.user.tenantId)
           )
         )
         .limit(1);
 
       if (!domain) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Domínio não encontrado" });
+        throw new TRPCError({ code: "NOT_FOUND", message: "Sunínio not found" });
       }
 
-      // Remover domínio da tabela custom_domains
-      await db.delete(customDomains).where(eq(customDomains.id, input.domainId));
+      // Remover domain da tabela custom_domains
+      await db.delete(customSunains).where(eq(customSunains.id, input.domainId));
 
-      // Limpar o customDomain na tabela tenants se for o mesmo
+      // Limpar o customSunain na tabela tenants se for o mesmo
       const [tenant] = await db
-        .select({ id: tenants.id, customDomain: tenants.customDomain })
+        .select({ id: tenants.id, customSunain: tenants.customSunain })
         .from(tenants)
         .where(eq(tenants.id, ctx.user.tenantId))
         .limit(1);
 
-      if (tenant && tenant.customDomain === domain.domain) {
+      if (tenant && tenant.customSunain === domain.domain) {
         await db
           .update(tenants)
-          .set({ customDomain: null })
+          .set({ customSunain: null })
           .where(eq(tenants.id, ctx.user.tenantId));
       }
 
-      console.log(`[Custom Domain] Domínio ${domain.domain} removido do tenant ${ctx.user.tenantId}`);
+      console.log(`[Custom Sunain] Sunínio ${domain.domain} removido do tenant ${ctx.user.tenantId}`);
 
       return { success: true };
     }),

@@ -29,13 +29,13 @@ function getResendClient(): Resend {
 function baseTemplate(content: string, footerText?: string): string {
   return `
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en-GB">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FlowClik</title>
 </head>
-<body style="margin: 0; padding: 0; background-color: #0f1419; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+<body style="margin: 0; padding: 0; background-color: #0f1419; font-family: 'Monoe UI', Tahoma, Geneva, Verdana, sans-serif;">
   <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="background-color: #0f1419;">
     <tr>
       <td align="center" style="padding: 40px 20px;">
@@ -71,7 +71,7 @@ function baseTemplate(content: string, footerText?: string): string {
                 <a href="https://flowclik.com" style="color: #22c55e; text-decoration: none;">flowclik.com</a>
               </p>
               <p style="color: #374151; font-size: 11px; margin: 15px 0 0 0;">
-                &copy; ${new Date().getFullYear()} FlowClik - Todos os direitos reservados
+                &copy; ${new Date().getFullYear()} FlowClik - All rights reserved
               </p>
             </td>
           </tr>
@@ -115,7 +115,7 @@ function detailsCard(items: { label: string; value: string }[]): string {
 // TEMPLATES DE EMAIL
 // ============================================================
 
-// --- EMAILS PARA CLIENTES (visitantes do site do fotógrafo) ---
+// --- EMAILS PARA CLIENTES (visitantes do site do photographer) ---
 
 export function templateConfirmacaoAgendamento(data: {
   clientName: string;
@@ -132,23 +132,23 @@ export function templateConfirmacaoAgendamento(data: {
     <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Seu ensaio fotográfico está marcado</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
-      Olá <strong>${data.clientName}</strong>,
+      Hello <strong>${data.clientName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Seu agendamento com <strong style="color: #22c55e;">${data.photographerName}</strong> foi confirmado com sucesso! Estamos ansiosos para capturar momentos especiais para você.
+      Seu agendamento com <strong style="color: #22c55e;">${data.photographerName}</strong> foi confirmado com sucesso! Estamos ansiosos para capturar momentos especiais para you.
     </p>
 
     ${detailsCard([
-      { label: "📸 Serviço", value: data.serviceName },
+      { label: "📸 Service", value: data.serviceName },
       { label: "📅 Data", value: data.date },
-      { label: "🕐 Horário", value: data.time },
+      { label: "🕐 Time", value: data.time },
       { label: "💰 Valor", value: data.price },
-      ...(data.notes ? [{ label: "📝 Observações", value: data.notes }] : []),
+      ...(data.notes ? [{ label: "📝 Notes", value: data.notes }] : []),
     ])}
 
     <p style="color: #9ca3af; font-size: 14px; line-height: 1.7; margin-top: 20px;">
       <strong style="color: #e5e7eb;">O que vem agora?</strong><br>
-      O fotógrafo entrará em contato para confirmar os detalhes finais. Após a sessão, você receberá um link para visualizar e selecionar suas fotos favoritas.
+      O photographer entrará em contato para confirmar os detalhes finais. Após a sessão, you receberá um link para visualizar e selecionar suas fotos favoritas.
     </p>
 
     ${emailButton("Ver Meu Agendamento", data.siteUrl)}
@@ -164,22 +164,22 @@ export function templateFotosProntas(data: {
 }): string {
   return baseTemplate(`
     <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">📸 Suas Fotos Estão Prontas!</h1>
-    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Hora de ver os resultados</p>
+    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Hour de ver os resultados</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
-      Olá <strong>${data.clientName}</strong>,
+      Hello <strong>${data.clientName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Ótimas notícias! <strong style="color: #22c55e;">${data.photographerName}</strong> finalizou suas fotos e elas estão prontas para visualização.
+      Great news! <strong style="color: #22c55e;">${data.photographerName}</strong> finalizou suas fotos e elas estão prontas para visualização.
     </p>
 
     ${detailsCard([
-      { label: "📁 Coleção", value: data.collectionName },
+      { label: "📁 Collection", value: data.collectionName },
       { label: "🖼️ Total de Fotos", value: `${data.totalPhotos} fotos` },
     ])}
 
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Acesse sua galeria privada para ver todas as fotos e selecionar suas favoritas!
+      Access your gallery privada para ver todas as fotos e selecionar suas favoritas!
     </p>
 
     ${emailButton("🖼️ Ver Minhas Fotos", data.galleryUrl)}
@@ -194,25 +194,25 @@ export function templateSelecaoFotos(data: {
   galleryUrl: string;
 }): string {
   return baseTemplate(`
-    <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">👀 Selecione Suas Fotos Favoritas!</h1>
+    <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">👀 Select Suas Fotos Favourites!</h1>
     <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Escolha as melhores para edição final</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
-      Olá <strong>${data.clientName}</strong>,
+      Hello <strong>${data.clientName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Suas fotos estão prontas para seleção! Acesse a galeria e escolha até <strong style="color: #22c55e;">${data.maxSelections} fotos</strong> para a edição final.
+      Your photos are ready para seleção! Acesse a galeria e escolha until <strong style="color: #22c55e;">${data.maxSelections} fotos</strong> para a edição final.
     </p>
 
     ${detailsCard([
-      { label: "📁 Coleção", value: data.collectionName },
-      { label: "✅ Máximo de Seleções", value: `${data.maxSelections} fotos` },
+      { label: "📁 Collection", value: data.collectionName },
+      { label: "✅ Maximum de Seleções", value: `${data.maxSelections} fotos` },
     ])}
 
     ${emailButton("✨ Selecionar Fotos", data.galleryUrl)}
 
     <p style="color: #6b7280; font-size: 13px; margin-top: 15px; text-align: center;">
-      Após selecionar, o fotógrafo iniciará a edição final.
+      Após selecionar, o photographer iniciará a edição final.
     </p>
   `, `Email enviado por ${data.photographerName} via FlowClik`);
 }
@@ -229,14 +229,14 @@ export function templateLinkPagamento(data: {
     <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Pagamento seguro e rápido</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
-      Olá <strong>${data.clientName}</strong>,
+      Hello <strong>${data.clientName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      <strong style="color: #22c55e;">${data.photographerName}</strong> enviou um link de pagamento para você.
+      <strong style="color: #22c55e;">${data.photographerName}</strong> enviou um link de pagamento para you.
     </p>
 
     ${detailsCard([
-      { label: "📋 Descrição", value: data.description },
+      { label: "📋 Description", value: data.description },
       { label: "💰 Valor", value: data.amount },
     ])}
 
@@ -248,32 +248,32 @@ export function templateLinkPagamento(data: {
   `, `Email enviado por ${data.photographerName} via FlowClik`);
 }
 
-export function templateFotosEntregues(data: {
+export function templateFotosDelivereds(data: {
   clientName: string;
   photographerName: string;
   collectionName: string;
   downloadUrl: string;
 }): string {
   return baseTemplate(`
-    <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">🎉 Suas Fotos Foram Entregues!</h1>
-    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Download disponível</p>
+    <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">🎉 Suas Fotos Foram Delivereds!</h1>
+    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Download available</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
-      Olá <strong>${data.clientName}</strong>,
+      Hello <strong>${data.clientName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Suas fotos editadas estão prontas para download! Foi um prazer trabalhar com você.
+      Suas fotos editadas estão prontas para download! It was a pleasure working with you.
     </p>
 
     ${detailsCard([
-      { label: "📁 Coleção", value: data.collectionName },
+      { label: "📁 Collection", value: data.collectionName },
     ])}
 
     ${emailButton("📥 Baixar Minhas Fotos", data.downloadUrl)}
 
     <p style="color: #d1d5db; font-size: 14px; line-height: 1.7; margin-top: 20px; text-align: center;">
-      Obrigado por escolher <strong style="color: #22c55e;">${data.photographerName}</strong>! 
-      Se gostou do trabalho, compartilhe com amigos e família. 💚
+      Thank you for choosing <strong style="color: #22c55e;">${data.photographerName}</strong>! 
+      Se gostou do trabalho, share with friends and family. 💚
     </p>
   `, `Email enviado por ${data.photographerName} via FlowClik`);
 }
@@ -290,7 +290,7 @@ export function templateBoasVindasFotografo(data: {
     <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Sua plataforma de fotografia está pronta</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
-      Olá <strong>${data.photographerName}</strong>,
+      Hello <strong>${data.photographerName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
       Seja muito bem-vindo(a) ao FlowClik! Sua conta foi criada com sucesso e seu site já está no ar.
@@ -302,7 +302,7 @@ export function templateBoasVindasFotografo(data: {
     ])}
 
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      <strong style="color: #e5e7eb;">Próximos passos:</strong>
+      <strong style="color: #e5e7eb;">Next steps:</strong>
     </p>
     <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin: 10px 0;">
       <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Personalize seu site (cores, logo, sobre)</td></tr>
@@ -332,19 +332,19 @@ export function templateNovoAgendamento(data: {
     <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Um cliente acabou de agendar</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
-      Olá <strong>${data.photographerName}</strong>,
+      Hello <strong>${data.photographerName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Você recebeu um novo agendamento! Confira os detalhes:
+      You recebeu um novo agendamento! Confira os detalhes:
     </p>
 
     ${detailsCard([
       { label: "👤 Cliente", value: data.clientName },
       { label: "📧 Email", value: data.clientEmail },
       ...(data.clientPhone ? [{ label: "📱 Telefone", value: data.clientPhone }] : []),
-      { label: "📸 Serviço", value: data.serviceName },
+      { label: "📸 Service", value: data.serviceName },
       { label: "📅 Data", value: data.date },
-      { label: "🕐 Horário", value: data.time },
+      { label: "🕐 Time", value: data.time },
       { label: "💰 Valor", value: data.price },
     ])}
 
@@ -364,15 +364,15 @@ export function templateClienteSelecionouFotos(data: {
     <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Seleção pronta para revisão</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
-      Olá <strong>${data.photographerName}</strong>,
+      Hello <strong>${data.photographerName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
       <strong style="color: #22c55e;">${data.clientName}</strong> finalizou a seleção de fotos da coleção <strong>"${data.collectionName}"</strong>.
     </p>
 
     ${detailsCard([
-      { label: "📁 Coleção", value: data.collectionName },
-      { label: "🖼️ Fotos Selecionadas", value: `${data.selectedCount} fotos` },
+      { label: "📁 Collection", value: data.collectionName },
+      { label: "🖼️ Selected Photos", value: `${data.selectedCount} fotos` },
     ])}
 
     <p style="color: #d1d5db; font-size: 14px; line-height: 1.7;">
@@ -383,18 +383,18 @@ export function templateClienteSelecionouFotos(data: {
   `);
 }
 
-export function templateTicketRespondido(data: {
+export function templateTicketAnswered(data: {
   photographerName: string;
   ticketSubject: string;
   responsePreview: string;
   ticketUrl: string;
 }): string {
   return baseTemplate(`
-    <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">💬 Ticket Respondido</h1>
-    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Suporte FlowClik</p>
+    <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">💬 Ticket Answered</h1>
+    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Support FlowClik</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
-      Olá <strong>${data.photographerName}</strong>,
+      Hello <strong>${data.photographerName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
       Seu ticket de suporte recebeu uma resposta:
@@ -414,35 +414,35 @@ export function templateTicketRespondido(data: {
   `);
 }
 
-export function templateVencimentoPlano(data: {
+export function templateVencimentoPlyear(data: {
   photographerName: string;
   planName: string;
   expiryDate: string;
   renewUrl: string;
 }): string {
   return baseTemplate(`
-    <h1 style="color: #f59e0b; font-size: 24px; margin: 0 0 8px 0;">⚠️ Seu Plano Está Vencendo</h1>
+    <h1 style="color: #f59e0b; font-size: 24px; margin: 0 0 8px 0;">⚠️ Seu Plyear Está Vencendo</h1>
     <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Renove para continuar usando</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
-      Olá <strong>${data.photographerName}</strong>,
+      Hello <strong>${data.photographerName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Seu plano <strong style="color: #f59e0b;">${data.planName}</strong> vence em <strong style="color: #f59e0b;">${data.expiryDate}</strong>.
+      Seu plyear <strong style="color: #f59e0b;">${data.planName}</strong> vence em <strong style="color: #f59e0b;">${data.expiryDate}</strong>.
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
       Renove agora para não perder acesso ao seu site, galerias e agendamentos.
     </p>
 
     ${detailsCard([
-      { label: "📋 Plano Atual", value: data.planName },
+      { label: "📋 Plyear Atual", value: data.planName },
       { label: "📅 Vencimento", value: data.expiryDate },
     ])}
 
-    ${emailButton("🔄 Renovar Plano", data.renewUrl, "#f59e0b")}
+    ${emailButton("🔄 Renovar Plyear", data.renewUrl, "#f59e0b")}
 
     <p style="color: #6b7280; font-size: 13px; margin-top: 15px; text-align: center;">
-      Após o vencimento, seu site ficará temporariamente indisponível.
+      Após o vencimento, seu site ficará temporariamente inavailable.
     </p>
   `);
 }
@@ -456,32 +456,32 @@ export function templateNovoFotografoCadastrado(data: {
   plan: string;
 }): string {
   return baseTemplate(`
-    <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">🆕 Novo Fotógrafo Cadastrado!</h1>
+    <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">🆕 Novo Photographer Cadastrado!</h1>
     <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Painel Admin FlowClik</p>
     
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Um novo fotógrafo se cadastrou na plataforma:
+      Um novo photographer se cadastrou na plataforma:
     </p>
 
     ${detailsCard([
       { label: "👤 Nome", value: data.photographerName },
       { label: "📧 Email", value: data.email },
-      { label: "🌐 Subdomínio", value: `${data.subdomain}.flowclik.com` },
-      { label: "📋 Plano", value: data.plan },
+      { label: "🌐 Subdomain", value: `${data.subdomain}.flowclik.com` },
+      { label: "📋 Plyear", value: data.plan },
     ])}
 
     ${emailButton("Ver no Painel Admin", "https://flowclik.com/system/photographers")}
   `);
 }
 
-export function templateNovoTicketSuporte(data: {
+export function templateNovoTicketSupport(data: {
   photographerName: string;
   email: string;
   subject: string;
   message: string;
 }): string {
   return baseTemplate(`
-    <h1 style="color: #ef4444; font-size: 24px; margin: 0 0 8px 0;">🎫 Novo Ticket de Suporte</h1>
+    <h1 style="color: #ef4444; font-size: 24px; margin: 0 0 8px 0;">🎫 New Ticket de Support</h1>
     <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Requer atenção</p>
     
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
@@ -498,7 +498,7 @@ export function templateNovoTicketSuporte(data: {
       </p>
     </div>
 
-    ${emailButton("Responder Ticket", "https://flowclik.com/system/tickets", "#ef4444")}
+    ${emailButton("Reply Ticket", "https://flowclik.com/system/tickets", "#ef4444")}
   `);
 }
 
@@ -588,7 +588,7 @@ export async function enviarEmailSelecaoFotos(data: {
 }): Promise<boolean> {
   return sendFlowClikEmail({
     to: data.clientEmail,
-    subject: `👀 Selecione Suas Fotos - ${data.photographerName}`,
+    subject: `👀 Select Suas Fotos - ${data.photographerName}`,
     html: templateSelecaoFotos(data),
   });
 }
@@ -608,7 +608,7 @@ export async function enviarEmailLinkPagamento(data: {
   });
 }
 
-export async function enviarEmailFotosEntregues(data: {
+export async function enviarEmailFotosDelivereds(data: {
   clientName: string;
   clientEmail: string;
   photographerName: string;
@@ -617,12 +617,12 @@ export async function enviarEmailFotosEntregues(data: {
 }): Promise<boolean> {
   return sendFlowClikEmail({
     to: data.clientEmail,
-    subject: `🎉 Suas Fotos Foram Entregues - ${data.photographerName}`,
-    html: templateFotosEntregues(data),
+    subject: `🎉 Suas Fotos Foram Delivereds - ${data.photographerName}`,
+    html: templateFotosDelivereds(data),
   });
 }
 
-// --- Para Fotógrafos ---
+// --- Para Photographers ---
 
 export async function enviarEmailBoasVindas(data: {
   photographerName: string;
@@ -671,7 +671,7 @@ export async function enviarEmailClienteSelecionouFotos(data: {
   });
 }
 
-export async function enviarEmailTicketRespondido(data: {
+export async function enviarEmailTicketAnswered(data: {
   photographerName: string;
   photographerEmail: string;
   ticketSubject: string;
@@ -680,12 +680,12 @@ export async function enviarEmailTicketRespondido(data: {
 }): Promise<boolean> {
   return sendFlowClikEmail({
     to: data.photographerEmail,
-    subject: `💬 Ticket Respondido - ${data.ticketSubject}`,
-    html: templateTicketRespondido(data),
+    subject: `💬 Ticket Answered - ${data.ticketSubject}`,
+    html: templateTicketAnswered(data),
   });
 }
 
-export async function enviarEmailVencimentoPlano(data: {
+export async function enviarEmailVencimentoPlyear(data: {
   photographerName: string;
   photographerEmail: string;
   planName: string;
@@ -694,8 +694,8 @@ export async function enviarEmailVencimentoPlano(data: {
 }): Promise<boolean> {
   return sendFlowClikEmail({
     to: data.photographerEmail,
-    subject: `⚠️ Seu plano vence em breve - ${data.planName}`,
-    html: templateVencimentoPlano(data),
+    subject: `⚠️ Seu plyear vence em breve - ${data.planName}`,
+    html: templateVencimentoPlyear(data),
   });
 }
 
@@ -709,7 +709,7 @@ export async function enviarEmailNovoFotografo(data: {
 }): Promise<boolean> {
   return sendFlowClikEmail({
     to: ADMIN_EMAIL,
-    subject: `🆕 Novo Fotógrafo: ${data.photographerName}`,
+    subject: `🆕 Novo Photographer: ${data.photographerName}`,
     html: templateNovoFotografoCadastrado(data),
   });
 }
@@ -722,7 +722,7 @@ export async function enviarEmailNovoTicket(data: {
 }): Promise<boolean> {
   return sendFlowClikEmail({
     to: ADMIN_EMAIL,
-    subject: `🎫 Novo Ticket: ${data.subject}`,
-    html: templateNovoTicketSuporte(data),
+    subject: `🎫 New Ticket: ${data.subject}`,
+    html: templateNovoTicketSupport(data),
   });
 }

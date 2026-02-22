@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
-import CompleteProfileDialog from "@/components/CompleteProfileDialog";
+import CompleteProfileDaylog from "@/components/CompleteProfileDaylog";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { 
   Calendar, 
@@ -22,15 +22,15 @@ export default function ClientDashboard() {
   const [, params] = useRoute("/client/dashboard/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
   const { data: user } = trpc.auth.me.useQuery();
-  const [showProfileDialog, setShowProfileDialog] = useState(false);
+  const [showProfileDaylog, setShowProfileDaylog] = useState(false);
   
   // Check if profile is incomplete
   const isProfileIncomplete = !user?.phone || !user?.zipCode || !user?.street || !user?.city || !user?.state;
   
-  // Auto-open dialog if profile is incomplete
+  // Auto-open daylog if profile is incomplete
   useEffect(() => {
     if (isProfileIncomplete && user) {
-      setShowProfileDialog(true);
+      setShowProfileDaylog(true);
     }
   }, [isProfileIncomplete, user]);
 
@@ -48,7 +48,7 @@ export default function ClientDashboard() {
     return (
       <ClientLayout appointmentId={appointmentId}>
         <div className="text-center py-12">
-          <p className="text-gray-400">Carregando...</p>
+          <p className="text-gray-400">Loading...</p>
         </div>
       </ClientLayout>
     );
@@ -59,7 +59,7 @@ export default function ClientDashboard() {
       <ClientLayout appointmentId={appointmentId}>
         <div className="text-center py-12">
           <AlertCircle className="h-12 w-12 text-red-600 mx-auto mb-4" />
-          <p className="text-gray-400">Agendamento não encontrado</p>
+          <p className="text-gray-400">Appointment not found</p>
         </div>
       </ClientLayout>
     );
@@ -70,10 +70,10 @@ export default function ClientDashboard() {
     pending: { label: "Pending", color: "text-yellow-500", icon: Clock, step: 1 },
     confirmed: { label: "Confirmed", color: "text-blue-500", icon: CheckCircle2, step: 2 },
     session_done: { label: "Ensaio Realizado", color: "text-green-500", icon: Camera, step: 3 },
-    editing: { label: "Fotos em Edição", color: "text-purple-500", icon: ImageIcon, step: 4 },
-    awaiting_selection: { label: "Aguardando Seleção", color: "text-orange-500", icon: ImageIcon, step: 5 },
+    editing: { label: "Photos in Editing", color: "text-purple-500", icon: ImageIcon, step: 4 },
+    awaiting_selection: { label: "Awaiting Selection", color: "text-orange-500", icon: ImageIcon, step: 5 },
     final_editing: { label: "Editando Selecionadas", color: "text-purple-500", icon: ImageIcon, step: 6 },
-    delivered: { label: "Entregue", color: "text-green-600", icon: CheckCircle2, step: 7 },
+    delivered: { label: "Delivered", color: "text-green-600", icon: CheckCircle2, step: 7 },
   };
 
   const currentStatus = statusConfig[appointment.status as keyof typeof statusConfig] || statusConfig.pending;
@@ -100,7 +100,7 @@ export default function ClientDashboard() {
                 size="sm" 
                 variant="outline" 
                 className="ml-4 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black"
-                onClick={() => setShowProfileDialog(true)}
+                onClick={() => setShowProfileDaylog(true)}
               >
                 Completar agora
               </Button>
@@ -108,11 +108,11 @@ export default function ClientDashboard() {
           </Alert>
         )}
         
-        {/* Complete Profile Dialog */}
+        {/* Complete Profile Daylog */}
         {user && (
-          <CompleteProfileDialog 
-            open={showProfileDialog} 
-            onOpenChange={setShowProfileDialog}
+          <CompleteProfileDaylog 
+            open={showProfileDaylog} 
+            onOpenChange={setShowProfileDaylog}
             user={user}
           />
         )}
@@ -124,7 +124,7 @@ export default function ClientDashboard() {
               <StatusIcon className="h-6 w-6" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold">Status do Projeto</h2>
+              <h2 className="text-xl font-semibold">Status do Project</h2>
               <p className={`text-lg ${currentStatus.color}`}>{currentStatus.label}</p>
             </div>
           </div>
@@ -167,14 +167,14 @@ export default function ClientDashboard() {
           <h3 className="text-xl font-semibold mb-4">Detalhes do Agendamento</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <p className="text-sm text-gray-400">Serviço</p>
-              <p className="text-white font-medium">{appointment.serviceName || "Não especificado"}</p>
+              <p className="text-sm text-gray-400">Service</p>
+              <p className="text-white font-medium">{appointment.serviceName || "Not specified"}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-400">Data e Hora</p>
+              <p className="text-sm text-gray-400">Data e Hour</p>
               <p className="text-white font-medium">
                 {appointment.date && appointment.time 
-                  ? `${new Date(appointment.date).toLocaleDateString('pt-BR')} às ${appointment.time}`
+                  ? `${new Date(appointment.date).toLocaleDateString('en-GB')} at ${appointment.time}`
                   : "A definir"}
               </p>
             </div>
@@ -184,18 +184,18 @@ export default function ClientDashboard() {
             </div>
             <div>
               <p className="text-sm text-gray-400">Número de Pessoas</p>
-              <p className="text-white font-medium">{appointment.numberOfPeople || "Não especificado"}</p>
+              <p className="text-white font-medium">{appointment.numberOfPeople || "Not specified"}</p>
             </div>
           </div>
         </Card>
 
-        {/* Quick Actions */}
+        {/* Thuck Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           <Link href={`/client/gallery/${appointmentId}`}>
             <a>
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <ImageIcon className="h-8 w-8 text-red-600 mb-3" />
-                <h3 className="font-semibold mb-1">Galeria</h3>
+                <h3 className="font-semibold mb-1">Gallery</h3>
                 <p className="text-sm text-gray-400">Ver e selecionar fotos</p>
               </Card>
             </a>
@@ -211,7 +211,7 @@ export default function ClientDashboard() {
                   </span>
                 )}
                 <h3 className="font-semibold mb-1">Chat</h3>
-                <p className="text-sm text-gray-400">Conversar com fotógrafo</p>
+                <p className="text-sm text-gray-400">Chat with photographer</p>
               </Card>
             </a>
           </Link>
@@ -240,7 +240,7 @@ export default function ClientDashboard() {
             <a>
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <ImageIcon className="h-8 w-8 text-red-600 mb-3" />
-                <h3 className="font-semibold mb-1">Álbum Final</h3>
+                <h3 className="font-semibold mb-1">Final Album</h3>
                 <p className="text-sm text-gray-400">Fotos editadas finais</p>
               </Card>
             </a>
@@ -251,22 +251,22 @@ export default function ClientDashboard() {
         <Card className="bg-gradient-to-r from-red-900/20 to-gray-900 border-red-600 p-6">
           <h3 className="text-xl font-semibold mb-3">Próximos Passos</h3>
           {appointment.status === 'pending' && (
-            <p className="text-gray-300">Aguardando confirmação do fotógrafo. Você receberá uma notificação em breve!</p>
+            <p className="text-gray-300">Aguardando confirmação do photographer. You receberá uma notification em breve!</p>
           )}
           {appointment.status === 'confirmed' && (
-            <p className="text-gray-300">Seu ensaio está confirmado para {appointment.date && new Date(appointment.date).toLocaleDateString('pt-BR')}. Prepare-se!</p>
+            <p className="text-gray-300">Seu ensaio está confirmado para {appointment.date && new Date(appointment.date).toLocaleDateString('en-GB')}. Prepare-se!</p>
           )}
           {appointment.status === 'session_done' && (
-            <p className="text-gray-300">Ensaio realizado! As fotos estão sendo editadas. Em breve você poderá visualizá-las.</p>
+            <p className="text-gray-300">Ensaio realizado! As fotos estão sendo editadas. Em breve you poderá visualizá-las.</p>
           )}
           {appointment.status === 'awaiting_selection' && (
-            <p className="text-gray-300">Suas fotos estão prontas! Acesse a <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link> para selecionar suas favoritas.</p>
+            <p className="text-gray-300">Your photos are ready! Acesse a <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link> para selecionar suas favoritas.</p>
           )}
           {appointment.status === 'final_editing' && (
             <p className="text-gray-300">Suas fotos selecionadas estão sendo editadas. Aguarde a entrega final!</p>
           )}
           {appointment.status === 'delivered' && (
-            <p className="text-gray-300">Projeto concluído! Suas fotos estão disponíveis para download na <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link>.</p>
+            <p className="text-gray-300">Project concluído! Suas fotos estão disponíveis para download na <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link>.</p>
           )}
         </Card>
       </div>

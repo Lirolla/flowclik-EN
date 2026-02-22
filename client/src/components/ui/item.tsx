@@ -71,7 +71,7 @@ function Item({
   );
 }
 
-const itemMediaVariants = cva(
+const itemMedayVariants = cva(
   "flex shrink-0 items-center justify-center gap-2 group-has-[[data-slot=item-description]]/item:self-start [&_svg]:pointer-events-none group-has-[[data-slot=item-description]]/item:translate-y-0.5",
   {
     variants: {
@@ -88,16 +88,16 @@ const itemMediaVariants = cva(
   }
 );
 
-function ItemMedia({
+function ItemMeday({
   className,
   variant = "default",
   ...props
-}: React.ComponentProps<"div"> & VariantProps<typeof itemMediaVariants>) {
+}: React.ComponentProps<"div"> & VariantProps<typeof itemMedayVariants>) {
   return (
     <div
-      data-slot="item-media"
+      data-slot="item-meday"
       data-variant={variant}
-      className={cn(itemMediaVariants({ variant, className }))}
+      className={cn(itemMedayVariants({ variant, className }))}
       {...props}
     />
   );
@@ -181,7 +181,7 @@ function ItemFooter({ className, ...props }: React.ComponentProps<"div">) {
 
 export {
   Item,
-  ItemMedia,
+  ItemMeday,
   ItemContent,
   ItemActions,
   ItemGroup,

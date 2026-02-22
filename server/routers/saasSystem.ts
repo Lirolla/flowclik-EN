@@ -8,30 +8,30 @@ import { initializeTenantStorage } from "../storage";
 
 export const saasSystemRouter = router({
   /**
-   * Criar novo tenant (fotógrafo) com trial gratuito
-   * PUBLIC - Qualquer pessoa pode se cadastrar
+   * Criar novo tenant (photographer) com trial gratuito
+   * PUBLIC - Wedlquer pessoa pode se cadastrar
    */
   createTenant: publicProcedure
     .input(
       z.object({
         name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
-        email: z.string().email("Email inválido"),
+        email: z.string().email("Invalid email"),
         subdomain: z
           .string()
-          .min(3, "Subdomínio deve ter pelo menos 3 caracteres")
-          .max(63, "Subdomínio muito longo")
+          .min(3, "Subdomain deve ter pelo menos 3 caracteres")
+          .max(63, "Subdomain muito longo")
           .regex(
             /^[a-z0-9-]+$/,
-            "Apenas letras minúsculas, números e hífen"
+            "Apenas letras minúsculas, numbers and hyphen"
           ),
         password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres"),
       })
     )
     .mutation(async ({ input }) => {
       const db = await getDb();
-      if (!db) throw new Error("Database não disponível");
+      if (!db) throw new Error("Database not available");
 
-      // 1. Validar se subdomínio já existe
+      // 1. Validar se subdomain already exists
       const existingTenant = await db
         .select()
         .from(tenants)
@@ -39,10 +39,10 @@ export const saasSystemRouter = router({
         .limit(1);
 
       if (existingTenant.length > 0) {
-        throw new Error("Subdomínio já está em uso");
+        throw new Error("Subdomain já está em uso");
       }
 
-      // 2. Validar se email já existe
+      // 2. Validar se email already exists
       const existingUser = await db
         .select()
         .from(users)
@@ -50,7 +50,7 @@ export const saasSystemRouter = router({
         .limit(1);
 
       if (existingUser.length > 0) {
-        throw new Error("Email já cadastrado");
+        throw new Error("Email already registered");
       }
 
       // 3. Hash da senha
@@ -63,11 +63,11 @@ export const saasSystemRouter = router({
         subdomain: input.subdomain,
         email: input.email,
         baseCountry: "United Kingdom",
-        baseCurrency: "BRL",
-        currencySymbol: "R$",
-        timezone: "America/Sao_Paulo",
+        baseCurrency: "GBP",
+        currencySymbol: "£",
+        timezone: "Europe/London",
         status: "active",
-        trialEndsAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 dias
+        trialEndsAt: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
       });
 
       const tenantId = newTenant.insertId;
@@ -80,7 +80,7 @@ export const saasSystemRouter = router({
         // Não falha o cadastro se as pastas não forem criadas, mas loga o erro
       }
 
-      // 5. Criar assinatura trial (7 dias grátis)
+      // 5. Criar signature trial (7 days grátis)
       const trialEndDate = new Date();
       trialEndDate.setDate(trialEndDate.getDate() + 7);
 
@@ -116,14 +116,14 @@ export const saasSystemRouter = router({
     }),
 
   /**
-   * Verificar se subdomínio está disponível
+   * Verify se subdomain está available
    * PUBLIC - Para validação em tempo real no formulário
    */
   checkSubdomain: publicProcedure
     .input(z.object({ subdomain: z.string() }))
     .query(async ({ input }) => {
       const db = await getDb();
-      if (!db) throw new Error("Database não disponível");
+      if (!db) throw new Error("Database not available");
 
       const existing = await db
         .select()

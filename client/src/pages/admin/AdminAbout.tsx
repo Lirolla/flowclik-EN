@@ -74,7 +74,7 @@ export default function AdminAbout() {
     <DashboardLayout>
     <div className="container max-w-4xl py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Página Sobre</h1>
+        <h1 className="text-3xl font-bold mb-2">Page Sobre</h1>
         <p className="text-muted-foreground">
           Configure o conteúdo da página "About" do seu site
         </p>
@@ -87,7 +87,7 @@ export default function AdminAbout() {
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label htmlFor="title">Título</Label>
+              <Label htmlFor="title">Title</Label>
               <Input
                 id="title"
                 value={formData.title}
@@ -148,11 +148,11 @@ export default function AdminAbout() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Missão, Visão e Valores</CardTitle>
+            <CardTitle>Mission, Vision e Valores</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label htmlFor="mission">Missão</Label>
+              <Label htmlFor="mission">Mission</Label>
               <Textarea
                 id="mission"
                 rows={3}
@@ -165,7 +165,7 @@ export default function AdminAbout() {
             </div>
 
             <div>
-              <Label htmlFor="vision">Visão</Label>
+              <Label htmlFor="vision">Vision</Label>
               <Textarea
                 id="vision"
                 rows={3}
@@ -194,11 +194,11 @@ export default function AdminAbout() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Equipe</CardTitle>
+            <CardTitle>Team</CardTitle>
           </CardHeader>
           <CardContent>
             <div>
-              <Label htmlFor="teamDescription">Descrição da Equipe</Label>
+              <Label htmlFor="teamDescription">Description da Team</Label>
               <Textarea
                 id="teamDescription"
                 rows={4}

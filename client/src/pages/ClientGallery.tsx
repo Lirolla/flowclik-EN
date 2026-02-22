@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Heart, X, MessageSquare, CheckCircle, Lock, Unlock, Download } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
 import { useToast } from "@/hooks/use-toast";
 import { ProtectedImage } from "@/components/ProtectedImage";
 
@@ -40,7 +40,7 @@ export default function ClientGallery() {
     onSuccess: () => {
       refetch();
       toast({
-        title: "Favorita atualizada!",
+        title: "Favourite atualizada!",
         description: "Sua seleção foi salva.",
       });
     },
@@ -59,7 +59,7 @@ export default function ClientGallery() {
       setComment("");
       toast({
         title: "Comentário adicionado!",
-        description: "O fotógrafo foi notificado.",
+        description: "O photographer foi notificado.",
       });
     },
     onError: (error) => {
@@ -75,8 +75,8 @@ export default function ClientGallery() {
     onSuccess: () => {
       refetch();
       toast({
-        title: "Seleção aprovada!",
-        description: "O fotógrafo foi notificado e iniciará a edição final.",
+        title: "Selection approved!",
+        description: "O photographer foi notificado e iniciará a edição final.",
       });
     },
     onError: (error) => {
@@ -118,7 +118,7 @@ export default function ClientGallery() {
   const handleApproveSelection = () => {
     if (!favoritesCount || favoritesCount === 0) {
       toast({
-        title: "Nenhuma foto selecionada",
+        title: "Nonea foto selecionada",
         description: "Por favor, marque pelo menos uma foto como favorita antes de aprovar.",
         variant: "destructive",
       });
@@ -154,7 +154,7 @@ export default function ClientGallery() {
               />
             </div>
             <Button type="submit" className="w-full">
-              Acessar Galeria
+              Acessar Gallery
             </Button>
           </form>
         </Card>
@@ -166,9 +166,9 @@ export default function ClientGallery() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <Card className="p-8 text-center">
-          <h2 className="text-2xl font-bold mb-4">Galeria não encontrada</h2>
+          <h2 className="text-2xl font-bold mb-4">Gallery not found</h2>
           <p className="text-muted-foreground mb-6">
-            As fotos do seu ensaio ainda não foram enviadas pelo fotógrafo.
+            As fotos do seu ensaio ainda não foram enviadas pelo photographer.
           </p>
           <Button onClick={() => setIsAuthenticated(false)}>
             Tentar outro email
@@ -191,7 +191,7 @@ export default function ClientGallery() {
             <div>
               <h1 className="text-3xl font-bold">{gallery.name}</h1>
               <p className="text-muted-foreground mt-1">
-                {appointment.clientName} • {new Date(appointment.appointmentDate).toLocaleDateString('pt-BR')}
+                {appointment.clientName} • {new Date(appointment.appointmentDate).toLocaleDateString('en-GB')}
               </p>
             </div>
             <div className="text-right flex items-center gap-4">
@@ -232,7 +232,7 @@ export default function ClientGallery() {
                     Seleção Aprovada
                   </div>
                   <div className="text-xs text-muted-foreground">
-                    {new Date(appointment.selectionApprovedAt!).toLocaleDateString('pt-BR')}
+                    {new Date(appointment.selectionApprovedAt!).toLocaleDateString('en-GB')}
                   </div>
                 </div>
               )}
@@ -247,7 +247,7 @@ export default function ClientGallery() {
           <p className="text-center">
             <strong>Instruções:</strong> Clique no ícone de coração ❤️ para marcar suas fotos favoritas. 
             Clique na foto para ver em tamanho grande e deixar comentários.
-            {!appointment.selectionApproved && " Quando terminar, clique em 'Aprovar Seleção' no topo."}
+            {!appointment.selectionApproved && " Wedndo terminar, clique em 'Aprovar Seleção' no topo."}
           </p>
         </Card>
       </div>
@@ -307,7 +307,7 @@ export default function ClientGallery() {
                 {/* Favorite Badge */}
                 {photo.isFavorite && (
                   <div className="absolute bottom-2 left-2 bg-red-500 text-white text-xs px-2 py-1 rounded">
-                    Favorita
+                    Favourite
                   </div>
                 )}
               </div>
@@ -318,7 +318,7 @@ export default function ClientGallery() {
         {photos.length === 0 && (
           <div className="text-center py-20">
             <p className="text-xl text-muted-foreground">
-              Nenhuma foto disponível ainda
+              Nonea foto available ainda
             </p>
           </div>
         )}
@@ -326,8 +326,8 @@ export default function ClientGallery() {
 
       {/* Lightbox with Comments */}
       {selectedPhoto && (
-        <Dialog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
-          <DialogContent className="max-w-[95vw] max-h-[95vh] p-0">
+        <Daylog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
+          <DaylogContent className="max-w-[95vw] max-h-[95vh] p-0">
             <div className="grid md:grid-cols-[1fr,400px] gap-0 max-h-[95vh]">
               {/* Image */}
               <div className="relative bg-black flex items-center justify-center">
@@ -366,12 +366,12 @@ export default function ClientGallery() {
 
               {/* Comments Panel */}
               <div className="bg-background p-6 flex flex-col max-h-[95vh]">
-                <DialogHeader>
-                  <DialogTitle className="flex items-center gap-2">
+                <DaylogHeader>
+                  <DaylogTitle className="flex items-center gap-2">
                     <MessageSquare className="w-5 h-5" />
                     Comentários
-                  </DialogTitle>
-                </DialogHeader>
+                  </DaylogTitle>
+                </DaylogHeader>
 
                 {/* Comments List */}
                 <div className="flex-1 overflow-y-auto my-4 space-y-3">
@@ -381,13 +381,13 @@ export default function ClientGallery() {
                       <Card key={c.id} className="p-3">
                         <p className="text-sm">{c.comment}</p>
                         <p className="text-xs text-muted-foreground mt-1">
-                          {new Date(c.createdAt).toLocaleString('pt-BR')}
+                          {new Date(c.createdAt).toLocaleString('en-GB')}
                         </p>
                       </Card>
                     ))}
                   {photoComments.filter(c => c.photoId === selectedPhoto.id).length === 0 && (
                     <p className="text-sm text-muted-foreground text-center py-8">
-                      Nenhum comentário ainda
+                      None comentário ainda
                     </p>
                   )}
                 </div>
@@ -411,8 +411,8 @@ export default function ClientGallery() {
                 </div>
               </div>
             </div>
-          </DialogContent>
-        </Dialog>
+          </DaylogContent>
+        </Daylog>
       )}
     </div>
   );

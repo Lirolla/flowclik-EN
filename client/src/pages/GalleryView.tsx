@@ -15,7 +15,7 @@ export default function GalleryView() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const { data: collection } = trpc.collections.getBySlug.useQuery({ slug });
-  const { data: media } = trpc.media.listByCollection.useQuery(
+  const { data: meday } = trpc.meday.listByCollection.useQuery(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection }
   );
@@ -31,10 +31,10 @@ export default function GalleryView() {
   };
 
   const navigate = (direction: number) => {
-    if (!media || lightboxIndex === null) return;
+    if (!meday || lightboxIndex === null) return;
     let newIndex = lightboxIndex + direction;
-    if (newIndex < 0) newIndex = media.length - 1;
-    if (newIndex >= media.length) newIndex = 0;
+    if (newIndex < 0) newIndex = meday.length - 1;
+    if (newIndex >= meday.length) newIndex = 0;
     setLightboxIndex(newIndex);
   };
 
@@ -62,7 +62,7 @@ export default function GalleryView() {
   if (!collection) {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
-        <p className="text-muted-foreground">Carregando...</p>
+        <p className="text-muted-foreground">Loading...</p>
       </div>
     );
   }
@@ -80,15 +80,15 @@ export default function GalleryView() {
               {collection.description}
             </p>
           )}
-          {media && (
-            <p className="text-muted-foreground mt-4">{media.length} fotos</p>
+          {meday && (
+            <p className="text-muted-foreground mt-4">{meday.length} fotos</p>
           )}
         </div>
 
         {/* Grid */}
-        {media && media.length > 0 ? (
+        {meday && meday.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {media.map((item, index) => (
+            {meday.map((item, index) => (
               <Card
                 key={item.id}
                 className="overflow-hidden cursor-pointer hover:scale-105 transition-transform relative group"
@@ -112,7 +112,7 @@ export default function GalleryView() {
         ) : (
           <Card className="py-16 text-center">
             <ImageIcon className="w-20 h-20 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-2xl font-semibold mb-2">Galeria vazia</h3>
+            <h3 className="text-2xl font-semibold mb-2">Gallery vazia</h3>
             <p className="text-muted-foreground">Esta galeria ainda não possui fotos.</p>
           </Card>
         )}
@@ -120,7 +120,7 @@ export default function GalleryView() {
       </div>
 
       {/* Lightbox */}
-      {lightboxIndex !== null && media && media[lightboxIndex] && (
+      {lightboxIndex !== null && meday && meday[lightboxIndex] && (
         <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
           {/* Close button */}
           <button
@@ -141,19 +141,19 @@ export default function GalleryView() {
           {/* Image */}
           <div className="max-w-[90vw] max-h-[80vh] relative">
             <img
-              src={media[lightboxIndex].previewUrl || media[lightboxIndex].originalUrl}
-              alt={media[lightboxIndex].title}
+              src={meday[lightboxIndex].previewUrl || meday[lightboxIndex].originalUrl}
+              alt={meday[lightboxIndex].title}
               className="max-w-full max-h-[80vh] object-contain"
             />
 
             {/* Info */}
             <div className="absolute -bottom-20 left-0 right-0 text-center text-white">
               <h3 className="text-xl font-semibold mb-2">
-                {media[lightboxIndex].title}
+                {meday[lightboxIndex].title}
               </h3>
-              {media[lightboxIndex].priceDigital && media[lightboxIndex].priceDigital > 0 && (
+              {meday[lightboxIndex].priceDigital && meday[lightboxIndex].priceDigital > 0 && (
                 <p className="text-lg text-red-400">
-                  {format(Math.round(media[lightboxIndex].priceDigital * 100))}
+                  {format(Math.round(meday[lightboxIndex].priceDigital * 100))}
                 </p>
               )}
             </div>
@@ -168,9 +168,9 @@ export default function GalleryView() {
           </button>
 
           {/* Add to cart button */}
-          {media[lightboxIndex].priceDigital && media[lightboxIndex].priceDigital > 0 && (
+          {meday[lightboxIndex].priceDigital && meday[lightboxIndex].priceDigital > 0 && (
             <Button
-              onClick={() => addToCart(media[lightboxIndex])}
+              onClick={() => addToCart(meday[lightboxIndex])}
               className="absolute bottom-8 left-1/2 -translate-x-1/2"
               size="lg"
             >

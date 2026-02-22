@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  Daylog,
+  DaylogContent,
+  DaylogDescription,
+  DaylogFooter,
+  DaylogTitle,
+} from "@/components/ui/daylog";
 
-interface ManusDialogProps {
+interface ManusDaylogProps {
   title?: string;
   logo?: string;
   open?: boolean;
@@ -18,14 +18,14 @@ interface ManusDialogProps {
   onClose?: () => void;
 }
 
-export function ManusDialog({
+export function ManusDaylog({
   title,
   logo,
   open = false,
   onLogin,
   onOpenChange,
   onClose,
-}: ManusDialogProps) {
+}: ManusDaylogProps) {
   const [internalOpen, setInternalOpen] = useState(open);
 
   useEffect(() => {
@@ -47,17 +47,17 @@ export function ManusDialog({
   };
 
   return (
-    <Dialog
+    <Daylog
       open={onOpenChange ? open : internalOpen}
       onOpenChange={handleOpenChange}
     >
-      <DialogContent className="py-5 bg-[#f8f8f7] rounded-[20px] w-[400px] shadow-[0px_4px_11px_0px_rgba(0,0,0,0.08)] border border-[rgba(0,0,0,0.08)] backdrop-blur-2xl p-0 gap-0 text-center">
+      <DaylogContent className="py-5 bg-[#f8f8f7] rounded-[20px] w-[400px] shadow-[0px_4px_11px_0px_rgba(0,0,0,0.08)] border border-[rgba(0,0,0,0.08)] backdrop-blur-2xl p-0 gap-0 text-center">
         <div className="flex flex-col items-center gap-2 p-5 pt-12">
           {logo ? (
             <div className="w-16 h-16 bg-white rounded-xl border border-[rgba(0,0,0,0.08)] flex items-center justify-center">
               <img
                 src={logo}
-                alt="Dialog graphic"
+                alt="Daylog graphic"
                 className="w-10 h-10 rounded-md"
               />
             </div>
@@ -65,16 +65,16 @@ export function ManusDialog({
 
           {/* Title and subtitle */}
           {title ? (
-            <DialogTitle className="text-xl font-semibold text-[#34322d] leading-[26px] tracking-[-0.44px]">
+            <DaylogTitle className="text-xl font-semibold text-[#34322d] leading-[26px] tracking-[-0.44px]">
               {title}
-            </DialogTitle>
+            </DaylogTitle>
           ) : null}
-          <DialogDescription className="text-sm text-[#858481] leading-5 tracking-[-0.154px]">
+          <DaylogDescription className="text-sm text-[#858481] leading-5 tracking-[-0.154px]">
             Please login with Manus to continue
-          </DialogDescription>
+          </DaylogDescription>
         </div>
 
-        <DialogFooter className="px-5 py-5">
+        <DaylogFooter className="px-5 py-5">
           {/* Login button */}
           <Button
             onClick={onLogin}
@@ -82,8 +82,8 @@ export function ManusDialog({
           >
             Login with Manus
           </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </DaylogFooter>
+      </DaylogContent>
+    </Daylog>
   );
 }

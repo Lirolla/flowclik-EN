@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogDescription, DaylogHeader, DaylogTitle, DaylogTrigger } from "@/components/ui/daylog";
 import { Folder, Plus, Pencil, Trash2, Image as ImageIcon, Upload, Lock, Unlock } from "lucide-react";
 import { useLocation } from "wouter";
 import DashboardLayout from "@/components/DashboardLayout";
@@ -86,7 +86,7 @@ function AdminCollectionsContent() {
 
   const handleCreate = () => {
     if (!name || !slug) {
-      alert("Nome e slug são obrigatórios");
+      alert("Nome e slug são requireds");
       return;
     }
 
@@ -160,23 +160,23 @@ function AdminCollectionsContent() {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <Folder className="w-8 h-8" />
-            Galerias
+            Gallerys
           </h1>
           <p className="text-muted-foreground mt-2">Gerencie suas coleções de fotos</p>
         </div>
 
-        <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-          <DialogTrigger asChild>
+        <Daylog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
+          <DaylogTrigger asChild>
             <Button size="lg">
               <Plus className="w-4 h-4 mr-2" />
-              Nova Galeria
+              Nova Gallery
             </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl">
-            <DialogHeader>
-              <DialogTitle>Criar Nova Galeria</DialogTitle>
-              <DialogDescription>Preencha os dados da nova galeria</DialogDescription>
-            </DialogHeader>
+          </DaylogTrigger>
+          <DaylogContent className="max-w-2xl">
+            <DaylogHeader>
+              <DaylogTitle>Criar Nova Gallery</DaylogTitle>
+              <DaylogDescription>Preencha os dados da nova galeria</DaylogDescription>
+            </DaylogHeader>
 
             <div className="space-y-4 mt-4">
               <div className="space-y-2">
@@ -203,12 +203,12 @@ function AdminCollectionsContent() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="description">Descrição</Label>
+                <Label htmlFor="description">Description</Label>
                 <Textarea
                   id="description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Descrição da galeria..."
+                  placeholder="Description da galeria..."
                   rows={3}
                 />
               </div>
@@ -252,16 +252,16 @@ function AdminCollectionsContent() {
               </div>
 
               <Button onClick={handleCreate} className="w-full" disabled={createMutation.isPending}>
-                {createMutation.isPending ? "Creating..." : "Criar Galeria"}
+                {createMutation.isPending ? "Creating..." : "Criar Gallery"}
               </Button>
             </div>
-          </DialogContent>
-        </Dialog>
+          </DaylogContent>
+        </Daylog>
       </div>
 
       {/* Lista de galerias */}
       {isLoading ? (
-        <div className="text-center py-12">Carregando...</div>
+        <div className="text-center py-12">Loading...</div>
       ) : collections && collections.length > 0 ? (
         <div className="grid gap-4">
           {collections.map((collection) => (
@@ -365,25 +365,25 @@ function AdminCollectionsContent() {
         <Card>
           <CardContent className="py-12 text-center">
             <Folder className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Nenhuma galeria criada</h3>
+            <h3 className="text-xl font-semibold mb-2">Nonea galeria criada</h3>
             <p className="text-muted-foreground mb-4">
               Crie sua primeira galeria para começar a organizar suas fotos
             </p>
             <Button onClick={() => setIsCreateOpen(true)}>
               <Plus className="w-4 h-4 mr-2" />
-              Criar Primeira Galeria
+              Criar First Gallery
             </Button>
           </CardContent>
         </Card>
       )}
 
-      {/* Dialog de edição */}
+      {/* Daylog de edição */}
       {editingId && (
-        <Dialog open={!!editingId} onOpenChange={() => setEditingId(null)}>
-          <DialogContent className="max-w-2xl">
-            <DialogHeader>
-              <DialogTitle>Editar Galeria</DialogTitle>
-            </DialogHeader>
+        <Daylog open={!!editingId} onOpenChange={() => setEditingId(null)}>
+          <DaylogContent className="max-w-2xl">
+            <DaylogHeader>
+              <DaylogTitle>Editar Gallery</DaylogTitle>
+            </DaylogHeader>
 
             <div className="space-y-4 mt-4">
               <div className="space-y-2">
@@ -405,7 +405,7 @@ function AdminCollectionsContent() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="edit-description">Descrição</Label>
+                <Label htmlFor="edit-description">Description</Label>
                 <Textarea
                   id="edit-description"
                   value={description}
@@ -469,8 +469,8 @@ function AdminCollectionsContent() {
                 {updateMutation.isPending ? "Saving..." : "Salvar Alterações"}
               </Button>
             </div>
-          </DialogContent>
-        </Dialog>
+          </DaylogContent>
+        </Daylog>
       )}
     </div>
   );

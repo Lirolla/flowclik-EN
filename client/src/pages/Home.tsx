@@ -6,7 +6,7 @@ import { trpc } from "@/lib/trpc";
 
 import LayoutWrapper from "@/components/LayoutWrapper";
 import { Link } from "wouter";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Daylog, DaylogContent } from "@/components/ui/daylog";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { useState } from "react";
 
@@ -65,7 +65,7 @@ export default function Home() {
             <div className="text-center mt-12">
               <Button asChild size="lg">
                 <Link href="/portfolio">
-                  <a>Ver Portfólio Completo</a>
+                  <a>View Portfolio Completo</a>
                 </Link>
               </Button>
             </div>
@@ -81,7 +81,7 @@ export default function Home() {
               <div className="grid md:grid-cols-2 gap-0">
                 <div className="p-8 md:p-12 flex flex-col justify-center">
                   <h2 className="text-3xl md:text-4xl font-bold font-serif mb-4">
-                    Agende seu Serviço
+                    Agende seu Service
                   </h2>
                   <p className="text-lg text-muted-foreground mb-6">
                     Transforme seus momentos em memórias únicas. Agende agora mesmo uma sessão de fotos profissional.
@@ -97,7 +97,7 @@ export default function Home() {
                       <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                         <span className="text-primary font-bold">2</span>
                       </div>
-                      <span className="text-sm">Selecione data e horário</span>
+                      <span className="text-sm">Select data e horário</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
@@ -114,7 +114,7 @@ export default function Home() {
                     </Button>
                     <Button asChild size="lg" variant="outline" className="flex-1">
                       <Link href="/services">
-                        <a>Ver Serviços</a>
+                        <a>Ver Services</a>
                       </Link>
                     </Button>
                   </div>
@@ -142,10 +142,10 @@ export default function Home() {
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4">
-                Portfólio de Vídeo
+                Portfólio de Video
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Conheça nossos melhores trabalhos em vídeo
+                Conheça nossos melhores trabalhos em video
               </p>
             </div>
 
@@ -181,7 +181,7 @@ export default function Home() {
             <div className="text-center mt-12">
               <Button asChild size="lg">
                 <Link href="/portfolio">
-                  <a>Ver Todos os Vídeos</a>
+                  <a>Ver Todos os Videos</a>
                 </Link>
               </Button>
             </div>
@@ -226,7 +226,7 @@ export default function Home() {
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4">
-                Galerias em Destaque
+                Gallerys em Destaque
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Explore nossas coleções mais populares
@@ -268,7 +268,7 @@ export default function Home() {
             <div className="text-center mt-12">
               <Button asChild size="lg">
                 <Link href="/galleries">
-                  <a>Ver Todas as Galerias</a>
+                  <a>Ver Todas as Gallerys</a>
                 </Link>
               </Button>
             </div>
@@ -276,9 +276,9 @@ export default function Home() {
         </section>
       )}
 
-      {/* Video Dialog */}
-      <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
-        <DialogContent className="max-w-7xl p-0 bg-black/95 border-none">
+      {/* Video Daylog */}
+      <Daylog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
+        <DaylogContent className="max-w-7xl p-0 bg-black/95 border-none">
           {selectedVideo && (
             <div className="relative">
               {/* Close Button */}
@@ -318,7 +318,7 @@ export default function Home() {
                   )}
                   {selectedVideo.story && (
                     <div>
-                      <h3 className="text-lg font-bold mb-2">História</h3>
+                      <h3 className="text-lg font-bold mb-2">History</h3>
                       <p className="text-white/80 whitespace-pre-wrap">
                         {selectedVideo.story}
                       </p>
@@ -328,8 +328,8 @@ export default function Home() {
               </div>
             </div>
           )}
-        </DialogContent>
-      </Dialog>
+        </DaylogContent>
+      </Daylog>
 
       </div>
     </LayoutWrapper>

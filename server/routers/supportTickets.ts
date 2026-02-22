@@ -8,7 +8,7 @@ import { notifyOwner } from "../_core/notification";
 import { sendAdminNewTicketEmail } from "../_core/emailTemplates";
 
 export const supportTicketsRouter = router({
-  // Fotógrafo cria ticket
+  // Photographer cria ticket
   create: protectedProcedure
     .input(
       z.object({
@@ -34,7 +34,7 @@ export const supportTicketsRouter = router({
 
       // Notificar owner
       await notifyOwner({
-        title: `🎫 Novo Ticket #${result.insertId}`,
+        title: `🎫 New Ticket #${result.insertId}`,
         content: `**Tenant:** ${tenantId}\n**Assunto:** ${input.subject}\n**Prioridade:** ${input.priority}\n\n${input.message.substring(0, 200)}...`,
       });
 
@@ -42,7 +42,7 @@ export const supportTicketsRouter = router({
       try {
         const [user] = await db.select().from(users).where(eq(users.id, ctx.user!.id)).limit(1);
         sendAdminNewTicketEmail({
-          photographerName: user?.name || 'Fotógrafo',
+          photographerName: user?.name || 'Photographer',
           email: user?.email || '',
           subject: input.subject,
           message: input.message,
@@ -54,7 +54,7 @@ export const supportTicketsRouter = router({
       return { ticketId: result.insertId };
     }),
 
-  // Fotógrafo busca seus tickets
+  // Photographer busca seus tickets
   getMyTickets: protectedProcedure.query(async ({ ctx }) => {
     const tenantId = getTenantId(ctx);
     const db = await getDb();
@@ -69,7 +69,7 @@ export const supportTicketsRouter = router({
     return tickets;
   }),
 
-  // Fotógrafo busca detalhes de um ticket
+  // Photographer busca detalhes de um ticket
   getTicketById: protectedProcedure
     .input(z.object({ ticketId: z.number() }))
     .query(async ({ input, ctx }) => {
@@ -90,7 +90,7 @@ export const supportTicketsRouter = router({
         .limit(1);
 
       if (!ticket) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Ticket não encontrado" });
+        throw new TRPCError({ code: "NOT_FOUND", message: "Ticket not found" });
       }
 
       // Buscar respostas (excluir notas internas se não for super admin)
@@ -108,7 +108,7 @@ export const supportTicketsRouter = router({
         .where(
           and(
             eq(supportTicketReplies.ticketId, input.ticketId),
-            // Ocultar notas internas se não for super admin
+            // Hide notas internas se não for super admin
             ctx.user!.role === "admin" 
               ? eq(supportTicketReplies.isInternal, 0)
               : undefined
@@ -122,7 +122,7 @@ export const supportTicketsRouter = router({
       };
     }),
 
-  // Fotógrafo adiciona resposta ao ticket
+  // Photographer adiciona resposta ao ticket
   addReply: protectedProcedure
     .input(
       z.object({
@@ -135,7 +135,7 @@ export const supportTicketsRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-      // Verificar se ticket pertence ao tenant
+      // Verify se ticket pertence ao tenant
       const [ticket] = await db
         .select()
         .from(supportTickets)
@@ -148,7 +148,7 @@ export const supportTicketsRouter = router({
         .limit(1);
 
       if (!ticket) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Ticket não encontrado" });
+        throw new TRPCError({ code: "NOT_FOUND", message: "Ticket not found" });
       }
 
       // Adicionar resposta

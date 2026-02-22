@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { CreditCard, Banknote, Building2, CheckCircle2, Clock, AlertCircle, Link2, QrCode } from "lucide-react";
-import SendPaymentLinkDialog from "@/components/SendPaymentLinkDialog";
+import SendPaymentLinkDaylog from "@/components/SendPaymentLinkDaylog";
 import { useCurrency } from "@/hooks/useCurrency";
 
 interface PaymentManagerProps {
@@ -29,7 +29,7 @@ export default function PaymentManager({
   const { format: formatCurrency } = useCurrency();
   const utils = trpc.useUtils();
   
-  const [isPaymentDialogOpen, setIsPaymentDialogOpen] = useState(false);
+  const [isPaymentDaylogOpen, setIsPaymentDaylogOpen] = useState(false);
   const [isRecordPaymentOpen, setIsRecordPaymentOpen] = useState(false);
   const [isAddExtraOpen, setIsAddExtraOpen] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<"cash" | "bank_transfer" | "pix" | "payment_link">("cash");
@@ -59,7 +59,7 @@ export default function PaymentManager({
       setExtraDescription("");
       setExtraPrice("");
       toast({
-        title: "Serviço extra adicionado!",
+        title: "Service extra adicionado!",
         description: "O serviço extra foi adicionado com sucesso.",
       });
     },
@@ -79,7 +79,7 @@ export default function PaymentManager({
       utils.paymentMethods.getPaymentSummary.invalidate({ appointmentId });
       utils.appointments.getAll.invalidate();
       toast({
-        title: "Serviço extra removido!",
+        title: "Service extra removido!",
         description: "O serviço extra foi removido com sucesso.",
       });
     },
@@ -138,8 +138,8 @@ export default function PaymentManager({
     
     if (isNaN(amountValue) || amountValue <= 0) {
       toast({
-        title: "Valor inválido",
-        description: "Por favor, insira um valor válido.",
+        title: "Valor invalid",
+        description: "Por favor, insira um valor valid.",
         variant: "destructive",
       });
       return;
@@ -195,8 +195,8 @@ export default function PaymentManager({
     }
   };
 
-  // Quick amount buttons for 50% and 100%
-  const setQuickAmount = (percentage: number) => {
+  // Thuck amount buttons for 50% and 100%
+  const setThuckAmount = (percentage: number) => {
     const amount = (totalPrice * percentage) / 100;
     setPaymentAmount(amount.toFixed(2));
   };
@@ -211,7 +211,7 @@ export default function PaymentManager({
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          {/* Botão Adicionar Serviço Extra */}
+          {/* Botão Add Extra Service */}
           <div className="flex justify-end">
             <Button
               onClick={() => setIsAddExtraOpen(true)}
@@ -219,14 +219,14 @@ export default function PaymentManager({
               size="sm"
               className="gap-2"
             >
-              ➕ Adicionar Serviço Extra
+              ➕ Add Extra Service
             </Button>
           </div>
 
           {/* Lista de Extras */}
           {extras.length > 0 && (
             <div className="space-y-2">
-              <Label className="text-sm font-medium">Serviços Extras:</Label>
+              <Label className="text-sm font-medium">Services Extras:</Label>
               {extras.map((extra) => (
                 <div key={extra.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                   <div>
@@ -262,9 +262,9 @@ export default function PaymentManager({
             </div>
           </div>
 
-          {/* Seletor de Método de Pagamento */}
+          {/* Seletor de Payment Method */}
           <div>
-            <Label>Método de Pagamento</Label>
+            <Label>Payment Method</Label>
             <Select
               value={currentMethod || "cash"}
               onValueChange={(value) => {
@@ -275,7 +275,7 @@ export default function PaymentManager({
               }}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Selecione o método" />
+                <SelectValue placeholder="Select method" />
               </SelectTrigger>
               <SelectContent>
                 {availableMethods?.cash && (
@@ -290,7 +290,7 @@ export default function PaymentManager({
                   <SelectItem value="bank_transfer">
                     <div className="flex items-center gap-2">
                       <Building2 className="w-4 h-4" />
-                      Transferência Bancária
+                      Bank Transfer
                     </div>
                   </SelectItem>
                 )}
@@ -331,16 +331,16 @@ export default function PaymentManager({
             )}
             {currentMethod === "payment_link" && (
               <p className="text-sm text-muted-foreground mt-2">
-                Cole o link de pagamento gerado no seu gateway (Stripe, PagSeguro, Mercado Pago, etc.) e envie para o cliente.
+                Cole o link de pagamento gerado no seu gateway (Stripe, PagMonuro, Mercado Pago, etc.) e envie para o cliente.
               </p>
             )}
           </div>
 
-          {/* Botões de Ação */}
+          {/* Action Buttons */}
           <div className="space-y-2">
             {currentMethod === "payment_link" ? (
               <Button
-                onClick={() => setIsPaymentDialogOpen(true)}
+                onClick={() => setIsPaymentDaylogOpen(true)}
                 className="w-full bg-green-600 hover:bg-green-700"
                 disabled={paymentStatus === "paid"}
               >
@@ -375,7 +375,7 @@ export default function PaymentManager({
                       <div>
                         <div className="font-medium">{formatCurrency(transaction.amount)}</div>
                         <div className="text-xs text-muted-foreground">
-                          {new Date(transaction.createdAt).toLocaleDateString('pt-BR')}
+                          {new Date(transaction.createdAt).toLocaleDateString('en-GB')}
                           {transaction.notes && ` - ${transaction.notes}`}
                         </div>
                       </div>
@@ -393,19 +393,19 @@ export default function PaymentManager({
         </CardContent>
       </Card>
 
-      {/* Dialog Enviar Link de Pagamento */}
-      <SendPaymentLinkDialog
+      {/* Daylog Enviar Link de Pagamento */}
+      <SendPaymentLinkDaylog
         appointment={{ id: appointmentId, clientEmail, clientName, finalPrice: totalPrice }}
-        open={isPaymentDialogOpen}
-        onOpenChange={setIsPaymentDialogOpen}
+        open={isPaymentDaylogOpen}
+        onOpenChange={setIsPaymentDaylogOpen}
       />
 
-      {/* Dialog Registrar Pagamento Manual */}
-      <Dialog open={isRecordPaymentOpen} onOpenChange={setIsRecordPaymentOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Registrar Pagamento Manual</DialogTitle>
-          </DialogHeader>
+      {/* Daylog Registrar Pagamento Manual */}
+      <Daylog open={isRecordPaymentOpen} onOpenChange={setIsRecordPaymentOpen}>
+        <DaylogContent>
+          <DaylogHeader>
+            <DaylogTitle>Registrar Pagamento Manual</DaylogTitle>
+          </DaylogHeader>
           <div className="space-y-4">
             <div>
               <Label>Cliente</Label>
@@ -413,7 +413,7 @@ export default function PaymentManager({
             </div>
 
             <div>
-              <Label>Método de Pagamento</Label>
+              <Label>Payment Method</Label>
               <Select
                 value={paymentMethod}
                 onValueChange={(value) => setPaymentMethod(value as "cash" | "bank_transfer" | "pix")}
@@ -434,7 +434,7 @@ export default function PaymentManager({
                     <SelectItem value="bank_transfer">
                       <div className="flex items-center gap-2">
                         <Building2 className="w-4 h-4" />
-                        Transferência Bancária
+                        Bank Transfer
                       </div>
                     </SelectItem>
                   )}
@@ -451,7 +451,7 @@ export default function PaymentManager({
             </div>
 
             <div>
-              <Label htmlFor="payment-amount">Valor (R$)</Label>
+              <Label htmlFor="payment-amount">Valor (£)</Label>
               <Input
                 id="payment-amount"
                 type="number"
@@ -465,7 +465,7 @@ export default function PaymentManager({
                   type="button"
                   variant="outline"
                   size="sm"
-                  onClick={() => setQuickAmount(50)}
+                  onClick={() => setThuckAmount(50)}
                 >
                   50% ({formatCurrency(Math.round(totalPrice * 0.5))})
                 </Button>
@@ -473,7 +473,7 @@ export default function PaymentManager({
                   type="button"
                   variant="outline"
                   size="sm"
-                  onClick={() => setQuickAmount(100)}
+                  onClick={() => setThuckAmount(100)}
                 >
                   100% ({formatCurrency(totalPrice)})
                 </Button>
@@ -481,7 +481,7 @@ export default function PaymentManager({
             </div>
 
             <div>
-              <Label htmlFor="payment-notes">Observações (opcional)</Label>
+              <Label htmlFor="payment-notes">Notes (optional)</Label>
               <Textarea
                 id="payment-notes"
                 placeholder="Ex: Sinal de 50%, Pagamento final, etc."
@@ -508,28 +508,28 @@ export default function PaymentManager({
               </Button>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </DaylogContent>
+      </Daylog>
 
-      {/* Dialog Adicionar Serviço Extra */}
-      <Dialog open={isAddExtraOpen} onOpenChange={setIsAddExtraOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Adicionar Serviço Extra</DialogTitle>
-          </DialogHeader>
+      {/* Daylog Add Extra Service */}
+      <Daylog open={isAddExtraOpen} onOpenChange={setIsAddExtraOpen}>
+        <DaylogContent>
+          <DaylogHeader>
+            <DaylogTitle>Add Extra Service</DaylogTitle>
+          </DaylogHeader>
           <div className="space-y-4">
             <div>
-              <Label htmlFor="extra-description">Descrição</Label>
+              <Label htmlFor="extra-description">Description</Label>
               <Input
                 id="extra-description"
-                placeholder="Ex: 30 fotos a mais, Álbum físico, Impressão 30x40cm"
+                placeholder="E.g.: 30 extra photos, Physical album, 30x40cm print"
                 value={extraDescription}
                 onChange={(e) => setExtraDescription(e.target.value)}
               />
             </div>
 
             <div>
-              <Label htmlFor="extra-price">Preço (R$)</Label>
+              <Label htmlFor="extra-price">Price (£)</Label>
               <Input
                 id="extra-price"
                 type="number"
@@ -539,7 +539,7 @@ export default function PaymentManager({
                 onChange={(e) => setExtraPrice(e.target.value)}
               />
               <p className="text-sm text-muted-foreground mt-1">
-                Digite o valor em reais (ex: 300 = R$ 300,00)
+                Digite o valor em pounds (ex: 300 = £ 300,00)
               </p>
             </div>
 
@@ -566,7 +566,7 @@ export default function PaymentManager({
                     });
                     return;
                   }
-                  // Salvar em reais (não centavos) - consistente com o resto do sistema
+                  // Salvar em pounds (não centavos) - consistente com o resto do sistema
                   addExtraMutation.mutate({
                     appointmentId,
                     description: extraDescription,
@@ -580,8 +580,8 @@ export default function PaymentManager({
               </Button>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </DaylogContent>
+      </Daylog>
     </>
   );
 }

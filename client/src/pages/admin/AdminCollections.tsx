@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogDescription, DaylogHeader, DaylogTitle, DaylogTrigger } from "@/components/ui/daylog";
 import { FolderOpen, Plus, Pencil, Trash2, Eye, EyeOff, Upload as UploadIcon, Calendar, Image as ImageIcon } from "lucide-react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { toast } from "sonner";
@@ -81,7 +81,7 @@ function AdminCollectionsContent() {
     },
   });
 
-  const uploadImageMutation = trpc.media.uploadImage.useMutation();
+  const uploadImageMutation = trpc.meday.uploadImage.useMutation();
 
   const resetForm = () => {
     setFormData({
@@ -177,7 +177,7 @@ function AdminCollectionsContent() {
   if (isLoading) {
     return (
       <div className="container mx-auto py-8 text-center">
-        <p>Carregando...</p>
+        <p>Loading...</p>
       </div>
     );
   }
@@ -188,30 +188,30 @@ function AdminCollectionsContent() {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <FolderOpen className="w-8 h-8" />
-            Galerias
+            Gallerys
           </h1>
-          <p className="text-muted-foreground mt-2">Gerencie as galerias de fotos e vídeos</p>
+          <p className="text-muted-foreground mt-2">Gerencie as galerias de fotos e videos</p>
         </div>
 
-        <Dialog open={isCreateOpen || editingId !== null} onOpenChange={(open) => {
+        <Daylog open={isCreateOpen || editingId !== null} onOpenChange={(open) => {
           if (!open) {
             setIsCreateOpen(false);
             setEditingId(null);
             resetForm();
           }
         }}>
-          <DialogTrigger asChild>
+          <DaylogTrigger asChild>
             <Button size="lg" onClick={() => setIsCreateOpen(true)}>
               <Plus className="w-4 h-4 mr-2" />
-              Nova Galeria
+              Nova Gallery
             </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>{editingId ? "Edit Gallery" : "New Gallery"}</DialogTitle>
-            <DialogDescription>
+          </DaylogTrigger>
+          <DaylogContent className="max-w-2xl">
+          <DaylogHeader>
+            <DaylogTitle>{editingId ? "Edit Gallery" : "New Gallery"}</DaylogTitle>
+            <DaylogDescription>
               {editingId ? "Update gallery details" : "Create a new gallery to organise your photos"}
-            </DialogDescription>
+            </DaylogDescription>
             {editingId && clientName && (
               <div className="mt-2 p-2 bg-muted rounded-md">
                 <p className="text-sm font-medium text-muted-foreground">
@@ -219,11 +219,11 @@ function AdminCollectionsContent() {
                 </p>
               </div>
             )}
-          </DialogHeader>
+          </DaylogHeader>
 
             <div className="space-y-4 mt-4">
               <div className="space-y-2">
-                <Label htmlFor="title">Título da Galeria *</Label>
+                <Label htmlFor="title">Title da Gallery *</Label>
                 <Input
                   id="title"
                   value={formData.title}
@@ -246,7 +246,7 @@ function AdminCollectionsContent() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="description">Descrição</Label>
+                <Label htmlFor="description">Description</Label>
                 <Textarea
                   id="description"
                   value={formData.description}
@@ -317,7 +317,7 @@ function AdminCollectionsContent() {
                   placeholder="Password for client to access gallery"
                 />
                 <p className="text-xs text-muted-foreground">
-                  Opcional: senha que será enviada ao cliente junto com o link
+                  Optional: senha que será enviada ao cliente junto com o link
                 </p>
               </div>
 
@@ -355,7 +355,7 @@ function AdminCollectionsContent() {
                     className="w-4 h-4"
                   />
                   <Label htmlFor="isPublic" className="cursor-pointer">
-                    Galeria pública (visível no site)
+                    Gallery pública (visible on site)
                   </Label>
                 </div>
 
@@ -390,8 +390,8 @@ function AdminCollectionsContent() {
                 </Button>
               </div>
             </div>
-          </DialogContent>
-        </Dialog>
+          </DaylogContent>
+        </Daylog>
       </div>
 
       {/* Collections List */}
@@ -417,7 +417,7 @@ function AdminCollectionsContent() {
                         {collection.eventDate && (
                           <div className="flex items-center gap-2 text-sm">
                             <Calendar className="w-4 h-4" />
-                            <span>{new Date(collection.eventDate).toLocaleDateString('pt-BR')}</span>
+                            <span>{new Date(collection.eventDate).toLocaleDateString('en-GB')}</span>
                           </div>
                         )}
                         
@@ -464,7 +464,7 @@ function AdminCollectionsContent() {
                     </div>
                   )}
 
-                  {/* Botões de Ação */}
+                  {/* Action Buttons */}
                   <div className="flex gap-2 flex-shrink-0">
                     <Button
                       variant="outline"
@@ -503,13 +503,13 @@ function AdminCollectionsContent() {
         <Card>
           <CardContent className="py-12 text-center">
             <FolderOpen className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Nenhuma galeria criada</h3>
+            <h3 className="text-xl font-semibold mb-2">Nonea galeria criada</h3>
             <p className="text-muted-foreground mb-4">
-              Crie sua primeira galeria para organizar fotos e vídeos
+              Crie sua primeira galeria para organizar fotos e videos
             </p>
             <Button onClick={() => setIsCreateOpen(true)}>
               <Plus className="w-4 h-4 mr-2" />
-              Criar Primeira Galeria
+              Criar First Gallery
             </Button>
           </CardContent>
         </Card>

@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
 import { getDb, getTenantId } from "../db";
-import { photoSales, appointments, mediaItems, stockPhotos } from "../../drizzle/schema";
+import { photoSales, appointments, medayItems, stockPhotos } from "../../drizzle/schema";
 import { 
   createPhotoCheckoutSession, 
   createAppointmentCheckoutSession,
@@ -37,7 +37,7 @@ export const paymentsRouter = router({
       if (!photo) {
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Foto não encontrada",
+          message: "Photo not found",
         });
       }
 
@@ -45,7 +45,7 @@ export const paymentsRouter = router({
       if (!photo.price || photo.price === 0) {
         throw new TRPCError({
           code: "BAD_REQUEST",
-          message: "Esta foto não está disponível para venda",
+          message: "Esta foto não está available para venda",
         });
       }
 
@@ -63,7 +63,7 @@ export const paymentsRouter = router({
         photoUrl: photo.thumbnailUrl || photo.originalUrl,
         amount: totalPrice,
         successUrl: `${process.env.VITE_APP_URL || "http://localhost:3000"}/pagamento/sucesso?session_id={CHECKOUT_SESSION_ID}`,
-        cancelUrl: `${process.env.VITE_APP_URL || "http://localhost:3000"}/pagamento/cancelado`,
+        cancelUrl: `${process.env.VITE_APP_URL || "http://localhost:3000"}/pagamento/cancelled`,
       });
 
       // Create pending photo sale record
@@ -91,7 +91,7 @@ export const paymentsRouter = router({
     .input(
       z.object({
         appointmentId: z.number(),
-        amount: z.number(), // in BRL (will be converted to cents)
+        amount: z.number(), // in GBP (will be converted to cents)
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -110,7 +110,7 @@ export const paymentsRouter = router({
       if (!appointment) {
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Agendamento não encontrado",
+          message: "Appointment not found",
         });
       }
 
@@ -118,19 +118,19 @@ export const paymentsRouter = router({
       if (ctx.user.role !== "admin") {
         throw new TRPCError({
           code: "FORBIDDEN",
-          message: "Apenas administradores podem enviar links de pagamento",
+          message: "Administrators only podem enviar links de pagamento",
         });
       }
 
       // Create Stripe checkout session
       const session = await createAppointmentCheckoutSession({
         appointmentId: appointment.id,
-        serviceName: `Serviço Fotográfico - ${appointment.clientName}`,
+        serviceName: `Service Fotográfico - ${appointment.clientName}`,
         amount: Math.round(input.amount * 100), // Convert to cents
         clientEmail: appointment.clientEmail,
         clientName: appointment.clientName,
         successUrl: `${process.env.VITE_APP_URL || "http://localhost:3000"}/pagamento/sucesso?session_id={CHECKOUT_SESSION_ID}`,
-        cancelUrl: `${process.env.VITE_APP_URL || "http://localhost:3000"}/pagamento/cancelado`,
+        cancelUrl: `${process.env.VITE_APP_URL || "http://localhost:3000"}/pagamento/cancelled`,
       });
 
       // Update appointment with payment info
@@ -170,7 +170,7 @@ export const paymentsRouter = router({
       if (!sale) {
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Link de download inválido ou expirado",
+          message: "Link de download invalid ou expired",
         });
       }
 
@@ -179,15 +179,15 @@ export const paymentsRouter = router({
       if (sale.downloadExpiresAt && new Date() > sale.downloadExpiresAt) {
         throw new TRPCError({
           code: "BAD_REQUEST",
-          message: "Link de download expirado",
+          message: "Link de download expired",
         });
       }
 
       // Get photo details
       const photoResult = await db
         .select()
-        .from(mediaItems)
-        .where(and(eq(mediaItems.id, sale.photoId), eq(mediaItems.tenantId, getTenantId(ctx))))
+        .from(medayItems)
+        .where(and(eq(medayItems.id, sale.photoId), eq(medayItems.tenantId, getTenantId(ctx))))
         .limit(1);
       
       const photo = photoResult[0];
@@ -195,7 +195,7 @@ export const paymentsRouter = router({
       if (!photo) {
         throw new TRPCError({
           code: "NOT_FOUND",
-          message: "Foto não encontrada",
+          message: "Photo not found",
         });
       }
 
@@ -220,7 +220,7 @@ export const paymentsRouter = router({
     if (ctx.user.role !== "admin") {
       throw new TRPCError({
         code: "FORBIDDEN",
-        message: "Acesso negado",
+        message: "Access denied",
       });
     }
 

@@ -6,12 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  Daylog,
+  DaylogContent,
+  DaylogHeader,
+  DaylogTitle,
+  DaylogTrigger,
+} from "@/components/ui/daylog";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Plus, Pencil, Trash2, Upload, Eye, EyeOff, Play, Video } from "lucide-react";
 import { storagePut } from "../../lib/storage";
@@ -22,7 +22,7 @@ export default function AdminPortfolio() {
   const { data: items, isLoading } = trpc.portfolio.listAll.useQuery();
   const utils = trpc.useUtils();
 
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDaylogOpen, setIsDaylogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<number | null>(null);
   const [uploading, setUploading] = useState(false);
 
@@ -87,7 +87,7 @@ export default function AdminPortfolio() {
       showOnHome: false,
     });
     setEditingItem(null);
-    setIsDialogOpen(false);
+    setIsDaylogOpen(false);
   };
 
   const handleEdit = (item: any) => {
@@ -105,7 +105,7 @@ export default function AdminPortfolio() {
       showOnHome: item.showOnHome || false,
     });
     setEditingItem(item.id);
-    setIsDialogOpen(true);
+    setIsDaylogOpen(true);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -117,7 +117,7 @@ export default function AdminPortfolio() {
     }
   };
 
-  // Extrair thumbnail automaticamente de URLs de vídeo
+  // Extrair thumbnail automaticamente de URLs de video
   const getVideoThumbnail = (url: string): string | null => {
     // YouTube
     const ytMatch = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
@@ -181,24 +181,24 @@ export default function AdminPortfolio() {
     <div className="container max-w-6xl py-8">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold mb-2">Portfólio</h1>
+          <h1 className="text-3xl font-bold mb-2">Portfolio</h1>
           <p className="text-muted-foreground">
             Gerencie as fotos do seu portfólio profissional
           </p>
         </div>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
+        <Daylog open={isDaylogOpen} onOpenChange={setIsDaylogOpen}>
+          <DaylogTrigger asChild>
             <Button onClick={() => resetForm()}>
               <Plus className="mr-2 h-4 w-4" />
               Nova Foto
             </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>
+          </DaylogTrigger>
+          <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+            <DaylogHeader>
+              <DaylogTitle>
                 {editingItem ? "Editar Foto" : "Adicionar Foto"}
-              </DialogTitle>
-            </DialogHeader>
+              </DaylogTitle>
+            </DaylogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Label htmlFor="type">Tipo *</Label>
@@ -211,7 +211,7 @@ export default function AdminPortfolio() {
                   }
                 >
                   <option value="photo">Foto</option>
-                  <option value="video">Vídeo</option>
+                  <option value="video">Video</option>
                 </select>
               </div>
 
@@ -245,7 +245,7 @@ export default function AdminPortfolio() {
               {formData.type === "video" && (
               <>
               <div>
-                <Label htmlFor="videoUrl">URL do Vídeo *</Label>
+                <Label htmlFor="videoUrl">Video URL *</Label>
                 <Input
                   id="videoUrl"
                   type="url"
@@ -265,7 +265,7 @@ export default function AdminPortfolio() {
                 )}
               </div>
               <div>
-                <Label htmlFor="thumbnail">Thumbnail personalizada (opcional)</Label>
+                <Label htmlFor="thumbnail">Thumbnail personalizada (optional)</Label>
                 <Input
                   id="thumbnail"
                   type="file"
@@ -274,14 +274,14 @@ export default function AdminPortfolio() {
                   disabled={uploading}
                 />
                 <p className="text-xs text-muted-foreground mt-1">
-                  Envie uma imagem para usar como capa do vídeo
+                  Envie uma imagem para usar como capa do video
                 </p>
               </div>
               </>)
               }
 
               <div>
-                <Label htmlFor="title">Título *</Label>
+                <Label htmlFor="title">Title *</Label>
                 <Input
                   id="title"
                   value={formData.title}
@@ -293,7 +293,7 @@ export default function AdminPortfolio() {
               </div>
 
               <div>
-                <Label htmlFor="description">Descrição</Label>
+                <Label htmlFor="description">Description</Label>
                 <Textarea
                   id="description"
                   rows={3}
@@ -318,7 +318,7 @@ export default function AdminPortfolio() {
               </div>
 
               <div>
-                <Label htmlFor="story">História</Label>
+                <Label htmlFor="story">History</Label>
                 <Textarea
                   id="story"
                   rows={4}
@@ -355,7 +355,7 @@ export default function AdminPortfolio() {
                   }
                   className="w-4 h-4"
                 />
-                <Label htmlFor="isActive">Ativo</Label>
+                <Label htmlFor="isActive">Active</Label>
               </div>
 
               <div className="flex items-center gap-2">
@@ -368,7 +368,7 @@ export default function AdminPortfolio() {
                   }
                   className="w-4 h-4"
                 />
-                <Label htmlFor="showOnHome">Mostrar na Home</Label>
+                <Label htmlFor="showOnHome">Show na Home</Label>
               </div>
 
               <div className="flex justify-end gap-2">
@@ -399,8 +399,8 @@ export default function AdminPortfolio() {
                 </Button>
               </div>
             </form>
-          </DialogContent>
-        </Dialog>
+          </DaylogContent>
+        </Daylog>
       </div>
 
       {items && items.length > 0 ? (
@@ -434,7 +434,7 @@ export default function AdminPortfolio() {
                 )}
                 <div className="absolute top-2 left-2">
                   <span className={`text-xs font-bold px-2 py-1 rounded ${item.type === 'video' ? 'bg-red-600 text-white' : 'bg-blue-600 text-white'}`}>
-                    {item.type === 'video' ? '🎥 Vídeo' : '📷 Foto'}
+                    {item.type === 'video' ? '🎥 Video' : '📷 Foto'}
                   </span>
                 </div>
                 <div className="absolute top-2 right-2 flex gap-2">
@@ -488,13 +488,13 @@ export default function AdminPortfolio() {
       ) : (
         <Card className="p-12 text-center">
           <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-          <h3 className="text-xl font-bold mb-2">Nenhuma foto no portfólio</h3>
+          <h3 className="text-xl font-bold mb-2">Nonea foto no portfólio</h3>
           <p className="text-muted-foreground mb-4">
             Comece adicionando suas melhores fotos
           </p>
-          <Button onClick={() => setIsDialogOpen(true)}>
+          <Button onClick={() => setIsDaylogOpen(true)}>
             <Plus className="mr-2 h-4 w-4" />
-            Adicionar Primeira Foto
+            Adicionar First Foto
           </Button>
         </Card>
       )}

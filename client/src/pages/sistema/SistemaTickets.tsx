@@ -7,11 +7,11 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+  Daylog,
+  DaylogContent,
+  DaylogHeader,
+  DaylogTitle,
+} from "@/components/ui/daylog";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -42,7 +42,7 @@ export default function SistemaTickets() {
   // Mutations
   const replyToTicket = trpc.sistema.replyToTicket.useMutation({
     onSuccess: () => {
-      toast({ title: "Resposta enviada!" });
+      toast({ title: "Reply enviada!" });
       setReplyMessage("");
       setIsInternal(false);
       refetchTickets();
@@ -92,10 +92,10 @@ export default function SistemaTickets() {
     return (
       <Badge variant={config.variant} className="gap-1">
         <Icon className="h-3 w-3" />
-        {status === "open" && "Aberto"}
+        {status === "open" && "Open"}
         {status === "in_progress" && "Em Andamento"}
         {status === "resolved" && "Resolvido"}
-        {status === "closed" && "Fechado"}
+        {status === "closed" && "Closed"}
       </Badge>
     );
   };
@@ -123,8 +123,8 @@ export default function SistemaTickets() {
       <div className="container py-8">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold">Tickets de Suporte</h1>
-          <p className="text-muted-foreground">Gerenciar solicitações de todos os fotógrafos</p>
+          <h1 className="text-3xl font-bold">Tickets de Support</h1>
+          <p className="text-muted-foreground">Gerenciar solicitações de todos os photographers</p>
         </div>
 
         <Select value={statusFilter} onValueChange={(v: any) => setStatusFilter(v)}>
@@ -133,10 +133,10 @@ export default function SistemaTickets() {
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="all">Todos</SelectItem>
-            <SelectItem value="open">Abertos</SelectItem>
+            <SelectItem value="open">Opens</SelectItem>
             <SelectItem value="in_progress">Em Andamento</SelectItem>
             <SelectItem value="resolved">Resolvidos</SelectItem>
-            <SelectItem value="closed">Fechados</SelectItem>
+            <SelectItem value="closed">Closeds</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -146,7 +146,7 @@ export default function SistemaTickets() {
         {!tickets || tickets.length === 0 ? (
           <Card className="p-12 text-center">
             <MessageSquare className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-lg font-semibold mb-2">Nenhum ticket encontrado</h3>
+            <h3 className="text-lg font-semibold mb-2">None ticket encontrado</h3>
             <p className="text-muted-foreground">
               Não há tickets com o filtro selecionado.
             </p>
@@ -173,7 +173,7 @@ export default function SistemaTickets() {
                   <p className="text-sm text-muted-foreground">
                     Criado {formatDistanceToNow(new Date(ticket.createdAt), { addSuffix: true, locale: ptBR })}
                     {ticket.lastReplyAt && (
-                      <> · Última resposta {formatDistanceToNow(new Date(ticket.lastReplyAt), { addSuffix: true, locale: ptBR })}</>
+                      <> · Last resposta {formatDistanceToNow(new Date(ticket.lastReplyAt), { addSuffix: true, locale: ptBR })}</>
                     )}
                   </p>
                 </div>
@@ -185,12 +185,12 @@ export default function SistemaTickets() {
 
       {/* Detalhes do Ticket */}
       {selectedTicket && ticketDetails && (
-        <Dialog open={!!selectedTicket} onOpenChange={() => setSelectedTicket(null)}>
-          <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>
+        <Daylog open={!!selectedTicket} onOpenChange={() => setSelectedTicket(null)}>
+          <DaylogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+            <DaylogHeader>
+              <DaylogTitle>
                 Ticket #{ticketDetails.ticket.id} - {ticketDetails.ticket.subject}
-              </DialogTitle>
+              </DaylogTitle>
               <div className="flex gap-2 mt-2">
                 {getStatusBadge(ticketDetails.ticket.status)}
                 {getPriorityBadge(ticketDetails.ticket.priority)}
@@ -198,7 +198,7 @@ export default function SistemaTickets() {
                   {ticketDetails.ticket.tenantSubdomain}.lirolla.com
                 </Badge>
               </div>
-            </DialogHeader>
+            </DaylogHeader>
 
             <div className="space-y-4">
               {/* Mensagem Original */}
@@ -212,7 +212,7 @@ export default function SistemaTickets() {
                 </p>
               </Card>
 
-              {/* Respostas */}
+              {/* Replys */}
               {ticketDetails.replies.map((reply) => (
                 <Card key={reply.id} className={reply.isInternal ? "p-4 border-yellow-300 bg-yellow-50" : "p-4"}>
                   {reply.isInternal && (
@@ -228,10 +228,10 @@ export default function SistemaTickets() {
                 </Card>
               ))}
 
-              {/* Adicionar Resposta */}
+              {/* Adicionar Reply */}
               {ticketDetails.ticket.status !== "closed" && (
                 <div className="space-y-2">
-                  <Label>Responder Ticket</Label>
+                  <Label>Reply Ticket</Label>
                   <Textarea
                     placeholder="Type your message..."
                     rows={4}
@@ -245,13 +245,13 @@ export default function SistemaTickets() {
                       onCheckedChange={(checked) => setIsInternal(checked as boolean)}
                     />
                     <Label htmlFor="internal" className="text-sm cursor-pointer">
-                      Nota interna (fotógrafo não verá)
+                      Nota interna (photographer não verá)
                     </Label>
                   </div>
                   <div className="flex gap-2">
                     <Button onClick={handleReply} disabled={replyToTicket.isPending}>
                       <Send className="h-4 w-4 mr-2" />
-                      {replyToTicket.isPending ? "Sending..." : "Enviar Resposta"}
+                      {replyToTicket.isPending ? "Sending..." : "Enviar Reply"}
                     </Button>
                     {ticketDetails.ticket.status !== "resolved" && (
                       <Button
@@ -267,8 +267,8 @@ export default function SistemaTickets() {
                 </div>
               )}
             </div>
-          </DialogContent>
-        </Dialog>
+          </DaylogContent>
+        </Daylog>
       )}
       </div>
     </SistemaLayout>

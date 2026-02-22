@@ -80,7 +80,7 @@ export default function ClientChat() {
       <ClientLayout appointmentId={appointmentId}>
         <div className="text-center py-12">
           <AlertCircle className="h-12 w-12 text-red-600 mx-auto mb-4" />
-          <p className="text-gray-400">Agendamento inválido</p>
+          <p className="text-gray-400">Agendamento invalid</p>
         </div>
       </ClientLayout>
     );
@@ -89,14 +89,14 @@ export default function ClientChat() {
   return (
     <ClientLayout appointmentId={appointmentId}>
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Chat com o Fotógrafo</h1>
+        <h1 className="text-3xl font-bold mb-6">Chat com o Photographer</h1>
 
         <Card className="bg-gray-900 border-gray-800 flex flex-col h-[600px]">
           {/* Messages Area */}
           <div className="flex-1 overflow-y-auto p-6 space-y-4">
             {messages && messages.length === 0 && (
               <div className="text-center py-12 text-gray-400">
-                <p>Nenhuma mensagem ainda. Comece a conversa!</p>
+                <p>Nonea mensagem ainda. Comece a conversa!</p>
               </div>
             )}
 
@@ -117,10 +117,10 @@ export default function ClientChat() {
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-xs opacity-75">
-                        {isOwnMessage ? "Você" : "Photographer"}
+                        {isOwnMessage ? "You" : "Photographer"}
                       </span>
                       <span className="text-xs opacity-50">
-                        {new Date(msg.createdAt).toLocaleString('pt-BR', {
+                        {new Date(msg.createdAt).toLocaleString('en-GB', {
                           day: '2-digit',
                           month: '2-digit',
                           hour: '2-digit',

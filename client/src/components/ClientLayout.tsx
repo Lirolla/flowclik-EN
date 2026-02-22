@@ -14,7 +14,7 @@ export function ClientLayout({ children, appointmentId }: ClientLayoutProps) {
 
   const menuItems = [
     { href: `/client/dashboard/${appointmentId}`, label: "Dashboard", icon: Home },
-    { href: `/client/gallery/${appointmentId}`, label: "Galeria", icon: Image },
+    { href: `/client/gallery/${appointmentId}`, label: "Gallery", icon: Image },
     { href: `/client/chat/${appointmentId}`, label: "Chat", icon: MessageSquare },
     { href: `/client/payments/${appointmentId}`, label: "Payments", icon: CreditCard },
     { href: `/client/contract/${appointmentId}`, label: "Contract", icon: FileText },
@@ -80,7 +80,7 @@ export function ClientLayout({ children, appointmentId }: ClientLayoutProps) {
       {/* Footer */}
       <footer className="bg-gray-900 border-t border-gray-800 mt-12">
         <div className="container mx-auto px-4 py-6 text-center text-sm text-gray-400">
-          <p>© 2024 FlowClik. Todos os direitos reservados.</p>
+          <p>© 2024 FlowClik. All rights reserved.</p>
         </div>
       </footer>
     </div>

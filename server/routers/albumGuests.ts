@@ -10,14 +10,14 @@ export const albumGuestsRouter = router({
     .input(
       z.object({
         collectionSlug: z.string(),
-        email: z.string().email("Email inválido"),
+        email: z.string().email("Invalid email"),
         name: z.string().optional(),
         relationship: z.string().optional(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
-      if (!db) throw new Error("Database não disponível");
+      if (!db) throw new Error("Database not available");
 
       // Find collection by slug
       const [collection] = await db
@@ -27,7 +27,7 @@ export const albumGuestsRouter = router({
         .limit(1);
 
       if (!collection) {
-        throw new Error("Álbum não encontrado");
+        throw new Error("Album not found");
       }
 
       // Check if email already registered for this collection
@@ -63,7 +63,7 @@ export const albumGuestsRouter = router({
       return { success: true, alreadyRegistered: false };
     }),
 
-  // Verificar se email já está registrado (para pular modal)
+  // Verify se email já está registrado (para pular modal)
   checkEmail: publicProcedure
     .input(
       z.object({

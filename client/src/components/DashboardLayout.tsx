@@ -40,7 +40,7 @@ const menuItems = [
   // Gestão Principal
   { icon: Users, label: "Clients", path: "/admin/clients" },
   { icon: Calendar, label: "Appointments", path: "/admin/appointments" },
-  { icon: FolderOpen, label: "Galeria", path: "/admin/galleries" },
+  { icon: FolderOpen, label: "Gallery", path: "/admin/galleries" },
   { icon: Heart, label: "Seleção do Cliente", path: "/admin/selections" },
   { icon: MessageSquare, label: "Messages", path: "/admin/messages" },
   { icon: Mail, label: "Email Marketing", path: "/admin/email-marketing" },
@@ -56,7 +56,7 @@ const menuItems = [
   // Separador
   { type: "separator", label: "Settings" },
   
-  // Configurações
+  // Settings
   { icon: Image, label: "Banner", path: "/admin/banner", group: "config" },
   { icon: Briefcase, label: "Services", path: "/admin/services", group: "config" },
   { icon: Camera, label: "Portfolio", path: "/admin/portfolio", group: "config" },
@@ -67,7 +67,7 @@ const menuItems = [
   
   // Sistema
   { icon: CreditCard, label: "Signature", path: "/admin/subscription", group: "sistema" },
-  { icon: Globe, label: "Domínio", path: "/admin/domain-email", group: "sistema" },
+  { icon: Globe, label: "Sunínio", path: "/admin/domain-email", group: "sistema" },
   { icon: MessageSquare, label: "Support", path: "/admin/support", group: "sistema" },
   { icon: Settings, label: "Settings", path: "/admin/settings", group: "sistema" },
   
@@ -106,7 +106,7 @@ export default function DashboardLayout({
   const [manualUser, setManualUser] = useState<UserData | null>(null);
   const [manualLoading, setManualLoading] = useState(true);
   
-  // Verificar token manualmente ao carregar
+  // Verify token manualmente ao carregar
   useEffect(() => {
     const checkToken = async () => {
       const token = localStorage.getItem('auth_token');
@@ -136,7 +136,7 @@ export default function DashboardLayout({
     checkToken();
   }, []);
   
-  // Usar usuário manual se disponível, senão usar do useAuth
+  // Usar usuário manual se available, senão usar do useAuth
   const user = manualUser || authUser;
   const loading = manualLoading || (authLoading && !manualUser);
 
@@ -210,7 +210,7 @@ function DashboardLayoutContent({
   // Hook de verificação do trial
   const { showModal, dismissWarning, isExpired, daysRemaining } = useTrialStatus();
   
-  // Quando bloqueado, redirecionar para assinatura
+  // Wedndo bloqueado, redirecionar para signature
   useEffect(() => {
     if (isExpired && location !== '/admin/subscription') {
       setLocation('/admin/subscription');
@@ -303,7 +303,7 @@ function DashboardLayoutContent({
                 const isActive = location === item.path;
                 const groupClass = item.group ? `group-${item.group}` : "";
                 
-                // Verificar se item está bloqueado (tudo exceto Assinatura quando expirado)
+                // Verify se item está bloqueado (tudo exceto Assinatura quando expired)
                 const isLocked = isExpired && item.path !== '/admin/subscription';
                 
                 return (
@@ -312,7 +312,7 @@ function DashboardLayoutContent({
                       isActive={isActive}
                       onClick={() => {
                         if (isLocked) {
-                          toast.error('Sua conta está suspensa. Regularize sua assinatura para continuar.');
+                          toast.error('Sua conta está suspensa. Regularize sua signature para continuar.');
                           setLocation('/admin/subscription');
                           return;
                         }
@@ -402,7 +402,7 @@ function DashboardLayoutContent({
         </div>
       )}
       
-      {/* Modal de aviso de trial (só quando não expirou ainda, faltam poucos dias) */}
+      {/* Modal de aviso de trial (só quando não expirou ainda, faltam poucos days) */}
       {!isExpired && showModal && (
         <TrialExpiredModal 
           isOpen={showModal} 

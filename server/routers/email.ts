@@ -11,7 +11,7 @@ function getTenantId(ctx: any): number {
   if (!ctx.user?.tenantId) {
     throw new TRPCError({
       code: "UNAUTHORIZED",
-      message: "Tenant ID não encontrado",
+      message: "Tenant ID not found",
     });
   }
   return ctx.user.tenantId;
@@ -22,7 +22,7 @@ export const emailRouter = router({
   saveConfig: protectedProcedure
     .input(
       z.object({
-        emailSender: z.string().email("Email inválido"),
+        emailSender: z.string().email("Invalid email"),
         resendApiKey: z.string().min(10, "API Key inválida"),
       })
     )
@@ -103,7 +103,7 @@ export const emailRouter = router({
       // Enviar email de teste
       const { data, error } = await resend.emails.send({
         from: config?.emailSender || 'FlowClik <noreply@flowclik.com>',
-        to: config.emailSender, // Envia para o próprio fotógrafo
+        to: config.emailSender, // Envia para o próprio photographer
         subject: "✅ Email Configurado com Sucesso - FlowClik",
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -117,9 +117,9 @@ export const emailRouter = router({
             <ul style="font-size: 14px; color: #666;">
               <li>✅ Confirmação de agendamento</li>
               <li>⏰ Lembrete 24h antes do evento</li>
-              <li>📸 Galeria pronta para visualizar</li>
-              <li>💬 Nova mensagem no chat</li>
-              <li>💰 Pagamento recebido</li>
+              <li>📸 Gallery pronta para visualizar</li>
+              <li>💬 New message no chat</li>
+              <li>💰 Payment received</li>
             </ul>
             <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
             <p style="font-size: 12px; color: #999;">

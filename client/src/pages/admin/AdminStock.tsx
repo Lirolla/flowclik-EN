@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { ImageIcon, Upload, X, DollarSign, Tag, Loader2 } from "lucide-react";
 import DashboardLayout from "@/components/DashboardLayout";
@@ -57,7 +57,7 @@ function AdminStockContent() {
   const deleteMutation = trpc.stock.delete.useMutation({
     onSuccess: () => {
       utils.stock.listAll.invalidate();
-      toast.success("Foto removida!");
+      toast.success("Photo removed!");
     },
   });
   
@@ -92,7 +92,7 @@ function AdminStockContent() {
 
   const handleUpload = async () => {
     if (selectedFiles.length === 0 || !category || !price) {
-      toast.error("Preencha todos os campos obrigatórios!");
+      toast.error("Please fill in all required fields!");
       return;
     }
 
@@ -180,7 +180,7 @@ function AdminStockContent() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold flex items-center gap-2 mb-2">
           <ImageIcon className="w-8 h-8" />
-          Gerenciar Fotos Stock
+          Gerenciar Stock Photos
         </h1>
         <p className="text-muted-foreground">
           Upload de fotos exclusivas para venda e configuração de molduras
@@ -196,7 +196,7 @@ function AdminStockContent() {
             onClick={() => document.getElementById("file-input")?.click()}
           >
             <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-            <p className="text-lg font-semibold mb-2">Arraste fotos aqui ou clique para selecionar</p>
+            <p className="text-lg font-semibold mb-2">Arraste fotos aqui or click to select</p>
             <p className="text-sm text-muted-foreground">
               Formatos aceitos: JPG, PNG, WEBP
             </p>
@@ -218,13 +218,13 @@ function AdminStockContent() {
           Fotos no Stock ({stockPhotos?.length || 0})
         </h2>
         {isLoading ? (
-          <div className="text-center py-12">Carregando...</div>
+          <div className="text-center py-12">Loading...</div>
         ) : stockPhotos && stockPhotos.length === 0 ? (
           <Card>
             <CardContent className="p-12 text-center">
               <ImageIcon className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
               <p className="text-muted-foreground">
-                Nenhuma foto no stock ainda. Faça upload acima!
+                Nonea foto no stock ainda. Faça upload acima!
               </p>
             </CardContent>
           </Card>
@@ -280,11 +280,11 @@ function AdminStockContent() {
       </div>
 
       {/* Upload Modal */}
-      <Dialog open={showUploadModal} onOpenChange={setShowUploadModal}>
-        <DialogContent className="max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>Upload de Fotos Stock</DialogTitle>
-          </DialogHeader>
+      <Daylog open={showUploadModal} onOpenChange={setShowUploadModal}>
+        <DaylogContent className="max-w-2xl">
+          <DaylogHeader>
+            <DaylogTitle>Upload de Stock Photos</DaylogTitle>
+          </DaylogHeader>
           <div className="space-y-4">
             <div>
               <p className="text-sm text-muted-foreground mb-2">
@@ -293,7 +293,7 @@ function AdminStockContent() {
             </div>
 
             <div>
-              <Label htmlFor="title">Título (opcional)</Label>
+              <Label htmlFor="title">Title (optional)</Label>
               <Input
                 id="title"
                 value={title}
@@ -306,7 +306,7 @@ function AdminStockContent() {
               <Label htmlFor="category">Categoria *</Label>
               <Select value={category} onValueChange={setCategory}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Selecione uma categoria" />
+                  <SelectValue placeholder="Select uma categoria" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="paisagem">Paisagem</SelectItem>
@@ -336,7 +336,7 @@ function AdminStockContent() {
             </div>
 
             <div>
-              <Label htmlFor="description">Descrição (opcional)</Label>
+              <Label htmlFor="description">Description (optional)</Label>
               <Textarea
                 id="description"
                 value={description}
@@ -365,15 +365,15 @@ function AdminStockContent() {
               </Button>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </DaylogContent>
+      </Daylog>
 
       {/* Edit Modal */}
-      <Dialog open={showEditModal} onOpenChange={setShowEditModal}>
-        <DialogContent className="max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>Editar Foto Stock</DialogTitle>
-          </DialogHeader>
+      <Daylog open={showEditModal} onOpenChange={setShowEditModal}>
+        <DaylogContent className="max-w-2xl">
+          <DaylogHeader>
+            <DaylogTitle>Editar Foto Stock</DaylogTitle>
+          </DaylogHeader>
           <div className="space-y-4">
             {editingPhoto && (
               <div className="flex justify-center">
@@ -386,12 +386,12 @@ function AdminStockContent() {
             )}
 
             <div>
-              <Label htmlFor="edit-title">Título</Label>
+              <Label htmlFor="edit-title">Title</Label>
               <Input
                 id="edit-title"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                placeholder="Título da foto"
+                placeholder="Title da foto"
               />
             </div>
 
@@ -399,7 +399,7 @@ function AdminStockContent() {
               <Label htmlFor="edit-category">Categoria</Label>
               <Select value={category} onValueChange={setCategory}>
                 <SelectTrigger>
-                  <SelectValue placeholder="Selecione uma categoria" />
+                  <SelectValue placeholder="Select uma categoria" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="paisagem">Paisagem</SelectItem>
@@ -429,7 +429,7 @@ function AdminStockContent() {
             </div>
 
             <div>
-              <Label htmlFor="edit-description">Descrição</Label>
+              <Label htmlFor="edit-description">Description</Label>
               <Textarea
                 id="edit-description"
                 value={description}
@@ -459,8 +459,8 @@ function AdminStockContent() {
               </Button>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </DaylogContent>
+      </Daylog>
     </div>
   );
 }

@@ -49,7 +49,7 @@ export function VideoPlayer({
         if (Hls.default.isSupported() && videoRef.current) {
           const hls = new Hls.default();
           hls.loadSource(url);
-          hls.attachMedia(videoRef.current);
+          hls.attachMeday(videoRef.current);
         } else if (videoRef.current && videoRef.current.canPlayType('application/vnd.apple.mpegurl')) {
           // Native HLS support (Safari)
           videoRef.current.src = url;
@@ -65,7 +65,7 @@ export function VideoPlayer({
       <iframe
         className={className || "w-full aspect-video"}
         src={`https://www.youtube.com/embed/${videoId}?autoplay=${autoplay ? 1 : 0}&loop=${loop ? 1 : 0}&mute=${muted ? 1 : 0}&controls=${controls ? 1 : 0}`}
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-meday; gyroscope; picture-in-picture"
         allowFullScreen
       />
     );
@@ -96,7 +96,7 @@ export function VideoPlayer({
       playsInline
     >
       {type === 'direct' && <source src={url} type="video/mp4" />}
-      Seu navegador não suporta vídeos.
+      Your browser does not support videos.
     </video>
   );
 }

@@ -28,10 +28,10 @@ function AdminAppointmentStatsContent() {
       confirmed: 'Confirmado',
       session_done: 'Ensaio Realizado',
       editing: 'Em Edição',
-      awaiting_selection: 'Aguardando Seleção',
+      awaiting_selection: 'Awaiting Selection',
       final_editing: 'Edição Final',
-      delivered: 'Entregue',
-      cancelled: 'Cancelado',
+      delivered: 'Delivered',
+      cancelled: 'Cancelled',
     };
     return labels[status] || status;
   };
@@ -61,7 +61,7 @@ function AdminAppointmentStatsContent() {
           Estatísticas de Agendamentos
         </h1>
         <p className="text-muted-foreground mt-2">
-          Análise completa do desempenho e conversão
+          Análise completa do desempenho e conversion
         </p>
       </div>
 
@@ -80,7 +80,7 @@ function AdminAppointmentStatsContent() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Receita Prevista</CardTitle>
+            <CardTitle className="text-sm font-medium">Revenue Prevista</CardTitle>
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -114,7 +114,7 @@ function AdminAppointmentStatsContent() {
               {conversionStats?.deliveryRate.toFixed(1)}%
             </div>
             <p className="text-xs text-muted-foreground">
-              {conversionStats?.delivered} de {conversionStats?.confirmed} entregues
+              {conversionStats?.delivered} de {conversionStats?.confirmed} delivereds
             </p>
           </CardContent>
         </Card>
@@ -161,13 +161,13 @@ function AdminAppointmentStatsContent() {
       {/* Estatísticas Mensais */}
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>Agendamentos por Mês (Últimos 12 meses)</CardTitle>
+          <CardTitle>Agendamentos por Month (Últimos 12 months)</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
             {monthlyStats?.map((stat) => {
               const [year, month] = stat.month.split('-');
-              const monthName = new Date(parseInt(year), parseInt(month) - 1).toLocaleDateString('pt-BR', {
+              const monthName = new Date(parseInt(year), parseInt(month) - 1).toLocaleDateString('en-GB', {
                 month: 'long',
                 year: 'numeric',
               });
@@ -194,10 +194,10 @@ function AdminAppointmentStatsContent() {
         </CardContent>
       </Card>
 
-      {/* Receita por Status */}
+      {/* Revenue por Status */}
       <Card>
         <CardHeader>
-          <CardTitle>Receita por Status</CardTitle>
+          <CardTitle>Revenue por Status</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">

@@ -26,7 +26,7 @@ export default function SharedAlbum() {
       setEmailSubmitted(true);
       toast({
         title: "Bem-vindo!",
-        description: "Você agora tem acesso ao álbum.",
+        description: "You agora tem acesso ao álbum.",
       });
     },
     onError: (error) => {
@@ -50,7 +50,7 @@ export default function SharedAlbum() {
     
     if (!email) {
       toast({
-        title: "Email obrigatório",
+        title: "Email required",
         description: "Por favor, informe seu email.",
         variant: "destructive",
       });
@@ -73,11 +73,11 @@ export default function SharedAlbum() {
           <div className="mb-6">
             <h2 className="flex items-center gap-2 text-2xl font-bold text-white mb-2">
               <Heart className="w-6 h-6 text-red-500 fill-red-500" />
-              Álbum Especial
+              Album Especial
             </h2>
             <p className="text-gray-400 text-sm">
               Para visualizar este álbum, por favor informe seu email.
-              Você receberá atualizações quando novas fotos forem adicionadas!
+              You receberá atualizações quando novas fotos forem adicionadas!
             </p>
           </div>
 
@@ -96,7 +96,7 @@ export default function SharedAlbum() {
             </div>
 
             <div>
-              <Label htmlFor="name" className="text-white">Nome (opcional)</Label>
+              <Label htmlFor="name" className="text-white">Nome (optional)</Label>
               <Input
                 id="name"
                 type="text"
@@ -108,7 +108,7 @@ export default function SharedAlbum() {
             </div>
 
             <div>
-              <Label htmlFor="relationship" className="text-white">Relação (opcional)</Label>
+              <Label htmlFor="relationship" className="text-white">Relação (optional)</Label>
               <Input
                 id="relationship"
                 type="text"
@@ -125,7 +125,7 @@ export default function SharedAlbum() {
               disabled={registerGuestMutation.isPending}
             >
               <Mail className="w-4 h-4 mr-2" />
-              {registerGuestMutation.isPending ? "Verificando..." : "Ver Álbum"}
+              {registerGuestMutation.isPending ? "Verifying..." : "Ver Album"}
             </Button>
           </form>
         </div>
@@ -147,7 +147,7 @@ export default function SharedAlbum() {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center p-4">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-white mb-2">Álbum não encontrado</h1>
+          <h1 className="text-2xl font-bold text-white mb-2">Album not found</h1>
           <p className="text-gray-400">O link pode estar incorreto ou o álbum foi removido.</p>
         </div>
       </div>
@@ -181,7 +181,7 @@ export default function SharedAlbum() {
               {appointment.clientName}
             </h1>
             <p className="text-xl md:text-2xl text-white/90 text-center drop-shadow-lg">
-              Álbum Especial
+              Album Especial
             </p>
             
             {/* Seta para scroll */}
@@ -200,14 +200,14 @@ export default function SharedAlbum() {
           <div className="text-center py-16">
             <p className="text-gray-400 text-lg">
               Ainda não há fotos finais disponíveis.
-              Você receberá um email quando forem adicionadas!
+              You receberá um email quando forem adicionadas!
             </p>
           </div>
         ) : (
           <>
             <div className="mb-8 text-center">
               <h2 className="text-2xl font-semibold text-white mb-2">
-                Galeria Completa
+                Gallery Completa
               </h2>
               <p className="text-gray-400">
                 {finalPhotos.length} {finalPhotos.length === 1 ? 'foto' : 'fotos'}

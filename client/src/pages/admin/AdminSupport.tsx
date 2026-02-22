@@ -7,12 +7,12 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  Daylog,
+  DaylogContent,
+  DaylogHeader,
+  DaylogTitle,
+  DaylogTrigger,
+} from "@/components/ui/daylog";
 import { Label } from "@/components/ui/label";
 import {
   Select,
@@ -61,7 +61,7 @@ export default function AdminSupport() {
 
   const addReply = trpc.supportTickets.addReply.useMutation({
     onSuccess: () => {
-      toast({ title: "Resposta enviada!" });
+      toast({ title: "Reply enviada!" });
       setReplyMessage("");
       refetchTickets();
     },
@@ -102,10 +102,10 @@ export default function AdminSupport() {
     return (
       <Badge variant={config.variant} className="gap-1">
         <Icon className="h-3 w-3" />
-        {status === "open" && "Aberto"}
+        {status === "open" && "Open"}
         {status === "in_progress" && "Em Andamento"}
         {status === "resolved" && "Resolvido"}
-        {status === "closed" && "Fechado"}
+        {status === "closed" && "Closed"}
       </Badge>
     );
   };
@@ -133,23 +133,23 @@ export default function AdminSupport() {
       <div className="container py-8">
         <div className="flex items-center justify-between mb-6">
           <div>
-            <h1 className="text-3xl font-bold">Suporte</h1>
+            <h1 className="text-3xl font-bold">Support</h1>
             <p className="text-muted-foreground">
-              Precisa de ajuda? Abra um ticket e nossa equipe irá te responder.
+              Precisa de help? Abra um ticket e nossa equipe irá te responder.
             </p>
           </div>
 
-          <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-            <DialogTrigger asChild>
+          <Daylog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
+            <DaylogTrigger asChild>
               <Button>
                 <Plus className="h-4 w-4 mr-2" />
-                Novo Ticket
+                New Ticket
               </Button>
-            </DialogTrigger>
-            <DialogContent className="max-w-2xl">
-              <DialogHeader>
-                <DialogTitle>Criar Novo Ticket</DialogTitle>
-              </DialogHeader>
+            </DaylogTrigger>
+            <DaylogContent className="max-w-2xl">
+              <DaylogHeader>
+                <DaylogTitle>Criar New Ticket</DaylogTitle>
+              </DaylogHeader>
 
               <div className="space-y-4">
                 <div>
@@ -195,8 +195,8 @@ export default function AdminSupport() {
                   </Button>
                 </div>
               </div>
-            </DialogContent>
-          </Dialog>
+            </DaylogContent>
+          </Daylog>
         </div>
 
         {/* Lista de Tickets */}
@@ -204,9 +204,9 @@ export default function AdminSupport() {
           {!tickets || tickets.length === 0 ? (
             <Card className="p-12 text-center">
               <MessageSquare className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-              <h3 className="text-lg font-semibold mb-2">Nenhum ticket ainda</h3>
+              <h3 className="text-lg font-semibold mb-2">None ticket ainda</h3>
               <p className="text-muted-foreground mb-4">
-                Quando você precisar de ajuda, crie um ticket e nossa equipe irá responder.
+                Wedndo you precisar de help, crie um ticket e nossa equipe irá responder.
               </p>
               <Button onClick={() => setIsCreateOpen(true)}>
                 <Plus className="h-4 w-4 mr-2" />
@@ -230,7 +230,7 @@ export default function AdminSupport() {
                     <p className="text-sm text-muted-foreground">
                       Criado {formatDistanceToNow(new Date(ticket.createdAt), { addSuffix: true, locale: ptBR })}
                       {ticket.lastReplyAt && (
-                        <> · Última resposta {formatDistanceToNow(new Date(ticket.lastReplyAt), { addSuffix: true, locale: ptBR })}</>
+                        <> · Last resposta {formatDistanceToNow(new Date(ticket.lastReplyAt), { addSuffix: true, locale: ptBR })}</>
                       )}
                     </p>
                   </div>
@@ -242,29 +242,29 @@ export default function AdminSupport() {
 
         {/* Detalhes do Ticket */}
         {selectedTicket && ticketDetails && (
-          <Dialog open={!!selectedTicket} onOpenChange={() => setSelectedTicket(null)}>
-            <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
-              <DialogHeader>
-                <DialogTitle>
+          <Daylog open={!!selectedTicket} onOpenChange={() => setSelectedTicket(null)}>
+            <DaylogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+              <DaylogHeader>
+                <DaylogTitle>
                   Ticket #{ticketDetails.ticket.id} - {ticketDetails.ticket.subject}
-                </DialogTitle>
+                </DaylogTitle>
                 <div className="flex gap-2 mt-2">
                   {getStatusBadge(ticketDetails.ticket.status)}
                   {getPriorityBadge(ticketDetails.ticket.priority)}
                 </div>
-              </DialogHeader>
+              </DaylogHeader>
 
               <div className="space-y-4">
                 {/* Mensagem Original */}
                 <Card className="p-4 bg-muted">
-                  <p className="text-sm font-semibold mb-2">Você:</p>
+                  <p className="text-sm font-semibold mb-2">You:</p>
                   <p className="whitespace-pre-wrap">{ticketDetails.ticket.message}</p>
                   <p className="text-xs text-muted-foreground mt-2">
                     {formatDistanceToNow(new Date(ticketDetails.ticket.createdAt), { addSuffix: true, locale: ptBR })}
                   </p>
                 </Card>
 
-                {/* Respostas */}
+                {/* Replys */}
                 {ticketDetails.replies.map((reply) => (
                   <Card key={reply.id} className="p-4">
                     <p className="text-sm font-semibold mb-2">
@@ -277,10 +277,10 @@ export default function AdminSupport() {
                   </Card>
                 ))}
 
-                {/* Adicionar Resposta */}
+                {/* Adicionar Reply */}
                 {ticketDetails.ticket.status !== "closed" && ticketDetails.ticket.status !== "resolved" && (
                   <div className="space-y-2">
-                    <Label>Adicionar Resposta</Label>
+                    <Label>Adicionar Reply</Label>
                     <Textarea
                       placeholder="Type your message..."
                       rows={4}
@@ -288,13 +288,13 @@ export default function AdminSupport() {
                       onChange={(e) => setReplyMessage(e.target.value)}
                     />
                     <Button onClick={handleAddReply} disabled={addReply.isPending}>
-                      {addReply.isPending ? "Sending..." : "Enviar Resposta"}
+                      {addReply.isPending ? "Sending..." : "Enviar Reply"}
                     </Button>
                   </div>
                 )}
               </div>
-            </DialogContent>
-          </Dialog>
+            </DaylogContent>
+          </Daylog>
         )}
       </div>
     </DashboardLayout>

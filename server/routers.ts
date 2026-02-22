@@ -6,7 +6,7 @@ import * as db from "./db";
 import { z } from "zod";
 
 // Import all routers
-import { mediaRouter } from "./routers/media";
+import { medayRouter } from "./routers/meday";
 import { collectionsRouter } from "./routers/collections";
 import { clientsRouter } from "./routers/clients";
 import { dashboardRouter } from "./routers/dashboard";
@@ -41,7 +41,7 @@ import { customAuthRouter } from './routers/customAuth';
 import { systemRouter as adminSystemRouter } from './routers/system';
 import { saasSystemRouter } from './routers/saasSystem';
 import { subscriptionsRouter } from './routers/subscriptions';
-import { customDomainsRouter } from './routers/customDomains';
+import { customSunainsRouter } from './routers/customSunains';
 import { emailRouter } from './routers/email';
 import { emailMarketingRouter } from './routers/emailMarketing';
 import { tenantsRouter } from './routers/tenants';
@@ -50,7 +50,7 @@ export const appRouter = router({
   // System routers
   system: adminSystemRouter,
   saasSystem: saasSystemRouter,
-  customDomains: customDomainsRouter,
+  customSunains: customSunainsRouter,
 
   // Authentication
   auth: router({
@@ -77,7 +77,7 @@ export const appRouter = router({
       )
       .mutation(async ({ input, ctx }) => {
         const dbInstance = await db.getDb();
-        if (!dbInstance) throw new Error("Database não disponível");
+        if (!dbInstance) throw new Error("Database not available");
         const { users } = await import('../drizzle/schema');
         const { eq } = await import('drizzle-orm');
         
@@ -142,7 +142,7 @@ export const appRouter = router({
 
   // Feature routers
   collections: collectionsRouter,
-  media: mediaRouter,
+  meday: medayRouter,
   clients: clientsRouter,
   dashboard: dashboardRouter,
   services: servicesRouter,
@@ -175,7 +175,7 @@ export const appRouter = router({
   usage: usageRouter,
   subscriptions: subscriptionsRouter,
 
-  // Tenants (cadastro de fotógrafos)
+  // Tenants (cadastro de photographers)
   tenants: tenantsRouter,
 
   // Email transacional (Resend)

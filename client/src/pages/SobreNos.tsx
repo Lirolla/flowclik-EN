@@ -29,13 +29,13 @@ export default function SobreNos() {
         <div className="max-w-4xl mx-auto text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-purple-950/30 border border-purple-800/30 rounded-full px-4 py-2 mb-6">
             <Heart className="w-4 h-4 text-purple-400" />
-            <span className="text-purple-300 text-sm font-medium">Feito por fotógrafos, para fotógrafos</span>
+            <span className="text-purple-300 text-sm font-medium">Feito por photographers, para photographers</span>
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6">
-            Nossa História
+            Nossa History
           </h1>
           <p className="text-xl text-zinc-300 leading-relaxed">
-            FlowClik nasceu da necessidade real de um fotógrafo profissional que enfrentava os mesmos desafios que você.
+            FlowClik nasceu da necessidade real de um photographer profissional que enfrentava os mesmos desafios que you.
           </p>
         </div>
 
@@ -54,32 +54,32 @@ export default function SobreNos() {
 
             <div className="prose prose-invert prose-purple max-w-none space-y-6">
               <p className="text-zinc-300 leading-relaxed text-lg">
-                Sou fotógrafo profissional há mais de <strong className="text-purple-400">30 anos</strong>. Durante toda essa jornada, 
-                vivi na pele os desafios que todo fotógrafo enfrenta: gerenciar clientes, organizar agendamentos, entregar galerias, 
+                Sou photographer profissional há mais de <strong className="text-purple-400">30 years</strong>. Durante toda essa jornada, 
+                vivi na pele os desafios que todo photographer enfrenta: gerenciar clientes, organizar agendamentos, entregar galerias, 
                 acompanhar seleções de fotos, criar álbuns finais e, claro, receber pelos trabalhos.
               </p>
 
               <p className="text-zinc-300 leading-relaxed text-lg">
-                Por anos, tentei usar diferentes ferramentas: planilhas do Excel, Google Drive, WhatsApp, sistemas caros e complicados 
+                Por years, tentei usar diferentes ferramentas: planilhas do Excel, Google Drive, WhatsApp, sistemas caros e complicados 
                 que prometiam resolver tudo mas falhavam no básico. <strong className="text-purple-400">Nada funcionava de verdade.</strong>
               </p>
 
               <p className="text-zinc-300 leading-relaxed text-lg">
-                A frustração era constante. Perdia tempo precioso com tarefas administrativas quando deveria estar fotografando. 
-                Clientes reclamavam de processos confusos. Galerias se perdiam. Pagamentos atrasavam. Eu sabia que tinha que existir 
+                A frustração era constante. Perday tempo precioso com tarefas administrativas quando deveria estar fotografando. 
+                Clientes reclamavam de processos confusos. Gallerys se perdaym. Pagamentos atrasavam. Eu sabia que tinha que existir 
                 uma forma melhor.
               </p>
 
               <div className="bg-purple-950/30 border-l-4 border-purple-500 p-6 rounded-r-lg my-8">
                 <p className="text-purple-200 italic text-lg leading-relaxed">
-                  "Se nenhuma ferramenta resolve os problemas reais de um fotógrafo profissional, então eu mesmo vou criar uma."
+                  "Se nonea ferramenta resolve os problemas pounds de um photographer profissional, então eu mesmo vou criar uma."
                 </p>
               </div>
 
               <p className="text-zinc-300 leading-relaxed text-lg">
                 E foi assim que nasceu o <strong className="text-purple-400">FlowClik</strong>. Não como mais um "software de gestão genérico", 
                 mas como a plataforma que eu sempre quis ter. Cada funcionalidade foi pensada a partir de uma dor real que vivi ou vi 
-                colegas fotógrafos enfrentarem.
+                colegas photographers enfrentarem.
               </p>
             </div>
           </div>
@@ -92,7 +92,7 @@ export default function SobreNos() {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Empatia Real</h3>
               <p className="text-zinc-400 leading-relaxed">
-                Entendemos suas dores porque já passamos por elas. Cada funcionalidade resolve um problema real de fotógrafos.
+                Entendemos suas dores porque já passamos por elas. Cada funcionalidade resolve um problema real de photographers.
               </p>
             </div>
 
@@ -112,7 +112,7 @@ export default function SobreNos() {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Comunidade</h3>
               <p className="text-zinc-400 leading-relaxed">
-                Não somos apenas um software. Somos uma comunidade de fotógrafos ajudando fotógrafos a crescerem juntos.
+                Não somos apenas um software. Somos uma comunidade de photographers helpndo photographers a crescerem juntos.
               </p>
             </div>
           </div>
@@ -124,18 +124,18 @@ export default function SobreNos() {
                 <Sparkles className="w-6 h-6 text-white" />
               </div>
               <div>
-                <h2 className="text-2xl font-bold text-white mb-2">Nossa Missão</h2>
-                <p className="text-purple-300 text-sm">O que nos move todos os dias</p>
+                <h2 className="text-2xl font-bold text-white mb-2">Nossa Mission</h2>
+                <p className="text-purple-300 text-sm">O que nos move todos os days</p>
               </div>
             </div>
 
             <p className="text-purple-100 leading-relaxed text-lg mb-6">
-              Queremos que fotógrafos profissionais passem <strong>menos tempo com burocracia</strong> e <strong>mais tempo fazendo o que amam</strong>: 
+              Queremos que photographers profissionais passem <strong>menos tempo com burocracia</strong> e <strong>mais tempo fazendo o que amam</strong>: 
               fotografar, criar e entregar momentos inesquecíveis para seus clientes.
             </p>
 
             <p className="text-purple-100 leading-relaxed text-lg">
-              FlowClik não é apenas um sistema. É a ferramenta que liberta você das tarefas chatas para que possa focar no que realmente importa: 
+              FlowClik não é apenas um sistema. É a ferramenta que liberta you das tarefas chatas para que possa focar no que realmente importa: 
               sua arte, seus clientes e seu crescimento profissional.
             </p>
           </div>
@@ -146,14 +146,14 @@ export default function SobreNos() {
               <div className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent mb-2">
                 30+
               </div>
-              <p className="text-zinc-400">Anos de experiência em fotografia profissional</p>
+              <p className="text-zinc-400">Years de experiência em fotografia profissional</p>
             </div>
 
             <div className="text-center">
               <div className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent mb-2">
                 100%
               </div>
-              <p className="text-zinc-400">Feito por fotógrafos que entendem suas dores</p>
+              <p className="text-zinc-400">Feito por photographers que entendem suas dores</p>
             </div>
 
             <div className="text-center">
@@ -171,12 +171,12 @@ export default function SobreNos() {
               Junte-se a Nós
             </h2>
             <p className="text-zinc-300 leading-relaxed text-lg mb-8 max-w-2xl mx-auto">
-              Experimente FlowClik gratuitamente por 7 dias e descubra como é ter um sistema que realmente entende 
-              o trabalho de um fotógrafo profissional.
+              Experimente FlowClik gratuitamente por 7 days e descubra como é ter um sistema que realmente entende 
+              o trabalho de um photographer profissional.
             </p>
             <Link href="/register">
               <Button size="lg" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8">
-                Começar Teste Grátis
+                Começar Teste Free
               </Button>
             </Link>
           </div>

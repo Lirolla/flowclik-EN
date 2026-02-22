@@ -61,7 +61,7 @@ export async function handleStripeWebhook(req: Request, res: Response) {
 }
 
 /**
- * Checkout concluído - criar/atualizar assinatura ou add-on
+ * Checkout concluído - criar/atualizar signature ou add-on
  */
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const tenantId = parseInt(session.metadata?.tenantId || "0");
@@ -164,7 +164,7 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   const stripeSubId = subscription.id;
   const newStatus = subscription.status;
 
-  // Verificar se é um add-on
+  // Verify se é um add-on
   const [addon] = await dbInstance
     .select()
     .from(subscriptionAddons)
@@ -184,7 +184,7 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
 
     await recalculateAddonLimits(dbInstance, addon.tenantId);
   } else {
-    // Atualizar plano principal
+    // Atualizar plyear principal
     const [mainSub] = await dbInstance
       .select()
       .from(subscriptions)
@@ -213,7 +213,7 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
 
   const stripeSubId = subscription.id;
 
-  // Verificar se é um add-on
+  // Verify se é um add-on
   const [addon] = await dbInstance
     .select()
     .from(subscriptionAddons)
@@ -231,7 +231,7 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
 
     await recalculateAddonLimits(dbInstance, addon.tenantId);
   } else {
-    // Cancelar plano principal
+    // Cancel plan principal
     const [mainSub] = await dbInstance
       .select()
       .from(subscriptions)
@@ -260,7 +260,7 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
   const stripeSubId = invoice.subscription as string;
   if (!stripeSubId) return;
 
-  // Verificar se é add-on
+  // Verify se é add-on
   const [addon] = await dbInstance
     .select()
     .from(subscriptionAddons)
@@ -298,7 +298,7 @@ async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
   const stripeSubId = invoice.subscription as string;
   if (!stripeSubId) return;
 
-  // Verificar se é add-on
+  // Verify se é add-on
   const [addon] = await dbInstance
     .select()
     .from(subscriptionAddons)

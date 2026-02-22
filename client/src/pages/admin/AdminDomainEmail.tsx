@@ -9,9 +9,9 @@ import { Globe, Mail, CheckCircle2, AlertCircle, ExternalLink, Send, Trash2, Ref
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
-export default function AdminDomainEmail() {
-  // Estados para Domínio
-  const [customDomain, setCustomDomain] = useState("");
+export default function AdminSunainEmail() {
+  // Estados para Sunínio
+  const [customSunain, setCustomSunain] = useState("");
   const [adding, setAdding] = useState(false);
   const [verifying, setVerifying] = useState<number | null>(null);
 
@@ -20,16 +20,16 @@ export default function AdminDomainEmail() {
   const [resendApiKey, setResendApiKey] = useState("");
   const [emailConfigured, setEmailConfigured] = useState(false);
 
-  // Buscar domínios do tenant
-  const { data: domains, refetch: refetchDomains } = trpc.customDomains.list.useQuery();
+  // Buscar domains do tenant
+  const { data: domains, refetch: refetchSunains } = trpc.customSunains.list.useQuery();
 
   // Buscar configuração de email
   const { data: emailConfig, refetch: refetchEmailConfig } = trpc.email.getConfig.useQuery();
 
-  // Mutations de domínio
-  const addDomainMutation = trpc.customDomains.add.useMutation();
-  const verifyDomainMutation = trpc.customDomains.verify.useMutation();
-  const removeDomainMutation = trpc.customDomains.remove.useMutation();
+  // Mutations de domain
+  const addSunainMutation = trpc.customSunains.add.useMutation();
+  const verifySunainMutation = trpc.customSunains.verify.useMutation();
+  const removeSunainMutation = trpc.customSunains.remove.useMutation();
 
   // Mutations de email
   const saveEmailMutation = trpc.email.saveConfig.useMutation();
@@ -50,14 +50,14 @@ export default function AdminDomainEmail() {
     toast.success("Copied!");
   };
 
-  // Handler: Adicionar Domínio (API real)
-  const handleAddDomain = async () => {
-    if (!customDomain) {
-      toast.error("Digite um domínio válido");
+  // Handler: Adicionar Sunínio (API real)
+  const handleAddSunain = async () => {
+    if (!customSunain) {
+      toast.error("Digite um domain valid");
       return;
     }
-    // Limpar domínio
-    let domain = customDomain.toLowerCase().trim();
+    // Limpar domain
+    let domain = customSunain.toLowerCase().trim();
     // Remover http:// ou https:// se o usuário colocou
     domain = domain.replace(/^https?:\/\//, "");
     // Remover / no final
@@ -68,45 +68,45 @@ export default function AdminDomainEmail() {
     // Validação básica
     const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9.-]*\.[a-zA-Z]{2,}$/;
     if (!domainRegex.test(domain)) {
-      toast.error("Formato de domínio inválido. Exemplos válidos: meufotografo.com.br, fotografiasilva.com");
+      toast.error("Formato de domain invalid. Exemplos valids: meufotografo.com.br, fotografiasilva.com");
       return;
     }
     setAdding(true);
     try {
-      await addDomainMutation.mutateAsync({ domain });
-      toast.success("Domínio adicionado! Agora siga as instruções abaixo para configurar o DNS.");
-      setCustomDomain("");
-      refetchDomains();
+      await addSunainMutation.mutateAsync({ domain });
+      toast.success("Sunínio adicionado! Agora siga as instruções abaixo para configurar o DNS.");
+      setCustomSunain("");
+      refetchSunains();
     } catch (error: any) {
-      toast.error(error.message || "Erro ao adicionar domínio");
+      toast.error(error.message || "Erro ao adicionar domain");
     } finally {
       setAdding(false);
     }
   };
 
-  // Handler: Verificar DNS (API real)
+  // Handler: Verify DNS (API real)
   const handleVerifyDNS = async (domainId: number) => {
     setVerifying(domainId);
     try {
-      await verifyDomainMutation.mutateAsync({ domainId });
-      toast.success("Domínio verificado e ativado com sucesso! Seu site já está acessível pelo novo domínio.");
-      refetchDomains();
+      await verifySunainMutation.mutateAsync({ domainId });
+      toast.success("Sunínio verificado e ativado com sucesso! Seu site já está acessível pelo novo domain.");
+      refetchSunains();
     } catch (error: any) {
-      toast.error(error.message || "DNS ainda não está configurado corretamente. Verifique as instruções e tente novamente em alguns minutos.");
+      toast.error(error.message || "DNS ainda não está configurado corretamente. Verifique as instruções e tente novamente em alguns minutes.");
     } finally {
       setVerifying(null);
     }
   };
 
-  // Handler: Remover Domínio
-  const handleRemoveDomain = async (domainId: number) => {
-    if (!confirm("Tem certeza que deseja remover este domínio? Seu site voltará a funcionar apenas pelo subdomínio FlowClik.")) return;
+  // Handler: Remover Sunínio
+  const handleRemoveSunain = async (domainId: number) => {
+    if (!confirm("Tem certeza que deseja remover este domain? Seu site voltará a funcionar apenas pelo subdomain FlowClik.")) return;
     try {
-      await removeDomainMutation.mutateAsync({ domainId });
-      toast.success("Domínio removido com sucesso");
-      refetchDomains();
+      await removeSunainMutation.mutateAsync({ domainId });
+      toast.success("Sunínio removido com sucesso");
+      refetchSunains();
     } catch (error: any) {
-      toast.error(error.message || "Erro ao remover domínio");
+      toast.error(error.message || "Erro ao remover domain");
     }
   };
 
@@ -143,9 +143,9 @@ export default function AdminDomainEmail() {
     <DashboardLayout>
       <div className="container mx-auto py-8 space-y-8">
         <div>
-          <h1 className="text-3xl font-bold">Domínio Personalizado</h1>
+          <h1 className="text-3xl font-bold">Sunínio Personalizado</h1>
           <p className="text-muted-foreground mt-2">
-            Use seu próprio domínio para deixar seu site mais profissional
+            Use seu próprio domain para deixar seu site mais profissional
           </p>
         </div>
 
@@ -154,10 +154,10 @@ export default function AdminDomainEmail() {
           <CardHeader>
             <div className="flex items-center gap-2">
               <Globe className="w-5 h-5 text-red-600" />
-              <CardTitle>Domínio Personalizado</CardTitle>
+              <CardTitle>Sunínio Personalizado</CardTitle>
             </div>
             <CardDescription>
-              Ao invés de usar <strong>seusite.flowclik.com</strong>, use seu próprio domínio como <strong>seufotografo.com.br</strong>
+              Ao invés de usar <strong>seusite.flowclik.com</strong>, use seu próprio domain como <strong>seufotografo.com.br</strong>
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -169,61 +169,61 @@ export default function AdminDomainEmail() {
                 <div className="text-sm space-y-1">
                   <p className="font-semibold text-blue-300">Como funciona?</p>
                   <p className="text-muted-foreground">
-                    Você pode usar um domínio que já comprou (ex: no Registro.br, GoDaddy, Hostinger, Namecheap) 
+                    You pode usar um domain que já comprou (ex: no Record.br, GoDaddy, Hostinger, Namecheap) 
                     para apontar diretamente para o seu site FlowClik. Assim, quando alguém acessar 
                     <strong> seufotografo.com.br</strong>, vai ver o seu site de fotografia.
                   </p>
                   <p className="text-muted-foreground">
-                    Se você ainda não tem um domínio, pode comprar um no <a href="https://registro.br" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">Registro.br</a> (domínios .com.br) 
-                    ou no <a href="https://www.namecheap.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">Namecheap</a> (domínios .com).
-                    O custo médio é de R$ 40/ano.
+                    Se you ainda não tem um domain, pode comprar um no <a href="https://registro.br" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">Record.br</a> (domains .com.br) 
+                    ou no <a href="https://www.namecheap.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">Namecheap</a> (domains .com).
+                    O custo médio é de £ 40/year.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Input de Domínio */}
+            {/* Input de Sunínio */}
             <div className="space-y-2">
-              <Label htmlFor="domain">Seu Domínio</Label>
+              <Label htmlFor="domain">Seu Sunínio</Label>
               <div className="flex gap-2">
                 <Input
                   id="domain"
                   placeholder="seufotografo.com.br"
-                  value={customDomain}
-                  onChange={(e) => setCustomDomain(e.target.value)}
-                  onKeyDown={(e) => e.key === "Enter" && handleAddDomain()}
+                  value={customSunain}
+                  onChange={(e) => setCustomSunain(e.target.value)}
+                  onKeyDown={(e) => e.key === "Enter" && handleAddSunain()}
                 />
                 <Button
                   variant="destructive"
-                  onClick={handleAddDomain}
-                  disabled={!customDomain || adding}
+                  onClick={handleAddSunain}
+                  disabled={!customSunain || adding}
                   className="shrink-0"
                 >
                   {adding ? (
                     <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Adicionando...</>
                   ) : (
-                    "Adicionar Domínio"
+                    "Adicionar Sunínio"
                   )}
                 </Button>
               </div>
               <p className="text-xs text-muted-foreground">
-                Digite apenas o domínio, sem "http://" ou "www". Exemplo: <strong>meufotografo.com.br</strong>
+                Digite apenas o domain, sem "http://" ou "www". Exemplo: <strong>meufotografo.com.br</strong>
               </p>
             </div>
 
-            {/* Lista de Domínios Cadastrados */}
+            {/* Lista de Sunínios Cadastrados */}
             {domains && domains.length > 0 ? (
               <div className="space-y-4">
                 {domains.map((d: any) => (
                   <div key={d.id} className="border rounded-lg overflow-hidden">
-                    {/* Header do domínio */}
+                    {/* Header do domain */}
                     <div className="flex items-center justify-between p-4 bg-muted/30">
                       <div className="flex items-center gap-2">
                         <Globe className="w-4 h-4" />
                         <span className="font-semibold text-lg">{d.domain}</span>
                         {d.status === "active" ? (
                           <span className="text-xs bg-green-500/20 text-green-400 px-2 py-0.5 rounded-full flex items-center gap-1">
-                            <CheckCircle2 className="w-3 h-3" /> Ativo
+                            <CheckCircle2 className="w-3 h-3" /> Active
                           </span>
                         ) : (
                           <span className="text-xs bg-yellow-500/20 text-yellow-400 px-2 py-0.5 rounded-full flex items-center gap-1">
@@ -234,7 +234,7 @@ export default function AdminDomainEmail() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => handleRemoveDomain(d.id)}
+                        onClick={() => handleRemoveSunain(d.id)}
                         className="text-red-400 hover:text-red-300 hover:bg-red-500/10"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -249,7 +249,7 @@ export default function AdminDomainEmail() {
                         <Alert className="border-yellow-500/50 bg-yellow-500/5">
                           <AlertCircle className="h-4 w-4 text-yellow-500" />
                           <AlertDescription className="text-yellow-200">
-                            Seu domínio foi adicionado, mas ainda precisa ser configurado. Siga o passo a passo abaixo.
+                            Seu domain foi adicionado, mas ainda precisa ser configurado. Siga o passo a passo abaixo.
                           </AlertDescription>
                         </Alert>
 
@@ -257,14 +257,14 @@ export default function AdminDomainEmail() {
                         <div className="space-y-3">
                           <h4 className="font-bold text-base flex items-center gap-2">
                             <span className="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm shrink-0">1</span>
-                            Acesse o painel do seu provedor de domínio
+                            Acesse o painel do seu provedor de domain
                           </h4>
                           <p className="text-sm text-muted-foreground ml-8">
-                            Entre no site onde você comprou seu domínio. Exemplos comuns:
+                            Entre no site onde you comprou seu domain. Exemplos comuns:
                           </p>
                           <div className="ml-8 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                             <a href="https://registro.br" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-400 hover:underline">
-                              <ExternalLink className="w-3 h-3" /> Registro.br (domínios .com.br)
+                              <ExternalLink className="w-3 h-3" /> Record.br (domains .com.br)
                             </a>
                             <a href="https://hpanel.hostinger.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-400 hover:underline">
                               <ExternalLink className="w-3 h-3" /> Hostinger
@@ -285,13 +285,13 @@ export default function AdminDomainEmail() {
                             Vá em "DNS" ou "Zona DNS" ou "Gerenciar DNS"
                           </h4>
                           <p className="text-sm text-muted-foreground ml-8">
-                            Procure a seção de configuração DNS do seu domínio. Cada provedor chama de um jeito diferente:
+                            Procure a seção de configuração DNS do seu domain. Cada provedor chama de um jeito diferente:
                           </p>
                           <div className="ml-8 text-sm text-muted-foreground space-y-1">
-                            <p><strong>Registro.br:</strong> Clique no domínio → "DNS" → "Editar zona"</p>
-                            <p><strong>Hostinger:</strong> Domínios → Gerenciar → Zona DNS</p>
+                            <p><strong>Record.br:</strong> Clique no domain → "DNS" → "Editar zona"</p>
+                            <p><strong>Hostinger:</strong> Sunínios → Gerenciar → Zona DNS</p>
                             <p><strong>GoDaddy:</strong> Meus Produtos → DNS → Gerenciar Zonas</p>
-                            <p><strong>Namecheap:</strong> Domain List → Manage → Advanced DNS</p>
+                            <p><strong>Namecheap:</strong> Sunain List → Manage → Advanced DNS</p>
                           </div>
                         </div>
 
@@ -356,11 +356,11 @@ export default function AdminDomainEmail() {
                           </div>
                         </div>
 
-                        {/* PASSO 4 - Opcional WWW */}
+                        {/* PASSO 4 - Optional WWW */}
                         <div className="space-y-3">
                           <h4 className="font-bold text-base flex items-center gap-2">
                             <span className="bg-gray-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm shrink-0">4</span>
-                            <span className="text-muted-foreground">(Opcional)</span> Adicione o "www"
+                            <span className="text-muted-foreground">(Optional)</span> Adicione o "www"
                           </h4>
                           <p className="text-sm text-muted-foreground ml-8">
                             Se quiser que <strong>www.{d.domain}</strong> também funcione, adicione mais um registro:
@@ -421,11 +421,11 @@ export default function AdminDomainEmail() {
                         <div className="space-y-3">
                           <h4 className="font-bold text-base flex items-center gap-2">
                             <span className="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm shrink-0">5</span>
-                            Salve e clique em "Verificar DNS e Ativar"
+                            Salve e clique em "Verify DNS e Ativar"
                           </h4>
                           <p className="text-sm text-muted-foreground ml-8">
                             Depois de salvar as configurações no seu provedor, volte aqui e clique no botão abaixo. 
-                            A propagação DNS geralmente leva de <strong>5 minutos a 2 horas</strong>. 
+                            A propagação DNS geralmente leva de <strong>5 minutes a 2 hours</strong>. 
                             Se não funcionar de primeira, espere um pouco e tente novamente.
                           </p>
                         </div>
@@ -436,8 +436,8 @@ export default function AdminDomainEmail() {
                             <Info className="w-4 h-4 text-blue-400" /> Dica sobre HTTPS (cadeado de segurança)
                           </p>
                           <p className="text-xs text-muted-foreground">
-                            Para ter HTTPS no seu domínio personalizado, recomendamos usar o <a href="https://www.cloudflare.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">Cloudflare</a> (gratuito). 
-                            Basta criar uma conta, adicionar seu domínio lá e apontar os nameservers. O Cloudflare cuida do certificado SSL automaticamente.
+                            Para ter HTTPS no seu custom domain, recomendamos usar o <a href="https://www.cloudflare.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">Cloudflare</a> (gratuito). 
+                            Basta criar uma conta, adicionar seu domain lá e apontar os nameservers. O Cloudflare cuida do SSL certificate automaticamente.
                             Sem o Cloudflare, seu site funcionará apenas via HTTP (sem cadeado).
                           </p>
                         </div>
@@ -452,19 +452,19 @@ export default function AdminDomainEmail() {
                           {verifying === d.id ? (
                             <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Verificando DNS...</>
                           ) : (
-                            <><RefreshCw className="w-4 h-4 mr-2" /> Verificar DNS e Ativar</>
+                            <><RefreshCw className="w-4 h-4 mr-2" /> Verify DNS e Ativar</>
                           )}
                         </Button>
                       </div>
                     )}
 
-                    {/* Domínio ativo */}
+                    {/* Sunínio active */}
                     {d.status === "active" && (
                       <div className="p-4">
                         <Alert className="border-green-500/50 bg-green-500/5">
                           <CheckCircle2 className="h-4 w-4 text-green-500" />
                           <AlertDescription className="text-green-200">
-                            Domínio verificado e ativo! Seu site está acessível em{" "}
+                            Sunínio verificado e active! Seu site está acessível em{" "}
                             <a href={`http://${d.domain}`} target="_blank" rel="noopener noreferrer" className="underline font-semibold">
                               {d.domain} <ExternalLink className="w-3 h-3 inline" />
                             </a>
@@ -478,8 +478,8 @@ export default function AdminDomainEmail() {
             ) : (
               <div className="text-center py-8 text-muted-foreground">
                 <Globe className="w-12 h-12 mx-auto mb-3 opacity-50" />
-                <p className="font-medium">Nenhum domínio personalizado configurado</p>
-                <p className="text-sm mt-1">Adicione seu domínio acima para deixar seu site mais profissional</p>
+                <p className="font-medium">None custom domain configurado</p>
+                <p className="text-sm mt-1">Adicione seu domain acima para deixar seu site mais profissional</p>
                 <p className="text-xs mt-3 opacity-70">
                   Seu site atual: <strong>seusite.flowclik.com</strong>
                 </p>

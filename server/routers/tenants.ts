@@ -16,12 +16,12 @@ export const tenantsRouter = router({
     .input(
       z.object({
         name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
-        email: z.string().email("Email inválido"),
+        email: z.string().email("Invalid email"),
         password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres"),
         subdomain: z.string()
-          .min(3, "Subdomínio deve ter pelo menos 3 caracteres")
-          .max(50, "Subdomínio muito longo")
-          .regex(/^[a-z0-9-]+$/, "Subdomínio deve conter apenas letras minúsculas, números e hífens"),
+          .min(3, "Subdomain deve ter pelo menos 3 caracteres")
+          .max(50, "Subdomain muito longo")
+          .regex(/^[a-z0-9-]+$/, "Subdomain deve conter apenas letras minúsculas, numbers and hyphens"),
         phone: z.string().optional(),
       })
     )
@@ -29,16 +29,16 @@ export const tenantsRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-      // Validar se subdomínio está disponível
+      // Validar se subdomain está available
       const available = await isSubdomainAvailable(input.subdomain);
       if (!available) {
         throw new TRPCError({ 
           code: "BAD_REQUEST", 
-          message: "Este subdomínio já está em uso ou é reservado" 
+          message: "Este subdomain já está em uso ou é reservado" 
         });
       }
 
-      // Verificar se email já existe
+      // Check if email already exists
       const [existingUser] = await db
         .select()
         .from(users)
@@ -55,7 +55,7 @@ export const tenantsRouter = router({
       // Hash da senha
       const hashedPassword = await bcrypt.hash(input.password, 10);
 
-      // Calcular data de fim do trial (7 dias)
+      // Calcular data de fim do trial (7 days)
       const trialEndsAt = new Date();
       trialEndsAt.setDate(trialEndsAt.getDate() + 7);
 
@@ -67,9 +67,9 @@ export const tenantsRouter = router({
         phone: input.phone || null,
         status: 'active',
         baseCountry: 'Brasil',
-        baseCurrency: 'BRL',
-        currencySymbol: 'R$',
-        timezone: 'America/Sao_Paulo',
+        baseCurrency: 'GBP',
+        currencySymbol: '£',
+        timezone: 'Europe/London',
         primaryColor: '#000000',
         accentColor: '#C9A961',
         trialEndsAt: trialEndsAt.toISOString().slice(0, 19).replace('T', ' '),
@@ -101,7 +101,7 @@ export const tenantsRouter = router({
         role: 'admin',
       });
 
-      // 3. Criar subscription padrão (trial de 7 dias)
+      // 3. Criar subscription padrão (trial de 7 days)
       // Usar SQL puro para evitar problemas com defaults do Drizzle
       await db.execute(
         sql`INSERT INTO subscriptions (tenantId, plan, status, currentPeriodStart, currentPeriodEnd) VALUES (${tenantId}, 'basico', 'trialing', ${new Date().toISOString()}, ${trialEndsAt.toISOString()})`
@@ -128,7 +128,7 @@ export const tenantsRouter = router({
     }),
 
   /**
-   * Verificar disponibilidade de subdomínio
+   * Verify disponibilidade de subdomain
    */
   checkSubdomain: publicProcedure
     .input(z.object({ subdomain: z.string() }))

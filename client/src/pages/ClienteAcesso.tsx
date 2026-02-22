@@ -25,7 +25,7 @@ export default function ClienteAcesso() {
       setIsLoading(false);
     },
     onError: () => {
-      setError("Erro ao buscar agendamento. Tente novamente.");
+      setError("Erro ao buscar agendamento. Try again.");
       setIsLoading(false);
     },
   });
@@ -106,7 +106,7 @@ export default function ClienteAcesso() {
                 />
               </div>
               <p className="text-xs text-gray-500 mt-2">
-                Senha fornecida pelo fotógrafo
+                Senha fornecida pelo photographer
               </p>
             </div>
 
@@ -129,7 +129,7 @@ export default function ClienteAcesso() {
           <div className="mt-6 pt-6 border-t border-gray-800">
             <p className="text-sm text-gray-400 text-center">
               Não encontrou seu agendamento?<br />
-              Entre em contato conosco através do{" "}
+              Get in touch conosco através do{" "}
               <a href="/contact" className="text-red-400 hover:underline">
                 formulário de contato
               </a>

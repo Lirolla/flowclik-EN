@@ -39,7 +39,7 @@ export const clientsRouter = router({
     .input(z.object({ id: z.number() }))
     .query(async ({ input, ctx }) => {
       const db = await getDb();
-      if (!db) throw new Error("Database não disponível");
+      if (!db) throw new Error("Database not available");
       
       const [client] = await db
         .select()
@@ -48,7 +48,7 @@ export const clientsRouter = router({
         .limit(1);
 
       if (!client) {
-        throw new Error("Cliente não encontrado");
+        throw new Error("Client not found");
       }
 
       return client;
@@ -58,8 +58,8 @@ export const clientsRouter = router({
   create: protectedProcedure
     .input(
       z.object({
-        name: z.string().min(1, "Nome é obrigatório"),
-        email: z.string().email("Email inválido"),
+        name: z.string().min(1, "Nome é required"),
+        email: z.string().email("Invalid email"),
         phone: z.string().optional(),
         street: z.string().optional(),
         number: z.string().optional(),
@@ -74,9 +74,9 @@ export const clientsRouter = router({
     )
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
-      if (!db) throw new Error("Database não disponível");
+      if (!db) throw new Error("Database not available");
       
-      // Verificar se email já existe
+      // Check if email already exists
       const [existing] = await db
         .select()
         .from(users)
@@ -84,7 +84,7 @@ export const clientsRouter = router({
         .limit(1);
 
       if (existing) {
-        throw new Error("Email já cadastrado");
+        throw new Error("Email already registered");
       }
 
 
@@ -132,7 +132,7 @@ export const clientsRouter = router({
     )
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
-      if (!db) throw new Error("Database não disponível");
+      if (!db) throw new Error("Database not available");
       
       const { id, ...updateData } = input;
 
@@ -146,7 +146,7 @@ export const clientsRouter = router({
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
-      if (!db) throw new Error("Database não disponível");
+      if (!db) throw new Error("Database not available");
       
       await db.delete(users).where(and(eq(users.id, input.id), eq(users.tenantId, getTenantId(ctx))));
       return { success: true };

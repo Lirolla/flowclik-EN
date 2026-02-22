@@ -33,119 +33,119 @@ const getEmailContent = (template: EmailTemplate, data: EmailData) => {
     appointment_created: {
       subject: '✅ Agendamento Recebido - Aguardando Confirmação',
       body: `
-Olá ${data.clientName},
+Hello ${data.clientName},
 
 Recebemos seu pedido de agendamento!
 
 📅 Data: ${data.appointmentDate}
-${data.appointmentTime ? `🕐 Horário: ${data.appointmentTime}` : ''}
-${data.serviceName ? `📸 Serviço: ${data.serviceName}` : ''}
+${data.appointmentTime ? `🕐 Time: ${data.appointmentTime}` : ''}
+${data.serviceName ? `📸 Service: ${data.serviceName}` : ''}
 ${data.eventLocation ? `📍 Local: ${data.eventLocation}` : ''}
 
 Estamos analisando sua solicitação e entraremos em contato em breve para confirmar.
 
-Atenciosamente,
-Equipe Lirolla
+Kind regards,
+Team Lirolla
       `.trim(),
     },
     appointment_confirmed: {
       subject: '🎉 Agendamento Confirmado!',
       body: `
-Olá ${data.clientName},
+Hello ${data.clientName},
 
 Seu agendamento foi CONFIRMADO! 🎉
 
 📅 Data: ${data.appointmentDate}
-${data.appointmentTime ? `🕐 Horário: ${data.appointmentTime}` : ''}
-${data.serviceName ? `📸 Serviço: ${data.serviceName}` : ''}
+${data.appointmentTime ? `🕐 Time: ${data.appointmentTime}` : ''}
+${data.serviceName ? `📸 Service: ${data.serviceName}` : ''}
 ${data.eventLocation ? `📍 Local: ${data.eventLocation}` : ''}
 
 Estamos ansiosos para capturar seus momentos especiais!
 
-Atenciosamente,
-Equipe Lirolla
+Kind regards,
+Team Lirolla
       `.trim(),
     },
     appointment_cancelled: {
-      subject: '❌ Agendamento Cancelado',
+      subject: '❌ Agendamento Cancelled',
       body: `
-Olá ${data.clientName},
+Hello ${data.clientName},
 
-Infelizmente seu agendamento foi cancelado.
+Infelizmente seu agendamento foi cancelled.
 
-Se você tiver alguma dúvida ou quiser reagendar, entre em contato conosco.
+Se you tiver alguma dúvida ou quiser reagendar, get in touch conosco.
 
-Atenciosamente,
-Equipe Lirolla
+Kind regards,
+Team Lirolla
       `.trim(),
     },
     session_done: {
       subject: '📸 Ensaio Realizado com Sucesso!',
       body: `
-Olá ${data.clientName},
+Hello ${data.clientName},
 
 Seu ensaio fotográfico foi realizado com sucesso! 📸
 
-Agora estamos trabalhando na edição das fotos. Em breve você receberá uma notificação para selecionar suas favoritas.
+Agora estamos trabalhando na edição das fotos. Em breve you receberá uma notification para selecionar suas favoritas.
 
-Atenciosamente,
-Equipe Lirolla
+Kind regards,
+Team Lirolla
       `.trim(),
     },
     photos_ready_for_selection: {
       subject: '👀 Suas Fotos Estão Prontas para Seleção!',
       body: `
-Olá ${data.clientName},
+Hello ${data.clientName},
 
-Ótimas notícias! Suas fotos estão prontas para seleção! 👀
+Great news! Your photos are ready para seleção! 👀
 
-Acesse sua galeria privada e escolha suas favoritas para a edição final.
+Access your gallery privada e escolha suas favoritas para a edição final.
 
-Atenciosamente,
-Equipe Lirolla
+Kind regards,
+Team Lirolla
       `.trim(),
     },
     final_photos_ready: {
       subject: '✨ Edição Final em Andamento',
       body: `
-Olá ${data.clientName},
+Hello ${data.clientName},
 
-Estamos trabalhando na edição final das fotos que você selecionou! ✨
+Estamos trabalhando na edição final das fotos que you selecionou! ✨
 
 Em breve suas fotos estarão prontas para download.
 
-Atenciosamente,
-Equipe Lirolla
+Kind regards,
+Team Lirolla
       `.trim(),
     },
     selection_approved: {
-      subject: '✅ Seleção de Fotos Aprovada!',
+      subject: '✅ Photo Selection Aprovada!',
       body: `
-Olá ${data.clientName},
+Hello ${data.clientName},
 
 Sua seleção de fotos foi aprovada com sucesso! ✅
 
-Agora vamos trabalhar na edição final das fotos que você escolheu.
+Agora vamos trabalhar na edição final das fotos que you escolheu.
 
 Em breve suas fotos estarão prontas para download!
 
-Atenciosamente,
-Equipe Lirolla
+Kind regards,
+Team Lirolla
       `.trim(),
     },
     photos_delivered: {
       subject: '📦 Suas Fotos Estão Prontas!',
       body: `
-Olá ${data.clientName},
+Hello ${data.clientName},
 
-Suas fotos estão prontas! 📦
+Your photos are ready! 📦
 
-Acesse sua galeria para fazer o download.
+Access your gallery para fazer o download.
 
-Foi um prazer trabalhar com você!
+It was a pleasure working with you!
 
-Atenciosamente,
-Equipe Lirolla
+Kind regards,
+Team Lirolla
       `.trim(),
     },
   };
@@ -157,7 +157,7 @@ Equipe Lirolla
  * Envia email para o cliente
  * 
  * NOTA: Esta é uma implementação simulada que apenas registra logs.
- * Em produção, substitua por integração real com serviço de email.
+ * Em produção, substitua por integration real com serviço de email.
  */
 export async function sendClientEmail(
   template: EmailTemplate,

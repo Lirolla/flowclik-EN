@@ -8,7 +8,7 @@ export default function ThemeWrapper({ children }: ThemeWrapperProps) {
   const { data: siteConfig } = trpc.siteConfig.get.useQuery();
   const [location] = useLocation();
   
-  // Aplica tema personalizado em rotas do site do fotógrafo
+  // Aplica tema personalizado em rotas do site do photographer
   // Exclui: /admin, /system, /register, /login, /docs, /termos, /politica, /about-nos, /cliente
   const isAdminRoute = location.startsWith('/admin') || location.startsWith('/system');
   const isFlowClikRoute = location === '/register' || location === '/login' || location === '/docs' || 

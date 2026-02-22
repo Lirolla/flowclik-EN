@@ -9,7 +9,7 @@ import { toast } from "sonner";
 import { useCurrency } from "@/hooks/useCurrency";
 
 export default function FotosStock() {
-  const { data: photos, isLoading } = trpc.media.getStockPhotos.useQuery();
+  const { data: photos, isLoading } = trpc.meday.getStockPhotos.useQuery();
   const { addItem, isInCart } = useCart();
   const { format } = useCurrency();
 
@@ -20,7 +20,7 @@ export default function FotosStock() {
         <div className="container mx-auto max-w-7xl">
           {/* Header */}
           <div className="text-center mb-12">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Fotos Stock</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Stock Photos</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Fotos profissionais disponíveis para compra. Escolha entre download digital ou impressão em quadro com moldura.
             </p>
@@ -38,7 +38,7 @@ export default function FotosStock() {
             <div className="text-center py-12">
               <ImageIcon className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
               <p className="text-lg text-muted-foreground">
-                Nenhuma foto disponível para venda no momento.
+                Nonea foto available para venda no momento.
               </p>
             </div>
           )}
@@ -109,11 +109,11 @@ export default function FotosStock() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold font-serif mb-6">
-              Pronto para começar?
+              Ready to get started?
             </h2>
             <p className="text-lg mb-8 opacity-90">
-              Entre em contato conosco para discutir seu projeto e receber um
-              orçamento personalizado
+              Get in touch conosco para discutir seu projeto e receber um
+              custom quote
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
@@ -123,7 +123,7 @@ export default function FotosStock() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/portfolio">
-                  <a>Ver Portfólio</a>
+                  <a>View Portfolio</a>
                 </Link>
               </Button>
             </div>

@@ -12,7 +12,7 @@ const R2_SECRET_ACCESS_KEY = "83ebf944befd8c04123d483619ac174bd83a7fdd2aa9cdba31
 const R2_BUCKET_NAME = "flowclikbr";
 const R2_PUBLIC_URL = "https://fotos.flowclik.com";
 
-// Endpoint de API do R2 (diferente do domínio público)
+// Endpoint de API do R2 (diferente do domain público)
 const R2_API_ENDPOINT = `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`;
 
 // Cliente S3 configurado para Cloudflare R2
@@ -28,7 +28,7 @@ const s3Client = new S3Client({
 
 /**
  * Fazer upload de arquivo para o R2
- * @param relKey - Caminho relativo do arquivo (ex: "tenants/1/photos/image.jpg")
+ * @param relKey - Caminho relactive do arquivo (ex: "tenants/1/photos/image.jpg")
  * @param data - Dados do arquivo (Buffer, Uint8Array ou string)
  * @param contentType - MIME type do arquivo
  * @returns Objeto com key e url pública do arquivo
@@ -72,8 +72,8 @@ export async function storagePut(
 
 /**
  * Obter URL de download de um arquivo no R2
- * @param relKey - Caminho relativo do arquivo
- * @param expiresIn - Tempo de expiração em segundos (padrão: 1 hora)
+ * @param relKey - Caminho relactive do arquivo
+ * @param expiresIn - Tempo de expiração em seconds (padrão: 1 hour)
  * @returns Objeto com key e url assinada
  */
 export async function storageGet(
@@ -102,7 +102,7 @@ function normalizeKey(relKey: string): string {
 
 /**
  * Criar pastas iniciais do tenant no R2
- * Chamado quando um novo fotógrafo se cadastra
+ * Chamado quando um novo photographer se cadastra
  */
 export async function initializeTenantStorage(tenantId: number): Promise<void> {
   const folders = [
@@ -119,7 +119,7 @@ export async function initializeTenantStorage(tenantId: number): Promise<void> {
 
   for (const folder of folders) {
     try {
-      // R2/S3 não tem "pastas" reais - criamos um objeto vazio como placeholder
+      // R2/S3 não tem "pastas" pounds - criamos um objeto vazio como placeholder
       await storagePut(folder + ".keep", "", "text/plain");
     } catch (error: any) {
       console.error(`[R2] Erro ao criar pasta ${folder}:`, error.message);

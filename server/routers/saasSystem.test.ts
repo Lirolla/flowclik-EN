@@ -13,7 +13,7 @@ describe("SaaS System - Cadastro de Tenants", () => {
   });
 
   it("deve criar tenant + subscription + usuário admin", async () => {
-    if (!db) throw new Error("Database não disponível");
+    if (!db) throw new Error("Database not available");
 
     const caller = appRouter.createCaller({
       user: null,
@@ -23,7 +23,7 @@ describe("SaaS System - Cadastro de Tenants", () => {
 
     // 1. Criar tenant
     const result = await caller.saasSystem.createTenant({
-      name: "Fotógrafo Teste",
+      name: "Test Photographer",
       email: `${testSubdomain}@test.com`,
       subdomain: testSubdomain,
       password: "senha123",
@@ -33,18 +33,18 @@ describe("SaaS System - Cadastro de Tenants", () => {
     expect(result.subdomain).toBe(testSubdomain);
     expect(result.url).toBe(`https://${testSubdomain}.flowclick.com`);
 
-    // 2. Verificar tenant criado
+    // 2. Verify tenant criado
     const [tenant] = await db
       .select()
       .from(tenants)
       .where(eq(tenants.subdomain, testSubdomain));
 
     expect(tenant).toBeDefined();
-    expect(tenant.name).toBe("Fotógrafo Teste");
+    expect(tenant.name).toBe("Test Photographer");
     expect(tenant.email).toBe(`${testSubdomain}@test.com`);
     expect(tenant.status).toBe("active");
 
-    // 3. Verificar subscription criada
+    // 3. Verify subscription criada
     const [subscription] = await db
       .select()
       .from(subscriptions)
@@ -56,14 +56,14 @@ describe("SaaS System - Cadastro de Tenants", () => {
     expect(subscription.storageLimit).toBe(10737418240); // 10GB
     expect(subscription.galleryLimit).toBe(10);
 
-    // 4. Verificar usuário admin criado
+    // 4. Verify usuário admin criado
     const [user] = await db
       .select()
       .from(users)
       .where(eq(users.email, `${testSubdomain}@test.com`));
 
     expect(user).toBeDefined();
-    expect(user.name).toBe("Fotógrafo Teste");
+    expect(user.name).toBe("Test Photographer");
     expect(user.role).toBe("admin");
     expect(user.tenantId).toBe(tenant.id);
     expect(user.password).toBeDefined(); // Hash bcrypt
@@ -77,7 +77,7 @@ describe("SaaS System - Cadastro de Tenants", () => {
     });
   }, 30000);
 
-  it("deve rejeitar subdomínio duplicado", async () => {
+  it("deve rejeitar subdomain duplicado", async () => {
     const caller = appRouter.createCaller({
       user: null,
       req: {} as any,
@@ -86,28 +86,28 @@ describe("SaaS System - Cadastro de Tenants", () => {
 
     await expect(
       caller.saasSystem.createTenant({
-        name: "Outro Fotógrafo",
+        name: "Outro Photographer",
         email: "outro@test.com",
-        subdomain: testSubdomain, // Mesmo subdomínio
+        subdomain: testSubdomain, // Mesmo subdomain
         password: "senha123",
       })
-    ).rejects.toThrow("Subdomínio já está em uso");
+    ).rejects.toThrow("Subdomain já está em uso");
   });
 
-  it("deve verificar disponibilidade de subdomínio", async () => {
+  it("deve verificar disponibilidade de subdomain", async () => {
     const caller = appRouter.createCaller({
       user: null,
       req: {} as any,
       res: {} as any,
     });
 
-    // Subdomínio existente
+    // Subdomain existente
     const existing = await caller.saasSystem.checkSubdomain({
       subdomain: testSubdomain,
     });
     expect(existing.available).toBe(false);
 
-    // Subdomínio disponível
+    // Subdomain available
     const available = await caller.saasSystem.checkSubdomain({
       subdomain: `novo-${Date.now()}`,
     });

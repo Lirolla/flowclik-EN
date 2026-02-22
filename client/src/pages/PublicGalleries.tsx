@@ -23,7 +23,7 @@ export default function PublicGalleries() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold font-serif mb-6">
-              Galerias
+              Gallerys
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground">
               Explore nossas coleções de momentos únicos
@@ -38,7 +38,7 @@ export default function PublicGalleries() {
 
         {!collections || collections.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Nenhuma galeria pública disponível no momento.</p>
+            <p className="text-muted-foreground">Nonea galeria pública available no momento.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -69,7 +69,7 @@ export default function PublicGalleries() {
                       )}
                       {collection.eventDate && (
                         <p className="text-xs text-muted-foreground mt-2">
-                          {new Date(collection.eventDate).toLocaleDateString('pt-BR')}
+                          {new Date(collection.eventDate).toLocaleDateString('en-GB')}
                         </p>
                       )}
                     </div>

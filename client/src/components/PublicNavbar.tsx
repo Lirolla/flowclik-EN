@@ -76,7 +76,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
               <a className={`text-sm font-medium transition-colors ${
                 currentPage === "galerias" ? "text-accent font-semibold" : "hover:text-accent"
               }`}>
-                Galerias
+                Gallerys
               </a>
             </Link>
             {showVideo && (
@@ -84,7 +84,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                 <a className={`text-sm font-medium transition-colors ${
                   currentPage === "video" ? "text-accent font-semibold" : "hover:text-accent"
                 }`}>
-                  Vídeo
+                  Video
                 </a>
               </Link>
             )}
@@ -93,7 +93,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                 <a className={`text-sm font-medium transition-colors ${
                   currentPage === "fotos-stock" ? "text-accent font-semibold" : "hover:text-accent"
                 }`}>
-                  Fotos Stock
+                  Stock Photos
                 </a>
               </Link>
             )}
@@ -101,7 +101,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
               <a className={`text-sm font-medium transition-colors ${
                 currentPage === "servicos" ? "text-accent font-semibold" : "hover:text-accent"
               }`}>
-                Serviços
+                Services
               </a>
             </Link>
             <Link href={SITE_ROUTES.portfolio()}>
@@ -127,7 +127,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
             </Link>
             </div>
             
-            {/* Botões de Ação (posicionados à direita) */}
+            {/* Action Buttons (posicionados à direita) */}
             <div className="absolute right-0 flex items-center gap-2">
               <Link href="/cart">
                 <a className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-primary-foreground text-xs font-medium rounded-md hover:bg-primary/90 transition-colors">
@@ -191,7 +191,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                       : "hover:bg-muted"
                   }`}
                 >
-                  Galerias
+                  Gallerys
                 </a>
               </Link>
 
@@ -205,7 +205,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                         : "hover:bg-muted"
                     }`}
                   >
-                    Vídeo
+                    Video
                   </a>
                 </Link>
               )}
@@ -220,7 +220,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                         : "hover:bg-muted"
                     }`}
                   >
-                    Fotos Stock
+                    Stock Photos
                   </a>
                 </Link>
               )}
@@ -234,7 +234,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                       : "hover:bg-muted"
                   }`}
                 >
-                  Serviços
+                  Services
                 </a>
               </Link>
 

@@ -37,13 +37,13 @@ export default function CadastroSaaS() {
       const result = await utils.client.saasSystem.checkSubdomain.query({ subdomain });
       setSubdomainCheck(result.available ? "available" : "taken");
     } catch (err) {
-      console.error('Erro ao verificar subdomínio:', err);
+      console.error('Erro ao verificar subdomain:', err);
       setSubdomainCheck("idle");
     }
   };
 
   const handleSubdomainChange = (value: string) => {
-    // Apenas letras minúsculas, números e hífen
+    // Apenas letras minúsculas, numbers and hyphen
     const clean = value.toLowerCase().replace(/[^a-z0-9-]/g, "");
     setFormData({ ...formData, subdomain: clean });
     checkSubdomain(clean);
@@ -65,7 +65,7 @@ export default function CadastroSaaS() {
     }
 
     if (subdomainCheck !== "available") {
-      setError("Escolha um subdomínio disponível");
+      setError("Escolha um subdomain available");
       return;
     }
 
@@ -80,7 +80,7 @@ export default function CadastroSaaS() {
       // Sucesso! Redirecionar para o novo site
       window.location.href = result.url + '/admin';
     } catch (err: any) {
-      setError(err.message || "Erro ao criar conta. Tente novamente.");
+      setError(err.message || "Erro ao criar conta. Try again.");
     }
   };
 
@@ -105,7 +105,7 @@ export default function CadastroSaaS() {
           
           <h1 className="text-3xl font-bold mb-2">Crie sua conta</h1>
           <p className="text-zinc-400">
-            7 dias grátis · Cancele quando quiser
+            7 days grátis · Cancele quando quiser
           </p>
         </div>
 
@@ -151,9 +151,9 @@ export default function CadastroSaaS() {
               />
             </div>
 
-            {/* Subdomínio */}
+            {/* Subdomain */}
             <div>
-              <Label htmlFor="subdomain">Escolha seu subdomínio</Label>
+              <Label htmlFor="subdomain">Escolha seu subdomain</Label>
               <div className="mt-2 flex items-center gap-2">
                 <Input
                   id="subdomain"
@@ -177,16 +177,16 @@ export default function CadastroSaaS() {
               </div>
               {subdomainCheck === "available" && (
                 <p className="text-xs text-green-500 mt-1">
-                  ✓ {formData.subdomain}.flowclik.com está disponível!
+                  ✓ {formData.subdomain}.flowclik.com está available!
                 </p>
               )}
               {subdomainCheck === "taken" && (
                 <p className="text-xs text-red-500 mt-1">
-                  ✗ Este subdomínio já está em uso
+                  ✗ Este subdomain já está em uso
                 </p>
               )}
               <p className="text-xs text-zinc-500 mt-1">
-                Apenas letras, números e hífen
+                Apenas letras, numbers and hyphen
               </p>
             </div>
 
@@ -209,7 +209,7 @@ export default function CadastroSaaS() {
                   Criando conta...
                 </>
               ) : (
-                "Criar Conta Grátis"
+                "Criar Conta Free"
               )}
             </Button>
           </form>
@@ -217,7 +217,7 @@ export default function CadastroSaaS() {
           <div className="mt-6 text-center text-sm text-zinc-500">
             Já tem uma conta?{" "}
             <Link href="/login">
-              <a className="text-purple-400 hover:text-purple-300">Entrar</a>
+              <a className="text-purple-400 hover:text-purple-300">Sign in</a>
             </Link>
           </div>
         </div>
@@ -225,8 +225,8 @@ export default function CadastroSaaS() {
         {/* Benefícios */}
         <div className="mt-8 space-y-3">
           {[
-            "Site profissional pronto em minutos",
-            "7 dias grátis para testar tudo",
+            "Site profissional pronto em minutes",
+            "7 days grátis para testar tudo",
             "Cancele quando quiser, sem burocracia",
           ].map((benefit, i) => (
             <div key={i} className="flex items-center gap-3 text-sm text-zinc-400">

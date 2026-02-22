@@ -20,7 +20,7 @@ export async function createContext(
 ): Promise<TrpcContext> {
   let user: User | null = null;
   
-  // 1. Detectar tenant pelo subdomínio/domínio customizado
+  // 1. Detectar tenant pelo subdomain/domain customizado
   let tenantId = await detectTenantFromRequest(opts.req);
 
   try {
@@ -61,8 +61,8 @@ export async function createContext(
           }
         }
       } catch (jwtError) {
-        // Token inválido ou expirado
-        console.debug("[Context] JWT inválido ou expirado");
+        // Invalid token ou expired
+        console.debug("[Context] JWT invalid ou expired");
         user = null;
       }
     }

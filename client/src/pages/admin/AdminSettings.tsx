@@ -102,24 +102,24 @@ function AdminSettingsContent() {
   
   // Regional settings (HARDCODED BRASIL)
   const baseCountry = "United Kingdom";
-  const baseCurrency = "BRL";
-  const currencySymbol = "R$";
-  const timezone = "America/Sao_Paulo";
-  const phoneCountryCode = "+55";
+  const baseCurrency = "GBP";
+  const currencySymbol = "£";
+  const timezone = "Europe/London";
+  const phoneCountryCode = "+44";
 
   const { data: config, isLoading } = trpc.siteConfig.get.useQuery();
   const { data: blockedDates } = trpc.blockedDates.list.useQuery();
   
   const updateConfigMutation = trpc.siteConfig.update.useMutation({
     onSuccess: () => {
-      toast.success("Configurações salvas com sucesso!");
+      toast.success("Settings salvas com sucesso!");
     },
     onError: (error) => {
       toast.error(`Erro: ${error.message}`);
     },
   });
 
-  const uploadImageMutation = trpc.media.uploadImage.useMutation();
+  const uploadImageMutation = trpc.meday.uploadImage.useMutation();
 
   const updateBusinessModeMutation = trpc.siteConfig.updateBusinessMode.useMutation({
     onSuccess: () => {
@@ -202,7 +202,7 @@ function AdminSettingsContent() {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        toast.error("Por favor, selecione apenas imagens");
+        toast.error("Por favor, select apenas imagens");
         return;
       }
 
@@ -280,7 +280,7 @@ function AdminSettingsContent() {
       paymentLinkEnabled,
       // Link de Pagamento salvo
       
-      // Aparência do Site
+      // Appearance do Site
       siteThemeLayout,
       siteThemeMode,
       siteThemeAccentColor,
@@ -292,10 +292,10 @@ function AdminSettingsContent() {
       
       // Regional settings (hardcoded Brasil)
       baseCountry: "United Kingdom",
-      baseCurrency: "BRL",
-      currencySymbol: "R$",
-      timezone: "America/Sao_Paulo",
-      phoneCountryCode: "+55",
+      baseCurrency: "GBP",
+      currencySymbol: "£",
+      timezone: "Europe/London",
+      phoneCountryCode: "+44",
       parallaxSubtitle: parallaxSubtitle || undefined,
     });
   };
@@ -386,7 +386,7 @@ function AdminSettingsContent() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Settings className="w-6 h-6" />
-            Configurações do Site
+            Site Settings
           </CardTitle>
           <CardDescription>
             Complete todas as seções para configurar seu site. 🔴 Vermelho = Não preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Completo
@@ -394,7 +394,7 @@ function AdminSettingsContent() {
         </CardHeader>
       </Card>
       
-      {/* Accordion de Configurações */}
+      {/* Accordion de Settings */}
       <Card>
         <CardContent className="pt-6">
           <Accordion type="single" collapsible className="w-full">
@@ -409,7 +409,7 @@ function AdminSettingsContent() {
               </AccordionTrigger>
               <AccordionContent className="space-y-6 pt-4">
                 <div className="space-y-4">
-                  <Label>Escolha o tipo de serviço que você oferece</Label>
+                  <Label>Escolha o tipo de serviço que you oferece</Label>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <button
                       onClick={() => handleBusinessModeChange("photography_only")}
@@ -422,7 +422,7 @@ function AdminSettingsContent() {
                       <Camera className="w-12 h-12 mx-auto mb-3 text-blue-600" />
                       <h3 className="font-semibold mb-2">Só Fotografia</h3>
                       <p className="text-sm text-muted-foreground">
-                        Foco em serviços fotográficos
+                        Foco em photography services
                       </p>
                     </button>
 
@@ -435,9 +435,9 @@ function AdminSettingsContent() {
                       }`}
                     >
                       <Video className="w-12 h-12 mx-auto mb-3 text-red-600" />
-                      <h3 className="font-semibold mb-2">Só Vídeo</h3>
+                      <h3 className="font-semibold mb-2">Só Video</h3>
                       <p className="text-sm text-muted-foreground">
-                        Foco em produção de vídeos
+                        Foco em produção de videos
                       </p>
                     </button>
 
@@ -453,7 +453,7 @@ function AdminSettingsContent() {
                         <Camera className="w-10 h-10 text-blue-600" />
                         <Video className="w-10 h-10 text-red-600" />
                       </div>
-                      <h3 className="font-semibold mb-2">Fotografia + Vídeo</h3>
+                      <h3 className="font-semibold mb-2">Fotografia + Video</h3>
                       <p className="text-sm text-muted-foreground">
                         Ofereço ambos os serviços
                       </p>
@@ -464,7 +464,7 @@ function AdminSettingsContent() {
                   <div className="space-y-4 pt-6 border-t">
                     <div className="flex items-center justify-between">
                       <div className="space-y-1">
-                        <Label className="text-base font-semibold">Ativar Fotos Stock</Label>
+                        <Label className="text-base font-semibold">Ativar Stock Photos</Label>
                         <p className="text-sm text-muted-foreground">
                           Habilite uma página pública para vender fotos avulsas
                         </p>
@@ -492,12 +492,12 @@ function AdminSettingsContent() {
               </AccordionContent>
             </AccordionItem>
 
-            {/* Aparência */}
+            {/* Appearance */}
             <AccordionItem value="appearance">
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status="complete" />
-                  <span className="font-semibold">Aparência do Site</span>
+                  <span className="font-semibold">Appearance do Site</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-6 pt-4">
@@ -811,7 +811,7 @@ function AdminSettingsContent() {
                   />
                 </div>
 
-                {/* REMOVIDO: Configurações Regionais (agora hardcoded Brasil) */}
+                {/* REMOVIDO: Settings Regionais (agora hardcoded Brasil) */}
 
                 {/* Current Logo URL (readonly) */}
                 {logoUrl && !logoFile && (
@@ -836,12 +836,12 @@ function AdminSettingsContent() {
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getAboutStatus()} />
-                  <span className="font-semibold">Página Sobre</span>
+                  <span className="font-semibold">Page Sobre</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
                 <div>
-                  <Label>Título da Seção *</Label>
+                  <Label>Title da Seção *</Label>
                   <Input
                     value={aboutTitlePt}
                     onChange={(e) => setAboutTitle(e.target.value)}
@@ -859,13 +859,13 @@ function AdminSettingsContent() {
                   />
                 </div>
                 <div>
-                  <Label>Foto de Perfil *</Label>
+                  <Label>Foto de Profile *</Label>
                   <div className="mt-2">
                     {aboutImage ? (
                       <div className="relative inline-block">
                         <img
                           src={aboutImage}
-                          alt="Foto de perfil"
+                          alt="Foto de profile"
                           className="w-32 h-32 object-cover rounded-lg border-2 border-border"
                         />
                         <Button
@@ -913,7 +913,7 @@ function AdminSettingsContent() {
                   </div>
                 </div>
                 <div>
-                  <Label>Missão</Label>
+                  <Label>Mission</Label>
                   <Textarea
                     value={aboutMission}
                     onChange={(e) => setAboutMission(e.target.value)}
@@ -922,7 +922,7 @@ function AdminSettingsContent() {
                   />
                 </div>
                 <div>
-                  <Label>Visão</Label>
+                  <Label>Vision</Label>
                   <Textarea
                     value={aboutVision}
                     onChange={(e) => setAboutVision(e.target.value)}
@@ -955,7 +955,7 @@ function AdminSettingsContent() {
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getServicesStatus()} />
-                  <span className="font-semibold">Página Serviços</span>
+                  <span className="font-semibold">Page Services</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
@@ -969,14 +969,14 @@ function AdminSettingsContent() {
                   />
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Os serviços individuais são gerenciados na página Admin → Serviços
+                  Os serviços individuais são gerenciados na página Admin → Services
                 </p>
                 <div className="flex justify-end mt-6">
                   <Button
                     onClick={handleSave}
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
-                    Salvar Serviços
+                    Salvar Services
                   </Button>
                 </div>
               </AccordionContent>
@@ -987,7 +987,7 @@ function AdminSettingsContent() {
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getContactStatus()} />
-                  <span className="font-semibold">Informações de Contato</span>
+                  <span className="font-semibold">Contact Information</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
@@ -1017,11 +1017,11 @@ function AdminSettingsContent() {
                   />
                 </div>
                 <div>
-                  <Label>Endereço</Label>
+                  <Label>Address</Label>
                   <Textarea
                     value={contactAddress}
                     onChange={(e) => setContactAddress(e.target.value)}
-                    placeholder="Rua, número, bairro, cidade, estado"
+                    placeholder="Rua, number, bairro, cidade, estado"
                     rows={3}
                   />
                 </div>
@@ -1163,7 +1163,7 @@ function AdminSettingsContent() {
                     </div>
                     
                     <div>
-                      <Label>Título Principal</Label>
+                      <Label>Title Principal</Label>
                       <Input
                         value={parallaxTitle}
                         onChange={(e) => setParallaxTitle(e.target.value)}
@@ -1210,7 +1210,7 @@ function AdminSettingsContent() {
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-6 pt-4">
-                {/* Transferência Bancária */}
+                {/* Bank Transfer */}
                 <div className="border rounded-lg p-4">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
@@ -1218,7 +1218,7 @@ function AdminSettingsContent() {
                         <span className="text-xl">🏦</span>
                       </div>
                       <div>
-                        <h4 className="font-semibold">Transferência Bancária / Depósito</h4>
+                        <h4 className="font-semibold">Bank Transfer / Depósito</h4>
                         <p className="text-sm text-muted-foreground">Pagamento direto na conta</p>
                       </div>
                     </div>
@@ -1277,7 +1277,7 @@ function AdminSettingsContent() {
                       <Textarea
                         value={paymentCashInstructions}
                         onChange={(e) => setPaymentCashInstructions(e.target.value)}
-                        placeholder="Ex: Pagamento em dinheiro pode ser feito no dia do ensaio ou na entrega das fotos. Aceitamos parcelamento em até 3x sem juros."
+                        placeholder="Ex: Pagamento em dinheiro pode ser feito no day do ensaio ou na entrega das fotos. Aceitamos parcelamento em until 3x sem juros."
                         rows={3}
                       />
                     </div>
@@ -1368,8 +1368,8 @@ function AdminSettingsContent() {
               <li>O modo de negócio define quais serviços aparecem no site</li>
               <li>Bloqueios de data impedem agendamentos nos períodos escolhidos</li>
               <li>O logo e nome aparecem no cabeçalho do site</li>
-              <li>O conteúdo de Sobre/Serviços aparece nas páginas públicas</li>
-              <li>Alterações são aplicadas imediatamente</li>
+              <li>O conteúdo de Sobre/Services aparece nas páginas públicas</li>
+              <li>Alterações são aplicadas imedaytamente</li>
             </ul>
           </div>
         </CardContent>
@@ -1391,7 +1391,7 @@ function AdminSettingsContent() {
         <CardContent>
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground">
-              Bloqueie períodos em que você não estará disponível para agendamentos (férias, viagens, etc)
+              Bloqueie períodos em que you não estará available para agendamentos (férias, viagens, etc)
             </p>
             
             {/* Formulário horizontal */}
@@ -1413,7 +1413,7 @@ function AdminSettingsContent() {
                 />
               </div>
               <div className="flex-1 min-w-[200px]">
-                <Label className="text-sm">Motivo (opcional)</Label>
+                <Label className="text-sm">Motivo (optional)</Label>
                 <Input
                   placeholder="Ex: Férias, Viagem"
                   value={blockReason}
@@ -1438,7 +1438,7 @@ function AdminSettingsContent() {
                     >
                       <div className="flex-1 min-w-0">
                         <p className="font-medium text-sm">
-                          {new Date(block.startDate).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" })} - {new Date(block.endDate).toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" })}
+                          {new Date(block.startDate).toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit" })} - {new Date(block.endDate).toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit" })}
                         </p>
                         {block.reason && (
                           <p className="text-xs text-muted-foreground truncate">{block.reason}</p>

@@ -6,7 +6,7 @@ export default function Footer() {
   const { data: siteConfig } = trpc.site.getConfig.useQuery();
   
   const siteName = siteConfig?.siteName || "FlowClik.com";
-  const siteTagline = siteConfig?.siteTagline || "A fotografia sempre foi meu modo de eternizar o que importa. Com mais de 20 anos de estrada, registrei histórias em diversos contextos — cada imagem carregando alma, tempo e verdade.";
+  const siteTagline = siteConfig?.siteTagline || "A fotografia sempre foi meu modo de eternizar o que importa. Com mais de 20 years de estrada, registrei histórias em diversos contextos — cada imagem carregando alma, tempo e verdade.";
   
   return (
     <footer className="bg-background border-t border-border/50 mt-auto">
@@ -24,7 +24,7 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-2">
               <Video className="w-5 h-5 text-primary" />
-              <span>Vídeo</span>
+              <span>Video</span>
             </div>
           </div>
         </div>
@@ -102,14 +102,14 @@ export default function Footer() {
               <li>
                 <Link href="/galleries">
                   <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Galerias
+                    Gallerys
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/services">
                   <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Serviços
+                    Services
                   </a>
                 </Link>
               </li>
@@ -143,7 +143,7 @@ export default function Footer() {
             <Link href="/admin">
               <a className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <Lock className="w-4 h-4" />
-                Área do Fotógrafo
+                Área do Photographer
               </a>
             </Link>
           </div>

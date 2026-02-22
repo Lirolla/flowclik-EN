@@ -13,20 +13,20 @@ export default function AdminLeads() {
   const handleExportCSV = () => {
     if (!leads || leads.length === 0) {
       toast({
-        title: "Nenhum lead para exportar",
+        title: "None lead para exportar",
         variant: "destructive",
       });
       return;
     }
 
     // Create CSV content
-    const headers = ["Email", "Name", "Relação", "Álbum", "Data de Visualização"];
+    const headers = ["Email", "Name", "Relação", "Album", "Data de Visualização"];
     const rows = leads.map((lead: any) => [
       lead.email,
       lead.name || "-",
       lead.relationship || "-",
       lead.collectionName || "-",
-      new Date(lead.viewedAt).toLocaleString("pt-BR"),
+      new Date(lead.viewedAt).toLocaleString("en-GB"),
     ]);
 
     const csvContent = [
@@ -94,7 +94,7 @@ export default function AdminLeads() {
                 <Eye className="w-6 h-6 text-green-500" />
               </div>
               <div>
-                <p className="text-sm text-gray-400">Álbuns Compartilhados</p>
+                <p className="text-sm text-gray-400">Albums Compartilhados</p>
                 <p className="text-2xl font-bold">{stats?.byCollection.length || 0}</p>
               </div>
             </div>
@@ -106,7 +106,7 @@ export default function AdminLeads() {
                 <TrendingUp className="w-6 h-6 text-purple-500" />
               </div>
               <div>
-                <p className="text-sm text-gray-400">Média por Álbum</p>
+                <p className="text-sm text-gray-400">Méday por Album</p>
                 <p className="text-2xl font-bold">
                   {stats?.byCollection.length 
                     ? Math.round((stats.total || 0) / stats.byCollection.length) 
@@ -120,7 +120,7 @@ export default function AdminLeads() {
         {/* Leads by Album */}
         {stats?.byCollection && stats.byCollection.length > 0 && (
           <Card className="bg-gray-900 border-gray-800 p-6">
-            <h2 className="text-xl font-semibold mb-4">Leads por Álbum</h2>
+            <h2 className="text-xl font-semibold mb-4">Leads por Album</h2>
             <div className="space-y-3">
               {stats.byCollection.map((item: any) => (
                 <div 
@@ -144,7 +144,7 @@ export default function AdminLeads() {
           {!leads || leads.length === 0 ? (
             <div className="p-12 text-center">
               <Mail className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-400">Nenhum lead capturado ainda.</p>
+              <p className="text-gray-400">None lead capturado ainda.</p>
               <p className="text-sm text-gray-500 mt-2">
                 Compartilhe álbuns com clientes para começar a capturar leads!
               </p>
@@ -157,7 +157,7 @@ export default function AdminLeads() {
                     <th className="px-6 py-3 text-left text-sm font-semibold">Email</th>
                     <th className="px-6 py-3 text-left text-sm font-semibold">Nome</th>
                     <th className="px-6 py-3 text-left text-sm font-semibold">Relação</th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold">Álbum</th>
+                    <th className="px-6 py-3 text-left text-sm font-semibold">Album</th>
                     <th className="px-6 py-3 text-left text-sm font-semibold">Visualizado em</th>
                   </tr>
                 </thead>
@@ -182,7 +182,7 @@ export default function AdminLeads() {
                       <td className="px-6 py-4 text-gray-400 text-sm">
                         <div className="flex items-center gap-2">
                           <Calendar className="w-4 h-4" />
-                          {new Date(lead.viewedAt).toLocaleString("pt-BR")}
+                          {new Date(lead.viewedAt).toLocaleString("en-GB")}
                         </div>
                       </td>
                     </tr>

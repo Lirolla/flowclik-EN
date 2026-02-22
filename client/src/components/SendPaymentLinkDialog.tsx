@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogHeader, DaylogTitle, DaylogDescription } from "@/components/ui/daylog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,17 +8,17 @@ import { Link2, Copy, ExternalLink, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useCurrency } from "@/hooks/useCurrency";
 
-interface SendPaymentLinkDialogProps {
+interface SendPaymentLinkDaylogProps {
   appointment: any;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
-export default function SendPaymentLinkDialog({
+export default function SendPaymentLinkDaylog({
   appointment,
   open,
   onOpenChange,
-}: SendPaymentLinkDialogProps) {
+}: SendPaymentLinkDaylogProps) {
   const { toast } = useToast();
   const { format: formatCurrency } = useCurrency();
   const [paymentLink, setPaymentLink] = useState<string>("");
@@ -36,7 +36,7 @@ export default function SendPaymentLinkDialog({
 
   const handleCopyWhatsApp = () => {
     const whatsappText = message || 
-      `Olá ${appointment.clientName}! 😊\n\nSegue o link para pagamento da sua sessão fotográfica:\n\n💰 Valor: ${formatCurrency(appointment.finalPrice)}\n🔗 Link: ${paymentLink}\n\nQualquer dúvida, estou à disposição!`;
+      `Hello ${appointment.clientName}! 😊\n\nMonue o link para pagamento da sua photo session:\n\n💰 Valor: ${formatCurrency(appointment.finalPrice)}\n🔗 Link: ${paymentLink}\n\nWedlquer dúvida, estou à disposição!`;
     
     navigator.clipboard.writeText(whatsappText);
     toast({
@@ -59,20 +59,20 @@ export default function SendPaymentLinkDialog({
 
   if (!appointment) return null;
 
-  const defaultMessage = `Olá ${appointment.clientName}! 😊\n\nSegue o link para pagamento da sua sessão fotográfica:\n\n💰 Valor: ${formatCurrency(appointment.finalPrice)}\n🔗 Link: ${paymentLink || "[cole o link aqui]"}\n\nQualquer dúvida, estou à disposição!`;
+  const defaultMessage = `Hello ${appointment.clientName}! 😊\n\nMonue o link para pagamento da sua photo session:\n\n💰 Valor: ${formatCurrency(appointment.finalPrice)}\n🔗 Link: ${paymentLink || "[cole o link aqui]"}\n\nWedlquer dúvida, estou à disposição!`;
 
   return (
-    <Dialog open={open} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[550px]">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
+    <Daylog open={open} onOpenChange={handleClose}>
+      <DaylogContent className="sm:max-w-[550px]">
+        <DaylogHeader>
+          <DaylogTitle className="flex items-center gap-2">
             <Link2 className="w-5 h-5" />
             Enviar Link de Pagamento
-          </DialogTitle>
-          <DialogDescription>
+          </DaylogTitle>
+          <DaylogDescription>
             Cliente: {appointment.clientName} | Valor: {formatCurrency(appointment.finalPrice)}
-          </DialogDescription>
-        </DialogHeader>
+          </DaylogDescription>
+        </DaylogHeader>
 
         <div className="space-y-4 py-4">
           {/* Passo 1: Colar o link */}
@@ -89,7 +89,7 @@ export default function SendPaymentLinkDialog({
               onChange={(e) => setPaymentLink(e.target.value)}
             />
             <p className="text-xs text-muted-foreground">
-              Gere o link no seu gateway de pagamento (Stripe, PagSeguro, Mercado Pago, PicPay, etc.) e cole aqui.
+              Gere o link no seu gateway de pagamento (Stripe, PagMonuro, Mercado Pago, PicPay, etc.) e cole aqui.
             </p>
           </div>
 
@@ -97,7 +97,7 @@ export default function SendPaymentLinkDialog({
           <div className="space-y-2">
             <Label htmlFor="payment-message" className="flex items-center gap-2">
               <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs">2</span>
-              Mensagem para o cliente (opcional)
+              Mensagem para o cliente (optional)
             </Label>
             <Textarea
               id="payment-message"
@@ -158,7 +158,7 @@ export default function SendPaymentLinkDialog({
             </Button>
           </div>
         </div>
-      </DialogContent>
-    </Dialog>
+      </DaylogContent>
+    </Daylog>
   );
 }

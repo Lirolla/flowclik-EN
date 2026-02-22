@@ -82,7 +82,7 @@ export default function SistemaAvisos() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Avisos Globais</h1>
         <p className="text-muted-foreground">
-          Envie mensagens que aparecem no dashboard de todos os fotógrafos
+          Envie mensagens que aparecem no dashboard de todos os photographers
         </p>
       </div>
 
@@ -91,11 +91,11 @@ export default function SistemaAvisos() {
         <h2 className="text-xl font-bold mb-4">Criar Novo Aviso</h2>
         <div className="space-y-4">
           <div>
-            <label className="text-sm font-medium mb-2 block">Título</label>
+            <label className="text-sm font-medium mb-2 block">Title</label>
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Ex: Manutenção programada às 22h"
+              placeholder="Ex: Manutenção programada at 22h"
             />
           </div>
 
@@ -117,7 +117,7 @@ export default function SistemaAvisos() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="info">🟢 Informativo</SelectItem>
+                  <SelectItem value="info">🟢 Informactive</SelectItem>
                   <SelectItem value="urgent">🟡 Importante</SelectItem>
                   <SelectItem value="urgent">🔴 Urgente</SelectItem>
                 </SelectContent>
@@ -131,10 +131,10 @@ export default function SistemaAvisos() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">Todos os fotógrafos</SelectItem>
-                  <SelectItem value="basico">Apenas Plano Básico</SelectItem>
-                  <SelectItem value="cortesia">Apenas Plano Cortesia</SelectItem>
-                  <SelectItem value="vitalicio">Apenas Plano Vitalício</SelectItem>
+                  <SelectItem value="all">Todos os photographers</SelectItem>
+                  <SelectItem value="basico">Apenas Basic Plan</SelectItem>
+                  <SelectItem value="cortesia">Apenas Plyear Cortesia</SelectItem>
+                  <SelectItem value="vitalicio">Apenas Plyear Vitalício</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -165,7 +165,7 @@ export default function SistemaAvisos() {
                   <div className="flex items-center gap-2 mb-2">
                     <h3 className="font-bold">{announcement.title}</h3>
                     {announcement.isActive ? (
-                      <Badge variant="default">Ativo</Badge>
+                      <Badge variant="default">Active</Badge>
                     ) : (
                       <Badge variant="secondary">Desativado</Badge>
                     )}
@@ -173,16 +173,16 @@ export default function SistemaAvisos() {
                   <p className="text-sm mb-2">{announcement.message}</p>
                   <div className="flex items-center gap-4 text-xs text-muted-foreground">
                     <span>
-                      Enviado para:{" "}
+                      Shipped para:{" "}
                       {announcement.targetPlan === "all"
                         ? "All"
                         : announcement.targetPlan === "starter"
                         // @ts-ignore
-                        ? "Plano Básico"
+                        ? "Basic Plan"
                         // @ts-ignore
                         : announcement.targetPlan === "starter"
-                        ? "Plano Cortesia"
-                        : "Plano Vitalício"}
+                        ? "Plyear Cortesia"
+                        : "Plyear Vitalício"}
                     </span>
                     <span>
                       {formatDistanceToNow(new Date(announcement.createdAt), {

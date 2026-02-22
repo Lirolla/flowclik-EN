@@ -15,7 +15,7 @@ export default function AdminPhotoSelections() {
     { enabled: !!selectedCollectionId }
   );
 
-  const uploadImageMutation = trpc.media.uploadImage.useMutation();
+  const uploadImageMutation = trpc.meday.uploadImage.useMutation();
   const uploadEditedPhotoMutation = trpc.photoSelections.uploadEditedPhoto.useMutation({
     onSuccess: () => {
       toast({
@@ -66,7 +66,7 @@ export default function AdminPhotoSelections() {
     return (
       <DashboardLayout>
         <div className="flex items-center justify-center min-h-[400px]">
-          <div className="text-muted-foreground">Carregando...</div>
+          <div className="text-muted-foreground">Loading...</div>
         </div>
       </DashboardLayout>
     );
@@ -102,7 +102,7 @@ export default function AdminPhotoSelections() {
                   )}
                 </div>
                 <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
-                  {collection.description || "Sem descrição"}
+                  {collection.description || "No description"}
                 </p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-sm text-primary">
@@ -146,7 +146,7 @@ export default function AdminPhotoSelections() {
                     className="gap-2"
                   >
                     <Share2 className="w-4 h-4" />
-                    Copiar Link do Álbum Final
+                    Copiar Link do Final Album
                   </Button>
                   <Button
                     variant="outline"
@@ -159,7 +159,7 @@ export default function AdminPhotoSelections() {
                     className="gap-2"
                   >
                     <ExternalLink className="w-4 h-4" />
-                    Visualizar Álbum
+                    Visualizar Album
                   </Button>
                 </div>
               )}
@@ -169,9 +169,9 @@ export default function AdminPhotoSelections() {
             {selections && selections.length === 0 && (
               <div className="text-center py-12 bg-card rounded-lg border">
                 <Heart className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-                <p className="text-lg font-medium mb-2">Nenhuma foto selecionada ainda</p>
+                <p className="text-lg font-medium mb-2">Nonea foto selecionada ainda</p>
                 <p className="text-sm text-muted-foreground">
-                  O cliente ainda não marcou nenhuma foto favorita nesta galeria
+                  O cliente ainda não marcou nonea foto favorita nesta galeria
                 </p>
               </div>
             )}
@@ -182,8 +182,8 @@ export default function AdminPhotoSelections() {
                   {/* Photo */}
                   <div className="relative aspect-square">
                     <img
-                      src={selection.mediaUrl}
-                      alt={selection.mediaTitle}
+                      src={selection.medayUrl}
+                      alt={selection.medayTitle}
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute top-2 left-2">
@@ -199,7 +199,7 @@ export default function AdminPhotoSelections() {
 
                   {/* Info */}
                   <div className="p-3 space-y-2">
-                    <p className="font-medium text-sm truncate">{selection.mediaTitle}</p>
+                    <p className="font-medium text-sm truncate">{selection.medayTitle}</p>
                     
                     {/* Client Feedback */}
                     {selection.clientFeedback && (

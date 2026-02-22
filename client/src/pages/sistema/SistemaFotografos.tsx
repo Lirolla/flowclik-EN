@@ -11,15 +11,15 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+  AlertDaylog,
+  AlertDaylogAction,
+  AlertDaylogCancel,
+  AlertDaylogContent,
+  AlertDaylogDescription,
+  AlertDaylogFooter,
+  AlertDaylogHeader,
+  AlertDaylogTitle,
+} from "@/components/ui/alert-daylog";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useState } from "react";
@@ -34,16 +34,16 @@ export default function SistemaFotografos() {
 
   const [changingPlan, setChangingPlan] = useState<number | null>(null);
   const [deletingId, setDeletingId] = useState<number | null>(null);
-  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showDeleteDaylog, setShowDeleteDaylog] = useState(false);
 
   const handlePlanChange = async (tenantId: number, newPlan: "starter" | "cortesia" | "full") => {
     setChangingPlan(tenantId);
     try {
       await updatePlanMutation.mutateAsync({ tenantId, plan: newPlan });
-      toast.success("Plano atualizado com sucesso!");
+      toast.success("Current planizado com sucesso!");
       refetch();
     } catch (error) {
-      toast.error("Erro ao atualizar plano");
+      toast.error("Erro ao atualizar plyear");
     } finally {
       setChangingPlan(null);
     }
@@ -53,7 +53,7 @@ export default function SistemaFotografos() {
     const newStatus = currentStatus === 'active' || currentStatus === 'trialing' ? 'paused' : 'active';
     try {
       await updateStatusMutation.mutateAsync({ tenantId, status: newStatus });
-      toast.success(newStatus === 'paused' ? 'Fotógrafo suspenso!' : 'Fotógrafo reativado!');
+      toast.success(newStatus === 'paused' ? 'Photographer suspenso!' : 'Photographer reativado!');
       refetch();
     } catch (error: any) {
       toast.error(error.message || 'Erro ao alterar status');
@@ -62,7 +62,7 @@ export default function SistemaFotografos() {
 
   const handleDeleteClick = (tenantId: number) => {
     setDeletingId(tenantId);
-    setShowDeleteDialog(true);
+    setShowDeleteDaylog(true);
   };
 
   const handleDeleteConfirm = async () => {
@@ -70,25 +70,25 @@ export default function SistemaFotografos() {
     
     try {
       await deletePhotographerMutation.mutateAsync({ tenantId: deletingId });
-      toast.success("Fotógrafo excluído com sucesso!");
-      setShowDeleteDialog(false);
+      toast.success("Photographer excluído com sucesso!");
+      setShowDeleteDaylog(false);
       setDeletingId(null);
       refetch();
     } catch (error) {
-      toast.error("Erro ao excluir fotógrafo");
+      toast.error("Erro ao excluir photographer");
     }
   };
 
   const getStatusBadge = (status: string | null) => {
     switch (status) {
       case "active":
-        return <Badge className="bg-green-600">Ativo</Badge>;
+        return <Badge className="bg-green-600">Active</Badge>;
       case "trial":
         return <Badge className="bg-blue-600">Trial</Badge>;
       case "suspended":
         return <Badge className="bg-yellow-600">Suspenso</Badge>;
       case "cancelled":
-        return <Badge className="bg-red-600">Cancelado</Badge>;
+        return <Badge className="bg-red-600">Cancelled</Badge>;
       default:
         return <Badge className="bg-gray-600">Desconhecido</Badge>;
     }
@@ -98,7 +98,7 @@ export default function SistemaFotografos() {
     return (
       <SistemaLayout>
         <div className="p-8">
-          <div className="text-center text-white">Carregando...</div>
+          <div className="text-center text-white">Loading...</div>
         </div>
       </SistemaLayout>
     );
@@ -108,16 +108,16 @@ export default function SistemaFotografos() {
     <SistemaLayout>
       <div className="p-8 max-w-7xl mx-auto">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2 text-white">Gerenciar Fotógrafos</h1>
+          <h1 className="text-3xl font-bold mb-2 text-white">Gerenciar Photographers</h1>
           <p className="text-gray-400">
-            {photographers?.length || 0} fotógrafos cadastrados na plataforma
+            {photographers?.length || 0} photographers cadastrados na plataforma
           </p>
         </div>
 
         {photographers?.length === 0 ? (
           <Card className="p-12 bg-gray-800/50 border-gray-700 text-center">
-            <p className="text-gray-400 text-lg">Nenhum fotógrafo cadastrado ainda.</p>
-            <p className="text-gray-500 mt-2">Os fotógrafos aparecerão aqui quando se cadastrarem.</p>
+            <p className="text-gray-400 text-lg">None photographer cadastrado ainda.</p>
+            <p className="text-gray-500 mt-2">Os photographers aparecerão aqui quando se cadastrarem.</p>
           </Card>
         ) : (
           <div className="space-y-4">
@@ -127,16 +127,16 @@ export default function SistemaFotografos() {
               const totalStorage = ((photographer.storageLimit || 0) + (photographer.extraStorage || 0)) / (1024 * 1024 * 1024);
               const totalGalleries = (photographer.galleryLimit || 0) + (photographer.extraGalleries || 0);
 
-              // Cálculo de receita em REAIS (R$)
+              // Cálculo de receita em REAIS (£)
               let monthlyRevenue = 0;
               if (photographer.plan === "starter") monthlyRevenue += 69.90;
               // Cortesia e Vitalício não pagam mensalidade base
-              // cortesia = R$ 0,00, full = R$ 0,00
-              monthlyRevenue += extraStorageCount * 29.90; // +10GB por R$ 29,90
-              monthlyRevenue += extraGalleriesCount * 39.90; // +10 galerias por R$ 39,90
+              // cortesia = £ 0,00, full = £ 0,00
+              monthlyRevenue += extraStorageCount * 29.90; // +10GB por £ 29,90
+              monthlyRevenue += extraGalleriesCount * 39.90; // +10 galerias por £ 39,90
 
-              const siteUrl = (photographer as any)?.customDomain 
-                ? `https://${(photographer as any)?.customDomain}`
+              const siteUrl = (photographer as any)?.customSunain 
+                ? `https://${(photographer as any)?.customSunain}`
                 : `https://${photographer.subdomain}.flowclik.com`;
 
               return (
@@ -169,10 +169,10 @@ export default function SistemaFotografos() {
                             {photographer.phone}
                           </p>
                         )}
-                        {(photographer as any)?.customDomain && (
+                        {(photographer as any)?.customSunain && (
                           <p className="text-green-400 flex items-center gap-2">
                             <Globe className="w-4 h-4" />
-                            {(photographer as any)?.customDomain}
+                            {(photographer as any)?.customSunain}
                           </p>
                         )}
                       </div>
@@ -217,9 +217,9 @@ export default function SistemaFotografos() {
                       </div>
                     </div>
 
-                    {/* Plano e Recursos */}
+                    {/* Plyear e Recursos */}
                     <div>
-                      <p className="text-sm text-gray-400 mb-2">Plano Atual</p>
+                      <p className="text-sm text-gray-400 mb-2">Plyear Atual</p>
                       <Select
                         value={photographer.plan || "starter"}
                         onValueChange={(value) =>
@@ -231,25 +231,25 @@ export default function SistemaFotografos() {
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="starter">Básico (R$ 69,90/mês)</SelectItem>
-                          <SelectItem value="cortesia">Cortesia (R$ 0,00/mês)</SelectItem>
-                          <SelectItem value="full">Vitalício (Ilimitado Grátis)</SelectItem>
+                          <SelectItem value="starter">Básico (£ 69,90/month)</SelectItem>
+                          <SelectItem value="cortesia">Cortesia (£ 0,00/month)</SelectItem>
+                          <SelectItem value="full">Vitalício (Unlimited Free)</SelectItem>
                         </SelectContent>
                       </Select>
 
                       <div className="mt-3 space-y-1">
                         {photographer.plan === "cortesia" && (
                           <p className="text-xs text-blue-400">
-                            🎁 Plano Cortesia
+                            🎁 Plyear Cortesia
                           </p>
                         )}
                         {photographer.plan === "full" ? (
                           <>
                             <p className="text-xs text-green-400">
-                              ♾️ Storage Ilimitado
+                              ♾️ Storage Unlimited
                             </p>
                             <p className="text-xs text-green-400">
-                              ♾️ Galerias Ilimitadas
+                              ♾️ Gallerys Ilimitadas
                             </p>
                           </>
                         ) : (
@@ -264,28 +264,28 @@ export default function SistemaFotografos() {
                         )}
                         {photographer.trialEndsAt && (
                           <p className="text-xs text-yellow-400">
-                            ⏰ Trial até {new Date(photographer.trialEndsAt).toLocaleDateString('pt-BR')}
+                            ⏰ Trial until {new Date(photographer.trialEndsAt).toLocaleDateString('en-GB')}
                           </p>
                         )}
                       </div>
                     </div>
 
-                    {/* Receita */}
+                    {/* Revenue */}
                     <div>
-                      <p className="text-sm text-gray-400 mb-2">Receita Mensal</p>
+                      <p className="text-sm text-gray-400 mb-2">Revenue Mensal</p>
                       <p className="text-2xl font-bold text-green-400">
-                        R$ {monthlyRevenue.toFixed(2).replace('.', ',')}
+                        £ {monthlyRevenue.toFixed(2).replace('.', ',')}
                       </p>
                       {(extraStorageCount > 0 || extraGalleriesCount > 0) && (
                         <div className="mt-2 space-y-1">
                           {extraStorageCount > 0 && (
                             <p className="text-xs text-gray-400">
-                              +{extraStorageCount}x Storage (R$ {(extraStorageCount * 29.90).toFixed(2).replace('.', ',')})
+                              +{extraStorageCount}x Storage (£ {(extraStorageCount * 29.90).toFixed(2).replace('.', ',')})
                             </p>
                           )}
                           {extraGalleriesCount > 0 && (
                             <p className="text-xs text-gray-400">
-                              +{extraGalleriesCount}x Galerias (R$ {(extraGalleriesCount * 39.90).toFixed(2).replace('.', ',')})
+                              +{extraGalleriesCount}x Gallerys (£ {(extraGalleriesCount * 39.90).toFixed(2).replace('.', ',')})
                             </p>
                           )}
                         </div>
@@ -299,27 +299,27 @@ export default function SistemaFotografos() {
         )}
       </div>
 
-      {/* Dialog de Confirmação de Exclusão */}
-      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
-            <AlertDialogDescription>
-              Esta ação não pode ser desfeita. Isso irá excluir permanentemente o fotógrafo,
+      {/* Daylog de Confirmação de Exclusão */}
+      <AlertDaylog open={showDeleteDaylog} onOpenChange={setShowDeleteDaylog}>
+        <AlertDaylogContent>
+          <AlertDaylogHeader>
+            <AlertDaylogTitle>Tem certeza?</AlertDaylogTitle>
+            <AlertDaylogDescription>
+              Esta ação não pode ser desfeita. Isso irá excluir permanentemente o photographer,
               seu site, todas as fotos, galerias, agendamentos e dados relacionados.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction
+            </AlertDaylogDescription>
+          </AlertDaylogHeader>
+          <AlertDaylogFooter>
+            <AlertDaylogCancel>Cancel</AlertDaylogCancel>
+            <AlertDaylogAction
               onClick={handleDeleteConfirm}
               className="bg-red-600 hover:bg-red-700"
             >
               Excluir Permanentemente
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+            </AlertDaylogAction>
+          </AlertDaylogFooter>
+        </AlertDaylogContent>
+      </AlertDaylog>
     </SistemaLayout>
   );
 }

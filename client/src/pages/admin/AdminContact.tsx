@@ -88,7 +88,7 @@ export default function AdminContact() {
     <DashboardLayout>
     <div className="container max-w-4xl py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Informações de Contato</h1>
+        <h1 className="text-3xl font-bold mb-2">Contact Information</h1>
         <p className="text-muted-foreground">
           Configure as informações de contato exibidas no site
         </p>
@@ -143,11 +143,11 @@ export default function AdminContact() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Endereço</CardTitle>
+            <CardTitle>Address</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label htmlFor="address">Endereço Completo</Label>
+              <Label htmlFor="address">Address Completo</Label>
               <Textarea
                 id="address"
                 rows={2}
@@ -155,7 +155,7 @@ export default function AdminContact() {
                 onChange={(e) =>
                   setFormData({ ...formData, address: e.target.value })
                 }
-                placeholder="Rua, número, complemento"
+                placeholder="Rua, number, complemento"
               />
             </div>
 
@@ -198,7 +198,7 @@ export default function AdminContact() {
             </div>
 
             <div>
-              <Label htmlFor="country">País</Label>
+              <Label htmlFor="country">Country</Label>
               <Input
                 id="country"
                 value={formData.country}
@@ -213,7 +213,7 @@ export default function AdminContact() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Localização no Mapa</CardTitle>
+            <CardTitle>Location no Mapa</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

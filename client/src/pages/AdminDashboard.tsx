@@ -22,10 +22,10 @@ export default function AdminDashboard() {
       confirmed: 'Confirmado',
       session_done: 'Ensaio Realizado',
       editing: 'Em Edição',
-      awaiting_selection: 'Aguardando Seleção',
+      awaiting_selection: 'Awaiting Selection',
       final_editing: 'Edição Final',
-      delivered: 'Entregue',
-      cancelled: 'Cancelado',
+      delivered: 'Delivered',
+      cancelled: 'Cancelled',
     };
     return labels[status] || status;
   };
@@ -51,7 +51,7 @@ export default function AdminDashboard() {
     return (
       <DashboardLayout>
         <div className="p-8">
-          <p className="text-white">Carregando...</p>
+          <p className="text-white">Loading...</p>
         </div>
       </DashboardLayout>
     );
@@ -59,9 +59,9 @@ export default function AdminDashboard() {
 
   const cards = [
     {
-      title: 'Receita Total',
+      title: 'Total Revenue',
       value: format(stats?.totalRevenue || 0),
-      subtitle: '+12% vs mês anterior',
+      subtitle: '+12% vs month anterior',
       icon: DollarSign,
       color: 'text-green-500',
       bgColor: 'bg-green-500/10',
@@ -85,7 +85,7 @@ export default function AdminDashboard() {
     {
       title: 'Fotos na Loja',
       value: stats?.stockPhotos || 0,
-      subtitle: 'Galeria Stock',
+      subtitle: 'Gallery Stock',
       icon: ImageIcon,
       color: 'text-purple-500',
       bgColor: 'bg-purple-500/10',
@@ -141,7 +141,7 @@ export default function AdminDashboard() {
 
             <Card className="bg-gray-900 border-gray-800">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-400">Receita Prevista</CardTitle>
+                <CardTitle className="text-sm font-medium text-gray-400">Revenue Prevista</CardTitle>
                 <DollarSign className="h-4 w-4 text-gray-500" />
               </CardHeader>
               <CardContent>
@@ -175,7 +175,7 @@ export default function AdminDashboard() {
                   {conversionStats?.deliveryRate.toFixed(1)}%
                 </div>
                 <p className="text-xs text-gray-500">
-                  {conversionStats?.delivered} de {conversionStats?.confirmed} entregues
+                  {conversionStats?.delivered} de {conversionStats?.confirmed} delivereds
                 </p>
               </CardContent>
             </Card>
@@ -220,10 +220,10 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        {/* Receita por Status */}
+        {/* Revenue por Status */}
         <Card className="bg-gray-900 border-gray-800 mb-8">
           <CardHeader>
-            <CardTitle className="text-white">Receita por Status</CardTitle>
+            <CardTitle className="text-white">Revenue por Status</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -259,16 +259,16 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        {/* Agendamentos por Mês */}
+        {/* Agendamentos por Month */}
         <Card className="bg-gray-900 border-gray-800 mb-8">
           <CardHeader>
-            <CardTitle className="text-white">Agendamentos por Mês (Últimos 12 meses)</CardTitle>
+            <CardTitle className="text-white">Agendamentos por Month (Últimos 12 months)</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {monthlyStats?.map((stat) => {
                 const [year, month] = stat.month.split('-');
-                const monthName = new Date(parseInt(year), parseInt(month) - 1).toLocaleDateString('pt-BR', {
+                const monthName = new Date(parseInt(year), parseInt(month) - 1).toLocaleDateString('en-GB', {
                   month: 'long',
                   year: 'numeric',
                 });
@@ -321,7 +321,7 @@ export default function AdminDashboard() {
                 {!recentOrders || recentOrders.length === 0 ? (
                   <tr>
                     <td colSpan={6} className="px-6 py-12 text-center text-gray-400">
-                      Nenhum pedido ainda
+                      None pedido ainda
                     </td>
                   </tr>
                 ) : (
@@ -341,11 +341,11 @@ export default function AdminDashboard() {
                         }`}>
                           {order.status === 'completed' ? 'Completo' :
                            order.status === 'pending' ? 'Pendente' :
-                           order.status === 'cancelled' ? 'Cancelado' : order.status}
+                           order.status === 'cancelled' ? 'Cancelled' : order.status}
                         </span>
                       </td>
                       <td className="px-6 py-4 text-gray-400">
-                        {new Date(order.createdAt).toLocaleDateString('pt-BR')}
+                        {new Date(order.createdAt).toLocaleDateString('en-GB')}
                       </td>
                     </tr>
                   ))
@@ -355,11 +355,11 @@ export default function AdminDashboard() {
           </div>
         </Card>
 
-        {/* Próximos Agendamentos */}
+        {/* Upcoming Appointments */}
         <Card className="bg-gray-900 border-gray-800">
           <div className="p-6 border-b border-gray-800">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-white">Próximos Agendamentos</h2>
+              <h2 className="text-2xl font-bold text-white">Upcoming Appointments</h2>
               <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
                 Ver Todos
               </button>
@@ -371,8 +371,8 @@ export default function AdminDashboard() {
                 <tr>
                   <th className="px-6 py-4 text-left text-white font-semibold">#ID</th>
                   <th className="px-6 py-4 text-left text-white font-semibold">Cliente</th>
-                  <th className="px-6 py-4 text-left text-white font-semibold">Serviço</th>
-                  <th className="px-6 py-4 text-left text-white font-semibold">Data/Hora</th>
+                  <th className="px-6 py-4 text-left text-white font-semibold">Service</th>
+                  <th className="px-6 py-4 text-left text-white font-semibold">Data/Hour</th>
                   <th className="px-6 py-4 text-left text-white font-semibold">Status</th>
                 </tr>
               </thead>
@@ -380,7 +380,7 @@ export default function AdminDashboard() {
                 {!upcomingAppointments || upcomingAppointments.length === 0 ? (
                   <tr>
                     <td colSpan={5} className="px-6 py-12 text-center text-gray-400">
-                      Nenhum agendamento
+                      None agendamento
                     </td>
                   </tr>
                 ) : (
@@ -390,7 +390,7 @@ export default function AdminDashboard() {
                       <td className="px-6 py-4 text-white">{appointment.clientName}</td>
                       <td className="px-6 py-4 text-gray-400">{appointment.serviceName || 'N/A'}</td>
                       <td className="px-6 py-4 text-white">
-                        {new Date(appointment.appointmentDate).toLocaleDateString('pt-BR')} às {appointment.appointmentTime}
+                        {new Date(appointment.appointmentDate).toLocaleDateString('en-GB')} at {appointment.appointmentTime}
                       </td>
                       <td className="px-6 py-4">
                         <span className={`px-3 py-1 rounded text-xs border ${

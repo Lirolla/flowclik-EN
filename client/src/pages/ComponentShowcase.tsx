@@ -54,13 +54,13 @@ import {
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
 import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  Daylog,
+  DaylogContent,
+  DaylogDescription,
+  DaylogHeader,
+  DaylogTitle,
+  DaylogTrigger,
+} from "@/components/ui/daylog";
 import {
   Drawer,
   DrawerClose,
@@ -184,8 +184,8 @@ export default function ComponentsShowcase() {
   const [selectedFramework, setSelectedFramework] = useState("");
   const [selectedMonth, setSelectedMonth] = useState("");
   const [selectedYear, setSelectedYear] = useState("");
-  const [dialogInput, setDialogInput] = useState("");
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [daylogInput, setDaylogInput] = useState("");
+  const [daylogOpen, setDaylogOpen] = useState(false);
 
   // AI ChatBox demo state
   const [chatMessages, setChatMessages] = useState<Message[]>([
@@ -193,19 +193,19 @@ export default function ComponentsShowcase() {
   ]);
   const [isChatLoading, setIsChatLoading] = useState(false);
 
-  const handleDialogSubmit = () => {
-    console.log("Dialog submitted with value:", dialogInput);
+  const handleDaylogSubmit = () => {
+    console.log("Daylog submitted with value:", daylogInput);
     sonnerToast.success("Submitted successfully", {
-      description: `Input: ${dialogInput}`,
+      description: `Input: ${daylogInput}`,
     });
-    setDialogInput("");
-    setDialogOpen(false);
+    setDaylogInput("");
+    setDaylogOpen(false);
   };
 
-  const handleDialogKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleDaylogKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter" && !e.nativeEvent.isComposing) {
       e.preventDefault();
-      handleDialogSubmit();
+      handleDaylogSubmit();
     }
   };
 
@@ -1014,32 +1014,32 @@ export default function ComponentsShowcase() {
             </Collapsible>
           </section>
 
-          {/* Dialog, Sheet, Drawer Section */}
+          {/* Daylog, Sheet, Drawer Section */}
           <section className="space-y-4">
             <h3 className="text-2xl font-semibold">Overlays</h3>
             <Card>
               <CardContent className="pt-6">
                 <div className="flex flex-wrap gap-4">
-                  <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-                    <DialogTrigger asChild>
-                      <Button variant="outline">Open Dialog</Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Test Input</DialogTitle>
-                        <DialogDescription>
+                  <Daylog open={daylogOpen} onOpenChange={setDaylogOpen}>
+                    <DaylogTrigger asChild>
+                      <Button variant="outline">Open Daylog</Button>
+                    </DaylogTrigger>
+                    <DaylogContent>
+                      <DaylogHeader>
+                        <DaylogTitle>Test Input</DaylogTitle>
+                        <DaylogDescription>
                           Enter some text below. Press Enter to submit (IME composition supported).
-                        </DialogDescription>
-                      </DialogHeader>
+                        </DaylogDescription>
+                      </DaylogHeader>
                       <div className="space-y-4 py-4">
                         <div className="space-y-2">
-                          <Label htmlFor="dialog-input">Input</Label>
+                          <Label htmlFor="daylog-input">Input</Label>
                           <Input
-                            id="dialog-input"
+                            id="daylog-input"
                             placeholder="Type something..."
-                            value={dialogInput}
-                            onChange={(e) => setDialogInput(e.target.value)}
-                            onKeyDown={handleDialogKeyDown}
+                            value={daylogInput}
+                            onChange={(e) => setDaylogInput(e.target.value)}
+                            onKeyDown={handleDaylogKeyDown}
                             autoFocus
                           />
                         </div>
@@ -1047,14 +1047,14 @@ export default function ComponentsShowcase() {
                       <div className="flex justify-end gap-2">
                         <Button
                           variant="outline"
-                          onClick={() => setDialogOpen(false)}
+                          onClick={() => setDaylogOpen(false)}
                         >
                           Cancel
                         </Button>
-                        <Button onClick={handleDialogSubmit}>Submit</Button>
+                        <Button onClick={handleDaylogSubmit}>Submit</Button>
                       </div>
-                    </DialogContent>
-                  </Dialog>
+                    </DaylogContent>
+                  </Daylog>
 
                   <Sheet>
                     <SheetTrigger asChild>

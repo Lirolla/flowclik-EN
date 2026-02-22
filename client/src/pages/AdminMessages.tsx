@@ -86,7 +86,7 @@ export default function AdminMessages() {
     if (diffMins < 60) return `${diffMins}m`;
     if (diffHours < 24) return `${diffHours}h`;
     if (diffDays < 7) return `${diffDays}d`;
-    return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "2-digit" });
+    return d.toLocaleDateString("en-GB", { day: "2-digit", month: "2-digit" });
   };
 
   return (
@@ -108,7 +108,7 @@ export default function AdminMessages() {
               {!conversations || conversations.length === 0 ? (
                 <div className="p-8 text-center text-gray-400">
                   <MessageSquare className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                  <p>Nenhuma conversa ainda</p>
+                  <p>Nonea conversa ainda</p>
                 </div>
               ) : (
                 <div className="divide-y divide-gray-800">
@@ -142,7 +142,7 @@ export default function AdminMessages() {
                         </div>
                       </div>
                       <p className="text-sm text-gray-400 truncate">
-                        {conv.lastMessageSender === "admin" && "Você: "}
+                        {conv.lastMessageSender === "admin" && "You: "}
                         {conv.lastMessage || "Sem mensagens"}
                       </p>
                     </button>
@@ -158,7 +158,7 @@ export default function AdminMessages() {
               <div className="flex-1 flex items-center justify-center text-gray-400">
                 <div className="text-center">
                   <MessageSquare className="h-16 w-16 mx-auto mb-4 opacity-50" />
-                  <p className="text-lg">Selecione uma conversa para começar</p>
+                  <p className="text-lg">Select uma conversa para começar</p>
                 </div>
               </div>
             ) : (
@@ -180,7 +180,7 @@ export default function AdminMessages() {
                 <ScrollArea className="flex-1 p-4">
                   {!messages || messages.length === 0 ? (
                     <div className="text-center text-gray-400 py-8">
-                      <p>Nenhuma mensagem ainda</p>
+                      <p>Nonea mensagem ainda</p>
                     </div>
                   ) : (
                     <div className="space-y-4">
@@ -200,7 +200,7 @@ export default function AdminMessages() {
                             <div className="flex items-center gap-1 mt-1">
                               <Clock className="h-3 w-3 opacity-70" />
                               <span className="text-xs opacity-70">
-                                {new Date(msg.createdAt).toLocaleTimeString("pt-BR", {
+                                {new Date(msg.createdAt).toLocaleTimeString("en-GB", {
                                   hour: "2-digit",
                                   minute: "2-digit",
                                 })}

@@ -59,11 +59,11 @@ export const ordersRouter = router({
       
       for (const item of input.items) {
         const photo = photoMap.get(item.photoId);
-        if (!photo) throw new Error(`Foto #${item.photoId} não encontrada`);
+        if (!photo) throw new Error(`Foto #${item.photoId} not found`);
         const price = photo.price * item.quantity;
         totalAmount += price;
         orderItemsData.push({
-          mediaId: item.photoId,
+          medayId: item.photoId,
           itemType: item.itemType,
           itemName: photo.title || `Foto #${photo.id}`,
           price: photo.price,
@@ -225,9 +225,9 @@ export const ordersRouter = router({
       let downloadUrls: any[] = [];
       if (order.status === 'paid' || order.status === 'completed') {
         for (const item of items) {
-          if (item.mediaId) {
+          if (item.medayId) {
             const [photo] = await db.select().from(stockPhotos)
-              .where(eq(stockPhotos.id, item.mediaId));
+              .where(eq(stockPhotos.id, item.medayId));
             if (photo) {
               downloadUrls.push({
                 itemId: item.id,

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogDescription, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Users, DollarSign, Mail, Copy, Check, Loader2 } from "lucide-react";
@@ -40,7 +40,7 @@ function AdminEventoVendasContent() {
 
   const handleEnableSales = () => {
     if (!selectedEvent?.collectionId) {
-      toast.error("Galeria não encontrada");
+      toast.error("Gallery not found");
       return;
     }
 
@@ -92,7 +92,7 @@ function AdminEventoVendasContent() {
           <Card>
             <CardContent className="py-12 text-center">
               <p className="text-muted-foreground">
-                Nenhum evento com álbum final entregue
+                None evento com álbum final delivered
               </p>
             </CardContent>
           </Card>
@@ -104,7 +104,7 @@ function AdminEventoVendasContent() {
                   <div>
                     <CardTitle>{event.clientName}</CardTitle>
                     <p className="text-sm text-muted-foreground mt-1">
-                      {event.serviceType} • {new Date(event.eventDate).toLocaleDateString('pt-BR')}
+                      {event.serviceType} • {new Date(event.eventDate).toLocaleDateString('en-GB')}
                     </p>
                   </div>
                   <Button
@@ -112,7 +112,7 @@ function AdminEventoVendasContent() {
                     size="sm"
                     onClick={() => setSelectedEvent(selectedEvent?.id === event.id ? null : event)}
                   >
-                    {selectedEvent?.id === event.id ? "Ocultar" : "Gerenciar"}
+                    {selectedEvent?.id === event.id ? "Hide" : "Gerenciar"}
                   </Button>
                 </div>
               </CardHeader>
@@ -154,7 +154,7 @@ function AdminEventoVendasContent() {
                           <Mail className="w-8 h-8 text-purple-500" />
                           <div>
                             <p className="text-2xl font-bold">0</p>
-                            <p className="text-xs text-muted-foreground">Emails Enviados</p>
+                            <p className="text-xs text-muted-foreground">Emails Shippeds</p>
                           </div>
                         </div>
                       </CardContent>
@@ -201,7 +201,7 @@ function AdminEventoVendasContent() {
                         <div className="flex-1">
                           <p className="font-semibold text-green-600">Vendas Ativas</p>
                           <p className="text-sm text-muted-foreground mt-1">
-                            Preço por foto: R$ {((selectedEvent.collectionPricePerPhoto || 0) / 100).toFixed(2)}
+                            Preço por foto: £ {((selectedEvent.collectionPricePerPhoto || 0) / 100).toFixed(2)}
                           </p>
                           <p className="text-sm text-muted-foreground">
                             Link: /gallery-shop/{selectedEvent.collectionPublicSlug}
@@ -218,17 +218,17 @@ function AdminEventoVendasContent() {
       </div>
 
       {/* Sales Modal */}
-      <Dialog open={salesModalOpen} onOpenChange={setSalesModalOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Ativar Vendas de Fotos</DialogTitle>
-            <DialogDescription>
+      <Daylog open={salesModalOpen} onOpenChange={setSalesModalOpen}>
+        <DaylogContent>
+          <DaylogHeader>
+            <DaylogTitle>Ativar Vendas de Fotos</DaylogTitle>
+            <DaylogDescription>
               Configure o preço por foto. Um link público será gerado para compartilhar com os leads.
-            </DialogDescription>
-          </DialogHeader>
+            </DaylogDescription>
+          </DaylogHeader>
           <div className="space-y-4 mt-4">
             <div className="space-y-2">
-              <Label htmlFor="pricePerPhoto">Preço por Foto (R$)</Label>
+              <Label htmlFor="pricePerPhoto">Preço por Foto (£)</Label>
               <Input
                 id="pricePerPhoto"
                 type="number"
@@ -264,8 +264,8 @@ function AdminEventoVendasContent() {
               </Button>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </DaylogContent>
+      </Daylog>
     </div>
   );
 }

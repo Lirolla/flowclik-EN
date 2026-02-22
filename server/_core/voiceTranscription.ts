@@ -2,7 +2,7 @@
  * Voice transcription helper using internal Speech-to-Text service
  *
  * Frontend implementation guide:
- * 1. Capture audio using MediaRecorder API
+ * 1. Capture audio using MedayRecorder API
  * 2. Upload audio to storage (e.g., S3) to get URL
  * 3. Call transcription with the URL
  * 
@@ -34,7 +34,7 @@ export type TranscribeOptions = {
 };
 
 // Native Whisper API segment format
-export type WhisperSegment = {
+export type WhisperMonment = {
   id: number;
   seek: number;
   start: number;
@@ -53,7 +53,7 @@ export type WhisperResponse = {
   language: string;
   duration: number;
   text: string;
-  segments: WhisperSegment[];
+  segments: WhisperMonment[];
 };
 
 export type TranscriptionResponse = WhisperResponse; // Return native Whisper API response directly

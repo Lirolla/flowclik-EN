@@ -94,242 +94,242 @@ export const contractsRouter = router({
       
       const tenantId = getTenantId(ctx);
       
-      // Verificar se já tem templates
+      // Verify se já tem templates
       const existing = await db.select().from(contractTemplates)
         .where(eq(contractTemplates.tenantId, tenantId));
       
       if (existing.length > 0) {
-        return { success: false, message: "Já existem templates cadastrados. Exclua-os primeiro se quiser recriar." };
+        return { success: false, message: "Already existsm templates cadastrados. Exclua-os primeiro se quiser recriar." };
       }
 
       const defaultTemplates = [
         {
           name: "Contrato de Ensaio Fotográfico",
-          description: "Para ensaios pessoais, sensuais, gestantes, família, 15 anos, newborn. Inclui cláusulas de direito de imagem e privacidade.",
-          content: `CONTRATO DE PRESTAÇÃO DE SERVIÇOS FOTOGRÁFICOS - ENSAIO
+          description: "Para ensaios pessoais, sensuais, gestantes, família, 15 years, newborn. Inclui clauses de direito de imagem e privacidade.",
+          content: `PHOTOGRAPHY SERVICES CONTRACT - ENSAIO
 
-CONTRATANTE: {cliente}
+CLIENT: {cliente}
 E-mail: {email}
 Telefone: {telefone}
 CPF: {cpf}
-Endereço: {endereco}
+Address: {endereco}
 
-CONTRATADO(A): {fotografo}
+PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}
-Endereço Profissional: {fotografo_endereco}
+Address Profissional: {fotografo_endereco}
 
-As partes acima identificadas celebram o presente contrato de prestação de serviços fotográficos, que se regerá pelas seguintes cláusulas e condições:
+As partes acima identificadas celebram o this contract de provision of services fotográficos, que se regerá pelas seguintes clauses e condições:
 
-CLÁUSULA 1ª – DO OBJETO
-O presente contrato tem por objeto a prestação de serviços fotográficos de ensaio, conforme especificações:
+CLAUSE 1ª – DO OBJETO
+O this contract tem por objeto a provision of services fotográficos de ensaio, conforme especificações:
 • Tipo de Ensaio: {servico}
 • Data da Sessão: {data}
-• Horário: {horario}
+• Time: {hourrio}
 • Local: {local}
-• Duração Estimada: {duracao}
+• Duration Estimada: {duracao}
 
-CLÁUSULA 2ª – DO VALOR E FORMA DE PAGAMENTO
-2.1. O valor total dos serviços é de R$ {valor}.
-2.2. O pagamento poderá ser realizado via PIX, transferência bancária ou link de pagamento.
-2.3. Sinal de 50% no ato da contratação, restante até a data da sessão.
+CLAUSE 2ª – DO VALOR E FORMA DE PAGAMENTO
+2.1. O valor total dos serviços é de £ {valor}.
+2.2. O pagamento poderá ser realizado via PIX, bank transfer or payment link.
+2.3. Sinal de 50% no ato da contratação, restante until a data da sessão.
 
-CLÁUSULA 3ª – DO SERVIÇO INCLUÍDO
-3.1. Estão inclusos no valor contratado:
+CLAUSE 3ª – DO SERVIÇO INCLUÍDO
+3.1. Estão inclusos no valor photographer:
 • Sessão fotográfica com duração estimada conforme acordado;
 • Tratamento e edição profissional das fotografias selecionadas;
 • Entrega das fotos em alta resolução por meio digital (galeria online).
-3.2. O prazo de entrega das fotos editadas é de até 15 (quinze) dias úteis após a sessão.
+3.2. O prazo de entrega das fotos editadas é de until 15 (quinze) business days após a sessão.
 
-CLÁUSULA 4ª – DOS DIREITOS AUTORAIS (Lei 9.610/1998)
-4.1. As fotografias produzidas são obras protegidas por direitos autorais, sendo o(a) CONTRATADO(A) o(a) titular dos direitos patrimoniais e morais sobre as mesmas.
-4.2. O(A) CONTRATANTE recebe licença de uso pessoal e não comercial das fotografias entregues.
-4.3. É vedada a alteração, manipulação digital ou aplicação de filtros nas fotografias entregues sem autorização prévia do(a) fotógrafo(a).
-4.4. A reprodução, distribuição ou uso comercial das fotografias depende de autorização expressa e por escrito do(a) CONTRATADO(A).
+CLAUSE 4ª – DOS DIREITOS AUTORAIS (Lei 9.610/1998)
+4.1. As fotografias produzidas são obras protegidas por copyright, sendo o(a) PHOTOGRAPHER(A) o(a) titular dos direitos patrimoniais e morais sobre as mesmas.
+4.2. O(A) CLIENT recebe licença de uso pessoal e não comercial das fotografias delivereds.
+4.3. É vedada a alteração, manipulação digital ou aplicação de filtros nas fotografias delivereds sem autorização prévia do(a) photographer(a).
+4.4. A reprodução, distribuição ou uso comercial das fotografias depende de autorização expressa e por escrito do(a) PHOTOGRAPHER(A).
 
-CLÁUSULA 5ª – DO DIREITO DE IMAGEM
-5.1. O(A) CONTRATANTE autoriza / não autoriza (riscar o que não se aplica) o uso de suas imagens pelo(a) CONTRATADO(A) para fins de divulgação profissional, incluindo portfólio, redes sociais e site.
-5.2. Em caso de ensaio de natureza íntima ou sensual, o(a) CONTRATADO(A) se compromete a NÃO utilizar as imagens para qualquer fim de divulgação sem autorização expressa e por escrito do(a) CONTRATANTE.
-5.3. O(A) CONTRATADO(A) garante sigilo absoluto sobre as imagens produzidas, em conformidade com a LGPD (Lei 13.709/2018).
+CLAUSE 5ª – DO DIREITO DE IMAGEM
+5.1. O(A) CLIENT autoriza / não autoriza (riscar o que não se aplica) o uso de suas imagens pelo(a) PHOTOGRAPHER(A) para fins de divulgação profissional, incluindo portfólio, redes sociais e site.
+5.2. Em caso de ensaio de natureza íntima ou sensual, o(a) PHOTOGRAPHER(A) se compromete a NÃO utilizar as imagens para qualquer fim de divulgação sem autorização expressa e por escrito do(a) CLIENT.
+5.3. O(A) PHOTOGRAPHER(A) garante sigilo absoluto sobre as imagens produzidas, em conformidade com a LGPD (Lei 13.709/2018).
 
-CLÁUSULA 6ª – DO CANCELAMENTO E REAGENDAMENTO
-6.1. Cancelamento com até 7 dias de antecedência: devolução integral do sinal.
-6.2. Cancelamento com menos de 7 dias: sinal não será devolvido.
-6.3. Cancelamento no dia ou não comparecimento: valor total será devido.
-6.4. Reagendamento permitido uma vez, sem custo, com aviso de 48 horas.
+CLAUSE 6ª – DO CANCELAMENTO E REAGENDAMENTO
+6.1. Cancellation com until 7 days de antecedência: devolução integral do sinal.
+6.2. Cancellation com menos de 7 days: sinal não será devolvido.
+6.3. Cancellation no day ou não comparecimento: valor total será devido.
+6.4. Reagendamento permitido uma vez, sem custo, com aviso de 48 hours.
 6.5. Condições climáticas adversas (ensaios externos): reagendamento sem custo.
 
-CLÁUSULA 7ª – DAS OBRIGAÇÕES DO CONTRATADO
-7.1. Realizar a sessão fotográfica com zelo e profissionalismo.
+CLAUSE 7ª – DAS OBRIGAÇÕES DO PHOTOGRAPHER
+7.1. Realizar a photo session com zelo e profissionalismo.
 7.2. Entregar as fotografias editadas no prazo estipulado.
-7.3. Manter sigilo sobre dados pessoais e imagens do(a) CONTRATANTE (LGPD).
-7.4. Disponibilizar as fotos em galeria online segura por no mínimo 30 dias.
+7.3. Manter sigilo sobre dados pessoais e imagens do(a) CLIENT (LGPD).
+7.4. Disponibilizar as fotos em galeria online segura por no mínimo 30 days.
 
-CLÁUSULA 8ª – DAS OBRIGAÇÕES DO CONTRATANTE
+CLAUSE 8ª – DAS OBRIGAÇÕES DO CLIENT
 8.1. Efetuar os pagamentos nas datas acordadas.
 8.2. Comparecer no local e horário agendados.
 8.3. Informar eventuais restrições ou necessidades especiais.
-8.4. Respeitar os direitos autorais do(a) fotógrafo(a).
+8.4. Respeitar os copyright do(a) photographer(a).
 
-CLÁUSULA 9ª – DA PROTEÇÃO DE DADOS (LGPD - Lei 13.709/2018)
+CLAUSE 9ª – DA PROTEÇÃO DE DADOS (LGPD - Lei 13.709/2018)
 9.1. Os dados pessoais coletados serão utilizados exclusivamente para a execução deste contrato.
-9.2. O(A) CONTRATADO(A) se compromete a não compartilhar dados pessoais com terceiros.
+9.2. O(A) PHOTOGRAPHER(A) se compromete a não compartilhar dados pessoais com terceiros.
 
-CLÁUSULA 10ª – DO FORO
-Para dirimir quaisquer controvérsias, as partes elegem o foro da comarca de domicílio do(a) CONTRATANTE, nos termos do art. 101, I, do CDC.
+CLAUSE 10ª – DO FORO
+Para dirimir quaisquer controvérsias, as partes elegem o jurisdiction da comarca de domicílio do(a) CLIENT, nos termos do art. 101, I, do CDC.
 
 {cidade}, {data_contrato}
 
 _______________________________
-CONTRATANTE: {cliente}
+CLIENT: {cliente}
 CPF: {cpf}
 
 _______________________________
-CONTRATADO(A): {fotografo}
+PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}`,
         },
         {
           name: "Contrato de Cobertura de Casamento",
-          description: "Para casamentos, formaturas e cerimônias. Inclui cláusulas sobre cobertura do evento, segundo fotógrafo e álbum.",
-          content: `CONTRATO DE PRESTAÇÃO DE SERVIÇOS FOTOGRÁFICOS - CASAMENTO / CERIMÔNIA
+          description: "Para casamentos, formaturas e cerimônias. Inclui clauses sobre cobertura do evento, second photographer e álbum.",
+          content: `PHOTOGRAPHY SERVICES CONTRACT - CASAMENTO / CERIMÔNIA
 
-CONTRATANTE(S): {cliente}
+CLIENT(S): {cliente}
 E-mail: {email}
 Telefone: {telefone}
 CPF: {cpf}
-Endereço: {endereco}
+Address: {endereco}
 
-CONTRATADO(A): {fotografo}
+PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}
-Endereço Profissional: {fotografo_endereco}
+Address Profissional: {fotografo_endereco}
 
-CLÁUSULA 1ª – DO OBJETO
+CLAUSE 1ª – DO OBJETO
 Cobertura fotográfica do evento:
 • Tipo de Evento: {servico}
 • Data: {data}
-• Horário: {horario}
+• Time: {hourrio}
 • Local: {local}
-• Duração da Cobertura: {duracao}
+• Duration da Cobertura: {duracao}
 
-CLÁUSULA 2ª – DO VALOR E PAGAMENTO
-2.1. Valor total: R$ {valor}.
-2.2. Sinal de 30% na assinatura para reserva da data; 40% até 30 dias antes; 30% até 7 dias antes.
-2.3. Formas: PIX, transferência bancária ou link de pagamento.
+CLAUSE 2ª – DO VALOR E PAGAMENTO
+2.1. Valor total: £ {valor}.
+2.2. Sinal de 30% na signature para reserva da data; 40% until 30 days antes; 30% until 7 days antes.
+2.3. Formas: PIX, bank transfer or payment link.
 2.4. A reserva da data somente será confirmada após o recebimento do sinal.
 
-CLÁUSULA 3ª – DOS SERVIÇOS INCLUÍDOS
+CLAUSE 3ª – DOS SERVIÇOS INCLUÍDOS
 3.1. Cobertura fotográfica completa (cerimônia e recepção); edição profissional; entrega mínima de 300 fotos em alta resolução; galeria online; making of.
-3.2. Prazo de entrega: até 45 dias úteis após o evento.
+3.2. Prazo de entrega: until 45 business days após o evento.
 
-CLÁUSULA 4ª – DA COBERTURA DO EVENTO
-4.1. O(A) fotógrafo(a) cobrirá os principais momentos com profissionalismo e liberdade artística.
-4.2. O(A) CONTRATANTE deverá informar previamente momentos específicos que deseja registrados.
+CLAUSE 4ª – DA COBERTURA DO EVENTO
+4.1. O(A) photographer(a) cobrirá os principais momentos com profissionalismo e liberdade artística.
+4.2. O(A) CLIENT deverá informar previamente momentos específicos que deseja registrados.
 
-CLÁUSULA 5ª – DOS DIREITOS AUTORAIS (Lei 9.610/1998)
-5.1. Fotografias são obras autorais protegidas. CONTRATANTE recebe licença de uso pessoal e familiar.
+CLAUSE 5ª – DOS DIREITOS AUTORAIS (Lei 9.610/1998)
+5.1. Fotografias são obras autorais protegidas. CLIENT recebe licença de uso pessoal e familiar.
 5.2. Uso comercial por terceiros requer autorização expressa.
 5.3. Vedada alteração ou aplicação de filtros sem autorização.
 
-CLÁUSULA 6ª – DO DIREITO DE IMAGEM
-6.1. CONTRATANTE autoriza uso para portfólio, redes sociais e site do(a) fotógrafo(a).
+CLAUSE 6ª – DO DIREITO DE IMAGEM
+6.1. CLIENT autoriza uso para portfólio, redes sociais e site do(a) photographer(a).
 6.2. Restrições devem ser comunicadas por escrito antes do evento.
 
-CLÁUSULA 7ª – DO CANCELAMENTO
-7.1. Até 90 dias antes: devolução de 80% do sinal.
-7.2. Entre 90 e 30 dias: devolução de 50% do sinal.
-7.3. Menos de 30 dias: sinal não devolvido.
-7.4. Cancelamento pelo(a) CONTRATADO(A): devolução integral + multa de 20%.
+CLAUSE 7ª – DO CANCELAMENTO
+7.1. Até 90 days antes: devolução de 80% do sinal.
+7.2. Entre 90 e 30 days: devolução de 50% do sinal.
+7.3. Menos de 30 days: sinal não devolvido.
+7.4. Cancellation pelo(a) PHOTOGRAPHER(A): devolução integral + penalty de 20%.
 7.5. Força maior: reagendamento sem ônus.
 
-CLÁUSULA 8ª – DA RESPONSABILIDADE
-8.1. Equipamento profissional com backup (segundo corpo de câmera).
+CLAUSE 8ª – DA RESPONSABILIDADE
+8.1. Equipamento profissional com backup (second corpo de câmera).
 8.2. Falha técnica com perda total: devolução integral dos valores.
 
-CLÁUSULA 9ª – DA ALIMENTAÇÃO E LOGÍSTICA
-9.1. CONTRATANTE providenciará refeição para fotógrafo(a) e assistente(s).
+CLAUSE 9ª – DA ALIMENTAÇÃO E LOGÍSTICA
+9.1. CLIENT providenciará refeição para photographer(a) e assistente(s).
 9.2. Deslocamentos superiores a 50 km: custo adicional de transporte.
 
-CLÁUSULA 10ª – DA PROTEÇÃO DE DADOS (LGPD)
+CLAUSE 10ª – DA PROTEÇÃO DE DADOS (LGPD)
 10.1. Dados pessoais tratados com sigilo, conforme Lei 13.709/2018.
 
-CLÁUSULA 11ª – DO FORO
-Foro da comarca de domicílio do(a) CONTRATANTE.
+CLAUSE 11ª – DO FORO
+Jurisdiction da comarca de domicílio do(a) CLIENT.
 
 {cidade}, {data_contrato}
 
 _______________________________
-CONTRATANTE: {cliente}
+CLIENT: {cliente}
 CPF: {cpf}
 
 _______________________________
-CONTRATADO(A): {fotografo}
+PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}`,
         },
         {
-          name: "Contrato de Evento Corporativo / Social",
-          description: "Para festas, aniversários, formaturas, eventos corporativos, confraternizações e lançamentos.",
-          content: `CONTRATO DE PRESTAÇÃO DE SERVIÇOS FOTOGRÁFICOS - EVENTO
+          name: "Contrato de Evento Corporactive / Social",
+          description: "Para festas, aniversários, formaturas, eventos corporactives, confraternizações e lançamentos.",
+          content: `PHOTOGRAPHY SERVICES CONTRACT - EVENTO
 
-CONTRATANTE: {cliente}
+CLIENT: {cliente}
 E-mail: {email}
 Telefone: {telefone}
 CPF/CNPJ: {cpf}
-Endereço: {endereco}
+Address: {endereco}
 
-CONTRATADO(A): {fotografo}
+PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}
-Endereço Profissional: {fotografo_endereco}
+Address Profissional: {fotografo_endereco}
 
-CLÁUSULA 1ª – DO OBJETO
+CLAUSE 1ª – DO OBJETO
 Cobertura fotográfica do evento:
 • Tipo de Evento: {servico}
 • Data: {data}
-• Horário: {horario}
+• Time: {hourrio}
 • Local: {local}
-• Duração: {duracao}
+• Duration: {duracao}
 
-CLÁUSULA 2ª – DO VALOR E PAGAMENTO
-2.1. Valor total: R$ {valor}.
-2.2. 50% de sinal na contratação; 50% até a data do evento.
-2.3. Formas: PIX, transferência bancária ou link de pagamento.
+CLAUSE 2ª – DO VALOR E PAGAMENTO
+2.1. Valor total: £ {valor}.
+2.2. 50% de sinal na contratação; 50% until a data do evento.
+2.3. Formas: PIX, bank transfer or payment link.
 
-CLÁUSULA 3ª – DOS SERVIÇOS
-3.1. Cobertura fotográfica pelo período contratado; edição profissional; entrega digital em galeria online (alta resolução).
-3.2. Prazo de entrega: até 20 dias úteis após o evento.
+CLAUSE 3ª – DOS SERVIÇOS
+3.1. Cobertura fotográfica pelo período photographer; edição profissional; entrega digital em galeria online (alta resolução).
+3.2. Prazo de entrega: until 20 business days após o evento.
 
-CLÁUSULA 4ª – DOS DIREITOS AUTORAIS (Lei 9.610/1998)
-4.1. Fotógrafo(a) é titular dos direitos autorais.
-4.2. CONTRATANTE recebe licença de uso institucional e divulgação do evento.
+CLAUSE 4ª – DOS DIREITOS AUTORAIS (Lei 9.610/1998)
+4.1. Photographer(a) é titular dos copyright.
+4.2. CLIENT recebe licença de uso institucional e divulgação do evento.
 4.3. Uso em campanhas publicitárias requer autorização adicional.
 
-CLÁUSULA 5ª – DO DIREITO DE IMAGEM
-5.1. CONTRATANTE declara possuir autorização dos participantes para registro fotográfico.
-5.2. Fotógrafo(a) poderá usar imagens no portfólio, salvo restrição expressa.
+CLAUSE 5ª – DO DIREITO DE IMAGEM
+5.1. CLIENT declara possuir autorização dos participantes para registro fotográfico.
+5.2. Photographer(a) poderá usar imagens no portfólio, salvo restrição expressa.
 
-CLÁUSULA 6ª – DO CANCELAMENTO
-6.1. Mais de 15 dias: devolução integral do sinal.
-6.2. Menos de 15 dias: sinal retido como taxa de reserva.
-6.3. No dia ou não comparecimento: valor total devido.
-6.4. Reagendamento permitido uma vez, com aviso de 72 horas.
+CLAUSE 6ª – DO CANCELAMENTO
+6.1. Mais de 15 days: devolução integral do sinal.
+6.2. Menos de 15 days: sinal retido como taxa de reserva.
+6.3. No day ou não comparecimento: valor total devido.
+6.4. Reagendamento permitido uma vez, com aviso de 72 hours.
 
-CLÁUSULA 7ª – CONDIÇÕES GERAIS
+CLAUSE 7ª – CONDIÇÕES GERAIS
 7.1. Acesso livre aos ambientes do evento.
-7.2. Alimentação para eventos com duração superior a 4 horas.
+7.2. Alimentação para eventos com duração superior a 4 hours.
 
-CLÁUSULA 8ª – PROTEÇÃO DE DADOS (LGPD)
+CLAUSE 8ª – PROTEÇÃO DE DADOS (LGPD)
 8.1. Dados pessoais tratados exclusivamente para execução do contrato.
 8.2. Imagens de menores não serão usadas para divulgação sem autorização dos responsáveis.
 
-CLÁUSULA 9ª – DO FORO
-Foro da comarca de domicílio do(a) CONTRATANTE.
+CLAUSE 9ª – DO FORO
+Jurisdiction da comarca de domicílio do(a) CLIENT.
 
 {cidade}, {data_contrato}
 
 _______________________________
-CONTRATANTE: {cliente}
+CLIENT: {cliente}
 CPF/CNPJ: {cpf}
 
 _______________________________
-CONTRATADO(A): {fotografo}
+PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}`,
         },
         {
@@ -337,35 +337,35 @@ CPF/CNPJ: {fotografo_documento}`,
           description: "Modelo simples e direto para qualquer tipo de serviço fotográfico. Ideal para trabalhos rápidos e sessões avulsas.",
           content: `CONTRATO SIMPLIFICADO DE PRESTAÇÃO DE SERVIÇOS FOTOGRÁFICOS
 
-CONTRATANTE: {cliente}
+CLIENT: {cliente}
 E-mail: {email} | Telefone: {telefone}
 CPF: {cpf}
 
-CONTRATADO(A): {fotografo}
+PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}
 
 1. SERVIÇO: {servico}
-2. DATA: {data} | HORÁRIO: {horario}
+2. DATA: {data} | HORÁRIO: {hourrio}
 3. LOCAL: {local}
-4. VALOR: R$ {valor}
+4. VALOR: £ {valor}
 5. PAGAMENTO: Conforme acordado entre as partes.
 
-6. ENTREGA: Fotos editadas em até 15 dias úteis via galeria digital.
+6. ENTREGA: Fotos editadas em until 15 business days via galeria digital.
 
-7. DIREITOS AUTORAIS: As fotografias são de autoria do(a) CONTRATADO(A), conforme Lei 9.610/98. O(A) CONTRATANTE recebe licença de uso pessoal.
+7. DIREITOS AUTORAIS: As fotografias são de autoria do(a) PHOTOGRAPHER(A), conforme Lei 9.610/98. O(A) CLIENT recebe licença de uso pessoal.
 
-8. CANCELAMENTO: Cancelamentos com menos de 48h de antecedência implicam na retenção de 50% do valor como taxa de reserva.
+8. CANCELAMENTO: Cancellations com menos de 48h de antecedência implicam na retenção de 50% do valor como taxa de reserva.
 
-9. IMAGEM: O(A) CONTRATANTE autoriza ( ) SIM ( ) NÃO o uso das fotos para portfólio do(a) fotógrafo(a).
+9. IMAGEM: O(A) CLIENT autoriza ( ) SIM ( ) NÃO o uso das fotos para portfólio do(a) photographer(a).
 
 10. LGPD: Dados pessoais tratados conforme Lei 13.709/2018, exclusivamente para este contrato.
 
-11. FORO: Comarca de domicílio do(a) CONTRATANTE.
+11. FORO: Comarca de domicílio do(a) CLIENT.
 
 {cidade}, {data_contrato}
 
 ___________________          ___________________
-CONTRATANTE                  CONTRATADO(A)
+CLIENT                  PHOTOGRAPHER(A)
 {cliente}                    {fotografo}
 CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         },
@@ -386,7 +386,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
 
   /**
    * Generate contract from appointment + template
-   * Substitui todas as variáveis com dados reais do agendamento
+   * Substitui todas as variáveis com dados pounds do agendamento
    */
   generateFromAppointment: protectedProcedure
     .input(z.object({
@@ -404,7 +404,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const [template] = await db.select().from(contractTemplates)
         .where(and(eq(contractTemplates.id, input.templateId), eq(contractTemplates.tenantId, tenantId)))
         .limit(1);
-      if (!template) throw new Error("Template não encontrado");
+      if (!template) throw new Error("Template not found");
 
       // Buscar appointment com dados do serviço
       const [appointment] = await db.select({
@@ -428,25 +428,25 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       .where(and(eq(appointments.id, input.appointmentId), eq(appointments.tenantId, tenantId)))
       .limit(1);
       
-      if (!appointment) throw new Error("Agendamento não encontrado");
+      if (!appointment) throw new Error("Appointment not found");
 
-      // Buscar dados do tenant (fotógrafo)
+      // Buscar dados do tenant (photographer)
       const [tenant] = await db.select().from(tenants)
         .where(eq(tenants.id, tenantId)).limit(1);
 
-      // Buscar dados do admin (fotógrafo)
+      // Buscar dados do admin (photographer)
       const [adminUser] = await db.select().from(users)
         .where(and(eq(users.tenantId, tenantId), eq(users.role, 'admin'))).limit(1);
 
       // Preparar variáveis
-      const serviceName = appointment.customServiceName || appointment.serviceName || 'Sessão Fotográfica';
+      const serviceName = appointment.customServiceName || appointment.serviceName || 'Photo Session';
       const price = appointment.finalPrice || appointment.servicePrice || 0;
       const priceFormatted = (price / 100).toFixed(2).replace('.', ',');
       const signalFormatted = (price / 200).toFixed(2).replace('.', ',');
       const dateFormatted = appointment.appointmentDate 
-        ? new Date(appointment.appointmentDate).toLocaleDateString('pt-BR')
+        ? new Date(appointment.appointmentDate).toLocaleDateString('en-GB')
         : '___/___/______';
-      const today = new Date().toLocaleDateString('pt-BR');
+      const today = new Date().toLocaleDateString('en-GB');
 
       // Substituir variáveis
       let content = template.content;
@@ -461,7 +461,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         '{fotografo_endereco}': '________________________',
         '{servico}': serviceName,
         '{data}': dateFormatted,
-        '{horario}': appointment.appointmentTime || 'A combinar',
+        '{hourrio}': appointment.appointmentTime || 'A combinar',
         '{local}': appointment.eventLocation || 'A definir',
         '{duracao}': appointment.estimatedDuration || 'A combinar',
         '{valor}': priceFormatted,
@@ -515,7 +515,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const [template] = await db.select().from(contractTemplates)
         .where(and(eq(contractTemplates.id, input.templateId), eq(contractTemplates.tenantId, tenantId)))
         .limit(1);
-      if (!template) throw new Error("Template não encontrado");
+      if (!template) throw new Error("Template not found");
 
       // Buscar appointment com serviço
       const [appointment] = await db.select({
@@ -537,7 +537,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       .where(and(eq(appointments.id, input.appointmentId), eq(appointments.tenantId, tenantId)))
       .limit(1);
       
-      if (!appointment) throw new Error("Agendamento não encontrado");
+      if (!appointment) throw new Error("Appointment not found");
 
       // Buscar tenant
       const [tenant] = await db.select().from(tenants)
@@ -546,14 +546,14 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         .where(and(eq(users.tenantId, tenantId), eq(users.role, 'admin'))).limit(1);
 
       // Preparar variáveis
-      const serviceName = appointment.customServiceName || appointment.serviceName || 'Sessão Fotográfica';
+      const serviceName = appointment.customServiceName || appointment.serviceName || 'Photo Session';
       const price = appointment.finalPrice || appointment.servicePrice || 0;
       const priceFormatted = (price / 100).toFixed(2).replace('.', ',');
       const signalFormatted = (price / 200).toFixed(2).replace('.', ',');
       const dateFormatted = appointment.appointmentDate 
-        ? new Date(appointment.appointmentDate).toLocaleDateString('pt-BR')
+        ? new Date(appointment.appointmentDate).toLocaleDateString('en-GB')
         : '___/___/______';
-      const today = new Date().toLocaleDateString('pt-BR');
+      const today = new Date().toLocaleDateString('en-GB');
 
       let content = template.content;
       const replacements: Record<string, string> = {
@@ -567,7 +567,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         '{fotografo_endereco}': '________________________',
         '{servico}': serviceName,
         '{data}': dateFormatted,
-        '{horario}': appointment.appointmentTime || 'A combinar',
+        '{hourrio}': appointment.appointmentTime || 'A combinar',
         '{local}': appointment.eventLocation || 'A definir',
         '{duracao}': appointment.estimatedDuration || 'A combinar',
         '{valor}': priceFormatted,
@@ -591,7 +591,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const doc = new jsPDF();
       let startY = 20;
       
-      // Adicionar logo se disponível
+      // Adicionar logo se available
       if (config?.logoUrl) {
         try {
           doc.addImage(config.logoUrl, 'PNG', 20, 10, 50, 25);
@@ -602,7 +602,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         }
       }
       
-      // Título
+      // Title
       doc.setFontSize(14);
       doc.setFont("helvetica", "bold");
       const titleLines = doc.splitTextToSize(template.name.toUpperCase(), 170);
@@ -621,7 +621,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
           doc.addPage();
           y = 20;
         }
-        // Bold para cláusulas
+        // Bold para clauses
         if (line.startsWith('CLÁUSULA') || line.startsWith('CONTRAT')) {
           doc.setFont("helvetica", "bold");
         } else {
@@ -656,7 +656,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const db = await getDb();
       if (!db) throw new Error("Database not available");
       
-      // Verificar se já existe um contrato para este agendamento
+      // Verify se already exists um contrato para este agendamento
       const existing = await db.select().from(contracts)
         .where(and(
           eq(contracts.appointmentId, input.appointmentId),
@@ -729,11 +729,11 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const html = `
         <div style="font-family: Georgia, serif; max-width: 700px; margin: 0 auto; padding: 20px;">
           ${input.logoUrl ? `<div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #ddd;"><img src="${input.logoUrl}" alt="${studioName}" style="max-height: 60px; max-width: 200px;" /></div>` : ''}
-          <h2 style="color: #333; font-size: 18px; margin-bottom: 5px;">${input.templateName || 'Contrato de Serviço Fotográfico'}</h2>
-          <p style="color: #666; font-size: 13px; margin-bottom: 20px;">Serviço: ${input.serviceName || ''} | Valor: R$ ${input.price || ''}</p>
+          <h2 style="color: #333; font-size: 18px; margin-bottom: 5px;">${input.templateName || 'Contrato de Service Fotográfico'}</h2>
+          <p style="color: #666; font-size: 13px; margin-bottom: 20px;">Service: ${input.serviceName || ''} | Valor: £ ${input.price || ''}</p>
           <div style="background: #f9f9f9; padding: 25px; border-radius: 8px; font-size: 13px; line-height: 1.8; color: #333; white-space: pre-wrap;">${contentHtml}</div>
           <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid #eee; font-size: 12px; color: #999; text-align: center;">
-            <p>Enviado por ${studioName} via FlowClik</p>
+            <p>Shipped por ${studioName} via FlowClik</p>
           </div>
         </div>
       `;

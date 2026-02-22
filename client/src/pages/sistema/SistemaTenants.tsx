@@ -71,9 +71,9 @@ export default function SistemaTenants() {
   return (
     <div className="container py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold">Fotógrafos Cadastrados</h1>
+        <h1 className="text-3xl font-bold">Photographers Cadastrados</h1>
         <p className="text-muted-foreground">
-          Gerenciar todos os fotógrafos da plataforma
+          Gerenciar todos os photographers da plataforma
         </p>
       </div>
 
@@ -82,7 +82,7 @@ export default function SistemaTenants() {
         {!tenants || tenants.length === 0 ? (
           <Card className="p-12 text-center">
             <Users className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-lg font-semibold mb-2">Nenhum fotógrafo cadastrado</h3>
+            <h3 className="text-lg font-semibold mb-2">None photographer cadastrado</h3>
           </Card>
         ) : (
           tenants.map((tenant) => (
@@ -100,7 +100,7 @@ export default function SistemaTenants() {
 
                   <div className="grid md:grid-cols-2 gap-4 mt-4">
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">Subdomínio</p>
+                      <p className="text-sm text-muted-foreground mb-1">Subdomain</p>
                       <div className="flex items-center gap-2">
                         <p className="font-mono text-sm">{tenant.subdomain}.lirolla.com</p>
                         <Button
@@ -133,7 +133,7 @@ export default function SistemaTenants() {
                       <div>
                         <p className="text-sm text-muted-foreground mb-1">
                           <FolderOpen className="h-3 w-3 inline mr-1" />
-                          Limite de Galerias
+                          Limite de Gallerys
                         </p>
                         <p className="text-sm font-semibold">{tenant.galleryLimit} galerias</p>
                       </div>

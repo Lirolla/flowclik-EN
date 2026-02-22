@@ -47,7 +47,7 @@ export default function AdminSettings() {
   const { data: config, isLoading } = trpc.siteConfig.get.useQuery();
   const updateMutation = trpc.siteConfig.update.useMutation({
     onSuccess: () => {
-      toast.success("Configurações salvas com sucesso!");
+      toast.success("Settings salvas com sucesso!");
     },
     onError: (error) => {
       toast.error(`Erro: ${error.message}`);
@@ -87,7 +87,7 @@ export default function AdminSettings() {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        toast.error("Por favor, selecione apenas imagens");
+        toast.error("Por favor, select apenas imagens");
         return;
       }
 
@@ -214,7 +214,7 @@ export default function AdminSettings() {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Settings className="w-6 h-6" />
-            Configurações do Site
+            Site Settings
           </CardTitle>
           <CardDescription>
             Complete todas as seções para configurar seu site. 🔴 Vermelho = Não preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Completo
@@ -301,12 +301,12 @@ export default function AdminSettings() {
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getAboutStatus()} />
-                  <span className="font-semibold">Página Sobre</span>
+                  <span className="font-semibold">Page Sobre</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
                 <div>
-                  <Label>Título da Seção *</Label>
+                  <Label>Title da Seção *</Label>
                   <Input
                     // @ts-ignore
                     value={aboutTitle}
@@ -326,13 +326,13 @@ export default function AdminSettings() {
                 </div>
                 <div>
                   <ImageUpload
-                    label="Foto de Perfil *"
+                    label="Foto de Profile *"
                     value={aboutImage}
                     onChange={setAboutImage}
                   />
                 </div>
                 <div>
-                  <Label>Missão</Label>
+                  <Label>Mission</Label>
                   <Textarea
                     value={aboutMission}
                     onChange={(e) => setAboutMission(e.target.value)}
@@ -341,7 +341,7 @@ export default function AdminSettings() {
                   />
                 </div>
                 <div>
-                  <Label>Visão</Label>
+                  <Label>Vision</Label>
                   <Textarea
                     value={aboutVision}
                     onChange={(e) => setAboutVision(e.target.value)}
@@ -366,7 +366,7 @@ export default function AdminSettings() {
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getServicesStatus()} />
-                  <span className="font-semibold">Página Serviços</span>
+                  <span className="font-semibold">Page Services</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
@@ -380,7 +380,7 @@ export default function AdminSettings() {
                   />
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Os serviços individuais são gerenciados na página Admin → Serviços
+                  Os serviços individuais são gerenciados na página Admin → Services
                 </p>
               </AccordionContent>
             </AccordionItem>
@@ -390,7 +390,7 @@ export default function AdminSettings() {
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getContactStatus()} />
-                  <span className="font-semibold">Informações de Contato</span>
+                  <span className="font-semibold">Contact Information</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
@@ -420,11 +420,11 @@ export default function AdminSettings() {
                   />
                 </div>
                 <div>
-                  <Label>Endereço</Label>
+                  <Label>Address</Label>
                   <Textarea
                     value={contactAddress}
                     onChange={(e) => setContactAddress(e.target.value)}
-                    placeholder="Rua, número, bairro, cidade, estado"
+                    placeholder="Rua, number, bairro, cidade, estado"
                     rows={3}
                   />
                 </div>
@@ -487,7 +487,7 @@ export default function AdminSettings() {
                   Salvando...
                 </>
               ) : (
-                "Salvar Todas as Configurações"
+                "Salvar Todas as Settings"
               )}
             </Button>
           </div>
@@ -498,8 +498,8 @@ export default function AdminSettings() {
             <ul className="list-disc list-inside space-y-1 text-muted-foreground">
               <li>Complete todas as seções marcadas em vermelho</li>
               <li>O logo e nome aparecem no cabeçalho do site</li>
-              <li>O conteúdo de Sobre/Serviços aparece nas páginas públicas</li>
-              <li>Alterações são aplicadas imediatamente</li>
+              <li>O conteúdo de Sobre/Services aparece nas páginas públicas</li>
+              <li>Alterações são aplicadas imedaytamente</li>
             </ul>
           </div>
         </CardContent>

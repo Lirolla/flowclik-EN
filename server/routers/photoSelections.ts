@@ -1,7 +1,7 @@
 import { router, publicProcedure, protectedProcedure } from "../_core/trpc";
 import { z } from "zod";
 import { getDb, getTenantId } from "../db";
-import { photoSelections, appointments, collections, mediaItems } from "../../drizzle/schema";
+import { photoSelections, appointments, collections, medayItems } from "../../drizzle/schema";
 import { eq, and } from "drizzle-orm";
 import { sendSelectionNotificationEmail, sendAdminSelectionNotification, sendClientSelectionNotification, sendPhotosDeliveredEmail } from "../_core/emailTemplates";
 import { notifyOwner } from "../_core/notification";
@@ -12,7 +12,7 @@ export const photoSelectionsRouter = router({
    */
   toggleSelection: publicProcedure
     .input(z.object({
-      mediaItemId: z.number(),
+      medayItemId: z.number(),
       collectionId: z.number(),
       isSelected: z.boolean(),
     }))
@@ -26,7 +26,7 @@ export const photoSelectionsRouter = router({
         .from(photoSelections)
         .where(
           and(
-            eq(photoSelections.mediaItemId, input.mediaItemId),
+            eq(photoSelections.medayItemId, input.medayItemId),
             eq(photoSelections.collectionId, input.collectionId)
           )
         )
@@ -41,7 +41,7 @@ export const photoSelectionsRouter = router({
       } else {
         // Create new
         await db.insert(photoSelections).values({
-          mediaItemId: input.mediaItemId,
+          medayItemId: input.medayItemId,
           collectionId: input.collectionId,
           isSelected: input.isSelected ? 1 : 0,
           tenantId: getTenantId(ctx),
@@ -56,7 +56,7 @@ export const photoSelectionsRouter = router({
    */
   saveFeedback: publicProcedure
     .input(z.object({
-      mediaItemId: z.number(),
+      medayItemId: z.number(),
       collectionId: z.number(),
       feedback: z.string(),
     }))
@@ -70,7 +70,7 @@ export const photoSelectionsRouter = router({
         .from(photoSelections)
         .where(
           and(
-            eq(photoSelections.mediaItemId, input.mediaItemId),
+            eq(photoSelections.medayItemId, input.medayItemId),
             eq(photoSelections.collectionId, input.collectionId)
           )
         )
@@ -85,7 +85,7 @@ export const photoSelectionsRouter = router({
       } else {
         // Create new
         await db.insert(photoSelections).values({
-          mediaItemId: input.mediaItemId,
+          medayItemId: input.medayItemId,
           collectionId: input.collectionId,
           clientFeedback: input.feedback,
           isSelected: 0,
@@ -124,24 +124,24 @@ export const photoSelectionsRouter = router({
       const db = await getDb();
       if (!db) return [];
 
-      const { mediaItems } = await import('../../drizzle/schema');
+      const { medayItems } = await import('../../drizzle/schema');
 
-      // Get all selected photos with media details
+      // Get all selected photos with meday details
       const selections = await db
         .select({
           id: photoSelections.id,
-          mediaItemId: photoSelections.mediaItemId,
+          medayItemId: photoSelections.medayItemId,
           isSelected: photoSelections.isSelected,
           clientFeedback: photoSelections.clientFeedback,
           editedPhotoUrl: photoSelections.editedPhotoUrl,
           status: photoSelections.status,
           createdAt: photoSelections.createdAt,
-          mediaUrl: mediaItems.originalUrl,
-          mediaTitle: mediaItems.title,
-          mediaType: mediaItems.mediaType,
+          medayUrl: medayItems.originalUrl,
+          medayTitle: medayItems.title,
+          medayType: medayItems.medayType,
         })
         .from(photoSelections)
-        .leftJoin(mediaItems, eq(photoSelections.mediaItemId, mediaItems.id))
+        .leftJoin(medayItems, eq(photoSelections.medayItemId, medayItems.id))
         .where(
           and(
             eq(photoSelections.collectionId, input.collectionId),
@@ -201,7 +201,7 @@ export const photoSelectionsRouter = router({
         .limit(1);
 
       if (!collection[0] || !collection[0].appointmentId) {
-        throw new Error("Galeria não vinculada a um agendamento");
+        throw new Error("Gallery não vinculada a um agendamento");
       }
 
       // Update appointment status to final_editing
@@ -242,8 +242,8 @@ export const photoSelectionsRouter = router({
       // Count total photos
       const totalPhotos = await db
         .select()
-        .from(mediaItems)
-        .where(and(eq(mediaItems.collectionId, input.collectionId), eq(mediaItems.tenantId, getTenantId(ctx))));
+        .from(medayItems)
+        .where(and(eq(medayItems.collectionId, input.collectionId), eq(medayItems.tenantId, getTenantId(ctx))));
 
       if (appointment[0]) {
         // Send email to client
@@ -262,12 +262,12 @@ export const photoSelectionsRouter = router({
           galleryTitle: collection[0].name,
           selectedCount: selectedPhotos.length,
           totalPhotos: totalPhotos.length,
-        }).catch(err => console.error('Erro ao enviar notificação ao admin:', err));
+        }).catch(err => console.error('Erro ao enviar notification ao admin:', err));
 
         // Notify owner via Manus notification
         await notifyOwner({
           title: `❤️ ${appointment[0].clientName} selecionou ${selectedPhotos.length} fotos`,
-          content: `Galeria: ${collection[0].name}\nSeleção: ${selectedPhotos.length} de ${totalPhotos.length} fotos`,
+          content: `Gallery: ${collection[0].name}\nSeleção: ${selectedPhotos.length} de ${totalPhotos.length} fotos`,
         }).catch(err => console.error('Erro ao notificar owner:', err));
       }
 
@@ -283,21 +283,21 @@ export const photoSelectionsRouter = router({
       const db = await getDb();
       if (!db) return [];
 
-      const { mediaItems } = await import('../../drizzle/schema');
+      const { medayItems } = await import('../../drizzle/schema');
 
       // Get all selections with edited photos
       const editedPhotos = await db
         .select({
           id: photoSelections.id,
-          mediaItemId: photoSelections.mediaItemId,
+          medayItemId: photoSelections.medayItemId,
           clientFeedback: photoSelections.clientFeedback,
           editedPhotoUrl: photoSelections.editedPhotoUrl,
           status: photoSelections.status,
-          originalUrl: mediaItems.originalUrl,
-          title: mediaItems.title,
+          originalUrl: medayItems.originalUrl,
+          title: medayItems.title,
         })
         .from(photoSelections)
-        .leftJoin(mediaItems, eq(photoSelections.mediaItemId, mediaItems.id))
+        .leftJoin(medayItems, eq(photoSelections.medayItemId, medayItems.id))
         .where(
           and(
             eq(photoSelections.collectionId, input.collectionId),
@@ -327,7 +327,7 @@ export const photoSelectionsRouter = router({
         .limit(1);
 
       if (!collection[0] || !collection[0].appointmentId) {
-        throw new Error("Galeria não vinculada a um agendamento");
+        throw new Error("Gallery não vinculada a um agendamento");
       }
 
       // Update appointment status to delivered
@@ -369,8 +369,8 @@ export const photoSelectionsRouter = router({
 
         // Notify owner
         await notifyOwner({
-          title: `🎉 Álbum final entregue: ${appointment[0].clientName}`,
-          content: `Galeria: ${collection[0].name}\nFotos editadas: ${editedPhotos.length}`,
+          title: `🎉 Final album delivered: ${appointment[0].clientName}`,
+          content: `Gallery: ${collection[0].name}\nFotos editadas: ${editedPhotos.length}`,
         }).catch(err => console.error('Erro ao notificar owner:', err));
       }
 
@@ -386,17 +386,17 @@ export const photoSelectionsRouter = router({
       const db = await getDb();
       if (!db) return [];
 
-      const { mediaItems } = await import('../../drizzle/schema');
+      const { medayItems } = await import('../../drizzle/schema');
 
       // Get all edited photos URLs
       const photos = await db
         .select({
           id: photoSelections.id,
           editedPhotoUrl: photoSelections.editedPhotoUrl,
-          title: mediaItems.title,
+          title: medayItems.title,
         })
         .from(photoSelections)
-        .leftJoin(mediaItems, eq(photoSelections.mediaItemId, mediaItems.id))
+        .leftJoin(medayItems, eq(photoSelections.medayItemId, medayItems.id))
         .where(
           and(
             eq(photoSelections.collectionId, input.collectionId),

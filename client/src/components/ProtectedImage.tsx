@@ -59,7 +59,7 @@ export function ProtectedImage({
       {/* Watermark Overlay */}
       {imageLoaded && (
         <>
-          {/* Diagonal watermark pattern */}
+          {/* Daygonal watermark pattern */}
           <div 
             className="absolute inset-0 pointer-events-none"
             style={{

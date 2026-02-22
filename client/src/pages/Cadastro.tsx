@@ -133,7 +133,7 @@ export default function Cadastro() {
           <p>
             Já tem uma conta?{" "}
             <a href="/login" className="text-primary hover:underline">
-              Faça login
+              Sign in
             </a>
           </p>
         </div>

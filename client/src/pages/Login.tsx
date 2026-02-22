@@ -49,7 +49,7 @@ export default function Login() {
         // Usar window.location para forçar reload completo (igual ao /system/login)
         window.location.href = "/admin";
       } else {
-        toast.error("Erro ao fazer login. Tente novamente.");
+        toast.error("Erro ao fazer login. Try again.");
         setIsLoading(false);
       }
     } catch (error) {
@@ -64,7 +64,7 @@ export default function Login() {
       <Card className="w-full max-w-md p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-2">FlowClik</h1>
-          <p className="text-muted-foreground">Faça login na sua conta</p>
+          <p className="text-muted-foreground">Sign in na sua conta</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">

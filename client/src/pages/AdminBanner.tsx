@@ -33,11 +33,11 @@ export default function AdminBanner() {
         <Card className="p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Acesso Negado</h2>
           <p className="text-muted-foreground mb-6">
-            Você não tem permissão para acessar esta página
+            You não tem permissão para acessar esta página
           </p>
           <Button asChild>
             <Link href="/">
-              <a>Voltar ao Início</a>
+              <a>Back to Home</a>
             </Link>
           </Button>
         </Card>
@@ -110,7 +110,7 @@ export default function AdminBanner() {
                     <div className="w-full h-full flex items-center justify-center bg-black">
                       <Video className="h-16 w-16 text-white/50" />
                       <p className="absolute bottom-2 right-2 text-xs text-white bg-black/50 px-2 py-1 rounded">
-                        Vídeo
+                        Video
                       </p>
                     </div>
                   ) : (
@@ -121,7 +121,7 @@ export default function AdminBanner() {
                   
                   {!slide.isActive && (
                     <div className="absolute top-2 left-2 bg-destructive text-destructive-foreground px-2 py-1 rounded text-xs font-medium">
-                      Inativo
+                      Inactive
                     </div>
                   )}
                 </div>
@@ -162,7 +162,7 @@ export default function AdminBanner() {
         ) : (
           <Card className="p-12 text-center">
             <ImageIcon className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-xl font-bold mb-2">Nenhum slide configurado</h3>
+            <h3 className="text-xl font-bold mb-2">None slide configurado</h3>
             <p className="text-muted-foreground mb-6">
               Crie seu primeiro slide para o banner da página inicial
             </p>
@@ -225,7 +225,7 @@ function SlideForm({
     }
     
     if (slideType === "video" && !videoUrl) {
-      toast.error("URL do vídeo é obrigatória");
+      toast.error("URL do video é obrigatória");
       return;
     }
 
@@ -257,7 +257,7 @@ function SlideForm({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="image">Imagem</SelectItem>
-            <SelectItem value="video">Vídeo (.m3u8)</SelectItem>
+            <SelectItem value="video">Video (.m3u8)</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -279,7 +279,7 @@ function SlideForm({
         </div>
       ) : (
         <div className="space-y-2">
-          <Label htmlFor="videoUrl">URL do Vídeo (.m3u8) *</Label>
+          <Label htmlFor="videoUrl">Video URL (.m3u8) *</Label>
           <Input
             id="videoUrl"
             type="url"
@@ -295,22 +295,22 @@ function SlideForm({
       )}
 
       <div className="space-y-2">
-        <Label htmlFor="title">Título</Label>
+        <Label htmlFor="title">Title</Label>
         <Input
           id="title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          placeholder="Título do slide"
+          placeholder="Title do slide"
         />
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="description">Descrição</Label>
+        <Label htmlFor="description">Description</Label>
         <Textarea
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Descrição que aparecerá no slide"
+          placeholder="Description que aparecerá no slide"
           rows={3}
         />
       </div>
@@ -346,8 +346,8 @@ function SlideForm({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="photography">Apenas Fotografia</SelectItem>
-            <SelectItem value="video">Apenas Vídeo</SelectItem>
-            <SelectItem value="both">Fotografia e Vídeo</SelectItem>
+            <SelectItem value="video">Apenas Video</SelectItem>
+            <SelectItem value="both">Fotografia e Video</SelectItem>
           </SelectContent>
         </Select>
         <p className="text-xs text-muted-foreground">
@@ -361,7 +361,7 @@ function SlideForm({
           checked={isActive}
           onCheckedChange={setIsActive}
         />
-        <Label htmlFor="isActive">Slide ativo</Label>
+        <Label htmlFor="isActive">Slide active</Label>
       </div>
 
       <div className="flex gap-3 pt-4">

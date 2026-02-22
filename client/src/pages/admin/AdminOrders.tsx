@@ -39,7 +39,7 @@ export default function AdminOrders() {
   const confirmPaymentMutation = trpc.orders.confirmPayment.useMutation({
     onSuccess: () => {
       utils.orders.getAll.invalidate();
-      toast.success("Pagamento confirmado!");
+      toast.success("Payment confirmed!");
     },
     onError: (err) => toast.error(err.message),
   });
@@ -53,7 +53,7 @@ export default function AdminOrders() {
     const variants: Record<string, { label: string; className: string }> = {
       pending: { label: "Pending", className: "bg-yellow-500/10 text-yellow-500" },
       paid: { label: "Paid", className: "bg-green-500/10 text-green-500" },
-      processing: { label: "Processando", className: "bg-blue-500/10 text-blue-500" },
+      processing: { label: "Processing", className: "bg-blue-500/10 text-blue-500" },
       completed: { label: "Completed", className: "bg-green-600/10 text-green-600" },
       cancelled: { label: "Cancelled", className: "bg-red-500/10 text-red-500" },
     };
@@ -121,7 +121,7 @@ export default function AdminOrders() {
             { key: "pending", label: "Pendentes" },
             { key: "paid", label: "Pagos" },
             { key: "completed", label: "Concluídos" },
-            { key: "cancelled", label: "Cancelados" },
+            { key: "cancelled", label: "Cancelleds" },
           ].map((f) => (
             <Button
               key={f.key}
@@ -148,7 +148,7 @@ export default function AdminOrders() {
                   <div className="flex items-start justify-between mb-4">
                     <div>
                       <div className="flex items-center gap-2 mb-2 flex-wrap">
-                        <h3 className="text-xl font-bold">Pedido #{order.id}</h3>
+                        <h3 className="text-xl font-bold">Order #{order.id}</h3>
                         {getStatusBadge(order.status)}
                         {getPaymentMethodBadge(order.paymentMethod)}
                       </div>
@@ -170,7 +170,7 @@ export default function AdminOrders() {
                   {/* Items */}
                   {order.items && order.items.length > 0 && (
                     <div className="bg-muted/50 rounded-lg p-3 mb-4">
-                      <p className="text-sm font-medium mb-2">Itens do Pedido:</p>
+                      <p className="text-sm font-medium mb-2">Order Items:</p>
                       <div className="space-y-1">
                         {order.items.map((item: any) => (
                           <div key={item.id} className="flex justify-between text-sm">
@@ -280,7 +280,7 @@ export default function AdminOrders() {
           <Card>
             <CardContent className="p-12 text-center">
               <ShoppingCart className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-              <h3 className="text-xl font-bold mb-2">Nenhum pedido encontrado</h3>
+              <h3 className="text-xl font-bold mb-2">None pedido encontrado</h3>
               <p className="text-muted-foreground">
                 {filter === "all"
                   ? "Ainda não há pedidos no sistema"

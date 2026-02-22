@@ -20,7 +20,7 @@ export default function Services() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold font-serif mb-6">
-              Nossos Serviços
+              Nossos Services
             </h1>
             {siteConfig?.servicesIntro && (
               <p className="text-lg md:text-xl text-muted-foreground whitespace-pre-wrap">
@@ -66,7 +66,7 @@ export default function Services() {
                     {service.duration && (
                       <div className="flex items-center gap-2 text-sm">
                         <Clock className="h-4 w-4 text-accent" />
-                        <span>{service.duration} minutos</span>
+                        <span>{service.duration} minutes</span>
                       </div>
                     )}
                     <div className="flex items-center gap-2 text-sm">
@@ -101,14 +101,14 @@ export default function Services() {
           ) : (
             <Card className="p-12 text-center">
               <h3 className="text-2xl font-bold mb-4">
-                Serviços em breve
+                Services em breve
               </h3>
               <p className="text-muted-foreground mb-6">
                 Estamos preparando nossos serviços. Volte em breve!
               </p>
               <Button asChild>
                 <Link href={SITE_ROUTES.home()}>
-                  <a>Voltar ao Início</a>
+                  <a>Back to Home</a>
                 </Link>
               </Button>
             </Card>
@@ -121,11 +121,11 @@ export default function Services() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold font-serif mb-6">
-              Pronto para começar?
+              Ready to get started?
             </h2>
             <p className="text-lg mb-8 opacity-90">
-              Entre em contato conosco para discutir seu projeto e receber um
-              orçamento personalizado
+              Get in touch conosco para discutir seu projeto e receber um
+              custom quote
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
@@ -135,7 +135,7 @@ export default function Services() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/galleries">
-                  <a>Ver Portfólio</a>
+                  <a>View Portfolio</a>
                 </Link>
               </Button>
             </div>

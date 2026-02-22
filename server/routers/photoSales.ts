@@ -1,7 +1,7 @@
 import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
 import { z } from "zod";
 import { getDb, getTenantId } from "../db";
-import { photoSales, collections, mediaItems, users } from "../../drizzle/schema";
+import { photoSales, collections, medayItems, users } from "../../drizzle/schema";
 import { eq, and, desc, sql } from "drizzle-orm";
 
 export const photoSalesRouter = router({
@@ -73,11 +73,11 @@ export const photoSalesRouter = router({
         productType: photoSales.productType,
         createdAt: photoSales.createdAt,
         paidAt: photoSales.paidAt,
-        photoTitle: mediaItems.title,
+        photoTitle: medayItems.title,
         collectionName: collections.name,
       })
       .from(photoSales)
-      .leftJoin(mediaItems, eq(photoSales.photoId, mediaItems.id))
+      .leftJoin(medayItems, eq(photoSales.photoId, medayItems.id))
       .leftJoin(collections, eq(photoSales.collectionId, collections.id))
       .orderBy(desc(photoSales.createdAt));
 
@@ -153,11 +153,11 @@ export const photoSalesRouter = router({
       // Get photos
       const photos = await db
         .select()
-        .from(mediaItems)
+        .from(medayItems)
         .where(
           and(
-            eq(mediaItems.collectionId, input.collectionId),
-            sql`${mediaItems.id} IN (${input.photoIds.join(',')})`
+            eq(medayItems.collectionId, input.collectionId),
+            sql`${medayItems.id} IN (${input.photoIds.join(',')})`
           )
         );
 

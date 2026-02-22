@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { ArrowLeft, Check, Download, X, ChevronLeft, ChevronRight, CheckCircle2, Package, Share2, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogDescription, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
 import { Input } from "@/components/ui/input";
 
 export default function ClientFinalAlbum() {
@@ -28,7 +28,7 @@ export default function ClientFinalAlbum() {
   const approveAlbumMutation = trpc.photoSelections.approveAlbum.useMutation({
     onSuccess: () => {
       toast({
-        title: "Álbum aprovado!",
+        title: "Album aprovado!",
         description: "Suas fotos editadas foram aprovadas com sucesso.",
       });
       refetch();
@@ -40,7 +40,7 @@ export default function ClientFinalAlbum() {
   const [passwordInput, setPasswordInput] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [isDownloading, setIsDownloading] = useState(false);
-  const [showShareDialog, setShowShareDialog] = useState(false);
+  const [showShareDaylog, setShowShareDaylog] = useState(false);
   const [shareLink, setShareLink] = useState("");
   
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function ClientFinalAlbum() {
     if (!downloadUrls || downloadUrls.length === 0) {
       toast({
         title: "Error",
-        description: "Nenhuma foto editada disponível para download.",
+        description: "Nonea foto editada available para download.",
         variant: "destructive",
       });
       return;
@@ -63,7 +63,7 @@ export default function ClientFinalAlbum() {
     setIsDownloading(true);
     toast({
       title: "Preparando download...",
-      description: `Baixando ${downloadUrls.length} fotos. Aguarde...`,
+      description: `Baixando ${downloadUrls.length} fotos. Please wait...`,
     });
 
     try {
@@ -105,7 +105,7 @@ export default function ClientFinalAlbum() {
       console.error('Erro ao criar ZIP:', error);
       toast({
         title: "Erro no download",
-        description: "Ocorreu um erro ao preparar o arquivo. Tente novamente.",
+        description: "Ocorreu um erro ao preparar o arquivo. Try again.",
         variant: "destructive",
       });
     } finally {
@@ -124,7 +124,7 @@ export default function ClientFinalAlbum() {
   if (!collection) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-background">
-        <h1 className="text-2xl font-bold mb-4">Álbum não encontrado</h1>
+        <h1 className="text-2xl font-bold mb-4">Album not found</h1>
         <Link href="/">
           <Button variant="outline">
             <ArrowLeft className="w-4 h-4 mr-2" />
@@ -143,14 +143,14 @@ export default function ClientFinalAlbum() {
         setIsAuthenticated(true);
         setPasswordError("");
       } else {
-        setPasswordError("Senha incorreta. Tente novamente.");
+        setPasswordError("Incorrect password. Try again.");
       }
     };
 
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="w-full max-w-md p-8 bg-card rounded-lg border">
-          <h1 className="text-2xl font-bold mb-2">Álbum Final</h1>
+          <h1 className="text-2xl font-bold mb-2">Final Album</h1>
           <p className="text-muted-foreground mb-6">Este álbum é protegido por senha</p>
           
           <form onSubmit={handlePasswordSubmit} className="space-y-4">
@@ -173,7 +173,7 @@ export default function ClientFinalAlbum() {
             </div>
             
             <Button type="submit" className="w-full">
-              Acessar Álbum
+              Acessar Album
             </Button>
           </form>
           
@@ -222,7 +222,7 @@ export default function ClientFinalAlbum() {
       return;
     }
 
-    if (confirm("Você confirma que aprova todas as fotos editadas? Esta ação não pode ser desfeita.")) {
+    if (confirm("You confirma que aprova todas as fotos editadas? Esta ação não pode ser desfeita.")) {
       await approveAlbumMutation.mutateAsync({ collectionId: collection.id });
     }
   };
@@ -249,7 +249,7 @@ export default function ClientFinalAlbum() {
         <div className="mb-8 p-6 bg-card rounded-lg border">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-xl font-semibold mb-1">Álbum Final - Fotos Editadas</h2>
+              <h2 className="text-xl font-semibold mb-1">Final Album - Fotos Editadas</h2>
               <p className="text-sm text-muted-foreground">
                 {completedCount} de {photos.length} fotos editadas
               </p>
@@ -278,16 +278,16 @@ export default function ClientFinalAlbum() {
                     </Button>
                     <Button onClick={handleApproveAlbum} size="lg" className="gap-2">
                       <CheckCircle2 className="w-5 h-5" />
-                      Aprovar Álbum Completo
+                      Aprovar Album Completo
                     </Button>
                     <Button 
-                      onClick={() => setShowShareDialog(true)} 
+                      onClick={() => setShowShareDaylog(true)} 
                       size="lg" 
                       variant="secondary"
                       className="gap-2"
                     >
                       <Share2 className="w-5 h-5" />
-                      Compartilhar Álbum
+                      Compartilhar Album
                     </Button>
                   </>
                 )}
@@ -306,7 +306,7 @@ export default function ClientFinalAlbum() {
         {/* Photos Grid */}
         {photos.length === 0 ? (
           <div className="text-center py-12 bg-card rounded-lg border">
-            <p className="text-muted-foreground">Nenhuma foto selecionada para edição ainda.</p>
+            <p className="text-muted-foreground">Nonea foto selecionada para edição ainda.</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -330,7 +330,7 @@ export default function ClientFinalAlbum() {
                 ) : (
                   <div className="w-full h-full flex items-center justify-center bg-muted">
                     <div className="text-center">
-                      <p className="text-sm text-muted-foreground">Em edição...</p>
+                      <p className="text-sm text-muted-foreground">In editing...</p>
                     </div>
                   </div>
                 )}
@@ -396,7 +396,7 @@ export default function ClientFinalAlbum() {
                 ) : (
                   <div className="text-center text-white">
                     <p className="text-lg mb-2">Esta foto ainda está sendo editada</p>
-                    <p className="text-sm text-white/60">Aguarde o fotógrafo finalizar</p>
+                    <p className="text-sm text-white/60">Aguarde o photographer finalizar</p>
                   </div>
                 )}
               </div>
@@ -412,18 +412,18 @@ export default function ClientFinalAlbum() {
 
       <Footer />
       
-      {/* Share Dialog */}
-      <Dialog open={showShareDialog} onOpenChange={setShowShareDialog}>
-        <DialogContent className="max-w-lg">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2">
+      {/* Share Daylog */}
+      <Daylog open={showShareDaylog} onOpenChange={setShowShareDaylog}>
+        <DaylogContent className="max-w-lg">
+          <DaylogHeader>
+            <DaylogTitle className="flex items-center gap-2">
               <Share2 className="w-5 h-5" />
-              Compartilhar Álbum
-            </DialogTitle>
-            <DialogDescription>
+              Compartilhar Album
+            </DaylogTitle>
+            <DaylogDescription>
               Compartilhe este álbum com amigos e familiares! Eles precisarão informar o email para visualizar.
-            </DialogDescription>
-          </DialogHeader>
+            </DaylogDescription>
+          </DaylogHeader>
           
           <div className="space-y-4">
             <div>
@@ -453,12 +453,12 @@ export default function ClientFinalAlbum() {
             <div className="bg-muted p-4 rounded-lg">
               <p className="text-sm text-muted-foreground">
                 📧 <strong>Captura de leads:</strong> Todos que acessarem este link precisarão informar o email. 
-                Você poderá ver a lista de visitantes no painel admin!
+                You poderá ver a lista de visitantes no painel admin!
               </p>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </DaylogContent>
+      </Daylog>
     </div>
   );
 }

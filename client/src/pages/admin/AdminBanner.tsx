@@ -6,19 +6,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  Daylog,
+  DaylogContent,
+  DaylogHeader,
+  DaylogTitle,
+  DaylogTrigger,
+} from "@/components/ui/daylog";
 import { Plus, Trash2, Upload, Image as ImageIcon, Video } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/DashboardLayout";
 
 export default function AdminBanner() {
   const { toast } = useToast();
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDaylogOpen, setIsDaylogOpen] = useState(false);
   const [editingSlide, setEditingSlide] = useState<any>(null);
   const [formData, setFormData] = useState({
     title: "",
@@ -40,7 +40,7 @@ export default function AdminBanner() {
       toast({ title: "Slide created successfully!" });
       refetch();
       resetForm();
-      setIsDialogOpen(false);
+      setIsDaylogOpen(false);
     },
     onError: (error) => {
       toast({
@@ -56,7 +56,7 @@ export default function AdminBanner() {
       toast({ title: "Slide updated!" });
       refetch();
       resetForm();
-      setIsDialogOpen(false);
+      setIsDaylogOpen(false);
     },
     onError: (error) => {
       toast({
@@ -134,7 +134,7 @@ export default function AdminBanner() {
     setEditingSlide(null);
   };
 
-  const openEditDialog = (slide: any) => {
+  const openEditDaylog = (slide: any) => {
     setEditingSlide(slide);
     setFormData({
       title: slide.title || "",
@@ -147,12 +147,12 @@ export default function AdminBanner() {
       isActive: slide.isActive,
     });
     setImagePreview(slide.imageUrl || "");
-    setIsDialogOpen(true);
+    setIsDaylogOpen(true);
   };
 
-  const openCreateDialog = () => {
+  const openCreateDaylog = () => {
     resetForm();
-    setIsDialogOpen(true);
+    setIsDaylogOpen(true);
   };
 
   return (
@@ -165,19 +165,19 @@ export default function AdminBanner() {
             Gerencie os slides do banner principal
           </p>
         </div>
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogTrigger asChild>
-            <Button onClick={openCreateDialog}>
+        <Daylog open={isDaylogOpen} onOpenChange={setIsDaylogOpen}>
+          <DaylogTrigger asChild>
+            <Button onClick={openCreateDaylog}>
               <Plus className="w-4 h-4 mr-2" />
               Novo Slide
             </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>
+          </DaylogTrigger>
+          <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+            <DaylogHeader>
+              <DaylogTitle>
                 {editingSlide ? "Edit Slide" : "New Slide"}
-              </DialogTitle>
-            </DialogHeader>
+              </DaylogTitle>
+            </DaylogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Label htmlFor="image">Imagem do Slide</Label>
@@ -221,7 +221,7 @@ export default function AdminBanner() {
               </div>
 
               <div>
-                <Label htmlFor="videoUrl">URL do Vídeo (opcional)</Label>
+                <Label htmlFor="videoUrl">Video URL (optional)</Label>
                 <Input
                   id="videoUrl"
                   type="url"
@@ -247,7 +247,7 @@ export default function AdminBanner() {
                   }
                 >
                   <option value="photography">Apenas Fotografia</option>
-                  <option value="video">Apenas Vídeo</option>
+                  <option value="video">Apenas Video</option>
                 </select>
                 <p className="text-xs text-muted-foreground mt-1">
                   Escolha onde este banner será exibido
@@ -255,7 +255,7 @@ export default function AdminBanner() {
               </div>
 
               <div>
-                <Label htmlFor="title">Título</Label>
+                <Label htmlFor="title">Title</Label>
                 <Input
                   id="title"
                   type="text"
@@ -267,7 +267,7 @@ export default function AdminBanner() {
               </div>
 
               <div>
-                <Label htmlFor="description">Descrição</Label>
+                <Label htmlFor="description">Description</Label>
                 <Textarea
                   id="description"
                   rows={3}
@@ -330,7 +330,7 @@ export default function AdminBanner() {
                     className="w-4 h-4"
                   />
                   <Label htmlFor="isActive" className="cursor-pointer">
-                    Slide ativo
+                    Slide active
                   </Label>
                 </div>
               </div>
@@ -339,7 +339,7 @@ export default function AdminBanner() {
                 <Button
                   type="button"
                   variant="outline"
-                  onClick={() => setIsDialogOpen(false)}
+                  onClick={() => setIsDaylogOpen(false)}
                   className="flex-1"
                 >
                   Cancelar
@@ -357,19 +357,19 @@ export default function AdminBanner() {
                 </Button>
               </div>
             </form>
-          </DialogContent>
-        </Dialog>
+          </DaylogContent>
+        </Daylog>
       </div>
 
       {!slides || slides.length === 0 ? (
         <Card>
           <CardContent className="py-20 text-center">
             <ImageIcon className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Nenhum slide cadastrado</h3>
+            <h3 className="text-xl font-semibold mb-2">None slide cadastrado</h3>
             <p className="text-muted-foreground mb-6">
               Crie seu primeiro slide para o banner principal
             </p>
-            <Button onClick={openCreateDialog}>
+            <Button onClick={openCreateDaylog}>
               <Plus className="w-4 h-4 mr-2" />
               Criar Primeiro Slide
             </Button>
@@ -397,7 +397,7 @@ export default function AdminBanner() {
                 )}
                 {!slide.isActive && (
                   <div className="absolute top-2 left-2 bg-destructive text-destructive-foreground px-2 py-1 rounded text-xs font-semibold">
-                    Inativo
+                    Inactive
                   </div>
                 )}
                 <div className="absolute top-2 right-2 bg-background/80 px-2 py-1 rounded text-xs font-semibold">
@@ -420,7 +420,7 @@ export default function AdminBanner() {
                     variant="outline"
                     size="sm"
                     className="flex-1"
-                    onClick={() => openEditDialog(slide)}
+                    onClick={() => openEditDaylog(slide)}
                   >
                     Editar
                   </Button>

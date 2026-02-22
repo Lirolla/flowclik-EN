@@ -75,14 +75,14 @@ export default function BookAppointment() {
   const handleSubmit = () => {
     if (!formData.serviceId || !formData.clientName || !formData.clientEmail || !formData.appointmentDate) {
       toast({
-        title: "Campos obrigatórios",
-        description: "Preencha todos os campos obrigatórios.",
+        title: "Required fields",
+        description: "Please fill in all required fields.",
         variant: "destructive",
       });
       return;
     }
 
-    // Combinar data e hora
+    // Combinar data e hour
     const dateTime = new Date(`${formData.appointmentDate}T${formData.appointmentTime || '10:00'}:00`);
 
     createAppointment.mutate({
@@ -111,7 +111,7 @@ export default function BookAppointment() {
               <CardContent className="py-20">
                 <CheckCircle className="w-20 h-20 mx-auto text-green-500 mb-6" />
                 <h1 className="text-4xl font-bold font-serif mb-4">
-                  Agendamento Enviado!
+                  Agendamento Shipped!
                 </h1>
                 <p className="text-lg text-muted-foreground mb-8">
                   Recebemos sua solicitação de agendamento. Entraremos em contato
@@ -120,12 +120,12 @@ export default function BookAppointment() {
                 <div className="flex gap-4 justify-center">
                   <Button asChild variant="outline">
                     <Link href="/services">
-                      <a>Ver Serviços</a>
+                      <a>Ver Services</a>
                     </Link>
                   </Button>
                   <Button asChild>
                     <Link href="/">
-                      <a>Voltar ao Início</a>
+                      <a>Back to Home</a>
                     </Link>
                   </Button>
                 </div>
@@ -143,7 +143,7 @@ export default function BookAppointment() {
       <div className="pt-8 pb-8 bg-gradient-to-br from-background to-muted/30">
         <div className="container max-w-4xl text-center">
           <h1 className="text-4xl md:text-5xl font-bold font-serif mb-4">
-            Agende seu Serviço
+            Agende seu Service
           </h1>
           <p className="text-lg text-muted-foreground">
             Preencha o formulário em 3 etapas simples
@@ -155,7 +155,7 @@ export default function BookAppointment() {
       <div className="container max-w-3xl py-8">
         <div className="flex items-center justify-center gap-4 mb-8">
           {[
-            { num: 1, label: "Serviço" },
+            { num: 1, label: "Service" },
             { num: 2, label: "Date" },
             { num: 3, label: "Details" },
           ].map((s, i) => (
@@ -194,14 +194,14 @@ export default function BookAppointment() {
             {step === 1 && (
               <div className="space-y-4">
                 <CardHeader className="p-0">
-                  <CardTitle>Escolha o Serviço</CardTitle>
+                  <CardTitle>Escolha o Service</CardTitle>
                   <CardDescription>
-                    Selecione o serviço que deseja contratar
+                    Select o serviço que deseja contratar
                   </CardDescription>
                 </CardHeader>
 
                 <div>
-                  <Label htmlFor="service">Serviço *</Label>
+                  <Label htmlFor="service">Service *</Label>
                   <Select
                     value={formData.serviceId}
                     onValueChange={(val) =>
@@ -209,7 +209,7 @@ export default function BookAppointment() {
                     }
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Selecione um serviço" />
+                      <SelectValue placeholder="Select um serviço" />
                     </SelectTrigger>
                     <SelectContent>
                       {services?.map((service) => (
@@ -256,7 +256,7 @@ export default function BookAppointment() {
               <div className="space-y-4">
                 <CardHeader className="p-0">
                   <CardTitle className="flex items-center gap-2">
-                    <Calendar className="w-5 h-5" /> Data e Horário
+                    <Calendar className="w-5 h-5" /> Data e Time
                   </CardTitle>
                   <CardDescription>
                     Escolha a data e horário preferidos
@@ -280,7 +280,7 @@ export default function BookAppointment() {
                   </div>
                   <div>
                     <Label htmlFor="time" className="flex items-center gap-2">
-                      <Clock className="w-4 h-4" /> Horário Preferido
+                      <Clock className="w-4 h-4" /> Time Preferido
                     </Label>
                     <Input
                       id="time"
@@ -373,7 +373,7 @@ export default function BookAppointment() {
                         eventLocation: e.target.value,
                       })
                     }
-                    placeholder="Endereço do evento"
+                    placeholder="Address do evento"
                   />
                 </div>
 
@@ -397,7 +397,7 @@ export default function BookAppointment() {
                   <div>
                     <Label htmlFor="duration" className="flex items-center gap-2">
                       <Timer className="w-4 h-4" />
-                      Duração Estimada
+                      Duration Estimada
                     </Label>
                     <Input
                       id="duration"
@@ -405,17 +405,17 @@ export default function BookAppointment() {
                       onChange={(e) =>
                         setFormData({ ...formData, estimatedDuration: e.target.value })
                       }
-                      placeholder="Ex: 2 horas"
+                      placeholder="Ex: 2 hours"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="notes">Observações</Label>
+                  <Label htmlFor="notes">Notes</Label>
                   <Textarea
                     id="notes"
                     rows={4}
-                    placeholder="Conte-nos mais sobre o que você precisa..."
+                    placeholder="Conte-nos mais sobre o que you precisa..."
                     value={formData.notes}
                     onChange={(e) =>
                       setFormData({ ...formData, notes: e.target.value })

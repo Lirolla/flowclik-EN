@@ -245,7 +245,7 @@ export const emailMarketingRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
-      // Verificar Resend API Key
+      // Verify Resend API Key
       if (!RESEND_API_KEY) {
         throw new TRPCError({ code: "BAD_REQUEST", message: "RESEND_API_KEY não configurada no servidor" });
       }
@@ -257,7 +257,7 @@ export const emailMarketingRouter = router({
         .limit(1);
       
       const client = clientList[0];
-      if (!client) throw new TRPCError({ code: "NOT_FOUND", message: "Cliente não encontrado" });
+      if (!client) throw new TRPCError({ code: "NOT_FOUND", message: "Client not found" });
       
       const resend = new Resend(RESEND_API_KEY);
       try {
@@ -307,7 +307,7 @@ export const emailMarketingRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
-      // Verificar Resend API Key
+      // Verify Resend API Key
       if (!RESEND_API_KEY) {
         throw new TRPCError({ code: "BAD_REQUEST", message: "RESEND_API_KEY não configurada no servidor" });
       }
@@ -319,7 +319,7 @@ export const emailMarketingRouter = router({
         .limit(1);
       
       const campaign = campaigns[0];
-      if (!campaign) throw new TRPCError({ code: "NOT_FOUND", message: "Campanha não encontrada" });
+      if (!campaign) throw new TRPCError({ code: "NOT_FOUND", message: "Campaign not found" });
       
       // Buscar destinatários
       let recipients: any[];
@@ -336,10 +336,10 @@ export const emailMarketingRouter = router({
       }
       
       if (recipients.length === 0) {
-        throw new TRPCError({ code: "BAD_REQUEST", message: "Nenhum destinatário encontrado" });
+        throw new TRPCError({ code: "BAD_REQUEST", message: "None destinatário encontrado" });
       }
       
-      // Atualizar status da campanha
+      // Update status da campanha
       await db.update(emailCampaigns)
         .set({ status: 'sending' })
         .where(eq(emailCampaigns.id, campaign.id));

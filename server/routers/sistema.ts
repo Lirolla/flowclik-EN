@@ -19,7 +19,7 @@ const sistemaProcedure = publicProcedure.use(({ ctx, next }) => {
   }
   throw new TRPCError({
     code: "FORBIDDEN",
-    message: "Acesso negado. Apenas super administradores podem acessar esta funcionalidade.",
+    message: "Access denied. Apenas super administradores podem acessar esta funcionalidade.",
   });
 });
 
@@ -29,12 +29,12 @@ export const sistemaRouter = router({
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-    // Total de tenants
+    // Total tenants
     const [{ totalTenants }] = await db
       .select({ totalTenants: count() })
       .from(tenants);
 
-    // Total de assinaturas ativas
+    // Total de signatures ativas
     const [{ activeSubscriptions }] = await db
       .select({ activeSubscriptions: count() })
       .from(subscriptions)
@@ -146,7 +146,7 @@ export const sistemaRouter = router({
         .limit(1);
 
       if (!ticket) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Ticket não encontrado" });
+        throw new TRPCError({ code: "NOT_FOUND", message: "Ticket not found" });
       }
 
       // Buscar TODAS as respostas (incluindo notas internas)
@@ -183,7 +183,7 @@ export const sistemaRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-      // Verificar se ticket existe
+      // Verify se ticket existe
       const [ticket] = await db
         .select()
         .from(supportTickets)
@@ -191,7 +191,7 @@ export const sistemaRouter = router({
         .limit(1);
 
       if (!ticket) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Ticket não encontrado" });
+        throw new TRPCError({ code: "NOT_FOUND", message: "Ticket not found" });
       }
 
       // Adicionar resposta
@@ -209,14 +209,14 @@ export const sistemaRouter = router({
         await db.execute(sql`UPDATE support_tickets SET status = 'in_progress', lastReplyAt = NOW(), lastReplyBy = ${userId} WHERE id = ${input.ticketId}`);
       }
 
-      // Enviar email de notificação ao fotógrafo (se não for nota interna)
+      // Enviar email de notification ao photographer (se não for nota interna)
       if (!input.isInternal) {
         try {
           const [ticketUser] = await db.select().from(users).where(eq(users.id, ticket.userId)).limit(1);
           if (ticketUser?.email) {
             sendTicketReplyNotification({
               photographerEmail: ticketUser.email,
-              photographerName: ticketUser.name || 'Fotógrafo',
+              photographerName: ticketUser.name || 'Photographer',
               ticketSubject: ticket.subject,
               responsePreview: input.message.substring(0, 200),
             }).catch(err => console.error('Erro email reply ticket:', err));

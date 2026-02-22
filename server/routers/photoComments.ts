@@ -33,7 +33,7 @@ export const photoCommentsRouter = router({
         .limit(1);
 
       if (!appointment || appointment.length === 0) {
-        throw new Error("Agendamento não encontrado ou email inválido");
+        throw new Error("Appointment not found ou email invalid");
       }
 
       await db.insert(photoComments).values({
@@ -110,7 +110,7 @@ export const photoCommentsRouter = router({
         .limit(1);
 
       if (!appointment || appointment.length === 0) {
-        throw new Error("Agendamento não encontrado ou email inválido");
+        throw new Error("Appointment not found ou email invalid");
       }
 
       return await db

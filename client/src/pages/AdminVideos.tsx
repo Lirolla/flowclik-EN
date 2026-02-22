@@ -7,46 +7,46 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
 import { Plus, Pencil, Trash2, Video } from "lucide-react";
 import { toast } from "sonner";
 
 export default function AdminVideos() {
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [daylogOpen, setDaylogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<any>(null);
 
   const { data: items, refetch } = trpc.portfolio.listAll.useQuery();
   const createMutation = trpc.portfolio.create.useMutation({
     onSuccess: () => {
-      toast.success("Vídeo criado com sucesso!");
+      toast.success("Video criado com sucesso!");
       refetch();
-      setDialogOpen(false);
+      setDaylogOpen(false);
       resetForm();
     },
     onError: (error) => {
-      toast.error(error.message || "Erro ao criar vídeo");
+      toast.error(error.message || "Erro ao criar video");
     },
   });
 
   const updateMutation = trpc.portfolio.update.useMutation({
     onSuccess: () => {
-      toast.success("Vídeo atualizado com sucesso!");
+      toast.success("Video atualizado com sucesso!");
       refetch();
-      setDialogOpen(false);
+      setDaylogOpen(false);
       resetForm();
     },
     onError: (error) => {
-      toast.error(error.message || "Erro ao atualizar vídeo");
+      toast.error(error.message || "Erro ao atualizar video");
     },
   });
 
   const deleteMutation = trpc.portfolio.delete.useMutation({
     onSuccess: () => {
-      toast.success("Vídeo excluído com sucesso!");
+      toast.success("Video excluído com sucesso!");
       refetch();
     },
     onError: (error) => {
-      toast.error(error.message || "Erro ao excluir vídeo");
+      toast.error(error.message || "Erro ao excluir video");
     },
   });
 
@@ -77,7 +77,7 @@ export default function AdminVideos() {
     setEditingItem(null);
   };
 
-  const handleOpenDialog = (item?: any) => {
+  const handleOpenDaylog = (item?: any) => {
     if (item) {
       setEditingItem(item);
       setFormData({
@@ -94,14 +94,14 @@ export default function AdminVideos() {
     } else {
       resetForm();
     }
-    setDialogOpen(true);
+    setDaylogOpen(true);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!formData.title || !formData.videoUrl) {
-      toast.error("Título e URL do vídeo são obrigatórios");
+      toast.error("Title e URL do video são requireds");
       return;
     }
 
@@ -126,7 +126,7 @@ export default function AdminVideos() {
   };
 
   const handleDelete = (id: number) => {
-    if (confirm("Tem certeza que deseja excluir este vídeo?")) {
+    if (confirm("Tem certeza que deseja excluir este video?")) {
       deleteMutation.mutate({ id });
     }
   };
@@ -138,12 +138,12 @@ export default function AdminVideos() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Vídeos do Portfólio</h1>
-            <p className="text-muted-foreground">Gerencie os vídeos do seu portfólio</p>
+            <h1 className="text-3xl font-bold">Videos do Portfólio</h1>
+            <p className="text-muted-foreground">Gerencie os videos do seu portfólio</p>
           </div>
-          <Button onClick={() => handleOpenDialog()}>
+          <Button onClick={() => handleOpenDaylog()}>
             <Plus className="w-4 h-4 mr-2" />
-            Novo Vídeo
+            Novo Video
           </Button>
         </div>
 
@@ -179,7 +179,7 @@ export default function AdminVideos() {
                   )}
                   {!item.isActive && (
                     <span className="bg-muted px-2 py-1 rounded">
-                      Inativo
+                      Inactive
                     </span>
                   )}
                 </div>
@@ -188,7 +188,7 @@ export default function AdminVideos() {
                     variant="outline"
                     size="sm"
                     className="flex-1"
-                    onClick={() => handleOpenDialog(item)}
+                    onClick={() => handleOpenDaylog(item)}
                   >
                     <Pencil className="w-3 h-3 mr-1" />
                     Editar
@@ -209,29 +209,29 @@ export default function AdminVideos() {
         {videos.length === 0 && (
           <Card className="p-12 text-center">
             <Video className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-            <h3 className="text-xl font-semibold mb-2">Nenhum vídeo cadastrado</h3>
+            <h3 className="text-xl font-semibold mb-2">None video cadastrado</h3>
             <p className="text-muted-foreground mb-4">
-              Comece adicionando seu primeiro vídeo ao portfólio
+              Comece adicionando seu primeiro video ao portfólio
             </p>
-            <Button onClick={() => handleOpenDialog()}>
+            <Button onClick={() => handleOpenDaylog()}>
               <Plus className="w-4 h-4 mr-2" />
-              Adicionar Vídeo
+              Adicionar Video
             </Button>
           </Card>
         )}
 
-        {/* Dialog */}
-        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>
-                {editingItem ? "Editar Vídeo" : "Novo Vídeo"}
-              </DialogTitle>
-            </DialogHeader>
+        {/* Daylog */}
+        <Daylog open={daylogOpen} onOpenChange={setDaylogOpen}>
+          <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+            <DaylogHeader>
+              <DaylogTitle>
+                {editingItem ? "Editar Video" : "Novo Video"}
+              </DaylogTitle>
+            </DaylogHeader>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
-                <Label htmlFor="title">Título *</Label>
+                <Label htmlFor="title">Title *</Label>
                 <Input
                   id="title"
                   value={formData.title}
@@ -241,7 +241,7 @@ export default function AdminVideos() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="videoUrl">URL do Vídeo (HLS/MP4) *</Label>
+                <Label htmlFor="videoUrl">Video URL (HLS/MP4) *</Label>
                 <Input
                   id="videoUrl"
                   type="url"
@@ -267,7 +267,7 @@ export default function AdminVideos() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="description">Descrição</Label>
+                <Label htmlFor="description">Description</Label>
                 <Textarea
                   id="description"
                   rows={3}
@@ -277,7 +277,7 @@ export default function AdminVideos() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="location">Localização</Label>
+                <Label htmlFor="location">Location</Label>
                 <Input
                   id="location"
                   placeholder="Ex: Londres, UK"
@@ -287,11 +287,11 @@ export default function AdminVideos() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="story">História/Contexto</Label>
+                <Label htmlFor="story">History/Contexto</Label>
                 <Textarea
                   id="story"
                   rows={4}
-                  placeholder="Conte a história por trás deste vídeo..."
+                  placeholder="Conte a história por trás deste video..."
                   value={formData.story}
                   onChange={(e) => setFormData({ ...formData, story: e.target.value })}
                 />
@@ -306,12 +306,12 @@ export default function AdminVideos() {
                   onChange={(e) => setFormData({ ...formData, sortOrder: parseInt(e.target.value) || 0 })}
                 />
                 <p className="text-xs text-muted-foreground">
-                  Maior número aparece primeiro
+                  Maior number aparece primeiro
                 </p>
               </div>
 
               <div className="flex items-center justify-between">
-                <Label htmlFor="isActive">Ativo</Label>
+                <Label htmlFor="isActive">Active</Label>
                 <Switch
                   id="isActive"
                   checked={formData.isActive}
@@ -320,7 +320,7 @@ export default function AdminVideos() {
               </div>
 
               <div className="flex items-center justify-between">
-                <Label htmlFor="showOnHome">Mostrar na Home</Label>
+                <Label htmlFor="showOnHome">Show na Home</Label>
                 <Switch
                   id="showOnHome"
                   checked={formData.showOnHome}
@@ -333,7 +333,7 @@ export default function AdminVideos() {
                   type="button"
                   variant="outline"
                   className="flex-1"
-                  onClick={() => setDialogOpen(false)}
+                  onClick={() => setDaylogOpen(false)}
                 >
                   Cancelar
                 </Button>
@@ -346,8 +346,8 @@ export default function AdminVideos() {
                 </Button>
               </div>
             </form>
-          </DialogContent>
-        </Dialog>
+          </DaylogContent>
+        </Daylog>
       </div>
     </DashboardLayout>
   );

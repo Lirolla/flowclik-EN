@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 /**
- * Hook para detectar se o domínio atual é flowclik.com (landing page)
+ * Hook para detectar se o domain atual é flowclik.com (landing page)
  * 
  * @returns true se for flowclik.com, false caso contrário
  */

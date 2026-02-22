@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogDescription, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,13 +7,13 @@ import { trpc } from "@/lib/trpc";
 import { useToast } from "@/hooks/use-toast";
 import { AlertCircle } from "lucide-react";
 
-interface CompleteProfileDialogProps {
+interface CompleteProfileDaylogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   user: any;
 }
 
-export default function CompleteProfileDialog({ open, onOpenChange, user }: CompleteProfileDialogProps) {
+export default function CompleteProfileDaylog({ open, onOpenChange, user }: CompleteProfileDaylogProps) {
   const { toast } = useToast();
   const utils = trpc.useUtils();
   
@@ -32,7 +32,7 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
   const updateProfileMutation = trpc.auth.updateProfile.useMutation({
     onSuccess: () => {
       toast({
-        title: "Perfil atualizado!",
+        title: "Profile atualizado!",
         description: "Seus dados foram salvos com sucesso.",
       });
       utils.auth.me.invalidate();
@@ -53,8 +53,8 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
     // Validação básica
     if (!formData.phone || !formData.zipCode || !formData.street || !formData.city || !formData.state) {
       toast({
-        title: "Campos obrigatórios",
-        description: "Por favor, preencha todos os campos obrigatórios.",
+        title: "Required fields",
+        description: "Por favor, preencha todos os campos requireds.",
         variant: "destructive",
       });
       return;
@@ -71,23 +71,23 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
   const isIncomplete = !user?.phone || !user?.zipCode || !user?.street || !user?.city || !user?.state;
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DialogHeader>
-          <DialogTitle className="flex items-center gap-2">
+    <Daylog open={open} onOpenChange={onOpenChange}>
+      <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DaylogHeader>
+          <DaylogTitle className="flex items-center gap-2">
             {isIncomplete && <AlertCircle className="w-5 h-5 text-yellow-500" />}
             Complete seus dados
-          </DialogTitle>
-          <DialogDescription>
+          </DaylogTitle>
+          <DaylogDescription>
             Para uma melhor experiência, precisamos de algumas informações adicionais.
-            Esses dados nos ajudam a enviar produtos físicos e manter contato.
-          </DialogDescription>
-        </DialogHeader>
+            Esses dados nos helpm a enviar produtos físicos e manter contato.
+          </DaylogDescription>
+        </DaylogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Contato */}
           <div className="space-y-3">
-            <h3 className="font-semibold text-sm">Contato</h3>
+            <h3 className="font-semibold text-sm">Contact</h3>
             <div className="grid gap-3">
               <div>
                 <Label htmlFor="phone">Telefone *</Label>
@@ -112,9 +112,9 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
             </div>
           </div>
 
-          {/* Endereço */}
+          {/* Address */}
           <div className="space-y-3">
-            <h3 className="font-semibold text-sm">Endereço</h3>
+            <h3 className="font-semibold text-sm">Address</h3>
             <div className="grid gap-3">
               <div>
                 <Label htmlFor="zipCode">CEP *</Label>
@@ -203,7 +203,7 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
             </Button>
           </div>
         </form>
-      </DialogContent>
-    </Dialog>
+      </DaylogContent>
+    </Daylog>
   );
 }

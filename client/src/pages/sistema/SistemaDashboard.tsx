@@ -10,7 +10,7 @@ export default function SistemaDashboard() {
   if (isLoading) {
     return (
       <div className="p-8">
-        <div className="text-center">Carregando...</div>
+        <div className="text-center">Loading...</div>
       </div>
     );
   }
@@ -19,8 +19,8 @@ export default function SistemaDashboard() {
     <SistemaLayout>
     <div className="p-8 max-w-7xl mx-auto">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Painel do Sistema</h1>
-        <p className="text-muted-foreground">Visão geral da plataforma FlowClik SaaS</p>
+        <h1 className="text-3xl font-bold mb-2">System Panel</h1>
+        <p className="text-muted-foreground">Vision geral da plataforma FlowClik SaaS</p>
       </div>
 
       {/* Cards de Estatísticas */}
@@ -28,7 +28,7 @@ export default function SistemaDashboard() {
         <Card className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-muted-foreground mb-1">Total de Fotógrafos</p>
+              <p className="text-sm text-muted-foreground mb-1">Total de Photographers</p>
               <p className="text-3xl font-bold">{dashboard?.totalPhotographers || 0}</p>
             </div>
             <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
@@ -52,8 +52,8 @@ export default function SistemaDashboard() {
         <Card className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-muted-foreground mb-1">Receita Mensal</p>
-              <p className="text-3xl font-bold">R$ {dashboard?.monthlyRevenue ? String(dashboard.monthlyRevenue).replace(".", ",") : "0,00"}</p>
+              <p className="text-sm text-muted-foreground mb-1">Revenue Mensal</p>
+              <p className="text-3xl font-bold">£ {dashboard?.monthlyRevenue ? String(dashboard.monthlyRevenue).replace(".", ",") : "0,00"}</p>
             </div>
             <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
               <DollarSign className="w-6 h-6 text-purple-600 dark:text-purple-400" />
@@ -64,7 +64,7 @@ export default function SistemaDashboard() {
         <Card className="p-6">
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm text-muted-foreground mb-1">Tickets Abertos</p>
+              <p className="text-sm text-muted-foreground mb-1">Tickets Opens</p>
               <p className="text-3xl font-bold">{dashboard?.openTickets || 0}</p>
             </div>
             <div className="p-3 bg-red-100 dark:bg-red-900/30 rounded-lg">
@@ -74,18 +74,18 @@ export default function SistemaDashboard() {
         </Card>
       </div>
 
-      {/* Fotógrafos por Plano */}
+      {/* Photographers por Plyear */}
       <Card className="p-6 mb-8">
-        <h2 className="text-xl font-bold mb-4">Fotógrafos por Plano</h2>
+        <h2 className="text-xl font-bold mb-4">Photographers por Plyear</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {dashboard?.photographersByPlan?.map((item: any) => (
             <div key={item.plan} className="p-4 bg-muted rounded-lg">
               <p className="text-sm text-muted-foreground mb-1">
-                {item.plan === "starter" && "Plano Básico (R$ 69,90/mês)"}
-                {item.plan === "cortesia" && "🎁 Plano Cortesia (Grátis)"}
-                {item.plan === "full" && "⭐ Plano Vitalício (Ilimitado)"}
-                {item.plan === "pro" && "Plano Pro"}
-                {item.plan === "enterprise" && "Plano Enterprise"}
+                {item.plan === "starter" && "Basic Plan (£ 69,90/month)"}
+                {item.plan === "cortesia" && "🎁 Plyear Cortesia (Free)"}
+                {item.plan === "full" && "⭐ Plyear Vitalício (Unlimited)"}
+                {item.plan === "pro" && "Plyear Pro"}
+                {item.plan === "enterprise" && "Plyear Enterprise"}
               </p>
               <p className="text-2xl font-bold">{item.count}</p>
             </div>
@@ -98,9 +98,9 @@ export default function SistemaDashboard() {
         <Link href="/system/photographers">
           <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer">
             <Users className="w-8 h-8 text-blue-600 mb-3" />
-            <h3 className="font-bold text-lg mb-2">Gerenciar Fotógrafos</h3>
+            <h3 className="font-bold text-lg mb-2">Gerenciar Photographers</h3>
             <p className="text-sm text-muted-foreground">
-              Ver todos os fotógrafos, planos e assinaturas
+              Ver todos os photographers, plyears e signatures
             </p>
           </Card>
         </Link>
@@ -110,7 +110,7 @@ export default function SistemaDashboard() {
             <AlertCircle className="w-8 h-8 text-purple-600 mb-3" />
             <h3 className="font-bold text-lg mb-2">Avisos Globais</h3>
             <p className="text-sm text-muted-foreground">
-              Enviar mensagens para todos os fotógrafos
+              Enviar mensagens para todos os photographers
             </p>
           </Card>
         </Link>
@@ -118,9 +118,9 @@ export default function SistemaDashboard() {
         <Link href="/system/tickets">
           <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer">
             <Package className="w-8 h-8 text-green-600 mb-3" />
-            <h3 className="font-bold text-lg mb-2">Tickets de Suporte</h3>
+            <h3 className="font-bold text-lg mb-2">Tickets de Support</h3>
             <p className="text-sm text-muted-foreground">
-              Ver e responder tickets dos fotógrafos
+              Ver e responder tickets dos photographers
             </p>
           </Card>
         </Link>

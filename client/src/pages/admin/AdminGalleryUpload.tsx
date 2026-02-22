@@ -33,17 +33,17 @@ export default function AdminGalleryUpload() {
 
   const utils = trpc.useUtils();
   const { data: collection, isLoading, error } = trpc.collections.getById.useQuery({ id: collectionId });
-  const { data: mediaList } = trpc.media.listByCollection.useQuery({ collectionId });
+  const { data: medayList } = trpc.meday.listByCollection.useQuery({ collectionId });
 
-  const uploadMutation = trpc.media.upload.useMutation({
+  const uploadMutation = trpc.meday.upload.useMutation({
     onSuccess: () => {
-      utils.media.listByCollection.invalidate({ collectionId });
+      utils.meday.listByCollection.invalidate({ collectionId });
     },
   });
 
-  const deleteMutation = trpc.media.delete.useMutation({
+  const deleteMutation = trpc.meday.delete.useMutation({
     onSuccess: () => {
-      utils.media.listByCollection.invalidate({ collectionId });
+      utils.meday.listByCollection.invalidate({ collectionId });
       toast({
         title: "Foto excluída",
         description: "A foto foi removida da galeria",
@@ -116,8 +116,8 @@ export default function AdminGalleryUpload() {
     try {
       // Comprimir imagem antes de enviar (resolve erro com fotos grandes 25MB+)
       const options = {
-        maxSizeMB: 2, // Máximo 2MB após compressão
-        maxWidthOrHeight: 4000, // Máximo 4000px (excelente qualidade)
+        maxSizeMB: 2, // Maximum 2MB após compressão
+        maxWidthOrHeight: 4000, // Maximum 4000px (excelente qualidade)
         useWebWorker: true, // Usar worker para não travar UI
         fileType: 'image/jpeg' as const,
       };
@@ -163,7 +163,7 @@ export default function AdminGalleryUpload() {
     
     if (pendingFiles.length === 0) {
       toast({
-        title: "Nenhuma foto para enviar",
+        title: "Nonea foto para enviar",
         description: "Todas as fotos já foram enviadas",
         variant: "default",
       });
@@ -182,7 +182,7 @@ export default function AdminGalleryUpload() {
       }
     }
 
-    // Mostrar notificação final
+    // Show notification final
     if (successCount > 0) {
       toast({
         title: "✅ Upload concluído!",
@@ -197,7 +197,7 @@ export default function AdminGalleryUpload() {
     }
   };
 
-  const handleDeleteMedia = (id: number) => {
+  const handleDeleteMeday = (id: number) => {
     if (confirm("Tem certeza que deseja excluir esta foto?")) {
       deleteMutation.mutate({ id });
     }
@@ -221,10 +221,10 @@ export default function AdminGalleryUpload() {
       <DashboardLayout>
       <div className="container mx-auto py-8">
         <div className="text-center text-red-500">
-          <p>Erro ao carregar galeria: {error?.message || "Galeria não encontrada"}</p>
+          <p>Error loading galeria: {error?.message || "Gallery not found"}</p>
           <p className="text-sm mt-2">ID: {collectionId}</p>
           <Button onClick={() => setLocation("/admin/galleries")} className="mt-4">
-            Voltar para Galerias
+            Voltar para Gallerys
           </Button>
         </div>
       </div>
@@ -243,7 +243,7 @@ export default function AdminGalleryUpload() {
           className="mb-4"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Voltar para Galerias
+          Voltar para Gallerys
         </Button>
 
         <div className="flex items-center justify-between">
@@ -259,7 +259,7 @@ export default function AdminGalleryUpload() {
             className="gap-2"
           >
             <ImageIcon className="w-4 h-4" />
-            Álbum Final
+            Final Album
           </Button>
         </div>
       </div>
@@ -279,7 +279,7 @@ export default function AdminGalleryUpload() {
           >
             <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-xl font-semibold mb-2">
-              Arraste fotos aqui ou clique para selecionar
+              Arraste fotos aqui or click to select
             </h3>
             <p className="text-muted-foreground mb-4">
               Formatos suportados: JPG, PNG, WEBP
@@ -330,7 +330,7 @@ export default function AdminGalleryUpload() {
                         <div className="flex-1 space-y-3">
                           <div className="grid grid-cols-2 gap-3">
                             <div>
-                              <Label>Título</Label>
+                              <Label>Title</Label>
                               <Input
                                 value={uploadFile.title}
                                 onChange={(e) =>
@@ -342,7 +342,7 @@ export default function AdminGalleryUpload() {
                               />
                             </div>
                             <div>
-                              <Label>Preço (R$)</Label>
+                              <Label>Price (£)</Label>
                               <Input
                                 type="number"
                                 value={uploadFile.price}
@@ -357,7 +357,7 @@ export default function AdminGalleryUpload() {
                           </div>
 
                           <div>
-                            <Label>Descrição (opcional)</Label>
+                            <Label>Description (optional)</Label>
                             <Input
                               value={uploadFile.description}
                               onChange={(e) =>
@@ -378,7 +378,7 @@ export default function AdminGalleryUpload() {
                         <div className="flex flex-col gap-2">
                           {uploadFile.uploaded ? (
                             <span className="text-sm text-green-500 font-semibold">
-                              ✓ Enviado
+                              ✓ Shipped
                             </span>
                           ) : uploadFile.uploading ? (
                             <Loader2 className="w-5 h-5 animate-spin" />
@@ -412,32 +412,32 @@ export default function AdminGalleryUpload() {
 
       {/* Existing Photos */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">Fotos na Galeria</h2>
+        <h2 className="text-2xl font-bold mb-4">Fotos na Gallery</h2>
         
-        {!mediaList || mediaList.length === 0 ? (
+        {!medayList || medayList.length === 0 ? (
           <Card>
             <CardContent className="py-12 text-center">
               <ImageIcon className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
               <p className="text-muted-foreground">
-                Nenhuma foto nesta galeria ainda
+                Nonea foto nesta galeria ainda
               </p>
             </CardContent>
           </Card>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {mediaList.map((media) => (
-              <Card key={media.id} className="overflow-hidden">
+            {medayList.map((meday) => (
+              <Card key={meday.id} className="overflow-hidden">
                 <div className="relative group">
                   <img
-                    src={media.thumbnailUrl || ''}
-                    alt={media.title}
+                    src={meday.thumbnailUrl || ''}
+                    alt={meday.title}
                     className="w-full h-48 object-cover"
                   />
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <Button
                       size="sm"
                       variant="destructive"
-                      onClick={() => handleDeleteMedia(media.id)}
+                      onClick={() => handleDeleteMeday(meday.id)}
                     >
                       <Trash2 className="w-4 h-4 mr-2" />
                       Excluir
@@ -445,10 +445,10 @@ export default function AdminGalleryUpload() {
                   </div>
                 </div>
                 <CardContent className="p-3">
-                  <p className="font-semibold text-sm truncate">{media.title}</p>
-                  {media.priceDigital && media.priceDigital > 0 && (
+                  <p className="font-semibold text-sm truncate">{meday.title}</p>
+                  {meday.priceDigital && meday.priceDigital > 0 && (
                     <p className="text-sm text-muted-foreground">
-                      R$ {(media.priceDigital || 0).toFixed(2)}
+                      £ {(meday.priceDigital || 0).toFixed(2)}
                     </p>
                   )}
                 </CardContent>

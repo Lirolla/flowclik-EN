@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogDescription, DaylogHeader, DaylogTitle, DaylogTrigger } from "@/components/ui/daylog";
 import { Briefcase, Plus, Pencil, Trash2, Clock, DollarSign } from "lucide-react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { CurrencyInput } from "@/components/CurrencyInput";
@@ -31,7 +31,7 @@ export default function AdminServices() {
       utils.services.getAll.invalidate();
       resetForm();
       setIsCreateOpen(false);
-      alert("Serviço criado com sucesso!");
+      alert("Service criado com sucesso!");
     },
     onError: (error) => {
       alert(`Erro: ${error.message}`);
@@ -72,7 +72,7 @@ export default function AdminServices() {
 
   const handleCreate = () => {
     if (!name || !slug) {
-      alert("Nome e slug são obrigatórios");
+      alert("Nome e slug são requireds");
       return;
     }
 
@@ -142,27 +142,27 @@ export default function AdminServices() {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <Briefcase className="w-8 h-8" />
-            Serviços
+            Services
           </h1>
-          <p className="text-muted-foreground mt-2">Gerencie os serviços fotográficos oferecidos</p>
+          <p className="text-muted-foreground mt-2">Gerencie os photography services oferecidos</p>
         </div>
 
-        <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-          <DialogTrigger asChild>
+        <Daylog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
+          <DaylogTrigger asChild>
             <Button size="lg">
               <Plus className="w-4 h-4 mr-2" />
-              Novo Serviço
+              Novo Service
             </Button>
-          </DialogTrigger>
-          <DialogContent className="max-w-2xl">
-            <DialogHeader>
-              <DialogTitle>Criar Novo Serviço</DialogTitle>
-              <DialogDescription>Preencha os dados do novo serviço</DialogDescription>
-            </DialogHeader>
+          </DaylogTrigger>
+          <DaylogContent className="max-w-2xl">
+            <DaylogHeader>
+              <DaylogTitle>Criar Novo Service</DaylogTitle>
+              <DaylogDescription>Preencha os dados do novo serviço</DaylogDescription>
+            </DaylogHeader>
 
             <div className="space-y-4 mt-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Nome do Serviço *</Label>
+                <Label htmlFor="name">Nome do Service *</Label>
                 <Input
                   id="name"
                   value={name}
@@ -182,18 +182,18 @@ export default function AdminServices() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="description">Descrição</Label>
+                <Label htmlFor="description">Description</Label>
                 <Textarea
                   id="description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Descrição do serviço..."
+                  placeholder="Description do serviço..."
                   rows={3}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="serviceType">Tipo de Serviço *</Label>
+                <Label htmlFor="serviceType">Tipo de Service *</Label>
                 <select
                   id="serviceType"
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -201,8 +201,8 @@ export default function AdminServices() {
                   onChange={(e) => setServiceType(e.target.value as "photography" | "video" | "both")}
                 >
                   <option value="photography">📷 Fotografia</option>
-                  <option value="video">🎥 Vídeo</option>
-                  <option value="both">📷🎥 Fotografia + Vídeo</option>
+                  <option value="video">🎥 Video</option>
+                  <option value="both">📷🎥 Fotografia + Video</option>
                 </select>
               </div>
 
@@ -215,7 +215,7 @@ export default function AdminServices() {
                 />
 
                 <div className="space-y-2">
-                  <Label htmlFor="duration">Duração (minutos)</Label>
+                  <Label htmlFor="duration">Duration (minutes)</Label>
                   <Input
                     id="duration"
                     type="number"
@@ -235,29 +235,29 @@ export default function AdminServices() {
                   className="w-4 h-4"
                 />
                 <Label htmlFor="active" className="cursor-pointer">
-                  Ativo (visível no site)
+                  Active (visible on site)
                 </Label>
               </div>
 
               <Button onClick={handleCreate} className="w-full" disabled={createMutation.isPending}>
-                {createMutation.isPending ? "Creating..." : "Criar Serviço"}
+                {createMutation.isPending ? "Creating..." : "Criar Service"}
               </Button>
             </div>
-          </DialogContent>
-        </Dialog>
+          </DaylogContent>
+        </Daylog>
       </div>
 
-      {/* Edit Dialog */}
-      <Dialog open={editingId !== null} onOpenChange={(open) => !open && setEditingId(null)}>
-        <DialogContent className="max-w-2xl">
-          <DialogHeader>
-            <DialogTitle>Editar Serviço</DialogTitle>
-            <DialogDescription>Atualize os dados do serviço</DialogDescription>
-          </DialogHeader>
+      {/* Edit Daylog */}
+      <Daylog open={editingId !== null} onOpenChange={(open) => !open && setEditingId(null)}>
+        <DaylogContent className="max-w-2xl">
+          <DaylogHeader>
+            <DaylogTitle>Editar Service</DaylogTitle>
+            <DaylogDescription>Atualize os dados do serviço</DaylogDescription>
+          </DaylogHeader>
 
           <div className="space-y-4 mt-4">
             <div className="space-y-2">
-              <Label htmlFor="edit-name">Nome do Serviço *</Label>
+              <Label htmlFor="edit-name">Nome do Service *</Label>
               <Input
                 id="edit-name"
                 value={name}
@@ -277,12 +277,12 @@ export default function AdminServices() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="edit-description">Descrição</Label>
+              <Label htmlFor="edit-description">Description</Label>
               <Textarea
                 id="edit-description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Descrição do serviço..."
+                placeholder="Description do serviço..."
                 rows={3}
               />
             </div>
@@ -296,7 +296,7 @@ export default function AdminServices() {
               />
 
               <div className="space-y-2">
-                <Label htmlFor="edit-duration">Duração (minutos)</Label>
+                <Label htmlFor="edit-duration">Duration (minutes)</Label>
                 <Input
                   id="edit-duration"
                   type="number"
@@ -316,20 +316,20 @@ export default function AdminServices() {
                 className="w-4 h-4"
               />
               <Label htmlFor="edit-active" className="cursor-pointer">
-                Ativo (visível no site)
+                Active (visible on site)
               </Label>
             </div>
 
             <Button onClick={handleUpdate} className="w-full" disabled={updateMutation.isPending}>
-              {updateMutation.isPending ? "Updating..." : "Atualizar Serviço"}
+              {updateMutation.isPending ? "Updating..." : "Atualizar Service"}
             </Button>
           </div>
-        </DialogContent>
-      </Dialog>
+        </DaylogContent>
+      </Daylog>
 
       {/* Lista de serviços */}
       {isLoading ? (
-        <div className="text-center py-12">Carregando...</div>
+        <div className="text-center py-12">Loading...</div>
       ) : services && services.length > 0 ? (
         <div className="grid gap-4">
           {services.map((service) => (
@@ -362,11 +362,11 @@ export default function AdminServices() {
                       )}
                       {service.isActive ? (
                         <span className="text-xs bg-green-500/20 text-green-500 px-2 py-1 rounded">
-                          Ativo
+                          Active
                         </span>
                       ) : (
                         <span className="text-xs bg-red-500/20 text-red-500 px-2 py-1 rounded">
-                          Inativo
+                          Inactive
                         </span>
                       )}
                     </div>
@@ -397,13 +397,13 @@ export default function AdminServices() {
         <Card>
           <CardContent className="py-12 text-center">
             <Briefcase className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Nenhum serviço cadastrado</h3>
+            <h3 className="text-xl font-semibold mb-2">None serviço cadastrado</h3>
             <p className="text-muted-foreground mb-4">
               Crie seu primeiro serviço para começar a oferecer aos clientes
             </p>
             <Button onClick={() => setIsCreateOpen(true)}>
               <Plus className="w-4 h-4 mr-2" />
-              Criar Primeiro Serviço
+              Criar Primeiro Service
             </Button>
           </CardContent>
         </Card>

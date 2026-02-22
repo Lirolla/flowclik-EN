@@ -12,24 +12,24 @@ const docsStructure: Record<string, { icon: any; articles: { id: string; title: 
       { id: "login", title: "Como fazer login", content: `
 # Como fazer login no sistema
 
-1. Acesse seu subdomínio: **seusite.flowclik.com**
+1. Acesse seu subdomain: **seusite.flowclik.com**
 2. Clique em "Sign in" no menu superior
 3. Digite seu email e senha cadastrados
 4. Clique em "Sign in"
 
 **Esqueceu a senha?**
-- Clique em "Esqueci minha senha" na tela de login
+- Clique em "Forgot my password" na tela de login
 - Digite seu email
-- Você receberá um link para redefinir
+- You receberá um link para redefinir
 
 **Dica:** Salve seu site nos favoritos para acesso rápido!
       ` },
-      { id: "configurar-perfil", title: "Configurar perfil e personalização", content: `
-# Configurar perfil e personalização
+      { id: "configurar-profile", title: "Configurar profile e customisation", content: `
+# Configurar profile e customisation
 
 ## Personalize seu site
 
-1. Acesse **Configurações** no menu lateral
+1. Acesse **Settings** no menu lateral
 2. Faça upload do seu **logo**
 3. Escolha as **cores da sua marca**
 4. Configure informações de contato
@@ -50,14 +50,14 @@ const docsStructure: Record<string, { icon: any; articles: { id: string; title: 
 2. Clique em **+ Novo Agendamento**
 3. Preencha os dados:
    - Cliente (ou crie novo)
-   - Serviço
+   - Service
    - Data e horário
    - Local
 4. Clique em **Salvar**
 
 O cliente receberá email de confirmação automaticamente!
 
-**Dica:** Configure seus serviços antes em **Serviços** no menu.
+**Dica:** Configure seus serviços antes em **Services** no menu.
       ` },
     ],
   },
@@ -67,19 +67,19 @@ O cliente receberá email de confirmação automaticamente!
       { id: "criar-galeria", title: "Como criar uma galeria", content: `
 # Como criar uma galeria
 
-1. Acesse **Galeria** no menu lateral
-2. Clique em **+ Nova Galeria**
+1. Acesse **Gallery** no menu lateral
+2. Clique em **+ Nova Gallery**
 3. Preencha:
    - Nome da galeria
-   - Descrição (opcional)
-   - Senha de acesso (opcional)
+   - Description (optional)
+   - Senha de acesso (optional)
 4. Clique em **Criar**
 
-Pronto! Agora você pode fazer upload de fotos.
+Pronto! Agora you pode fazer upload de fotos.
 
 **Tipos de galeria:**
 - **Privada:** Apenas com senha
-- **Pública:** Qualquer pessoa com o link
+- **Pública:** Wedlquer pessoa com o link
       ` },
       { id: "upload-fotos", title: "Upload de fotos em massa", content: `
 # Upload de fotos em massa
@@ -92,9 +92,9 @@ Pronto! Agora você pode fazer upload de fotos.
 
 **Dicas:**
 - Suporta JPG, PNG, WEBP
-- Máximo 50 fotos por vez
+- Maximum 50 fotos por vez
 - Sistema redimensiona automaticamente
-- Marca d'água opcional em **Configurações**
+- Marca d'água optional em **Settings**
       ` },
       { id: "compartilhar-galeria", title: "Compartilhar galeria com cliente", content: `
 # Compartilhar galeria com cliente
@@ -109,7 +109,7 @@ Pronto! Agora você pode fazer upload de fotos.
 - Mais segurança para fotos privadas
 
 **Sem senha:**
-- Qualquer pessoa com link acessa
+- Wedlquer pessoa com link acessa
 - Ideal para álbuns públicos
       ` },
       { id: "habilitar-vendas", title: "Habilitar vendas na galeria", content: `
@@ -118,7 +118,7 @@ Pronto! Agora você pode fazer upload de fotos.
 1. Acesse **Vendas de Eventos** no menu
 2. Encontre o evento/galeria
 3. Clique em **Ativar Vendas**
-4. Defina o preço por foto (ex: R$ 25,00)
+4. Defina o preço por foto (ex: £ 25,00)
 5. Copie o link de vendas
 6. Envie para clientes interessados
 
@@ -140,17 +140,17 @@ Pronto! Agora você pode fazer upload de fotos.
 
 1. Acesse **Agendamentos**
 2. Clique em **+ Novo Agendamento**
-3. Selecione ou crie cliente
+3. Select ou crie cliente
 4. Escolha o serviço
 5. Defina data, horário e local
-6. Adicione observações (opcional)
+6. Adicione observações (optional)
 7. Clique em **Salvar**
 
 **Status do agendamento:**
 - **Pendente:** Aguardando confirmação
 - **Confirmado:** Cliente confirmou
 - **Concluído:** Ensaio realizado
-- **Cancelado:** Agendamento cancelado
+- **Cancelled:** Agendamento cancelled
       ` },
       { id: "gerenciar-status", title: "Gerenciar status de agendamentos", content: `
 # Gerenciar status de agendamentos
@@ -158,12 +158,12 @@ Pronto! Agora você pode fazer upload de fotos.
 1. Abra o agendamento
 2. Clique em **Mudar Status**
 3. Escolha o novo status
-4. Cliente recebe notificação automática
+4. Cliente recebe notification automática
 
 **Fluxo recomendado:**
 1. Pendente → Confirmado (cliente pagou sinal)
 2. Confirmado → Concluído (ensaio realizado)
-3. Concluído → Entregue (fotos enviadas)
+3. Concluído → Delivered (fotos enviadas)
       ` },
       { id: "pagamentos-agendamento", title: "Gerenciar pagamentos", content: `
 # Gerenciar pagamentos de agendamentos
@@ -173,7 +173,7 @@ Pronto! Agora você pode fazer upload de fotos.
 3. Clique em **Enviar Link de Pagamento**
 4. Cliente recebe link por email
 5. Paga com cartão (Stripe)
-6. Você recebe notificação
+6. You recebe notification
 
 **Tipos de pagamento:**
 - **Sinal:** Parte do valor (ex: 50%)
@@ -194,7 +194,7 @@ Pronto! Agora você pode fazer upload de fotos.
    - Nome completo
    - Email
    - Telefone
-   - Endereço (opcional)
+   - Address (optional)
 4. Clique em **Salvar**
 
 **Dica:** Cadastre clientes antes de criar agendamentos para agilizar!
@@ -207,7 +207,7 @@ Pronto! Agora você pode fazer upload de fotos.
 3. Clique em **Enviar Contrato**
 4. Cliente recebe por email
 5. Assina digitalmente
-6. Você recebe notificação
+6. You recebe notification
 
 **Vantagens:**
 - Sem impressão
@@ -220,11 +220,11 @@ Pronto! Agora você pode fazer upload de fotos.
 1. Abra o cliente ou agendamento
 2. Clique em **Mensagens**
 3. Digite sua mensagem
-4. Cliente recebe notificação
+4. Cliente recebe notification
 
 **Recursos:**
 - Histórico completo de conversas
-- Notificações em tempo real
+- Notifications em tempo real
 - Anexar fotos e documentos
       ` },
     ],
@@ -235,20 +235,20 @@ Pronto! Agora você pode fazer upload de fotos.
       { id: "configurar-servicos", title: "Configurar serviços e preços", content: `
 # Configurar serviços e preços
 
-1. Acesse **Serviços** no menu
-2. Clique em **+ Novo Serviço**
+1. Acesse **Services** no menu
+2. Clique em **+ Novo Service**
 3. Preencha:
    - Nome (ex: "Ensaio Casal")
-   - Descrição
+   - Description
    - Preço
-   - Duração
+   - Duration
 4. Clique em **Salvar**
 
 **Exemplos de serviços:**
-- Ensaio individual: R$ 300
-- Ensaio casal: R$ 450
-- Casamento: R$ 2.500
-- Formatura: R$ 1.800
+- Ensaio individual: £ 300
+- Ensaio casal: £ 450
+- Casamento: £ 2.500
+- Formatura: £ 1.800
       ` },
       { id: "portfolio", title: "Gerenciar portfólio", content: `
 # Gerenciar portfólio
@@ -261,21 +261,21 @@ Pronto! Agora você pode fazer upload de fotos.
 
 **Dicas:**
 - Use suas melhores fotos
-- Máximo 20 fotos no portfólio
+- Maximum 20 fotos no portfólio
 - Atualize regularmente
 - Mostre variedade de trabalhos
       ` },
-      { id: "dominio-proprio", title: "Configurar domínio próprio", content: `
-# Configurar domínio próprio
+      { id: "dominio-proprio", title: "Configurar domain próprio", content: `
+# Configurar domain próprio
 
-**Você tem:** seusite.flowclik.com
+**You tem:** seusite.flowclik.com
 **Quer ter:** www.seusite.com.br
 
-## Passo a passo:
+## Step by step:
 
-1. Compre um domínio (Registro.br, GoDaddy, etc)
-2. Acesse **Configurações** > **Domínio**
-3. Digite seu domínio
+1. Compre um domain (Record.br, GoDaddy, etc)
+2. Acesse **Settings** > **Sunínio**
+3. Digite seu domain
 4. Configure DNS conforme instruções
 5. Aguarde propagação (24-48h)
 
@@ -286,7 +286,7 @@ Nome: @
 Valor: [IP fornecido pelo sistema]
 \`\`\`
 
-**Dúvidas?** Entre em contato com suporte!
+**Questions?** Get in touch com suporte!
       ` },
     ],
   },
@@ -394,7 +394,7 @@ export default function Docs() {
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-sm text-zinc-500 mb-8">
             <Link href="/docs">
-              <a className="hover:text-white transition">Documentação</a>
+              <a className="hover:text-white transition">Documentation</a>
             </Link>
             <ChevronRight className="w-4 h-4" />
             <span>{selectedCategory}</span>

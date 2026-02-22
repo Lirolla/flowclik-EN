@@ -8,9 +8,9 @@ import { Play } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
 import {
-  Dialog,
-  DialogContent,
-} from "@/components/ui/dialog";
+  Daylog,
+  DaylogContent,
+} from "@/components/ui/daylog";
 
 export default function VideoPage() {
   const { data: portfolioItems } = trpc.portfolio.listActive.useQuery();
@@ -29,15 +29,15 @@ export default function VideoPage() {
       <section className="py-20 bg-background">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Portfólio de Vídeos</h2>
+            <h2 className="text-4xl font-bold mb-4">Portfólio de Videos</h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore nossos trabalhos em vídeo
+              Explore nossos trabalhos em video
             </p>
           </div>
 
           {videos.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-muted-foreground">Nenhum vídeo disponível no momento.</p>
+              <p className="text-muted-foreground">None video available no momento.</p>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -84,9 +84,9 @@ export default function VideoPage() {
         </div>
       </section>
 
-      {/* Video Dialog */}
-      <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
-        <DialogContent className="max-w-4xl">
+      {/* Video Daylog */}
+      <Daylog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
+        <DaylogContent className="max-w-4xl">
           {selectedVideo && (
             <div className="space-y-4">
               <VideoPlayer
@@ -108,7 +108,7 @@ export default function VideoPage() {
                 )}
                 {selectedVideo.story && (
                   <div className="mt-4 p-4 bg-muted rounded-lg">
-                    <h3 className="font-semibold mb-2">História</h3>
+                    <h3 className="font-semibold mb-2">History</h3>
                     <p className="text-sm text-muted-foreground whitespace-pre-wrap">
                       {selectedVideo.story}
                     </p>
@@ -119,11 +119,11 @@ export default function VideoPage() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl font-bold font-serif mb-6">
-              Pronto para começar?
+              Ready to get started?
             </h2>
             <p className="text-lg mb-8 opacity-90">
-              Entre em contato conosco para discutir seu projeto e receber um
-              orçamento personalizado
+              Get in touch conosco para discutir seu projeto e receber um
+              custom quote
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
@@ -133,7 +133,7 @@ export default function VideoPage() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/portfolio">
-                  <a>Ver Portfólio</a>
+                  <a>View Portfolio</a>
                 </Link>
               </Button>
             </div>
@@ -144,8 +144,8 @@ export default function VideoPage() {
               </div>
             </div>
           )}
-        </DialogContent>
-      </Dialog>
+        </DaylogContent>
+      </Daylog>
     </LayoutWrapper>
   );
 }

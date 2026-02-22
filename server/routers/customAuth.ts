@@ -15,7 +15,7 @@ export const customAuthRouter = router({
   register: publicProcedure
     .input(
       z.object({
-        email: z.string().email("Email inválido"),
+        email: z.string().email("Invalid email"),
         password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres"),
         name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
         tenantId: z.number().optional(), // Para associar a um tenant específico
@@ -25,7 +25,7 @@ export const customAuthRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-      // Verificar se email já existe
+      // Check if email already exists
       const [existingUser] = await db
         .select({ id: users.id })
         .from(users)
@@ -97,7 +97,7 @@ export const customAuthRouter = router({
   login: publicProcedure
     .input(
       z.object({
-        email: z.string().email("Email inválido"),
+        email: z.string().email("Invalid email"),
         password: z.string().min(1, "Senha obrigatória"),
       })
     )
@@ -128,7 +128,7 @@ export const customAuthRouter = router({
         });
       }
 
-      // Verificar senha
+      // Verify senha
       const passwordMatch = await bcrypt.compare(input.password, user.password);
 
       if (!passwordMatch) {
@@ -223,7 +223,7 @@ export const customAuthRouter = router({
     return { success: true };
   }),
 
-  // Alterar senha
+  // Change password
   changePassword: protectedProcedure
     .input(
       z.object({
@@ -249,10 +249,10 @@ export const customAuthRouter = router({
         .limit(1);
 
       if (!user || !user.password) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Usuário não encontrado" });
+        throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
       }
 
-      // Verificar senha atual
+      // Verify senha atual
       const passwordMatch = await bcrypt.compare(input.currentPassword, user.password);
 
       if (!passwordMatch) {

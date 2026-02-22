@@ -118,7 +118,7 @@ export default function AdminFinalAlbum() {
       </Link>
 
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Álbum Final</h1>
+        <h1 className="text-3xl font-bold mb-2">Final Album</h1>
         <p className="text-muted-foreground">
           {collection?.name} - Fotos editadas finais do projeto
         </p>
@@ -132,7 +132,7 @@ export default function AdminFinalAlbum() {
             Enviar Fotos Finais Editadas
           </h3>
           <p className="text-sm text-muted-foreground mb-4">
-            Arraste fotos aqui ou clique para selecionar
+            Arraste fotos aqui or click to select
           </p>
           <input
             type="file"
@@ -156,7 +156,7 @@ export default function AdminFinalAlbum() {
       {/* Photos Grid */}
       <div className="mb-4 flex items-center justify-between">
         <h2 className="text-xl font-semibold">
-          Fotos no Álbum ({finalPhotos?.length || 0})
+          Fotos no Album ({finalPhotos?.length || 0})
         </h2>
       </div>
 
@@ -191,7 +191,7 @@ export default function AdminFinalAlbum() {
       ) : (
         <div className="text-center py-12 bg-card rounded-lg border">
           <p className="text-muted-foreground">
-            Nenhuma foto no álbum final ainda. Faça upload das fotos editadas acima.
+            Nonea foto no álbum final ainda. Faça upload das fotos editadas acima.
           </p>
         </div>
       )}

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Daylog, DaylogContent, DaylogHeader, DaylogTitle, DaylogDescription } from "@/components/ui/daylog";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, CreditCard, Clock, CheckCircle } from "lucide-react";
 import { trpc } from "@/lib/trpc";
@@ -15,9 +15,9 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
   const [isLoading, setIsLoading] = useState(false);
   
   // createCheckoutSession não implementado para Assas
-  // const createCheckout = trpc.assinaturas.createCheckoutSession.useMutation(...);
+  // const createCheckout = trpc.signatures.createCheckoutSession.useMutation(...);
   const createCheckout = { mutate: () => {
-    toast.error("Checkout session não disponível. Entre em contato com o suporte.");
+    toast.error("Checkout session not available. Please contact support.");
   } };
 
   const handleSubscribe = async (plan: "basic") => {
@@ -31,9 +31,9 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
   const isWarning = daysRemaining !== undefined && daysRemaining > 0 && daysRemaining <= 3;
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose ? () => onClose() : undefined}>
-      <DialogContent className="sm:max-w-lg bg-gray-900 border-gray-800" onInteractOutside={(e) => isExpired && e.preventDefault()}>
-        <DialogHeader className="text-center">
+    <Daylog open={isOpen} onOpenChange={onClose ? () => onClose() : undefined}>
+      <DaylogContent className="sm:max-w-lg bg-gray-900 border-gray-800" onInteractOutside={(e) => isExpired && e.preventDefault()}>
+        <DaylogHeader className="text-center">
           <div className="flex justify-center mb-4">
             {isExpired ? (
               <div className="p-4 bg-red-500/20 rounded-full">
@@ -45,29 +45,29 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
               </div>
             )}
           </div>
-          <DialogTitle className="text-2xl font-bold text-white">
-            {isExpired ? "Período de Teste Expirado" : "Seu Período de Teste Está Acabando"}
-          </DialogTitle>
-          <DialogDescription className="text-gray-400 mt-2">
+          <DaylogTitle className="text-2xl font-bold text-white">
+            {isExpired ? "Trial Period Expired" : "Your Trial Period is Ending"}
+          </DaylogTitle>
+          <DaylogDescription className="text-gray-400 mt-2">
             {isExpired ? (
-              "Seu período de teste de 7 dias terminou. Para continuar usando o FlowClik, escolha um plano abaixo."
+              "Your 7-day trial has ended. To continue using FlowClik, choose a plan below."
             ) : (
-              `Restam apenas ${daysRemaining} dia${daysRemaining !== 1 ? 's' : ''} do seu período de teste. Assine agora para não perder acesso!`
+              `Only ${daysRemaining} day${daysRemaining !== 1 ? 's' : ''} of your trial period. Subscribe now to keep your access!`
             )}
-          </DialogDescription>
-        </DialogHeader>
+          </DaylogDescription>
+        </DaylogHeader>
 
         <div className="space-y-4 mt-6">
-          {/* Plano Básico */}
+          {/* Basic Plan */}
           <div className="p-4 rounded-lg border border-purple-500/50 bg-purple-500/10">
             <div className="flex items-center justify-between mb-3">
               <div>
-                <h3 className="font-semibold text-white">Plano Básico</h3>
+                <h3 className="font-semibold text-white">Basic Plan</h3>
                 <p className="text-sm text-gray-400">Perfeito para começar</p>
               </div>
               <div className="text-right">
-                <span className="text-2xl font-bold text-white">R$ 69,90</span>
-                <span className="text-gray-400">/mês</span>
+                <span className="text-2xl font-bold text-white">£ 69,90</span>
+                <span className="text-gray-400">/month</span>
               </div>
             </div>
             <ul className="space-y-2 mb-4">
@@ -81,7 +81,7 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
               </li>
               <li className="flex items-center text-sm text-gray-300">
                 <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                Suporte por email
+                Support por email
               </li>
             </ul>
             <Button
@@ -99,11 +99,11 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
         {!isExpired && onClose && (
           <div className="mt-4 text-center">
             <Button variant="ghost" onClick={onClose} className="text-gray-400 hover:text-white">
-              Continuar testando ({daysRemaining} dias restantes)
+              Continuar testando ({daysRemaining} days remaining)
             </Button>
           </div>
         )}
-      </DialogContent>
-    </Dialog>
+      </DaylogContent>
+    </Daylog>
   );
 }

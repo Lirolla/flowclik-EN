@@ -60,7 +60,7 @@ export default function SistemaLogin() {
             FlowClik Sistema
           </CardTitle>
           <p className="text-gray-400 text-sm">
-            Acesso restrito ao administrador master
+            Restricted access ao administrador master
           </p>
         </CardHeader>
         <CardContent>

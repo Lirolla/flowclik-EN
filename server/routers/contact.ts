@@ -12,16 +12,16 @@ export const contactRouter = router({
   sendMessage: publicProcedure
     .input(
       z.object({
-        name: z.string().min(1, "Nome é obrigatório"),
-        email: z.string().email("Email inválido"),
+        name: z.string().min(1, "Nome é required"),
+        email: z.string().email("Invalid email"),
         phone: z.string().optional(),
-        subject: z.string().min(1, "Assunto é obrigatório"),
+        subject: z.string().min(1, "Assunto é required"),
         message: z.string().min(10, "Mensagem deve ter pelo menos 10 caracteres"),
       })
     )
     .mutation(async ({ input, ctx }) => {
       const content = `
-**Nova mensagem de contato**
+**New message de contato**
 
 **Nome:** ${input.name}
 **Email:** ${input.email}
@@ -38,7 +38,7 @@ ${input.message}
       });
 
       if (!success) {
-        throw new Error("Erro ao enviar mensagem. Tente novamente mais tarde.");
+        throw new Error("Erro ao enviar mensagem. Try again mais tarde.");
       }
 
       return { success: true };

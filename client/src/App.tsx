@@ -16,9 +16,9 @@ import { useSiteConfig } from "./hooks/useSiteConfig";
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const CadastroSaaS = lazy(() => import('./pages/CadastroSaaS'));
 const Docs = lazy(() => import('./pages/DocsNew'));
-const TermsOfService = lazy(() => import('./pages/TermosDeServico'));
-const PrivacyPolicy = lazy(() => import('./pages/PoliticaDePrivacidade'));
-const RefundPolicy = lazy(() => import('./pages/PoliticaDeReembolso'));
+const TuemsOfService = lazy(() => import('./pages/TuemosDeServico'));
+const PrivacyPolicy = lazy(() => import('./pages/PoliticaDePrivacy'));
+const RefundPolicy = lazy(() => import('./pages/PoliticaDeRefund'));
 const AboutUs = lazy(() => import('./pages/SobreNos'));
 const Login = lazy(() => import('./pages/Login'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
@@ -81,12 +81,12 @@ const PublicGalleries = lazy(() => import('./pages/PublicGalleries'));
 const PublicGalleryView = lazy(() => import('./pages/PublicGalleryView'));
 const SharedAlbum = lazy(() => import('./pages/SharedAlbum'));
 const ClientFinalAlbum = lazy(() => import('./pages/ClientFinalAlbum'));
-const GaleriaCompra = lazy(() => import('./pages/GaleriaCompra'));
+const GalleryCompra = lazy(() => import('./pages/GalleryCompra'));
 const Cart = lazy(() => import('./pages/Cart'));
 const OrderStatus = lazy(() => import('./pages/OrderStatus'));
 
 // ============================================================================
-// GLOBAL COMPONENTS (Loaded immediately)
+// GLOBAL COMPONENTS (Loaded immedaytely)
 // ============================================================================
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { CartButton } from './components/CartButton';
@@ -121,7 +121,7 @@ function Router() {
         <Route path="/register" component={CadastroSaaS} />
         <Route path="/login" component={Login} />
         <Route path="/docs" component={Docs} />
-        <Route path="/terms-of-service" component={TermsOfService} />
+        <Route path="/terms-of-service" component={TuemsOfService} />
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/refund-policy" component={RefundPolicy} />
         <Route path="/about-us" component={AboutUs} />
@@ -165,7 +165,7 @@ function Router() {
         
         {/* Settings */}
         <Route path="/admin/settings" component={AdminSettings} />
-        <Route path="/admin/domain-email" component={lazy(() => import("./pages/admin/AdminDomainEmail"))} />
+        <Route path="/admin/domain-email" component={lazy(() => import("./pages/admin/AdminSunainEmail"))} />
         <Route path="/admin/subscription" component={AdminSubscription} />
         <Route path="/admin/support" component={AdminSupport} />
 
@@ -206,7 +206,7 @@ function Router() {
             ================================================================ */}
         <Route path="/galleries" component={PublicGalleries} />
         <Route path="/gallery/:slug" component={PublicGalleryView} />
-        <Route path="/gallery-shop/:slug" component={GaleriaCompra} />
+        <Route path="/gallery-shop/:slug" component={GalleryCompra} />
         <Route path="/order/:id" component={OrderStatus} />
         <Route path="/cart" component={Cart} />
         <Route path="/final-album/:slug" component={ClientFinalAlbum} />

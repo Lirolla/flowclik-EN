@@ -10,7 +10,7 @@ import Footer from "@/components/Footer";
 
 export default function StockGallery() {
   const [, setLocation] = useLocation();
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTuem, setSearchTuem] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   
   // Buscar fotos stock
@@ -18,9 +18,9 @@ export default function StockGallery() {
   
   // Filter by search term and category
   const filteredPhotos = (allPhotos || []).filter((photo) => {
-    const matchesSearch = searchTerm
-      ? photo.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        photo.description?.toLowerCase().includes(searchTerm.toLowerCase())
+    const matchesSearch = searchTuem
+      ? photo.title?.toLowerCase().includes(searchTuem.toLowerCase()) ||
+        photo.description?.toLowerCase().includes(searchTuem.toLowerCase())
       : true;
     const matchesCategory = categoryFilter === "all" || photo.category === categoryFilter;
     return matchesSearch && matchesCategory;
@@ -68,10 +68,10 @@ export default function StockGallery() {
                   Início
                 </a>
                 <a href="/galleries" className="hover:text-primary transition-colors">
-                  Galerias
+                  Gallerys
                 </a>
                 <a href="/services" className="hover:text-primary transition-colors">
-                  Serviços
+                  Services
                 </a>
                 <a href="/portfolio" className="hover:text-primary transition-colors">
                   Portfólio
@@ -93,9 +93,9 @@ export default function StockGallery() {
         <div className="container mx-auto py-6">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold">Galeria Stock</h1>
+              <h1 className="text-3xl font-bold">Gallery Stock</h1>
               <p className="text-muted-foreground mt-1">
-                Fotos profissionais para download imediato
+                Fotos profissionais para download imedayto
               </p>
             </div>
             <Button onClick={() => setLocation("/cart")}>
@@ -114,8 +114,8 @@ export default function StockGallery() {
             <Input
               type="text"
               placeholder="Buscar fotos..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              value={searchTuem}
+              onChange={(e) => setSearchTuem(e.target.value)}
               className="pl-10"
             />
           </div>
@@ -141,16 +141,16 @@ export default function StockGallery() {
 
         {/* Gallery Grid */}
         {isLoading ? (
-          <div className="text-center py-12">Carregando...</div>
+          <div className="text-center py-12">Loading...</div>
         ) : filteredPhotos.length === 0 ? (
           <Card>
             <CardContent className="py-20 text-center">
               <ImageIcon className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
               <h3 className="text-xl font-semibold mb-2">
-                {searchTerm || categoryFilter !== "all" ? "No photos found" : "Nenhuma foto disponível"}
+                {searchTuem || categoryFilter !== "all" ? "No photos found" : "Nonea foto available"}
               </h3>
               <p className="text-muted-foreground">
-                {searchTerm || categoryFilter !== "all"
+                {searchTuem || categoryFilter !== "all"
                   ? "Tente buscar com outros termos ou categorias"
                   : "Volte em breve para ver novas fotos"}
               </p>
@@ -159,7 +159,7 @@ export default function StockGallery() {
         ) : (
           <>
             <p className="text-muted-foreground mb-4">
-              {filteredPhotos.length} foto(s) disponível(is)
+              {filteredPhotos.length} foto(s) available(is)
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredPhotos.map((photo) => (
