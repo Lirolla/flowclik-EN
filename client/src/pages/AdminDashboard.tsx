@@ -19,8 +19,8 @@ export default function AdminDashboard() {
   const getStatusLabel = (status: string) => {
     const labels: Record<string, string> = {
       pending: 'Pending',
-      confirmed: 'Confirmado',
-      session_done: 'Ensaio Realizado',
+      confirmed: 'Confirmed',
+      session_done: 'Session Completed',
       editing: 'In Editing',
       awaiting_selection: 'Awaiting Selection',
       final_editing: 'Final Editing',
@@ -61,21 +61,21 @@ export default function AdminDashboard() {
     {
       title: 'Total Revenue',
       value: format(stats?.totalRevenue || 0),
-      subtitle: '+12% vs month previous',
+      subtitle: '+12% vs previous month',
       icon: DollarSign,
       color: 'text-green-500',
       bgColor: 'bg-green-500/10',
     },
     {
-      title: 'Pedidos',
+      title: 'Orders',
       value: stats?.totalOrders || 0,
-      subtitle: '+8 news pedidos',
+      subtitle: '+8 new orders',
       icon: ShoppingCart,
       color: 'text-blue-500',
       bgColor: 'bg-blue-500/10',
     },
     {
-      title: 'Agendamentos Pendings',
+      title: 'Pending Appointments',
       value: stats?.pendingBookings || 0,
       subtitle: '3 awaiting confirmation',
       icon: Calendar,
@@ -83,9 +83,9 @@ export default function AdminDashboard() {
       bgColor: 'bg-yellow-500/10',
     },
     {
-      title: 'Fotos na Loja',
+      title: 'Shop Photos',
       value: stats?.stockPhotos || 0,
-      subtitle: 'Gallery Stock',
+      subtitle: 'Stock Gallery',
       icon: ImageIcon,
       color: 'text-purple-500',
       bgColor: 'bg-purple-500/10',
@@ -97,7 +97,7 @@ export default function AdminDashboard() {
       <div className="p-8">
         <h1 className="text-4xl font-bold text-white mb-8">Dashboard</h1>
         
-        {/* Avisos Globais do Admin do SaaS */}
+        {/* Global Announcements from SaaS Admin */}
         <AnnouncementBanner />
 
         {/* Stats Cards */}
@@ -119,40 +119,40 @@ export default function AdminDashboard() {
           })}
         </div>
 
-        {/* Statistics de Agendamentos */}
+        {/* Appointment Statistics */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
             <BarChart3 className="w-6 h-6" />
-            Statistics de Agendamentos
+            Appointment Statistics
           </h2>
 
-          {/* Cards de Summary de Agendamentos */}
+          {/* Appointment Summary Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <Card className="bg-gray-900 border-gray-800">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-400">Total de Agendamentos</CardTitle>
+                <CardTitle className="text-sm font-medium text-gray-400">Total Appointments</CardTitle>
                 <Calendar className="h-4 w-4 text-gray-500" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-white">{totalAppointments}</div>
-                <p className="text-xs text-gray-500">Everys os status</p>
+                <p className="text-xs text-gray-500">All statuses</p>
               </CardContent>
             </Card>
 
             <Card className="bg-gray-900 border-gray-800">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-400">Revenue Prevista</CardTitle>
+                <CardTitle className="text-sm font-medium text-gray-400">Expected Revenue</CardTitle>
                 <DollarSign className="h-4 w-4 text-gray-500" />
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-white">{format(totalRevenue)}</div>
-                <p className="text-xs text-gray-500">Soma de everys os services</p>
+                <p className="text-xs text-gray-500">Sum of all services</p>
               </CardContent>
             </Card>
 
             <Card className="bg-gray-900 border-gray-800">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-400">Taxa de Confirmation</CardTitle>
+                <CardTitle className="text-sm font-medium text-gray-400">Confirmation Rate</CardTitle>
                 <CheckCircle className="h-4 w-4 text-gray-500" />
               </CardHeader>
               <CardContent>
@@ -160,14 +160,14 @@ export default function AdminDashboard() {
                   {conversionStats?.confirmationRate.toFixed(1)}%
                 </div>
                 <p className="text-xs text-gray-500">
-                  {conversionStats?.confirmed} de {conversionStats?.total} confirmados
+                  {conversionStats?.confirmed} of {conversionStats?.total} confirmed
                 </p>
               </CardContent>
             </Card>
 
             <Card className="bg-gray-900 border-gray-800">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-400">Taxa de Entrega</CardTitle>
+                <CardTitle className="text-sm font-medium text-gray-400">Delivery Rate</CardTitle>
                 <TrendingUp className="h-4 w-4 text-gray-500" />
               </CardHeader>
               <CardContent>
@@ -175,17 +175,17 @@ export default function AdminDashboard() {
                   {conversionStats?.deliveryRate.toFixed(1)}%
                 </div>
                 <p className="text-xs text-gray-500">
-                  {conversionStats?.delivered} de {conversionStats?.confirmed} delivereds
+                  {conversionStats?.delivered} of {conversionStats?.confirmed} delivered
                 </p>
               </CardContent>
             </Card>
           </div>
         </div>
 
-        {/* Statistics por Status */}
+        {/* Appointments by Status */}
         <Card className="bg-gray-900 border-gray-800 mb-8">
           <CardHeader>
-            <CardTitle className="text-white">Agendamentos por Status</CardTitle>
+            <CardTitle className="text-white">Appointments by Status</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -201,7 +201,7 @@ export default function AdminDashboard() {
                         <span className={`text-xs px-3 py-1 rounded border ${getStatusColor(stat.status)}`}>
                           {getStatusLabel(stat.status)}
                         </span>
-                        <span className="text-sm font-medium text-white">{stat.count} agendamentos</span>
+                        <span className="text-sm font-medium text-white">{stat.count} appointments</span>
                       </div>
                       <span className="text-sm text-gray-400">
                         {percentage.toFixed(1)}%
@@ -220,10 +220,10 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        {/* Revenue por Status */}
+        {/* Revenue by Status */}
         <Card className="bg-gray-900 border-gray-800 mb-8">
           <CardHeader>
-            <CardTitle className="text-white">Revenue por Status</CardTitle>
+            <CardTitle className="text-white">Revenue by Status</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -259,10 +259,10 @@ export default function AdminDashboard() {
           </CardContent>
         </Card>
 
-        {/* Agendamentos por Month */}
+        {/* Appointments by Month */}
         <Card className="bg-gray-900 border-gray-800 mb-8">
           <CardHeader>
-            <CardTitle className="text-white">Agendamentos por Month (Lasts 12 months)</CardTitle>
+            <CardTitle className="text-white">Appointments by Month (Last 12 months)</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -280,7 +280,7 @@ export default function AdminDashboard() {
                   <div key={stat.month} className="space-y-2">
                     <div className="flex items-center justify-between">
                       <span className="text-sm font-medium text-white capitalize">{monthName}</span>
-                      <span className="text-sm text-gray-400">{stat.count} agendamentos</span>
+                      <span className="text-sm text-gray-400">{stat.count} appointments</span>
                     </div>
                     <div className="w-full bg-gray-800 rounded-full h-2">
                       <div
@@ -299,9 +299,9 @@ export default function AdminDashboard() {
         <Card className="bg-gray-900 border-gray-800 mb-8">
           <div className="p-6 border-b border-gray-800">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-white">Pedidos Recentes</h2>
+              <h2 className="text-2xl font-bold text-white">Recent Orders</h2>
               <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
-                Ver Everys
+                View All
               </button>
             </div>
           </div>
@@ -311,17 +311,17 @@ export default function AdminDashboard() {
                 <tr>
                   <th className="px-6 py-4 text-left text-white font-semibold">#ID</th>
                   <th className="px-6 py-4 text-left text-white font-semibold">Client</th>
-                  <th className="px-6 py-4 text-left text-white font-semibold">Itens</th>
+                  <th className="px-6 py-4 text-left text-white font-semibold">Items</th>
                   <th className="px-6 py-4 text-left text-white font-semibold">Total</th>
                   <th className="px-6 py-4 text-left text-white font-semibold">Status</th>
-                  <th className="px-6 py-4 text-left text-white font-semibold">Data</th>
+                  <th className="px-6 py-4 text-left text-white font-semibold">Date</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-800">
                 {!recentOrders || recentOrders.length === 0 ? (
                   <tr>
                     <td colSpan={6} className="px-6 py-12 text-center text-gray-400">
-                      None pedido still
+                      No orders yet
                     </td>
                   </tr>
                 ) : (
@@ -361,7 +361,7 @@ export default function AdminDashboard() {
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-white">Upcoming Appointments</h2>
               <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
-                Ver Everys
+                View All
               </button>
             </div>
           </div>
@@ -372,7 +372,7 @@ export default function AdminDashboard() {
                   <th className="px-6 py-4 text-left text-white font-semibold">#ID</th>
                   <th className="px-6 py-4 text-left text-white font-semibold">Client</th>
                   <th className="px-6 py-4 text-left text-white font-semibold">Service</th>
-                  <th className="px-6 py-4 text-left text-white font-semibold">Data/Hour</th>
+                  <th className="px-6 py-4 text-left text-white font-semibold">Date/Time</th>
                   <th className="px-6 py-4 text-left text-white font-semibold">Status</th>
                 </tr>
               </thead>
@@ -380,7 +380,7 @@ export default function AdminDashboard() {
                 {!upcomingAppointments || upcomingAppointments.length === 0 ? (
                   <tr>
                     <td colSpan={5} className="px-6 py-12 text-center text-gray-400">
-                      None agendamento
+                      No upcoming appointments
                     </td>
                   </tr>
                 ) : (
