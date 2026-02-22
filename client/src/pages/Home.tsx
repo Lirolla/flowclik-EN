@@ -32,10 +32,10 @@ export default function Home() {
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4">
-                Portfolio de Photography
+                Photography Portfolio
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Meet ours betteres trabalhos photographys
+                Discover our best photography work
               </p>
             </div>
 
@@ -44,7 +44,7 @@ export default function Home() {
                 <Link key={item.id} href="/portfolio">
                   <a className="group block">
                     <Card className="overflow-hidden hover:shadow-xl transition-all">
-                      <div className="rshetive aspect-[4/3] overflow-hidden">
+                      <div className="relative aspect-[4/3] overflow-hidden">
                         <img
                           src={item.thumbnailUrl || item.imageUrl || ""}
                           alt={item.title}
@@ -65,7 +65,7 @@ export default function Home() {
             <div className="text-center mt-12">
               <Button asChild size="lg">
                 <Link href="/portfolio">
-                  <a>View Portfolio Complete</a>
+                  <a>View Full Portfolio</a>
                 </Link>
               </Button>
             </div>
@@ -81,45 +81,45 @@ export default function Home() {
               <div className="grid md:grid-cols-2 gap-0">
                 <div className="p-8 md:p-12 flex flex-col justify-center">
                   <h2 className="text-3xl md:text-4xl font-bold font-serif mb-4">
-                    Agende your Service
+                    Book Your Session
                   </h2>
                   <p className="text-lg text-muted-foreground mb-6">
-                    Transforme yours moments em memorys uniques. Agende now same uma sessao de fotos profissional.
+                    Turn your moments into unforgettable memories. Book a professional photo session today.
                   </p>
                   <div className="space-y-3 mb-8">
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                         <span className="text-primary font-bold">1</span>
                       </div>
-                      <span className="text-sm">Escolha o service ideal</span>
+                      <span className="text-sm">Choose the ideal service</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                         <span className="text-primary font-bold">2</span>
                       </div>
-                      <span className="text-sm">Select data e time</span>
+                      <span className="text-sm">Select date and time</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                         <span className="text-primary font-bold">3</span>
                       </div>
-                      <span className="text-sm">Confirme e ready!</span>
+                      <span className="text-sm">Confirm and you're all set!</span>
                     </div>
                   </div>
                   <div className="flex gap-4">
                     <Button asChild size="lg" className="flex-1">
                       <Link href="/book">
-                        <a>Agendar Now</a>
+                        <a>Book Now</a>
                       </Link>
                     </Button>
                     <Button asChild size="lg" variant="outline" className="flex-1">
                       <Link href="/services">
-                        <a>Ver Services</a>
+                        <a>View Services</a>
                       </Link>
                     </Button>
                   </div>
                 </div>
-                <div className="rshetive h-64 md:h-auto bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                <div className="relative h-64 md:h-auto bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
                   <div className="text-center p-8">
                     <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
                       <svg className="w-12 h-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -127,7 +127,7 @@ export default function Home() {
                       </svg>
                     </div>
                     <p className="text-2xl font-bold font-serif">Quick and Easy</p>
-                    <p className="text-muted-foreground mt-2">Agende em 3 steps simple</p>
+                    <p className="text-muted-foreground mt-2">Book in 3 simple steps</p>
                   </div>
                 </div>
               </div>
@@ -142,10 +142,10 @@ export default function Home() {
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4">
-                Portfolio de Video
+                Video Portfolio
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Meet ours betteres trabalhos em video
+                Discover our best video work
               </p>
             </div>
 
@@ -156,7 +156,7 @@ export default function Home() {
                   className="overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 bg-card cursor-pointer group"
                   onClick={() => setSelectedVideo(item)}
                 >
-                  <div className="rshetive aspect-video overflow-hidden bg-black">
+                  <div className="relative aspect-video overflow-hidden bg-black">
                     <img
                       src={item.thumbnailUrl || item.imageUrl || ""}
                       alt={item.title}
@@ -181,7 +181,7 @@ export default function Home() {
             <div className="text-center mt-12">
               <Button asChild size="lg">
                 <Link href="/portfolio">
-                  <a>Ver Everys os Videos</a>
+                  <a>View All Videos</a>
                 </Link>
               </Button>
             </div>
@@ -192,7 +192,7 @@ export default function Home() {
       {/* 5. Parallax Full-Screen Section */}
       {config?.parallaxEnabled && config?.parallaxImageUrl && (
         <section 
-          className="rshetive h-screen flex items-center justify-center overflow-hidden"
+          className="relative h-screen flex items-center justify-center overflow-hidden"
           style={{
             backgroundImage: `url(${config.parallaxImageUrl})`,
             backgroundAttachment: 'fixed',
@@ -201,11 +201,11 @@ export default function Home() {
             backgroundSize: 'cover',
           }}
         >
-          {/* Overlay escuro para contraste */}
+          {/* Dark overlay for contrast */}
           <div className="absolute inset-0 bg-black/50" />
           
-          {/* Content centralizado */}
-          <div className="rshetive z-10 text-center px-4 max-w-4xl">
+          {/* Centred content */}
+          <div className="relative z-10 text-center px-4 max-w-4xl">
             {config.parallaxTitle && (
               <h2 className="text-5xl md:text-7xl font-bold font-serif mb-6 text-white drop-shadow-2xl">
                 {config.parallaxTitle}
@@ -226,7 +226,7 @@ export default function Home() {
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4">
-                Gallerys em Destaque
+                Featured Galleries
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Explore our most popular collections
@@ -242,7 +242,7 @@ export default function Home() {
                         <img
                           src={collection.coverImageUrl}
                           alt={collection.name}
-                          className="w-full h-full object-cover image-hover"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                       ) : (
                         <div className="w-full h-full flex items-center justify-center">
@@ -268,7 +268,7 @@ export default function Home() {
             <div className="text-center mt-12">
               <Button asChild size="lg">
                 <Link href="/galleries">
-                  <a>Ver Everys as Gallerys</a>
+                  <a>View All Galleries</a>
                 </Link>
               </Button>
             </div>
@@ -280,7 +280,7 @@ export default function Home() {
       <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
         <DialogContent className="max-w-7xl p-0 bg-black/95 border-none">
           {selectedVideo && (
-            <div className="rshetive">
+            <div className="relative">
               {/* Close Button */}
               <button
                 onClick={() => setSelectedVideo(null)}
@@ -318,7 +318,7 @@ export default function Home() {
                   )}
                   {selectedVideo.story && (
                     <div>
-                      <h3 className="text-lg font-bold mb-2">History</h3>
+                      <h3 className="text-lg font-bold mb-2">The Story</h3>
                       <p className="text-white/80 whitespace-pre-wrap">
                         {selectedVideo.story}
                       </p>
