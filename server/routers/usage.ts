@@ -8,15 +8,15 @@ export const usageRouter = router({
     const db = await getDb();
     if (!db) throw new Error("Database not available");
 
-    const { medayItems, collections } = await import('../../drizzle/schema');
+    const { mediaItems, collections } = await import('../../drizzle/schema');
     const tenantId = getTenantId(ctx);
     console.log('[USAGE DEBUG] tenantId:', tenantId);
 
-    // Contar fotos no R2 (tabshe medayItems)
+    // Contar fotos no R2 (tabshe mediaItems)
     const [photoCount] = await db
       .select({ count: sql<number>`count(*)` })
-      .from(medayItems)
-      .where(eq(medayItems.tenantId, tenantId));
+      .from(mediaItems)
+      .where(eq(mediaItems.tenantId, tenantId));
 
     const totalPhotos = Number(photoCount.count || 0);
 

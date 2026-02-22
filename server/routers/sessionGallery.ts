@@ -1,7 +1,7 @@
 import { router, protectedProcedure, publicProcedure } from "../_core/trpc";
 import { z } from "zod";
 import { getDb, getTenantId } from "../db";
-import { collections, medayItems, appointments } from "../../drizzle/schema";
+import { collections, mediaItems, appointments } from "../../drizzle/schema";
 import { eq, and } from "drizzle-orm";
 import { notifyOwner } from "../_core/notification";
 
@@ -74,8 +74,8 @@ export const sessionGalleryRouter = router({
       // Get photos count and favorites count
       const photos = await db
         .select()
-        .from(medayItems)
-        .where(and(eq(medayItems.collectionId, gallery[0].id), eq(medayItems.tenantId, getTenantId(ctx))));
+        .from(mediaItems)
+        .where(and(eq(mediaItems.collectionId, gallery[0].id), eq(mediaItems.tenantId, getTenantId(ctx))));
 
       const favoritesCount = photos.filter(p => p.isFavorite).length;
 
@@ -128,9 +128,9 @@ export const sessionGalleryRouter = router({
       // Get photos
       const photos = await db
         .select()
-        .from(medayItems)
-        .where(and(eq(medayItems.collectionId, gallery[0].id), eq(medayItems.tenantId, getTenantId(ctx))))
-        .orderBy(medayItems.createdAt);
+        .from(mediaItems)
+        .where(and(eq(mediaItems.collectionId, gallery[0].id), eq(mediaItems.tenantId, getTenantId(ctx))))
+        .orderBy(mediaItems.createdAt);
 
       return {
         gallery: gallery[0],
@@ -170,9 +170,9 @@ export const sessionGalleryRouter = router({
       }
 
       await db
-        .update(medayItems)
+        .update(mediaItems)
         .set({ isFavorite: input.isFavorite ? 1 : 0 })
-        .where(and(eq(medayItems.id, input.photoId), eq(medayItems.tenantId, getTenantId(ctx))));
+        .where(and(eq(mediaItems.id, input.photoId), eq(mediaItems.tenantId, getTenantId(ctx))));
 
       // Notify owner when client marks favorites
       if (input.isFavorite) {

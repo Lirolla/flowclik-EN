@@ -14,7 +14,7 @@ export function ImageUpload({ value, onChange, label = "Imagem", className = "" 
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const uploadMutation = trpc.meday.uploadImage.useMutation();
+  const uploadMutation = trpc.media.uploadImage.useMutation();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];

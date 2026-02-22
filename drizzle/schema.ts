@@ -292,10 +292,10 @@ export const finalAlbums = mysqlTable("finalAlbums", {
 	index("idx_finalAlbums_tenantId").on(table.tenantId),
 ]);
 
-export const medayItems = mysqlTable("medayItems", {
+export const mediaItems = mysqlTable("mediaItems", {
 	id: int().autoincrement().primaryKey(),
 	collectionId: int(),
-	medayType: mysqlEnum(['photo','video']).notNull(),
+	mediaType: mysqlEnum(['photo','video']).notNull(),
 	title: varchar({ length: 255 }).notNull(),
 	description: text(),
 	originalUrl: text().notNull(),
@@ -317,14 +317,14 @@ export const medayItems = mysqlTable("medayItems", {
 	tenantId: int().default(1).notNull(),
 },
 (table) => [
-	index("idx_medayItems_collectionId").on(table.collectionId),
-	index("idx_medayItems_tenantId").on(table.tenantId),
+	index("idx_mediaItems_collectionId").on(table.collectionId),
+	index("idx_mediaItems_tenantId").on(table.tenantId),
 ]);
 
 export const orderItems = mysqlTable("orderItems", {
 	id: int().autoincrement().primaryKey(),
 	orderId: int().notNull(),
-	medayId: int(),
+	mediaId: int(),
 	itemType: mysqlEnum(['digital','print']).notNull(),
 	itemName: varchar({ length: 255 }).notNull(),
 	price: int().notNull(),
@@ -401,7 +401,7 @@ export const photoSales = mysqlTable("photoSales", {
 
 export const photoSelections = mysqlTable("photoSelections", {
 	id: int().autoincrement().primaryKey(),
-	medayItemId: int().notNull(),
+	mediaItemId: int().notNull(),
 	collectionId: int().notNull(),
 	isSelected: tinyint().default(0).notNull(),
 	clientFeedback: text(),

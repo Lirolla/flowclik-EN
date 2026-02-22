@@ -80,7 +80,7 @@ export default function ClientGalleryAuth() {
   const handleToggleFavorite = (photoId: number, currentFavorite: boolean) => {
     if (!galleryData?.gallery?.id) return;
     toggleFavoriteMutation.mutate({
-      medayItemId: photoId,
+      mediaItemId: photoId,
       collectionId: galleryData.gallery.id,
       isSelected: !currentFavorite,
     });

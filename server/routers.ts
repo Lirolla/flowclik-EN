@@ -6,7 +6,7 @@ import * as db from "./db";
 import { z } from "zod";
 
 // Import all routers
-import { medayRouter } from "./routers/meday";
+import { mediaRouter } from "./routers/media";
 import { collectionsRouter } from "./routers/collections";
 import { clientsRouter } from "./routers/clients";
 import { dashboardRouter } from "./routers/dashboard";
@@ -142,7 +142,7 @@ export const appRouter = router({
 
   // Feature routers
   collections: collectionsRouter,
-  meday: medayRouter,
+  media: mediaRouter,
   clients: clientsRouter,
   dashboard: dashboardRouter,
   services: servicesRouter,

@@ -1,6 +1,6 @@
 import { TRPCError } from "@trpc/server";
 import { getDb, getTenantId } from "../db";
-import { subscriptions, collections, medayItems } from "../../drizzle/schema";
+import { subscriptions, collections, mediaItems } from "../../drizzle/schema";
 import { eq, and, sql } from "drizzle-orm";
 
 /**
@@ -112,8 +112,8 @@ async function calculateStorageUsed(tenantId: number): Promise<number> {
   // Buscar everys as fotos do tenant
   const photos = await db
     .select()
-    .from(medayItems)
-    .where(eq(medayItems.tenantId, tenantId));
+    .from(mediaItems)
+    .where(eq(mediaItems.tenantId, tenantId));
 
   let totalBytes = 0;
 

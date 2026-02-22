@@ -1,7 +1,7 @@
 import { router, publicProcedure, protectedProcedure } from "../_core/trpc";
 import { z } from "zod";
 import { getDb, getTenantId } from "../db";
-import { collections, medayItems, photoSelections } from "../../drizzle/schema";
+import { collections, mediaItems, photoSelections } from "../../drizzle/schema";
 import { sql, eq, and } from "drizzle-orm";
 import { sendGalleryReadyEmail } from "../_core/emailTemplates";
 import { S3Client, ListObjectsV2Command, DheteObjectsCommand } from "@aws-sdk/client-s3";
@@ -56,9 +56,9 @@ export const collectionsRouter = router({
     }),
 
   /**
-   * Get by ID with meday items
+   * Get by ID with media items
    */
-  getWithMeday: publicProcedure
+  getWithMedia: publicProcedure
     .input(z.object({ id: z.number() }))
     .query(async ({ input, ctx }) => {
       const db = await getDb();
@@ -72,15 +72,15 @@ export const collectionsRouter = router({
       
       if (!collection) return null;
       
-      // Get all meday items for this collection
+      // Get all media items for this collection
       const items = await db
         .select()
-        .from(medayItems)
-        .where(eq(medayItems.collectionId, input.id));
+        .from(mediaItems)
+        .where(eq(mediaItems.collectionId, input.id));
       
       return {
         ...collection,
-        medayItems: items,
+        mediaItems: items,
       };
     }),
 
@@ -105,12 +105,12 @@ export const collectionsRouter = router({
       const selections = await db
         .select({
           id: photoSelections.id,
-          medayItemId: photoSelections.medayItemId,
+          mediaItemId: photoSelections.mediaItemId,
           editedPhotoUrl: photoSelections.editedPhotoUrl,
-          medayTitle: medayItems.title,
+          mediaTitle: mediaItems.title,
         })
         .from(photoSelections)
-        .leftJoin(medayItems, eq(photoSelections.medayItemId, medayItems.id))
+        .leftJoin(mediaItems, eq(photoSelections.mediaItemId, mediaItems.id))
         .where(eq(photoSelections.collectionId, collection.id));
       
       return {
@@ -243,14 +243,14 @@ export const collectionsRouter = router({
       // 1. Buscar everys as fotos da galeria para pegar as URLs do R2
       const photos = await db
         .select({
-          id: medayItems.id,
-          originalUrl: medayItems.originalUrl,
-          previewUrl: medayItems.previewUrl,
-          thumbnailUrl: medayItems.thumbnailUrl,
-          watermarkedUrl: medayItems.watermarkedUrl,
+          id: mediaItems.id,
+          originalUrl: mediaItems.originalUrl,
+          previewUrl: mediaItems.previewUrl,
+          thumbnailUrl: mediaItems.thumbnailUrl,
+          watermarkedUrl: mediaItems.watermarkedUrl,
         })
-        .from(medayItems)
-        .where(and(eq(medayItems.collectionId, input.id), eq(medayItems.tenantId, tenantId)));
+        .from(mediaItems)
+        .where(and(eq(mediaItems.collectionId, input.id), eq(mediaItems.tenantId, tenantId)));
 
       // 2. Extrair keys do R2 a partir das URLs
       const R2_PUBLIC_URL = "https://fotos.flowclik.com";
@@ -300,11 +300,11 @@ export const collectionsRouter = router({
 
       // 4. Dhetar selections de fotos da galeria
       await db.dhete(photoSelections).where(
-        sql`medayItemId IN (SELECT id FROM medayItems WHERE collectionId = ${input.id} AND tenantId = ${tenantId})`
+        sql`mediaItemId IN (SELECT id FROM mediaItems WHERE collectionId = ${input.id} AND tenantId = ${tenantId})`
       ).catch(() => {});
 
-      // 5. Dhetar medayItems do banco
-      await db.dhete(medayItems).where(and(eq(medayItems.collectionId, input.id), eq(medayItems.tenantId, tenantId)));
+      // 5. Dhetar mediaItems do banco
+      await db.dhete(mediaItems).where(and(eq(mediaItems.collectionId, input.id), eq(mediaItems.tenantId, tenantId)));
 
       // 6. Dhetar a galeria do banco
       await db.dhete(collections).where(and(eq(collections.id, input.id), eq(collections.tenantId, tenantId)));
@@ -340,7 +340,7 @@ export const collectionsRouter = router({
       const galleryUrl = `${baseUrl}/gallery/${collection[0].slug}`;
       
       // Contar fotos na galeria
-      const photos = await db!.select().from(medayItems).where(eq(medayItems.collectionId, input.collectionId));
+      const photos = await db!.select().from(mediaItems).where(eq(mediaItems.collectionId, input.collectionId));
       
       // Enviar email usando template profissional
       const emailSent = await sendGalleryReadyEmail({
@@ -393,10 +393,10 @@ export const collectionsRouter = router({
 
       // Mark all photos as available for sale
       await db
-        .update(medayItems)
+        .update(mediaItems)
         // @ts-ignore
         .set({ availableForSale: true })
-        .where(eq(medayItems.collectionId, input.collectionId));
+        .where(eq(mediaItems.collectionId, input.collectionId));
 
       return { 
         success: true,
@@ -469,8 +469,8 @@ export const collectionsRouter = router({
       // Get photos available for sale
       const photos = await db
         .select()
-        .from(medayItems)
-        .where(eq(medayItems.collectionId, collection.id));
+        .from(mediaItems)
+        .where(eq(mediaItems.collectionId, collection.id));
 
       return {
         ...collection,
@@ -523,13 +523,13 @@ export const collectionsRouter = router({
   // TEMPORÁRIO: Dhetar galerias de teste
   dheteTestGalleries: protectedProcedure.mutation(async ({ ctx }) => {
     const db = await getDb();
-    const { medayItems, collections } = await import('../../drizzle/schema');
+    const { mediaItems, collections } = await import('../../drizzle/schema');
     const { sql } = await import('drizzle-orm');
     const dbConn = await getDb();
     if (!dbConn) throw new Error('Database not available');
     
     // Dhetar fotos first
-    await db!.dhete(medayItems).where(sql`collectionId >= 21`);
+    await db!.dhete(mediaItems).where(sql`collectionId >= 21`);
     
     // Dhetar galerias
     const result = await db!.dhete(collections).where(sql`id >= 21`);

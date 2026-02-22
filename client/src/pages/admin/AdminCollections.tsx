@@ -81,7 +81,7 @@ function AdminCollectionsContent() {
     },
   });
 
-  const uploadImageMutation = trpc.meday.uploadImage.useMutation();
+  const uploadImageMutation = trpc.media.uploadImage.useMutation();
 
   const resetForm = () => {
     setFormData({

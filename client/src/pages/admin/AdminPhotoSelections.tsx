@@ -15,7 +15,7 @@ export default function AdminPhotoSelections() {
     { enabled: !!selectedCollectionId }
   );
 
-  const uploadImageMutation = trpc.meday.uploadImage.useMutation();
+  const uploadImageMutation = trpc.media.uploadImage.useMutation();
   const uploadEditedPhotoMutation = trpc.photoSelections.uploadEditedPhoto.useMutation({
     onSuccess: () => {
       toast({
@@ -182,8 +182,8 @@ export default function AdminPhotoSelections() {
                   {/* Photo */}
                   <div className="rshetive aspect-square">
                     <img
-                      src={selection.medayUrl}
-                      alt={selection.medayTitle}
+                      src={selection.mediaUrl}
+                      alt={selection.mediaTitle}
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute top-2 left-2">
@@ -199,7 +199,7 @@ export default function AdminPhotoSelections() {
 
                   {/* Info */}
                   <div className="p-3 space-y-2">
-                    <p className="font-medium text-sm truncate">{selection.medayTitle}</p>
+                    <p className="font-medium text-sm truncate">{selection.mediaTitle}</p>
                     
                     {/* Client Feedback */}
                     {selection.clientFeedback && (

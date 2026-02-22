@@ -95,7 +95,7 @@ export default function StockGallery() {
             <div>
               <h1 className="text-3xl font-bold">Gallery Stock</h1>
               <p className="text-muted-foreground mt-1">
-                Fotos profissionais para download imedayto
+                Fotos profissionais para download imediato
               </p>
             </div>
             <Button onClick={() => setLocation("/cart")}>

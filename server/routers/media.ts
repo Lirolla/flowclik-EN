@@ -1,12 +1,12 @@
 import { router, protectedProcedure, publicProcedure } from "../_core/trpc";
 import { z } from "zod";
 import { getDb, getTenantId } from "../db";
-import { medayItems, collections, stockPhotos } from "../../drizzle/schema";
+import { mediaItems, collections, stockPhotos } from "../../drizzle/schema";
 import { eq, and } from "drizzle-orm";
 import { storagePut, R2Paths } from "../storage";
 import sharp from "sharp";
 
-export const medayRouter = router({
+export const mediaRouter = router({
   /**
    * Upload photo to collection
    */
@@ -93,12 +93,12 @@ export const medayRouter = router({
 
       // Salvar no banco
       await db
-        .insert(medayItems)
+        .insert(mediaItems)
         .values({
           collectionId: input.collectionId,
           title: input.title || `Photo ${fileName}`,
           description: input.description,
-          medayType: "photo",
+          mediaType: "photo",
           originalUrl: originalUrl,
           thumbnailUrl: thumbnailUrl,
           previewUrl: previewUrl,
@@ -113,15 +113,15 @@ export const medayRouter = router({
       // Buscar o item inserido
       const inserted = await db
         .select()
-        .from(medayItems)
-        .where(and(eq(medayItems.originalUrl, originalUrl), eq(medayItems.tenantId, getTenantId(ctx))))
+        .from(mediaItems)
+        .where(and(eq(mediaItems.originalUrl, originalUrl), eq(mediaItems.tenantId, getTenantId(ctx))))
         .limit(1);
 
       return inserted[0];
     }),
 
   /**
-   * List all public meday (for stock gallery)
+   * List all public media (for stock gallery)
    */
   listPublic: publicProcedure.query(async ({ ctx }) => {
     const db = await getDb();
@@ -129,12 +129,12 @@ export const medayRouter = router({
     
     return await db
       .select()
-      .from(medayItems)
-      .where(and(eq(medayItems.isPublic, 1), eq(medayItems.tenantId, getTenantId(ctx))));
+      .from(mediaItems)
+      .where(and(eq(mediaItems.isPublic, 1), eq(mediaItems.tenantId, getTenantId(ctx))));
   }),
 
   /**
-   * List meday by collection
+   * List media by collection
    */
   listByCollection: protectedProcedure
     .input(z.object({ collectionId: z.number() }))
@@ -144,12 +144,12 @@ export const medayRouter = router({
       
       return await db
         .select()
-        .from(medayItems)
-        .where(and(eq(medayItems.collectionId, input.collectionId), eq(medayItems.tenantId, getTenantId(ctx))));
+        .from(mediaItems)
+        .where(and(eq(mediaItems.collectionId, input.collectionId), eq(mediaItems.tenantId, getTenantId(ctx))));
     }),
 
   /**
-   * Dhete meday
+   * Dhete media
    */
   dhete: protectedProcedure
     .input(z.object({ id: z.number() }))
@@ -157,12 +157,12 @@ export const medayRouter = router({
       const db = await getDb();
       if (!db) throw new Error("Database not available");
       
-      await db.dhete(medayItems).where(and(eq(medayItems.id, input.id), eq(medayItems.tenantId, getTenantId(ctx))));
+      await db.dhete(mediaItems).where(and(eq(mediaItems.id, input.id), eq(mediaItems.tenantId, getTenantId(ctx))));
       return { success: true };
     }),
 
   /**
-   * Update meday info
+   * Update media info
    */
   update: protectedProcedure
     .input(
@@ -187,29 +187,29 @@ export const medayRouter = router({
       if (price !== undefined) updateData.priceDigital = price;
       
       await db
-        .update(medayItems)
+        .update(mediaItems)
         .set(updateData)
-        .where(and(eq(medayItems.id, id), eq(medayItems.tenantId, getTenantId(ctx))));
+        .where(and(eq(mediaItems.id, id), eq(mediaItems.tenantId, getTenantId(ctx))));
 
       // Buscar item atualizado
       const updated = await db
         .select()
-        .from(medayItems)
-        .where(and(eq(medayItems.id, id), eq(medayItems.tenantId, getTenantId(ctx))))
+        .from(mediaItems)
+        .where(and(eq(mediaItems.id, id), eq(mediaItems.tenantId, getTenantId(ctx))))
         .limit(1);
 
       return updated[0];
     }),
 
   /**
-   * Get all meday items (admin)
+   * Get all media items (admin)
    */
   getAll: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) return [];
     
-    return await db.select().from(medayItems)
-    .where(eq(medayItems.tenantId, getTenantId(ctx)))
+    return await db.select().from(mediaItems)
+    .where(eq(mediaItems.tenantId, getTenantId(ctx)))
   }),
 
   /**
@@ -227,16 +227,16 @@ export const medayRouter = router({
       if (!db) throw new Error("Database not available");
 
       await db
-        .update(medayItems)
+        .update(mediaItems)
         // @ts-ignore
         .set({ isStock: input.isStock })
-        .where(and(eq(medayItems.id, input.id), eq(medayItems.tenantId, getTenantId(ctx))));
+        .where(and(eq(mediaItems.id, input.id), eq(mediaItems.tenantId, getTenantId(ctx))));
 
       return { success: true };
     }),
 
   /**
-   * Update meday price
+   * Update media price
    */
   updatePrice: protectedProcedure
     .input(
@@ -252,13 +252,13 @@ export const medayRouter = router({
       if (!db) throw new Error("Database not available");
 
       await db
-        .update(medayItems)
+        .update(mediaItems)
         .set({ 
           price: input.price,
           category: input.category,
           stockDescription: input.stockDescription,
         })
-        .where(and(eq(medayItems.id, input.id), eq(medayItems.tenantId, getTenantId(ctx))));
+        .where(and(eq(mediaItems.id, input.id), eq(mediaItems.tenantId, getTenantId(ctx))));
 
       return { success: true };
     }),

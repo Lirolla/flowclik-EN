@@ -499,7 +499,7 @@ export default function AdminSettings() {
               <li>Complete everys as sections mareachs em vermelho</li>
               <li>The logo and name appear in the site header</li>
               <li>O content de About/Services aparece nas pages publics</li>
-              <li>Changes are aplieachs imedaytamente</li>
+              <li>Changes are aplieachs imediatamente</li>
             </ul>
           </div>
         </CardContent>

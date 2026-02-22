@@ -205,7 +205,7 @@ export default function Contact() {
               </CardContent>
             </Card>
 
-            {/* Social Meday Cards - Same estilo dos cards de contato */}
+            {/* Social Media Cards - Same estilo dos cards de contato */}
             {(siteConfig?.socialInstagram ||
               siteConfig?.socialFacebook ||
               siteConfig?.socialYouTube) && (

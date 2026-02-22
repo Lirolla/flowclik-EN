@@ -245,14 +245,14 @@ export const subscriptionsRouter = router({
       if (!addon) throw new Error("Add-on not found");
 
       // Verify uso before de cancsher
-      const { medayItems, collections } = await import("../../drizzle/schema");
+      const { mediaItems, collections } = await import("../../drizzle/schema");
 
       if (addon.addonType === "storage") {
         // Verify se o storage extra is sendo used
         const [photoCount] = await dbInstance
           .select({ count: sql<number>`count(*)` })
-          .from(medayItems)
-          .where(eq(medayItems.tenantId, tenantId));
+          .from(mediaItems)
+          .where(eq(mediaItems.tenantId, tenantId));
         const totalPhotos = Number(photoCount.count || 0);
         const storageUsed = totalPhotos * 5 * 1024 * 1024; // 5MB por foto
 
@@ -547,12 +547,12 @@ export const subscriptionsRouter = router({
     const totalGalleryLimit = baseGalleries + (galleryAddonsCount * 10);
 
     // Calcular uso current
-    const { medayItems, collections } = await import("../../drizzle/schema");
+    const { mediaItems, collections } = await import("../../drizzle/schema");
 
     const [photoCount] = await dbInstance
       .select({ count: sql<number>`count(*)` })
-      .from(medayItems)
-      .where(eq(medayItems.tenantId, tenantId));
+      .from(mediaItems)
+      .where(eq(mediaItems.tenantId, tenantId));
     const totalPhotos = Number(photoCount.count || 0);
     const storageUsed = totalPhotos * 5 * 1024 * 1024;
 

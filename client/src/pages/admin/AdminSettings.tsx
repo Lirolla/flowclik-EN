@@ -119,7 +119,7 @@ function AdminSettingsContent() {
     },
   });
 
-  const uploadImageMutation = trpc.meday.uploadImage.useMutation();
+  const uploadImageMutation = trpc.media.uploadImage.useMutation();
 
   const updateBusinessModeMutation = trpc.siteConfig.updateBusinessMode.useMutation({
     onSuccess: () => {
@@ -1369,7 +1369,7 @@ function AdminSettingsContent() {
               <li>Bloqueios de data impedem agendamentos nos periods escolhidos</li>
               <li>The logo and name appear in the site header</li>
               <li>O content de About/Services aparece nas pages publics</li>
-              <li>Changes are aplieachs imedaytamente</li>
+              <li>Changes are aplieachs imediatamente</li>
             </ul>
           </div>
         </CardContent>

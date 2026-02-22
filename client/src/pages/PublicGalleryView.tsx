@@ -14,7 +14,7 @@ export default function PublicGalleryView() {
   const slug = params?.slug || "";
 
   const { data: collection, isLoading: collectionLoading } = trpc.collections.getBySlug.useQuery({ slug });
-  const { data: medayItems, isLoading: medayLoading } = trpc.collections.getWithMeday.useQuery(
+  const { data: mediaItems, isLoading: mediaLoading } = trpc.collections.getWithMedia.useQuery(
     { id: collection?.id || 0 },
     { enabled: !!collection?.id }
   );
@@ -45,9 +45,9 @@ export default function PublicGalleryView() {
       const selectionsMap: Record<number, boolean> = {};
       const feedbacksMap: Record<number, string> = {};
       existingSelections.forEach((sel: any) => {
-        selectionsMap[sel.medayItemId] = sel.isSelected;
+        selectionsMap[sel.mediaItemId] = sel.isSelected;
         if (sel.clientFeedback) {
-          feedbacksMap[sel.medayItemId] = sel.clientFeedback;
+          feedbacksMap[sel.mediaItemId] = sel.clientFeedback;
         }
       });
       setSelections(selectionsMap);
@@ -55,7 +55,7 @@ export default function PublicGalleryView() {
     }
   }, [existingSelections]);
 
-  if (collectionLoading || medayLoading) {
+  if (collectionLoading || mediaLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background">
         <div className="text-muted-foreground">Carregando galeria...</div>
@@ -130,10 +130,10 @@ export default function PublicGalleryView() {
     );
   }
 
-  const items = (medayItems as any)?.medayItems || [];
+  const items = (mediaItems as any)?.mediaItems || [];
   
   // Detect if gallery has only videos
-  const hasOnlyVideos = items.length > 0 && items.every((item: any) => item.medayType === "video");
+  const hasOnlyVideos = items.length > 0 && items.every((item: any) => item.mediaType === "video");
   const layoutType = hasOnlyVideos ? "youtube" : (collection.layoutType || "masonry");
 
   const openLightbox = (index: number) => {
@@ -156,23 +156,23 @@ export default function PublicGalleryView() {
     }
   };
 
-  const toggleSelection = async (medayItemId: number, e?: React.MouseEvent) => {
+  const toggleSelection = async (mediaItemId: number, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    const newValue = !selections[medayItemId];
-    setSelections({ ...selections, [medayItemId]: newValue });
+    const newValue = !selections[mediaItemId];
+    setSelections({ ...selections, [mediaItemId]: newValue });
     
     await toggleSelectionMutation.mutateAsync({
-      medayItemId,
+      mediaItemId,
       collectionId: collection?.id || 0,
       isSelected: newValue,
     });
   };
 
-  const saveFeedback = async (medayItemId: number, feedback: string) => {
-    setFeedbacks({ ...feedbacks, [medayItemId]: feedback });
+  const saveFeedback = async (mediaItemId: number, feedback: string) => {
+    setFeedbacks({ ...feedbacks, [mediaItemId]: feedback });
     
     await saveFeedbackMutation.mutateAsync({
-      medayItemId,
+      mediaItemId,
       collectionId: collection?.id || 0,
       feedback,
     });
@@ -235,7 +235,7 @@ export default function PublicGalleryView() {
                     className="rshetive aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted"
                     onClick={() => openLightbox(index)}
                   >
-                    {item.medayType === "photo" ? (
+                    {item.mediaType === "photo" ? (
                       <img
                         src={item.thumbnailUrl || item.previewUrl || item.originalUrl}
                         alt={item.title}
@@ -280,7 +280,7 @@ export default function PublicGalleryView() {
                     className="rshetive break-inside-avoid mb-4 overflow-hidden rounded-lg cursor-pointer group"
                     onClick={() => openLightbox(index)}
                   >
-                    {item.medayType === "photo" ? (
+                    {item.mediaType === "photo" ? (
                       <img
                         src={item.previewUrl || item.originalUrl}
                         alt={item.title}
@@ -406,7 +406,7 @@ export default function PublicGalleryView() {
             {layoutType === "fullscreen" && (
               <div className="max-w-6xl mx-auto">
                 <div className="rshetive bg-black rounded-lg overflow-hidden flex items-center justify-center" style={{ height: "75vh" }}>
-                  {items[lightboxIndex || 0]?.medayType === "photo" ? (
+                  {items[lightboxIndex || 0]?.mediaType === "photo" ? (
                     <img
                       src={items[lightboxIndex || 0]?.originalUrl}
                       alt={items[lightboxIndex || 0]?.title}
@@ -449,7 +449,7 @@ export default function PublicGalleryView() {
                       }`}
                       onClick={() => setLightboxIndex(index)}
                     >
-                      {item.medayType === "photo" ? (
+                      {item.mediaType === "photo" ? (
                         <img
                           src={item.thumbnailUrl || item.previewUrl || item.originalUrl}
                           alt={item.title}
@@ -510,7 +510,7 @@ export default function PublicGalleryView() {
           </Button>
 
           <div className="flex flex-col items-center justify-center max-w-7xl w-full h-[85vh] p-4">
-            {items[lightboxIndex]?.medayType === "photo" ? (
+            {items[lightboxIndex]?.mediaType === "photo" ? (
               <img
                 src={items[lightboxIndex]?.originalUrl}
                 alt={items[lightboxIndex]?.title}
@@ -560,7 +560,7 @@ export default function PublicGalleryView() {
               )}
 
               {/* Buy Button (only for photos with price) - Feature removed */}
-              {/* {items[lightboxIndex]?.medayType === "photo" && items[lightboxIndex]?.price && items[lightboxIndex]?.price > 0 && (
+              {/* {items[lightboxIndex]?.mediaType === "photo" && items[lightboxIndex]?.price && items[lightboxIndex]?.price > 0 && (
                 <Button
                   onClick={() => {
                     setSelectedPhoto(items[lightboxIndex]);

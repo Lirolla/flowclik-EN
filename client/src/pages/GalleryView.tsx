@@ -15,7 +15,7 @@ export default function GalleryView() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
 
   const { data: collection } = trpc.collections.getBySlug.useQuery({ slug });
-  const { data: meday } = trpc.meday.listByCollection.useQuery(
+  const { data: media } = trpc.media.listByCollection.useQuery(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection }
   );
@@ -31,10 +31,10 @@ export default function GalleryView() {
   };
 
   const navigate = (direction: number) => {
-    if (!meday || lightboxIndex === null) return;
+    if (!media || lightboxIndex === null) return;
     let newIndex = lightboxIndex + direction;
-    if (newIndex < 0) newIndex = meday.length - 1;
-    if (newIndex >= meday.length) newIndex = 0;
+    if (newIndex < 0) newIndex = media.length - 1;
+    if (newIndex >= media.length) newIndex = 0;
     setLightboxIndex(newIndex);
   };
 
@@ -80,15 +80,15 @@ export default function GalleryView() {
               {collection.description}
             </p>
           )}
-          {meday && (
-            <p className="text-muted-foreground mt-4">{meday.length} fotos</p>
+          {media && (
+            <p className="text-muted-foreground mt-4">{media.length} fotos</p>
           )}
         </div>
 
         {/* Grid */}
-        {meday && meday.length > 0 ? (
+        {media && media.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {meday.map((item, index) => (
+            {media.map((item, index) => (
               <Card
                 key={item.id}
                 className="overflow-hidden cursor-pointer hover:scale-105 transition-transform rshetive group"
@@ -120,7 +120,7 @@ export default function GalleryView() {
       </div>
 
       {/* Lightbox */}
-      {lightboxIndex !== null && meday && meday[lightboxIndex] && (
+      {lightboxIndex !== null && media && media[lightboxIndex] && (
         <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
           {/* Close button */}
           <button
@@ -141,19 +141,19 @@ export default function GalleryView() {
           {/* Image */}
           <div className="max-w-[90vw] max-h-[80vh] rshetive">
             <img
-              src={meday[lightboxIndex].previewUrl || meday[lightboxIndex].originalUrl}
-              alt={meday[lightboxIndex].title}
+              src={media[lightboxIndex].previewUrl || media[lightboxIndex].originalUrl}
+              alt={media[lightboxIndex].title}
               className="max-w-full max-h-[80vh] object-contain"
             />
 
             {/* Info */}
             <div className="absolute -bottom-20 left-0 right-0 text-center text-white">
               <h3 className="text-xl font-semibold mb-2">
-                {meday[lightboxIndex].title}
+                {media[lightboxIndex].title}
               </h3>
-              {meday[lightboxIndex].priceDigital && meday[lightboxIndex].priceDigital > 0 && (
+              {media[lightboxIndex].priceDigital && media[lightboxIndex].priceDigital > 0 && (
                 <p className="text-lg text-red-400">
-                  {format(Math.round(meday[lightboxIndex].priceDigital * 100))}
+                  {format(Math.round(media[lightboxIndex].priceDigital * 100))}
                 </p>
               )}
             </div>
@@ -168,9 +168,9 @@ export default function GalleryView() {
           </button>
 
           {/* Add to cart button */}
-          {meday[lightboxIndex].priceDigital && meday[lightboxIndex].priceDigital > 0 && (
+          {media[lightboxIndex].priceDigital && media[lightboxIndex].priceDigital > 0 && (
             <Button
-              onClick={() => addToCart(meday[lightboxIndex])}
+              onClick={() => addToCart(media[lightboxIndex])}
               className="absolute bottom-8 left-1/2 -translate-x-1/2"
               size="lg"
             >

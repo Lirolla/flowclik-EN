@@ -63,7 +63,7 @@ export const ordersRouter = router({
         const price = photo.price * item.quantity;
         totalAmount += price;
         orderItemsData.push({
-          medayId: item.photoId,
+          mediaId: item.photoId,
           itemType: item.itemType,
           itemName: photo.title || `Foto #${photo.id}`,
           price: photo.price,
@@ -225,9 +225,9 @@ export const ordersRouter = router({
       let downloadUrls: any[] = [];
       if (order.status === 'paid' || order.status === 'completed') {
         for (const item of items) {
-          if (item.medayId) {
+          if (item.mediaId) {
             const [photo] = await db.select().from(stockPhotos)
-              .where(eq(stockPhotos.id, item.medayId));
+              .where(eq(stockPhotos.id, item.mediaId));
             if (photo) {
               downloadUrls.push({
                 itemId: item.id,

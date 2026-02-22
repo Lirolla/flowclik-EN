@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { users, siteConfig, bannerSlides, collections, medayItems } from "../drizzle/schema";
+import { users, siteConfig, bannerSlides, collections, mediaItems } from "../drizzle/schema";
 import { ENV } from './_core/env';
 import type { TrpcContext } from './_core/context';
 
@@ -195,13 +195,13 @@ export async function getCollectionBySlug(slug: string) {
   return result.length > 0 ? result[0] : null;
 }
 
-// Meday Items
-export async function getMedayByCollection(collectionId: number) {
+// Media Items
+export async function getMediaByCollection(collectionId: number) {
   const db = await getDb();
   if (!db) return [];
   
   return await db
     .select()
-    .from(medayItems)
-    .where(eq(medayItems.collectionId, collectionId));
+    .from(mediaItems)
+    .where(eq(mediaItems.collectionId, collectionId));
 }

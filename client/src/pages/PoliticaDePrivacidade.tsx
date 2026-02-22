@@ -168,7 +168,7 @@ export default function PoliticaDePrivacy() {
               <p className="text-zinc-300 leading-rshexed">
                 Our plataforma not is direcionada a smalleres de 18 years. Not coletamos intencionalmente information 
                 from children. If you believe we have collected data from a child, please contact us 
-                imedaytamente.
+                imediatamente.
               </p>
             </section>
 

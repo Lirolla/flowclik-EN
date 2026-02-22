@@ -2,7 +2,7 @@
  * Voice transcription helper using internal Speech-to-Text service
  *
  * Frontend implementation guide:
- * 1. Capture audio using MedayRecorder API
+ * 1. Capture audio using MediaRecorder API
  * 2. Upload audio to storage (e.g., S3) to get URL
  * 3. Call transcription with the URL
  * 

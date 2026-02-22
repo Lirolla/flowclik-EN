@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
 import { getDb, getTenantId } from "../db";
-import { photoSales, appointments, medayItems, stockPhotos } from "../../drizzle/schema";
+import { photoSales, appointments, mediaItems, stockPhotos } from "../../drizzle/schema";
 import { 
   createPhotoCheckoutSession, 
   createAppointmentCheckoutSession,
@@ -186,8 +186,8 @@ export const paymentsRouter = router({
       // Get photo details
       const photoResult = await db
         .select()
-        .from(medayItems)
-        .where(and(eq(medayItems.id, sale.photoId), eq(medayItems.tenantId, getTenantId(ctx))))
+        .from(mediaItems)
+        .where(and(eq(mediaItems.id, sale.photoId), eq(mediaItems.tenantId, getTenantId(ctx))))
         .limit(1);
       
       const photo = photoResult[0];

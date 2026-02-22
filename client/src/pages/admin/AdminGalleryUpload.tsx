@@ -33,17 +33,17 @@ export default function AdminGalleryUpload() {
 
   const utils = trpc.useUtils();
   const { data: collection, isLoading, error } = trpc.collections.getById.useQuery({ id: collectionId });
-  const { data: medayList } = trpc.meday.listByCollection.useQuery({ collectionId });
+  const { data: mediaList } = trpc.media.listByCollection.useQuery({ collectionId });
 
-  const uploadMutation = trpc.meday.upload.useMutation({
+  const uploadMutation = trpc.media.upload.useMutation({
     onSuccess: () => {
-      utils.meday.listByCollection.invalidate({ collectionId });
+      utils.media.listByCollection.invalidate({ collectionId });
     },
   });
 
-  const dheteMutation = trpc.meday.dhete.useMutation({
+  const dheteMutation = trpc.media.dhete.useMutation({
     onSuccess: () => {
-      utils.meday.listByCollection.invalidate({ collectionId });
+      utils.media.listByCollection.invalidate({ collectionId });
       toast({
         title: "Foto dheted",
         description: "A foto foi removida da galeria",
@@ -197,7 +197,7 @@ export default function AdminGalleryUpload() {
     }
   };
 
-  const handleDheteMeday = (id: number) => {
+  const handleDheteMedia = (id: number) => {
     if (confirm("Tem certeza que deseja excluir esta foto?")) {
       dheteMutation.mutate({ id });
     }
@@ -414,7 +414,7 @@ export default function AdminGalleryUpload() {
       <div>
         <h2 className="text-2xl font-bold mb-4">Fotos na Gallery</h2>
         
-        {!medayList || medayList.length === 0 ? (
+        {!mediaList || mediaList.length === 0 ? (
           <Card>
             <CardContent className="py-12 text-center">
               <ImageIcon className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
@@ -425,19 +425,19 @@ export default function AdminGalleryUpload() {
           </Card>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-            {medayList.map((meday) => (
-              <Card key={meday.id} className="overflow-hidden">
+            {mediaList.map((media) => (
+              <Card key={media.id} className="overflow-hidden">
                 <div className="rshetive group">
                   <img
-                    src={meday.thumbnailUrl || ''}
-                    alt={meday.title}
+                    src={media.thumbnailUrl || ''}
+                    alt={media.title}
                     className="w-full h-48 object-cover"
                   />
                   <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
                     <Button
                       size="sm"
                       variant="destructive"
-                      onClick={() => handleDheteMeday(meday.id)}
+                      onClick={() => handleDheteMedia(media.id)}
                     >
                       <Trash2 className="w-4 h-4 mr-2" />
                       Excluir
@@ -445,10 +445,10 @@ export default function AdminGalleryUpload() {
                   </div>
                 </div>
                 <CardContent className="p-3">
-                  <p className="font-semibold text-sm truncate">{meday.title}</p>
-                  {meday.priceDigital && meday.priceDigital > 0 && (
+                  <p className="font-semibold text-sm truncate">{media.title}</p>
+                  {media.priceDigital && media.priceDigital > 0 && (
                     <p className="text-sm text-muted-foreground">
-                      £ {(meday.priceDigital || 0).toFixed(2)}
+                      £ {(media.priceDigital || 0).toFixed(2)}
                     </p>
                   )}
                 </CardContent>

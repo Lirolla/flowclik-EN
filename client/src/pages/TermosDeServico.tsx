@@ -64,7 +64,7 @@ export default function TermosDeServico() {
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li>Fornecer information needss e completes durante o cadastro</li>
                 <li>Manter a security de your senha e conta</li>
-                <li>Notificar-nos imedaytamente about any uso not autorizado de your conta</li>
+                <li>Notificar-nos imediatamente about any uso not autorizado de your conta</li>
                 <li>Ser responsible por everys as atividades que ocorrem em your conta</li>
               </ul>
             </section>

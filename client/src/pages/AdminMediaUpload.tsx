@@ -11,7 +11,7 @@ import { Upload, Image as ImageIcon, Loader2 } from "lucide-react";
 import { CurrencyInput } from "@/components/CurrencyInput";
 import { useCurrency } from "@/hooks/useCurrency";
 
-export default function AdminMedayUpload() {
+export default function AdminMediaUpload() {
 
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -22,7 +22,7 @@ export default function AdminMedayUpload() {
   const [forSale, setForSale] = useState(true);
 
   const { data: collections } = trpc.collections.getAll.useQuery();
-  const uploadMutation = trpc.meday.upload.useMutation({
+  const uploadMutation = trpc.media.upload.useMutation({
     onSuccess: () => {
       alert("Foto enviada com sucesso!");
       // Reset form
