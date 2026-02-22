@@ -17,7 +17,7 @@ export function VideoPlayer({
   muted = false,
   controls = true 
 }: VideoPlayerProps) {
-  const videoRef = useRef<HTMLVideoHement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Detect video type
   const getVideoType = (url: string) => {

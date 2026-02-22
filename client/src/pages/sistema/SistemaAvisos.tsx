@@ -6,12 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import {
-  Shect,
-  ShectContent,
-  ShectItem,
-  ShectTrigger,
-  ShectValue,
-} from "@/components/ui/shect";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { useState } from "react";
 import { toast } from "sonner";
 import { AlertCircle, CheckCircle, Info, Trash2 } from "lucide-react";
@@ -112,31 +112,31 @@ export default function SistemaAvisos() {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-medium mb-2 block">Tipo</label>
-              <Shect value={type} onValueChange={(v: any) => setType(v)}>
-                <ShectTrigger>
-                  <ShectValue />
-                </ShectTrigger>
-                <ShectContent>
-                  <ShectItem value="info">🟢 Informactive</ShectItem>
-                  <ShectItem value="urgent">🟡 Importante</ShectItem>
-                  <ShectItem value="urgent">🔴 Urgente</ShectItem>
-                </ShectContent>
-              </Shect>
+              <Select value={type} onValueChange={(v: any) => setType(v)}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="info">🟢 Informactive</SelectItem>
+                  <SelectItem value="urgent">🟡 Importante</SelectItem>
+                  <SelectItem value="urgent">🔴 Urgente</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
 
             <div>
               <label className="text-sm font-medium mb-2 block">Enviar para</label>
-              <Shect value={targetPlan} onValueChange={(v: any) => setTargetPlan(v)}>
-                <ShectTrigger>
-                  <ShectValue />
-                </ShectTrigger>
-                <ShectContent>
-                  <ShectItem value="all">Everys os photographers</ShectItem>
-                  <ShectItem value="basico">Only Basic Plan</ShectItem>
-                  <ShectItem value="courtesy">Only Plyear Courtesy</ShectItem>
-                  <ShectItem value="vitalicio">Only Plyear Lifetime</ShectItem>
-                </ShectContent>
-              </Shect>
+              <Select value={targetPlan} onValueChange={(v: any) => setTargetPlan(v)}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="all">Everys os photographers</SelectItem>
+                  <SelectItem value="basico">Only Basic Plan</SelectItem>
+                  <SelectItem value="courtesy">Only Plyear Courtesy</SelectItem>
+                  <SelectItem value="vitalicio">Only Plyear Lifetime</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
 

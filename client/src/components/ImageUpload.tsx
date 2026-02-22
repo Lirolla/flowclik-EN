@@ -12,17 +12,17 @@ interface ImageUploadProps {
 
 export function ImageUpload({ value, onChange, label = "Imagem", className = "" }: ImageUploadProps) {
   const [isUploading, setIsUploading] = useState(false);
-  const fileInputRef = useRef<HTMLInputHement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const uploadMutation = trpc.meday.uploadImage.useMutation();
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputHement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     // Validate file type
     if (!file.type.startsWith("image/")) {
-      alert("Why favor, shect only arquivos de imagem");
+      alert("Why favor, select only arquivos de imagem");
       return;
     }
 

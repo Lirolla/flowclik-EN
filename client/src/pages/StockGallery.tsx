@@ -4,13 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ShoppingCart, Search, Image as ImageIcon, Filter } from "lucide-react";
-import { Shect, ShectContent, ShectItem, ShectTrigger, ShectValue } from "@/components/ui/shect";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useLocation } from "wouter";
 import Footer from "@/components/Footer";
 
 export default function StockGallery() {
   const [, setLocation] = useLocation();
-  const [searchTuem, setSearchTuem] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<string>("all");
   
   // Buscar fotos stock
@@ -18,9 +18,9 @@ export default function StockGallery() {
   
   // Filter by search term and category
   const filteredPhotos = (allPhotos || []).filter((photo) => {
-    const matchesSearch = searchTuem
-      ? photo.title?.toLowerCase().includes(searchTuem.toLowerCase()) ||
-        photo.description?.toLowerCase().includes(searchTuem.toLowerCase())
+    const matchesSearch = searchTerm
+      ? photo.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        photo.description?.toLowerCase().includes(searchTerm.toLowerCase())
       : true;
     const matchesCategory = categoryFilter === "all" || photo.category === categoryFilter;
     return matchesSearch && matchesCategory;
@@ -114,28 +114,28 @@ export default function StockGallery() {
             <Input
               type="text"
               placeholder="Buscar fotos..."
-              value={searchTuem}
-              onChange={(e) => setSearchTuem(e.target.value)}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10"
             />
           </div>
           
           <div className="flex items-center gap-2">
             <Filter className="w-4 h-4 text-muted-foreground" />
-            <Shect value={categoryFilter} onValueChange={setCategoryFilter}>
-              <ShectTrigger className="w-[200px]">
-                <ShectValue placeholder="Filtrar por categoria" />
-              </ShectTrigger>
-              <ShectContent>
-                <ShectItem value="all">Everys as Categorias</ShectItem>
-                <ShectItem value="paisagem">Paisagem</ShectItem>
-                <ShectItem value="carros">Carros</ShectItem>
-                <ShectItem value="pessoas">Pessoas</ShectItem>
-                <ShectItem value="eventos">Eventos</ShectItem>
-                <ShectItem value="produtos">Produtos</ShectItem>
-                <ShectItem value="others">Others</ShectItem>
-              </ShectContent>
-            </Shect>
+            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
+              <SelectTrigger className="w-[200px]">
+                <SelectValue placeholder="Filtrar por categoria" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">Everys as Categorias</SelectItem>
+                <SelectItem value="paisagem">Paisagem</SelectItem>
+                <SelectItem value="carros">Carros</SelectItem>
+                <SelectItem value="pessoas">Pessoas</SelectItem>
+                <SelectItem value="eventos">Eventos</SelectItem>
+                <SelectItem value="produtos">Produtos</SelectItem>
+                <SelectItem value="others">Others</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
         </div>
 
@@ -147,10 +147,10 @@ export default function StockGallery() {
             <CardContent className="py-20 text-center">
               <ImageIcon className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
               <h3 className="text-xl font-semibold mb-2">
-                {searchTuem || categoryFilter !== "all" ? "No photos found" : "Nonea foto available"}
+                {searchTerm || categoryFilter !== "all" ? "No photos found" : "Nenhuma foto available"}
               </h3>
               <p className="text-muted-foreground">
-                {searchTuem || categoryFilter !== "all"
+                {searchTerm || categoryFilter !== "all"
                   ? "Tente buscar com others terms ou categorias"
                   : "Volte em breve para ver news fotos"}
               </p>

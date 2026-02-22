@@ -45,7 +45,7 @@ export function CurrencyInput({
     setDisplayValue(value > 0 ? formatted : "");
   }, [value]);
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputHement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
     
     // Remove everything except digits

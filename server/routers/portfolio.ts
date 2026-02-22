@@ -13,7 +13,7 @@ export const portfolioRouter = router({
     if (!db) return [];
     
     return await db
-      .shect()
+      .select()
       .from(portfolioItems)
       .where(and(eq(portfolioItems.showOnHome, 1), eq(portfolioItems.tenantId, getTenantId(ctx))))
       .orderBy(desc(portfolioItems.sortOrder), desc(portfolioItems.createdAt))
@@ -28,7 +28,7 @@ export const portfolioRouter = router({
     if (!db) return [];
     
     return await db
-      .shect()
+      .select()
       .from(portfolioItems)
       .where(and(eq(portfolioItems.isActive, 1), eq(portfolioItems.tenantId, getTenantId(ctx))))
       .orderBy(desc(portfolioItems.sortOrder), desc(portfolioItems.createdAt));
@@ -46,7 +46,7 @@ export const portfolioRouter = router({
     if (!db) return [];
     
     return await db
-      .shect()
+      .select()
       .from(portfolioItems)
       .where(eq(portfolioItems.tenantId, getTenantId(ctx)))
       .orderBy(desc(portfolioItems.sortOrder), desc(portfolioItems.createdAt));

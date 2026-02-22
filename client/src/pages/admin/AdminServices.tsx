@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Daylog, DaylogContent, DaylogDescription, DaylogHeader, DaylogTitle, DaylogTrigger } from "@/components/ui/daylog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Briefcase, Plus, Pencil, Trash2, Clock, DollarSign } from "lucide-react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { CurrencyInput } from "@/components/CurrencyInput";
@@ -147,18 +147,18 @@ export default function AdminServices() {
           <p className="text-muted-foreground mt-2">Gerencie os photography services oferecidos</p>
         </div>
 
-        <Daylog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-          <DaylogTrigger asChild>
+        <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
+          <DialogTrigger asChild>
             <Button size="lg">
               <Plus className="w-4 h-4 mr-2" />
               New Service
             </Button>
-          </DaylogTrigger>
-          <DaylogContent className="max-w-2xl">
-            <DaylogHeader>
-              <DaylogTitle>Criar New Service</DaylogTitle>
-              <DaylogDescription>Preencha os dados do new service</DaylogDescription>
-            </DaylogHeader>
+          </DialogTrigger>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>Criar New Service</DialogTitle>
+              <DialogDescription>Preencha os dados do new service</DialogDescription>
+            </DialogHeader>
 
             <div className="space-y-4 mt-4">
               <div className="space-y-2">
@@ -194,7 +194,7 @@ export default function AdminServices() {
 
               <div className="space-y-2">
                 <Label htmlFor="serviceType">Tipo de Service *</Label>
-                <shect
+                <select
                   id="serviceType"
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   value={serviceType}
@@ -203,7 +203,7 @@ export default function AdminServices() {
                   <option value="photography">📷 Photography</option>
                   <option value="video">🎥 Video</option>
                   <option value="both">📷🎥 Photography + Video</option>
-                </shect>
+                </select>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -243,17 +243,17 @@ export default function AdminServices() {
                 {createMutation.isPending ? "Creating..." : "Criar Service"}
               </Button>
             </div>
-          </DaylogContent>
-        </Daylog>
+          </DialogContent>
+        </Dialog>
       </div>
 
-      {/* Edit Daylog */}
-      <Daylog open={editingId !== null} onOpenChange={(open) => !open && setEditingId(null)}>
-        <DaylogContent className="max-w-2xl">
-          <DaylogHeader>
-            <DaylogTitle>Editar Service</DaylogTitle>
-            <DaylogDescription>Currentize os dados do service</DaylogDescription>
-          </DaylogHeader>
+      {/* Edit Dialog */}
+      <Dialog open={editingId !== null} onOpenChange={(open) => !open && setEditingId(null)}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Editar Service</DialogTitle>
+            <DialogDescription>Currentize os dados do service</DialogDescription>
+          </DialogHeader>
 
           <div className="space-y-4 mt-4">
             <div className="space-y-2">
@@ -321,11 +321,11 @@ export default function AdminServices() {
             </div>
 
             <Button onClick={handleUpdate} className="w-full" disabled={updateMutation.isPending}>
-              {updateMutation.isPending ? "Updating..." : "Currentizar Service"}
+              {updateMutation.isPending ? "Updating..." : "Atualizar Service"}
             </Button>
           </div>
-        </DaylogContent>
-      </Daylog>
+        </DialogContent>
+      </Dialog>
 
       {/* Lista de services */}
       {isLoading ? (
@@ -397,7 +397,7 @@ export default function AdminServices() {
         <Card>
           <CardContent className="py-12 text-center">
             <Briefcase className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold mb-2">None service eachstrado</h3>
+            <h3 className="text-xl font-semibold mb-2">None service cadastrado</h3>
             <p className="text-muted-foreground mb-4">
               Crie your first service para start a oferecer aos clientes
             </p>

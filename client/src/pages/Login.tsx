@@ -106,7 +106,7 @@ export default function Login() {
           <p>
             Not tem uma conta?{" "}
             <a href="/register" className="text-primary hover:underline">
-              Eachstre-se
+              Cadastre-se
             </a>
           </p>
         </div>

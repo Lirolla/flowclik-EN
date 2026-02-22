@@ -6,12 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  Daylog,
-  DaylogContent,
-  DaylogHeader,
-  DaylogTitle,
-  DaylogTrigger,
-} from "@/components/ui/daylog";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Plus, Trash2, FileText, Download, Eye, Wand2, Edit, ChevronRight, Sparkles, Mail, MessageCircle, Loader2, CircleCheckBig } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/DashboardLayout";
@@ -26,7 +26,7 @@ export default function AdminContracts() {
 
 function AdminContractsContent() {
   const { toast } = useToast();
-  const [isDaylogOpen, setIsDaylogOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingTemplate, setEditingTemplate] = useState<any>(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -37,8 +37,8 @@ function AdminContractsContent() {
 
   // Estado para gerar contrato
   const [isGenerateOpen, setIsGenerateOpen] = useState(false);
-  const [shectedTemplateId, setShectedTemplateId] = useState<number | null>(null);
-  const [shectedAppointmentId, setShectedAppointmentId] = useState<number | null>(null);
+  const [selectedTemplateId, setSelectedTemplateId] = useState<number | null>(null);
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState<number | null>(null);
   const [generatedContent, setGeneratedContent] = useState<string>("");
   const [generatedInfo, setGeneratedInfo] = useState<any>(null);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -51,7 +51,7 @@ function AdminContractsContent() {
       toast({ title: "Template criado com sucesso!" });
       refetch();
       resetForm();
-      setIsDaylogOpen(false);
+      setIsDialogOpen(false);
     },
     onError: (error: any) => {
       toast({ title: "Erro ao criar template", description: error.message, variant: "destructive" });
@@ -60,10 +60,10 @@ function AdminContractsContent() {
 
   const updateTemplate = trpc.contracts.update.useMutation({
     onSuccess: () => {
-      toast({ title: "Template currentizado!" });
+      toast({ title: "Template atualizado!" });
       refetch();
       resetForm();
-      setIsDaylogOpen(false);
+      setIsDialogOpen(false);
     },
     onError: (error: any) => {
       toast({ title: "Error updating", description: error.message, variant: "destructive" });
@@ -110,7 +110,7 @@ function AdminContractsContent() {
   const generatePDF = trpc.contracts.generatePDF.useMutation({
     onSuccess: (data: any) => {
       if (data.pdfData) {
-        const link = document.createHement("a");
+        const link = document.createElement("a");
         link.href = data.pdfData;
         link.download = data.fileName;
         link.click();
@@ -124,7 +124,7 @@ function AdminContractsContent() {
 
   const saveContract = trpc.contracts.saveContract.useMutation({
     onSuccess: (data: any) => {
-      toast({ title: data.updated ? "Contrato currentizado!" : "Contrato salvo com sucesso!" });
+      toast({ title: data.updated ? "Contrato atualizado!" : "Contrato salvo com sucesso!" });
     },
     onError: () => {
       toast({ title: "Erro ao salvar contrato", variant: "destructive" });
@@ -158,7 +158,7 @@ function AdminContractsContent() {
     setEditingTemplate(null);
   };
 
-  const openEditDaylog = (template: any) => {
+  const openEditDialog = (template: any) => {
     setEditingTemplate(template);
     setFormData({
       name: template.name,
@@ -166,12 +166,12 @@ function AdminContractsContent() {
       content: template.content,
       isActive: template.isActive === 1,
     });
-    setIsDaylogOpen(true);
+    setIsDialogOpen(true);
   };
 
-  const openCreateDaylog = () => {
+  const openCreateDialog = () => {
     resetForm();
-    setIsDaylogOpen(true);
+    setIsDialogOpen(true);
   };
 
   // Filtrar agendamentos actives (not cancelleds)
@@ -201,19 +201,19 @@ function AdminContractsContent() {
               {seedDefaults.isPending ? "Loading..." : "Carregar Modelos Readys"}
             </Button>
           )}
-          <Daylog open={isDaylogOpen} onOpenChange={setIsDaylogOpen}>
-            <DaylogTrigger asChild>
-              <Button onClick={openCreateDaylog} variant="outline">
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogTrigger asChild>
+              <Button onClick={openCreateDialog} variant="outline">
                 <Plus className="w-4 h-4 mr-2" />
                 New Template
               </Button>
-            </DaylogTrigger>
-            <DaylogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
-              <DaylogHeader>
-                <DaylogTitle>
+            </DialogTrigger>
+            <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>
                   {editingTemplate ? "Editar Template" : "New Template"}
-                </DaylogTitle>
-              </DaylogHeader>
+                </DialogTitle>
+              </DialogHeader>
               <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
                   <Label htmlFor="name">Nome do Template *</Label>
@@ -247,11 +247,11 @@ function AdminContractsContent() {
                     <div className="grid grid-cols-2 gap-1">
                       <span><code>{"{cliente}"}</code> - Nome do cliente</span>
                       <span><code>{"{email}"}</code> - E-mail</span>
-                      <span><code>{"{thefone}"}</code> - Thefone</span>
+                      <span><code>{"{telefone}"}</code> - Telefone</span>
                       <span><code>{"{cpf}"}</code> - CPF do cliente</span>
                       <span><code>{"{servico}"}</code> - Tipo de service</span>
                       <span><code>{"{data}"}</code> - Data do agendamento</span>
-                      <span><code>{"{hourrio}"}</code> - Time</span>
+                      <span><code>{"{horario}"}</code> - Time</span>
                       <span><code>{"{local}"}</code> - Local do evento</span>
                       <span><code>{"{duracao}"}</code> - Duration estimada</span>
                       <span><code>{"{valor}"}</code> - Valor total (£)</span>
@@ -274,7 +274,7 @@ function AdminContractsContent() {
                   <Label htmlFor="isActive" className="cursor-pointer">Template active</Label>
                 </div>
                 <div className="flex gap-2 pt-4">
-                  <Button type="button" variant="outline" onClick={() => setIsDaylogOpen(false)} className="flex-1">
+                  <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)} className="flex-1">
                     Cancsher
                   </Button>
                   <Button type="submit" className="flex-1" disabled={createTemplate.isPending || updateTemplate.isPending}>
@@ -282,8 +282,8 @@ function AdminContractsContent() {
                   </Button>
                 </div>
               </form>
-            </DaylogContent>
-          </Daylog>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
 
@@ -297,47 +297,47 @@ function AdminContractsContent() {
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground mb-4">
-            Shect um agendamento e um modelo de contrato. Os dados do cliente, service, data e valor will be preenchidos automaticamente.
+            Select um agendamento e um modelo de contrato. Os dados do cliente, service, data e valor will be preenchidos automaticamente.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Shecionar Agendamento */}
             <div>
-              <Label>1. Shect o Agendamento</Label>
-              <shect
+              <Label>1. Select o Agendamento</Label>
+              <select
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring mt-1"
-                value={shectedAppointmentId || ""}
-                onChange={(e) => setShectedAppointmentId(e.target.value ? Number(e.target.value) : null)}
+                value={selectedAppointmentId || ""}
+                onChange={(e) => setSelectedAppointmentId(e.target.value ? Number(e.target.value) : null)}
               >
-                <option value="">Shect um agendamento...</option>
+                <option value="">Select um agendamento...</option>
                 {activeAppointments.map((apt: any) => (
                   <option key={apt.id} value={apt.id}>
                     {apt.clientName} - {apt.customServiceName || apt.serviceName || 'No service'} - {apt.appointmentDate ? new Date(apt.appointmentDate).toLocaleDateString('en-GB') : 'No date'}
                   </option>
                 ))}
-              </shect>
+              </select>
             </div>
 
             {/* Shecionar Template */}
             <div>
-              <Label>2. Shect o Contract Template</Label>
-              <shect
+              <Label>2. Select o Contract Template</Label>
+              <select
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring mt-1"
-                value={shectedTemplateId || ""}
-                onChange={(e) => setShectedTemplateId(e.target.value ? Number(e.target.value) : null)}
+                value={selectedTemplateId || ""}
+                onChange={(e) => setSelectedTemplateId(e.target.value ? Number(e.target.value) : null)}
               >
-                <option value="">Shect um modelo...</option>
+                <option value="">Select um modelo...</option>
                 {templates?.filter((t: any) => t.isActive === 1).map((t: any) => (
                   <option key={t.id} value={t.id}>
                     {t.name}
                   </option>
                 ))}
-              </shect>
+              </select>
             </div>
           </div>
 
           {/* Info do agendamento shecionado */}
-          {shectedAppointmentId && (() => {
-            const apt = activeAppointments.find((a: any) => a.id === shectedAppointmentId);
+          {selectedAppointmentId && (() => {
+            const apt = activeAppointments.find((a: any) => a.id === selectedAppointmentId);
             if (!apt) return null;
             const price = apt.finalPrice || apt.servicePrice || 0;
             return (
@@ -355,34 +355,34 @@ function AdminContractsContent() {
           <div className="flex gap-2 mt-4">
             <Button
               onClick={() => {
-                if (!shectedTemplateId || !shectedAppointmentId) {
-                  toast({ title: "Shect um agendamento e um modelo", variant: "destructive" });
+                if (!selectedTemplateId || !selectedAppointmentId) {
+                  toast({ title: "Select um agendamento e um modelo", variant: "destructive" });
                   return;
                 }
                 generateFromAppointment.mutate({
-                  templateId: shectedTemplateId,
-                  appointmentId: shectedAppointmentId,
+                  templateId: selectedTemplateId,
+                  appointmentId: selectedAppointmentId,
                 });
               }}
-              disabled={!shectedTemplateId || !shectedAppointmentId || generateFromAppointment.isPending}
+              disabled={!selectedTemplateId || !selectedAppointmentId || generateFromAppointment.isPending}
               className="flex-1 md:flex-none"
             >
               <Eye className="w-4 h-4 mr-2" />
-              {generateFromAppointment.isPending ? "Gerando..." : "Viyourlizar Contrato"}
+              {generateFromAppointment.isPending ? "Gerando..." : "Visualizar Contrato"}
             </Button>
             <Button
               variant="outline"
               onClick={() => {
-                if (!shectedTemplateId || !shectedAppointmentId) {
-                  toast({ title: "Shect um agendamento e um modelo", variant: "destructive" });
+                if (!selectedTemplateId || !selectedAppointmentId) {
+                  toast({ title: "Select um agendamento e um modelo", variant: "destructive" });
                   return;
                 }
                 generatePDF.mutate({
-                  templateId: shectedTemplateId,
-                  appointmentId: shectedAppointmentId,
+                  templateId: selectedTemplateId,
+                  appointmentId: selectedAppointmentId,
                 });
               }}
-              disabled={!shectedTemplateId || !shectedAppointmentId || generatePDF.isPending}
+              disabled={!selectedTemplateId || !selectedAppointmentId || generatePDF.isPending}
               className="flex-1 md:flex-none"
             >
               <Download className="w-4 h-4 mr-2" />
@@ -393,14 +393,14 @@ function AdminContractsContent() {
       </Card>
 
       {/* Preview do contrato gerado */}
-      <Daylog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
-        <DaylogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
-          <DaylogHeader>
-            <DaylogTitle className="flex items-center gap-2">
+      <Dialog open={isPreviewOpen} onOpenChange={setIsPreviewOpen}>
+        <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
               <FileText className="w-5 h-5" />
               {generatedInfo?.templateName || "Contract"}
-            </DaylogTitle>
-          </DaylogHeader>
+            </DialogTitle>
+          </DialogHeader>
           {generatedInfo && (
             <div className="flex flex-wrap gap-2 text-xs text-muted-foreground mb-2">
               <span className="bg-muted px-2 py-1 rounded">Cliente: {generatedInfo.clientName}</span>
@@ -434,10 +434,10 @@ function AdminContractsContent() {
             <Button
               variant="outline"
               onClick={() => {
-                if (!shectedTemplateId || !shectedAppointmentId) return;
+                if (!selectedTemplateId || !selectedAppointmentId) return;
                 saveContract.mutate({
-                  appointmentId: shectedAppointmentId,
-                  templateId: shectedTemplateId,
+                  appointmentId: selectedAppointmentId,
+                  templateId: selectedTemplateId,
                   content: generatedContent,
                   clientName: generatedInfo?.clientName || '',
                   clientEmail: generatedInfo?.clientEmail || '',
@@ -481,13 +481,13 @@ function AdminContractsContent() {
               variant="outline"
               onClick={() => {
                 if (!generatedInfo?.clientEmail) {
-                  toast({ title: "Cliente sem email eachstrado", variant: "destructive" });
+                  toast({ title: "Cliente sem email cadastrado", variant: "destructive" });
                   return;
                 }
-                if (!shectedTemplateId || !shectedAppointmentId) return;
+                if (!selectedTemplateId || !selectedAppointmentId) return;
                 sendEmail.mutate({
-                  appointmentId: shectedAppointmentId,
-                  templateId: shectedTemplateId,
+                  appointmentId: selectedAppointmentId,
+                  templateId: selectedTemplateId,
                   content: generatedContent,
                   clientName: generatedInfo?.clientName || '',
                   clientEmail: generatedInfo?.clientEmail || '',
@@ -524,8 +524,8 @@ function AdminContractsContent() {
               Copiar
             </Button>
           </div>
-        </DaylogContent>
-      </Daylog>
+        </DialogContent>
+      </Dialog>
 
       {/* Lista de Templates */}
       <div>
@@ -534,7 +534,7 @@ function AdminContractsContent() {
           <Card>
             <CardContent className="py-16 text-center">
               <FileText className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-              <h3 className="text-xl font-semibold mb-2">None modelo eachstrado</h3>
+              <h3 className="text-xl font-semibold mb-2">None modelo cadastrado</h3>
               <p className="text-muted-foreground mb-6">
                 Click "Load Ready Templates" to add 4 professional contracts, or create your own.
               </p>
@@ -573,7 +573,7 @@ function AdminContractsContent() {
                     {template.content.length} characters • Criado em {new Date(template.createdAt).toLocaleDateString('en-GB')}
                   </div>
                   <div className="flex gap-2">
-                    <Button size="sm" variant="outline" onClick={() => openEditDaylog(template)}>
+                    <Button size="sm" variant="outline" onClick={() => openEditDialog(template)}>
                       <Edit className="w-3 h-3 mr-1" /> Editar
                     </Button>
                     <Button

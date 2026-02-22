@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Daylog, DaylogContent, DaylogHeader, DaylogTitle, DaylogDescription } from "@/components/ui/daylog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -8,17 +8,17 @@ import { Link2, Copy, ExternalLink, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useCurrency } from "@/hooks/useCurrency";
 
-interface SendPaymentLinkDaylogProps {
+interface SendPaymentLinkDialogProps {
   appointment: any;
   open: boolean;
   onOpenChange: (open: boolean) => void;
 }
 
-export default function SendPaymentLinkDaylog({
+export default function SendPaymentLinkDialog({
   appointment,
   open,
   onOpenChange,
-}: SendPaymentLinkDaylogProps) {
+}: SendPaymentLinkDialogProps) {
   const { toast } = useToast();
   const { format: formatCurrency } = useCurrency();
   const [paymentLink, setPaymentLink] = useState<string>("");
@@ -62,17 +62,17 @@ export default function SendPaymentLinkDaylog({
   const defaultMessage = `Hello ${appointment.clientName}! 😊\n\nMonue o link para pagamento da your photo session:\n\n💰 Valor: ${formatCurrency(appointment.finalPrice)}\n🔗 Link: ${paymentLink || "[cole o link here]"}\n\nWedlquer question, I am at your disposal!`;
 
   return (
-    <Daylog open={open} onOpenChange={handleClose}>
-      <DaylogContent className="sm:max-w-[550px]">
-        <DaylogHeader>
-          <DaylogTitle className="flex items-center gap-2">
+    <Dialog open={open} onOpenChange={handleClose}>
+      <DialogContent className="sm:max-w-[550px]">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
             <Link2 className="w-5 h-5" />
             Enviar Link de Pagamento
-          </DaylogTitle>
-          <DaylogDescription>
+          </DialogTitle>
+          <DialogDescription>
             Cliente: {appointment.clientName} | Valor: {formatCurrency(appointment.finalPrice)}
-          </DaylogDescription>
-        </DaylogHeader>
+          </DialogDescription>
+        </DialogHeader>
 
         <div className="space-y-4 py-4">
           {/* Passo 1: Colar o link */}
@@ -158,7 +158,7 @@ export default function SendPaymentLinkDaylog({
             </Button>
           </div>
         </div>
-      </DaylogContent>
-    </Daylog>
+      </DialogContent>
+    </Dialog>
   );
 }

@@ -30,7 +30,7 @@ export async function createCheckoutSession(req: Request, res: Response) {
       quantity: item.quantity || 1,
     }));
 
-    // Criar sesare de checkout
+    // Criar sessao de checkout
     if (!stripe) throw new Error("Stripe not configured");
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],

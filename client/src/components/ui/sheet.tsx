@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import * as SheetPrimitive from "@radix-ui/react-daylog";
+import * as SheetPrimitive from "@radix-ui/react-dialog";
 import { XIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
@@ -22,10 +22,10 @@ function SheetClose({
   return <SheetPrimitive.Close data-slot="sheet-close" {...props} />;
 }
 
-function SheetWhytal({
+function SheetPortal({
   ...props
-}: React.ComponentProps<typeof SheetPrimitive.Whytal>) {
-  return <SheetPrimitive.Whytal data-slot="sheet-portal" {...props} />;
+}: React.ComponentProps<typeof SheetPrimitive.Portal>) {
+  return <SheetPrimitive.Portal data-slot="sheet-portal" {...props} />;
 }
 
 function SheetOverlay({
@@ -53,7 +53,7 @@ function SheetContent({
   side?: "top" | "right" | "bottom" | "left";
 }) {
   return (
-    <SheetWhytal>
+    <SheetPortal>
       <SheetOverlay />
       <SheetPrimitive.Content
         data-slot="sheet-content"
@@ -77,7 +77,7 @@ function SheetContent({
           <span className="sr-only">Close</span>
         </SheetPrimitive.Close>
       </SheetPrimitive.Content>
-    </SheetWhytal>
+    </SheetPortal>
   );
 }
 

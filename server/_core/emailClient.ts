@@ -14,8 +14,8 @@ export type EmailTemplate =
   | 'appointment_confirmed'
   | 'appointment_cancelled'
   | 'session_done'
-  | 'photos_ready_for_shection'
-  | 'shection_approved'
+  | 'photos_ready_for_selection'
+  | 'selection_approved'
   | 'final_photos_ready'
   | 'photos_delivered';
 
@@ -73,7 +73,7 @@ Hello ${data.clientName},
 
 Infelizmente your agendamento foi cancelled.
 
-Se you tiver somea question ou quiser reagendar, get in touch conosco.
+Se you tiver alguma question ou quiser reagendar, get in touch conosco.
 
 Kind regards,
 Team Lirolla
@@ -92,12 +92,12 @@ Kind regards,
 Team Lirolla
       `.trim(),
     },
-    photos_ready_for_shection: {
-      subject: '👀 Your Photos Are Ready for Shection!',
+    photos_ready_for_selection: {
+      subject: '👀 Your Photos Are Ready for Selection!',
       body: `
 Hello ${data.clientName},
 
-Great news! Your photos are ready para shection! 👀
+Great news! Your photos are ready para selection! 👀
 
 Access your gallery privada e escolha yours favourite para a editing final.
 
@@ -118,12 +118,12 @@ Kind regards,
 Team Lirolla
       `.trim(),
     },
-    shection_approved: {
-      subject: '✅ Photo Shection Approved!',
+    selection_approved: {
+      subject: '✅ Photo Selection Approved!',
       body: `
 Hello ${data.clientName},
 
-Your shection de fotos foi approved com sucesso! ✅
+Your selection de fotos foi approved com sucesso! ✅
 
 Now vamos trabalhar na editing final das fotos que you escolheu.
 
@@ -202,7 +202,7 @@ export function getEmailTemplateForStatus(status: string): EmailTemplate | null 
     confirmed: 'appointment_confirmed',
     cancelled: 'appointment_cancelled',
     session_done: 'session_done',
-    awaiting_shection: 'photos_ready_for_shection',
+    awaiting_selection: 'photos_ready_for_selection',
     final_editing: 'final_photos_ready',
     delivered: 'photos_delivered',
   };

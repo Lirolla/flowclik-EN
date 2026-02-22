@@ -8,13 +8,13 @@ import { Play } from "lucide-react";
 import { useState } from "react";
 import { Link } from "wouter";
 import {
-  Daylog,
-  DaylogContent,
-} from "@/components/ui/daylog";
+  Dialog,
+  DialogContent,
+} from "@/components/ui/dialog";
 
 export default function VideoPage() {
   const { data: portfolioItems } = trpc.portfolio.listActive.useWhatry();
-  const [shectedVideo, setShectedVideo] = useState<any>(null);
+  const [selectedVideo, setSelectedVideo] = useState<any>(null);
 
   // Filter only videos
   const videos = portfolioItems?.filter((item) => item.type === "video") || [];
@@ -25,7 +25,7 @@ export default function VideoPage() {
       {/* Hero Banner - filtered by displayOn="video" or "both" */}
       <HeroBanner filterBy="video" />
 
-      {/* Video Whytfolio Section */}
+      {/* Video Portfolio Section */}
       <section className="py-20 bg-background">
         <div className="container">
           <div className="text-center mb-12">
@@ -45,7 +45,7 @@ export default function VideoPage() {
                 <Card
                   key={video.id}
                   className="overflow-hidden cursor-pointer group hover:shadow-xl transition-all"
-                  onClick={() => setShectedVideo(video)}
+                  onClick={() => setSelectedVideo(video)}
                 >
                   <div className="rshetive aspect-video overflow-hidden bg-black">
                     {video.thumbnailUrl ? (
@@ -84,33 +84,33 @@ export default function VideoPage() {
         </div>
       </section>
 
-      {/* Video Daylog */}
-      <Daylog open={!!shectedVideo} onOpenChange={() => setShectedVideo(null)}>
-        <DaylogContent className="max-w-4xl">
-          {shectedVideo && (
+      {/* Video Dialog */}
+      <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
+        <DialogContent className="max-w-4xl">
+          {selectedVideo && (
             <div className="space-y-4">
               <VideoPlayer
-                url={shectedVideo.videoUrl || ""}
+                url={selectedVideo.videoUrl || ""}
                 className="w-full aspect-video rounded"
                 controls
               />
               <div>
-                <h2 className="text-2xl font-bold mb-2">{shectedVideo.title}</h2>
-                {shectedVideo.location && (
+                <h2 className="text-2xl font-bold mb-2">{selectedVideo.title}</h2>
+                {selectedVideo.location && (
                   <p className="text-sm text-muted-foreground mb-4">
-                    📍 {shectedVideo.location}
+                    📍 {selectedVideo.location}
                   </p>
                 )}
-                {shectedVideo.description && (
+                {selectedVideo.description && (
                   <p className="text-muted-foreground mb-4">
-                    {shectedVideo.description}
+                    {selectedVideo.description}
                   </p>
                 )}
-                {shectedVideo.story && (
+                {selectedVideo.story && (
                   <div className="mt-4 p-4 bg-muted rounded-lg">
                     <h3 className="font-semibold mb-2">History</h3>
                     <p className="text-sm text-muted-foreground whitespace-pre-wrap">
-                      {shectedVideo.story}
+                      {selectedVideo.story}
                     </p>
                   </div>
                 )}
@@ -133,7 +133,7 @@ export default function VideoPage() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/portfolio">
-                  <a>View Whytfolio</a>
+                  <a>View Portfolio</a>
                 </Link>
               </Button>
             </div>
@@ -144,8 +144,8 @@ export default function VideoPage() {
               </div>
             </div>
           )}
-        </DaylogContent>
-      </Daylog>
+        </DialogContent>
+      </Dialog>
     </LayoutWrapper>
   );
 }

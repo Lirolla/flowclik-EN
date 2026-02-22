@@ -13,7 +13,7 @@ export const blockedDatesRouter = router({
     if (!db) throw new Error("Database not available");
 
     return await db
-      .shect()
+      .select()
       .from(blockedDates)
       .where(and(eq(blockedDates.isActive, 1), eq(blockedDates.tenantId, getTenantId(ctx))))
       .orderBy(blockedDates.startDate);
@@ -28,7 +28,7 @@ export const blockedDatesRouter = router({
 
     const now = new Date().toISOString();
     return await db
-      .shect()
+      .select()
       .from(blockedDates)
       .where(
         and(
@@ -93,7 +93,7 @@ export const blockedDatesRouter = router({
 
       const dateStr = input.date.toISOString();
       const blocks = await db
-        .shect()
+        .select()
         .from(blockedDates)
         .where(
           and(

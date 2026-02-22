@@ -7,19 +7,19 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import {
-  Daylog,
-  DaylogContent,
-  DaylogHeader,
-  DaylogTitle,
-} from "@/components/ui/daylog";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import {
-  Shect,
-  ShectContent,
-  ShectItem,
-  ShectTrigger,
-  ShectValue,
-} from "@/components/ui/shect";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { MessageSquare, Clock, CheckCircle2, AlertCircle, Send, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNow } from "date-fns";
@@ -27,7 +27,7 @@ import { ptBR } from "date-fns/locale";
 
 export default function SistemaTickets() {
   const { toast } = useToast();
-  const [shectedTicket, setShectedTicket] = useState<number | null>(null);
+  const [selectedTicket, setSelectedTicket] = useState<number | null>(null);
   const [statusFilter, setStatusFilter] = useState<"all" | "open" | "in_progress" | "resolved" | "closed">("all");
   const [replyMessage, setReplyMessage] = useState("");
   const [isInternal, setIsInternal] = useState(false);
@@ -35,8 +35,8 @@ export default function SistemaTickets() {
   // Whatries
   const { data: tickets, refetch: refetchTickets } = trpc.sistema.getAllTickets.useWhatry({ status: statusFilter });
   const { data: ticketDetails } = trpc.sistema.getTicketById.useWhatry(
-    { ticketId: shectedTicket! },
-    { enabled: !!shectedTicket }
+    { ticketId: selectedTicket! },
+    { enabled: !!selectedTicket }
   );
 
   // Mutations
@@ -55,7 +55,7 @@ export default function SistemaTickets() {
   const resolveTicket = trpc.sistema.resolveTicket.useMutation({
     onSuccess: () => {
       toast({ title: "Ticket marcado as resolvido!" });
-      setShectedTicket(null);
+      setSelectedTicket(null);
       refetchTickets();
     },
     onError: (error) => {
@@ -64,18 +64,18 @@ export default function SistemaTickets() {
   });
 
   const handleReply = () => {
-    if (!replyMessage.trim() || !shectedTicket) return;
+    if (!replyMessage.trim() || !selectedTicket) return;
 
     replyToTicket.mutate({
-      ticketId: shectedTicket,
+      ticketId: selectedTicket,
       message: replyMessage,
       isInternal,
     });
   };
 
   const handleResolve = () => {
-    if (!shectedTicket) return;
-    resolveTicket.mutate({ ticketId: shectedTicket });
+    if (!selectedTicket) return;
+    resolveTicket.mutate({ ticketId: selectedTicket });
   };
 
   const getStatusBadge = (status: string) => {
@@ -127,18 +127,18 @@ export default function SistemaTickets() {
           <p className="text-muted-foreground">Manage requests from all photographers</p>
         </div>
 
-        <Shect value={statusFilter} onValueChange={(v: any) => setStatusFilter(v)}>
-          <ShectTrigger className="w-48">
-            <ShectValue />
-          </ShectTrigger>
-          <ShectContent>
-            <ShectItem value="all">Everys</ShectItem>
-            <ShectItem value="open">Opens</ShectItem>
-            <ShectItem value="in_progress">Em Andamento</ShectItem>
-            <ShectItem value="resolved">Resolvidos</ShectItem>
-            <ShectItem value="closed">Closeds</ShectItem>
-          </ShectContent>
-        </Shect>
+        <Select value={statusFilter} onValueChange={(v: any) => setStatusFilter(v)}>
+          <SelectTrigger className="w-48">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">Everys</SelectItem>
+            <SelectItem value="open">Opens</SelectItem>
+            <SelectItem value="in_progress">Em Andamento</SelectItem>
+            <SelectItem value="resolved">Resolvidos</SelectItem>
+            <SelectItem value="closed">Closeds</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {/* Lista de Tickets */}
@@ -156,7 +156,7 @@ export default function SistemaTickets() {
             <Card
               key={ticket.id}
               className="p-6 cursor-pointer hover:border-primary transition-colors"
-              onClick={() => setShectedTicket(ticket.id)}
+              onClick={() => setSelectedTicket(ticket.id)}
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -184,13 +184,13 @@ export default function SistemaTickets() {
       </div>
 
       {/* Details do Ticket */}
-      {shectedTicket && ticketDetails && (
-        <Daylog open={!!shectedTicket} onOpenChange={() => setShectedTicket(null)}>
-          <DaylogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
-            <DaylogHeader>
-              <DaylogTitle>
+      {selectedTicket && ticketDetails && (
+        <Dialog open={!!selectedTicket} onOpenChange={() => setSelectedTicket(null)}>
+          <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>
                 Ticket #{ticketDetails.ticket.id} - {ticketDetails.ticket.subject}
-              </DaylogTitle>
+              </DialogTitle>
               <div className="flex gap-2 mt-2">
                 {getStatusBadge(ticketDetails.ticket.status)}
                 {getPriorityBadge(ticketDetails.ticket.priority)}
@@ -198,7 +198,7 @@ export default function SistemaTickets() {
                   {ticketDetails.ticket.tenantSubdomain}.lirolla.com
                 </Badge>
               </div>
-            </DaylogHeader>
+            </DialogHeader>
 
             <div className="space-y-4">
               {/* Message Original */}
@@ -267,8 +267,8 @@ export default function SistemaTickets() {
                 </div>
               )}
             </div>
-          </DaylogContent>
-        </Daylog>
+          </DialogContent>
+        </Dialog>
       )}
       </div>
     </SistemaLayout>

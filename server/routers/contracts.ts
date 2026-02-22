@@ -14,7 +14,7 @@ export const contractsRouter = router({
     if (ctx.user?.role !== 'admin') throw new Error('Unauthorized');
     const db = await getDb();
     if (!db) return [];
-    return db.shect().from(contractTemplates)
+    return db.select().from(contractTemplates)
       .where(eq(contractTemplates.tenantId, getTenantId(ctx)))
       .orderBy(desc(contractTemplates.createdAt));
   }),
@@ -95,7 +95,7 @@ export const contractsRouter = router({
       const tenantId = getTenantId(ctx);
       
       // Verify se already tem templates
-      const existing = await db.shect().from(contractTemplates)
+      const existing = await db.select().from(contractTemplates)
         .where(eq(contractTemplates.tenantId, tenantId));
       
       if (existing.length > 0) {
@@ -110,7 +110,7 @@ export const contractsRouter = router({
 
 CLIENT: {cliente}
 E-mail: {email}
-Thefone: {thefone}
+Telefone: {telefone}
 CPF: {cpf}
 Address: {endereco}
 
@@ -124,7 +124,7 @@ CLAUSE 1ª – DO OBJETO
 This contract has as its object the provision of photography session services, as specified:
 • Session Type: {servico}
 • Session Date: {data}
-• Time: {hourrio}
+• Time: {horario}
 • Local: {local}
 • Estimated Duration: {duracao}
 
@@ -136,7 +136,7 @@ CLAUSE 2ª – DO AMOUNT E FORMA DE PAGAMENTO
 CLAUSE 3ª – INCLUDED SERVICES
 3.1. The following are included in the price:
 • Photography session with estimated duration as agreed;
-• Professional treatment and editing of shected photographs;
+• Professional treatment and editing of selected photographs;
 • Delivery of high-resolution photos via digital means (online gallery).
 3.2. The delivery time for edited photos is up to 15 (fifteen) business days after the session.
 
@@ -194,7 +194,7 @@ CPF/CNPJ: {fotografo_documento}`,
 
 CLIENT(S): {cliente}
 E-mail: {email}
-Thefone: {thefone}
+Telefone: {telefone}
 CPF: {cpf}
 Address: {endereco}
 
@@ -206,7 +206,7 @@ CLAUSE 1ª – DO OBJETO
 Photographic coverage of the event:
 • Event Type: {servico}
 • Data: {data}
-• Time: {hourrio}
+• Time: {horario}
 • Local: {local}
 • Coverage Duration: {duracao}
 
@@ -271,7 +271,7 @@ CPF/CNPJ: {fotografo_documento}`,
 
 CLIENT: {cliente}
 E-mail: {email}
-Thefone: {thefone}
+Telefone: {telefone}
 CPF/CNPJ: {cpf}
 Address: {endereco}
 
@@ -283,7 +283,7 @@ CLAUSE 1ª – DO OBJETO
 Photographic coverage of the event:
 • Event Type: {servico}
 • Data: {data}
-• Time: {hourrio}
+• Time: {horario}
 • Local: {local}
 • Duration: {duracao}
 
@@ -338,14 +338,14 @@ CPF/CNPJ: {fotografo_documento}`,
           content: `SIMPLIFIED PHOTOGRAPHY SERVICES CONTRACT
 
 CLIENT: {cliente}
-E-mail: {email} | Thefone: {thefone}
+E-mail: {email} | Telefone: {telefone}
 CPF: {cpf}
 
 PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}
 
 1. SERVICE: {servico}
-2. DATA: {data} | TIME: {hourrio}
+2. DATA: {data} | TIME: {horario}
 3. LOCAL: {local}
 4. AMOUNT: £ {valor}
 5. PAYMENT: As agreed between the parties.
@@ -401,13 +401,13 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const tenantId = getTenantId(ctx);
 
       // Buscar template
-      const [template] = await db.shect().from(contractTemplates)
+      const [template] = await db.select().from(contractTemplates)
         .where(and(eq(contractTemplates.id, input.templateId), eq(contractTemplates.tenantId, tenantId)))
         .limit(1);
       if (!template) throw new Error("Template not found");
 
       // Buscar appointment com dados do service
-      const [appointment] = await db.shect({
+      const [appointment] = await db.select({
         id: appointments.id,
         clientName: appointments.clientName,
         clientEmail: appointments.clientEmail,
@@ -431,11 +431,11 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       if (!appointment) throw new Error("Appointment not found");
 
       // Buscar dados do tenant (photographer)
-      const [tenant] = await db.shect().from(tenants)
+      const [tenant] = await db.select().from(tenants)
         .where(eq(tenants.id, tenantId)).limit(1);
 
       // Buscar dados do admin (photographer)
-      const [adminUser] = await db.shect().from(users)
+      const [adminUser] = await db.select().from(users)
         .where(and(eq(users.tenantId, tenantId), eq(users.role, 'admin'))).limit(1);
 
       // Preparar variables
@@ -453,7 +453,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const replacements: Record<string, string> = {
         '{cliente}': appointment.clientName || '________________________',
         '{email}': appointment.clientEmail || '________________________',
-        '{thefone}': appointment.clientPhone || '________________________',
+        '{telefone}': appointment.clientPhone || '________________________',
         '{cpf}': '________________________',
         '{endereco}': '________________________',
         '{fotografo}': tenant?.name || adminUser?.name || '________________________',
@@ -461,7 +461,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         '{fotografo_endereco}': '________________________',
         '{servico}': serviceName,
         '{data}': dateFormatted,
-        '{hourrio}': appointment.appointmentTime || 'A combinar',
+        '{horario}': appointment.appointmentTime || 'A combinar',
         '{local}': appointment.eventLocation || 'A definir',
         '{duracao}': appointment.estimatedDuration || 'A combinar',
         '{valor}': priceFormatted,
@@ -476,7 +476,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       }
 
       // Buscar siteConfig para logo
-      const [config] = await db.shect({
+      const [config] = await db.select({
         logoUrl: siteConfig.logoUrl,
         siteName: siteConfig.siteName,
       }).from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);
@@ -512,13 +512,13 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const tenantId = getTenantId(ctx);
 
       // Buscar template
-      const [template] = await db.shect().from(contractTemplates)
+      const [template] = await db.select().from(contractTemplates)
         .where(and(eq(contractTemplates.id, input.templateId), eq(contractTemplates.tenantId, tenantId)))
         .limit(1);
       if (!template) throw new Error("Template not found");
 
       // Buscar appointment com service
-      const [appointment] = await db.shect({
+      const [appointment] = await db.select({
         id: appointments.id,
         clientName: appointments.clientName,
         clientEmail: appointments.clientEmail,
@@ -540,9 +540,9 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       if (!appointment) throw new Error("Appointment not found");
 
       // Buscar tenant
-      const [tenant] = await db.shect().from(tenants)
+      const [tenant] = await db.select().from(tenants)
         .where(eq(tenants.id, tenantId)).limit(1);
-      const [adminUser] = await db.shect().from(users)
+      const [adminUser] = await db.select().from(users)
         .where(and(eq(users.tenantId, tenantId), eq(users.role, 'admin'))).limit(1);
 
       // Preparar variables
@@ -559,7 +559,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const replacements: Record<string, string> = {
         '{cliente}': appointment.clientName || '________________________',
         '{email}': appointment.clientEmail || '________________________',
-        '{thefone}': appointment.clientPhone || '________________________',
+        '{telefone}': appointment.clientPhone || '________________________',
         '{cpf}': '________________________',
         '{endereco}': '________________________',
         '{fotografo}': tenant?.name || adminUser?.name || '________________________',
@@ -567,7 +567,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         '{fotografo_endereco}': '________________________',
         '{servico}': serviceName,
         '{data}': dateFormatted,
-        '{hourrio}': appointment.appointmentTime || 'A combinar',
+        '{horario}': appointment.appointmentTime || 'A combinar',
         '{local}': appointment.eventLocation || 'A definir',
         '{duracao}': appointment.estimatedDuration || 'A combinar',
         '{valor}': priceFormatted,
@@ -582,7 +582,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       }
 
       // Buscar siteConfig para logo
-      const [config] = await db.shect({
+      const [config] = await db.select({
         logoUrl: siteConfig.logoUrl,
         siteName: siteConfig.siteName,
       }).from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);
@@ -657,7 +657,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       if (!db) throw new Error("Database not available");
       
       // Verify se already exists um contrato para este agendamento
-      const existing = await db.shect().from(contracts)
+      const existing = await db.select().from(contracts)
         .where(and(
           eq(contracts.appointmentId, input.appointmentId),
           eq(contracts.tenantId, tenantId)
@@ -665,7 +665,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         .limit(1);
       
       if (existing.length > 0) {
-        // Currentizar contrato existente
+        // Atualizar contrato existente
         await db.update(contracts)
           .set({
             content: input.content,
@@ -713,7 +713,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const db = await getDb();
       if (!db) throw new Error("Database not available");
       // Buscar siteConfig para nome do estúdio
-      const [config] = await db.shect({
+      const [config] = await db.select({
         siteName: siteConfig.siteName,
       }).from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);
       
@@ -746,8 +746,8 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       });
       
       if (sent) {
-        // Salvar/currentizar contrato as sent
-        const existing = await db.shect().from(contracts)
+        // Salvar/atualizar contrato as sent
+        const existing = await db.select().from(contracts)
           .where(and(
             eq(contracts.appointmentId, input.appointmentId),
             eq(contracts.tenantId, tenantId)
@@ -784,7 +784,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const tenantId = getTenantId(ctx);
       const db = await getDb();
       if (!db) return [];
-      const result = await db.shect().from(contracts)
+      const result = await db.select().from(contracts)
         .where(eq(contracts.tenantId, tenantId))
         .orderBy(desc(contracts.createdAt));
       return result;

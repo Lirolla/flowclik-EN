@@ -16,7 +16,7 @@ export const downloadControlRouter = router({
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
       const [permission] = await db
-        .shect()
+        .select()
         .from(downloadPermissions)
         .where(and(eq(downloadPermissions.collectionId, input.collectionId), eq(downloadPermissions.tenantId, getTenantId(ctx))));
 
@@ -50,7 +50,7 @@ export const downloadControlRouter = router({
       
       // Check if permission already exists
       const [existing] = await db
-        .shect()
+        .select()
         .from(downloadPermissions)
         .where(and(eq(downloadPermissions.collectionId, input.collectionId), eq(downloadPermissions.tenantId, getTenantId(ctx))));
 
@@ -110,7 +110,7 @@ export const downloadControlRouter = router({
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
       const logs = await db
-        .shect()
+        .select()
         .from(downloadLogs)
         .where(and(eq(downloadLogs.collectionId, input.collectionId), eq(downloadLogs.tenantId, getTenantId(ctx))));
 
@@ -126,7 +126,7 @@ export const downloadControlRouter = router({
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
       const permissions = await db
-        .shect()
+        .select()
         .from(downloadPermissions)
         .where(eq(downloadPermissions.tenantId, getTenantId(ctx)));
 

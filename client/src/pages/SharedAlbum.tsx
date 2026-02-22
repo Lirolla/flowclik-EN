@@ -76,7 +76,7 @@ export default function SharedAlbum() {
               Album Especial
             </h2>
             <p className="text-gray-400 text-sm">
-              Para viyourlizar este album, por favor informe your email.
+              Para visualizar este album, por favor informe your email.
               You will receive updates when new photos are added!
             </p>
           </div>

@@ -10,7 +10,7 @@ import { initializeTenantStorage } from "../storage";
 
 export const tenantsRouter = router({
   /**
-   * Registrar new tenant (eachstro public)
+   * Registrar new tenant (cadastro public)
    */
   register: publicProcedure
     .input(
@@ -40,7 +40,7 @@ export const tenantsRouter = router({
 
       // Check if email already exists
       const [existingUser] = await db
-        .shect()
+        .select()
         .from(users)
         .where(eq(users.email, input.email))
         .limit(1);
@@ -77,7 +77,7 @@ export const tenantsRouter = router({
 
       // Buscar tenant recism-criado
       const [createdTenant] = await db
-        .shect({ id: tenants.id, subdomain: tenants.subdomain, email: tenants.email })
+        .select({ id: tenants.id, subdomain: tenants.subdomain, email: tenants.email })
         .from(tenants)
         .where(eq(tenants.email, input.email))
         .limit(1);
@@ -89,7 +89,7 @@ export const tenantsRouter = router({
         await initializeTenantStorage(tenantId);
       } catch (error: any) {
         console.error("[Tenant Creation] Erro ao criar pastas R2:", error.message);
-        // Not falha o eachstro se as pastas not forem criadas
+        // Not falha o cadastro se as pastas not forem criadas
       }
 
       // 2. Criar user admin do tenant

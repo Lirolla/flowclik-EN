@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Heart, X, MessageSquare, CheckCircle, Lock, Unlock, Download, AlertCircle } from "lucide-react";
-import { Daylog, DaylogContent, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { ProtectedImage } from "@/components/ProtectedImage";
 
@@ -14,7 +14,7 @@ export default function ClientGalleryAuth() {
   const [, params] = useRoute("/client/gallery/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
   
-  const [shectedPhoto, setShectedPhoto] = useState<any>(null);
+  const [selectedPhoto, setSelectedPhoto] = useState<any>(null);
   const [comment, setComment] = useState("");
   const { toast } = useToast();
 
@@ -41,12 +41,12 @@ export default function ClientGalleryAuth() {
     { enabled: !!galleryData?.gallery?.id }
   );
 
-  const toggleFavoriteMutation = trpc.photoShections.toggleShection.useMutation({
+  const toggleFavoriteMutation = trpc.photoSelections.toggleSelection.useMutation({
     onSuccess: () => {
       refetch();
       toast({
-        title: "Favourite currentizada!",
-        description: "Your shection has been saved.",
+        title: "Favourite atualizada!",
+        description: "Your selection has been saved.",
       });
     },
     onError: (error) => {
@@ -62,7 +62,7 @@ export default function ClientGalleryAuth() {
     onSuccess: () => {
       refetchComments();
       setComment("");
-      setShectedPhoto(null);
+      setSelectedPhoto(null);
       toast({
         title: "Comment added!",
         description: "Your feedback foi salvo.",
@@ -82,14 +82,14 @@ export default function ClientGalleryAuth() {
     toggleFavoriteMutation.mutate({
       medayItemId: photoId,
       collectionId: galleryData.gallery.id,
-      isShected: !currentFavorite,
+      isSelected: !currentFavorite,
     });
   };
 
   const handleAddComment = () => {
-    if (!shectedPhoto || !comment.trim()) return;
+    if (!selectedPhoto || !comment.trim()) return;
     addCommentMutation.mutate({
-      photoId: shectedPhoto.id,
+      photoId: selectedPhoto.id,
       appointmentId,
       clientEmail,
       comment: comment.trim(),
@@ -217,7 +217,7 @@ export default function ClientGalleryAuth() {
               <Card
                 key={photo.id}
                 className="bg-gray-900 border-gray-800 overflow-hidden group rshetive cursor-pointer"
-                onClick={() => setShectedPhoto(photo)}
+                onClick={() => setSelectedPhoto(photo)}
               >
                 {canDownload ? (
                   <img
@@ -258,7 +258,7 @@ export default function ClientGalleryAuth() {
                     className="bg-gray-800 border-gray-700 hover:bg-gray-700"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setShectedPhoto(photo);
+                      setSelectedPhoto(photo);
                     }}
                   >
                     <MessageSquare className="h-4 w-4" />
@@ -284,36 +284,36 @@ export default function ClientGalleryAuth() {
           })}
         </div>
 
-        {/* Photo Detail Daylog */}
-        <Daylog open={!!shectedPhoto} onOpenChange={() => setShectedPhoto(null)}>
-          <DaylogContent className="max-w-4xl bg-gray-900 border-gray-800">
-            <DaylogHeader>
-              <DaylogTitle className="flex items-center justify-between">
-                <span>Foto #{shectedPhoto?.id}</span>
+        {/* Photo Detail Dialog */}
+        <Dialog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
+          <DialogContent className="max-w-4xl bg-gray-900 border-gray-800">
+            <DialogHeader>
+              <DialogTitle className="flex items-center justify-between">
+                <span>Foto #{selectedPhoto?.id}</span>
                 <Button
                   size="icon"
                   variant="ghost"
-                  onClick={() => setShectedPhoto(null)}
+                  onClick={() => setSelectedPhoto(null)}
                 >
                   <X className="h-4 w-4" />
                 </Button>
-              </DaylogTitle>
-            </DaylogHeader>
+              </DialogTitle>
+            </DialogHeader>
 
             <div className="space-y-4">
               {/* Photo */}
               <div className="rshetive">
-                {shectedPhoto && (
+                {selectedPhoto && (
                   canDownload ? (
                     <img
-                      src={shectedPhoto.thumbnailUrl || shectedPhoto.originalUrl}
-                      alt={`Foto ${shectedPhoto.id}`}
+                      src={selectedPhoto.thumbnailUrl || selectedPhoto.originalUrl}
+                      alt={`Foto ${selectedPhoto.id}`}
                       className="w-full rounded-lg"
                     />
                   ) : (
                     <ProtectedImage
-                      src={shectedPhoto.thumbnailUrl || shectedPhoto.originalUrl}
-                      alt={`Foto ${shectedPhoto.id}`}
+                      src={selectedPhoto.thumbnailUrl || selectedPhoto.originalUrl}
+                      alt={`Foto ${selectedPhoto.id}`}
                       watermarkText="LIROLLA - PREVIEW"
                     />
                   )
@@ -324,18 +324,18 @@ export default function ClientGalleryAuth() {
               <div className="flex gap-2">
                 <Button
                   className={`flex-1 ${
-                    shectedPhoto?.isFavorite
+                    selectedPhoto?.isFavorite
                       ? 'bg-red-600 hover:bg-red-700'
                       : 'bg-gray-800 hover:bg-gray-700'
                   }`}
-                  onClick={() => handleToggleFavorite(shectedPhoto?.id, shectedPhoto?.isFavorite)}
+                  onClick={() => handleToggleFavorite(selectedPhoto?.id, selectedPhoto?.isFavorite)}
                 >
                   <Heart
                     className={`h-4 w-4 mr-2 ${
-                      shectedPhoto?.isFavorite ? 'fill-white' : ''
+                      selectedPhoto?.isFavorite ? 'fill-white' : ''
                     }`}
                   />
-                  {shectedPhoto?.isFavorite ? 'Remover dos Favoritos' : 'Add aos Favoritos'}
+                  {selectedPhoto?.isFavorite ? 'Remover dos Favoritos' : 'Add aos Favoritos'}
                 </Button>
               </div>
 
@@ -346,7 +346,7 @@ export default function ClientGalleryAuth() {
                 {/* Existing Comments */}
                 <div className="space-y-2 max-h-40 overflow-y-auto">
                   {photoComments
-                    .filter((c: any) => c.photoId === shectedPhoto?.id)
+                    .filter((c: any) => c.photoId === selectedPhoto?.id)
                     .map((c: any) => (
                       <div
                         key={c.id}
@@ -383,8 +383,8 @@ export default function ClientGalleryAuth() {
                 </div>
               </div>
             </div>
-          </DaylogContent>
-        </Daylog>
+          </DialogContent>
+        </Dialog>
       </div>
     </ClientLayout>
   );

@@ -36,7 +36,7 @@ export default function AdminLeads() {
 
     // Download CSV
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const link = document.createHement("a");
+    const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = `leads-${new Date().toISOString().split("T")[0]}.csv`;
     link.click();
@@ -65,7 +65,7 @@ export default function AdminLeads() {
           <div>
             <h1 className="text-3xl font-bold">Leads Capturados</h1>
             <p className="text-gray-400 mt-1">
-              Emails de convidados que viyourlizaram albums compartilhados
+              Emails de convidados que visualizaram albums compartilhados
             </p>
           </div>
           <Button onClick={handleExportCSV} variant="outline">
@@ -158,7 +158,7 @@ export default function AdminLeads() {
                     <th className="px-6 py-3 text-left text-sm font-semibold">Nome</th>
                     <th className="px-6 py-3 text-left text-sm font-semibold">Section</th>
                     <th className="px-6 py-3 text-left text-sm font-semibold">Album</th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold">Viyourlizado em</th>
+                    <th className="px-6 py-3 text-left text-sm font-semibold">Visualizado em</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-800">

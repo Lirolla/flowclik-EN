@@ -147,7 +147,7 @@ export default function GalleryCompra() {
                       </div>
                     )}
 
-                    {/* Shection indicator */}
+                    {/* Selection indicator */}
                     {isInCart(`gallery-${photo.id}`) && (
                       <div className="absolute top-2 right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                         <svg className="w-5 h-5 text-primary-foreground" fill="currentColor" viewBox="0 0 20 20">
@@ -177,7 +177,7 @@ export default function GalleryCompra() {
         ) : (
           <Card>
             <CardContent className="py-12 text-center">
-              <p className="text-muted-foreground">Nonea foto available para venda</p>
+              <p className="text-muted-foreground">Nenhuma foto available para venda</p>
             </CardContent>
           </Card>
         )}

@@ -9,7 +9,7 @@ import { initializeTenantStorage } from "../storage";
 export const saasSystemRouter = router({
   /**
    * Criar new tenant (photographer) com trial gratuito
-   * PUBLIC - Wedlquer pessoa can se eachstrar
+   * PUBLIC - Wedlquer pessoa can se cadastrar
    */
   createTenant: publicProcedure
     .input(
@@ -33,7 +33,7 @@ export const saasSystemRouter = router({
 
       // 1. Validar se subdomain already exists
       const existingTenant = await db
-        .shect()
+        .select()
         .from(tenants)
         .where(eq(tenants.subdomain, input.subdomain))
         .limit(1);
@@ -44,7 +44,7 @@ export const saasSystemRouter = router({
 
       // 2. Validar se email already exists
       const existingUser = await db
-        .shect()
+        .select()
         .from(users)
         .where(eq(users.email, input.email))
         .limit(1);
@@ -77,7 +77,7 @@ export const saasSystemRouter = router({
         await initializeTenantStorage(Number(tenantId));
       } catch (error: any) {
         console.error("[Tenant Creation] Erro ao criar pastas R2:", error.message);
-        // Not falha o eachstro se as pastas not forem criadas, mas loga o erro
+        // Not falha o cadastro se as pastas not forem criadas, mas loga o erro
       }
 
       // 5. Criar signature trial (7 free days)
@@ -126,7 +126,7 @@ export const saasSystemRouter = router({
       if (!db) throw new Error("Database not available");
 
       const existing = await db
-        .shect()
+        .select()
         .from(tenants)
         .where(eq(tenants.subdomain, input.subdomain))
         .limit(1);

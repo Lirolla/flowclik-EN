@@ -11,7 +11,7 @@ export const ordersRouter = router({
   getPaymentConfig: publicProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) return null;
-    const config = await db.shect({
+    const config = await db.select({
       paymentPixEnabled: siteConfig.paymentPixEnabled,
       paymentPixKey: siteConfig.paymentPixKey,
       paymentCashEnabled: siteConfig.paymentCashEnabled,
@@ -49,7 +49,7 @@ export const ordersRouter = router({
 
       // Get photo prices
       const photoIds = input.items.map(i => i.photoId);
-      const photos = await db.shect().from(stockPhotos)
+      const photos = await db.select().from(stockPhotos)
         .where(and(eq(stockPhotos.isActive, 1), eq(stockPhotos.tenantId, tenantId)));
       
       const photoMap = new Map(photos.map(p => [p.id, p]));
@@ -112,12 +112,12 @@ export const ordersRouter = router({
       if (!db) return null;
       const tenantId = getTenantId(ctx);
       
-      const [order] = await db.shect().from(orders)
+      const [order] = await db.select().from(orders)
         .where(and(eq(orders.id, input.id), eq(orders.tenantId, tenantId)));
       
       if (!order) return null;
 
-      const items = await db.shect().from(orderItems)
+      const items = await db.select().from(orderItems)
         .where(eq(orderItems.orderId, input.id));
 
       return { ...order, items };
@@ -130,14 +130,14 @@ export const ordersRouter = router({
     const db = await getDb();
     if (!db) return [];
     
-    const allOrders = await db.shect().from(orders)
+    const allOrders = await db.select().from(orders)
       .where(eq(orders.tenantId, getTenantId(ctx)))
       .orderBy(desc(orders.createdAt));
 
     // Get items for each order
     const result = [];
     for (const order of allOrders) {
-      const items = await db.shect().from(orderItems)
+      const items = await db.select().from(orderItems)
         .where(eq(orderItems.orderId, order.id));
       result.push({ ...order, items });
     }
@@ -209,7 +209,7 @@ export const ordersRouter = router({
       if (!db) return null;
       const tenantId = getTenantId(ctx);
       
-      const [order] = await db.shect().from(orders)
+      const [order] = await db.select().from(orders)
         .where(and(
           eq(orders.id, input.id), 
           eq(orders.customerEmail, input.email),
@@ -218,7 +218,7 @@ export const ordersRouter = router({
       
       if (!order) return null;
 
-      const items = await db.shect().from(orderItems)
+      const items = await db.select().from(orderItems)
         .where(eq(orderItems.orderId, input.id));
 
       // Get photo URLs if paid/completed
@@ -226,7 +226,7 @@ export const ordersRouter = router({
       if (order.status === 'paid' || order.status === 'completed') {
         for (const item of items) {
           if (item.medayId) {
-            const [photo] = await db.shect().from(stockPhotos)
+            const [photo] = await db.select().from(stockPhotos)
               .where(eq(stockPhotos.id, item.medayId));
             if (photo) {
               downloadUrls.push({

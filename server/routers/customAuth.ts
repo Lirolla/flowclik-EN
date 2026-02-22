@@ -27,7 +27,7 @@ export const customAuthRouter = router({
 
       // Check if email already exists
       const [existingUser] = await db
-        .shect({ id: users.id })
+        .select({ id: users.id })
         .from(users)
         .where(eq(users.email, input.email))
         .limit(1);
@@ -54,7 +54,7 @@ export const customAuthRouter = router({
 
       // Buscar user criado
       const [createdUser] = await db
-        .shect({
+        .select({
           id: users.id,
           email: users.email,
           name: users.name,
@@ -107,7 +107,7 @@ export const customAuthRouter = router({
 
       // Buscar user por email
       const [user] = await db
-        .shect({
+        .select({
           id: users.id,
           email: users.email,
           password: users.password,
@@ -138,7 +138,7 @@ export const customAuthRouter = router({
         });
       }
 
-      // Currentizar lastSignedIn
+      // Atualizar lastSignedIn
       const now = new Date();
       const mysqlTimestamp = now.toISOString().slice(0, 19).replace('T', ' ');
       await db
@@ -193,7 +193,7 @@ export const customAuthRouter = router({
       if (!db) return null;
 
       const [user] = await db
-        .shect({
+        .select({
           id: users.id,
           email: users.email,
           name: users.name,
@@ -236,7 +236,7 @@ export const customAuthRouter = router({
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
       const [user] = await db
-        .shect({
+        .select({
           id: users.id,
           email: users.email,
           password: users.password,
@@ -265,7 +265,7 @@ export const customAuthRouter = router({
       // Hash da new senha
       const newPasswordHash = await bcrypt.hash(input.newPassword, SALT_ROUNDS);
 
-      // Currentizar senha
+      // Atualizar senha
       await db
         .update(users)
         .set({ password: newPasswordHash })

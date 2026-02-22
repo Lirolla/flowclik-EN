@@ -58,7 +58,7 @@ export default function AdminContact() {
     onSuccess: () => {
       toast({
         title: "Saved successfully!",
-        description: "As information de contato were currentizadas.",
+        description: "As information de contato were atualizadas.",
       });
       utils.contact.get.invalidate();
     },
@@ -115,7 +115,7 @@ export default function AdminContact() {
               </div>
 
               <div>
-                <Label htmlFor="phone">Thefone</Label>
+                <Label htmlFor="phone">Telefone</Label>
                 <Input
                   id="phone"
                   value={formData.phone}

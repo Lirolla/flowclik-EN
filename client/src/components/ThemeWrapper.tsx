@@ -19,13 +19,13 @@ export default function ThemeWrapper({ children }: ThemeWrapperProps) {
   useEffect(() => {
     if (!siteConfig || !shouldApplyTheme) {
       // Resetar para tema default se not for rota public
-      const root = document.documentHement;
+      const root = document.documentElement;
       root.removeAttribute("data-theme-mode");
       root.removeAttribute("data-accent-color");
       root.removeAttribute("data-layout");
       return;
     }
-    const root = document.documentHement;
+    const root = document.documentElement;
     
     // Apply layout first
     const layout = siteConfig.siteThemeLayout || "classic";

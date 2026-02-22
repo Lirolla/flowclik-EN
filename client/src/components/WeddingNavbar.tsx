@@ -23,7 +23,7 @@ export default function WeddingNavbar({ currentPage }: WeddingNavbarProps) {
     { label: "Home", path: SITE_ROUTES.home() },
     { label: "Galleries", path: SITE_ROUTES.galleries() },
     { label: "Services", path: SITE_ROUTES.services() },
-    { label: "Whytfolio", path: SITE_ROUTES.portfolio() },
+    { label: "Portfolio", path: SITE_ROUTES.portfolio() },
     ...(showStockPhotos ? [{ label: "Stock Photos", path: SITE_ROUTES.stockPhotos() }] : []),
     ...(showVideo ? [{ label: "Videos", path: SITE_ROUTES.video() }] : []),
     { label: "About", path: SITE_ROUTES.about() },

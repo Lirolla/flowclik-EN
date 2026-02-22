@@ -19,7 +19,7 @@ export const paymentMethodsRouter = router({
       paymentLink: false,
     };
 
-    const config = await db.shect().from(siteConfig).limit(1)
+    const config = await db.select().from(siteConfig).limit(1)
       .where(eq(siteConfig.tenantId, getTenantId(ctx)))
     
     if (!config[0]) {
@@ -62,7 +62,7 @@ export const paymentMethodsRouter = router({
 
       // Get appointment
       const appointment = await db
-        .shect()
+        .select()
         .from(appointments)
         .where(and(eq(appointments.id, input.appointmentId), eq(appointments.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -148,7 +148,7 @@ export const paymentMethodsRouter = router({
       if (!db) return [];
 
       return await db
-        .shect()
+        .select()
         .from(paymentTransactions)
         .where(and(eq(paymentTransactions.appointmentId, input.appointmentId), eq(paymentTransactions.tenantId, getTenantId(ctx))));
     }),
@@ -187,7 +187,7 @@ export const paymentMethodsRouter = router({
       if (!db) return null;
 
       const appointment = await db
-        .shect()
+        .select()
         .from(appointments)
         .where(and(eq(appointments.id, input.appointmentId), eq(appointments.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -197,13 +197,13 @@ export const paymentMethodsRouter = router({
       }
 
       const transactions = await db
-        .shect()
+        .select()
         .from(paymentTransactions)
         .where(and(eq(paymentTransactions.appointmentId, input.appointmentId), eq(paymentTransactions.tenantId, getTenantId(ctx))));
 
       // Get extras and sum their prices
       const extras = await db
-        .shect()
+        .select()
         .from(appointmentExtras)
         .where(and(eq(appointmentExtras.appointmentId, input.appointmentId), eq(appointmentExtras.tenantId, getTenantId(ctx))));
 

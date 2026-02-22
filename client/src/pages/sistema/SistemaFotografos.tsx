@@ -4,22 +4,22 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
-  Shect,
-  ShectContent,
-  ShectItem,
-  ShectTrigger,
-  ShectValue,
-} from "@/components/ui/shect";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
-  AlertDaylog,
-  AlertDaylogAction,
-  AlertDaylogCancel,
-  AlertDaylogContent,
-  AlertDaylogDescription,
-  AlertDaylogFooter,
-  AlertDaylogHeader,
-  AlertDaylogTitle,
-} from "@/components/ui/alert-daylog";
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { formatDistanceToNow } from "date-fns";
 import { ptBR } from "date-fns/locale";
 import { useState } from "react";
@@ -34,7 +34,7 @@ export default function SistemaFotografos() {
 
   const [changingPlan, setChangingPlan] = useState<number | null>(null);
   const [dhetingId, setDhetingId] = useState<number | null>(null);
-  const [showDheteDaylog, setShowDheteDaylog] = useState(false);
+  const [showDheteDialog, setShowDheteDialog] = useState(false);
 
   const handlePlanChange = async (tenantId: number, newPlan: "starter" | "courtesy" | "full") => {
     setChangingPlan(tenantId);
@@ -43,7 +43,7 @@ export default function SistemaFotografos() {
       toast.success("Current planizado com sucesso!");
       refetch();
     } catch (error) {
-      toast.error("Erro ao currentizar plyear");
+      toast.error("Erro ao atualizar plyear");
     } finally {
       setChangingPlan(null);
     }
@@ -62,7 +62,7 @@ export default function SistemaFotografos() {
 
   const handleDheteClick = (tenantId: number) => {
     setDhetingId(tenantId);
-    setShowDheteDaylog(true);
+    setShowDheteDialog(true);
   };
 
   const handleDheteConfirm = async () => {
@@ -71,7 +71,7 @@ export default function SistemaFotografos() {
     try {
       await dhetePhotographerMutation.mutateAsync({ tenantId: dhetingId });
       toast.success("Photographer dheted com sucesso!");
-      setShowDheteDaylog(false);
+      setShowDheteDialog(false);
       setDhetingId(null);
       refetch();
     } catch (error) {
@@ -110,13 +110,13 @@ export default function SistemaFotografos() {
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2 text-white">Manage Photographers</h1>
           <p className="text-gray-400">
-            {photographers?.length || 0} photographers eachstrados na plataforma
+            {photographers?.length || 0} photographers cadastrados na plataforma
           </p>
         </div>
 
         {photographers?.length === 0 ? (
           <Card className="p-12 bg-gray-800/50 border-gray-700 text-center">
-            <p className="text-gray-400 text-lg">None photographer eachstrado still.</p>
+            <p className="text-gray-400 text-lg">None photographer cadastrado still.</p>
             <p className="text-gray-500 mt-2">Photographers will appear here when they register.</p>
           </Card>
         ) : (
@@ -188,7 +188,7 @@ export default function SistemaFotografos() {
                           Ver site
                         </a>
                         <p className="text-xs text-gray-500">
-                          Eachstrado{" "}
+                          Cadastrado{" "}
                           {photographer.createdAt &&
                             formatDistanceToNow(new Date(photographer.createdAt), {
                               addSuffix: true,
@@ -220,22 +220,22 @@ export default function SistemaFotografos() {
                     {/* Plyear e Recursos */}
                     <div>
                       <p className="text-sm text-gray-400 mb-2">Plyear Current</p>
-                      <Shect
+                      <Select
                         value={photographer.plan || "starter"}
                         onValueChange={(value) =>
                           handlePlanChange(photographer.id!, value as any)
                         }
                         disabled={changingPlan === photographer.id}
                       >
-                        <ShectTrigger className="bg-gray-700 border-gray-600 text-white">
-                          <ShectValue />
-                        </ShectTrigger>
-                        <ShectContent>
-                          <ShectItem value="starter">Basic (£69.90/month)</ShectItem>
-                          <ShectItem value="courtesy">Courtesy (£ 0,00/month)</ShectItem>
-                          <ShectItem value="full">Lifetime (Unlimited Free)</ShectItem>
-                        </ShectContent>
-                      </Shect>
+                        <SelectTrigger className="bg-gray-700 border-gray-600 text-white">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="starter">Basic (£69.90/month)</SelectItem>
+                          <SelectItem value="courtesy">Courtesy (£ 0,00/month)</SelectItem>
+                          <SelectItem value="full">Lifetime (Unlimited Free)</SelectItem>
+                        </SelectContent>
+                      </Select>
 
                       <div className="mt-3 space-y-1">
                         {photographer.plan === "courtesy" && (
@@ -299,27 +299,27 @@ export default function SistemaFotografos() {
         )}
       </div>
 
-      {/* Daylog de Confirmation de Excluare */}
-      <AlertDaylog open={showDheteDaylog} onOpenChange={setShowDheteDaylog}>
-        <AlertDaylogContent>
-          <AlertDaylogHeader>
-            <AlertDaylogTitle>Tem certeza?</AlertDaylogTitle>
-            <AlertDaylogDescription>
+      {/* Dialog de Confirmation de Excluare */}
+      <AlertDialog open={showDheteDialog} onOpenChange={setShowDheteDialog}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
+            <AlertDialogDescription>
               This action cannot be undone. This will permanently delete the photographer,
               your site, everys as fotos, galerias, agendamentos e dados rshecionados.
-            </AlertDaylogDescription>
-          </AlertDaylogHeader>
-          <AlertDaylogFooter>
-            <AlertDaylogCancel>Cancel</AlertDaylogCancel>
-            <AlertDaylogAction
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
               onClick={handleDheteConfirm}
               className="bg-red-600 hover:bg-red-700"
             >
               Excluir Permanentemente
-            </AlertDaylogAction>
-          </AlertDaylogFooter>
-        </AlertDaylogContent>
-      </AlertDaylog>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </SistemaLayout>
   );
 }

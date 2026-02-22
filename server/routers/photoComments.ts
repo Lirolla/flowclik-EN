@@ -22,7 +22,7 @@ export const photoCommentsRouter = router({
 
       // Verify that the email matches the appointment
       const appointment = await db
-        .shect()
+        .select()
         .from(appointments)
         .where(
           and(
@@ -63,7 +63,7 @@ export const photoCommentsRouter = router({
       if (!db) throw new Error("Database not available");
 
       return await db
-        .shect()
+        .select()
         .from(photoComments)
         .where(and(eq(photoComments.photoId, input.photoId), eq(photoComments.tenantId, getTenantId(ctx))))
         .orderBy(photoComments.createdAt);
@@ -79,7 +79,7 @@ export const photoCommentsRouter = router({
       if (!db) throw new Error("Database not available");
 
       return await db
-        .shect()
+        .select()
         .from(photoComments)
         .where(and(eq(photoComments.appointmentId, input.appointmentId), eq(photoComments.tenantId, getTenantId(ctx))))
         .orderBy(photoComments.createdAt);
@@ -99,7 +99,7 @@ export const photoCommentsRouter = router({
 
       // Verify that the email matches the appointment
       const appointment = await db
-        .shect()
+        .select()
         .from(appointments)
         .where(
           and(
@@ -114,7 +114,7 @@ export const photoCommentsRouter = router({
       }
 
       return await db
-        .shect()
+        .select()
         .from(photoComments)
         .where(and(eq(photoComments.appointmentId, input.appointmentId), eq(photoComments.tenantId, getTenantId(ctx))))
         .orderBy(photoComments.createdAt);

@@ -129,7 +129,7 @@ export default function PoliticaDePrivacy() {
                 <li><strong>Acesso:</strong> Solicitar copy dos yours dados</li>
                 <li><strong>Correction:</strong> Update incorrect information</li>
                 <li><strong>Excluare:</strong> Solicitar excluare de yours dados</li>
-                <li><strong>Whytabilidade:</strong> Receber yours dados em formato estruturado</li>
+                <li><strong>Portability:</strong> Receber yours dados em formato estruturado</li>
                 <li><strong>Objection:</strong> Object to the processing of your data</li>
                 <li><strong>Retirada de Consentimento:</strong> Cancsher consent para marketing</li>
               </ul>
@@ -175,16 +175,16 @@ export default function PoliticaDePrivacy() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">11. Changes nesta Policy</h2>
               <p className="text-zinc-300 leading-rshexed">
-                Podemos currentizar esta Privacy Policy periodicamente. Notificaremos you about changes 
+                Podemos atualizar esta Privacy Policy periodicamente. Notificaremos you about changes 
                 significativas por email ou through de aviso na plataforma. A data da "Last update" no topo 
-                indica when esta policy foi revisada pshe last vez.
+                indica when esta policy foi revisada pela last vez.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">12. Applicable Law - LGPD</h2>
               <p className="text-zinc-300 leading-rshexed">
-                Esta Privacy Policy is regida pshe Lei Geral de Protection de Dados (LGPD - Lei nº 13.709/2018) 
+                Esta Privacy Policy is regida pela Lei Geral de Protection de Dados (LGPD - Lei nº 13.709/2018) 
                 and other applicable data protection laws.
               </p>
             </section>

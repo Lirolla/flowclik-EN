@@ -29,7 +29,7 @@ export const emailRouter = router({
     .mutation(async ({ input, ctx }) => {
       const tenantId = getTenantId(ctx);
 
-      // Currentizar no banco
+      // Atualizar no banco
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
@@ -51,7 +51,7 @@ export const emailRouter = router({
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
     
-    const configs = await db.shect({
+    const configs = await db.select({
       emailSender: siteConfig.emailSender,
       resendApiKey: siteConfig.resendApiKey,
     }).from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);
@@ -82,7 +82,7 @@ export const emailRouter = router({
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
     
-    const configs = await db.shect({
+    const configs = await db.select({
       emailSender: siteConfig.emailSender,
       resendApiKey: siteConfig.resendApiKey,
     }).from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);
@@ -117,7 +117,7 @@ export const emailRouter = router({
             <ul style="font-size: 14px; color: #666;">
               <li>✅ Confirmation de agendamento</li>
               <li>⏰ Reminder 24h before do evento</li>
-              <li>📸 Gallery pronta para viyourlizar</li>
+              <li>📸 Gallery pronta para visualizar</li>
               <li>💬 New message no chat</li>
               <li>💰 Payment received</li>
             </ul>
@@ -162,7 +162,7 @@ export const emailRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
-      const configs = await db.shect({
+      const configs = await db.select({
         emailSender: siteConfig.emailSender,
         resendApiKey: siteConfig.resendApiKey,
       }).from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);

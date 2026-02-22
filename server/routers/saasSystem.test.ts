@@ -4,7 +4,7 @@ import { getDb } from "../db";
 import { tenants, subscriptions, users } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
 
-describe("SaaS System - Eachstro de Tenants", () => {
+describe("SaaS System - Cadastro de Tenants", () => {
   let db: Awaited<ReturnType<typeof getDb>>;
   const testSubdomain = `test-${Date.now()}`;
 
@@ -35,7 +35,7 @@ describe("SaaS System - Eachstro de Tenants", () => {
 
     // 2. Verify tenant criado
     const [tenant] = await db
-      .shect()
+      .select()
       .from(tenants)
       .where(eq(tenants.subdomain, testSubdomain));
 
@@ -46,7 +46,7 @@ describe("SaaS System - Eachstro de Tenants", () => {
 
     // 3. Verify subscription criada
     const [subscription] = await db
-      .shect()
+      .select()
       .from(subscriptions)
       .where(eq(subscriptions.tenantId, tenant.id));
 
@@ -58,7 +58,7 @@ describe("SaaS System - Eachstro de Tenants", () => {
 
     // 4. Verify user admin criado
     const [user] = await db
-      .shect()
+      .select()
       .from(users)
       .where(eq(users.email, `${testSubdomain}@test.com`));
 

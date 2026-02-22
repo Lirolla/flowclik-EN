@@ -19,14 +19,14 @@ export const stockRouter = router({
       let photos;
       
       if (input?.category) {
-        photos = await db.shect().from(stockPhotos)
+        photos = await db.select().from(stockPhotos)
           .where(and(
             eq(stockPhotos.isActive, 1),
             eq(stockPhotos.category, input.category),
             eq(stockPhotos.tenantId, getTenantId(ctx))
           ));
       } else {
-        photos = await db.shect().from(stockPhotos)
+        photos = await db.select().from(stockPhotos)
           .where(and(eq(stockPhotos.isActive, 1), eq(stockPhotos.tenantId, getTenantId(ctx))));
       }
       return photos;
@@ -37,7 +37,7 @@ export const stockRouter = router({
   listAll: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) throw new Error("Database not available");
-    const photos = await db.shect().from(stockPhotos)
+    const photos = await db.select().from(stockPhotos)
       .where(eq(stockPhotos.tenantId, getTenantId(ctx)));
     return photos;
   }),

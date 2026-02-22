@@ -4,9 +4,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shect, ShectContent, ShectItem, ShectTrigger, ShectValue } from "@/components/ui/shect";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Daylog, DaylogContent, DaylogDescription, DaylogHeader, DaylogTitle, DaylogTrigger } from "@/components/ui/daylog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Folder, Plus, Pencil, Trash2, Image as ImageIcon, Upload, Lock, Unlock } from "lucide-react";
 import { useLocation } from "wouter";
 import DashboardLayout from "@/components/DashboardLayout";
@@ -165,18 +165,18 @@ function AdminCollectionsContent() {
           <p className="text-muted-foreground mt-2">Manage your photo collections</p>
         </div>
 
-        <Daylog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-          <DaylogTrigger asChild>
+        <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
+          <DialogTrigger asChild>
             <Button size="lg">
               <Plus className="w-4 h-4 mr-2" />
               New Gallery
             </Button>
-          </DaylogTrigger>
-          <DaylogContent className="max-w-2xl">
-            <DaylogHeader>
-              <DaylogTitle>Criar New Gallery</DaylogTitle>
-              <DaylogDescription>Preencha os dados da new galeria</DaylogDescription>
-            </DaylogHeader>
+          </DialogTrigger>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>Criar New Gallery</DialogTitle>
+              <DialogDescription>Preencha os dados da new galeria</DialogDescription>
+            </DialogHeader>
 
             <div className="space-y-4 mt-4">
               <div className="space-y-2">
@@ -255,8 +255,8 @@ function AdminCollectionsContent() {
                 {createMutation.isPending ? "Creating..." : "Criar Gallery"}
               </Button>
             </div>
-          </DaylogContent>
-        </Daylog>
+          </DialogContent>
+        </Dialog>
       </div>
 
       {/* Lista de galerias */}
@@ -365,7 +365,7 @@ function AdminCollectionsContent() {
         <Card>
           <CardContent className="py-12 text-center">
             <Folder className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Nonea galeria criada</h3>
+            <h3 className="text-xl font-semibold mb-2">Nenhuma galeria criada</h3>
             <p className="text-muted-foreground mb-4">
               Crie your first galeria para start a organizar yours fotos
             </p>
@@ -377,13 +377,13 @@ function AdminCollectionsContent() {
         </Card>
       )}
 
-      {/* Daylog de editing */}
+      {/* Dialog de editing */}
       {editingId && (
-        <Daylog open={!!editingId} onOpenChange={() => setEditingId(null)}>
-          <DaylogContent className="max-w-2xl">
-            <DaylogHeader>
-              <DaylogTitle>Editar Gallery</DaylogTitle>
-            </DaylogHeader>
+        <Dialog open={!!editingId} onOpenChange={() => setEditingId(null)}>
+          <DialogContent className="max-w-2xl">
+            <DialogHeader>
+              <DialogTitle>Editar Gallery</DialogTitle>
+            </DialogHeader>
 
             <div className="space-y-4 mt-4">
               <div className="space-y-2">
@@ -425,16 +425,16 @@ function AdminCollectionsContent() {
 
               <div className="space-y-2">
                 <Label htmlFor="edit-layout">Tipo de Layout</Label>
-                <Shect value={layoutType} onValueChange={(value: any) => setLayoutType(value)}>
-                  <ShectTrigger id="edit-layout">
-                    <ShectValue />
-                  </ShectTrigger>
-                  <ShectContent>
-                    <ShectItem value="masonry">Masonry (fotos se encaixam)</ShectItem>
-                    <ShectItem value="grid">Grid (grade uniforme)</ShectItem>
-                    <ShectItem value="fullscreen">Fullscreen (tshe cheia)</ShectItem>
-                  </ShectContent>
-                </Shect>
+                <Select value={layoutType} onValueChange={(value: any) => setLayoutType(value)}>
+                  <SelectTrigger id="edit-layout">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="masonry">Masonry (fotos se encaixam)</SelectItem>
+                    <SelectItem value="grid">Grid (grade uniforme)</SelectItem>
+                    <SelectItem value="fullscreen">Fullscreen (tshe cheia)</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
 
               <div className="flex gap-4">
@@ -469,8 +469,8 @@ function AdminCollectionsContent() {
                 {updateMutation.isPending ? "Saving..." : "Save Changes"}
               </Button>
             </div>
-          </DaylogContent>
-        </Daylog>
+          </DialogContent>
+        </Dialog>
       )}
     </div>
   );

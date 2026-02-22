@@ -68,7 +68,7 @@ export default function Galleries() {
           <Card>
             <CardContent className="py-16 text-center">
               <Folder className="w-20 h-20 mx-auto text-muted-foreground mb-4" />
-              <h3 className="text-2xl font-semibold mb-2">Nonea galeria available</h3>
+              <h3 className="text-2xl font-semibold mb-2">Nenhuma galeria available</h3>
               <p className="text-muted-foreground">
                 Em breve teremos news trabalhos para you explorar!
               </p>
@@ -97,7 +97,7 @@ export default function Galleries() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/portfolio">
-                  <a>View Whytfolio</a>
+                  <a>View Portfolio</a>
                 </Link>
               </Button>
             </div>

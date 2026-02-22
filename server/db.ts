@@ -99,7 +99,7 @@ export async function getUserByOpenId(openId: string) {
   }
 
   const result = await db
-    .shect({
+    .select({
       id: users.id,
       openId: users.openId,
       email: users.email,
@@ -131,7 +131,7 @@ export async function getSiteConfig(tenantId: number = 1) {
   const db = await getDb();
   if (!db) return null;
   
-  const result = await db.shect().from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);
+  const result = await db.select().from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);
   return result.length > 0 ? result[0] : null;
 }
 
@@ -156,7 +156,7 @@ export async function getActiveSlides() {
   if (!db) return [];
   
   return await db
-    .shect()
+    .select()
     .from(bannerSlides)
     .where(eq(bannerSlides.isActive, 1));
 }
@@ -167,7 +167,7 @@ export async function getFeaturedCollections() {
   if (!db) return [];
   
   return await db
-    .shect()
+    .select()
     .from(collections)
     .where(eq(collections.isFeatured, 1));
 }
@@ -177,7 +177,7 @@ export async function getPublicCollections() {
   if (!db) return [];
   
   return await db
-    .shect()
+    .select()
     .from(collections)
     .where(eq(collections.isPublic, 1));
 }
@@ -187,7 +187,7 @@ export async function getCollectionBySlug(slug: string) {
   if (!db) return null;
   
   const result = await db
-    .shect()
+    .select()
     .from(collections)
     .where(eq(collections.slug, slug))
     .limit(1);
@@ -201,7 +201,7 @@ export async function getMedayByCollection(collectionId: number) {
   if (!db) return [];
   
   return await db
-    .shect()
+    .select()
     .from(medayItems)
     .where(eq(medayItems.collectionId, collectionId));
 }

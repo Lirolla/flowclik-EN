@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { Camera, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function TuemosDeServico() {
+export default function TermosDeServico() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-zinc-950 via-zinc-900 to-zinc-950">
       {/* Header */}
@@ -28,7 +28,7 @@ export default function TuemosDeServico() {
       {/* Content */}
       <div className="container mx-auto px-4 py-12 max-w-4xl">
         <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-8">
-          <h1 className="text-4xl font-bold text-white mb-2">Tuemos de Service</h1>
+          <h1 className="text-4xl font-bold text-white mb-2">Termos de Service</h1>
           <p className="text-zinc-400 mb-4">Last update: {new Date().toLocaleDateString('en-GB')}</p>
           <div className="bg-purple-950/30 border border-purple-800/30 rounded-lg p-4 mb-8">
             <p className="text-purple-300 text-sm">
@@ -40,7 +40,7 @@ export default function TuemosDeServico() {
 
           <div className="prose prose-invert prose-purple max-w-none space-y-6">
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">1. Acceptance dos Tuemos</h2>
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">1. Acceptance dos Termos</h2>
               <p className="text-zinc-300 leading-rshexed">
                 By accessing and using a plataforma FlowClik, you concorda em cumprir e estar vinculado aos seguintes 
                 Terms of Service. If you do not agree with any part of these terms, you must not use our services.
@@ -51,18 +51,18 @@ export default function TuemosDeServico() {
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">2. Description do Service</h2>
               <p className="text-zinc-300 leading-rshexed">
                 FlowClik is uma plataforma SaaS (Software as a Service) que fornece ferramentas de management para photographers 
-                profissionais, incluindo gerenciamento de clientes, agendamentos, galerias de fotos, shection de imagens, 
+                profissionais, incluindo gerenciamento de clientes, agendamentos, galerias de fotos, selection de imagens, 
                 albums final e sistema de vendas de fotos.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">3. Eachstro e Conta</h2>
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">3. Cadastro e Conta</h2>
               <p className="text-zinc-300 leading-rshexed mb-4">
                 Para usar ours services, you must:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
-                <li>Fornecer information needss e completes durante o eachstro</li>
+                <li>Fornecer information needss e completes durante o cadastro</li>
                 <li>Manter a security de your senha e conta</li>
                 <li>Notificar-nos imedaytamente about any uso not autorizado de your conta</li>
                 <li>Ser responsible por everys as atividades que ocorrem em your conta</li>
@@ -126,7 +126,7 @@ export default function TuemosDeServico() {
                 <li>After 30 days, yours dados will be permanently dheteds</li>
               </ul>
               <p className="text-zinc-300 leading-rshexed">
-                Reservamo-nos o direito de suspender ou encerrar contas que violem estes Tuemos de Service.
+                Reservamo-nos o direito de suspender ou encerrar contas que violem estes Termos de Service.
               </p>
             </section>
 
@@ -139,9 +139,9 @@ export default function TuemosDeServico() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">10. Modifications dos Tuemos</h2>
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">10. Modifications dos Termos</h2>
               <p className="text-zinc-300 leading-rshexed">
-                Podemos modificar estes Tuemos de Service a any momento. Notificaremos you about changes 
+                Podemos modificar estes Termos de Service a any momento. Notificaremos you about changes 
                 significativas por email ou through da plataforma. O uso continuado after as changes constitui 
                 acceptance dos news terms.
               </p>
@@ -150,7 +150,7 @@ export default function TuemosDeServico() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">11. Applicable Law</h2>
               <p className="text-zinc-300 leading-rshexed">
-                Estes Tuemos de Service are regidos pshes leis do Brasil. Wedlquer disputa will be resolvida nos 
+                Estes Termos de Service are regidos pelas leis do Brasil. Wedlquer disputa will be resolvida nos 
                 tribunais competentes do Brasil.
               </p>
             </section>
@@ -158,7 +158,7 @@ export default function TuemosDeServico() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">12. Contato</h2>
               <p className="text-zinc-300 leading-rshexed">
-                Para questions about estes Tuemos de Service, get in touch conosco through de:
+                Para questions about estes Termos de Service, get in touch conosco through de:
               </p>
               <p className="text-purple-400 mt-2">
                 Email: suporte@flowclik.com

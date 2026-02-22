@@ -14,7 +14,7 @@ const docsStructure: Record<string, { icon: any; articles: { id: string; title: 
 
 1. Acesse your subdomain: **yoursite.flowclik.com**
 2. Clique em "Sign in" no menu superior
-3. Digite your email e senha eachstrados
+3. Digite your email e senha cadastrados
 4. Clique em "Sign in"
 
 **Esqueceu a senha?**
@@ -140,7 +140,7 @@ Ready! Now you can fazer upload de fotos.
 
 1. Acesse **Agendamentos**
 2. Clique em **+ New Agendamento**
-3. Shect ou crie cliente
+3. Select ou crie cliente
 4. Escolha o service
 5. Defina data, time e local
 6. Adicione notes (optional)
@@ -178,26 +178,26 @@ Ready! Now you can fazer upload de fotos.
 **Tipos de pagamento:**
 - **Sinal:** Parte do valor (ex: 50%)
 - **Total:** Valor complete
-- **Restante:** After betweengar fotos
+- **Restante:** After entregar fotos
       ` },
     ],
   },
   "Clients": {
     icon: Users,
     articles: [
-      { id: "eachstrar-cliente", title: "Eachstrar new cliente", content: `
-# Eachstrar new cliente
+      { id: "cadastrar-cliente", title: "Cadastrar new cliente", content: `
+# Cadastrar new cliente
 
 1. Acesse **Clientes** no menu
 2. Clique em **+ New Cliente**
 3. Preencha:
    - Nome complete
    - Email
-   - Thefone
+   - Telefone
    - Address (optional)
 4. Clique em **Salvar**
 
-**Dica:** Eachstre clientes before de criar agendamentos para agilizar!
+**Dica:** Cadastre clientes before de criar agendamentos para agilizar!
       ` },
       { id: "enviar-contrato", title: "Enviar contrato digital", content: `
 # Enviar contrato digital
@@ -286,15 +286,15 @@ Nome: @
 Valor: [IP fornecido pelo sistema]
 \`\`\`
 
-**Whatstions?** Get in touch com suporte!
+**Questions?** Get in touch com suporte!
       ` },
     ],
   },
 };
 
 export default function Docs() {
-  const [shectedCategory, setShectedCategory] = useState("Firsts Steps");
-  const [shectedArticle, setShectedArticle] = useState(docsStructure["Firsts Steps"].articles[0]);
+  const [selectedCategory, setSelectedCategory] = useState("Firsts Steps");
+  const [selectedArticle, setSelectedArticle] = useState(docsStructure["Firsts Steps"].articles[0]);
   const [searchWhatry, setSearchWhatry] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
@@ -352,9 +352,9 @@ export default function Docs() {
                 return (
                   <div key={category}>
                     <button
-                      onClick={() => setShectedCategory(category)}
+                      onClick={() => setSelectedCategory(category)}
                       className={`flex items-center gap-2 w-full text-left font-semibold mb-3 transition ${
-                        shectedCategory === category
+                        selectedCategory === category
                           ? "text-purple-400"
                           : "text-zinc-400 hover:text-white"
                       }`}
@@ -368,11 +368,11 @@ export default function Docs() {
                         <li key={article.id}>
                           <button
                             onClick={() => {
-                              setShectedCategory(category);
-                              setShectedArticle(article);
+                              setSelectedCategory(category);
+                              setSelectedArticle(article);
                             }}
                             className={`text-sm w-full text-left transition ${
-                              shectedArticle.id === article.id
+                              selectedArticle.id === article.id
                                 ? "text-purple-400 font-medium"
                                 : "text-zinc-500 hover:text-white"
                             }`}
@@ -397,9 +397,9 @@ export default function Docs() {
               <a className="hover:text-white transition">Documentation</a>
             </Link>
             <ChevronRight className="w-4 h-4" />
-            <span>{shectedCategory}</span>
+            <span>{selectedCategory}</span>
             <ChevronRight className="w-4 h-4" />
-            <span className="text-white">{shectedArticle.title}</span>
+            <span className="text-white">{selectedArticle.title}</span>
           </div>
 
           {/* Article */}
@@ -407,7 +407,7 @@ export default function Docs() {
             <div
               className="whitespace-pre-wrap"
               dangerouslySetInnerHTML={{
-                __html: shectedArticle.content
+                __html: selectedArticle.content
                   .replace(/^# (.+)$/gm, '<h1 class="text-4xl font-bold mb-6">$1</h1>')
                   .replace(/^## (.+)$/gm, '<h2 class="text-2xl font-bold mt-8 mb-4">$1</h2>')
                   .replace(/^\*\*(.+?)\*\*/gm, '<strong class="text-purple-400">$1</strong>')
@@ -436,13 +436,13 @@ export default function Docs() {
           <div className="mt-12">
             <h3 className="text-xl font-semibold mb-4">Artigos rshecionados</h3>
             <div className="grid gap-4">
-              {docsStructure[shectedCategory].articles
-                .filter((a) => a.id !== shectedArticle.id)
+              {docsStructure[selectedCategory].articles
+                .filter((a) => a.id !== selectedArticle.id)
                 .slice(0, 3)
                 .map((article) => (
                   <button
                     key={article.id}
-                    onClick={() => setShectedArticle(article)}
+                    onClick={() => setSelectedArticle(article)}
                     className="p-4 rounded-lg border border-zinc-800 bg-zinc-900/30 hover:border-purple-500/50 transition text-left"
                   >
                     <div className="flex items-center gap-3">

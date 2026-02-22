@@ -72,7 +72,7 @@ function AdminSessionGalleryContent() {
           <CardContent className="py-12 text-center">
             <Upload className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-xl font-semibold mb-2">
-              Nonea galeria criada still
+              Nenhuma galeria criada still
             </h3>
             <p className="text-muted-foreground mb-6">
               Crie uma galeria privada para fazer upload das fotos do ensaio
@@ -125,7 +125,7 @@ function AdminSessionGalleryContent() {
         <Card>
           <CardHeader>
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Shection Fee
+              Selection Fee
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -157,7 +157,7 @@ function AdminSessionGalleryContent() {
             <Button asChild>
               <a href={clientLink} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-4 h-4 mr-2" />
-                Viyourlizar
+                Visualizar
               </a>
             </Button>
           </div>
@@ -184,7 +184,7 @@ function AdminSessionGalleryContent() {
               </Link>
             </Button>
             <p className="text-sm text-muted-foreground mt-4">
-              Dica: Shect a galeria "{galleryData.name}" ao fazer upload
+              Dica: Select a galeria "{galleryData.name}" ao fazer upload
             </p>
           </div>
         </CardContent>

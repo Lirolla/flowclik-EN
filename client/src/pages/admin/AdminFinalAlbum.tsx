@@ -51,7 +51,7 @@ export default function AdminFinalAlbum() {
     },
   });
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputHement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
     if (!files || files.length === 0 || !collection) return;
 
@@ -132,7 +132,7 @@ export default function AdminFinalAlbum() {
             Enviar Fotos Final Editadas
           </h3>
           <p className="text-sm text-muted-foreground mb-4">
-            Arraste fotos here or click to shect
+            Arraste fotos here or click to select
           </p>
           <input
             type="file"
@@ -191,7 +191,7 @@ export default function AdminFinalAlbum() {
       ) : (
         <div className="text-center py-12 bg-card rounded-lg border">
           <p className="text-muted-foreground">
-            Nonea foto no album final still. Make upload das fotos edited above.
+            Nenhuma foto no album final still. Make upload das fotos edited above.
           </p>
         </div>
       )}

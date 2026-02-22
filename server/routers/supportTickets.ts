@@ -40,7 +40,7 @@ export const supportTicketsRouter = router({
 
       // Enviar email para admin
       try {
-        const [user] = await db.shect().from(users).where(eq(users.id, ctx.user!.id)).limit(1);
+        const [user] = await db.select().from(users).where(eq(users.id, ctx.user!.id)).limit(1);
         sendAdminNewTicketEmail({
           photographerName: user?.name || 'Photographer',
           email: user?.email || '',
@@ -61,7 +61,7 @@ export const supportTicketsRouter = router({
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
     const tickets = await db
-      .shect()
+      .select()
       .from(supportTickets)
       .where(eq(supportTickets.tenantId, tenantId))
       .orderBy(desc(supportTickets.createdAt));
@@ -79,7 +79,7 @@ export const supportTicketsRouter = router({
 
       // Buscar ticket
       const [ticket] = await db
-        .shect()
+        .select()
         .from(supportTickets)
         .where(
           and(
@@ -95,7 +95,7 @@ export const supportTicketsRouter = router({
 
       // Buscar respostas (excluir notas internas se not for super admin)
       const replies = await db
-        .shect({
+        .select({
           id: supportTicketReplies.id,
           message: supportTicketReplies.message,
           createdAt: supportTicketReplies.createdAt,
@@ -137,7 +137,7 @@ export const supportTicketsRouter = router({
 
       // Verify se ticket pertence ao tenant
       const [ticket] = await db
-        .shect()
+        .select()
         .from(supportTickets)
         .where(
           and(
@@ -160,7 +160,7 @@ export const supportTicketsRouter = router({
         isInternal: 0,
       });
 
-      // Currentizar ticket
+      // Atualizar ticket
       await db
         .update(supportTickets)
         .set({

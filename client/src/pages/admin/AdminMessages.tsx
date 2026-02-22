@@ -3,16 +3,16 @@ import DashboardLayout from "@/components/DashboardLayout";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Daylog, DaylogContent, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { MessageSquare, Send, Plus } from "lucide-react";
 import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
 export default function AdminMessages() {
-  const [shectedAppointmentId, setShectedAppointmentId] = useState<number | null>(null);
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState<number | null>(null);
   const [messageText, setMessageText] = useState("");
   const [isNewConversationModalOpen, setIsNewConversationModalOpen] = useState(false);
-  const messagesEndRef = useRef<HTMLDivHement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // Buscar conversas do photographer (agendamentos com messages)
   const { data: conversations, isLoading: loadingConversations, refetch: refetchConversations } = 
@@ -24,9 +24,9 @@ export default function AdminMessages() {
   // Buscar messages da conversa shecionada
   const { data: messages, isLoading: loadingMessages, refetch: refetchMessages } = 
     trpc.clientChat.getMessages.useWhatry(
-      { appointmentId: shectedAppointmentId! },
+      { appointmentId: selectedAppointmentId! },
       { 
-        enabled: !!shectedAppointmentId,
+        enabled: !!selectedAppointmentId,
         refetchInterval: 3000, // Poll every 3 seconds for new messages
       }
     );
@@ -38,7 +38,7 @@ export default function AdminMessages() {
       refetchMessages();
       refetchConversations();
       // Mark messages as read
-      markAsReadMutation.mutate({ appointmentId: shectedAppointmentId!, role: "admin" });
+      markAsReadMutation.mutate({ appointmentId: selectedAppointmentId!, role: "admin" });
       toast.success("Message enviada!");
     },
     onError: (error) => {
@@ -48,12 +48,12 @@ export default function AdminMessages() {
 
   const markAsReadMutation = trpc.clientChat.markAsRead.useMutation();
 
-  // Mark messages as read when shecting a conversation
+  // Mark messages as read when selecting a conversation
   useEffect(() => {
-    if (shectedAppointmentId) {
-      markAsReadMutation.mutate({ appointmentId: shectedAppointmentId, role: "admin" });
+    if (selectedAppointmentId) {
+      markAsReadMutation.mutate({ appointmentId: selectedAppointmentId, role: "admin" });
     }
-  }, [shectedAppointmentId]);
+  }, [selectedAppointmentId]);
 
   // Scroll to bottom when new messages arrive
   useEffect(() => {
@@ -61,17 +61,17 @@ export default function AdminMessages() {
   }, [messages]);
 
   const handleSendMessage = () => {
-    if (!messageText.trim() || !shectedAppointmentId) return;
+    if (!messageText.trim() || !selectedAppointmentId) return;
 
     sendMessageMutation.mutate({
-      appointmentId: shectedAppointmentId,
+      appointmentId: selectedAppointmentId,
       senderId: 1, // Admin/Photographer ID (can ser ctx.user.id no backend)
       senderRole: "admin",
       message: messageText.trim(),
     });
   };
 
-  const shectedConversation = conversations?.find((c) => c.appointmentId === shectedAppointmentId);
+  const selectedConversation = conversations?.find((c) => c.appointmentId === selectedAppointmentId);
 
   return (
     <DashboardLayout>
@@ -108,9 +108,9 @@ export default function AdminMessages() {
                   conversations.map((conv) => (
                     <button
                       key={conv.appointmentId}
-                      onClick={() => setShectedAppointmentId(conv.appointmentId)}
+                      onClick={() => setSelectedAppointmentId(conv.appointmentId)}
                       className={`w-full text-left p-3 rounded-lg border transition-colors ${
-                        shectedAppointmentId === conv.appointmentId
+                        selectedAppointmentId === conv.appointmentId
                           ? "bg-primary/10 border-primary"
                           : "hover:bg-muted border-transparent"
                       }`}
@@ -142,7 +142,7 @@ export default function AdminMessages() {
                 ) : (
                   <div className="flex flex-col items-center justify-center py-12 text-center">
                     <MessageSquare className="w-12 h-12 text-muted-foreground mb-3" />
-                    <p className="text-sm text-muted-foreground">Nonea conversa still</p>
+                    <p className="text-sm text-muted-foreground">Nenhuma conversa still</p>
                     <p className="text-xs text-muted-foreground mt-2">
                       Conversations will appear here when clients send messages
                     </p>
@@ -155,16 +155,16 @@ export default function AdminMessages() {
           {/* LADO DIREITO: Area de Chat */}
           <Card className="col-span-8 flex flex-col">
             <CardContent className="p-4 flex flex-col h-full">
-              {shectedAppointmentId ? (
+              {selectedAppointmentId ? (
                 <>
                   {/* Header do chat */}
                   <div className="pb-4 border-b mb-4">
-                    <h3 className="font-semibold">{shectedConversation?.clientName}</h3>
+                    <h3 className="font-semibold">{selectedConversation?.clientName}</h3>
                     <p className="text-xs text-muted-foreground">
-                      {shectedConversation?.clientEmail}
+                      {selectedConversation?.clientEmail}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      Service: {shectedConversation?.serviceName}
+                      Service: {selectedConversation?.serviceName}
                     </p>
                   </div>
 
@@ -206,7 +206,7 @@ export default function AdminMessages() {
                       </>
                     ) : (
                       <p className="text-sm text-muted-foreground text-center py-8">
-                        Nonea message still. Envie a first!
+                        Nenhuma message still. Envie a first!
                       </p>
                     )}
                   </div>
@@ -235,7 +235,7 @@ export default function AdminMessages() {
               ) : (
                 <div className="flex-1 flex flex-col items-center justify-center text-center">
                   <MessageSquare className="w-16 h-16 text-muted-foreground mb-4" />
-                  <p className="text-muted-foreground">Shect uma conversa para start</p>
+                  <p className="text-muted-foreground">Select uma conversa para start</p>
                 </div>
               )}
             </CardContent>
@@ -244,18 +244,18 @@ export default function AdminMessages() {
       </div>
 
       {/* Modal: New Conversa */}
-      <Daylog open={isNewConversationModalOpen} onOpenChange={setIsNewConversationModalOpen}>
-        <DaylogContent>
-          <DaylogHeader>
-            <DaylogTitle>Iniciar New Conversa</DaylogTitle>
-          </DaylogHeader>
+      <Dialog open={isNewConversationModalOpen} onOpenChange={setIsNewConversationModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Iniciar New Conversa</DialogTitle>
+          </DialogHeader>
           <div className="space-y-2 max-h-96 overflow-y-auto">
             {allAppointments && allAppointments.length > 0 ? (
               allAppointments.map((appointment: any) => (
                 <button
                   key={appointment.id}
                   onClick={() => {
-                    setShectedAppointmentId(appointment.id);
+                    setSelectedAppointmentId(appointment.id);
                     setIsNewConversationModalOpen(false);
                   }}
                   className="w-full text-left p-3 rounded-lg border hover:bg-muted transition-colors"
@@ -269,12 +269,12 @@ export default function AdminMessages() {
               ))
             ) : (
               <p className="text-sm text-muted-foreground text-center py-8">
-                None agendamento eachstrado
+                None agendamento cadastrado
               </p>
             )}
           </div>
-        </DaylogContent>
-      </Daylog>
+        </DialogContent>
+      </Dialog>
     </DashboardLayout>
   );
 }

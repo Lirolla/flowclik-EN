@@ -50,7 +50,7 @@ export const defaultEmailTemplates = [
       <p style="color:#fff;font-size:24px;font-weight:700;margin:0;">Desconto Especial</p>
       <p style="color:rgba(255,255,255,0.9);font-size:14px;margin:5px 0 0;">Get in touch para saber mais!</p>
     </div>
-    <p style="font-size:16px;color:#555;line-height:1.6;">Not perca essa oportunidade! Reply to this email ou get in touch para agendar your sesare.</p>
+    <p style="font-size:16px;color:#555;line-height:1.6;">Not perca essa oportunidade! Reply to this email ou get in touch para agendar your sessao.</p>
     <p style="font-size:16px;color:#555;">Best regards,<br><strong>{{fotografo}}</strong></p>
   </div>
   <div style="background:#f8f9fa;padding:20px;text-align:center;border-top:1px solid #eee;">
@@ -78,7 +78,7 @@ export const defaultEmailTemplates = [
     <p style="font-size:16px;color:#555;line-height:1.6;">Este is um reminder de que your evento is se aproximando! Estamos preparando tudo para registrar esse momento special.</p>
     <div style="background:#f0f7ff;border-left:4px solid #4facfe;padding:15px 20px;margin:20px 0;border-radius:0 8px 8px 0;">
       <p style="font-size:16px;color:#333;margin:0;font-weight:600;">📌 Details do Evento</p>
-      <p style="font-size:14px;color:#555;margin:8px 0 0;">Confira os details e get in touch caso precise de somea change.</p>
+      <p style="font-size:14px;color:#555;margin:8px 0 0;">Confira os details e get in touch caso precise de alguma change.</p>
     </div>
     <p style="font-size:16px;color:#555;line-height:1.6;">Estamos ansiosos para esse day! Wedlquer question, is only respwherer este email.</p>
     <p style="font-size:16px;color:#555;">Atis breve,<br><strong>{{fotografo}}</strong></p>
@@ -91,7 +91,7 @@ export const defaultEmailTemplates = [
 </html>`,
   },
   {
-    name: "Thank you pshe Sesare",
+    name: "Thank you pela Sesare",
     subject: "💜 Thank you for your trust, {{nome}}!",
     category: "thank_you" as const,
     htmlContent: `<!DOCTYPE html>
@@ -105,7 +105,7 @@ export const defaultEmailTemplates = [
   </div>
   <div style="padding:30px;">
     <p style="font-size:18px;color:#333;line-height:1.6;">Hello <strong>{{nome}}</strong>,</p>
-    <p style="font-size:16px;color:#555;line-height:1.6;">Very thank you pshe trust em our trabalho! Foi um prazer registrar yours moments special.</p>
+    <p style="font-size:16px;color:#555;line-height:1.6;">Very thank you pela trust em our trabalho! Foi um prazer registrar yours moments special.</p>
     <p style="font-size:16px;color:#555;line-height:1.6;">Your photos are being carefully edited and will soon be available for you.</p>
     <div style="text-align:center;margin:30px 0;">
       <p style="font-size:16px;color:#a18cd1;font-weight:600;">We hope it was an incredible experience! ✨</p>
@@ -142,7 +142,7 @@ export const defaultEmailTemplates = [
       <ul style="font-size:14px;color:#555;margin:8px 0 0;padding-left:20px;">
         <li>Atendimento custom</li>
         <li>Fotos de alta qualidade</li>
-        <li>Betweenga no prazo combinado</li>
+        <li>Entrega no prazo combinado</li>
         <li>Gallery online exclusive</li>
       </ul>
     </div>

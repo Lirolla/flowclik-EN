@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
-import * as DaylogPrimitive from "@radix-ui/react-daylog";
+import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { XIcon } from "lucide-react";
 import * as React from "react";
 
-// Context to track composition state across daylog children
-const DaylogCompositionContext = React.createContext<{
+// Context to track composition state across dialog children
+const DialogCompositionContext = React.createContext<{
   isComposing: () => boolean;
   setComposing: (composing: boolean) => void;
   justEndedComposing: () => boolean;
@@ -16,12 +16,12 @@ const DaylogCompositionContext = React.createContext<{
   markCompositionEnd: () => {},
 });
 
-export const useDaylogComposition = () =>
-  React.useContext(DaylogCompositionContext);
+export const useDialogComposition = () =>
+  React.useContext(DialogCompositionContext);
 
-function Daylog({
+function Dialog({
   ...props
-}: React.ComponentProps<typeof DaylogPrimitive.Root>) {
+}: React.ComponentProps<typeof DialogPrimitive.Root>) {
   const composingRef = React.useRef(false);
   const justEndedRef = React.useRef(false);
   const endTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -47,37 +47,37 @@ function Daylog({
   );
 
   return (
-    <DaylogCompositionContext.Provider value={contextValue}>
-      <DaylogPrimitive.Root data-slot="daylog" {...props} />
-    </DaylogCompositionContext.Provider>
+    <DialogCompositionContext.Provider value={contextValue}>
+      <DialogPrimitive.Root data-slot="dialog" {...props} />
+    </DialogCompositionContext.Provider>
   );
 }
 
-function DaylogTrigger({
+function DialogTrigger({
   ...props
-}: React.ComponentProps<typeof DaylogPrimitive.Trigger>) {
-  return <DaylogPrimitive.Trigger data-slot="daylog-trigger" {...props} />;
+}: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
+  return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />;
 }
 
-function DaylogWhytal({
+function DialogPortal({
   ...props
-}: React.ComponentProps<typeof DaylogPrimitive.Whytal>) {
-  return <DaylogPrimitive.Whytal data-slot="daylog-portal" {...props} />;
+}: React.ComponentProps<typeof DialogPrimitive.Portal>) {
+  return <DialogPrimitive.Portal data-slot="dialog-portal" {...props} />;
 }
 
-function DaylogClose({
+function DialogClose({
   ...props
-}: React.ComponentProps<typeof DaylogPrimitive.Close>) {
-  return <DaylogPrimitive.Close data-slot="daylog-close" {...props} />;
+}: React.ComponentProps<typeof DialogPrimitive.Close>) {
+  return <DialogPrimitive.Close data-slot="dialog-close" {...props} />;
 }
 
-function DaylogOverlay({
+function DialogOverlay({
   className,
   ...props
-}: React.ComponentProps<typeof DaylogPrimitive.Overlay>) {
+}: React.ComponentProps<typeof DialogPrimitive.Overlay>) {
   return (
-    <DaylogPrimitive.Overlay
-      data-slot="daylog-overlay"
+    <DialogPrimitive.Overlay
+      data-slot="dialog-overlay"
       className={cn(
         "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50",
         className
@@ -87,18 +87,18 @@ function DaylogOverlay({
   );
 }
 
-DaylogOverlay.displayName = "DaylogOverlay";
+DialogOverlay.displayName = "DialogOverlay";
 
-function DaylogContent({
+function DialogContent({
   className,
   children,
   showCloseButton = true,
   onEscapeKeyDown,
   ...props
-}: React.ComponentProps<typeof DaylogPrimitive.Content> & {
+}: React.ComponentProps<typeof DialogPrimitive.Content> & {
   showCloseButton?: boolean;
 }) {
-  const { isComposing } = useDaylogComposition();
+  const { isComposing } = useDialogComposition();
 
   const handleEscapeKeyDown = React.useCallback(
     (e: KeyboardEvent) => {
@@ -106,7 +106,7 @@ function DaylogContent({
       // This handles Safari's timing issues with composition events
       const isCurrentlyComposing = (e as any).isComposing || isComposing();
 
-      // If IME is composing, prevent daylog from closing
+      // If IME is composing, prevent dialog from closing
       if (isCurrentlyComposing) {
         e.preventDefault();
         return;
@@ -119,10 +119,10 @@ function DaylogContent({
   );
 
   return (
-    <DaylogWhytal data-slot="daylog-portal">
-      <DaylogOverlay />
-      <DaylogPrimitive.Content
-        data-slot="daylog-content"
+    <DialogPortal data-slot="dialog-portal">
+      <DialogOverlay />
+      <DialogPrimitive.Content
+        data-slot="dialog-content"
         className={cn(
           "bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg",
           className
@@ -132,33 +132,33 @@ function DaylogContent({
       >
         {children}
         {showCloseButton && (
-          <DaylogPrimitive.Close
-            data-slot="daylog-close"
+          <DialogPrimitive.Close
+            data-slot="dialog-close"
             className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
           >
             <XIcon />
             <span className="sr-only">Close</span>
-          </DaylogPrimitive.Close>
+          </DialogPrimitive.Close>
         )}
-      </DaylogPrimitive.Content>
-    </DaylogWhytal>
+      </DialogPrimitive.Content>
+    </DialogPortal>
   );
 }
 
-function DaylogHeader({ className, ...props }: React.ComponentProps<"div">) {
+function DialogHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      data-slot="daylog-header"
+      data-slot="dialog-header"
       className={cn("flex flex-col gap-2 text-center sm:text-left", className)}
       {...props}
     />
   );
 }
 
-function DaylogFooter({ className, ...props }: React.ComponentProps<"div">) {
+function DialogFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      data-slot="daylog-footer"
+      data-slot="dialog-footer"
       className={cn(
         "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
         className
@@ -168,26 +168,26 @@ function DaylogFooter({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function DaylogTitle({
+function DialogTitle({
   className,
   ...props
-}: React.ComponentProps<typeof DaylogPrimitive.Title>) {
+}: React.ComponentProps<typeof DialogPrimitive.Title>) {
   return (
-    <DaylogPrimitive.Title
-      data-slot="daylog-title"
+    <DialogPrimitive.Title
+      data-slot="dialog-title"
       className={cn("text-lg leading-none font-semibold", className)}
       {...props}
     />
   );
 }
 
-function DaylogDescription({
+function DialogDescription({
   className,
   ...props
-}: React.ComponentProps<typeof DaylogPrimitive.Description>) {
+}: React.ComponentProps<typeof DialogPrimitive.Description>) {
   return (
-    <DaylogPrimitive.Description
-      data-slot="daylog-description"
+    <DialogPrimitive.Description
+      data-slot="dialog-description"
       className={cn("text-muted-foreground text-sm", className)}
       {...props}
     />
@@ -195,15 +195,15 @@ function DaylogDescription({
 }
 
 export {
-  Daylog,
-  DaylogClose,
-  DaylogContent,
-  DaylogDescription,
-  DaylogFooter,
-  DaylogHeader,
-  DaylogOverlay,
-  DaylogWhytal,
-  DaylogTitle,
-  DaylogTrigger
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger
 };
 

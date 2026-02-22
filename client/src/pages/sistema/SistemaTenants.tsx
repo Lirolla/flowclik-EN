@@ -71,7 +71,7 @@ export default function SistemaTenants() {
   return (
     <div className="container py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold">Photographers Eachstrados</h1>
+        <h1 className="text-3xl font-bold">Photographers Cadastrados</h1>
         <p className="text-muted-foreground">
           Manage everys os photographers da plataforma
         </p>
@@ -82,7 +82,7 @@ export default function SistemaTenants() {
         {!tenants || tenants.length === 0 ? (
           <Card className="p-12 text-center">
             <Users className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-lg font-semibold mb-2">None photographer eachstrado</h3>
+            <h3 className="text-lg font-semibold mb-2">None photographer cadastrado</h3>
           </Card>
         ) : (
           tenants.map((tenant) => (
@@ -141,7 +141,7 @@ export default function SistemaTenants() {
                   </div>
 
                   <p className="text-xs text-muted-foreground mt-4">
-                    Eachstrado {formatDistanceToNow(new Date(tenant.createdAt), { addSuffix: true, locale: ptBR })}
+                    Cadastrado {formatDistanceToNow(new Date(tenant.createdAt), { addSuffix: true, locale: ptBR })}
                   </p>
                 </div>
               </div>

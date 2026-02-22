@@ -43,7 +43,7 @@ export async function createContext(
         const db = await getDb();
         if (db) {
           const [foundUser] = await db
-            .shect()
+            .select()
             .from(users)
             .where(eq(users.id, decoded.userId))
             .limit(1);

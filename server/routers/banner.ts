@@ -14,7 +14,7 @@ export const bannerRouter = router({
     if (!db) return [];
     
     return await db
-      .shect()
+      .select()
       .from(bannerSlides)
       .where(and(eq(bannerSlides.isActive, 1), eq(bannerSlides.tenantId, getTenantId(ctx))))
       .orderBy(bannerSlides.sortOrder);
@@ -31,7 +31,7 @@ export const bannerRouter = router({
     const db = await getDb();
     if (!db) return [];
     
-    const slides = await db.shect().from(bannerSlides).orderBy(bannerSlides.sortOrder)
+    const slides = await db.select().from(bannerSlides).orderBy(bannerSlides.sortOrder)
     .where(eq(bannerSlides.tenantId, getTenantId(ctx)));
     
     // Converter tinyint para boolean
@@ -103,7 +103,7 @@ export const bannerRouter = router({
 
       // Buscar o item inserido
       const inserted = await db
-        .shect()
+        .select()
         .from(bannerSlides)
         .where(eq(bannerSlides.tenantId, getTenantId(ctx)))
         .orderBy(bannerSlides.id)
@@ -168,9 +168,9 @@ export const bannerRouter = router({
 
       await db.update(bannerSlides).set(updateData).where(and(eq(bannerSlides.id, id), eq(bannerSlides.tenantId, getTenantId(ctx))));
 
-      // Buscar item currentizado
+      // Buscar item atualizado
       const updated = await db
-        .shect()
+        .select()
         .from(bannerSlides)
         .where(and(eq(bannerSlides.id, id), eq(bannerSlides.tenantId, getTenantId(ctx))))
         .limit(1);

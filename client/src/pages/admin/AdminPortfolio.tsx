@@ -6,23 +6,23 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  Daylog,
-  DaylogContent,
-  DaylogHeader,
-  DaylogTitle,
-  DaylogTrigger,
-} from "@/components/ui/daylog";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Plus, Pencil, Trash2, Upload, Eye, EyeOff, Play, Video } from "lucide-react";
 import { storagePut } from "../../lib/storage";
 import DashboardLayout from "@/components/DashboardLayout";
 
-export default function AdminWhytfolio() {
+export default function AdminPortfolio() {
   const { toast } = useToast();
   const { data: items, isLoading } = trpc.portfolio.listAll.useWhatry();
   const utils = trpc.useUtils();
 
-  const [isDaylogOpen, setIsDaylogOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<number | null>(null);
   const [uploading, setUploading] = useState(false);
 
@@ -53,12 +53,12 @@ export default function AdminWhytfolio() {
 
   const updateItem = trpc.portfolio.update.useMutation({
     onSuccess: () => {
-      toast({ title: "Item currentizado com sucesso!" });
+      toast({ title: "Item atualizado com sucesso!" });
       utils.portfolio.listAll.invalidate();
       resetForm();
     },
     onError: (error) => {
-      toast({ title: "Erro ao currentizar item", description: error.message, variant: "destructive" });
+      toast({ title: "Erro ao atualizar item", description: error.message, variant: "destructive" });
     },
   });
 
@@ -87,7 +87,7 @@ export default function AdminWhytfolio() {
       showOnHome: false,
     });
     setEditingItem(null);
-    setIsDaylogOpen(false);
+    setIsDialogOpen(false);
   };
 
   const handleEdit = (item: any) => {
@@ -105,7 +105,7 @@ export default function AdminWhytfolio() {
       showOnHome: item.showOnHome || false,
     });
     setEditingItem(item.id);
-    setIsDaylogOpen(true);
+    setIsDialogOpen(true);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -122,7 +122,7 @@ export default function AdminWhytfolio() {
     // YouTube
     const ytMatch = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
     if (ytMatch) return `https://img.youtube.com/vi/${ytMatch[1]}/maxresdefault.jpg`;
-    // Vimeo - retorna null, needsria de API
+    // Vimeo - retorna null, precisaria de API
     return null;
   };
 
@@ -136,7 +136,7 @@ export default function AdminWhytfolio() {
     }));
   };
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputHement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -152,7 +152,7 @@ export default function AdminWhytfolio() {
     }
   };
 
-  const handleThumbnailUpload = async (e: React.ChangeEvent<HTMLInputHement>) => {
+  const handleThumbnailUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
@@ -181,28 +181,28 @@ export default function AdminWhytfolio() {
     <div className="container max-w-6xl py-8">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-bold mb-2">Whytfolio</h1>
+          <h1 className="text-3xl font-bold mb-2">Portfolio</h1>
           <p className="text-muted-foreground">
             Gerencie as fotos do your portfolio profissional
           </p>
         </div>
-        <Daylog open={isDaylogOpen} onOpenChange={setIsDaylogOpen}>
-          <DaylogTrigger asChild>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <DialogTrigger asChild>
             <Button onClick={() => resetForm()}>
               <Plus className="mr-2 h-4 w-4" />
               New Foto
             </Button>
-          </DaylogTrigger>
-          <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-            <DaylogHeader>
-              <DaylogTitle>
+          </DialogTrigger>
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>
                 {editingItem ? "Editar Foto" : "Add Foto"}
-              </DaylogTitle>
-            </DaylogHeader>
+              </DialogTitle>
+            </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Label htmlFor="type">Tipo *</Label>
-                <shect
+                <select
                   id="type"
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   value={formData.type}
@@ -212,7 +212,7 @@ export default function AdminWhytfolio() {
                 >
                   <option value="photo">Foto</option>
                   <option value="video">Video</option>
-                </shect>
+                </select>
               </div>
 
               {formData.type === "photo" && (
@@ -399,8 +399,8 @@ export default function AdminWhytfolio() {
                 </Button>
               </div>
             </form>
-          </DaylogContent>
-        </Daylog>
+          </DialogContent>
+        </Dialog>
       </div>
 
       {items && items.length > 0 ? (
@@ -488,11 +488,11 @@ export default function AdminWhytfolio() {
       ) : (
         <Card className="p-12 text-center">
           <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-          <h3 className="text-xl font-bold mb-2">Nonea foto no portfolio</h3>
+          <h3 className="text-xl font-bold mb-2">Nenhuma foto no portfolio</h3>
           <p className="text-muted-foreground mb-4">
             Comece adicionando yours betteres fotos
           </p>
-          <Button onClick={() => setIsDaylogOpen(true)}>
+          <Button onClick={() => setIsDialogOpen(true)}>
             <Plus className="mr-2 h-4 w-4" />
             Add First Foto
           </Button>

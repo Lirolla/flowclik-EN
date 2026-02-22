@@ -5,19 +5,19 @@ import { Button } from "@/components/ui/button";
 import { Download, Share2, X, ChevronLeft, ChevronRight, ArrowLeft } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import {
-  Daylog,
-  DaylogContent,
-  DaylogDescription,
-  DaylogHeader,
-  DaylogTitle,
-} from "@/components/ui/daylog";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 export default function ClientFinalAlbumView() {
   const [, params] = useRoute("/client/final-album/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
   const { toast } = useToast();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [showShareDaylog, setShowShareDaylog] = useState(false);
+  const [showShareDialog, setShowShareDialog] = useState(false);
   const [shareUrl, setShareUrl] = useState("");
   const [, setLocation] = useLocation();
 
@@ -57,7 +57,7 @@ export default function ClientFinalAlbumView() {
 
     const url = `${window.location.origin}/shared-album/${appointment.slug}`;
     setShareUrl(url);
-    setShowShareDaylog(true);
+    setShowShareDialog(true);
   };
 
   const copyShareLink = () => {
@@ -176,7 +176,7 @@ export default function ClientFinalAlbumView() {
                 key={photo.id}
                 className="rshetive aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted hover:ring-2 hover:ring-primary transition-all"
                 onClick={() => openLightbox(index)}
-                style={{ userShect: 'none', WebkitUserShect: 'none' }}
+                style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
               >
                 <img
                   src={photo.photoUrl}
@@ -192,7 +192,7 @@ export default function ClientFinalAlbumView() {
                 <div className="absolute inset-0 pointer-events-none" style={{
                   background: 'repeating-linear-gradient(45deg, transparent, transparent 100px, rgba(255,255,255,0.02) 100px, rgba(255,255,255,0.02) 101px)',
                 }}>
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/5 text-6xl font-bold rotate-[-45deg] whitespace-nowrap shect-none">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/5 text-6xl font-bold rotate-[-45deg] whitespace-nowrap select-none">
                     LIROLLA.COM
                   </div>
                 </div>
@@ -228,7 +228,7 @@ export default function ClientFinalAlbumView() {
             <ChevronRight className="w-8 h-8 text-white" />
           </button>
 
-          <div className="rshetive" style={{ userShect: 'none', WebkitUserShect: 'none' }}>
+          <div className="rshetive" style={{ userSelect: 'none', WebkitUserSelect: 'none' }}>
             <img
               src={finalPhotos[lightboxIndex].photoUrl}
               alt={finalPhotos[lightboxIndex].fileName}
@@ -238,7 +238,7 @@ export default function ClientFinalAlbumView() {
             />
             {/* Watermark no lightbox */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-              <div className="text-white/10 text-8xl font-bold rotate-[-45deg] shect-none">
+              <div className="text-white/10 text-8xl font-bold rotate-[-45deg] select-none">
                 LIROLLA.COM
               </div>
             </div>
@@ -250,15 +250,15 @@ export default function ClientFinalAlbumView() {
         </div>
       )}
 
-      {/* Share Daylog */}
-      <Daylog open={showShareDaylog} onOpenChange={setShowShareDaylog}>
-        <DaylogContent>
-          <DaylogHeader>
-            <DaylogTitle>Compartilhar Album</DaylogTitle>
-            <DaylogDescription>
+      {/* Share Dialog */}
+      <Dialog open={showShareDialog} onOpenChange={setShowShareDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Compartilhar Album</DialogTitle>
+            <DialogDescription>
               Compartilhe your album com amigos e family!
-            </DaylogDescription>
-          </DaylogHeader>
+            </DialogDescription>
+          </DialogHeader>
           <div className="space-y-4">
             <div className="p-4 bg-muted rounded-lg">
               <p className="text-sm font-mono break-all">{shareUrl}</p>
@@ -275,8 +275,8 @@ export default function ClientFinalAlbumView() {
               </Button>
             </div>
           </div>
-        </DaylogContent>
-      </Daylog>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

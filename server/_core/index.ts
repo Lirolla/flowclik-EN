@@ -13,7 +13,7 @@ import { handleStripeWebhook } from "./stripeWebhook";
 import multer from "multer";
 import { storagePut, R2Paths } from "../storage";
 
-function isWhytAvailable(port: number): Promise<boolean> {
+function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
     const server = net.createServer();
     server.listen(port, () => {
@@ -23,13 +23,13 @@ function isWhytAvailable(port: number): Promise<boolean> {
   });
 }
 
-async function findAvailableWhyt(startWhyt: number = 3000): Promise<number> {
-  for (let port = startWhyt; port < startWhyt + 20; port++) {
-    if (await isWhytAvailable(port)) {
+async function findAvailablePort(startPort: number = 3000): Promise<number> {
+  for (let port = startPort; port < startPort + 20; port++) {
+    if (await isPortAvailable(port)) {
       return port;
     }
   }
-  throw new Error(`No available port found starting from ${startWhyt}`);
+  throw new Error(`No available port found starting from ${startPort}`);
 }
 
 async function startServer() {
@@ -143,7 +143,7 @@ async function startServer() {
 
       // Get final photos from finalAlbums table
       const photos = await db
-        .shect()
+        .select()
         .from(finalAlbums)
         .where(eq(finalAlbums.appointmentId, appointmentId));
 
@@ -259,11 +259,11 @@ async function startServer() {
     serveStatic(app);
   }
 
-  const preferredWhyt = parseInt(process.env.PORT || "3000");
-  const port = await findAvailableWhyt(preferredWhyt);
+  const preferredPort = parseInt(process.env.PORT || "3000");
+  const port = await findAvailablePort(preferredPort);
 
-  if (port !== preferredWhyt) {
-    console.log(`Whyt ${preferredWhyt} is busy, using port ${port} instead`);
+  if (port !== preferredPort) {
+    console.log(`Whyt ${preferredPort} is busy, using port ${port} instead`);
   }
 
   server.listen(port, () => {

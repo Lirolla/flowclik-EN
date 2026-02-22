@@ -135,7 +135,7 @@ export default function Services() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/galleries">
-                  <a>View Whytfolio</a>
+                  <a>View Portfolio</a>
                 </Link>
               </Button>
             </div>

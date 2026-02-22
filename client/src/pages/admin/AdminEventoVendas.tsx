@@ -2,7 +2,7 @@ import { useState } from "react";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Daylog, DaylogContent, DaylogDescription, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Users, DollarSign, Mail, Copy, Check, Loader2 } from "lucide-react";
@@ -18,7 +18,7 @@ export default function AdminEventoVendas() {
 }
 
 function AdminEventoVendasContent() {
-  const [shectedEvent, setShectedEvent] = useState<any>(null);
+  const [selectedEvent, setSelectedEvent] = useState<any>(null);
   const [salesModalOpen, setSalesModalOpen] = useState(false);
   const [priceInput, setPriceInput] = useState("25.00");
 
@@ -39,21 +39,21 @@ function AdminEventoVendasContent() {
   });
 
   const handleEnableSales = () => {
-    if (!shectedEvent?.collectionId) {
+    if (!selectedEvent?.collectionId) {
       toast.error("Gallery not found");
       return;
     }
 
     const priceInCents = Math.round(parseFloat(priceInput) * 100);
     enableSalesMutation.mutate({
-      collectionId: shectedEvent.collectionId,
+      collectionId: selectedEvent.collectionId,
       pricePerPhoto: priceInCents,
     });
   };
 
   const handleCopyLink = () => {
-    if (!shectedEvent?.collectionPublicSlug) return;
-    const link = `${window.location.origin}/gallery-shop/${shectedEvent.collectionPublicSlug}`;
+    if (!selectedEvent?.collectionPublicSlug) return;
+    const link = `${window.location.origin}/gallery-shop/${selectedEvent.collectionPublicSlug}`;
     navigator.clipboard.writeText(link);
     toast.success("Link copied!");
   };
@@ -110,15 +110,15 @@ function AdminEventoVendasContent() {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => setShectedEvent(shectedEvent?.id === event.id ? null : event)}
+                    onClick={() => setSelectedEvent(selectedEvent?.id === event.id ? null : event)}
                   >
-                    {shectedEvent?.id === event.id ? "Hide" : "Manage"}
+                    {selectedEvent?.id === event.id ? "Hide" : "Manage"}
                   </Button>
                 </div>
               </CardHeader>
 
               {/* Expanded Details */}
-              {shectedEvent?.id === event.id && (
+              {selectedEvent?.id === event.id && (
                 <CardContent className="border-t pt-6 space-y-6">
                   {/* Stats */}
                   <div className="grid grid-cols-3 gap-4">
@@ -127,7 +127,7 @@ function AdminEventoVendasContent() {
                         <div className="flex items-center gap-3">
                           <Users className="w-8 h-8 text-blue-500" />
                           <div>
-                            <p className="text-2xl font-bold">{shectedEvent?.leadsCount || 0}</p>
+                            <p className="text-2xl font-bold">{selectedEvent?.leadsCount || 0}</p>
                             <p className="text-xs text-muted-foreground">Leads Capturados</p>
                           </div>
                         </div>
@@ -140,7 +140,7 @@ function AdminEventoVendasContent() {
                           <DollarSign className="w-8 h-8 text-green-500" />
                           <div>
                             <p className="text-2xl font-bold">
-                              {shectedEvent?.collectionSalesEnabled ? "Active" : "Inactive"}
+                              {selectedEvent?.collectionSalesEnabled ? "Active" : "Inactive"}
                             </p>
                             <p className="text-xs text-muted-foreground">Status de Vendas</p>
                           </div>
@@ -163,7 +163,7 @@ function AdminEventoVendasContent() {
 
                   {/* Actions */}
                   <div className="flex gap-3">
-                    {!shectedEvent?.collectionSalesEnabled ? (
+                    {!selectedEvent?.collectionSalesEnabled ? (
                       <Button
                         onClick={() => setSalesModalOpen(true)}
                         className="flex-1"
@@ -184,27 +184,27 @@ function AdminEventoVendasContent() {
                         <Button
                           onClick={handleSendEmails}
                           className="flex-1"
-                          disabled={!shectedEvent?.leadsCount || shectedEvent.leadsCount === 0}
+                          disabled={!selectedEvent?.leadsCount || selectedEvent.leadsCount === 0}
                         >
                           <Mail className="w-4 h-4 mr-2" />
-                          Enviar para {shectedEvent?.leadsCount || 0} Leads
+                          Enviar para {selectedEvent?.leadsCount || 0} Leads
                         </Button>
                       </>
                     )}
                   </div>
 
                   {/* Sales Info */}
-                  {shectedEvent?.collectionSalesEnabled && (
+                  {selectedEvent?.collectionSalesEnabled && (
                     <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
                       <div className="flex items-start gap-3">
                         <Check className="w-5 h-5 text-green-600 mt-0.5" />
                         <div className="flex-1">
                           <p className="font-semibold text-green-600">Vendas Ativas</p>
                           <p className="text-sm text-muted-foreground mt-1">
-                            Price por foto: £ {((shectedEvent.collectionPricePerPhoto || 0) / 100).toFixed(2)}
+                            Price por foto: £ {((selectedEvent.collectionPricePerPhoto || 0) / 100).toFixed(2)}
                           </p>
                           <p className="text-sm text-muted-foreground">
-                            Link: /gallery-shop/{shectedEvent.collectionPublicSlug}
+                            Link: /gallery-shop/{selectedEvent.collectionPublicSlug}
                           </p>
                         </div>
                       </div>
@@ -218,14 +218,14 @@ function AdminEventoVendasContent() {
       </div>
 
       {/* Sales Modal */}
-      <Daylog open={salesModalOpen} onOpenChange={setSalesModalOpen}>
-        <DaylogContent>
-          <DaylogHeader>
-            <DaylogTitle>Ativar Vendas de Fotos</DaylogTitle>
-            <DaylogDescription>
+      <Dialog open={salesModalOpen} onOpenChange={setSalesModalOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Ativar Vendas de Fotos</DialogTitle>
+            <DialogDescription>
               Configure o price por foto. Um link public will be gerado para compartilhar com os leads.
-            </DaylogDescription>
-          </DaylogHeader>
+            </DialogDescription>
+          </DialogHeader>
           <div className="space-y-4 mt-4">
             <div className="space-y-2">
               <Label htmlFor="pricePerPhoto">Price por Foto (£)</Label>
@@ -264,8 +264,8 @@ function AdminEventoVendasContent() {
               </Button>
             </div>
           </div>
-        </DaylogContent>
-      </Daylog>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

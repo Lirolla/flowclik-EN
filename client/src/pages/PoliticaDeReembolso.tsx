@@ -100,10 +100,10 @@ export default function PoliticaDeRefund() {
               </p>
               <ol className="list-decimal ml-6 mb-4 text-zinc-300 space-y-2">
                 <li>Envie um email para <strong className="text-purple-400">suporte@flowclik.com</strong></li>
-                <li>Inclua no assunto: "Request de Refund - [Your Email de Eachstro]"</li>
+                <li>Inclua no assunto: "Request de Refund - [Your Email de Cadastro]"</li>
                 <li>No corpo do email, informe:
                   <ul className="list-disc ml-6 mt-2 space-y-1">
-                    <li>Your nome complete e email de eachstro</li>
+                    <li>Your nome complete e email de cadastro</li>
                     <li>Data da signature</li>
                     <li>Motivo do cancellation (optional, mas nos help a melhourr)</li>
                   </ul>

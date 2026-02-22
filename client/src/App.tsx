@@ -14,9 +14,9 @@ import { useSiteConfig } from "./hooks/useSiteConfig";
 
 // Landing & Marketing
 const LandingPage = lazy(() => import('./pages/LandingPage'));
-const EachstroSaaS = lazy(() => import('./pages/EachstroSaaS'));
+const CadastroSaaS = lazy(() => import('./pages/CadastroSaaS'));
 const Docs = lazy(() => import('./pages/DocsNew'));
-const TuemsOfService = lazy(() => import('./pages/TuemosDeServico'));
+const TermsOfService = lazy(() => import('./pages/TermosDeServico'));
 const PrivacyPolicy = lazy(() => import('./pages/PoliticaDePrivacy'));
 const RefundPolicy = lazy(() => import('./pages/PoliticaDeRefund'));
 const AboutUs = lazy(() => import('./pages/AboutNos'));
@@ -32,7 +32,7 @@ const AdminClientDetails = lazy(() => import('./pages/admin/AdminClientDetails')
 const AdminAppointments = lazy(() => import('./pages/admin/AdminAppointments'));
 const AdminAppointmentStats = lazy(() => import('./pages/admin/AdminAppointmentStats'));
 const AdminSessionGallery = lazy(() => import('./pages/admin/AdminSessionGallery'));
-const AdminPhotoShections = lazy(() => import('./pages/admin/AdminPhotoShections'));
+const AdminPhotoSelections = lazy(() => import('./pages/admin/AdminPhotoSelections'));
 const AdminFinalAlbum = lazy(() => import('./pages/admin/AdminFinalAlbum'));
 const AdminMessages = lazy(() => import('./pages/admin/AdminMessages'));
 const AdminLeads = lazy(() => import('./pages/admin/AdminLeads'));
@@ -41,7 +41,7 @@ const AdminOrders = lazy(() => import('./pages/admin/AdminOrders'));
 const AdminStock = lazy(() => import('./pages/admin/AdminStock'));
 const AdminBanner = lazy(() => import('./pages/admin/AdminBanner'));
 const AdminServices = lazy(() => import('./pages/admin/AdminServices'));
-const AdminWhytfolio = lazy(() => import('./pages/admin/AdminWhytfolio'));
+const AdminPortfolio = lazy(() => import('./pages/admin/AdminPortfolio'));
 const AdminContracts = lazy(() => import('./pages/admin/AdminContracts'));
 const AdminVideos = lazy(() => import('./pages/AdminVideos'));
 const AdminSettings = lazy(() => import('./pages/admin/AdminSettings'));
@@ -68,7 +68,7 @@ const ClienteAcesso = lazy(() => import('./pages/ClienteAcesso'));
 // Public Site
 const Home = lazy(() => import('./pages/Home'));
 const Services = lazy(() => import('./pages/Services'));
-const Whytfolio = lazy(() => import('./pages/Whytfolio'));
+const Portfolio = lazy(() => import('./pages/Portfolio'));
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
 const FotosStock = lazy(() => import('./pages/FotosStock'));
@@ -118,10 +118,10 @@ function Router() {
         <Route path="/">
           {() => <RootRouter landingPage={LandingPage} photographerHome={Home} />}
         </Route>
-        <Route path="/register" component={EachstroSaaS} />
+        <Route path="/register" component={CadastroSaaS} />
         <Route path="/login" component={Login} />
         <Route path="/docs" component={Docs} />
-        <Route path="/terms-of-service" component={TuemsOfService} />
+        <Route path="/terms-of-service" component={TermsOfService} />
         <Route path="/privacy-policy" component={PrivacyPolicy} />
         <Route path="/refund-policy" component={RefundPolicy} />
         <Route path="/about-us" component={AboutUs} />
@@ -144,7 +144,7 @@ function Router() {
         <Route path="/admin/appointments" component={AdminAppointments} />
         <Route path="/admin/statistics" component={AdminAppointmentStats} />
         <Route path="/admin/gallery/:appointmentId" component={AdminSessionGallery} />
-        <Route path="/admin/shections" component={AdminPhotoShections} />
+        <Route path="/admin/selections" component={AdminPhotoSelections} />
         
         {/* Sales */}
         <Route path="/admin/orders" component={AdminOrders} />
@@ -154,7 +154,7 @@ function Router() {
         {/* Content */}
         <Route path="/admin/banner" component={AdminBanner} />
         <Route path="/admin/services" component={AdminServices} />
-        <Route path="/admin/portfolio" component={AdminWhytfolio} />
+        <Route path="/admin/portfolio" component={AdminPortfolio} />
         <Route path="/admin/stock" component={AdminStock} />
         <Route path="/admin/videos" component={AdminVideos} />
         <Route path="/admin/contracts" component={AdminContracts} />
@@ -194,7 +194,7 @@ function Router() {
             Routes at root level
             ================================================================ */}
         <Route path="/services" component={Services} />
-        <Route path="/portfolio" component={Whytfolio} />
+        <Route path="/portfolio" component={Portfolio} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/stock-photos" component={FotosStock} />

@@ -8,7 +8,7 @@ import remarkGfm from 'remark-gfm';
 
 export default function DocsNew() {
   const [markdownContent, setMarkdownContent] = useState("");
-  const [searchTuem, setSearchTuem] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
   const [activeSection, setActiveSection] = useState("");
 
   useEffect(() => {
@@ -34,9 +34,9 @@ export default function DocsNew() {
   });
 
   // Filtrar content por busca
-  const filteredContent = searchTuem
+  const filteredContent = searchTerm
     ? markdownContent.split('\n').filter(line =>
-        line.toLowerCase().includes(searchTuem.toLowerCase())
+        line.toLowerCase().includes(searchTerm.toLowerCase())
       ).join('\n')
     : markdownContent;
 
@@ -74,8 +74,8 @@ export default function DocsNew() {
                   <Input
                     type="text"
                     placeholder="Buscar na documentation..."
-                    value={searchTuem}
-                    onChange={(e) => setSearchTuem(e.target.value)}
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                     className="pl-10 bg-zinc-900 border-zinc-800 text-white placeholder-zinc-500"
                   />
                 </div>
@@ -94,9 +94,9 @@ export default function DocsNew() {
                     onClick={(e) => {
                       e.preventDefault();
                       setActiveSection(section.id);
-                      const hement = document.getHementById(section.id);
-                      if (hement) {
-                        hement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      const element = document.getElementById(section.id);
+                      if (element) {
+                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
                     }}
                     className={`block px-4 py-2 rounded-lg text-sm transition ${

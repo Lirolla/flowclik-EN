@@ -83,11 +83,11 @@ export default function AdminSettings() {
     }
   }, [config]);
 
-  const handleLogoChange = (e: React.ChangeEvent<HTMLInputHement>) => {
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        toast.error("Why favor, shect only imagens");
+        toast.error("Why favor, select only imagens");
         return;
       }
 
@@ -395,7 +395,7 @@ export default function AdminSettings() {
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
                 <div>
-                  <Label>Thefone</Label>
+                  <Label>Telefone</Label>
                   <Input
                     value={contactPhone}
                     onChange={(e) => setContactPhone(e.target.value)}

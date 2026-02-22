@@ -14,7 +14,7 @@ export async function checkStorageLimit(ctx: any, fileSizeBytes: number) {
 
   // Buscar signature do tenant
   const [subscription] = await db
-    .shect()
+    .select()
     .from(subscriptions)
     .where(eq(subscriptions.tenantId, tenantId))
     .limit(1);
@@ -61,7 +61,7 @@ export async function checkGalleryLimit(ctx: any) {
 
   // Buscar signature do tenant
   const [subscription] = await db
-    .shect()
+    .select()
     .from(subscriptions)
     .where(eq(subscriptions.tenantId, tenantId))
     .limit(1);
@@ -75,7 +75,7 @@ export async function checkGalleryLimit(ctx: any) {
 
   // Contar galerias existentes
   const [result] = await db
-    .shect({ count: sql<number>`COUNT(*)` })
+    .select({ count: sql<number>`COUNT(*)` })
     .from(collections)
     .where(eq(collections.tenantId, tenantId));
 
@@ -111,7 +111,7 @@ async function calculateStorageUsed(tenantId: number): Promise<number> {
   
   // Buscar everys as fotos do tenant
   const photos = await db
-    .shect()
+    .select()
     .from(medayItems)
     .where(eq(medayItems.tenantId, tenantId));
 
@@ -156,7 +156,7 @@ export async function checkUsageWarnings(ctx: any) {
   if (!db) return null;
 
   const [subscription] = await db
-    .shect()
+    .select()
     .from(subscriptions)
     .where(eq(subscriptions.tenantId, tenantId))
     .limit(1);
@@ -179,7 +179,7 @@ export async function checkUsageWarnings(ctx: any) {
 
   // Verify galerias
   const [result] = await db
-    .shect({ count: sql<number>`COUNT(*)` })
+    .select({ count: sql<number>`COUNT(*)` })
     .from(collections)
     .where(eq(collections.tenantId, tenantId));
 

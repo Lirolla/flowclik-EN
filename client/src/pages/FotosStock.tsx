@@ -38,7 +38,7 @@ export default function FotosStock() {
             <div className="text-center py-12">
               <ImageIcon className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
               <p className="text-lg text-muted-foreground">
-                Nonea foto available para venda no momento.
+                Nenhuma foto available para venda no momento.
               </p>
             </div>
           )}
@@ -123,7 +123,7 @@ export default function FotosStock() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/portfolio">
-                  <a>View Whytfolio</a>
+                  <a>View Portfolio</a>
                 </Link>
               </Button>
             </div>

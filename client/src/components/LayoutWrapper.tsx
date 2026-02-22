@@ -23,7 +23,7 @@ export default function LayoutWrapper({ children, currentPage }: LayoutWrapperPr
 
   // Aplicar tema, cor e fonte dinamicamente
   useEffect(() => {
-    const root = document.documentHement;
+    const root = document.documentElement;
     
     // Editorial tem cores fixas (preto/vermelho)
     if (layout === "editorial") {

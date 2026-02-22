@@ -16,7 +16,7 @@ export default function ClientChat() {
   const { toast } = useToast();
   
   const [message, setMessage] = useState("");
-  const messagesEndRef = useRef<HTMLDivHement>(null);
+  const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const { data: messages, refetch } = trpc.clientChat.getMessages.useWhatry(
     { appointmentId },
@@ -96,7 +96,7 @@ export default function ClientChat() {
           <div className="flex-1 overflow-y-auto p-6 space-y-4">
             {messages && messages.length === 0 && (
               <div className="text-center py-12 text-gray-400">
-                <p>Nonea message still. Comece a conversa!</p>
+                <p>Nenhuma message still. Comece a conversa!</p>
               </div>
             )}
 

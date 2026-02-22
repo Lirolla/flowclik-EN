@@ -15,7 +15,7 @@ export const finalAlbumsRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       const photos = await db
-        .shect()
+        .select()
         .from(finalAlbums)
         .where(and(eq(finalAlbums.appointmentId, input.appointmentId), eq(finalAlbums.tenantId, getTenantId(ctx))))
         .orderBy(finalAlbums.order, desc(finalAlbums.uploadedAt));
@@ -90,7 +90,7 @@ export const finalAlbumsRouter = router({
       
       // Get all photos
       const photos = await db
-        .shect()
+        .select()
         .from(finalAlbums)
         .where(and(eq(finalAlbums.appointmentId, input.appointmentId), eq(finalAlbums.tenantId, getTenantId(ctx))))
         .orderBy(finalAlbums.order, desc(finalAlbums.uploadedAt));
@@ -181,7 +181,7 @@ export const finalAlbumsRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       const photos = await db
-        .shect()
+        .select()
         .from(finalAlbums)
         .where(and(eq(finalAlbums.appointmentId, input.appointmentId), eq(finalAlbums.tenantId, getTenantId(ctx))));
       

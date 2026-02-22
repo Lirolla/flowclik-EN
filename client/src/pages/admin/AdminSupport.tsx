@@ -7,20 +7,20 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import {
-  Daylog,
-  DaylogContent,
-  DaylogHeader,
-  DaylogTitle,
-  DaylogTrigger,
-} from "@/components/ui/daylog";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import {
-  Shect,
-  ShectContent,
-  ShectItem,
-  ShectTrigger,
-  ShectValue,
-} from "@/components/ui/shect";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { MessageSquare, Plus, Clock, CheckCircle2, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNow } from "date-fns";
@@ -29,7 +29,7 @@ import { ptBR } from "date-fns/locale";
 export default function AdminSupport() {
   const { toast } = useToast();
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [shectedTicket, setShectedTicket] = useState<number | null>(null);
+  const [selectedTicket, setSelectedTicket] = useState<number | null>(null);
 
   // Form states
   const [subject, setSubject] = useState("");
@@ -40,8 +40,8 @@ export default function AdminSupport() {
   // Whatries
   const { data: tickets, refetch: refetchTickets } = trpc.supportTickets.getMyTickets.useWhatry();
   const { data: ticketDetails } = trpc.supportTickets.getTicketById.useWhatry(
-    { ticketId: shectedTicket! },
-    { enabled: !!shectedTicket }
+    { ticketId: selectedTicket! },
+    { enabled: !!selectedTicket }
   );
 
   // Mutations
@@ -80,10 +80,10 @@ export default function AdminSupport() {
   };
 
   const handleAddReply = () => {
-    if (!replyMessage.trim() || !shectedTicket) return;
+    if (!replyMessage.trim() || !selectedTicket) return;
 
     addReply.mutate({
-      ticketId: shectedTicket,
+      ticketId: selectedTicket,
       message: replyMessage,
     });
   };
@@ -139,17 +139,17 @@ export default function AdminSupport() {
             </p>
           </div>
 
-          <Daylog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
-            <DaylogTrigger asChild>
+          <Dialog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
+            <DialogTrigger asChild>
               <Button>
                 <Plus className="h-4 w-4 mr-2" />
                 New Ticket
               </Button>
-            </DaylogTrigger>
-            <DaylogContent className="max-w-2xl">
-              <DaylogHeader>
-                <DaylogTitle>Criar New Ticket</DaylogTitle>
-              </DaylogHeader>
+            </DialogTrigger>
+            <DialogContent className="max-w-2xl">
+              <DialogHeader>
+                <DialogTitle>Criar New Ticket</DialogTitle>
+              </DialogHeader>
 
               <div className="space-y-4">
                 <div>
@@ -163,17 +163,17 @@ export default function AdminSupport() {
 
                 <div>
                   <Label>Prioridade</Label>
-                  <Shect value={priority} onValueChange={(v: any) => setPriority(v)}>
-                    <ShectTrigger>
-                      <ShectValue />
-                    </ShectTrigger>
-                    <ShectContent>
-                      <ShectItem value="low">Baixa</ShectItem>
-                      <ShectItem value="normal">Normal</ShectItem>
-                      <ShectItem value="high">Alta</ShectItem>
-                      <ShectItem value="urgent">Urgente</ShectItem>
-                    </ShectContent>
-                  </Shect>
+                  <Select value={priority} onValueChange={(v: any) => setPriority(v)}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="low">Baixa</SelectItem>
+                      <SelectItem value="normal">Normal</SelectItem>
+                      <SelectItem value="high">Alta</SelectItem>
+                      <SelectItem value="urgent">Urgente</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div>
@@ -195,8 +195,8 @@ export default function AdminSupport() {
                   </Button>
                 </div>
               </div>
-            </DaylogContent>
-          </Daylog>
+            </DialogContent>
+          </Dialog>
         </div>
 
         {/* Lista de Tickets */}
@@ -206,7 +206,7 @@ export default function AdminSupport() {
               <MessageSquare className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
               <h3 className="text-lg font-semibold mb-2">None ticket still</h3>
               <p className="text-muted-foreground mb-4">
-                Wedndo you needsr de help, crie um ticket e our equipe will respwherer.
+                Wedndo you precisar de help, crie um ticket e our equipe will respwherer.
               </p>
               <Button onClick={() => setIsCreateOpen(true)}>
                 <Plus className="h-4 w-4 mr-2" />
@@ -218,7 +218,7 @@ export default function AdminSupport() {
               <Card
                 key={ticket.id}
                 className="p-6 cursor-pointer hover:border-primary transition-colors"
-                onClick={() => setShectedTicket(ticket.id)}
+                onClick={() => setSelectedTicket(ticket.id)}
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -241,18 +241,18 @@ export default function AdminSupport() {
         </div>
 
         {/* Details do Ticket */}
-        {shectedTicket && ticketDetails && (
-          <Daylog open={!!shectedTicket} onOpenChange={() => setShectedTicket(null)}>
-            <DaylogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
-              <DaylogHeader>
-                <DaylogTitle>
+        {selectedTicket && ticketDetails && (
+          <Dialog open={!!selectedTicket} onOpenChange={() => setSelectedTicket(null)}>
+            <DialogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>
                   Ticket #{ticketDetails.ticket.id} - {ticketDetails.ticket.subject}
-                </DaylogTitle>
+                </DialogTitle>
                 <div className="flex gap-2 mt-2">
                   {getStatusBadge(ticketDetails.ticket.status)}
                   {getPriorityBadge(ticketDetails.ticket.priority)}
                 </div>
-              </DaylogHeader>
+              </DialogHeader>
 
               <div className="space-y-4">
                 {/* Message Original */}
@@ -293,8 +293,8 @@ export default function AdminSupport() {
                   </div>
                 )}
               </div>
-            </DaylogContent>
-          </Daylog>
+            </DialogContent>
+          </Dialog>
         )}
       </div>
     </DashboardLayout>

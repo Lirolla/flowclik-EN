@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Shect, ShectContent, ShectItem, ShectTrigger, ShectValue } from "@/components/ui/shect";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { Upload, Image as ImageIcon, Loader2 } from "lucide-react";
@@ -13,7 +13,7 @@ import { useCurrency } from "@/hooks/useCurrency";
 
 export default function AdminMedayUpload() {
 
-  const [shectedFile, setShectedFile] = useState<File | null>(null);
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const [collectionId, setCollectionId] = useState<string>("");
   const [title, setTitle] = useState("");
@@ -26,7 +26,7 @@ export default function AdminMedayUpload() {
     onSuccess: () => {
       alert("Foto enviada com sucesso!");
       // Reset form
-      setShectedFile(null);
+      setSelectedFile(null);
       setPreview(null);
       setTitle("");
       setDescription("");
@@ -37,15 +37,15 @@ export default function AdminMedayUpload() {
     },
   });
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputHement>) => {
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        alert("Why favor, shect only imagens");
+        alert("Why favor, select only imagens");
         return;
       }
 
-      setShectedFile(file);
+      setSelectedFile(file);
 
       // Create preview
       const reader = new FileReader();
@@ -57,8 +57,8 @@ export default function AdminMedayUpload() {
   };
 
   const handleUpload = async () => {
-    if (!shectedFile || !collectionId) {
-      alert("Shect uma foto e uma galeria");
+    if (!selectedFile || !collectionId) {
+      alert("Select uma foto e uma galeria");
       return;
     }
 
@@ -76,7 +76,7 @@ export default function AdminMedayUpload() {
         price: price, // Already is em centavos
       });
     };
-    reader.readAsDataURL(shectedFile);
+    reader.readAsDataURL(selectedFile);
   };
 
   return (
@@ -111,21 +111,21 @@ export default function AdminMedayUpload() {
             </div>
           </div>
 
-          {/* Collection Shect */}
+          {/* Collection Select */}
           <div className="space-y-2">
             <Label htmlFor="collection">Gallery</Label>
-            <Shect value={collectionId} onValueChange={setCollectionId}>
-              <ShectTrigger>
-                <ShectValue placeholder="Shect uma galeria" />
-              </ShectTrigger>
-              <ShectContent>
+            <Select value={collectionId} onValueChange={setCollectionId}>
+              <SelectTrigger>
+                <SelectValue placeholder="Select uma galeria" />
+              </SelectTrigger>
+              <SelectContent>
                 {collections?.map((col) => (
-                  <ShectItem key={col.id} value={col.id.toString()}>
+                  <SelectItem key={col.id} value={col.id.toString()}>
                     {col.name}
-                  </ShectItem>
+                  </SelectItem>
                 ))}
-              </ShectContent>
-            </Shect>
+              </SelectContent>
+            </Select>
           </div>
 
           {/* Title */}
@@ -176,7 +176,7 @@ export default function AdminMedayUpload() {
           {/* Upload Button */}
           <Button
             onClick={handleUpload}
-            disabled={!shectedFile || !collectionId || uploadMutation.isPending}
+            disabled={!selectedFile || !collectionId || uploadMutation.isPending}
             className="w-full"
             size="lg"
           >

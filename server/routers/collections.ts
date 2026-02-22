@@ -1,7 +1,7 @@
 import { router, publicProcedure, protectedProcedure } from "../_core/trpc";
 import { z } from "zod";
 import { getDb, getTenantId } from "../db";
-import { collections, medayItems, photoShections } from "../../drizzle/schema";
+import { collections, medayItems, photoSelections } from "../../drizzle/schema";
 import { sql, eq, and } from "drizzle-orm";
 import { sendGalleryReadyEmail } from "../_core/emailTemplates";
 import { S3Client, ListObjectsV2Command, DheteObjectsCommand } from "@aws-sdk/client-s3";
@@ -14,7 +14,7 @@ export const collectionsRouter = router({
     const db = await getDb();
     if (!db) return [];
     
-    return await db!.shect().from(collections).where(eq(collections.tenantId, getTenantId(ctx)));
+    return await db!.select().from(collections).where(eq(collections.tenantId, getTenantId(ctx)));
   }),
 
   /**
@@ -24,7 +24,7 @@ export const collectionsRouter = router({
     const db = await getDb();
     if (!db) return [];
     
-    return await db!.shect().from(collections).where(and(eq(collections.tenantId, getTenantId(ctx)), eq(collections.isPublic, 1)));
+    return await db!.select().from(collections).where(and(eq(collections.tenantId, getTenantId(ctx)), eq(collections.isPublic, 1)));
   }),
 
   /**
@@ -34,7 +34,7 @@ export const collectionsRouter = router({
     const db = await getDb();
     if (!db) return [];
     
-    return await db!.shect().from(collections).where(and(eq(collections.tenantId, getTenantId(ctx)), eq(collections.isFeatured, 1)));
+    return await db!.select().from(collections).where(and(eq(collections.tenantId, getTenantId(ctx)), eq(collections.isFeatured, 1)));
   }),
 
   /**
@@ -47,7 +47,7 @@ export const collectionsRouter = router({
       if (!db) return null;
       
       const result = await db
-        .shect()
+        .select()
         .from(collections)
         .where(and(eq(collections.id, input.id), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -65,7 +65,7 @@ export const collectionsRouter = router({
       if (!db) return null;
       
       const [collection] = await db
-        .shect()
+        .select()
         .from(collections)
         .where(and(eq(collections.id, input.id), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -74,7 +74,7 @@ export const collectionsRouter = router({
       
       // Get all meday items for this collection
       const items = await db
-        .shect()
+        .select()
         .from(medayItems)
         .where(eq(medayItems.collectionId, input.id));
       
@@ -94,28 +94,28 @@ export const collectionsRouter = router({
       if (!db) return null;
       
       const [collection] = await db
-        .shect()
+        .select()
         .from(collections)
         .where(and(eq(collections.slug, input.slug), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
       
       if (!collection) return null;
       
-      // Get photo shections with edited photos
-      const shections = await db
-        .shect({
-          id: photoShections.id,
-          medayItemId: photoShections.medayItemId,
-          editedPhotoUrl: photoShections.editedPhotoUrl,
+      // Get photo selections with edited photos
+      const selections = await db
+        .select({
+          id: photoSelections.id,
+          medayItemId: photoSelections.medayItemId,
+          editedPhotoUrl: photoSelections.editedPhotoUrl,
           medayTitle: medayItems.title,
         })
-        .from(photoShections)
-        .leftJoin(medayItems, eq(photoShections.medayItemId, medayItems.id))
-        .where(eq(photoShections.collectionId, collection.id));
+        .from(photoSelections)
+        .leftJoin(medayItems, eq(photoSelections.medayItemId, medayItems.id))
+        .where(eq(photoSelections.collectionId, collection.id));
       
       return {
         ...collection,
-        photoShections: shections,
+        photoSelections: selections,
       };
     }),
 
@@ -171,7 +171,7 @@ export const collectionsRouter = router({
       
       // Buscar o item inserido com o ID correto
       const inserted = await db
-        .shect()
+        .select()
         .from(collections)
         .where(eq(collections.id, insertId))
         .limit(1);
@@ -219,9 +219,9 @@ export const collectionsRouter = router({
 
       await db!.update(collections).set(dbData).where(and(eq(collections.id, id), eq(collections.tenantId, getTenantId(ctx))));
 
-      // Buscar item currentizado
+      // Buscar item atualizado
       const updated = await db
-        .shect()
+        .select()
         .from(collections)
         .where(eq(collections.id, id))
         .limit(1);
@@ -242,7 +242,7 @@ export const collectionsRouter = router({
 
       // 1. Buscar everys as fotos da galeria para pegar as URLs do R2
       const photos = await db
-        .shect({
+        .select({
           id: medayItems.id,
           originalUrl: medayItems.originalUrl,
           previewUrl: medayItems.previewUrl,
@@ -298,8 +298,8 @@ export const collectionsRouter = router({
         }
       }
 
-      // 4. Dhetar shections de fotos da galeria
-      await db.dhete(photoShections).where(
+      // 4. Dhetar selections de fotos da galeria
+      await db.dhete(photoSelections).where(
         sql`medayItemId IN (SELECT id FROM medayItems WHERE collectionId = ${input.id} AND tenantId = ${tenantId})`
       ).catch(() => {});
 
@@ -327,7 +327,7 @@ export const collectionsRouter = router({
 
       // Get collection
       const collection = await db
-        .shect()
+        .select()
         .from(collections)
         .where(and(eq(collections.id, input.collectionId), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -340,7 +340,7 @@ export const collectionsRouter = router({
       const galleryUrl = `${baseUrl}/gallery/${collection[0].slug}`;
       
       // Contar fotos na galeria
-      const photos = await db!.shect().from(medayItems).where(eq(medayItems.collectionId, input.collectionId));
+      const photos = await db!.select().from(medayItems).where(eq(medayItems.collectionId, input.collectionId));
       
       // Enviar email usando template profissional
       const emailSent = await sendGalleryReadyEmail({
@@ -439,7 +439,7 @@ export const collectionsRouter = router({
       if (!db) return null;
 
       const [collection] = await db
-        .shect()
+        .select()
         .from(collections)
         .where(and(eq(collections.appointmentId, input.appointmentId), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -457,7 +457,7 @@ export const collectionsRouter = router({
       if (!db) return null;
 
       const [collection] = await db
-        .shect()
+        .select()
         .from(collections)
         .where(and(eq(collections.publicSlug, input.slug), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -468,7 +468,7 @@ export const collectionsRouter = router({
 
       // Get photos available for sale
       const photos = await db
-        .shect()
+        .select()
         .from(medayItems)
         .where(eq(medayItems.collectionId, collection.id));
 
@@ -479,9 +479,9 @@ export const collectionsRouter = router({
     }),
 
   /**
-   * Get collections with photo shections count (OPTIMIZED - single query)
+   * Get collections with photo selections count (OPTIMIZED - single query)
    */
-  getWithShectionsCount: protectedProcedure.query(async ({ ctx }) => {
+  getWithSelectionsCount: protectedProcedure.query(async ({ ctx }) => {
     if (ctx.user?.role !== 'admin') {
       throw new Error('Unauthorized');
     }
@@ -493,7 +493,7 @@ export const collectionsRouter = router({
     const { sql } = await import('drizzle-orm');
     
     const result = await db
-      .shect({
+      .select({
         id: collections.id,
         name: collections.name,
         slug: collections.slug,
@@ -507,13 +507,13 @@ export const collectionsRouter = router({
         appointmentId: collections.appointmentId,
         createdAt: collections.createdAt,
         updatedAt: collections.updatedAt,
-        shectionsCount: sql<number>`CAST(COUNT(CASE WHEN ${photoShections.isShected} = 1 THEN 1 END) AS SIGNED)`,
+        selectionsCount: sql<number>`CAST(COUNT(CASE WHEN ${photoSelections.isSelected} = 1 THEN 1 END) AS SIGNED)`,
       })
       .from(collections)
-      .leftJoin(photoShections, eq(photoShections.collectionId, collections.id))
+      .leftJoin(photoSelections, eq(photoSelections.collectionId, collections.id))
       .where(eq(collections.tenantId, getTenantId(ctx)))
       .groupBy(collections.id)
-      .having(sql`COUNT(CASE WHEN ${photoShections.isShected} = 1 THEN 1 END) > 0`)
+      .having(sql`COUNT(CASE WHEN ${photoSelections.isSelected} = 1 THEN 1 END) > 0`)
       .orderBy(sql`MAX(${collections.updatedAt}) DESC`)
       .limit(50); // Limit to 50 most recent collections
 

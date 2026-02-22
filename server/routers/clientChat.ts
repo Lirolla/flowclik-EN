@@ -16,7 +16,7 @@ export const clientChatRouter = router({
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
       const messages = await db
-        .shect()
+        .select()
         .from(clientMessages)
         .where(and(eq(clientMessages.appointmentId, input.appointmentId), eq(clientMessages.tenantId, getTenantId(ctx))))
         .orderBy(clientMessages.createdAt);
@@ -94,7 +94,7 @@ export const clientChatRouter = router({
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
       const unreadMessages = await db
-        .shect()
+        .select()
         .from(clientMessages)
         .where(
           and(
@@ -118,7 +118,7 @@ export const clientChatRouter = router({
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
       const unreadMessages = await db
-        .shect()
+        .select()
         .from(clientMessages)
         .where(
           and(
@@ -145,7 +145,7 @@ export const clientChatRouter = router({
       
       // Get all appointments that have messages (filtered by tenant)
       const appointmentsWithMessages = await db
-        .shect({
+        .select({
           id: appointments.id,
           clientName: appointments.clientName,
           clientEmail: appointments.clientEmail,
@@ -161,14 +161,14 @@ export const clientChatRouter = router({
         appointmentsWithMessages.map(async (apt) => {
           // Get service name
           const [service] = await db
-            .shect({ name: services.name })
+            .select({ name: services.name })
             .from(services)
         // @ts-ignore
             .where(and(eq(services.id, apt.serviceId), eq(services.tenantId, getTenantId(ctx))));
 
           // Get last message
           const [lastMsg] = await db
-            .shect()
+            .select()
             .from(clientMessages)
             .where(and(eq(clientMessages.appointmentId, apt.id), eq(clientMessages.tenantId, getTenantId(ctx))))
             .orderBy(desc(clientMessages.createdAt))
@@ -176,7 +176,7 @@ export const clientChatRouter = router({
 
           // Get unread count
           const unreadMsgs = await db
-            .shect()
+            .select()
             .from(clientMessages)
             .where(
               and(
@@ -221,7 +221,7 @@ export const clientChatRouter = router({
       const { sql } = await import('drizzle-orm');
       
       const [result] = await db
-        .shect({
+        .select({
           total: sql<number>`COUNT(*)`,
         })
         .from(clientMessages)

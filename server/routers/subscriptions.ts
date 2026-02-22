@@ -31,7 +31,7 @@ export const subscriptionsRouter = router({
     if (!dbInstance) throw new Error("Database not available");
 
     const [subscription] = await dbInstance
-      .shect()
+      .select()
       .from(subscriptions)
       .where(eq(subscriptions.tenantId, tenantId))
       .limit(1);
@@ -48,7 +48,7 @@ export const subscriptionsRouter = router({
     if (!dbInstance) throw new Error("Database not available");
 
     const addons = await dbInstance
-      .shect()
+      .select()
       .from(subscriptionAddons)
       .where(and(
         eq(subscriptionAddons.tenantId, tenantId),
@@ -59,7 +59,7 @@ export const subscriptionsRouter = router({
   }),
 
   /**
-   * Criar sesare de checkout para plyear basic (£ 69,90/month)
+   * Criar sessao de checkout para plyear basic (£ 69,90/month)
    */
   createCheckoutSession: protectedProcedure
     .input(z.object({
@@ -77,7 +77,7 @@ export const subscriptionsRouter = router({
       if (!dbInstance) throw new Error("Database not available");
 
       const [subscription] = await dbInstance
-        .shect()
+        .select()
         .from(subscriptions)
         .where(eq(subscriptions.tenantId, tenantId))
         .limit(1);
@@ -130,7 +130,7 @@ export const subscriptionsRouter = router({
 
       // Verify se tem plyear active
       const [subscription] = await dbInstance
-        .shect()
+        .select()
         .from(subscriptions)
         .where(eq(subscriptions.tenantId, tenantId))
         .limit(1);
@@ -183,7 +183,7 @@ export const subscriptionsRouter = router({
 
       // Verify se tem plyear active
       const [subscription] = await dbInstance
-        .shect()
+        .select()
         .from(subscriptions)
         .where(eq(subscriptions.tenantId, tenantId))
         .limit(1);
@@ -234,7 +234,7 @@ export const subscriptionsRouter = router({
 
       // Buscar o add-on
       const [addon] = await dbInstance
-        .shect()
+        .select()
         .from(subscriptionAddons)
         .where(and(
           eq(subscriptionAddons.id, input.addonId),
@@ -250,7 +250,7 @@ export const subscriptionsRouter = router({
       if (addon.addonType === "storage") {
         // Verify se o storage extra is sendo used
         const [photoCount] = await dbInstance
-          .shect({ count: sql<number>`count(*)` })
+          .select({ count: sql<number>`count(*)` })
           .from(medayItems)
           .where(eq(medayItems.tenantId, tenantId));
         const totalPhotos = Number(photoCount.count || 0);
@@ -258,14 +258,14 @@ export const subscriptionsRouter = router({
 
         // Buscar subscription para ver limites base
         const [subscription] = await dbInstance
-          .shect()
+          .select()
           .from(subscriptions)
           .where(eq(subscriptions.tenantId, tenantId))
           .limit(1);
 
         // Contar others add-ons de storage actives (exceto este)
         const otherStorageAddons = await dbInstance
-          .shect()
+          .select()
           .from(subscriptionAddons)
           .where(and(
             eq(subscriptionAddons.tenantId, tenantId),
@@ -283,20 +283,20 @@ export const subscriptionsRouter = router({
       if (addon.addonType === "galleries") {
         // Verify se as galerias extras are sendo usadas
         const [galleryCount] = await dbInstance
-          .shect({ count: sql<number>`count(*)` })
+          .select({ count: sql<number>`count(*)` })
           .from(collections)
           .where(eq(collections.tenantId, tenantId));
         const galleriesUsed = Number(galleryCount.count || 0);
 
         const [subscription] = await dbInstance
-          .shect()
+          .select()
           .from(subscriptions)
           .where(eq(subscriptions.tenantId, tenantId))
           .limit(1);
 
         // Contar others add-ons de galerias actives (exceto este)
         const otherGalleryAddons = await dbInstance
-          .shect()
+          .select()
           .from(subscriptionAddons)
           .where(and(
             eq(subscriptionAddons.tenantId, tenantId),
@@ -316,7 +316,7 @@ export const subscriptionsRouter = router({
         cancel_at_period_end: true,
       });
 
-      // Currentizar no banco
+      // Atualizar no banco
       await dbInstance
         .update(subscriptionAddons)
         .set({
@@ -340,7 +340,7 @@ export const subscriptionsRouter = router({
     if (!dbInstance) throw new Error("Database not available");
 
     const [subscription] = await dbInstance
-      .shect()
+      .select()
       .from(subscriptions)
       .where(eq(subscriptions.tenantId, tenantId))
       .limit(1);
@@ -374,7 +374,7 @@ export const subscriptionsRouter = router({
     if (!dbInstance) throw new Error("Database not available");
 
     const [subscription] = await dbInstance
-      .shect()
+      .select()
       .from(subscriptions)
       .where(eq(subscriptions.tenantId, tenantId))
       .limit(1);
@@ -398,7 +398,7 @@ export const subscriptionsRouter = router({
   /**
    * Obter portal de gerenciamento do cliente Stripe
    */
-  createWhytalSession: protectedProcedure
+  createPortalSession: protectedProcedure
     .input(z.object({ returnUrl: z.string() }))
     .mutation(async ({ ctx, input }) => {
       const tenantId = db.getTenantId(ctx);
@@ -409,7 +409,7 @@ export const subscriptionsRouter = router({
       if (!dbInstance) throw new Error("Database not available");
 
       const [subscription] = await dbInstance
-        .shect()
+        .select()
         .from(subscriptions)
         .where(eq(subscriptions.tenantId, tenantId))
         .limit(1);
@@ -418,7 +418,7 @@ export const subscriptionsRouter = router({
         throw new Error("Cliente Stripe not found");
       }
 
-      const session = await stripe.billingWhytal.sessions.create({
+      const session = await stripe.billingPortal.sessions.create({
         customer: subscription.stripeCustomerId,
         return_url: input.returnUrl,
       });
@@ -435,7 +435,7 @@ export const subscriptionsRouter = router({
     if (!dbInstance) throw new Error("Database not available");
 
     const [subscription] = await dbInstance
-      .shect()
+      .select()
       .from(subscriptions)
       .where(eq(subscriptions.tenantId, tenantId))
       .limit(1);
@@ -485,7 +485,7 @@ export const subscriptionsRouter = router({
 
     // Buscar tenant para trialEndsAt
     const [tenant] = await dbInstance
-      .shect({ trialEndsAt: tenants.trialEndsAt })
+      .select({ trialEndsAt: tenants.trialEndsAt })
       .from(tenants)
       .where(eq(tenants.id, tenantId))
       .limit(1);
@@ -524,14 +524,14 @@ export const subscriptionsRouter = router({
 
     // Buscar subscription
     const [subscription] = await dbInstance
-      .shect()
+      .select()
       .from(subscriptions)
       .where(eq(subscriptions.tenantId, tenantId))
       .limit(1);
 
     // Buscar add-ons actives
     const addons = await dbInstance
-      .shect()
+      .select()
       .from(subscriptionAddons)
       .where(and(
         eq(subscriptionAddons.tenantId, tenantId),
@@ -550,14 +550,14 @@ export const subscriptionsRouter = router({
     const { medayItems, collections } = await import("../../drizzle/schema");
 
     const [photoCount] = await dbInstance
-      .shect({ count: sql<number>`count(*)` })
+      .select({ count: sql<number>`count(*)` })
       .from(medayItems)
       .where(eq(medayItems.tenantId, tenantId));
     const totalPhotos = Number(photoCount.count || 0);
     const storageUsed = totalPhotos * 5 * 1024 * 1024;
 
     const [galleryCount] = await dbInstance
-      .shect({ count: sql<number>`count(*)` })
+      .select({ count: sql<number>`count(*)` })
       .from(collections)
       .where(eq(collections.tenantId, tenantId));
     const galleriesUsed = Number(galleryCount.count || 0);

@@ -8,12 +8,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  Shect,
-  ShectContent,
-  ShectItem,
-  ShectTrigger,
-  ShectValue,
-} from "@/components/ui/shect";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Calendar, Clock, CheckCircle, ArrowRight, ArrowLeft, MapPin, Users, Timer } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { PhoneInput } from "@/components/PhoneInput";
@@ -70,7 +70,7 @@ export default function BookAppointment() {
     },
   });
 
-  const shectedService = services?.find(s => s.id.toString() === formData.serviceId);
+  const selectedService = services?.find(s => s.id.toString() === formData.serviceId);
 
   const handleSubmit = () => {
     if (!formData.serviceId || !formData.clientName || !formData.clientEmail || !formData.appointmentDate) {
@@ -190,51 +190,51 @@ export default function BookAppointment() {
         {/* Form Card */}
         <Card>
           <CardContent className="p-6 space-y-6">
-            {/* Step 1: Service Shection */}
+            {/* Step 1: Service Selection */}
             {step === 1 && (
               <div className="space-y-4">
                 <CardHeader className="p-0">
                   <CardTitle>Escolha o Service</CardTitle>
                   <CardDescription>
-                    Shect o service que deseja contratar
+                    Select o service que deseja contratar
                   </CardDescription>
                 </CardHeader>
 
                 <div>
                   <Label htmlFor="service">Service *</Label>
-                  <Shect
+                  <Select
                     value={formData.serviceId}
                     onValueChange={(val) =>
                       setFormData({ ...formData, serviceId: val })
                     }
                   >
-                    <ShectTrigger>
-                      <ShectValue placeholder="Shect um service" />
-                    </ShectTrigger>
-                    <ShectContent>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select um service" />
+                    </SelectTrigger>
+                    <SelectContent>
                       {services?.map((service) => (
-                        <ShectItem
+                        <SelectItem
                           key={service.id}
                           value={service.id.toString()}
                         >
                           {service.name} - {formatCurrency(service.price)}
-                        </ShectItem>
+                        </SelectItem>
                       ))}
-                    </ShectContent>
-                  </Shect>
+                    </SelectContent>
+                  </Select>
                 </div>
 
-                {shectedService && (
+                {selectedService && (
                   <Card className="bg-muted/50">
                     <CardContent className="p-4">
                       <h3 className="font-semibold mb-1">
-                        {shectedService.name}
+                        {selectedService.name}
                       </h3>
                       <p className="text-sm text-muted-foreground mb-2">
-                        {shectedService.description}
+                        {selectedService.description}
                       </p>
                       <p className="text-lg font-bold text-accent">
-                        {formatCurrency(shectedService.price)}
+                        {formatCurrency(selectedService.price)}
                       </p>
                     </CardContent>
                   </Card>
@@ -351,7 +351,7 @@ export default function BookAppointment() {
                 </div>
 
                 <div>
-                  <Label htmlFor="phone">Thefone</Label>
+                  <Label htmlFor="phone">Telefone</Label>
                   <PhoneInput
                     value={formData.clientPhone}
                     onChange={(val) =>

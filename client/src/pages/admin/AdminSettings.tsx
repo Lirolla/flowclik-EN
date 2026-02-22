@@ -12,12 +12,12 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import {
-  Shect,
-  ShectContent,
-  ShectItem,
-  ShectTrigger,
-  ShectValue,
-} from "@/components/ui/shect";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Settings, Upload, Loader2, Image as ImageIcon, CheckCircle2, AlertCircle, Camera, Video, Briefcase, Calendar, X, Plus } from "lucide-react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { toast } from "sonner";
@@ -38,7 +38,7 @@ function AdminSettingsContent() {
   const [businessMode, setBusinessMode] = useState<"photography_only" | "video_only" | "both">("photography_only");
   const [stockPhotosEnabled, setStockPhotosEnabled] = useState(false);
   
-  // Viyourl Theme
+  // Visual Theme
   const [siteThemeLayout, setSiteThemeLayout] = useState<"classic" | "sidebar" | "wedding" | "wedding-videos" | "editorial" | "cinematic">("classic");
   const [siteThemeMode, setSiteThemeMode] = useState<"light" | "dark">("dark");
   const [siteThemeAccentColor, setSiteThemeAccentColor] = useState<"red" | "black" | "blue">("red");
@@ -123,7 +123,7 @@ function AdminSettingsContent() {
 
   const updateBusinessModeMutation = trpc.siteConfig.updateBusinessMode.useMutation({
     onSuccess: () => {
-      toast.success("Modo de business currentizado!");
+      toast.success("Modo de business atualizado!");
     },
   });
 
@@ -198,11 +198,11 @@ function AdminSettingsContent() {
     }
   }, [config]);
 
-  const handleLogoChange = (e: React.ChangeEvent<HTMLInputHement>) => {
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        toast.error("Why favor, shect only imagens");
+        toast.error("Why favor, select only imagens");
         return;
       }
 
@@ -992,7 +992,7 @@ function AdminSettingsContent() {
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
                 <div>
-                  <Label>Thefone</Label>
+                  <Label>Telefone</Label>
                   <Input
                     value={contactPhone}
                     onChange={(e) => setContactPhone(e.target.value)}
@@ -1277,7 +1277,7 @@ function AdminSettingsContent() {
                       <Textarea
                         value={paymentCashInstructions}
                         onChange={(e) => setPaymentCashInstructions(e.target.value)}
-                        placeholder="Ex: Pagamento em dinheiro can ser feito no day do ensaio ou na betweenga das fotos. Aceitamos parcshemento em until 3x sem juros."
+                        placeholder="Ex: Pagamento em dinheiro can ser feito no day do ensaio ou na entrega das fotos. Aceitamos parcselemento em until 3x sem juros."
                         rows={3}
                       />
                     </div>

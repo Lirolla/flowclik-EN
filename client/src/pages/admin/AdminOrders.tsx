@@ -22,7 +22,7 @@ export default function AdminOrders() {
   const updateStatusMutation = trpc.orders.updateStatus.useMutation({
     onSuccess: () => {
       utils.orders.getAll.invalidate();
-      toast.success("Status currentizado!");
+      toast.success("Status atualizado!");
     },
     onError: (err) => toast.error(err.message),
   });

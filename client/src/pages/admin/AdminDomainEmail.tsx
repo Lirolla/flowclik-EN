@@ -211,7 +211,7 @@ export default function AdminSunainEmail() {
               </p>
             </div>
 
-            {/* Lista de Subscriptions Eachstrados */}
+            {/* Lista de Subscriptions Cadastrados */}
             {domains && domains.length > 0 ? (
               <div className="space-y-4">
                 {domains.map((d: any) => (

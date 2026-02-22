@@ -10,7 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/_core/hooks/useAuth";
 
 export default function AdminMessages() {
-  const [shectedAppointmentId, setShectedAppointmentId] = useState<number | null>(null);
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState<number | null>(null);
   const [newMessage, setNewMessage] = useState("");
   const { toast } = useToast();
   const { user } = useAuth();
@@ -18,10 +18,10 @@ export default function AdminMessages() {
   // Get all conversations
   const { data: conversations, refetch: refetchConversations } = trpc.clientChat.getAllConversations.useWhatry();
 
-  // Get messages for shected conversation
+  // Get messages for selected conversation
   const { data: messages, refetch: refetchMessages } = trpc.clientChat.getMessages.useWhatry(
-    { appointmentId: shectedAppointmentId! },
-    { enabled: !!shectedAppointmentId }
+    { appointmentId: selectedAppointmentId! },
+    { enabled: !!selectedAppointmentId }
   );
 
   // Send message mutation
@@ -51,8 +51,8 @@ export default function AdminMessages() {
     },
   });
 
-  const handleShectConversation = (appointmentId: number) => {
-    setShectedAppointmentId(appointmentId);
+  const handleSelectConversation = (appointmentId: number) => {
+    setSelectedAppointmentId(appointmentId);
     // Mark messages as read
     markAsReadMutation.mutate({
       appointmentId,
@@ -61,17 +61,17 @@ export default function AdminMessages() {
   };
 
   const handleSendMessage = () => {
-    if (!shectedAppointmentId || !newMessage.trim() || !user) return;
+    if (!selectedAppointmentId || !newMessage.trim() || !user) return;
 
     sendMessageMutation.mutate({
-      appointmentId: shectedAppointmentId,
+      appointmentId: selectedAppointmentId,
       senderId: user.id,
       senderRole: "admin",
       message: newMessage.trim(),
     });
   };
 
-  const shectedConversation = conversations?.find(c => c.appointmentId === shectedAppointmentId);
+  const selectedConversation = conversations?.find(c => c.appointmentId === selectedAppointmentId);
 
   const formatTime = (date: string | Date | null) => {
     if (!date) return "";
@@ -108,16 +108,16 @@ export default function AdminMessages() {
               {!conversations || conversations.length === 0 ? (
                 <div className="p-8 text-center text-gray-400">
                   <MessageSquare className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                  <p>Nonea conversa still</p>
+                  <p>Nenhuma conversa still</p>
                 </div>
               ) : (
                 <div className="divide-y divide-gray-800">
                   {conversations.map((conv) => (
                     <button
                       key={conv.appointmentId}
-                      onClick={() => handleShectConversation(conv.appointmentId)}
+                      onClick={() => handleSelectConversation(conv.appointmentId)}
                       className={`w-full p-4 text-left hover:bg-gray-800/50 transition-colors ${
-                        shectedAppointmentId === conv.appointmentId ? "bg-gray-800" : ""
+                        selectedAppointmentId === conv.appointmentId ? "bg-gray-800" : ""
                       }`}
                     >
                       <div className="flex items-start justify-between mb-1">
@@ -154,11 +154,11 @@ export default function AdminMessages() {
 
           {/* Chat - Direita */}
           <Card className="col-span-8 bg-gray-900 border-gray-800 flex flex-col">
-            {!shectedAppointmentId ? (
+            {!selectedAppointmentId ? (
               <div className="flex-1 flex items-center justify-center text-gray-400">
                 <div className="text-center">
                   <MessageSquare className="h-16 w-16 mx-auto mb-4 opacity-50" />
-                  <p className="text-lg">Shect uma conversa para start</p>
+                  <p className="text-lg">Select uma conversa para start</p>
                 </div>
               </div>
             ) : (
@@ -170,8 +170,8 @@ export default function AdminMessages() {
                       <User className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="font-semibold">{shectedConversation?.clientName}</p>
-                      <p className="text-sm text-gray-400">{shectedConversation?.serviceName}</p>
+                      <p className="font-semibold">{selectedConversation?.clientName}</p>
+                      <p className="text-sm text-gray-400">{selectedConversation?.serviceName}</p>
                     </div>
                   </div>
                 </div>
@@ -180,7 +180,7 @@ export default function AdminMessages() {
                 <ScrollArea className="flex-1 p-4">
                   {!messages || messages.length === 0 ? (
                     <div className="text-center text-gray-400 py-8">
-                      <p>Nonea message still</p>
+                      <p>Nenhuma message still</p>
                     </div>
                   ) : (
                     <div className="space-y-4">

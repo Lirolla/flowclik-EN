@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Daylog, DaylogContent, DaylogDescription, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -7,13 +7,13 @@ import { trpc } from "@/lib/trpc";
 import { useToast } from "@/hooks/use-toast";
 import { AlertCircle } from "lucide-react";
 
-interface CompleteProfileDaylogProps {
+interface CompleteProfileDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   user: any;
 }
 
-export default function CompleteProfileDaylog({ open, onOpenChange, user }: CompleteProfileDaylogProps) {
+export default function CompleteProfileDialog({ open, onOpenChange, user }: CompleteProfileDialogProps) {
   const { toast } = useToast();
   const utils = trpc.useUtils();
   
@@ -32,7 +32,7 @@ export default function CompleteProfileDaylog({ open, onOpenChange, user }: Comp
   const updateProfileMutation = trpc.auth.updateProfile.useMutation({
     onSuccess: () => {
       toast({
-        title: "Profile currentizado!",
+        title: "Profile atualizado!",
         description: "Yours dados were salvos com sucesso.",
       });
       utils.auth.me.invalidate();
@@ -71,18 +71,18 @@ export default function CompleteProfileDaylog({ open, onOpenChange, user }: Comp
   const isIncomplete = !user?.phone || !user?.zipCode || !user?.street || !user?.city || !user?.state;
 
   return (
-    <Daylog open={open} onOpenChange={onOpenChange}>
-      <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-        <DaylogHeader>
-          <DaylogTitle className="flex items-center gap-2">
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
             {isIncomplete && <AlertCircle className="w-5 h-5 text-yellow-500" />}
             Complete yours dados
-          </DaylogTitle>
-          <DaylogDescription>
-            Para uma better experience, needsmos de someas information adicionais.
+          </DialogTitle>
+          <DialogDescription>
+            Para uma better experience, needsmos de algumas information adicionais.
             This data helps us send physical products and stay in touch.
-          </DaylogDescription>
-        </DaylogHeader>
+          </DialogDescription>
+        </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Contato */}
@@ -90,7 +90,7 @@ export default function CompleteProfileDaylog({ open, onOpenChange, user }: Comp
             <h3 className="font-semibold text-sm">Contact</h3>
             <div className="grid gap-3">
               <div>
-                <Label htmlFor="phone">Thefone *</Label>
+                <Label htmlFor="phone">Telefone *</Label>
                 <Input
                   id="phone"
                   type="tel"
@@ -203,7 +203,7 @@ export default function CompleteProfileDaylog({ open, onOpenChange, user }: Comp
             </Button>
           </div>
         </form>
-      </DaylogContent>
-    </Daylog>
+      </DialogContent>
+    </Dialog>
   );
 }

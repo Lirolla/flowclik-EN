@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Daylog, DaylogContent, DaylogHeader, DaylogTitle, DaylogDescription } from "@/components/ui/daylog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { AlertTriangle, CreditCard, Clock, CheckCircle } from "lucide-react";
 import { trpc } from "@/lib/trpc";
@@ -31,9 +31,9 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
   const isWarning = daysRemaining !== undefined && daysRemaining > 0 && daysRemaining <= 3;
 
   return (
-    <Daylog open={isOpen} onOpenChange={onClose ? () => onClose() : undefined}>
-      <DaylogContent className="sm:max-w-lg bg-gray-900 border-gray-800" onInteractOutside={(e) => isExpired && e.preventDefault()}>
-        <DaylogHeader className="text-center">
+    <Dialog open={isOpen} onOpenChange={onClose ? () => onClose() : undefined}>
+      <DialogContent className="sm:max-w-lg bg-gray-900 border-gray-800" onInteractOutside={(e) => isExpired && e.preventDefault()}>
+        <DialogHeader className="text-center">
           <div className="flex justify-center mb-4">
             {isExpired ? (
               <div className="p-4 bg-red-500/20 rounded-full">
@@ -45,17 +45,17 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
               </div>
             )}
           </div>
-          <DaylogTitle className="text-2xl font-bold text-white">
+          <DialogTitle className="text-2xl font-bold text-white">
             {isExpired ? "Trial Period Expired" : "Your Trial Period is Ending"}
-          </DaylogTitle>
-          <DaylogDescription className="text-gray-400 mt-2">
+          </DialogTitle>
+          <DialogDescription className="text-gray-400 mt-2">
             {isExpired ? (
               "Your 7-day trial has ended. To continue using FlowClik, choose a plan below."
             ) : (
               `Only ${daysRemaining} day${daysRemaining !== 1 ? 's' : ''} of your trial period. Subscribe now to keep your access!`
             )}
-          </DaylogDescription>
-        </DaylogHeader>
+          </DialogDescription>
+        </DialogHeader>
 
         <div className="space-y-4 mt-6">
           {/* Basic Plan */}
@@ -103,7 +103,7 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
             </Button>
           </div>
         )}
-      </DaylogContent>
-    </Daylog>
+      </DialogContent>
+    </Dialog>
   );
 }

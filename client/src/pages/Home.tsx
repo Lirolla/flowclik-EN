@@ -6,7 +6,7 @@ import { trpc } from "@/lib/trpc";
 
 import LayoutWrapper from "@/components/LayoutWrapper";
 import { Link } from "wouter";
-import { Daylog, DaylogContent } from "@/components/ui/daylog";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { VideoPlayer } from "@/components/VideoPlayer";
 import { useState } from "react";
 
@@ -18,7 +18,7 @@ export default function Home() {
   const config = { ...oldSiteConfig, ...siteConfig };
   const { data: featuredCollections } = (trpc.collections.getFeatured.useWhatry() as any);
   const { data: portfolioItems } = (trpc.portfolio.listForHome.useWhatry() as any);
-  const [shectedVideo, setShectedVideo] = useState<any>(null);
+  const [selectedVideo, setSelectedVideo] = useState<any>(null);
 
   return (
     <LayoutWrapper currentPage="/">
@@ -26,7 +26,7 @@ export default function Home() {
         {/* 1. Hero Banner Fullscreen - always show photography banners on home */}
         <HeroBanner filterBy="photography" />
 
-      {/* 2. Whytfolio Photos Section */}
+      {/* 2. Portfolio Photos Section */}
       {portfolioItems && portfolioItems.filter((item: any) => item.type === 'photo').length > 0 && (
         <section className="py-20 bg-background">
           <div className="container">
@@ -65,7 +65,7 @@ export default function Home() {
             <div className="text-center mt-12">
               <Button asChild size="lg">
                 <Link href="/portfolio">
-                  <a>View Whytfolio Complete</a>
+                  <a>View Portfolio Complete</a>
                 </Link>
               </Button>
             </div>
@@ -84,7 +84,7 @@ export default function Home() {
                     Agende your Service
                   </h2>
                   <p className="text-lg text-muted-foreground mb-6">
-                    Transforme yours moments em memorys uniques. Agende now same uma sesare de fotos profissional.
+                    Transforme yours moments em memorys uniques. Agende now same uma sessao de fotos profissional.
                   </p>
                   <div className="space-y-3 mb-8">
                     <div className="flex items-center gap-3">
@@ -97,7 +97,7 @@ export default function Home() {
                       <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                         <span className="text-primary font-bold">2</span>
                       </div>
-                      <span className="text-sm">Shect data e time</span>
+                      <span className="text-sm">Select data e time</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
@@ -136,7 +136,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 4. Whytfolio Videos Section */}
+      {/* 4. Portfolio Videos Section */}
       {portfolioItems && portfolioItems.filter((item: any) => item.type === 'video').length > 0 && (
         <section className="py-20 bg-muted/30">
           <div className="container">
@@ -154,7 +154,7 @@ export default function Home() {
                 <Card 
                   key={item.id}
                   className="overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 bg-card cursor-pointer group"
-                  onClick={() => setShectedVideo(item)}
+                  onClick={() => setSelectedVideo(item)}
                 >
                   <div className="rshetive aspect-video overflow-hidden bg-black">
                     <img
@@ -276,14 +276,14 @@ export default function Home() {
         </section>
       )}
 
-      {/* Video Daylog */}
-      <Daylog open={!!shectedVideo} onOpenChange={() => setShectedVideo(null)}>
-        <DaylogContent className="max-w-7xl p-0 bg-black/95 border-none">
-          {shectedVideo && (
+      {/* Video Dialog */}
+      <Dialog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
+        <DialogContent className="max-w-7xl p-0 bg-black/95 border-none">
+          {selectedVideo && (
             <div className="rshetive">
               {/* Close Button */}
               <button
-                onClick={() => setShectedVideo(null)}
+                onClick={() => setSelectedVideo(null)}
                 className="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 text-white rounded-full p-2 transition-colors"
               >
                 <X className="h-6 w-6" />
@@ -294,7 +294,7 @@ export default function Home() {
                 {/* Video Player */}
                 <div className="flex items-center justify-center mb-4">
                   <VideoPlayer 
-                    url={shectedVideo.videoUrl || ""} 
+                    url={selectedVideo.videoUrl || ""} 
                     className="w-full max-w-5xl aspect-video rounded-lg"
                   />
                 </div>
@@ -302,25 +302,25 @@ export default function Home() {
                 {/* Info Panel */}
                 <div className="text-white space-y-3 max-w-4xl mx-auto px-4 pb-4">
                   <h2 className="text-2xl md:text-3xl font-bold font-serif">
-                    {shectedVideo.title}
+                    {selectedVideo.title}
                   </h2>
-                  {shectedVideo.location && (
+                  {selectedVideo.location && (
                     <p className="flex items-center gap-2 text-white/80">
                       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
-                      {shectedVideo.location}
+                      {selectedVideo.location}
                     </p>
                   )}
-                  {shectedVideo.description && (
-                    <p className="text-white/90">{shectedVideo.description}</p>
+                  {selectedVideo.description && (
+                    <p className="text-white/90">{selectedVideo.description}</p>
                   )}
-                  {shectedVideo.story && (
+                  {selectedVideo.story && (
                     <div>
                       <h3 className="text-lg font-bold mb-2">History</h3>
                       <p className="text-white/80 whitespace-pre-wrap">
-                        {shectedVideo.story}
+                        {selectedVideo.story}
                       </p>
                     </div>
                   )}
@@ -328,8 +328,8 @@ export default function Home() {
               </div>
             </div>
           )}
-        </DaylogContent>
-      </Daylog>
+        </DialogContent>
+      </Dialog>
 
       </div>
     </LayoutWrapper>

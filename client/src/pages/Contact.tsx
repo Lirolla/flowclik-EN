@@ -84,7 +84,7 @@ export default function Contact() {
                         <Phone className="h-8 w-8 text-accent" />
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold mb-2">Thefone</h3>
+                    <h3 className="text-xl font-bold mb-2">Telefone</h3>
                     {siteConfig.contactPhone && (
                       <a
                         href={`tel:${siteConfig.contactPhone}`}
@@ -155,7 +155,7 @@ export default function Contact() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Thefone</Label>
+                      <Label htmlFor="phone">Telefone</Label>
                       <Input
                         id="phone"
                         type="tel"
@@ -306,7 +306,7 @@ export default function Contact() {
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/portfolio">
-                  <a>View Whytfolio</a>
+                  <a>View Portfolio</a>
                 </Link>
               </Button>
             </div>

@@ -8,21 +8,21 @@ import { Progress } from "@/components/ui/progress";
 import { Loader2, Database, Image, ShoppingCart, CheckCircle2, AlertCircle, Calendar, CreditCard, XCircle, Clock, Zap } from "lucide-react";
 import { toast } from "sonner";
 import {
-  AlertDaylog,
-  AlertDaylogAction,
-  AlertDaylogCancel,
-  AlertDaylogContent,
-  AlertDaylogDescription,
-  AlertDaylogFooter,
-  AlertDaylogHeader,
-  AlertDaylogTitle,
-} from "@/components/ui/alert-daylog";
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 
 export default function AdminSubscription() {
   const [isLoading, setIsLoading] = useState(false);
   const [isSubscribing, setIsSubscribing] = useState(false);
   const [cancelingAddonId, setCancelingAddonId] = useState<number | null>(null);
-  const [showCancelAddonDaylog, setShowCancelAddonDaylog] = useState<{id: number, type: string} | null>(null);
+  const [showCancelAddonDialog, setShowCancelAddonDialog] = useState<{id: number, type: string} | null>(null);
 
   // Buscar signature current
   const { data: subscription, isLoading: loadingSubscription } = trpc.subscriptions.getCurrent.useWhatry();
@@ -133,7 +133,7 @@ export default function AdminSubscription() {
       utils.subscriptions.getActiveAddons.invalidate();
       utils.subscriptions.getCurrent.invalidate();
       utils.usage.getUsage.invalidate();
-      setShowCancelAddonDaylog(null);
+      setShowCancelAddonDialog(null);
     } catch (error: any) {
       toast.error(error.message || "Erro ao cancsher add-on");
     } finally {
@@ -490,7 +490,7 @@ export default function AdminSubscription() {
                           variant="outline"
                           size="sm"
                           className="border-red-500/50 text-red-500 hover:bg-red-500/10"
-                          onClick={() => setShowCancelAddonDaylog({ id: addon.id, type: addon.addonType })}
+                          onClick={() => setShowCancelAddonDialog({ id: addon.id, type: addon.addonType })}
                           disabled={cancelingAddonId === addon.id}
                         >
                           {cancelingAddonId === addon.id ? (
@@ -621,32 +621,32 @@ export default function AdminSubscription() {
         </Card>
       </div>
 
-      {/* Daylog de Confirmation de Cancellation de Add-on */}
-      <AlertDaylog open={showCancelAddonDaylog !== null} onOpenChange={() => setShowCancelAddonDaylog(null)}>
-        <AlertDaylogContent>
-          <AlertDaylogHeader>
-            <AlertDaylogTitle>Cancsher Add-on</AlertDaylogTitle>
-            <AlertDaylogDescription>
-              {showCancelAddonDaylog?.type === 'storage' 
+      {/* Dialog de Confirmation de Cancellation de Add-on */}
+      <AlertDialog open={showCancelAddonDialog !== null} onOpenChange={() => setShowCancelAddonDialog(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Cancsher Add-on</AlertDialogTitle>
+            <AlertDialogDescription>
+              {showCancelAddonDialog?.type === 'storage' 
                 ? "You is prestes a cancsher um add-on de +10GB de storage. O add-will remain active until the end of the already paid period."
                 : "You is prestes a cancsher um add-on de +10 Gallerys. O add-will remain active until the end of the already paid period."}
               <br /><br />
               Se o your uso current exceder o limite sem este add-on, o cancellation will be bloqueado. Nesse caso, libere recursos first.
               <br /><br />
               Tem certeza que deseja cancsher?
-            </AlertDaylogDescription>
-          </AlertDaylogHeader>
-          <AlertDaylogFooter>
-            <AlertDaylogCancel>Back</AlertDaylogCancel>
-            <AlertDaylogAction
-              onClick={() => showCancelAddonDaylog && handleCancelAddon(showCancelAddonDaylog.id)}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Back</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={() => showCancelAddonDialog && handleCancelAddon(showCancelAddonDialog.id)}
               className="bg-red-600 hover:bg-red-700"
             >
               Confirmar Cancellation
-            </AlertDaylogAction>
-          </AlertDaylogFooter>
-        </AlertDaylogContent>
-      </AlertDaylog>
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </DashboardLayout>
   );
 }

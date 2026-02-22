@@ -2,14 +2,14 @@ import { useState, useEffect } from "react";
 import { trpc } from "@/lib/trpc";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Daylog, DaylogContent, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Shect, ShectContent, ShectItem, ShectTrigger, ShectValue } from "@/components/ui/shect";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { CreditCard, Banknote, Building2, CheckCircle2, Clock, AlertCircle, Link2, QrCode } from "lucide-react";
-import SendPaymentLinkDaylog from "@/components/SendPaymentLinkDaylog";
+import SendPaymentLinkDialog from "@/components/SendPaymentLinkDialog";
 import { useCurrency } from "@/hooks/useCurrency";
 
 interface PaymentManagerProps {
@@ -29,7 +29,7 @@ export default function PaymentManager({
   const { format: formatCurrency } = useCurrency();
   const utils = trpc.useUtils();
   
-  const [isPaymentDaylogOpen, setIsPaymentDaylogOpen] = useState(false);
+  const [isPaymentDialogOpen, setIsPaymentDialogOpen] = useState(false);
   const [isRecordPaymentOpen, setIsRecordPaymentOpen] = useState(false);
   const [isAddExtraOpen, setIsAddExtraOpen] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState<"cash" | "bank_transfer" | "pix" | "payment_link">("cash");
@@ -98,7 +98,7 @@ export default function PaymentManager({
       utils.paymentMethods.getPaymentSummary.invalidate({ appointmentId });
       utils.appointments.getAll.invalidate();
       toast({
-        title: "Method de pagamento currentizado!",
+        title: "Method de pagamento atualizado!",
         description: "O method de pagamento foi alterado com sucesso.",
       });
     },
@@ -265,7 +265,7 @@ export default function PaymentManager({
           {/* Shetor de Payment Method */}
           <div>
             <Label>Payment Method</Label>
-            <Shect
+            <Select
               value={currentMethod || "cash"}
               onValueChange={(value) => {
                 updatePaymentMethodMutation.mutate({
@@ -274,42 +274,42 @@ export default function PaymentManager({
                 });
               }}
             >
-              <ShectTrigger>
-                <ShectValue placeholder="Shect method" />
-              </ShectTrigger>
-              <ShectContent>
+              <SelectTrigger>
+                <SelectValue placeholder="Select method" />
+              </SelectTrigger>
+              <SelectContent>
                 {availableMethods?.cash && (
-                  <ShectItem value="cash">
+                  <SelectItem value="cash">
                     <div className="flex items-center gap-2">
                       <Banknote className="w-4 h-4" />
                       Dinheiro
                     </div>
-                  </ShectItem>
+                  </SelectItem>
                 )}
                 {availableMethods?.bankTransfer && (
-                  <ShectItem value="bank_transfer">
+                  <SelectItem value="bank_transfer">
                     <div className="flex items-center gap-2">
                       <Building2 className="w-4 h-4" />
                       Bank Transfer
                     </div>
-                  </ShectItem>
+                  </SelectItem>
                 )}
                 {availableMethods?.pix && (
-                  <ShectItem value="pix">
+                  <SelectItem value="pix">
                     <div className="flex items-center gap-2">
                       <QrCode className="w-4 h-4" />
                       PIX
                     </div>
-                  </ShectItem>
+                  </SelectItem>
                 )}
-                <ShectItem value="payment_link">
+                <SelectItem value="payment_link">
                   <div className="flex items-center gap-2">
                     <Link2 className="w-4 h-4" />
                     Link de Pagamento
                   </div>
-                </ShectItem>
-              </ShectContent>
-            </Shect>
+                </SelectItem>
+              </SelectContent>
+            </Select>
             
             {/* Instructions do method de pagamento */}
             {currentMethod === "cash" && availableMethods?.cashInstructions && (
@@ -340,7 +340,7 @@ export default function PaymentManager({
           <div className="space-y-2">
             {currentMethod === "payment_link" ? (
               <Button
-                onClick={() => setIsPaymentDaylogOpen(true)}
+                onClick={() => setIsPaymentDialogOpen(true)}
                 className="w-full bg-green-600 hover:bg-green-700"
                 disabled={paymentStatus === "paid"}
               >
@@ -393,19 +393,19 @@ export default function PaymentManager({
         </CardContent>
       </Card>
 
-      {/* Daylog Enviar Link de Pagamento */}
-      <SendPaymentLinkDaylog
+      {/* Dialog Enviar Link de Pagamento */}
+      <SendPaymentLinkDialog
         appointment={{ id: appointmentId, clientEmail, clientName, finalPrice: totalPrice }}
-        open={isPaymentDaylogOpen}
-        onOpenChange={setIsPaymentDaylogOpen}
+        open={isPaymentDialogOpen}
+        onOpenChange={setIsPaymentDialogOpen}
       />
 
-      {/* Daylog Registrar Pagamento Manual */}
-      <Daylog open={isRecordPaymentOpen} onOpenChange={setIsRecordPaymentOpen}>
-        <DaylogContent>
-          <DaylogHeader>
-            <DaylogTitle>Registrar Pagamento Manual</DaylogTitle>
-          </DaylogHeader>
+      {/* Dialog Registrar Pagamento Manual */}
+      <Dialog open={isRecordPaymentOpen} onOpenChange={setIsRecordPaymentOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Registrar Pagamento Manual</DialogTitle>
+          </DialogHeader>
           <div className="space-y-4">
             <div>
               <Label>Cliente</Label>
@@ -414,40 +414,40 @@ export default function PaymentManager({
 
             <div>
               <Label>Payment Method</Label>
-              <Shect
+              <Select
                 value={paymentMethod}
                 onValueChange={(value) => setPaymentMethod(value as "cash" | "bank_transfer" | "pix")}
               >
-                <ShectTrigger>
-                  <ShectValue />
-                </ShectTrigger>
-                <ShectContent>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
                   {availableMethods?.cash && (
-                    <ShectItem value="cash">
+                    <SelectItem value="cash">
                       <div className="flex items-center gap-2">
                         <Banknote className="w-4 h-4" />
                         Dinheiro
                       </div>
-                    </ShectItem>
+                    </SelectItem>
                   )}
                   {availableMethods?.bankTransfer && (
-                    <ShectItem value="bank_transfer">
+                    <SelectItem value="bank_transfer">
                       <div className="flex items-center gap-2">
                         <Building2 className="w-4 h-4" />
                         Bank Transfer
                       </div>
-                    </ShectItem>
+                    </SelectItem>
                   )}
                   {availableMethods?.pix && (
-                    <ShectItem value="pix">
+                    <SelectItem value="pix">
                       <div className="flex items-center gap-2">
                         <QrCode className="w-4 h-4" />
                         PIX
                       </div>
-                    </ShectItem>
+                    </SelectItem>
                   )}
-                </ShectContent>
-              </Shect>
+                </SelectContent>
+              </Select>
             </div>
 
             <div>
@@ -508,15 +508,15 @@ export default function PaymentManager({
               </Button>
             </div>
           </div>
-        </DaylogContent>
-      </Daylog>
+        </DialogContent>
+      </Dialog>
 
-      {/* Daylog Add Extra Service */}
-      <Daylog open={isAddExtraOpen} onOpenChange={setIsAddExtraOpen}>
-        <DaylogContent>
-          <DaylogHeader>
-            <DaylogTitle>Add Extra Service</DaylogTitle>
-          </DaylogHeader>
+      {/* Dialog Add Extra Service */}
+      <Dialog open={isAddExtraOpen} onOpenChange={setIsAddExtraOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Add Extra Service</DialogTitle>
+          </DialogHeader>
           <div className="space-y-4">
             <div>
               <Label htmlFor="extra-description">Description</Label>
@@ -580,8 +580,8 @@ export default function PaymentManager({
               </Button>
             </div>
           </div>
-        </DaylogContent>
-      </Daylog>
+        </DialogContent>
+      </Dialog>
     </>
   );
 }

@@ -72,10 +72,10 @@ export default function AdminGalleryUpload() {
     addFiles(droppedFiles);
   }, []);
 
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputHement>) => {
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      const shectedFiles = Array.from(e.target.files);
-      addFiles(shectedFiles);
+      const selectedFiles = Array.from(e.target.files);
+      addFiles(selectedFiles);
     }
   };
 
@@ -163,7 +163,7 @@ export default function AdminGalleryUpload() {
     
     if (pendingFiles.length === 0) {
       toast({
-        title: "Nonea foto para enviar",
+        title: "Nenhuma foto para enviar",
         description: "Everys as fotos already were enviadas",
         variant: "default",
       });
@@ -279,7 +279,7 @@ export default function AdminGalleryUpload() {
           >
             <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-xl font-semibold mb-2">
-              Arraste fotos here or click to shect
+              Arraste fotos here or click to select
             </h3>
             <p className="text-muted-foreground mb-4">
               Formatos suportados: JPG, PNG, WEBP
@@ -419,7 +419,7 @@ export default function AdminGalleryUpload() {
             <CardContent className="py-12 text-center">
               <ImageIcon className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
               <p className="text-muted-foreground">
-                Nonea foto nesta galeria still
+                Nenhuma foto nesta galeria still
               </p>
             </CardContent>
           </Card>

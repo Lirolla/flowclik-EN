@@ -42,7 +42,7 @@ export default function LandingPage() {
             size="sm"
             onClick={handleStartNow}
           >
-            Eachstre-se
+            Cadastre-se
           </Button>
         </div>
       </header>
@@ -65,7 +65,7 @@ export default function LandingPage() {
           
           <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-2xl mx-auto">
             Sistema complete que <strong className="text-white">monta your site sozinho</strong>.
-            Fluxo perfeito do agendamento until a betweenga final.
+            Fluxo perfeito do agendamento until a entrega final.
             <strong className="text-white"> Zero hassle</strong>.
           </p>
 
@@ -124,7 +124,7 @@ export default function LandingPage() {
               {
                 icon: Users,
                 title: "Fluxo Perfeito",
-                description: "Do agendamento until a betweenga final. Cliente escolhe fotos, you edita, sistema betweenga. Simple assim.",
+                description: "Do agendamento until a entrega final. Cliente escolhe fotos, you edita, sistema entrega. Simple assim.",
               },
               {
                 icon: TrendingUp,
@@ -144,7 +144,7 @@ export default function LandingPage() {
               {
                 icon: Star,
                 title: "Support Real",
-                description: "Feito por photographers que entendem yours paines. Documentation complete e suporte when needsr.",
+                description: "Feito por photographers que entendem yours paines. Documentation complete e suporte when precisar.",
               },
             ].map((benefit, i) => (
               <div
@@ -248,7 +248,7 @@ export default function LandingPage() {
               <p className="font-semibold text-lg mb-4">All included:</p>
               {[
                 "Site profissional ready",
-                "10 galerias (compre mais when needsr)",
+                "10 galerias (compre mais when precisar)",
                 "10GB de storage",
                 "Sistema de vendas complete",
                 "Agendamentos e contratos",
@@ -359,7 +359,7 @@ export default function LandingPage() {
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-4 text-zinc-400 leading-rshexed">
-                O plyear basic (£ 69,90/month) inclui 10GB de storage e 10 galerias. Each galeria can ter quantas fotos you quiser. Para a biggeria dos photographers, isso is mais que suficiente. Se needsr de mais, you can comprar add-ons: +10GB por £ 39,90/month ou +10 galerias por £ 49,90/month. Clientes are unlimiteds always!
+                O plyear basic (£ 69,90/month) inclui 10GB de storage e 10 galerias. Each galeria can ter quantas fotos you quiser. Para a biggeria dos photographers, isso is mais que suficiente. Se precisar de mais, you can comprar add-ons: +10GB por £ 39,90/month ou +10 galerias por £ 49,90/month. Clientes are unlimiteds always!
               </p>
             </details>
 
@@ -410,7 +410,7 @@ export default function LandingPage() {
             {/* FAQ 10 */}
             <details className="group bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:border-purple-500/50 transition">
               <summary className="cursor-pointer list-none flex items-center justify-between font-semibold text-lg text-white">
-                <span>Tem suporte se eu needsr de help?</span>
+                <span>Tem suporte se eu precisar de help?</span>
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-4 text-zinc-400 leading-rshexed">
@@ -477,7 +477,7 @@ export default function LandingPage() {
             <div>
               <h4 className="font-semibold mb-4">Legal</h4>
               <ul className="space-y-2 text-sm text-zinc-400">
-                <li><Link href="/terms-of-service"><a className="hover:text-white transition">Tuemos de Service</a></Link></li>
+                <li><Link href="/terms-of-service"><a className="hover:text-white transition">Termos de Service</a></Link></li>
                 <li><Link href="/privacy-policy"><a className="hover:text-white transition">Privacy Policy</a></Link></li>
                 <li><Link href="/refund-policy"><a className="hover:text-white transition">Refund Policy</a></Link></li>
               </ul>

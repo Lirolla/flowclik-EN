@@ -71,7 +71,7 @@ export const appointmentPhotos = mysqlTable("appointmentPhotos", {
 	thumbnailUrl: text(),
 	fileName: varchar({ length: 255 }).notNull(),
 	fileSize: int(),
-	isShectedByClient: tinyint().default(0).notNull(),
+	isSelectedByClient: tinyint().default(0).notNull(),
 	uploadedAt: timestamp({ mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 	tenantId: int().default(1).notNull(),
 	createdAt: timestamp({ mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
@@ -85,7 +85,7 @@ export const appointments = mysqlTable("appointments", {
 	clientEmail: varchar({ length: 320 }).notNull(),
 	clientPhone: varchar({ length: 50 }),
 	appointmentDate: timestamp({ mode: 'string' }).notNull(),
-	status: mysqlEnum(['pending','awaiting_payment','confirmed','session_done','editing','awaiting_shection','final_editing','delivered','cancelled']).default('pending').notNull(),
+	status: mysqlEnum(['pending','awaiting_payment','confirmed','session_done','editing','awaiting_selection','final_editing','delivered','cancelled']).default('pending').notNull(),
 	notes: text(),
 	contractUrl: text(),
 	contractSigned: tinyint().default(0).notNull(),
@@ -96,8 +96,8 @@ export const appointments = mysqlTable("appointments", {
 	estimatedDuration: varchar({ length: 50 }),
 	adminNotes: text(),
 	updatedAt: timestamp({ mode: 'string' }).defaultNow().onUpdateNow().notNull(),
-	shectionApproved: tinyint().default(0).notNull(),
-	shectionApprovedAt: timestamp({ mode: 'string' }),
+	selectionApproved: tinyint().default(0).notNull(),
+	selectionApprovedAt: timestamp({ mode: 'string' }),
 	paymentStatus: mysqlEnum(['pending','awaiting_payment','partial','paid','failed','refunded']).default('pending'),
 	finalPrice: int(),
 	stripeSessionId: varchar({ length: 255 }),
@@ -399,11 +399,11 @@ export const photoSales = mysqlTable("photoSales", {
 	index("photoSales_downloadToken_unique").on(table.downloadToken),
 ]);
 
-export const photoShections = mysqlTable("photoShections", {
+export const photoSelections = mysqlTable("photoSelections", {
 	id: int().autoincrement().primaryKey(),
 	medayItemId: int().notNull(),
 	collectionId: int().notNull(),
-	isShected: tinyint().default(0).notNull(),
+	isSelected: tinyint().default(0).notNull(),
 	clientFeedback: text(),
 	editedPhotoUrl: text(),
 	status: mysqlEnum(['pending','editing','completed']).default('pending').notNull(),
@@ -412,9 +412,9 @@ export const photoShections = mysqlTable("photoShections", {
 	tenantId: int().default(1).notNull(),
 },
 (table) => [
-	index("idx_photoShections_collectionId").on(table.collectionId),
-	index("idx_photoShections_isShected").on(table.isShected),
-	index("idx_photoShections_tenantId").on(table.tenantId),
+	index("idx_photoSelections_collectionId").on(table.collectionId),
+	index("idx_photoSelections_isSelected").on(table.isSelected),
+	index("idx_photoSelections_tenantId").on(table.tenantId),
 ]);
 
 export const portfolioItems = mysqlTable("portfolioItems", {
@@ -706,7 +706,7 @@ export const users = mysqlTable("users", {
 
 
 // Type exports
-export type User = typeof users.$inferShect;
+export type User = typeof users.$inferSelect;
 export type InsertUser = typeof users.$inferInsert;
 
 // Tabshe de add-ons individuais (each add-on tem ciclo own)
@@ -775,7 +775,7 @@ templateId: int(),
 subject: varchar({ length: 500 }).notNull(),
 htmlContent: text().notNull(),
 status: mysqlEnum(['draft','sending','sent','failed']).default('draft').notNull(),
-recipientType: mysqlEnum(['all','shected','event_based']).default('all').notNull(),
+recipientType: mysqlEnum(['all','selected','event_based']).default('all').notNull(),
 recipientIds: text(),
 sentCount: int().default(0).notNull(),
 failedCount: int().default(0).notNull(),

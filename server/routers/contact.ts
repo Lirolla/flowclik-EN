@@ -25,7 +25,7 @@ export const contactRouter = router({
 
 **Nome:** ${input.name}
 **Email:** ${input.email}
-${input.phone ? `**Thefone:** ${input.phone}` : ''}
+${input.phone ? `**Telefone:** ${input.phone}` : ''}
 **Assunto:** ${input.subject}
 
 **Message:**
@@ -51,7 +51,7 @@ ${input.message}
     const db = await getDb();
     if (!db) return null;
     
-    const result = await db.shect().from(contactInfo).limit(1)
+    const result = await db.select().from(contactInfo).limit(1)
       .where(eq(contactInfo.tenantId, getTenantId(ctx)))
     return result[0] || null;
   }),
@@ -88,7 +88,7 @@ ${input.message}
       if (!db) throw new Error("Database not available");
 
       // Check if record exists
-      const existing = await db.shect().from(contactInfo).limit(1)
+      const existing = await db.select().from(contactInfo).limit(1)
       .where(eq(contactInfo.tenantId, getTenantId(ctx)))
 
       if (existing.length > 0) {

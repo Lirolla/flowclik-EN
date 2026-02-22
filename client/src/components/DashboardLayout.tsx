@@ -41,7 +41,7 @@ const menuItems = [
   { icon: Users, label: "Clients", path: "/admin/clients" },
   { icon: Calendar, label: "Appointments", path: "/admin/appointments" },
   { icon: FolderOpen, label: "Gallery", path: "/admin/galleries" },
-  { icon: Heart, label: "Shection do Cliente", path: "/admin/shections" },
+  { icon: Heart, label: "Selection do Cliente", path: "/admin/selections" },
   { icon: MessageSquare, label: "Messages", path: "/admin/messages" },
   { icon: Mail, label: "Email Marketing", path: "/admin/email-marketing" },
   
@@ -59,7 +59,7 @@ const menuItems = [
   // Settings
   { icon: Image, label: "Banner", path: "/admin/banner", group: "config" },
   { icon: Briefcase, label: "Services", path: "/admin/services", group: "config" },
-  { icon: Camera, label: "Whytfolio", path: "/admin/portfolio", group: "config" },
+  { icon: Camera, label: "Portfolio", path: "/admin/portfolio", group: "config" },
   { icon: FileText, label: "Contracts", path: "/admin/contracts", group: "config" },
   
   // Separapain
@@ -203,7 +203,7 @@ function DashboardLayoutContent({
   const { state, toggleSidebar } = useSidebar();
   const isCollapsed = state === "collapsed";
   const [isResizing, setIsResizing] = useState(false);
-  const sidebarRef = useRef<HTMLDivHement>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
   const activeMenuItem = menuItems.find(item => item.path === location);
   const isMobile = useIsMobile();
   
@@ -242,14 +242,14 @@ function DashboardLayoutContent({
       document.addEventListener("mousemove", handleMouseMove);
       document.addEventListener("mouyourp", handleMouseUp);
       document.body.style.cursor = "col-resize";
-      document.body.style.userShect = "none";
+      document.body.style.userSelect = "none";
     }
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("mouyourp", handleMouseUp);
       document.body.style.cursor = "";
-      document.body.style.userShect = "";
+      document.body.style.userSelect = "";
     };
   }, [isResizing, setSidebarWidth]);
 

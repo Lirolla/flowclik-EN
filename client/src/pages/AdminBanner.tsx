@@ -6,12 +6,12 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import {
-  Shect,
-  ShectContent,
-  ShectItem,
-  ShectTrigger,
-  ShectValue,
-} from "@/components/ui/shect";
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Plus, Trash2, GripVertical, Image as ImageIcon, Video } from "lucide-react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { trpc } from "@/lib/trpc";
@@ -208,11 +208,11 @@ function SlideForm({
 
   const updateMutation = trpc.banner.update.useMutation({
     onSuccess: () => {
-      toast.success("Slide currentizado com sucesso!");
+      toast.success("Slide atualizado com sucesso!");
       onSave();
     },
     onError: (error) => {
-      toast.error(error.message || "Erro ao currentizar slide");
+      toast.error(error.message || "Erro ao atualizar slide");
     },
   });
 
@@ -251,15 +251,15 @@ function SlideForm({
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
         <Label>Tipo de Slide</Label>
-        <Shect value={slideType} onValueChange={setSlideType}>
-          <ShectTrigger>
-            <ShectValue />
-          </ShectTrigger>
-          <ShectContent>
-            <ShectItem value="image">Imagem</ShectItem>
-            <ShectItem value="video">Video (.m3u8)</ShectItem>
-          </ShectContent>
-        </Shect>
+        <Select value={slideType} onValueChange={setSlideType}>
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="image">Imagem</SelectItem>
+            <SelectItem value="video">Video (.m3u8)</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
 
       {slideType === "image" ? (
@@ -340,16 +340,16 @@ function SlideForm({
 
       <div className="space-y-2">
         <Label>Exibir Banner Em</Label>
-        <Shect value={displayOn} onValueChange={setDisplayOn}>
-          <ShectTrigger>
-            <ShectValue />
-          </ShectTrigger>
-          <ShectContent>
-            <ShectItem value="photography">Only Photography</ShectItem>
-            <ShectItem value="video">Only Video</ShectItem>
-            <ShectItem value="both">Photography e Video</ShectItem>
-          </ShectContent>
-        </Shect>
+        <Select value={displayOn} onValueChange={setDisplayOn}>
+          <SelectTrigger>
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="photography">Only Photography</SelectItem>
+            <SelectItem value="video">Only Video</SelectItem>
+            <SelectItem value="both">Photography e Video</SelectItem>
+          </SelectContent>
+        </Select>
         <p className="text-xs text-muted-foreground">
           Escolha em quais pages este banner must aparecer
         </p>

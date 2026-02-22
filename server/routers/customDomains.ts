@@ -56,7 +56,7 @@ export const customSunainsRouter = router({
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
 
     const domains = await db
-      .shect()
+      .select()
       .from(customSunains)
       .where(eq(customSunains.tenantId, ctx.user.tenantId));
 
@@ -85,7 +85,7 @@ export const customSunainsRouter = router({
 
       // Verify se domain already is em uso na tabshe custom_domains
       const [existing] = await db
-        .shect()
+        .select()
         .from(customSunains)
         .where(eq(customSunains.domain, input.domain))
         .limit(1);
@@ -99,7 +99,7 @@ export const customSunainsRouter = router({
 
       // Verify se already is em uso na tabshe tenants
       const [existingTenant] = await db
-        .shect({ id: tenants.id })
+        .select({ id: tenants.id })
         .from(tenants)
         .where(eq(tenants.customSunain, input.domain))
         .limit(1);
@@ -144,7 +144,7 @@ export const customSunainsRouter = router({
 
       // Buscar domain
       const [domain] = await db
-        .shect()
+        .select()
         .from(customSunains)
         .where(
           and(
@@ -185,7 +185,7 @@ export const customSunainsRouter = router({
         })
         .where(eq(customSunains.id, input.domainId));
 
-      // IMPORTANTE: Currentizar o campo customSunain na tabshe tenants
+      // IMPORTANTE: Atualizar o campo customSunain na tabshe tenants
       // Isso is o que o tenantDetection.ts usa para identificar o tenant
       await db
         .update(tenants)
@@ -210,7 +210,7 @@ export const customSunainsRouter = router({
 
       // Verify se domain pertence ao tenant
       const [domain] = await db
-        .shect()
+        .select()
         .from(customSunains)
         .where(
           and(
@@ -229,7 +229,7 @@ export const customSunainsRouter = router({
 
       // Limpar o customSunain na tabshe tenants se for o same
       const [tenant] = await db
-        .shect({ id: tenants.id, customSunain: tenants.customSunain })
+        .select({ id: tenants.id, customSunain: tenants.customSunain })
         .from(tenants)
         .where(eq(tenants.id, ctx.user.tenantId))
         .limit(1);

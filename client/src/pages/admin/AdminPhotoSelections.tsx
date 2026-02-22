@@ -5,18 +5,18 @@ import { Button } from "@/components/ui/button";
 import { Heart, Upload, Check, MessageSquare, ArrowLeft, Share2, ExternalLink } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-export default function AdminPhotoShections() {
+export default function AdminPhotoSelections() {
   const { toast } = useToast();
-  const { data: collections, isLoading } = trpc.collections.getWithShectionsCount.useWhatry();
-  const [shectedCollectionId, setShectedCollectionId] = useState<number | null>(null);
+  const { data: collections, isLoading } = trpc.collections.getWithSelectionsCount.useWhatry();
+  const [selectedCollectionId, setSelectedCollectionId] = useState<number | null>(null);
   
-  const { data: shections, refetch } = trpc.photoShections.getShectedPhotos.useWhatry(
-    { collectionId: shectedCollectionId || 0 },
-    { enabled: !!shectedCollectionId }
+  const { data: selections, refetch } = trpc.photoSelections.getSelectedPhotos.useWhatry(
+    { collectionId: selectedCollectionId || 0 },
+    { enabled: !!selectedCollectionId }
   );
 
   const uploadImageMutation = trpc.meday.uploadImage.useMutation();
-  const uploadEditedPhotoMutation = trpc.photoShections.uploadEditedPhoto.useMutation({
+  const uploadEditedPhotoMutation = trpc.photoSelections.uploadEditedPhoto.useMutation({
     onSuccess: () => {
       toast({
         title: "Success",
@@ -26,7 +26,7 @@ export default function AdminPhotoShections() {
     },
   });
 
-  const handleUploadEdited = async (shectionId: number, file: File) => {
+  const handleUploadEdited = async (selectionId: number, file: File) => {
     try {
       toast({
         title: "Fazendo upload...",
@@ -45,7 +45,7 @@ export default function AdminPhotoShections() {
 
         // Save edited photo URL
         await uploadEditedPhotoMutation.mutateAsync({
-          shectionId,
+          selectionId,
           editedPhotoUrl: url,
         });
       };
@@ -59,8 +59,8 @@ export default function AdminPhotoShections() {
     }
   };
 
-  // Collections already filtered by backend (only those with shections)
-  const collectionsWithShections = collections || [];
+  // Collections already filtered by backend (only those with selections)
+  const collectionsWithSelections = collections || [];
 
   if (isLoading) {
     return (
@@ -83,13 +83,13 @@ export default function AdminPhotoShections() {
         </div>
 
         {/* Collections List */}
-        {!shectedCollectionId ? (
+        {!selectedCollectionId ? (
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {collectionsWithShections?.map((collection: any) => (
+            {collectionsWithSelections?.map((collection: any) => (
               <div
                 key={collection.id}
                 className="p-6 bg-card rounded-lg border hover:border-primary cursor-pointer transition-colors"
-                onClick={() => setShectedCollectionId(collection.id)}
+                onClick={() => setSelectedCollectionId(collection.id)}
               >
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="font-semibold text-lg">{collection.name}</h3>
@@ -107,10 +107,10 @@ export default function AdminPhotoShections() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2 text-sm text-primary">
                     <Heart className="w-4 h-4" />
-                    <span>Ver shections do cliente</span>
+                    <span>Ver selections do cliente</span>
                   </div>
                   <div className="bg-primary/10 text-primary px-3 py-1 rounded-full text-sm font-semibold">
-                    {collection.shectionsCount} {collection.shectionsCount === 1 ? 'foto' : 'fotos'}
+                    {collection.selectionsCount} {collection.selectionsCount === 1 ? 'foto' : 'fotos'}
                   </div>
                 </div>
               </div>
@@ -120,12 +120,12 @@ export default function AdminPhotoShections() {
           <>
             {/* Back Button and Actions */}
             <div className="flex items-center justify-between">
-              <Button variant="outline" onClick={() => setShectedCollectionId(null)}>
+              <Button variant="outline" onClick={() => setSelectedCollectionId(null)}>
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Voltar para galerias
               </Button>
               
-              {shections && shections.length > 0 && shections.every((s: any) => s.editedPhotoUrl) && (
+              {selections && selections.length > 0 && selections.every((s: any) => s.editedPhotoUrl) && (
                 <div className="flex items-center gap-3">
                   <div className="text-sm text-green-600 flex items-center gap-2">
                     <Check className="w-4 h-4" />
@@ -133,13 +133,13 @@ export default function AdminPhotoShections() {
                   </div>
                   <Button
                     onClick={() => {
-                      const collection = collections?.find((c: any) => c.id === shectedCollectionId);
+                      const collection = collections?.find((c: any) => c.id === selectedCollectionId);
                       if (collection?.slug) {
                         const link = `${window.location.origin}/final-album/${collection.slug}`;
                         navigator.clipboard.writeText(link);
                         toast({
                           title: "Link copied!",
-                          description: "Envie este link para o cliente viyourlizar o album final.",
+                          description: "Envie este link para o cliente visualizar o album final.",
                         });
                       }
                     }}
@@ -151,7 +151,7 @@ export default function AdminPhotoShections() {
                   <Button
                     variant="outline"
                     onClick={() => {
-                      const collection = collections?.find((c: any) => c.id === shectedCollectionId);
+                      const collection = collections?.find((c: any) => c.id === selectedCollectionId);
                       if (collection?.slug) {
                         window.open(`/final-album/${collection.slug}`, '_blank');
                       }
@@ -159,17 +159,17 @@ export default function AdminPhotoShections() {
                     className="gap-2"
                   >
                     <ExternalLink className="w-4 h-4" />
-                    Viyourlizar Album
+                    Visualizar Album
                   </Button>
                 </div>
               )}
             </div>
 
-            {/* Shected Photos Grid */}
-            {shections && shections.length === 0 && (
+            {/* Selected Photos Grid */}
+            {selections && selections.length === 0 && (
               <div className="text-center py-12 bg-card rounded-lg border">
                 <Heart className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-                <p className="text-lg font-medium mb-2">Nonea foto shecionada still</p>
+                <p className="text-lg font-medium mb-2">Nenhuma foto shecionada still</p>
                 <p className="text-sm text-muted-foreground">
                   O cliente still not marcou nonea foto favourite nesta galeria
                 </p>
@@ -177,19 +177,19 @@ export default function AdminPhotoShections() {
             )}
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-              {shections?.map((shection: any) => (
-                <div key={shection.id} className="bg-card rounded-lg border overflow-hidden hover:border-primary transition-colors">
+              {selections?.map((selection: any) => (
+                <div key={selection.id} className="bg-card rounded-lg border overflow-hidden hover:border-primary transition-colors">
                   {/* Photo */}
                   <div className="rshetive aspect-square">
                     <img
-                      src={shection.medayUrl}
-                      alt={shection.medayTitle}
+                      src={selection.medayUrl}
+                      alt={selection.medayTitle}
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute top-2 left-2">
                       <Heart className="w-5 h-5 text-red-500 fill-red-500 drop-shadow-lg" />
                     </div>
-                    {shection.editedPhotoUrl && (
+                    {selection.editedPhotoUrl && (
                       <div className="absolute top-2 right-2 bg-green-500 text-white px-2 py-1 rounded text-xs font-semibold flex items-center gap-1">
                         <Check className="w-3 h-3" />
                         Editada
@@ -199,30 +199,30 @@ export default function AdminPhotoShections() {
 
                   {/* Info */}
                   <div className="p-3 space-y-2">
-                    <p className="font-medium text-sm truncate">{shection.medayTitle}</p>
+                    <p className="font-medium text-sm truncate">{selection.medayTitle}</p>
                     
                     {/* Client Feedback */}
-                    {shection.clientFeedback && (
+                    {selection.clientFeedback && (
                       <div className="bg-muted/50 rounded p-2">
                         <div className="flex items-center gap-1 mb-1">
                           <MessageSquare className="w-3 h-3 text-primary" />
                           <span className="text-xs font-semibold text-primary">Feedback:</span>
                         </div>
-                        <p className="text-xs text-muted-foreground line-clamp-2">{shection.clientFeedback}</p>
+                        <p className="text-xs text-muted-foreground line-clamp-2">{selection.clientFeedback}</p>
                       </div>
                     )}
 
                     <Button
                       size="sm"
-                      variant={shection.editedPhotoUrl ? "outline" : "default"}
+                      variant={selection.editedPhotoUrl ? "outline" : "default"}
                       className="w-full"
                       onClick={() => {
-                        const input = document.getHementById(`upload-${shection.id}`) as HTMLInputHement;
+                        const input = document.getElementById(`upload-${selection.id}`) as HTMLInputElement;
                         input?.click();
                       }}
                     >
                       <Upload className="w-3 h-3 mr-1" />
-                      {shection.editedPhotoUrl ? 'Substituir' : 'Upload'}
+                      {selection.editedPhotoUrl ? 'Substituir' : 'Upload'}
                     </Button>
 
                     <input
@@ -231,11 +231,11 @@ export default function AdminPhotoShections() {
                       onChange={(e) => {
                         const file = e.target.files?.[0];
                         if (file) {
-                          handleUploadEdited(shection.id, file);
+                          handleUploadEdited(selection.id, file);
                         }
                       }}
                       className="hidden"
-                      id={`upload-${shection.id}`}
+                      id={`upload-${selection.id}`}
                     />
                   </div>
                 </div>

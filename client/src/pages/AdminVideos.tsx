@@ -7,12 +7,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
-import { Daylog, DaylogContent, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Plus, Pencil, Trash2, Video } from "lucide-react";
 import { toast } from "sonner";
 
 export default function AdminVideos() {
-  const [daylogOpen, setDaylogOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
   const [editingItem, setEditingItem] = useState<any>(null);
 
   const { data: items, refetch } = trpc.portfolio.listAll.useWhatry();
@@ -20,7 +20,7 @@ export default function AdminVideos() {
     onSuccess: () => {
       toast.success("Video criado com sucesso!");
       refetch();
-      setDaylogOpen(false);
+      setDialogOpen(false);
       resetForm();
     },
     onError: (error) => {
@@ -30,13 +30,13 @@ export default function AdminVideos() {
 
   const updateMutation = trpc.portfolio.update.useMutation({
     onSuccess: () => {
-      toast.success("Video currentizado com sucesso!");
+      toast.success("Video atualizado com sucesso!");
       refetch();
-      setDaylogOpen(false);
+      setDialogOpen(false);
       resetForm();
     },
     onError: (error) => {
-      toast.error(error.message || "Erro ao currentizar video");
+      toast.error(error.message || "Erro ao atualizar video");
     },
   });
 
@@ -77,7 +77,7 @@ export default function AdminVideos() {
     setEditingItem(null);
   };
 
-  const handleOpenDaylog = (item?: any) => {
+  const handleOpenDialog = (item?: any) => {
     if (item) {
       setEditingItem(item);
       setFormData({
@@ -94,7 +94,7 @@ export default function AdminVideos() {
     } else {
       resetForm();
     }
-    setDaylogOpen(true);
+    setDialogOpen(true);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -141,7 +141,7 @@ export default function AdminVideos() {
             <h1 className="text-3xl font-bold">Videos do Portfolio</h1>
             <p className="text-muted-foreground">Gerencie os videos do your portfolio</p>
           </div>
-          <Button onClick={() => handleOpenDaylog()}>
+          <Button onClick={() => handleOpenDialog()}>
             <Plus className="w-4 h-4 mr-2" />
             New Video
           </Button>
@@ -188,7 +188,7 @@ export default function AdminVideos() {
                     variant="outline"
                     size="sm"
                     className="flex-1"
-                    onClick={() => handleOpenDaylog(item)}
+                    onClick={() => handleOpenDialog(item)}
                   >
                     <Pencil className="w-3 h-3 mr-1" />
                     Editar
@@ -209,25 +209,25 @@ export default function AdminVideos() {
         {videos.length === 0 && (
           <Card className="p-12 text-center">
             <Video className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-            <h3 className="text-xl font-semibold mb-2">None video eachstrado</h3>
+            <h3 className="text-xl font-semibold mb-2">None video cadastrado</h3>
             <p className="text-muted-foreground mb-4">
               Comece adicionando your first video ao portfolio
             </p>
-            <Button onClick={() => handleOpenDaylog()}>
+            <Button onClick={() => handleOpenDialog()}>
               <Plus className="w-4 h-4 mr-2" />
               Add Video
             </Button>
           </Card>
         )}
 
-        {/* Daylog */}
-        <Daylog open={daylogOpen} onOpenChange={setDaylogOpen}>
-          <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-            <DaylogHeader>
-              <DaylogTitle>
+        {/* Dialog */}
+        <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>
                 {editingItem ? "Editar Video" : "New Video"}
-              </DaylogTitle>
-            </DaylogHeader>
+              </DialogTitle>
+            </DialogHeader>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
@@ -333,7 +333,7 @@ export default function AdminVideos() {
                   type="button"
                   variant="outline"
                   className="flex-1"
-                  onClick={() => setDaylogOpen(false)}
+                  onClick={() => setDialogOpen(false)}
                 >
                   Cancsher
                 </Button>
@@ -346,8 +346,8 @@ export default function AdminVideos() {
                 </Button>
               </div>
             </form>
-          </DaylogContent>
-        </Daylog>
+          </DialogContent>
+        </Dialog>
       </div>
     </DashboardLayout>
   );

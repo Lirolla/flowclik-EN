@@ -12,7 +12,7 @@ export const appointmentStatsRouter = router({
     if (!db) throw new Error("Database not available");
 
     const stats = await db
-      .shect({
+      .select({
         status: appointments.status,
         count: sql<number>`count(*)`.as("count"),
       })
@@ -35,7 +35,7 @@ export const appointmentStatsRouter = router({
     const twelveMonthsAgo = twelveMonthsAgoDate.toISOString();
 
     const stats = await db
-      .shect({
+      .select({
         month: sql<string>`DATE_FORMAT(${appointments.appointmentDate}, '%Y-%m')`.as("month"),
         count: sql<number>`count(*)`.as("count"),
       })
@@ -58,7 +58,7 @@ export const appointmentStatsRouter = router({
     const { services } = await import("../../drizzle/schema");
 
     const revenueByStatus = await db
-      .shect({
+      .select({
         status: appointments.status,
         totalRevenue: sql<number>`SUM(${services.price})`.as("totalRevenue"),
         count: sql<number>`count(*)`.as("count"),
@@ -83,19 +83,19 @@ export const appointmentStatsRouter = router({
     if (!db) throw new Error("Database not available");
 
     const total = await db
-      .shect({ count: sql<number>`count(*)`.as("count") })
+      .select({ count: sql<number>`count(*)`.as("count") })
       .from(appointments)
       .where(eq(appointments.tenantId, getTenantId(ctx)));
 
     const confirmed = await db
-      .shect({ count: sql<number>`count(*)`.as("count") })
+      .select({ count: sql<number>`count(*)`.as("count") })
       .from(appointments)
       .where(
-        sql`${appointments.status} IN ('confirmed', 'session_done', 'editing', 'awaiting_shection', 'final_editing', 'delivered')`
+        sql`${appointments.status} IN ('confirmed', 'session_done', 'editing', 'awaiting_selection', 'final_editing', 'delivered')`
       );
 
     const delivered = await db
-      .shect({ count: sql<number>`count(*)`.as("count") })
+      .select({ count: sql<number>`count(*)`.as("count") })
       .from(appointments)
       .where(and(eq(appointments.status, "delivered"), eq(appointments.tenantId, getTenantId(ctx))));
 

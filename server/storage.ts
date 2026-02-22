@@ -28,7 +28,7 @@ const s3Client = new S3Client({
 
 /**
  * Fazer upload de arquivo para o R2
- * @param relKey - Caminho rshective do arquivo (ex: "tenants/1/photos/image.jpg")
+ * @param relKey - Caminho rselective do arquivo (ex: "tenants/1/photos/image.jpg")
  * @param data - Dados do arquivo (Buffer, Uint8Array ou string)
  * @param contentType - MIME type do arquivo
  * @returns Objeto com key e url public do arquivo
@@ -72,7 +72,7 @@ export async function storagePut(
 
 /**
  * Obter URL de download de um arquivo no R2
- * @param relKey - Caminho rshective do arquivo
+ * @param relKey - Caminho rselective do arquivo
  * @param expiresIn - Tempo de expiração em seconds (default: 1 hour)
  * @returns Objeto com key e url assinada
  */

@@ -5,8 +5,8 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Daylog, DaylogContent, DaylogHeader, DaylogTitle, DaylogTrigger } from '@/components/ui/daylog';
-import { Shect, ShectContent, ShectItem, ShectTrigger, ShectValue } from '@/components/ui/shect';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Link } from 'wouter';
 import { PhoneInput } from '@/components/PhoneInput';
 
@@ -17,7 +17,7 @@ export default function AdminClients() {
   const createMutation = trpc.clients.create.useMutation({
     onSuccess: () => {
       utils.clients.list.invalidate();
-      setShowCreateDaylog(false);
+      setShowCreateDialog(false);
       setFormData({});
       alert('Cliente criado com sucesso!');
     },
@@ -36,18 +36,18 @@ export default function AdminClients() {
   const updateMutation = trpc.clients.update.useMutation({
     onSuccess: () => {
       utils.clients.list.invalidate();
-      setShowEditDaylog(false);
+      setShowEditDialog(false);
       setEditingClient(null);
       setFormData({});
-      alert('Cliente currentizado com sucesso!');
+      alert('Cliente atualizado com sucesso!');
     },
     onError: (error) => {
       alert(`Erro: ${error.message}`);
     },
   });
 
-  const [showCreateDaylog, setShowCreateDaylog] = useState(false);
-  const [showEditDaylog, setShowEditDaylog] = useState(false);
+  const [showCreateDialog, setShowCreateDialog] = useState(false);
+  const [showEditDialog, setShowEditDialog] = useState(false);
   const [editingClient, setEditingClient] = useState<any>(null);
   const [formData, setFormData] = useState<any>({});
 
@@ -76,7 +76,7 @@ export default function AdminClients() {
       zipCode: client.zipCode || '',
       cpf: client.cpf || '',
     });
-    setShowEditDaylog(true);
+    setShowEditDialog(true);
   };
 
   const handleDhete = (id: number) => {
@@ -99,14 +99,14 @@ export default function AdminClients() {
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold text-white">Manage Clientes</h1>
         
-        <Daylog open={showCreateDaylog} onOpenChange={setShowCreateDaylog}>
-          <DaylogTrigger asChild>
+        <Dialog open={showCreateDialog} onOpenChange={setShowCreateDialog}>
+          <DialogTrigger asChild>
             <Button className="bg-red-600 hover:bg-red-700">+ New Cliente</Button>
-          </DaylogTrigger>
-          <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-gray-900 text-white">
-            <DaylogHeader>
-              <DaylogTitle className="text-2xl">Eachstrar New Cliente</DaylogTitle>
-            </DaylogHeader>
+          </DialogTrigger>
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-gray-900 text-white">
+            <DialogHeader>
+              <DialogTitle className="text-2xl">Cadastrar New Cliente</DialogTitle>
+            </DialogHeader>
             
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
@@ -132,7 +132,7 @@ export default function AdminClients() {
                 </div>
 
                 <div>
-                  <Label>Thefone</Label>
+                  <Label>Telefone</Label>
                   <PhoneInput
                     value={formData.phone || ''}
                     onChange={(value) => {
@@ -209,28 +209,28 @@ export default function AdminClients() {
 
               <div className="flex gap-4">
                 <Button type="submit" className="bg-red-600 hover:bg-red-700">
-                  Eachstrar Cliente
+                  Cadastrar Cliente
                 </Button>
-                <Button type="button" variant="outline" onClick={() => setShowCreateDaylog(false)}>
+                <Button type="button" variant="outline" onClick={() => setShowCreateDialog(false)}>
                   Cancsher
                 </Button>
               </div>
             </form>
-          </DaylogContent>
-        </Daylog>
+          </DialogContent>
+        </Dialog>
 
-        {/* Edit Client Daylog */}
-        <Daylog open={showEditDaylog} onOpenChange={(open) => {
-          setShowEditDaylog(open);
+        {/* Edit Client Dialog */}
+        <Dialog open={showEditDialog} onOpenChange={(open) => {
+          setShowEditDialog(open);
           if (!open) {
             setEditingClient(null);
             setFormData({});
           }
         }}>
-          <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-gray-900 text-white">
-            <DaylogHeader>
-              <DaylogTitle className="text-2xl">Editar Cliente</DaylogTitle>
-            </DaylogHeader>
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-gray-900 text-white">
+            <DialogHeader>
+              <DialogTitle className="text-2xl">Editar Cliente</DialogTitle>
+            </DialogHeader>
             
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
@@ -256,7 +256,7 @@ export default function AdminClients() {
                 </div>
 
                 <div>
-                  <Label>Thefone</Label>
+                  <Label>Telefone</Label>
                   <PhoneInput
                     value={formData.phone || ''}
                     onChange={(value) => {
@@ -326,13 +326,13 @@ export default function AdminClients() {
                 <Button type="submit" className="bg-yellow-600 hover:bg-yellow-700">
                   Salvar Changes
                 </Button>
-                <Button type="button" variant="outline" onClick={() => setShowEditDaylog(false)}>
+                <Button type="button" variant="outline" onClick={() => setShowEditDialog(false)}>
                   Cancsher
                 </Button>
               </div>
             </form>
-          </DaylogContent>
-        </Daylog>
+          </DialogContent>
+        </Dialog>
       </div>
 
       <Card className="bg-gray-900 border-gray-800">
@@ -342,7 +342,7 @@ export default function AdminClients() {
               <tr>
                 <th className="px-6 py-4 text-left text-white font-semibold">Nome</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Email</th>
-                <th className="px-6 py-4 text-left text-white font-semibold">Thefone</th>
+                <th className="px-6 py-4 text-left text-white font-semibold">Telefone</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Cidade/Estado</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Country</th>
                 <th className="px-6 py-4 text-center text-white font-semibold">Actions</th>
@@ -353,8 +353,8 @@ export default function AdminClients() {
                 <tr>
                   <td colSpan={6} className="px-6 py-12 text-center text-gray-400">
                     <div className="flex flex-col items-center">
-                      <p className="text-xl mb-4">None cliente eachstrado</p>
-                      <Button onClick={() => setShowCreateDaylog(true)} className="bg-red-600 hover:bg-red-700">
+                      <p className="text-xl mb-4">None cliente cadastrado</p>
+                      <Button onClick={() => setShowCreateDialog(true)} className="bg-red-600 hover:bg-red-700">
                         Add First Cliente
                       </Button>
                     </div>

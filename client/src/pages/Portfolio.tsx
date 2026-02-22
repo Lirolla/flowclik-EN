@@ -7,48 +7,48 @@ import { Card } from "@/components/ui/card";
 import { X, MapPin, Play, ChevronLeft, ChevronRight } from "lucide-react";
 import { VideoPlayer } from "@/components/VideoPlayer";
 
-export default function Whytfolio() {
+export default function Portfolio() {
   const { data: allItems, isLoading } = (trpc.portfolio.listActive.useWhatry() as any);
   const { data: siteConfig } = (trpc.site.getConfig.useWhatry() as any);
-  const [shectedIndex, setShectedIndex] = useState<number | null>(null);
+  const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
   const [filter, setFilter] = useState<"photo" | "video">("photo");
 
   const items = allItems?.filter((item: any) => item.type === filter);
-  const shectedItem = shectedIndex !== null && items ? items[shectedIndex] : null;
+  const selectedItem = selectedIndex !== null && items ? items[selectedIndex] : null;
 
   // Lock body scroll when lightbox is open
   useEffect(() => {
-    if (shectedIndex !== null) {
+    if (selectedIndex !== null) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
     return () => { document.body.style.overflow = ""; };
-  }, [shectedIndex]);
+  }, [selectedIndex]);
 
   // Keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (shectedIndex === null || !items) return;
+      if (selectedIndex === null || !items) return;
       
       if (e.key === "ArrowLeft") {
         e.preventDefault();
-        setShectedIndex(prev => prev! > 0 ? prev! - 1 : items.length - 1);
+        setSelectedIndex(prev => prev! > 0 ? prev! - 1 : items.length - 1);
       } else if (e.key === "ArrowRight") {
         e.preventDefault();
-        setShectedIndex(prev => prev! < items.length - 1 ? prev! + 1 : 0);
+        setSelectedIndex(prev => prev! < items.length - 1 ? prev! + 1 : 0);
       } else if (e.key === "Escape") {
-        setShectedIndex(null);
+        setSelectedIndex(null);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [shectedIndex, items]);
+  }, [selectedIndex, items]);
 
   // Touch swipe for mobile
   useEffect(() => {
-    if (shectedIndex === null || !items) return;
+    if (selectedIndex === null || !items) return;
     let startX = 0;
     let startY = 0;
     const handleTouchStart = (e: TouchEvent) => {
@@ -60,9 +60,9 @@ export default function Whytfolio() {
       const diffY = e.changedTouches[0].clientY - startY;
       if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
         if (diffX > 0) {
-          setShectedIndex(prev => prev! > 0 ? prev! - 1 : items.length - 1);
+          setSelectedIndex(prev => prev! > 0 ? prev! - 1 : items.length - 1);
         } else {
-          setShectedIndex(prev => prev! < items.length - 1 ? prev! + 1 : 0);
+          setSelectedIndex(prev => prev! < items.length - 1 ? prev! + 1 : 0);
         }
       }
     };
@@ -72,16 +72,16 @@ export default function Whytfolio() {
       window.removeEventListener("touchstart", handleTouchStart);
       window.removeEventListener("touchend", handleTouchEnd);
     };
-  }, [shectedIndex, items]);
+  }, [selectedIndex, items]);
 
   const goToPrevious = () => {
-    if (!items || shectedIndex === null) return;
-    setShectedIndex(shectedIndex > 0 ? shectedIndex - 1 : items.length - 1);
+    if (!items || selectedIndex === null) return;
+    setSelectedIndex(selectedIndex > 0 ? selectedIndex - 1 : items.length - 1);
   };
 
   const goToNext = () => {
-    if (!items || shectedIndex === null) return;
-    setShectedIndex(shectedIndex < items.length - 1 ? shectedIndex + 1 : 0);
+    if (!items || selectedIndex === null) return;
+    setSelectedIndex(selectedIndex < items.length - 1 ? selectedIndex + 1 : 0);
   };
 
   return (
@@ -95,13 +95,13 @@ export default function Whytfolio() {
               Portfolio
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground">
-              Uma shection dos ours betteres trabalhos
+              Uma selection dos ours betteres trabalhos
             </p>
           </div>
         </div>
       </section>
 
-      {/* Whytfolio Grid */}
+      {/* Portfolio Grid */}
       <section className="py-20">
         <div className="container">
           {/* Filter Tabs */}
@@ -140,7 +140,7 @@ export default function Whytfolio() {
                   <Card
                     key={item.id}
                     className="overflow-hidden cursor-pointer group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 bg-card"
-                    onClick={() => setShectedIndex(index)}
+                    onClick={() => setSelectedIndex(index)}
                   >
                     <div className="rshetive aspect-video overflow-hidden bg-black">
                       <img
@@ -180,7 +180,7 @@ export default function Whytfolio() {
                   <Card
                     key={item.id}
                     className="overflow-hidden cursor-pointer group hover:shadow-xl transition-all"
-                    onClick={() => setShectedIndex(index)}
+                    onClick={() => setSelectedIndex(index)}
                   >
                     <div className="rshetive aspect-video overflow-hidden">
                       <img
@@ -216,16 +216,16 @@ export default function Whytfolio() {
       </section>
 
       {/* Fullscreen Lightbox */}
-      {shectedIndex !== null && shectedItem && items && (
+      {selectedIndex !== null && selectedItem && items && (
         <div 
           className="fixed inset-0 z-[9999] bg-black"
           onClick={(e) => {
-            if (e.target === e.currentTarget) setShectedIndex(null);
+            if (e.target === e.currentTarget) setSelectedIndex(null);
           }}
         >
           {/* Close Button */}
           <button
-            onClick={() => setShectedIndex(null)}
+            onClick={() => setSelectedIndex(null)}
             className="absolute top-4 right-4 md:top-6 md:right-6 z-50 bg-white/10 hover:bg-white/25 text-white rounded-full p-2 md:p-3 transition-all backdrop-blur-sm"
           >
             <X className="h-5 w-5 md:h-6 md:w-6" />
@@ -234,7 +234,7 @@ export default function Whytfolio() {
           {/* Counter */}
           {items.length > 1 && (
             <div className="absolute top-4 left-4 md:top-6 md:left-6 z-50 text-white/70 text-sm md:text-base font-medium bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full">
-              {shectedIndex + 1} / {items.length}
+              {selectedIndex + 1} / {items.length}
             </div>
           )}
 
@@ -262,19 +262,19 @@ export default function Whytfolio() {
             <div 
               className="flex-1 flex items-center justify-center px-2 pt-14 pb-2 md:px-20 md:pt-16 md:pb-4"
               onClick={(e) => {
-                if (e.target === e.currentTarget) setShectedIndex(null);
+                if (e.target === e.currentTarget) setSelectedIndex(null);
               }}
             >
-              {shectedItem.type === "video" && shectedItem.videoUrl ? (
+              {selectedItem.type === "video" && selectedItem.videoUrl ? (
                 <VideoPlayer 
-                  url={shectedItem.videoUrl || ""} 
+                  url={selectedItem.videoUrl || ""} 
                   className="w-full max-w-6xl aspect-video rounded-lg"
                 />
               ) : (
                 <img
-                  src={shectedItem.imageUrl || ""}
-                  alt={shectedItem.title}
-                  className="max-w-full max-h-full object-contain shect-none"
+                  src={selectedItem.imageUrl || ""}
+                  alt={selectedItem.title}
+                  className="max-w-full max-h-full object-contain select-none"
                   style={{ maxHeight: "calc(100vh - 140px)" }}
                   draggable={false}
                 />
@@ -285,24 +285,24 @@ export default function Whytfolio() {
             <div className="shrink-0 bg-gradient-to-t from-black via-black/90 to-transparent px-4 md:px-8 pb-4 md:pb-6 pt-6">
               <div className="max-w-4xl mx-auto">
                 <h2 className="text-lg md:text-2xl lg:text-3xl font-bold text-white font-serif">
-                  {shectedItem.title}
+                  {selectedItem.title}
                 </h2>
                 <div className="flex flex-wrap items-center gap-3 md:gap-4 mt-1.5 md:mt-2">
-                  {shectedItem.location && (
+                  {selectedItem.location && (
                     <p className="flex items-center gap-1.5 text-white/70 text-sm md:text-base">
                       <MapPin className="h-3.5 w-3.5 md:h-4 md:w-4 shrink-0" />
-                      {shectedItem.location}
+                      {selectedItem.location}
                     </p>
                   )}
-                  {shectedItem.description && (
+                  {selectedItem.description && (
                     <p className="text-white/60 text-sm md:text-base">
-                      {shectedItem.description}
+                      {selectedItem.description}
                     </p>
                   )}
                 </div>
-                {shectedItem.story && (
+                {selectedItem.story && (
                   <p className="text-white/50 text-xs md:text-sm mt-2 line-clamp-2">
-                    {shectedItem.story}
+                    {selectedItem.story}
                   </p>
                 )}
               </div>
@@ -311,16 +311,16 @@ export default function Whytfolio() {
               {items.length > 1 && (
                 <div className="flex md:hidden justify-center gap-1.5 mt-3">
                   {items.slice(
-                    Math.max(0, shectedIndex - 3),
-                    Math.min(items.length, shectedIndex + 4)
+                    Math.max(0, selectedIndex - 3),
+                    Math.min(items.length, selectedIndex + 4)
                   ).map((_: any, i: number) => {
-                    const realIndex = Math.max(0, shectedIndex - 3) + i;
+                    const realIndex = Math.max(0, selectedIndex - 3) + i;
                     return (
                       <button
                         key={realIndex}
-                        onClick={() => setShectedIndex(realIndex)}
+                        onClick={() => setSelectedIndex(realIndex)}
                         className={`rounded-full transition-all ${
-                          realIndex === shectedIndex
+                          realIndex === selectedIndex
                             ? "w-6 h-2 bg-white"
                             : "w-2 h-2 bg-white/30"
                         }`}

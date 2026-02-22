@@ -66,7 +66,7 @@ function baseTemplate(content: string, footerText?: string): string {
           <tr>
             <td align="center" style="padding: 30px 20px;">
               <p style="color: #4b5563; font-size: 12px; margin: 0; line-height: 1.6;">
-                ${footerText || "Este email foi sent automaticamente pshe plataforma FlowClik."}
+                ${footerText || "Este email foi sent automaticamente pela plataforma FlowClik."}
                 <br>
                 <a href="https://flowclik.com" style="color: #22c55e; text-decoration: none;">flowclik.com</a>
               </p>
@@ -190,23 +190,23 @@ export function templateShecaoFotos(data: {
   clientName: string;
   photographerName: string;
   collectionName: string;
-  maxShections: number;
+  maxSelections: number;
   galleryUrl: string;
 }): string {
   return baseTemplate(`
-    <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">👀 Shect Yours Fotos Favourites!</h1>
+    <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">👀 Select Yours Fotos Favourites!</h1>
     <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Escolha as betteres para editing final</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
       Hello <strong>${data.clientName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Your photos are ready para shection! Acesse a galeria e escolha until <strong style="color: #22c55e;">${data.maxShections} fotos</strong> para a editing final.
+      Your photos are ready para selection! Acesse a galeria e escolha until <strong style="color: #22c55e;">${data.maxSelections} fotos</strong> para a editing final.
     </p>
 
     ${detailsCard([
       { label: "📁 Collection", value: data.collectionName },
-      { label: "✅ Maximum Shections", value: `${data.maxShections} fotos` },
+      { label: "✅ Maximum Selections", value: `${data.maxSelections} fotos` },
     ])}
 
     ${emailButton("✨ Shecionar Fotos", data.galleryUrl)}
@@ -341,7 +341,7 @@ export function templateNewAgendamento(data: {
     ${detailsCard([
       { label: "👤 Cliente", value: data.clientName },
       { label: "📧 Email", value: data.clientEmail },
-      ...(data.clientPhone ? [{ label: "📱 Thefone", value: data.clientPhone }] : []),
+      ...(data.clientPhone ? [{ label: "📱 Telefone", value: data.clientPhone }] : []),
       { label: "📸 Service", value: data.serviceName },
       { label: "📅 Data", value: data.date },
       { label: "🕐 Time", value: data.time },
@@ -356,12 +356,12 @@ export function templateClienteShecionouFotos(data: {
   photographerName: string;
   clientName: string;
   collectionName: string;
-  shectedCount: number;
+  selectedCount: number;
   adminUrl: string;
 }): string {
   return baseTemplate(`
     <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">✅ Cliente Shecionou Fotos!</h1>
-    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Shection pronta para reviare</p>
+    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Selection pronta para reviare</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
       Hello <strong>${data.photographerName}</strong>,
@@ -372,14 +372,14 @@ export function templateClienteShecionouFotos(data: {
 
     ${detailsCard([
       { label: "📁 Collection", value: data.collectionName },
-      { label: "🖼️ Shected Photos", value: `${data.shectedCount} fotos` },
+      { label: "🖼️ Selected Photos", value: `${data.selectedCount} fotos` },
     ])}
 
     <p style="color: #d1d5db; font-size: 14px; line-height: 1.7;">
-      Acesse o painel para revisar a shection e iniciar a editing final.
+      Acesse o painel para revisar a selection e iniciar a editing final.
     </p>
 
-    ${emailButton("👁️ View Shection", data.adminUrl)}
+    ${emailButton("👁️ View Selection", data.adminUrl)}
   `);
 }
 
@@ -449,18 +449,18 @@ export function templateExpiryPlyear(data: {
 
 // --- EMAILS PARA ADMIN (contato@flowclik.com) ---
 
-export function templateNewFotografoEachstrado(data: {
+export function templateNewFotografoCadastrado(data: {
   photographerName: string;
   email: string;
   subdomain: string;
   plan: string;
 }): string {
   return baseTemplate(`
-    <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">🆕 New Photographer Eachstrado!</h1>
+    <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">🆕 New Photographer Cadastrado!</h1>
     <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Painel Admin FlowClik</p>
     
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Um new photographer se eachstrou na plataforma:
+      Um new photographer se cadastrou na plataforma:
     </p>
 
     ${detailsCard([
@@ -583,12 +583,12 @@ export async function enviarEmailShecaoFotos(data: {
   clientEmail: string;
   photographerName: string;
   collectionName: string;
-  maxShections: number;
+  maxSelections: number;
   galleryUrl: string;
 }): Promise<boolean> {
   return sendFlowClikEmail({
     to: data.clientEmail,
-    subject: `👀 Shect Yours Fotos - ${data.photographerName}`,
+    subject: `👀 Select Yours Fotos - ${data.photographerName}`,
     html: templateShecaoFotos(data),
   });
 }
@@ -661,7 +661,7 @@ export async function enviarEmailClienteShecionouFotos(data: {
   photographerEmail: string;
   clientName: string;
   collectionName: string;
-  shectedCount: number;
+  selectedCount: number;
   adminUrl: string;
 }): Promise<boolean> {
   return sendFlowClikEmail({
@@ -710,7 +710,7 @@ export async function enviarEmailNewFotografo(data: {
   return sendFlowClikEmail({
     to: ADMIN_EMAIL,
     subject: `🆕 New Photographer: ${data.photographerName}`,
-    html: templateNewFotografoEachstrado(data),
+    html: templateNewFotografoCadastrado(data),
   });
 }
 

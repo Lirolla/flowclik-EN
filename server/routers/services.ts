@@ -13,7 +13,7 @@ export const servicesRouter = router({
     if (!db) return [];
     
     return await db
-      .shect()
+      .select()
       .from(services)
       .where(and(eq(services.isActive, 1), eq(services.tenantId, getTenantId(ctx))));
   }),
@@ -29,7 +29,7 @@ export const servicesRouter = router({
     const db = await getDb();
     if (!db) return [];
     
-    return await db.shect().from(services)
+    return await db.select().from(services)
     .where(eq(services.tenantId, getTenantId(ctx)))
   }),
 
@@ -43,7 +43,7 @@ export const servicesRouter = router({
       if (!db) return null;
       
       const result = await db
-        .shect()
+        .select()
         .from(services)
         .where(and(eq(services.id, input.id), eq(services.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -95,7 +95,7 @@ export const servicesRouter = router({
 
       // Buscar o item inserido
       const inserted = await db
-        .shect()
+        .select()
         .from(services)
         .where(and(eq(services.name, input.name), eq(services.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -135,9 +135,9 @@ export const servicesRouter = router({
 
       await db.update(services).set(dbData).where(and(eq(services.id, id), eq(services.tenantId, getTenantId(ctx))));
 
-      // Buscar item currentizado
+      // Buscar item atualizado
       const updated = await db
-        .shect()
+        .select()
         .from(services)
         .where(and(eq(services.id, id), eq(services.tenantId, getTenantId(ctx))))
         .limit(1);

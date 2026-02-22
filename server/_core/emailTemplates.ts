@@ -65,7 +65,7 @@ ${content}
 </td></tr>
 <tr><td align="center" style="padding:30px 20px;">
   <p style="color:#4b5563;font-size:12px;margin:0;line-height:1.6;">
-    ${footer || "Este email foi sent automaticamente pshe plataforma FlowClik."}<br>
+    ${footer || "Este email foi sent automaticamente pela plataforma FlowClik."}<br>
     <a href="https://flowclik.com" style="color:#e879f9;text-decoration:none;">flowclik.com</a>
   </p>
   <p style="color:#374151;font-size:11px;margin:15px 0 0 0;">&copy; ${new Date().getFullYear()} FlowClik - All rights reserved</p>
@@ -118,11 +118,11 @@ interface PaymentData {
   paymentDate: string;
 }
 
-interface ShectionData {
+interface SelectionData {
   clientName: string;
   clientEmail: string;
   galleryTitle: string;
-  shectedCount: number;
+  selectedCount: number;
   totalPhotos: number;
 }
 
@@ -159,7 +159,7 @@ ${card([
   {label:"📸 Service", value: data.serviceName || "N/A"},
   {label:"📅 Data", value: data.appointmentDate || "N/A"},
 ])}
-<p style="color:#d1d5db;font-size:14px;line-height:1.7;">Se you tiver somea question ou quiser reagendar, get in touch conosco.</p>
+<p style="color:#d1d5db;font-size:14px;line-height:1.7;">Se you tiver alguma question ou quiser reagendar, get in touch conosco.</p>
   `);
   return sendEmail({ to: data.clientEmail, subject: "❌ Agendamento Cancelled", html });
 }
@@ -183,20 +183,20 @@ ${card([
 ${passwordSection}
 <p style="color:#d1d5db;font-size:15px;line-height:1.7;">Access your gallery privada para ver everys as fotos e shecionar yours favourite!</p>
 ${btn("🖼️ Acessar Minha Gallery", data.galleryUrl)}
-<p style="color:#6b7280;font-size:13px;margin-top:15px;text-align:center;">Navegue pshes fotos e clique no ❤️ nas yours favourite.</p>
+<p style="color:#6b7280;font-size:13px;margin-top:15px;text-align:center;">Navegue pelas fotos e clique no ❤️ nas yours favourite.</p>
   `);
   return sendEmail({ to: data.clientEmail, subject: '📸 Your galeria "' + data.galleryTitle + '" is ready!', html });
 }
 
-export async function sendShectionNotificationEmail(data: ShectionData): Promise<boolean> {
+export async function sendSelectionNotificationEmail(data: SelectionData): Promise<boolean> {
   const html = base(`
-<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">❤️ Photo Shection Recebida!</h1>
-<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Thank you pshe your shection</p>
+<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">❤️ Photo Selection Recebida!</h1>
+<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Thank you pela your selection</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.clientName}</strong>,</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Recebemos yours shections de fotos favourite! Thank you por dedicar tempo para escolher as betteres imagens.</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Recebemos yours selections de fotos favourite! Thank you por dedicar tempo para escolher as betteres imagens.</p>
 ${card([
   {label:"📁 Gallery", value: data.galleryTitle},
-  {label:"❤️ Shected Photos", value: data.shectedCount + " de " + data.totalPhotos},
+  {label:"❤️ Selected Photos", value: data.selectedCount + " de " + data.totalPhotos},
 ])}
 <p style="color:#d1d5db;font-size:14px;line-height:1.7;"><strong style="color:#e5e7eb;">Next steps:</strong></p>
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:10px 0;">
@@ -205,7 +205,7 @@ ${card([
 <tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">📧 You will receive um email com o link para download</td></tr>
 </table>
   `);
-  return sendEmail({ to: data.clientEmail, subject: "❤️ Photo Shection Recebida!", html });
+  return sendEmail({ to: data.clientEmail, subject: "❤️ Photo Selection Recebida!", html });
 }
 
 export async function sendPhotosDeliveredEmail(data: {
@@ -292,7 +292,7 @@ export async function sendNewAppointmentNotification(data: {
 ${card([
   {label:"👤 Cliente", value: data.clientName},
   {label:"📧 Email", value: data.clientEmail},
-  {label:"📱 Thefone", value: data.clientPhone},
+  {label:"📱 Telefone", value: data.clientPhone},
   {label:"📸 Service", value: data.serviceName},
   {label:"📅 Data", value: data.date},
   {label:"🕐 Time", value: data.time},
@@ -302,23 +302,23 @@ ${card([
   return sendEmail({ to: data.photographerEmail, subject: "📅 New Agendamento - " + data.clientName, html });
 }
 
-export async function sendClientShectionNotification(data: {
+export async function sendClientSelectionNotification(data: {
   photographerEmail: string;
   photographerName: string;
   clientName: string;
   galleryTitle: string;
-  shectedCount: number;
+  selectedCount: number;
 }): Promise<boolean> {
   const html = base(`
 <h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">✅ Cliente Shecionou Fotos!</h1>
-<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Shection pronta para reviare</p>
+<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Selection pronta para reviare</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.photographerName}</strong>,</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;"><strong style="color:#e879f9;">${data.clientName}</strong> finalizou a shection de fotos da galeria <strong>"${data.galleryTitle}"</strong>.</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;"><strong style="color:#e879f9;">${data.clientName}</strong> finalizou a selection de fotos da galeria <strong>"${data.galleryTitle}"</strong>.</p>
 ${card([
   {label:"📁 Gallery", value: data.galleryTitle},
-  {label:"🖼️ Shected Photos", value: data.shectedCount + " fotos"},
+  {label:"🖼️ Selected Photos", value: data.selectedCount + " fotos"},
 ])}
-<p style="color:#d1d5db;font-size:14px;line-height:1.7;">Acesse o painel para revisar a shection e iniciar a editing final.</p>
+<p style="color:#d1d5db;font-size:14px;line-height:1.7;">Acesse o painel para revisar a selection e iniciar a editing final.</p>
   `);
   return sendEmail({ to: data.photographerEmail, subject: "✅ " + data.clientName + " shecionou fotos - " + data.galleryTitle, html });
 }
@@ -374,9 +374,9 @@ export async function sendAdminNewPhotographerEmail(data: {
   plan: string;
 }): Promise<boolean> {
   const html = base(`
-<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">🆕 New Photographer Eachstrado!</h1>
+<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">🆕 New Photographer Cadastrado!</h1>
 <p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Painel Admin FlowClik</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Um new photographer se eachstrou na plataforma:</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Um new photographer se cadastrou na plataforma:</p>
 ${card([
   {label:"👤 Nome", value: data.name},
   {label:"📧 Email", value: data.email},
@@ -407,16 +407,16 @@ ${btn("Reply Ticket", "https://flowclik.com/system/tickets", "#ef4444")}
   return sendEmail({ to: ADMIN_EMAIL, subject: "🎫 New Ticket: " + data.subject, html });
 }
 
-export async function sendAdminShectionNotification(data: ShectionData): Promise<boolean> {
+export async function sendAdminSelectionNotification(data: SelectionData): Promise<boolean> {
   const html = base(`
-<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">🔔 New Photo Shection</h1>
-<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Cliente finalizou shection</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">New shection recebida:</p>
+<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">🔔 New Photo Selection</h1>
+<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Cliente finalizou selection</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">New selection recebida:</p>
 ${card([
   {label:"👤 Cliente", value: data.clientName + " (" + data.clientEmail + ")"},
   {label:"📁 Gallery", value: data.galleryTitle},
-  {label:"❤️ Shecionadas", value: data.shectedCount + " de " + data.totalPhotos + " fotos"},
+  {label:"❤️ Shecionadas", value: data.selectedCount + " de " + data.totalPhotos + " fotos"},
 ])}
   `);
-  return sendEmail({ to: ADMIN_EMAIL, subject: "🔔 " + data.clientName + " shecionou " + data.shectedCount + " fotos", html });
+  return sendEmail({ to: ADMIN_EMAIL, subject: "🔔 " + data.clientName + " shecionou " + data.selectedCount + " fotos", html });
 }

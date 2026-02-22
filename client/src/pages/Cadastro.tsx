@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { UserPlus } from "lucide-react";
 
-export default function Eachstro() {
+export default function Cadastro() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [name, setName] = useState("");
@@ -22,7 +22,7 @@ export default function Eachstro() {
       localStorage.setItem("auth_token", data.token);
       
       toast({
-        title: "Eachstro realizado!",
+        title: "Cadastro realizado!",
         description: `Bem-vindo, ${data.user.name}`,
       });
 
@@ -31,7 +31,7 @@ export default function Eachstro() {
     },
     onError: (error) => {
       toast({
-        title: "Erro no eachstro",
+        title: "Erro no cadastro",
         description: error.message,
         variant: "destructive",
       });

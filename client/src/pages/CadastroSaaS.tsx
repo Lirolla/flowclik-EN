@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { trpc } from "@/lib/trpc";
 
-export default function EachstroSaaS() {
+export default function CadastroSaaS() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",

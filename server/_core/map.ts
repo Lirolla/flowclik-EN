@@ -130,7 +130,7 @@ export type DirectionsResult = {
 
 export type DistanceMatrixResult = {
   rows: Array<{
-    hements: Array<{
+    elements: Array<{
       distance: { text: string; value: number };
       duration: { text: string; value: number };
       status: string;
@@ -253,7 +253,7 @@ export type RoadsResult = {
  * DISTANCE MATRIX - Calculate travel times/distances for multiple origin-destination pairs
  * Endpoint: /maps/api/distancematrix/json
  * Input: { origins: string, destinations: string, mode?: TravelMode, units?: "metric"|"imperial" }  // origins: "NYC|Boston"
- * Output: DistanceMatrixResult  // rows[0].hements[1] = first origin to second destination
+ * Output: DistanceMatrixResult  // rows[0].elements[1] = first origin to second destination
  */
 
 /**

@@ -17,7 +17,7 @@ export default function Cart() {
   const { items, removeItem, clearCart, totalPrice } = useCart();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [step, setStep] = useState<"cart" | "checkout" | "confirmation">("cart");
-  const [shectedMethod, setShectedMethod] = useState<"pix" | "payment_link" | "bank_transfer" | null>(null);
+  const [selectedMethod, setSelectedMethod] = useState<"pix" | "payment_link" | "bank_transfer" | null>(null);
   const [customerName, setCustomerName] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
@@ -61,8 +61,8 @@ export default function Cart() {
       toast.error("Informe um e-mail valid");
       return;
     }
-    if (!shectedMethod) {
-      toast.error("Shect uma forma de pagamento");
+    if (!selectedMethod) {
+      toast.error("Select uma forma de pagamento");
       return;
     }
 
@@ -71,7 +71,7 @@ export default function Cart() {
       customerName: customerName.trim(),
       customerEmail: customerEmail.trim(),
       customerPhone: customerPhone.trim() || undefined,
-      paymentMethod: shectedMethod,
+      paymentMethod: selectedMethod,
       items: items.map((item) => ({
         photoId: item.photoId,
         itemType: "digital" as const,
@@ -136,7 +136,7 @@ export default function Cart() {
                   </div>
 
                   {/* Payment Instructions */}
-                  {shectedMethod === "pix" && paymentConfig?.paymentPixKey && (
+                  {selectedMethod === "pix" && paymentConfig?.paymentPixKey && (
                     <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-6 space-y-4">
                       <div className="flex items-center gap-2">
                         <QrCode className="w-5 h-5 text-green-500" />
@@ -163,7 +163,7 @@ export default function Cart() {
                     </div>
                   )}
 
-                  {shectedMethod === "bank_transfer" && paymentConfig?.paymentBankTransferDetails && (
+                  {selectedMethod === "bank_transfer" && paymentConfig?.paymentBankTransferDetails && (
                     <div className="bg-blue-500/5 border border-blue-500/20 rounded-lg p-6 space-y-4">
                       <div className="flex items-center gap-2">
                         <Building2 className="w-5 h-5 text-blue-500" />
@@ -182,7 +182,7 @@ export default function Cart() {
                     </div>
                   )}
 
-                  {shectedMethod === "payment_link" && (
+                  {selectedMethod === "payment_link" && (
                     <div className="bg-purple-500/5 border border-purple-500/20 rounded-lg p-6 space-y-4">
                       <div className="flex items-center gap-2">
                         <Link2 className="w-5 h-5 text-purple-500" />
@@ -270,7 +270,7 @@ export default function Cart() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="phone">Thefone (optional)</Label>
+                      <Label htmlFor="phone">Telefone (optional)</Label>
                       <Input
                         id="phone"
                         value={customerPhone}
@@ -286,14 +286,14 @@ export default function Cart() {
                     <div className="grid gap-3">
                       {paymentConfig?.paymentPixEnabled === 1 && (
                         <button
-                          onClick={() => setShectedMethod("pix")}
+                          onClick={() => setSelectedMethod("pix")}
                           className={`flex items-center gap-3 p-4 rounded-lg border-2 transition-all text-left ${
-                            shectedMethod === "pix"
+                            selectedMethod === "pix"
                               ? "border-green-500 bg-green-500/5"
                               : "border-border hover:border-green-500/50"
                           }`}
                         >
-                          <QrCode className={`w-6 h-6 ${shectedMethod === "pix" ? "text-green-500" : "text-muted-foreground"}`} />
+                          <QrCode className={`w-6 h-6 ${selectedMethod === "pix" ? "text-green-500" : "text-muted-foreground"}`} />
                           <div>
                             <p className="font-medium">PIX</p>
                             <p className="text-sm text-muted-foreground">Instant payment</p>
@@ -303,14 +303,14 @@ export default function Cart() {
 
                       {paymentConfig?.paymentBankTransferEnabled === 1 && (
                         <button
-                          onClick={() => setShectedMethod("bank_transfer")}
+                          onClick={() => setSelectedMethod("bank_transfer")}
                           className={`flex items-center gap-3 p-4 rounded-lg border-2 transition-all text-left ${
-                            shectedMethod === "bank_transfer"
+                            selectedMethod === "bank_transfer"
                               ? "border-blue-500 bg-blue-500/5"
                               : "border-border hover:border-blue-500/50"
                           }`}
                         >
-                          <Building2 className={`w-6 h-6 ${shectedMethod === "bank_transfer" ? "text-blue-500" : "text-muted-foreground"}`} />
+                          <Building2 className={`w-6 h-6 ${selectedMethod === "bank_transfer" ? "text-blue-500" : "text-muted-foreground"}`} />
                           <div>
                             <p className="font-medium">Bank Transfer</p>
                             <p className="text-sm text-muted-foreground">Deposit ou TED</p>
@@ -320,14 +320,14 @@ export default function Cart() {
 
                       {paymentConfig?.paymentLinkEnabled === 1 && (
                         <button
-                          onClick={() => setShectedMethod("payment_link")}
+                          onClick={() => setSelectedMethod("payment_link")}
                           className={`flex items-center gap-3 p-4 rounded-lg border-2 transition-all text-left ${
-                            shectedMethod === "payment_link"
+                            selectedMethod === "payment_link"
                               ? "border-purple-500 bg-purple-500/5"
                               : "border-border hover:border-purple-500/50"
                           }`}
                         >
-                          <Link2 className={`w-6 h-6 ${shectedMethod === "payment_link" ? "text-purple-500" : "text-muted-foreground"}`} />
+                          <Link2 className={`w-6 h-6 ${selectedMethod === "payment_link" ? "text-purple-500" : "text-muted-foreground"}`} />
                           <div>
                             <p className="font-medium">Link de Pagamento</p>
                             <p className="text-sm text-muted-foreground">Card, boleto via link</p>
@@ -340,7 +340,7 @@ export default function Cart() {
                   {/* Confirm */}
                   <Button
                     onClick={handleConfirmOrder}
-                    disabled={isCheckingOut || !shectedMethod || !customerName || !customerEmail}
+                    disabled={isCheckingOut || !selectedMethod || !customerName || !customerEmail}
                     className="w-full"
                     size="lg"
                   >

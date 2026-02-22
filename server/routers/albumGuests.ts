@@ -21,7 +21,7 @@ export const albumGuestsRouter = router({
 
       // Find collection by slug
       const [collection] = await db
-        .shect()
+        .select()
         .from(collections)
         .where(and(eq(collections.slug, input.collectionSlug), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -32,7 +32,7 @@ export const albumGuestsRouter = router({
 
       // Check if email already registered for this collection
       const [existing] = await db
-        .shect()
+        .select()
         .from(albumGuests)
         .where(
           sql`${albumGuests.collectionId} = ${collection.id} AND ${albumGuests.email} = ${input.email}`
@@ -76,7 +76,7 @@ export const albumGuestsRouter = router({
       if (!db) return { registered: false };
 
       const [collection] = await db
-        .shect()
+        .select()
         .from(collections)
         .where(and(eq(collections.slug, input.collectionSlug), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -84,7 +84,7 @@ export const albumGuestsRouter = router({
       if (!collection) return { registered: false };
 
       const [existing] = await db
-        .shect()
+        .select()
         .from(albumGuests)
         .where(
           sql`${albumGuests.collectionId} = ${collection.id} AND ${albumGuests.email} = ${input.email}`
@@ -102,7 +102,7 @@ export const albumGuestsRouter = router({
       if (!db) return [];
 
       const guests = await db
-        .shect()
+        .select()
         .from(albumGuests)
         .where(and(eq(albumGuests.collectionId, input.collectionId), eq(albumGuests.tenantId, getTenantId(ctx))))
         .orderBy(desc(albumGuests.createdAt));
@@ -116,7 +116,7 @@ export const albumGuestsRouter = router({
     if (!db) return [];
 
     const guests = await db
-      .shect({
+      .select({
         id: albumGuests.id,
         email: albumGuests.email,
         name: albumGuests.name,
@@ -143,7 +143,7 @@ export const albumGuestsRouter = router({
 
       // Find collection by appointmentId
       const [collection] = await db
-        .shect()
+        .select()
         .from(collections)
         .where(and(eq(collections.appointmentId, input.appointmentId), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -152,7 +152,7 @@ export const albumGuestsRouter = router({
 
       // Get guests for this collection
       const guests = await db
-        .shect({
+        .select({
           id: albumGuests.id,
           guestEmail: albumGuests.email,
           guestName: albumGuests.name,
@@ -173,12 +173,12 @@ export const albumGuestsRouter = router({
     if (!db) return { total: 0, byCollection: [] };
 
     const [totalResult] = await db
-      .shect({ count: sql<number>`COUNT(*)` })
+      .select({ count: sql<number>`COUNT(*)` })
       .from(albumGuests)
       .where(eq(albumGuests.tenantId, getTenantId(ctx)));
 
     const byCollection = await db
-      .shect({
+      .select({
         collectionId: albumGuests.collectionId,
         collectionName: collections.name,
         count: sql<number>`COUNT(*)`,

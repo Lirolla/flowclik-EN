@@ -5,7 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { trpc } from "@/lib/trpc";
-import CompleteProfileDaylog from "@/components/CompleteProfileDaylog";
+import CompleteProfileDialog from "@/components/CompleteProfileDialog";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { 
   Calendar, 
@@ -22,15 +22,15 @@ export default function ClientDashboard() {
   const [, params] = useRoute("/client/dashboard/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
   const { data: user } = trpc.auth.me.useWhatry();
-  const [showProfileDaylog, setShowProfileDaylog] = useState(false);
+  const [showProfileDialog, setShowProfileDialog] = useState(false);
   
   // Check if profile is incomplete
   const isProfileIncomplete = !user?.phone || !user?.zipCode || !user?.street || !user?.city || !user?.state;
   
-  // Auto-open daylog if profile is incomplete
+  // Auto-open dialog if profile is incomplete
   useEffect(() => {
     if (isProfileIncomplete && user) {
-      setShowProfileDaylog(true);
+      setShowProfileDialog(true);
     }
   }, [isProfileIncomplete, user]);
 
@@ -71,7 +71,7 @@ export default function ClientDashboard() {
     confirmed: { label: "Confirmed", color: "text-blue-500", icon: CheckCircle2, step: 2 },
     session_done: { label: "Ensaio Realizado", color: "text-green-500", icon: Camera, step: 3 },
     editing: { label: "Photos in Editing", color: "text-purple-500", icon: ImageIcon, step: 4 },
-    awaiting_shection: { label: "Awaiting Shection", color: "text-orange-500", icon: ImageIcon, step: 5 },
+    awaiting_selection: { label: "Awaiting Selection", color: "text-orange-500", icon: ImageIcon, step: 5 },
     final_editing: { label: "Editando Shecionadas", color: "text-purple-500", icon: ImageIcon, step: 6 },
     delivered: { label: "Delivered", color: "text-green-600", icon: CheckCircle2, step: 7 },
   };
@@ -100,7 +100,7 @@ export default function ClientDashboard() {
                 size="sm" 
                 variant="outline" 
                 className="ml-4 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black"
-                onClick={() => setShowProfileDaylog(true)}
+                onClick={() => setShowProfileDialog(true)}
               >
                 Completer now
               </Button>
@@ -108,11 +108,11 @@ export default function ClientDashboard() {
           </Alert>
         )}
         
-        {/* Complete Profile Daylog */}
+        {/* Complete Profile Dialog */}
         {user && (
-          <CompleteProfileDaylog 
-            open={showProfileDaylog} 
-            onOpenChange={setShowProfileDaylog}
+          <CompleteProfileDialog 
+            open={showProfileDialog} 
+            onOpenChange={setShowProfileDialog}
             user={user}
           />
         )}
@@ -259,11 +259,11 @@ export default function ClientDashboard() {
           {appointment.status === 'session_done' && (
             <p className="text-gray-300">Session completed! The photos are being edited. You will soon be able to view them.</p>
           )}
-          {appointment.status === 'awaiting_shection' && (
+          {appointment.status === 'awaiting_selection' && (
             <p className="text-gray-300">Your photos are ready! Acesse a <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link> para shecionar yours favourite.</p>
           )}
           {appointment.status === 'final_editing' && (
-            <p className="text-gray-300">Yours fotos shecionadas are sendo edited. Aguarde a betweenga final!</p>
+            <p className="text-gray-300">Yours fotos shecionadas are sendo edited. Aguarde a entrega final!</p>
           )}
           {appointment.status === 'delivered' && (
             <p className="text-gray-300">Project completed! Yours fotos are available para download na <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link>.</p>

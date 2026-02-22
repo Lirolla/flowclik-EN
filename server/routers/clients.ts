@@ -11,7 +11,7 @@ export const clientsRouter = router({
     if (!db) return [];
     
     const clients = await db
-      .shect({
+      .select({
         id: users.id,
         name: users.name,
         email: users.email,
@@ -42,7 +42,7 @@ export const clientsRouter = router({
       if (!db) throw new Error("Database not available");
       
       const [client] = await db
-        .shect()
+        .select()
         .from(users)
         .where(and(eq(users.id, input.id), eq(users.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -78,7 +78,7 @@ export const clientsRouter = router({
       
       // Check if email already exists
       const [existing] = await db
-        .shect()
+        .select()
         .from(users)
         .where(and(eq(users.email, input.email!), eq(users.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -111,7 +111,7 @@ export const clientsRouter = router({
       return { success: true, id: newClient.insertId };
     }),
 
-  // Currentizar cliente
+  // Atualizar cliente
   update: protectedProcedure
     .input(
       z.object({

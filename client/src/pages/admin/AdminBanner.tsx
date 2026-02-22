@@ -6,19 +6,19 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  Daylog,
-  DaylogContent,
-  DaylogHeader,
-  DaylogTitle,
-  DaylogTrigger,
-} from "@/components/ui/daylog";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Plus, Trash2, Upload, Image as ImageIcon, Video } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import DashboardLayout from "@/components/DashboardLayout";
 
 export default function AdminBanner() {
   const { toast } = useToast();
-  const [isDaylogOpen, setIsDaylogOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingSlide, setEditingSlide] = useState<any>(null);
   const [formData, setFormData] = useState({
     title: "",
@@ -40,7 +40,7 @@ export default function AdminBanner() {
       toast({ title: "Slide created successfully!" });
       refetch();
       resetForm();
-      setIsDaylogOpen(false);
+      setIsDialogOpen(false);
     },
     onError: (error) => {
       toast({
@@ -56,7 +56,7 @@ export default function AdminBanner() {
       toast({ title: "Slide updated!" });
       refetch();
       resetForm();
-      setIsDaylogOpen(false);
+      setIsDialogOpen(false);
     },
     onError: (error) => {
       toast({
@@ -81,7 +81,7 @@ export default function AdminBanner() {
     },
   });
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputHement>) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setImageFile(file);
@@ -134,7 +134,7 @@ export default function AdminBanner() {
     setEditingSlide(null);
   };
 
-  const openEditDaylog = (slide: any) => {
+  const openEditDialog = (slide: any) => {
     setEditingSlide(slide);
     setFormData({
       title: slide.title || "",
@@ -147,12 +147,12 @@ export default function AdminBanner() {
       isActive: slide.isActive,
     });
     setImagePreview(slide.imageUrl || "");
-    setIsDaylogOpen(true);
+    setIsDialogOpen(true);
   };
 
-  const openCreateDaylog = () => {
+  const openCreateDialog = () => {
     resetForm();
-    setIsDaylogOpen(true);
+    setIsDialogOpen(true);
   };
 
   return (
@@ -165,19 +165,19 @@ export default function AdminBanner() {
             Gerencie os slides do banner principal
           </p>
         </div>
-        <Daylog open={isDaylogOpen} onOpenChange={setIsDaylogOpen}>
-          <DaylogTrigger asChild>
-            <Button onClick={openCreateDaylog}>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <DialogTrigger asChild>
+            <Button onClick={openCreateDialog}>
               <Plus className="w-4 h-4 mr-2" />
               New Slide
             </Button>
-          </DaylogTrigger>
-          <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-            <DaylogHeader>
-              <DaylogTitle>
+          </DialogTrigger>
+          <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
+            <DialogHeader>
+              <DialogTitle>
                 {editingSlide ? "Edit Slide" : "New Slide"}
-              </DaylogTitle>
-            </DaylogHeader>
+              </DialogTitle>
+            </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <Label htmlFor="image">Imagem do Slide</Label>
@@ -238,7 +238,7 @@ export default function AdminBanner() {
 
               <div>
                 <Label htmlFor="displayOn">Exibir em:</Label>
-                <shect
+                <select
                   id="displayOn"
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   value={formData.displayOn}
@@ -248,7 +248,7 @@ export default function AdminBanner() {
                 >
                   <option value="photography">Only Photography</option>
                   <option value="video">Only Video</option>
-                </shect>
+                </select>
                 <p className="text-xs text-muted-foreground mt-1">
                   Escolha where este banner will be exibido
                 </p>
@@ -339,7 +339,7 @@ export default function AdminBanner() {
                 <Button
                   type="button"
                   variant="outline"
-                  onClick={() => setIsDaylogOpen(false)}
+                  onClick={() => setIsDialogOpen(false)}
                   className="flex-1"
                 >
                   Cancsher
@@ -357,19 +357,19 @@ export default function AdminBanner() {
                 </Button>
               </div>
             </form>
-          </DaylogContent>
-        </Daylog>
+          </DialogContent>
+        </Dialog>
       </div>
 
       {!slides || slides.length === 0 ? (
         <Card>
           <CardContent className="py-20 text-center">
             <ImageIcon className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold mb-2">None slide eachstrado</h3>
+            <h3 className="text-xl font-semibold mb-2">None slide cadastrado</h3>
             <p className="text-muted-foreground mb-6">
               Crie your first slide para o banner principal
             </p>
-            <Button onClick={openCreateDaylog}>
+            <Button onClick={openCreateDialog}>
               <Plus className="w-4 h-4 mr-2" />
               Criar First Slide
             </Button>
@@ -420,7 +420,7 @@ export default function AdminBanner() {
                     variant="outline"
                     size="sm"
                     className="flex-1"
-                    onClick={() => openEditDaylog(slide)}
+                    onClick={() => openEditDialog(slide)}
                   >
                     Editar
                   </Button>

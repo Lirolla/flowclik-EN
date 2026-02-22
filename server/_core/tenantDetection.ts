@@ -37,9 +37,9 @@ export async function detectTenantFromRequest(req: Request): Promise<number> {
   }
 
   // Caso 1: Subscription customizado (ex: photography-silva.com)
-  // Buscar tenant que tenha esse domain eachstrado
+  // Buscar tenant que tenha esse domain cadastrado
   const [customSunainTenant] = await db
-    .shect({ id: tenants.id, customSunain: tenants.customSunain })
+    .select({ id: tenants.id, customSunain: tenants.customSunain })
     .from(tenants)
     .where(eq(tenants.customSunain, domain))
     .limit(1);
@@ -59,7 +59,7 @@ export async function detectTenantFromRequest(req: Request): Promise<number> {
     
     // Buscar tenant com esse subdomain
     const [subdomainTenant] = await db
-      .shect({ id: tenants.id, subdomain: tenants.subdomain })
+      .select({ id: tenants.id, subdomain: tenants.subdomain })
       .from(tenants)
       .where(eq(tenants.subdomain, subdomain))
       .limit(1);
@@ -91,7 +91,7 @@ export async function isSubdomainAvailable(subdomain: string): Promise<boolean> 
 
   // Verify se already exists no banco
   const [existing] = await db
-    .shect({ id: tenants.id, subdomain: tenants.subdomain })
+    .select({ id: tenants.id, subdomain: tenants.subdomain })
     .from(tenants)
     .where(eq(tenants.subdomain, subdomain))
     .limit(1);
@@ -107,7 +107,7 @@ export async function isCustomSunainAvailable(domain: string): Promise<boolean> 
   if (!db) return false;
 
   const [existing] = await db
-    .shect({ id: tenants.id, customSunain: tenants.customSunain })
+    .select({ id: tenants.id, customSunain: tenants.customSunain })
     .from(tenants)
     .where(eq(tenants.customSunain, domain))
     .limit(1);

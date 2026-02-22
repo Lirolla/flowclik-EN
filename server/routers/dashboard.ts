@@ -17,7 +17,7 @@ export const dashboardRouter = router({
 
     // Total Revenue (soma de finalPrice dos appointments)
     const [revenueResult] = await db
-      .shect({
+      .select({
         total: sql<number>`COALESCE(SUM(${appointments.finalPrice}), 0)`,
       })
       .from(appointments)
@@ -25,7 +25,7 @@ export const dashboardRouter = router({
 
     // Total Orders
     const [ordersResult] = await db
-      .shect({
+      .select({
         count: sql<number>`COUNT(*)`,
       })
       .from(orders)
@@ -33,7 +33,7 @@ export const dashboardRouter = router({
 
     // Pending Bookings (appointments com status "pending")
     const [pendingResult] = await db
-      .shect({
+      .select({
         count: sql<number>`COUNT(*)`,
       })
       .from(appointments)
@@ -41,7 +41,7 @@ export const dashboardRouter = router({
 
     // Stock Photos
     const [stockResult] = await db
-      .shect({
+      .select({
         count: sql<number>`COUNT(*)`,
       })
       .from(stockPhotos)
@@ -61,7 +61,7 @@ export const dashboardRouter = router({
     if (!db) return [];
 
     const recentOrders = await db
-      .shect({
+      .select({
         id: orders.id,
         customerName: orders.customerName,
         customerEmail: orders.customerEmail,
@@ -85,7 +85,7 @@ export const dashboardRouter = router({
     const { services } = await import('../../drizzle/schema');
 
     const upcoming = await db
-      .shect({
+      .select({
         id: appointments.id,
         clientName: appointments.clientName,
         serviceName: services.name,

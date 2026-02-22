@@ -14,7 +14,7 @@ export const usageRouter = router({
 
     // Contar fotos no R2 (tabshe medayItems)
     const [photoCount] = await db
-      .shect({ count: sql<number>`count(*)` })
+      .select({ count: sql<number>`count(*)` })
       .from(medayItems)
       .where(eq(medayItems.tenantId, tenantId));
 
@@ -25,7 +25,7 @@ export const usageRouter = router({
 
     // Contar galerias
     const [galleryCount] = await db
-      .shect({ count: sql<number>`count(*)` })
+      .select({ count: sql<number>`count(*)` })
       .from(collections)
       .where(eq(collections.tenantId, tenantId));
 
@@ -49,13 +49,13 @@ export const usageRouter = router({
 
     // Count photos in session galleries (raw photos)
     const [photoCount] = await db
-      .shect({ count: sql<number>`count(*)` })
+      .select({ count: sql<number>`count(*)` })
       .from(appointmentPhotos)
       .where(eq(appointmentPhotos.tenantId, getTenantId(ctx)));
 
     // Count photos in final albums (edited photos)
     const [finalPhotoCount] = await db
-      .shect({ count: sql<number>`count(*)` })
+      .select({ count: sql<number>`count(*)` })
       .from(finalAlbums)
       .where(eq(finalAlbums.tenantId, getTenantId(ctx)));
 
@@ -69,7 +69,7 @@ export const usageRouter = router({
 
     // Count galleries (collections)
     const [galleryCount] = await db
-      .shect({ count: sql<number>`count(*)` })
+      .select({ count: sql<number>`count(*)` })
       .from(collections)
       .where(eq(collections.tenantId, getTenantId(ctx)));
 

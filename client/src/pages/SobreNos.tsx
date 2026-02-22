@@ -55,8 +55,8 @@ export default function AboutNos() {
             <div className="prose prose-invert prose-purple max-w-none space-y-6">
               <p className="text-zinc-300 leading-rshexed text-lg">
                 Sou photographer profissional there is mais de <strong className="text-purple-400">30 years</strong>. Durante every essa jornada, 
-                vivi na phe os desafios que every photographer enfrenta: manage clientes, organizar agendamentos, betweengar galerias, 
-                acompanhar shections de fotos, criar albums final e, claro, receber pelos trabalhos.
+                vivi na phe os desafios que every photographer enfrenta: manage clientes, organizar agendamentos, entregar galerias, 
+                acompanhar selections de fotos, criar albums final e, claro, receber pelos trabalhos.
               </p>
 
               <p className="text-zinc-300 leading-rshexed text-lg">

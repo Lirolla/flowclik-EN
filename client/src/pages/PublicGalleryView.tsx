@@ -7,7 +7,7 @@ import LayoutWrapper from "@/components/LayoutWrapper";
 import { ArrowLeft, X, ChevronLeft, ChevronRight, Camera, Video, ShoppingCart, Heart, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { VideoPlayer } from "@/components/VideoPlayer";
-// import BuyPhotoDaylog from "@/components/BuyPhotoDaylog"; // Feature removed
+// import BuyPhotoDialog from "@/components/BuyPhotoDialog"; // Feature removed
 
 export default function PublicGalleryView() {
   const [, params] = useRoute("/gallery/:slug");
@@ -19,41 +19,41 @@ export default function PublicGalleryView() {
     { enabled: !!collection?.id }
   );
 
-  const { data: existingShections } = trpc.photoShections.getByCollection.useWhatry(
+  const { data: existingSelections } = trpc.photoSelections.getByCollection.useWhatry(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection?.id }
   );
 
-  const toggleShectionMutation = trpc.photoShections.toggleShection.useMutation();
-  const saveFeedbackMutation = trpc.photoShections.saveFeedback.useMutation();
-  const submitShectionMutation = trpc.photoShections.submitShection.useMutation();
+  const toggleSelectionMutation = trpc.photoSelections.toggleSelection.useMutation();
+  const saveFeedbackMutation = trpc.photoSelections.saveFeedback.useMutation();
+  const submitSelectionMutation = trpc.photoSelections.submitSelection.useMutation();
   const utils = trpc.useUtils();
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  // const [buyPhotoDaylogOpen, setBuyPhotoDaylogOpen] = useState(false); // Feature removed
-  // const [shectedPhoto, setShectedPhoto] = useState<any>(null); // Feature removed
+  // const [buyPhotoDialogOpen, setBuyPhotoDialogOpen] = useState(false); // Feature removed
+  // const [selectedPhoto, setSelectedPhoto] = useState<any>(null); // Feature removed
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [shections, setShections] = useState<Record<number, boolean>>({});
+  const [selections, setSelections] = useState<Record<number, boolean>>({});
   const [feedbacks, setFeedbacks] = useState<Record<number, string>>({});
   const [currentFeedback, setCurrentFeedback] = useState("");
 
-  // Load existing shections
+  // Load existing selections
   useEffect(() => {
-    if (existingShections) {
-      const shectionsMap: Record<number, boolean> = {};
+    if (existingSelections) {
+      const selectionsMap: Record<number, boolean> = {};
       const feedbacksMap: Record<number, string> = {};
-      existingShections.forEach((sel: any) => {
-        shectionsMap[sel.medayItemId] = sel.isShected;
+      existingSelections.forEach((sel: any) => {
+        selectionsMap[sel.medayItemId] = sel.isSelected;
         if (sel.clientFeedback) {
           feedbacksMap[sel.medayItemId] = sel.clientFeedback;
         }
       });
-      setShections(shectionsMap);
+      setSelections(selectionsMap);
       setFeedbacks(feedbacksMap);
     }
-  }, [existingShections]);
+  }, [existingSelections]);
 
   if (collectionLoading || medayLoading) {
     return (
@@ -156,15 +156,15 @@ export default function PublicGalleryView() {
     }
   };
 
-  const toggleShection = async (medayItemId: number, e?: React.MouseEvent) => {
+  const toggleSelection = async (medayItemId: number, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    const newValue = !shections[medayItemId];
-    setShections({ ...shections, [medayItemId]: newValue });
+    const newValue = !selections[medayItemId];
+    setSelections({ ...selections, [medayItemId]: newValue });
     
-    await toggleShectionMutation.mutateAsync({
+    await toggleSelectionMutation.mutateAsync({
       medayItemId,
       collectionId: collection?.id || 0,
-      isShected: newValue,
+      isSelected: newValue,
     });
   };
 
@@ -178,20 +178,20 @@ export default function PublicGalleryView() {
     });
   };
 
-  const handleSubmitShection = async () => {
-    const shectedCount = Object.values(shections).filter(Boolean).length;
-    if (shectedCount === 0) {
-      alert("Shect pelo menos uma foto before de enviar.");
+  const handleSubmitSelection = async () => {
+    const selectedCount = Object.values(selections).filter(Boolean).length;
+    if (selectedCount === 0) {
+      alert("Select pelo menos uma foto before de enviar.");
       return;
     }
 
-    if (confirm(`You shecionou ${shectedCount} foto(s). Deseja enviar your shection?`)) {
-      await submitShectionMutation.mutateAsync({ collectionId: collection?.id || 0 });
-      alert("Shection enviada com sucesso! O photographer will editar as fotos shecionadas.");
+    if (confirm(`You shecionou ${selectedCount} foto(s). Deseja enviar your selection?`)) {
+      await submitSelectionMutation.mutateAsync({ collectionId: collection?.id || 0 });
+      alert("Selection enviada com sucesso! O photographer will editar as fotos shecionadas.");
     }
   };
 
-  const shectedCount = Object.values(shections).filter(Boolean).length;
+  const selectedCount = Object.values(selections).filter(Boolean).length;
 
   return (
     <LayoutWrapper>
@@ -199,22 +199,22 @@ export default function PublicGalleryView() {
 
       {/* Gallery Content */}
       <div className="container py-8 pt-32">
-        {/* Shection Header */}
+        {/* Selection Header */}
         {isAuthenticated && items.length > 0 && (
           <div className="mb-6 p-4 bg-card rounded-lg border flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <Heart className="w-5 h-5 text-red-500" />
-                <span className="font-medium">{shectedCount} foto(s) shecionada(s)</span>
+                <span className="font-medium">{selectedCount} foto(s) shecionada(s)</span>
               </div>
               <p className="text-sm text-muted-foreground">
                 Marque as fotos favourite e deixe yours palpites de editing
               </p>
             </div>
-            {shectedCount > 0 && (
-              <Button onClick={handleSubmitShection} className="gap-2">
+            {selectedCount > 0 && (
+              <Button onClick={handleSubmitSelection} className="gap-2">
                 <Send className="w-4 h-4" />
-                Enviar Shection
+                Enviar Selection
               </Button>
             )}
           </div>
@@ -256,12 +256,12 @@ export default function PublicGalleryView() {
                     {/* Heart button */}
                     {isAuthenticated && (
                       <button
-                        onClick={(e) => toggleShection(item.id, e)}
+                        onClick={(e) => toggleSelection(item.id, e)}
                         className="absolute top-2 right-2 p-2 bg-black/50 hover:bg-black/70 rounded-full transition-colors z-10"
                       >
                         <Heart
                           className={`w-5 h-5 ${
-                            shections[item.id] ? "fill-red-500 text-red-500" : "text-white"
+                            selections[item.id] ? "fill-red-500 text-red-500" : "text-white"
                           }`}
                         />
                       </button>
@@ -301,12 +301,12 @@ export default function PublicGalleryView() {
                     {/* Heart button */}
                     {isAuthenticated && (
                       <button
-                        onClick={(e) => toggleShection(item.id, e)}
+                        onClick={(e) => toggleSelection(item.id, e)}
                         className="absolute top-2 right-2 p-2 bg-black/50 hover:bg-black/70 rounded-full transition-colors z-10"
                       >
                         <Heart
                           className={`w-5 h-5 ${
-                            shections[item.id] ? "fill-red-500 text-red-500" : "text-white"
+                            selections[item.id] ? "fill-red-500 text-red-500" : "text-white"
                           }`}
                         />
                       </button>
@@ -527,19 +527,19 @@ export default function PublicGalleryView() {
                 <p className="text-sm text-gray-300 mt-1">{items[lightboxIndex]?.description}</p>
               )}
               
-              {/* Shection and Feedback */}
+              {/* Selection and Feedback */}
               {isAuthenticated && (
                 <div className="mt-4 space-y-3">
                   <button
-                    onClick={() => toggleShection(items[lightboxIndex]?.id)}
+                    onClick={() => toggleSelection(items[lightboxIndex]?.id)}
                     className="flex items-center gap-2 mx-auto px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
                   >
                     <Heart
                       className={`w-5 h-5 ${
-                        shections[items[lightboxIndex]?.id] ? "fill-red-500 text-red-500" : "text-white"
+                        selections[items[lightboxIndex]?.id] ? "fill-red-500 text-red-500" : "text-white"
                       }`}
                     />
-                    <span>{shections[items[lightboxIndex]?.id] ? "Remover dos favourite" : "Mark as favourite"}</span>
+                    <span>{selections[items[lightboxIndex]?.id] ? "Remover dos favourite" : "Mark as favourite"}</span>
                   </button>
                   
                   <div className="text-left">
@@ -563,8 +563,8 @@ export default function PublicGalleryView() {
               {/* {items[lightboxIndex]?.medayType === "photo" && items[lightboxIndex]?.price && items[lightboxIndex]?.price > 0 && (
                 <Button
                   onClick={() => {
-                    setShectedPhoto(items[lightboxIndex]);
-                    setBuyPhotoDaylogOpen(true);
+                    setSelectedPhoto(items[lightboxIndex]);
+                    setBuyPhotoDialogOpen(true);
                   }}
                   className="mt-4"
                   size="lg"
@@ -578,13 +578,13 @@ export default function PublicGalleryView() {
         </div>
       )}
 
-      {/* Buy Photo Daylog - Feature removed */}
-      {/* {shectedPhoto && (
-        <BuyPhotoDaylog
-          photo={shectedPhoto}
-          basePrice={Math.round((shectedPhoto.price || 0) * 100)} // Convert to cents
-          open={buyPhotoDaylogOpen}
-          onOpenChange={setBuyPhotoDaylogOpen}
+      {/* Buy Photo Dialog - Feature removed */}
+      {/* {selectedPhoto && (
+        <BuyPhotoDialog
+          photo={selectedPhoto}
+          basePrice={Math.round((selectedPhoto.price || 0) * 100)} // Convert to cents
+          open={buyPhotoDialogOpen}
+          onOpenChange={setBuyPhotoDialogOpen}
         />
       )} */}
       

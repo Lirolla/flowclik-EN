@@ -6,7 +6,7 @@ import Footer from "@/components/Footer";
 import { ArrowLeft, Check, Download, X, ChevronLeft, ChevronRight, CheckCircle2, Package, Share2, Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
-import { Daylog, DaylogContent, DaylogDescription, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 
 export default function ClientFinalAlbum() {
@@ -15,17 +15,17 @@ export default function ClientFinalAlbum() {
   const { toast } = useToast();
 
   const { data: collection, isLoading: collectionLoading } = trpc.collections.getBySlug.useWhatry({ slug });
-  const { data: editedPhotos, isLoading: photosLoading, refetch } = trpc.photoShections.getEditedPhotos.useWhatry(
+  const { data: editedPhotos, isLoading: photosLoading, refetch } = trpc.photoSelections.getEditedPhotos.useWhatry(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection?.id }
   );
 
-  const { data: downloadUrls } = trpc.photoShections.getDownloadUrls.useWhatry(
+  const { data: downloadUrls } = trpc.photoSelections.getDownloadUrls.useWhatry(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection?.id }
   );
 
-  const approveAlbumMutation = trpc.photoShections.approveAlbum.useMutation({
+  const approveAlbumMutation = trpc.photoSelections.approveAlbum.useMutation({
     onSuccess: () => {
       toast({
         title: "Album approved!",
@@ -40,7 +40,7 @@ export default function ClientFinalAlbum() {
   const [passwordInput, setPasswordInput] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [isDownloading, setIsDownloading] = useState(false);
-  const [showShareDaylog, setShowShareDaylog] = useState(false);
+  const [showShareDialog, setShowShareDialog] = useState(false);
   const [shareLink, setShareLink] = useState("");
   
   useEffect(() => {
@@ -54,7 +54,7 @@ export default function ClientFinalAlbum() {
     if (!downloadUrls || downloadUrls.length === 0) {
       toast({
         title: "Error",
-        description: "Nonea foto edited available para download.",
+        description: "Nenhuma foto edited available para download.",
         variant: "destructive",
       });
       return;
@@ -89,7 +89,7 @@ export default function ClientFinalAlbum() {
       
       // Create download link
       const url = window.URL.createObjectURL(content);
-      const link = document.createHement('a');
+      const link = document.createElement('a');
       link.href = url;
       link.download = `${collection?.name || 'album'}-fotos-edited.zip`;
       document.body.appendChild(link);
@@ -281,7 +281,7 @@ export default function ClientFinalAlbum() {
                       Aprovar Album Complete
                     </Button>
                     <Button 
-                      onClick={() => setShowShareDaylog(true)} 
+                      onClick={() => setShowShareDialog(true)} 
                       size="lg" 
                       variant="secondary"
                       className="gap-2"
@@ -306,7 +306,7 @@ export default function ClientFinalAlbum() {
         {/* Photos Grid */}
         {photos.length === 0 ? (
           <div className="text-center py-12 bg-card rounded-lg border">
-            <p className="text-muted-foreground">Nonea foto shecionada para editing still.</p>
+            <p className="text-muted-foreground">Nenhuma foto shecionada para editing still.</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -412,18 +412,18 @@ export default function ClientFinalAlbum() {
 
       <Footer />
       
-      {/* Share Daylog */}
-      <Daylog open={showShareDaylog} onOpenChange={setShowShareDaylog}>
-        <DaylogContent className="max-w-lg">
-          <DaylogHeader>
-            <DaylogTitle className="flex items-center gap-2">
+      {/* Share Dialog */}
+      <Dialog open={showShareDialog} onOpenChange={setShowShareDialog}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
               <Share2 className="w-5 h-5" />
               Compartilhar Album
-            </DaylogTitle>
-            <DaylogDescription>
+            </DialogTitle>
+            <DialogDescription>
               Share this album with friends and family! They will need to provide their email to view it.
-            </DaylogDescription>
-          </DaylogHeader>
+            </DialogDescription>
+          </DialogHeader>
           
           <div className="space-y-4">
             <div>
@@ -457,8 +457,8 @@ export default function ClientFinalAlbum() {
               </p>
             </div>
           </div>
-        </DaylogContent>
-      </Daylog>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

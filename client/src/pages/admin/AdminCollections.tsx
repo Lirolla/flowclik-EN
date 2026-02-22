@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
-import { Daylog, DaylogContent, DaylogDescription, DaylogHeader, DaylogTitle, DaylogTrigger } from "@/components/ui/daylog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { FolderOpen, Plus, Pencil, Trash2, Eye, EyeOff, Upload as UploadIcon, Calendar, Image as ImageIcon } from "lucide-react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { toast } from "sonner";
@@ -193,25 +193,25 @@ function AdminCollectionsContent() {
           <p className="text-muted-foreground mt-2">Gerencie as galerias de fotos e videos</p>
         </div>
 
-        <Daylog open={isCreateOpen || editingId !== null} onOpenChange={(open) => {
+        <Dialog open={isCreateOpen || editingId !== null} onOpenChange={(open) => {
           if (!open) {
             setIsCreateOpen(false);
             setEditingId(null);
             resetForm();
           }
         }}>
-          <DaylogTrigger asChild>
+          <DialogTrigger asChild>
             <Button size="lg" onClick={() => setIsCreateOpen(true)}>
               <Plus className="w-4 h-4 mr-2" />
               New Gallery
             </Button>
-          </DaylogTrigger>
-          <DaylogContent className="max-w-2xl">
-          <DaylogHeader>
-            <DaylogTitle>{editingId ? "Edit Gallery" : "New Gallery"}</DaylogTitle>
-            <DaylogDescription>
+          </DialogTrigger>
+          <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>{editingId ? "Edit Gallery" : "New Gallery"}</DialogTitle>
+            <DialogDescription>
               {editingId ? "Update gallery details" : "Create a new gallery to organise your photos"}
-            </DaylogDescription>
+            </DialogDescription>
             {editingId && clientName && (
               <div className="mt-2 p-2 bg-muted rounded-md">
                 <p className="text-sm font-medium text-muted-foreground">
@@ -219,7 +219,7 @@ function AdminCollectionsContent() {
                 </p>
               </div>
             )}
-          </DaylogHeader>
+          </DialogHeader>
 
             <div className="space-y-4 mt-4">
               <div className="space-y-2">
@@ -333,7 +333,7 @@ function AdminCollectionsContent() {
 
               <div className="space-y-2">
                 <Label htmlFor="layoutType">Tipo de Layout</Label>
-                <shect
+                <select
                   id="layoutType"
                   value={formData.layoutType}
                   onChange={(e) => setFormData({ ...formData, layoutType: e.target.value as any })}
@@ -342,7 +342,7 @@ function AdminCollectionsContent() {
                   <option value="masonry">Masonry (fotos se encaixam)</option>
                   <option value="grid">Grid (grade uniforme)</option>
                   <option value="fullscreen">Fullscreen (tshe cheia)</option>
-                </shect>
+                </select>
               </div>
 
               <div className="flex items-center gap-4">
@@ -390,8 +390,8 @@ function AdminCollectionsContent() {
                 </Button>
               </div>
             </div>
-          </DaylogContent>
-        </Daylog>
+          </DialogContent>
+        </Dialog>
       </div>
 
       {/* Collections List */}
@@ -503,7 +503,7 @@ function AdminCollectionsContent() {
         <Card>
           <CardContent className="py-12 text-center">
             <FolderOpen className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Nonea galeria criada</h3>
+            <h3 className="text-xl font-semibold mb-2">Nenhuma galeria criada</h3>
             <p className="text-muted-foreground mb-4">
               Crie your first galeria para organizar fotos e videos
             </p>
