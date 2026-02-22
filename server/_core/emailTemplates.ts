@@ -383,7 +383,7 @@ ${card([
   {label:"🌐 Subdomínio", value: data.subdomain + ".flowclik.com"},
   {label:"📋 Plano", value: data.plan},
 ])}
-${btn("Ver no Painel Admin", "https://flowclik.com/sistema/fotografos")}
+${btn("Ver no Painel Admin", "https://flowclik.com/system/photographers")}
   `);
   return sendEmail({ to: ADMIN_EMAIL, subject: "🆕 Novo Fotógrafo: " + data.name, html });
 }
@@ -402,7 +402,7 @@ ${card([{label:"📋 Assunto", value: data.subject}])}
 <div style="background-color:#141824;border-radius:10px;padding:15px 20px;margin:15px 0;border-left:3px solid #ef4444;">
 <p style="color:#d1d5db;font-size:14px;line-height:1.6;margin:0;">${data.message.substring(0, 500)}</p>
 </div>
-${btn("Responder Ticket", "https://flowclik.com/sistema/tickets", "#ef4444")}
+${btn("Responder Ticket", "https://flowclik.com/system/tickets", "#ef4444")}
   `);
   return sendEmail({ to: ADMIN_EMAIL, subject: "🎫 Novo Ticket: " + data.subject, html });
 }

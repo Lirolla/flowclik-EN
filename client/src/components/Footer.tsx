@@ -100,14 +100,14 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/galerias">
+                <Link href="/galleries">
                   <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     Galerias
                   </a>
                 </Link>
               </li>
               <li>
-                <Link href="/servicos">
+                <Link href="/services">
                   <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     Serviços
                   </a>
@@ -121,14 +121,14 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/sobre">
+                <Link href="/about">
                   <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     Sobre
                   </a>
                 </Link>
               </li>
               <li>
-                <Link href="/contato">
+                <Link href="/contact">
                   <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
                     Contato
                   </a>

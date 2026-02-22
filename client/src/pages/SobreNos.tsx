@@ -174,7 +174,7 @@ export default function SobreNos() {
               Experimente FlowClik gratuitamente por 7 dias e descubra como é ter um sistema que realmente entende 
               o trabalho de um fotógrafo profissional.
             </p>
-            <Link href="/cadastro">
+            <Link href="/register">
               <Button size="lg" className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white px-8">
                 Começar Teste Grátis
               </Button>

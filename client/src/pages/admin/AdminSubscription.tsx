@@ -78,8 +78,8 @@ export default function AdminSubscription() {
     setIsSubscribing(true);
     try {
       const result = await createCheckout.mutateAsync({
-        successUrl: `${window.location.origin}/admin/assinatura?success=plan`,
-        cancelUrl: `${window.location.origin}/admin/assinatura?canceled=true`,
+        successUrl: `${window.location.origin}/admin/subscription?success=plan`,
+        cancelUrl: `${window.location.origin}/admin/subscription?canceled=true`,
       });
       if (result.url) {
         window.location.href = result.url;
@@ -95,8 +95,8 @@ export default function AdminSubscription() {
     setIsLoading(true);
     try {
       const result = await buyStorageAddon.mutateAsync({
-        successUrl: `${window.location.origin}/admin/assinatura?success=storage`,
-        cancelUrl: `${window.location.origin}/admin/assinatura?canceled=true`,
+        successUrl: `${window.location.origin}/admin/subscription?success=storage`,
+        cancelUrl: `${window.location.origin}/admin/subscription?canceled=true`,
       });
       if (result.url) {
         window.location.href = result.url;
@@ -112,8 +112,8 @@ export default function AdminSubscription() {
     setIsLoading(true);
     try {
       const result = await buyGalleriesAddon.mutateAsync({
-        successUrl: `${window.location.origin}/admin/assinatura?success=galleries`,
-        cancelUrl: `${window.location.origin}/admin/assinatura?canceled=true`,
+        successUrl: `${window.location.origin}/admin/subscription?success=galleries`,
+        cancelUrl: `${window.location.origin}/admin/subscription?canceled=true`,
       });
       if (result.url) {
         window.location.href = result.url;
@@ -148,20 +148,20 @@ export default function AdminSubscription() {
       toast.success("Assinatura ativada com sucesso! Bem-vindo ao FlowClik!");
       utils.subscriptions.getCurrent.invalidate();
       utils.subscriptions.checkTrialStatus.invalidate();
-      window.history.replaceState({}, '', '/admin/assinatura');
+      window.history.replaceState({}, '', '/admin/subscription');
     } else if (params.get('success') === 'storage') {
       toast.success("+10GB adicionados com sucesso!");
       utils.subscriptions.getActiveAddons.invalidate();
       utils.subscriptions.getCurrent.invalidate();
-      window.history.replaceState({}, '', '/admin/assinatura');
+      window.history.replaceState({}, '', '/admin/subscription');
     } else if (params.get('success') === 'galleries') {
       toast.success("+10 Galerias adicionadas com sucesso!");
       utils.subscriptions.getActiveAddons.invalidate();
       utils.subscriptions.getCurrent.invalidate();
-      window.history.replaceState({}, '', '/admin/assinatura');
+      window.history.replaceState({}, '', '/admin/subscription');
     } else if (params.get('canceled') === 'true') {
       toast.error("Compra cancelada");
-      window.history.replaceState({}, '', '/admin/assinatura');
+      window.history.replaceState({}, '', '/admin/subscription');
     }
   }, []);
 

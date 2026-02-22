@@ -7,7 +7,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Link } from "wouter";
 
 export default function AdminFinalAlbum() {
-  const [, params] = useRoute("/admin/galerias/:id/album-final");
+  const [, params] = useRoute("/admin/galleries/:id/final-album");
   const collectionId = params?.id ? parseInt(params.id) : 0;
   const { toast } = useToast();
   const [uploading, setUploading] = useState(false);
@@ -110,7 +110,7 @@ export default function AdminFinalAlbum() {
 
   return (
     <div className="p-8">
-      <Link href="/admin/agendamentos">
+      <Link href="/admin/appointments">
         <Button variant="ghost" className="mb-4">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Voltar para Agendamentos

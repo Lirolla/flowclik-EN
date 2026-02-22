@@ -10,7 +10,7 @@ import { VideoPlayer } from "@/components/VideoPlayer";
 // import BuyPhotoDialog from "@/components/BuyPhotoDialog"; // Feature removed
 
 export default function PublicGalleryView() {
-  const [, params] = useRoute("/galeria/:slug");
+  const [, params] = useRoute("/gallery/:slug");
   const slug = params?.slug || "";
 
   const { data: collection, isLoading: collectionLoading } = trpc.collections.getBySlug.useQuery({ slug });
@@ -67,7 +67,7 @@ export default function PublicGalleryView() {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen bg-background">
         <h1 className="text-2xl font-bold mb-4">Galeria não encontrada</h1>
-        <Link href="/galerias">
+        <Link href="/galleries">
           <Button variant="outline">
             <ArrowLeft className="w-4 h-4 mr-2" />
             Voltar para galerias
@@ -119,7 +119,7 @@ export default function PublicGalleryView() {
             </Button>
           </form>
           
-          <Link href="/galerias" className="block mt-4">
+          <Link href="/galleries" className="block mt-4">
             <Button variant="outline" className="w-full">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Voltar

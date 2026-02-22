@@ -53,7 +53,7 @@ function AdminEventoVendasContent() {
 
   const handleCopyLink = () => {
     if (!selectedEvent?.collectionPublicSlug) return;
-    const link = `${window.location.origin}/galeria-compra/${selectedEvent.collectionPublicSlug}`;
+    const link = `${window.location.origin}/gallery-shop/${selectedEvent.collectionPublicSlug}`;
     navigator.clipboard.writeText(link);
     toast.success("Link copiado!");
   };
@@ -204,7 +204,7 @@ function AdminEventoVendasContent() {
                             Preço por foto: R$ {((selectedEvent.collectionPricePerPhoto || 0) / 100).toFixed(2)}
                           </p>
                           <p className="text-sm text-muted-foreground">
-                            Link: /galeria-compra/{selectedEvent.collectionPublicSlug}
+                            Link: /gallery-shop/{selectedEvent.collectionPublicSlug}
                           </p>
                         </div>
                       </div>

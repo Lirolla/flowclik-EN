@@ -18,7 +18,7 @@ export default function ClienteAcesso() {
     onSuccess: (appointment) => {
       if (appointment) {
         // Redirecionar para o dashboard do cliente
-        setLocation(`/cliente/dashboard/${appointment.id}`);
+        setLocation(`/client/dashboard/${appointment.id}`);
       } else {
         setError("Email ou senha incorretos.");
       }
@@ -130,7 +130,7 @@ export default function ClienteAcesso() {
             <p className="text-sm text-gray-400 text-center">
               Não encontrou seu agendamento?<br />
               Entre em contato conosco através do{" "}
-              <a href="/contato" className="text-red-400 hover:underline">
+              <a href="/contact" className="text-red-400 hover:underline">
                 formulário de contato
               </a>
             </p>

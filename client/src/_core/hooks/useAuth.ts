@@ -16,7 +16,7 @@ type User = {
 
 const AUTH_TOKEN_KEY = "auth_token";
 
-// Função para fazer requisição manual com o token (igual ao /sistema/login)
+// Função para fazer requisição manual com o token (igual ao /system/login)
 async function fetchUserWithToken(): Promise<User | null> {
   const token = localStorage.getItem(AUTH_TOKEN_KEY);
   if (!token) return null;
@@ -45,7 +45,7 @@ export function useAuth(options?: UseAuthOptions) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
-  // Buscar usuário usando fetch direto (igual ao /sistema/login)
+  // Buscar usuário usando fetch direto (igual ao /system/login)
   useEffect(() => {
     const checkAuth = async () => {
       setLoading(true);

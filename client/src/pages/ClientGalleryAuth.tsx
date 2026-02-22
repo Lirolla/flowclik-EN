@@ -11,7 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { ProtectedImage } from "@/components/ProtectedImage";
 
 export default function ClientGalleryAuth() {
-  const [, params] = useRoute("/cliente/galeria/:id");
+  const [, params] = useRoute("/client/gallery/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
   
   const [selectedPhoto, setSelectedPhoto] = useState<any>(null);

@@ -5,7 +5,7 @@ import { trpc } from "@/lib/trpc";
 import { AlertCircle, CheckCircle, CreditCard, Calendar } from "lucide-react";
 
 export default function ClientPayments() {
-  const [, params] = useRoute("/cliente/pagamentos/:id");
+  const [, params] = useRoute("/client/payments/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
 
   const { data: appointment, isLoading } = trpc.appointments.getById.useQuery(
@@ -177,7 +177,7 @@ export default function ClientPayments() {
           <Card className="bg-blue-900/20 border-blue-600 p-6">
             <p className="text-gray-300">
               <strong>Precisa de ajuda com o pagamento?</strong><br />
-              Entre em contato com o fotógrafo através do <a href={`/cliente/chat/${appointmentId}`} className="text-red-400 underline">chat</a> para combinar a melhor forma de pagamento.
+              Entre em contato com o fotógrafo através do <a href={`/client/chat/${appointmentId}`} className="text-red-400 underline">chat</a> para combinar a melhor forma de pagamento.
             </p>
           </Card>
         )}

@@ -10,7 +10,7 @@ export function checkSistemaAuth(): boolean {
 
 export function sistemaLogout() {
   localStorage.removeItem(SISTEMA_TOKEN_KEY);
-  window.location.href = "/sistema/login";
+  window.location.href = "/system/login";
 }
 
 interface SistemaAuthGuardProps {
@@ -26,7 +26,7 @@ export default function SistemaAuthGuard({ children }: SistemaAuthGuardProps) {
     setIsAuthenticated(authenticated);
     
     if (!authenticated) {
-      setLocation("/sistema/login");
+      setLocation("/system/login");
     }
   }, [setLocation]);
 

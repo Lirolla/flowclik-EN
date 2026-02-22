@@ -19,7 +19,7 @@ export function checkSistemaAuth(): boolean {
 
 export function sistemaLogout() {
   localStorage.removeItem(SISTEMA_TOKEN_KEY);
-  window.location.href = "/sistema/login";
+  window.location.href = "/system/login";
 }
 
 export default function SistemaLogin() {
@@ -39,7 +39,7 @@ export default function SistemaLogin() {
       localStorage.setItem(SISTEMA_TOKEN_KEY, "admin_master_authenticated");
       toast.success("Login realizado com sucesso!");
       // Usar window.location para forçar reload e atualizar o cliente tRPC
-      window.location.href = "/sistema";
+      window.location.href = "/system";
     } else {
       toast.error("Credenciais inválidas");
     }

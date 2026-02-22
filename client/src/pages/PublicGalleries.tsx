@@ -43,7 +43,7 @@ export default function PublicGalleries() {
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {collections.map((collection: any) => (
-              <Link key={collection.id} href={`/galeria/${collection.slug}`}>
+              <Link key={collection.id} href={`/gallery/${collection.slug}`}>
                 <a>
                   <Card className="overflow-hidden group hover:shadow-xl transition-all cursor-pointer">
                     <div className="relative aspect-square overflow-hidden bg-muted">

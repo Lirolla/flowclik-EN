@@ -10,7 +10,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Input } from "@/components/ui/input";
 
 export default function ClientFinalAlbum() {
-  const [, params] = useRoute("/album-final/:slug");
+  const [, params] = useRoute("/final-album/:slug");
   const slug = params?.slug || "";
   const { toast } = useToast();
 
@@ -45,7 +45,7 @@ export default function ClientFinalAlbum() {
   
   useEffect(() => {
     if (collection?.slug) {
-      const link = `${window.location.origin}/album-compartilhavel/${collection.slug}`;
+      const link = `${window.location.origin}/shared-album/${collection.slug}`;
       setShareLink(link);
     }
   }, [collection]);
@@ -234,7 +234,7 @@ export default function ClientFinalAlbum() {
       <div className="container py-8 pt-32">
         {/* Header */}
         <div className="mb-8">
-          <Link href="/galerias">
+          <Link href="/galleries">
             <Button variant="ghost" className="mb-4">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Voltar para galerias

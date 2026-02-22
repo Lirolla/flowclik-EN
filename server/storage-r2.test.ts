@@ -20,7 +20,7 @@ describe('R2 Storage Configuration', () => {
     
     // Testar paths de galeria
     const galeriaPath = R2Paths.galeria(1, 'casamento-maria', 'originais', 'foto.jpg');
-    expect(galeriaPath).toBe('tenant-1/galerias/casamento-maria/originais/foto.jpg');
+    expect(galeriaPath).toBe('tenant-1/galleries/casamento-maria/originais/foto.jpg');
     
     // Testar paths de banner
     const bannerPath = R2Paths.banner(1, 'banner-123.jpg');

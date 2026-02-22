@@ -347,12 +347,12 @@ export default function Portfolio() {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
-                <Link href="/contato">
+                <Link href="/contact">
                   <a>Falar Conosco</a>
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
-                <Link href="/servicos">
+                <Link href="/services">
                   <a>Ver Serviços</a>
                 </Link>
               </Button>

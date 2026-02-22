@@ -13,11 +13,11 @@ export function ClientLayout({ children, appointmentId }: ClientLayoutProps) {
   const { user } = useAuth();
 
   const menuItems = [
-    { href: `/cliente/dashboard/${appointmentId}`, label: "Dashboard", icon: Home },
-    { href: `/cliente/galeria/${appointmentId}`, label: "Galeria", icon: Image },
-    { href: `/cliente/chat/${appointmentId}`, label: "Chat", icon: MessageSquare },
-    { href: `/cliente/pagamentos/${appointmentId}`, label: "Pagamentos", icon: CreditCard },
-    { href: `/cliente/contrato/${appointmentId}`, label: "Contrato", icon: FileText },
+    { href: `/client/dashboard/${appointmentId}`, label: "Dashboard", icon: Home },
+    { href: `/client/gallery/${appointmentId}`, label: "Galeria", icon: Image },
+    { href: `/client/chat/${appointmentId}`, label: "Chat", icon: MessageSquare },
+    { href: `/client/payments/${appointmentId}`, label: "Pagamentos", icon: CreditCard },
+    { href: `/client/contract/${appointmentId}`, label: "Contrato", icon: FileText },
   ];
 
   return (

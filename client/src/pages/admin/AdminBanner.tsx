@@ -295,7 +295,7 @@ export default function AdminBanner() {
                   <Input
                     id="buttonLink"
                     type="text"
-                    placeholder="/servicos"
+                    placeholder="/services"
                     value={formData.buttonLink}
                     onChange={(e) =>
                       setFormData({ ...formData, buttonLink: e.target.value })

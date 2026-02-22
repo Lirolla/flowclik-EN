@@ -108,12 +108,12 @@ export default function Home() {
                   </div>
                   <div className="flex gap-4">
                     <Button asChild size="lg" className="flex-1">
-                      <Link href="/agendar">
+                      <Link href="/book">
                         <a>Agendar Agora</a>
                       </Link>
                     </Button>
                     <Button asChild size="lg" variant="outline" className="flex-1">
-                      <Link href="/servicos">
+                      <Link href="/services">
                         <a>Ver Serviços</a>
                       </Link>
                     </Button>
@@ -235,7 +235,7 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {featuredCollections.map((collection: any) => (
-                <Link key={collection.id} href={`/galeria/${collection.slug}`}>
+                <Link key={collection.id} href={`/gallery/${collection.slug}`}>
                   <Card className="group overflow-hidden cursor-pointer hover:shadow-xl transition-all duration-300">
                     <div className="aspect-[4/3] overflow-hidden bg-muted">
                       {collection.coverImageUrl ? (
@@ -267,7 +267,7 @@ export default function Home() {
 
             <div className="text-center mt-12">
               <Button asChild size="lg">
-                <Link href="/galerias">
+                <Link href="/galleries">
                   <a>Ver Todas as Galerias</a>
                 </Link>
               </Button>

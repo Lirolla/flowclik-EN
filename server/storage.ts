@@ -106,7 +106,7 @@ function normalizeKey(relKey: string): string {
  */
 export async function initializeTenantStorage(tenantId: number): Promise<void> {
   const folders = [
-    `tenant-${tenantId}/galerias/`,
+    `tenant-${tenantId}/galleries/`,
     `tenant-${tenantId}/banners/`,
     `tenant-${tenantId}/portfolio/`,
     `tenant-${tenantId}/ensaios/`,
@@ -135,10 +135,10 @@ export async function initializeTenantStorage(tenantId: number): Promise<void> {
 export const R2Paths = {
   /**
    * Path para fotos de galeria
-   * @example tenant-1/galerias/casamento-maria/originais/foto.jpg
+   * @example tenant-1/galleries/casamento-maria/originais/foto.jpg
    */
   galeria: (tenantId: number, galeriaSlug: string, tipo: 'originais' | 'thumbnails' | 'preview', filename: string) => {
-    return `tenant-${tenantId}/galerias/${galeriaSlug}/${tipo}/${filename}`;
+    return `tenant-${tenantId}/galleries/${galeriaSlug}/${tipo}/${filename}`;
   },
 
   /**

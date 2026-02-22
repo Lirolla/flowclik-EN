@@ -11,7 +11,7 @@ import LayoutWrapper from "@/components/LayoutWrapper";
 import { useCurrency } from "@/hooks/useCurrency";
 
 export default function OrderStatus() {
-  const [, params] = useRoute("/pedido/:id");
+  const [, params] = useRoute("/order/:id");
   const orderId = params?.id ? Number(params.id) : null;
   const [email, setEmail] = useState("");
   const [searched, setSearched] = useState(false);

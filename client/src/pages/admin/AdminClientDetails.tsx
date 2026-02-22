@@ -18,7 +18,7 @@ export default function AdminClientDetails() {
 }
 
 function AdminClientDetailsContent() {
-  const [, params] = useRoute("/admin/cliente/:email");
+  const [, params] = useRoute("/admin/client/:email");
   const email = params?.email ? decodeURIComponent(params.email) : "";
   
   const { data: siteConfig } = trpc.siteConfig.get.useQuery();
@@ -193,7 +193,7 @@ function AdminClientDetailsContent() {
                       )}
                     </div>
                     <Button variant="outline" size="sm" asChild>
-                      <Link href="/admin/agendamentos">
+                      <Link href="/admin/appointments">
                         <a>Ver Detalhes</a>
                       </Link>
                     </Button>
@@ -248,7 +248,7 @@ function AdminClientDetailsContent() {
                       </div>
                     </div>
                     <Button variant="outline" size="sm" asChild>
-                      <Link href="/admin/pedidos">
+                      <Link href="/admin/orders">
                         <a>Ver Detalhes</a>
                       </Link>
                     </Button>

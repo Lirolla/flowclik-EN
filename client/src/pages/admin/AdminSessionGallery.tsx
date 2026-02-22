@@ -16,7 +16,7 @@ export default function AdminSessionGallery() {
 }
 
 function AdminSessionGalleryContent() {
-  const [, params] = useRoute("/admin/galeria/:appointmentId");
+  const [, params] = useRoute("/admin/gallery/:appointmentId");
   const appointmentId = params?.appointmentId ? parseInt(params.appointmentId) : 0;
   const [copied, setCopied] = useState(false);
   const { toast } = useToast();
@@ -179,7 +179,7 @@ function AdminSessionGalleryContent() {
               Use a página de <strong>Galerias</strong> para fazer upload das fotos do ensaio
             </p>
             <Button asChild>
-              <Link href={`/admin/galerias/${galleryData.id}/upload`}>
+              <Link href={`/admin/galleries/${galleryData.id}/upload`}>
                 <a>Ir para Upload de Galerias</a>
               </Link>
             </Button>

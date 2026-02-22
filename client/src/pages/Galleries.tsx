@@ -27,7 +27,7 @@ export default function Galleries() {
         ) : collections && collections.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {collections.map((collection) => (
-              <Link key={collection.id} href={`/galeria/${collection.slug}`}>
+              <Link key={collection.id} href={`/gallery/${collection.slug}`}>
                 <Card className="overflow-hidden hover:scale-105 transition-transform cursor-pointer">
                   {collection.coverImageUrl ? (
                     <div className="relative h-64 overflow-hidden">
@@ -91,7 +91,7 @@ export default function Galleries() {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
-                <Link href="/contato">
+                <Link href="/contact">
                   <a>Falar Conosco</a>
                 </Link>
               </Button>

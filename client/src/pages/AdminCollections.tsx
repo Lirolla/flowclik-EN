@@ -198,7 +198,7 @@ function AdminCollectionsContent() {
                   placeholder="casamento-joao-maria"
                 />
                 <p className="text-xs text-muted-foreground">
-                  URL: /galeria/{slug || "..."}
+                  URL: /gallery/{slug || "..."}
                 </p>
               </div>
 
@@ -283,7 +283,7 @@ function AdminCollectionsContent() {
                       )}
                       <div>
                         <h3 className="text-xl font-semibold">{collection.name}</h3>
-                        <p className="text-sm text-muted-foreground">/galeria/{collection.slug}</p>
+                        <p className="text-sm text-muted-foreground">/gallery/{collection.slug}</p>
                       </div>
                     </div>
 
@@ -336,7 +336,7 @@ function AdminCollectionsContent() {
                     <Button
                       variant="default"
                       size="sm"
-                      onClick={() => setLocation(`/admin/galeria/${collection.id}/upload`)}
+                      onClick={() => setLocation(`/admin/gallery/${collection.id}/upload`)}
                     >
                       <Upload className="w-4 h-4 mr-2" />
                       Gerenciar Fotos

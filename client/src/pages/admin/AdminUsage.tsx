@@ -63,7 +63,7 @@ export default function AdminUsage() {
             Monitore o uso de armazenamento, galerias e fotos da sua conta
           </p>
         </div>
-        <Button onClick={() => navigate("/admin/assinatura")} className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
+        <Button onClick={() => navigate("/admin/subscription")} className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
           <Sparkles className="w-4 h-4 mr-2" />
           Fazer Upgrade
         </Button>
@@ -199,18 +199,18 @@ export default function AdminUsage() {
                 Próxima cobrança: {new Date(stats.plan.nextBilling).toLocaleDateString('pt-BR')}
               </div>
             </div>
-            <Button variant="outline" onClick={() => navigate("/admin/assinatura")}>
+            <Button variant="outline" onClick={() => navigate("/admin/subscription")}>
               <TrendingUp className="w-4 h-4 mr-2" />
               Gerenciar Plano
             </Button>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
-            <Button variant="outline" className="w-full" onClick={() => navigate("/admin/assinatura")}>
+            <Button variant="outline" className="w-full" onClick={() => navigate("/admin/subscription")}>
               Comprar +10GB
               <span className="ml-auto text-muted-foreground">£3.99/mês</span>
             </Button>
-            <Button variant="outline" className="w-full" onClick={() => navigate("/admin/assinatura")}>
+            <Button variant="outline" className="w-full" onClick={() => navigate("/admin/subscription")}>
               Comprar +10 Galerias
               <span className="ml-auto text-muted-foreground">£2.99/mês</span>
             </Button>

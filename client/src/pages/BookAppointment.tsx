@@ -119,7 +119,7 @@ export default function BookAppointment() {
                 </p>
                 <div className="flex gap-4 justify-center">
                   <Button asChild variant="outline">
-                    <Link href="/servicos">
+                    <Link href="/services">
                       <a>Ver Serviços</a>
                     </Link>
                   </Button>

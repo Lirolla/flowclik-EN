@@ -1,29 +1,29 @@
 /**
- * Helper para rotas do site do fotógrafo
+ * Helper for photographer's site routes
  * 
- * PRODUÇÃO REAL: Todas as rotas na raiz (/)
- * Sem mais /site/* - sistema pronto para produção
+ * PRODUCTION: All routes at root (/)
+ * No more /site/* - system ready for production
  */
 
 /**
- * Detecta se está em subdomínio de tenant
- * (Mantido para compatibilidade, mas não mais usado para rotas)
+ * Detects if running on a tenant subdomain
+ * (Kept for compatibility, but no longer used for routes)
  */
 export function isSubdomain(): boolean {
   if (typeof window === 'undefined') return false;
   
   const host = window.location.hostname;
   
-  // Localhost = desenvolvimento
+  // Localhost = development
   if (host === 'localhost' || host === '127.0.0.1' || host.includes('manusvm.computer')) {
     return false;
   }
   
-  // Subdomínio = produção (ex: joao.flowclik.com)
-  // flowclik.com sozinho = landing page (não é subdomínio de tenant)
+  // Subdomain = production (e.g.: john.flowclik.com)
+  // flowclik.com alone = landing page (not a tenant subdomain)
   const parts = host.split('.');
   if (parts.length > 2) {
-    // Tem subdomínio (ex: joao.flowclik.com)
+    // Has subdomain (e.g.: john.flowclik.com)
     return true;
   }
   
@@ -31,22 +31,22 @@ export function isSubdomain(): boolean {
 }
 
 /**
- * Retorna a URL base do site do fotógrafo
+ * Returns the photographer's site base URL
  * 
- * SEMPRE RETORNA '' (raiz) - Produção real
+ * ALWAYS RETURNS '' (root) - Production
  */
 export function getSiteBaseUrl(): string {
   return '';
 }
 
 /**
- * Gera URL completa para páginas do site do fotógrafo
+ * Generates full URL for photographer's site pages
  * 
- * @param path - Caminho relativo (ex: "servicos", "portfolio")
- * @returns URL completa (ex: "/servicos", "/portfolio")
+ * @param path - Relative path (e.g.: "services", "portfolio")
+ * @returns Full URL (e.g.: "/services", "/portfolio")
  */
 export function getSiteUrl(path: string = ''): string {
-  const cleanPath = path.replace(/^\//, ''); // Remove / inicial se tiver
+  const cleanPath = path.replace(/^\//, ''); // Remove leading / if present
   
   if (!cleanPath) {
     return '/';
@@ -56,16 +56,16 @@ export function getSiteUrl(path: string = ''): string {
 }
 
 /**
- * Rotas do site do fotógrafo (sempre na raiz)
+ * Photographer's site routes (always at root)
  */
 export const SITE_ROUTES = {
   home: () => '/',
-  servicos: () => '/servicos',
+  services: () => '/services',
   portfolio: () => '/portfolio',
-  sobre: () => '/sobre',
-  contato: () => '/contato',
-  fotosStock: () => '/fotos-stock',
-  galerias: () => '/galerias',
+  about: () => '/about',
+  contact: () => '/contact',
+  stockPhotos: () => '/stock-photos',
+  galleries: () => '/galleries',
   video: () => '/video',
-  agendar: () => '/agendar',
+  book: () => '/book',
 } as const;

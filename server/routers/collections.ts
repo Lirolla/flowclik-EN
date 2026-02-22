@@ -337,7 +337,7 @@ export const collectionsRouter = router({
       }
 
       const baseUrl = process.env.VITE_FRONTEND_FORGE_API_URL?.replace('/api', '') || 'https://lirolla.com';
-      const galleryUrl = `${baseUrl}/galeria/${collection[0].slug}`;
+      const galleryUrl = `${baseUrl}/gallery/${collection[0].slug}`;
       
       // Contar fotos na galeria
       const photos = await db!.select().from(mediaItems).where(eq(mediaItems.collectionId, input.collectionId));
@@ -401,7 +401,7 @@ export const collectionsRouter = router({
       return { 
         success: true,
         publicSlug: slug,
-        url: `/galeria-compra/${slug}`,
+        url: `/gallery-shop/${slug}`,
       };
     }),
 

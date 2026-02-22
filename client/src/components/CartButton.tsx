@@ -13,7 +13,7 @@ export function CartButton() {
 
   return (
     <Button
-      onClick={() => setLocation("/carrinho")}
+      onClick={() => setLocation("/cart")}
       className="fixed bottom-6 right-6 z-50 rounded-full shadow-lg"
       size="lg"
     >

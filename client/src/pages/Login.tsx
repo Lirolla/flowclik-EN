@@ -46,7 +46,7 @@ export default function Login() {
         localStorage.setItem(AUTH_TOKEN_KEY, token);
         toast.success(`Bem-vindo, ${userName}!`);
         
-        // Usar window.location para forçar reload completo (igual ao /sistema/login)
+        // Usar window.location para forçar reload completo (igual ao /system/login)
         window.location.href = "/admin";
       } else {
         toast.error("Erro ao fazer login. Tente novamente.");
@@ -105,7 +105,7 @@ export default function Login() {
         <div className="mt-6 text-center text-sm text-muted-foreground">
           <p>
             Não tem uma conta?{" "}
-            <a href="/cadastro" className="text-primary hover:underline">
+            <a href="/register" className="text-primary hover:underline">
               Cadastre-se
             </a>
           </p>

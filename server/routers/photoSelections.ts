@@ -356,7 +356,7 @@ export const photoSelectionsRouter = router({
 
       if (appointment[0]) {
         const baseUrl = process.env.VITE_FRONTEND_FORGE_API_URL?.replace('/api', '') || 'https://lirolla.com';
-        const albumUrl = `${baseUrl}/galeria/${collection[0].slug}/album`;
+        const albumUrl = `${baseUrl}/gallery/${collection[0].slug}/album`;
 
         // Send final album email to client
         await sendPhotosDeliveredEmail({

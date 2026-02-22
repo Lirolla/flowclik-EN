@@ -223,7 +223,7 @@ export default function AdminGalleryUpload() {
         <div className="text-center text-red-500">
           <p>Erro ao carregar galeria: {error?.message || "Galeria não encontrada"}</p>
           <p className="text-sm mt-2">ID: {collectionId}</p>
-          <Button onClick={() => setLocation("/admin/galerias")} className="mt-4">
+          <Button onClick={() => setLocation("/admin/galleries")} className="mt-4">
             Voltar para Galerias
           </Button>
         </div>
@@ -239,7 +239,7 @@ export default function AdminGalleryUpload() {
       <div className="mb-8">
         <Button
           variant="ghost"
-          onClick={() => setLocation("/admin/galerias")}
+          onClick={() => setLocation("/admin/galleries")}
           className="mb-4"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
@@ -254,7 +254,7 @@ export default function AdminGalleryUpload() {
             </p>
           </div>
           <Button
-            onClick={() => setLocation(`/admin/galerias/${collectionId}/album-final`)}
+            onClick={() => setLocation(`/admin/galleries/${collectionId}/album-final`)}
             variant="outline"
             className="gap-2"
           >

@@ -10,7 +10,7 @@ import { Send, Paperclip, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function ClientChat() {
-  const [, params] = useRoute("/cliente/chat/:id");
+  const [, params] = useRoute("/client/chat/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
   // const { user } = useAuth(); // Clientes não usam OAuth, usam email+senha do agendamento
   const { toast } = useToast();

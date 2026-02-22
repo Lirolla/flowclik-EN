@@ -12,7 +12,7 @@ const sistemaProcedure = publicProcedure.use(({ ctx, next }) => {
   if (ctx.user?.role === "admin" || ctx.user?.role === "master") {
     return next({ ctx });
   }
-  // Check 2: Sistema auth header (from /sistema panel)
+  // Check 2: Sistema auth header (from /system panel)
   const sistemaAuth = ctx.req.headers["x-sistema-auth"];
   if (sistemaAuth === "admin_master_authenticated") {
     return next({ ctx });

@@ -30,13 +30,13 @@ export default function WeddingVideosNavbar({ currentPage }: WeddingVideosNavbar
 
   const menuItems = [
     { label: "Início", href: SITE_ROUTES.home(), id: "inicio" },
-    { label: "Galerias", href: SITE_ROUTES.galerias(), id: "galerias" },
-    { label: "Serviços", href: SITE_ROUTES.servicos(), id: "servicos" },
+    { label: "Galerias", href: SITE_ROUTES.galleries(), id: "galerias" },
+    { label: "Serviços", href: SITE_ROUTES.services(), id: "servicos" },
     { label: "Portfólio", href: SITE_ROUTES.portfolio(), id: "portfolio" },
-    ...(showStockPhotos ? [{ label: "Fotos Stock", href: SITE_ROUTES.fotosStock(), id: "fotos-stock" }] : []),
+    ...(showStockPhotos ? [{ label: "Fotos Stock", href: SITE_ROUTES.stockPhotos(), id: "fotos-stock" }] : []),
     ...(showVideo ? [{ label: "Vídeos", href: SITE_ROUTES.video(), id: "video" }] : []),
-    { label: "Sobre", href: SITE_ROUTES.sobre(), id: "sobre" },
-    { label: "Contato", href: SITE_ROUTES.contato(), id: "contato" },
+    { label: "Sobre", href: SITE_ROUTES.about(), id: "sobre" },
+    { label: "Contato", href: SITE_ROUTES.contact(), id: "contato" },
   ];
 
   return (
@@ -86,13 +86,13 @@ export default function WeddingVideosNavbar({ currentPage }: WeddingVideosNavbar
               ))}
               
               {/* Botões Cliente e Carrinho */}
-              <Link href="/cliente-acesso">
+              <Link href="/client-access">
                 <a className="px-4 py-2 bg-[#C9A961] text-white text-xs font-light tracking-widest hover:bg-[#D4AF37] transition-colors flex items-center gap-2">
                   <User className="w-4 h-4" />
                   Cliente
                 </a>
               </Link>
-              <Link href="/carrinho">
+              <Link href="/cart">
                 <a className="px-4 py-2 bg-[#C9A961] text-white text-xs font-light tracking-widest hover:bg-[#D4AF37] transition-colors flex items-center gap-2">
                   <ShoppingCart className="w-4 h-4" />
                   Carrinho
@@ -133,7 +133,7 @@ export default function WeddingVideosNavbar({ currentPage }: WeddingVideosNavbar
                 </Link>
               ))}
               
-              <Link href="/cliente-acesso">
+              <Link href="/client-access">
                 <a
                   onClick={closeMenu}
                   className="flex items-center justify-center gap-2 w-full py-3 px-6 bg-[#C9A961] text-white text-sm font-light tracking-widest hover:bg-[#D4AF37] transition-colors"
@@ -142,7 +142,7 @@ export default function WeddingVideosNavbar({ currentPage }: WeddingVideosNavbar
                   Cliente
                 </a>
               </Link>
-              <Link href="/carrinho">
+              <Link href="/cart">
                 <a
                   onClick={closeMenu}
                   className="flex items-center justify-center gap-2 w-full py-3 px-6 bg-[#C9A961] text-white text-sm font-light tracking-widest hover:bg-[#D4AF37] transition-colors"

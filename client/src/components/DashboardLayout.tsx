@@ -38,38 +38,38 @@ const menuItems = [
   { type: "separator" },
   
   // Gestão Principal
-  { icon: Users, label: "Clientes", path: "/admin/clientes" },
-  { icon: Calendar, label: "Agendamentos", path: "/admin/agendamentos" },
-  { icon: FolderOpen, label: "Galeria", path: "/admin/galerias" },
-  { icon: Heart, label: "Seleção do Cliente", path: "/admin/selecoes" },
-  { icon: MessageSquare, label: "Mensagens", path: "/admin/mensagens" },
+  { icon: Users, label: "Clientes", path: "/admin/clients" },
+  { icon: Calendar, label: "Agendamentos", path: "/admin/appointments" },
+  { icon: FolderOpen, label: "Galeria", path: "/admin/galleries" },
+  { icon: Heart, label: "Seleção do Cliente", path: "/admin/selections" },
+  { icon: MessageSquare, label: "Mensagens", path: "/admin/messages" },
   { icon: Mail, label: "Email Marketing", path: "/admin/email-marketing" },
   
   // Separador
   { type: "separator", label: "Vendas" },
   
   // Vendas
-  { icon: DollarSign, label: "Vendas de Eventos", path: "/admin/vendas-eventos", group: "vendas" },
+  { icon: DollarSign, label: "Vendas de Eventos", path: "/admin/event-sales", group: "vendas" },
   { icon: ImageIcon, label: "Fotos Stock", path: "/admin/stock", group: "vendas" },
-  { icon: ShoppingCart, label: "Pedidos", path: "/admin/pedidos", group: "vendas" },
+  { icon: ShoppingCart, label: "Pedidos", path: "/admin/orders", group: "vendas" },
   
   // Separador
   { type: "separator", label: "Configurações" },
   
   // Configurações
   { icon: Image, label: "Banner", path: "/admin/banner", group: "config" },
-  { icon: Briefcase, label: "Serviços", path: "/admin/servicos", group: "config" },
+  { icon: Briefcase, label: "Serviços", path: "/admin/services", group: "config" },
   { icon: Camera, label: "Portfólio", path: "/admin/portfolio", group: "config" },
-  { icon: FileText, label: "Contratos", path: "/admin/contratos", group: "config" },
+  { icon: FileText, label: "Contratos", path: "/admin/contracts", group: "config" },
   
   // Separador
   { type: "separator", label: "Sistema" },
   
   // Sistema
-  { icon: CreditCard, label: "Assinatura", path: "/admin/assinatura", group: "sistema" },
-  { icon: Globe, label: "Domínio", path: "/admin/dominio-email", group: "sistema" },
-  { icon: MessageSquare, label: "Suporte", path: "/admin/suporte", group: "sistema" },
-  { icon: Settings, label: "Configurações", path: "/admin/configuracoes", group: "sistema" },
+  { icon: CreditCard, label: "Assinatura", path: "/admin/subscription", group: "sistema" },
+  { icon: Globe, label: "Domínio", path: "/admin/domain-email", group: "sistema" },
+  { icon: MessageSquare, label: "Suporte", path: "/admin/support", group: "sistema" },
+  { icon: Settings, label: "Configurações", path: "/admin/settings", group: "sistema" },
   
   // Separador
   { type: "separator" },
@@ -212,8 +212,8 @@ function DashboardLayoutContent({
   
   // Quando bloqueado, redirecionar para assinatura
   useEffect(() => {
-    if (isExpired && location !== '/admin/assinatura') {
-      setLocation('/admin/assinatura');
+    if (isExpired && location !== '/admin/subscription') {
+      setLocation('/admin/subscription');
     }
   }, [isExpired, location, setLocation]);
 
@@ -304,7 +304,7 @@ function DashboardLayoutContent({
                 const groupClass = item.group ? `group-${item.group}` : "";
                 
                 // Verificar se item está bloqueado (tudo exceto Assinatura quando expirado)
-                const isLocked = isExpired && item.path !== '/admin/assinatura';
+                const isLocked = isExpired && item.path !== '/admin/subscription';
                 
                 return (
                   <SidebarMenuItem key={item.path}>
@@ -313,7 +313,7 @@ function DashboardLayoutContent({
                       onClick={() => {
                         if (isLocked) {
                           toast.error('Sua conta está suspensa. Regularize sua assinatura para continuar.');
-                          setLocation('/admin/assinatura');
+                          setLocation('/admin/subscription');
                           return;
                         }
                         item.path && setLocation(item.path);
@@ -398,7 +398,7 @@ function DashboardLayoutContent({
       {/* Banner de conta suspensa */}
       {isExpired && (
         <div className="fixed top-0 left-0 right-0 z-50 bg-red-600 text-white text-center py-2 px-4 text-sm font-medium shadow-lg">
-          🔒 Sua conta está suspensa. Acesse <button onClick={() => setLocation('/admin/assinatura')} className="underline font-bold hover:text-red-100">Assinatura</button> para regularizar.
+          🔒 Sua conta está suspensa. Acesse <button onClick={() => setLocation('/admin/subscription')} className="underline font-bold hover:text-red-100">Assinatura</button> para regularizar.
         </div>
       )}
       

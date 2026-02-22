@@ -95,7 +95,7 @@ export default function SistemaDashboard() {
 
       {/* Links Rápidos */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Link href="/sistema/fotografos">
+        <Link href="/system/photographers">
           <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer">
             <Users className="w-8 h-8 text-blue-600 mb-3" />
             <h3 className="font-bold text-lg mb-2">Gerenciar Fotógrafos</h3>
@@ -105,7 +105,7 @@ export default function SistemaDashboard() {
           </Card>
         </Link>
 
-        <Link href="/sistema/avisos">
+        <Link href="/system/notices">
           <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer">
             <AlertCircle className="w-8 h-8 text-purple-600 mb-3" />
             <h3 className="font-bold text-lg mb-2">Avisos Globais</h3>
@@ -115,7 +115,7 @@ export default function SistemaDashboard() {
           </Card>
         </Link>
 
-        <Link href="/sistema/tickets">
+        <Link href="/system/tickets">
           <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer">
             <Package className="w-8 h-8 text-green-600 mb-3" />
             <h3 className="font-bold text-lg mb-2">Tickets de Suporte</h3>

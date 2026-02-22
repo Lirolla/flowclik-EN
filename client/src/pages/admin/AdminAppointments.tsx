@@ -174,7 +174,7 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
               Use a página de <strong>Galerias</strong> para fazer upload das fotos do ensaio
             </p>
             <Button asChild>
-              <a href={`/admin/galerias/${galleryData.id}/upload`}>
+              <a href={`/admin/galleries/${galleryData.id}/upload`}>
                 Ir para Upload de Galerias
               </a>
             </Button>
@@ -807,7 +807,7 @@ function AdminAppointmentsContent() {
                       <Button
                         variant="default"
                         size="sm"
-                        onClick={() => window.location.href = `/admin/galerias/${collection.id}/album-final`}
+                        onClick={() => window.location.href = `/admin/galleries/${collection.id}/album-final`}
                         className="bg-purple-600 hover:bg-purple-700"
                       >
                         <Sparkles className="w-4 h-4 mr-2" />

@@ -21,13 +21,13 @@ export default function WeddingNavbar({ currentPage }: WeddingNavbarProps) {
 
   const navItems = [
     { label: "Início", path: SITE_ROUTES.home() },
-    { label: "Galerias", path: SITE_ROUTES.galerias() },
-    { label: "Serviços", path: SITE_ROUTES.servicos() },
+    { label: "Galerias", path: SITE_ROUTES.galleries() },
+    { label: "Serviços", path: SITE_ROUTES.services() },
     { label: "Portfólio", path: SITE_ROUTES.portfolio() },
-    ...(showStockPhotos ? [{ label: "Fotos Stock", path: SITE_ROUTES.fotosStock() }] : []),
+    ...(showStockPhotos ? [{ label: "Fotos Stock", path: SITE_ROUTES.stockPhotos() }] : []),
     ...(showVideo ? [{ label: "Vídeos", path: SITE_ROUTES.video() }] : []),
-    { label: "Sobre", path: SITE_ROUTES.sobre() },
-    { label: "Contato", path: SITE_ROUTES.contato() },
+    { label: "Sobre", path: SITE_ROUTES.about() },
+    { label: "Contato", path: SITE_ROUTES.contact() },
   ];
 
   return (
@@ -79,13 +79,13 @@ export default function WeddingNavbar({ currentPage }: WeddingNavbarProps) {
               
               {/* Botões Cliente e Carrinho */}
               <div className="flex items-center gap-3">
-                <Link href="/cliente-acesso">
+                <Link href="/client-access">
                   <a className="px-3 py-1.5 text-xs bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors flex items-center gap-2">
                     <User className="w-3.5 h-3.5" />
                     Cliente
                   </a>
                 </Link>
-                <Link href="/carrinho">
+                <Link href="/cart">
                   <a className="px-3 py-1.5 text-xs bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors flex items-center gap-2">
                     <ShoppingCart className="w-3.5 h-3.5" />
                     Carrinho
@@ -142,7 +142,7 @@ export default function WeddingNavbar({ currentPage }: WeddingNavbarProps) {
                 </li>
               ))}
               <li className="px-6 py-3 flex gap-2">
-                <Link href="/cliente-acesso">
+                <Link href="/client-access">
                   <a
                     onClick={closeMenu}
                     className="flex-1 px-3 py-2 text-xs bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors flex items-center justify-center gap-2"
@@ -151,7 +151,7 @@ export default function WeddingNavbar({ currentPage }: WeddingNavbarProps) {
                     Cliente
                   </a>
                 </Link>
-                <Link href="/carrinho">
+                <Link href="/cart">
                   <a
                     onClick={closeMenu}
                     className="flex-1 px-3 py-2 text-xs bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors flex items-center justify-center gap-2"

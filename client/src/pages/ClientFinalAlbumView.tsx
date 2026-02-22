@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/dialog";
 
 export default function ClientFinalAlbumView() {
-  const [, params] = useRoute("/cliente/album-final/:id");
+  const [, params] = useRoute("/client/final-album/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
   const { toast } = useToast();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -55,7 +55,7 @@ export default function ClientFinalAlbumView() {
       return;
     }
 
-    const url = `${window.location.origin}/album-compartilhavel/${appointment.slug}`;
+    const url = `${window.location.origin}/shared-album/${appointment.slug}`;
     setShareUrl(url);
     setShowShareDialog(true);
   };
@@ -122,7 +122,7 @@ export default function ClientFinalAlbumView() {
         <div className="container mx-auto py-6">
           <Button
             variant="ghost"
-            onClick={() => setLocation(`/cliente/dashboard/${appointmentId}`)}
+            onClick={() => setLocation(`/client/dashboard/${appointmentId}`)}
             className="mb-4"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />

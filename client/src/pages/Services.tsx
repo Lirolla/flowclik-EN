@@ -90,7 +90,7 @@ export default function Services() {
                     </div>
 
                     <Button asChild className="w-full" size="lg">
-                      <Link href="/agendar">
+                      <Link href="/book">
                         <a>Agendar Agora</a>
                       </Link>
                     </Button>
@@ -129,12 +129,12 @@ export default function Services() {
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
-                <Link href="/contato">
+                <Link href="/contact">
                   <a>Falar Conosco</a>
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
-                <Link href="/galerias">
+                <Link href="/galleries">
                   <a>Ver Portfólio</a>
                 </Link>
               </Button>

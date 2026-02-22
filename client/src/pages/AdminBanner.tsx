@@ -333,7 +333,7 @@ function SlideForm({
             type="url"
             value={buttonLink}
             onChange={(e) => setButtonLink(e.target.value)}
-            placeholder="/galerias"
+            placeholder="/galleries"
           />
         </div>
       </div>

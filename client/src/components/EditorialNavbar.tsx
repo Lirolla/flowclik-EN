@@ -38,13 +38,13 @@ export default function EditorialNavbar({ currentPage }: EditorialNavbarProps) {
 
   const menuItems = [
     { label: "Início", href: SITE_ROUTES.home(), id: "/" },
-    { label: "Galerias", href: SITE_ROUTES.galerias(), id: "galerias" },
-    { label: "Serviços", href: SITE_ROUTES.servicos(), id: "servicos" },
+    { label: "Galerias", href: SITE_ROUTES.galleries(), id: "galerias" },
+    { label: "Serviços", href: SITE_ROUTES.services(), id: "servicos" },
     { label: "Portfólio", href: SITE_ROUTES.portfolio(), id: "portfolio" },
-    ...(showStock ? [{ label: "Fotos Stock", href: SITE_ROUTES.fotosStock(), id: "fotos-stock" }] : []),
+    ...(showStock ? [{ label: "Fotos Stock", href: SITE_ROUTES.stockPhotos(), id: "fotos-stock" }] : []),
     ...(showVideo ? [{ label: "Vídeos", href: SITE_ROUTES.video(), id: "video" }] : []),
-    { label: "Sobre", href: SITE_ROUTES.sobre(), id: "sobre" },
-    { label: "Contato", href: SITE_ROUTES.contato(), id: "contato" },
+    { label: "Sobre", href: SITE_ROUTES.about(), id: "sobre" },
+    { label: "Contato", href: SITE_ROUTES.contact(), id: "contato" },
   ];
 
   return (
@@ -79,12 +79,12 @@ export default function EditorialNavbar({ currentPage }: EditorialNavbarProps) {
 
             {/* Desktop - Icons + Hamburger */}
             <div className="hidden lg:flex items-center gap-6">
-              <Link href="/cliente-acesso">
+              <Link href="/client-access">
                 <a className="text-white/70 hover:text-white transition-colors">
                   <User className="w-5 h-5" />
                 </a>
               </Link>
-              <Link href="/carrinho">
+              <Link href="/cart">
                 <a className="text-white/70 hover:text-white transition-colors">
                   <ShoppingCart className="w-5 h-5" />
                 </a>
@@ -102,7 +102,7 @@ export default function EditorialNavbar({ currentPage }: EditorialNavbarProps) {
 
             {/* Mobile */}
             <div className="flex lg:hidden items-center gap-4">
-              <Link href="/carrinho">
+              <Link href="/cart">
                 <a className="text-white/70 hover:text-white">
                   <ShoppingCart className="w-5 h-5" />
                 </a>

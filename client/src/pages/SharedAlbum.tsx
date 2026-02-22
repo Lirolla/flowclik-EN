@@ -10,7 +10,7 @@ import { Heart, Download, Mail } from "lucide-react";
 export default function SharedAlbum() {
   console.log('=== SharedAlbum RENDERING ===');
   
-  const [, params] = useRoute("/album-compartilhavel/:slug");
+  const [, params] = useRoute("/shared-album/:slug");
   const slug = params?.slug || "";
   console.log('Slug:', slug);
   

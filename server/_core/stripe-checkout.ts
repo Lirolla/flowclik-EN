@@ -37,7 +37,7 @@ export async function createCheckoutSession(req: Request, res: Response) {
       line_items: lineItems,
       mode: "payment",
       success_url: `${process.env.VITE_APP_URL || "http://localhost:3000"}/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.VITE_APP_URL || "http://localhost:3000"}/carrinho`,
+      cancel_url: `${process.env.VITE_APP_URL || "http://localhost:3000"}/cart`,
       metadata: {
         items: JSON.stringify(items.map((item: any) => ({ id: item.id, quantity: item.quantity }))),
       },

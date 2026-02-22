@@ -177,7 +177,7 @@ export const photoSalesRouter = router({
         collectionId: collection.id,
         collectionName: collection.name,
         successUrl: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/pagamento/sucesso?session_id={CHECKOUT_SESSION_ID}`,
-        cancelUrl: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/galeria-compra/${collection.publicSlug}`,
+        cancelUrl: `${process.env.VITE_APP_URL || 'http://localhost:3000'}/gallery-shop/${collection.publicSlug}`,
       });
 
       // Create pending sales records

@@ -241,7 +241,7 @@ function AdminCollectionsContent() {
                   placeholder="casamento-joao-maria"
                 />
                 <p className="text-xs text-muted-foreground">
-                  URL: /galeria/{formData.slug || "slug-da-galeria"}
+                  URL: /gallery/{formData.slug || "slug-da-galeria"}
                 </p>
               </div>
 
@@ -405,7 +405,7 @@ function AdminCollectionsContent() {
                     <FolderOpen className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
                     <div className="flex-1 min-w-0">
                       <h3 className="text-xl font-semibold">{collection.name}</h3>
-                      <p className="text-sm text-muted-foreground">/galeria/{collection.slug}</p>
+                      <p className="text-sm text-muted-foreground">/gallery/{collection.slug}</p>
 
                       {collection.description && (
                         <p className="text-muted-foreground mt-2 line-clamp-2">
@@ -469,7 +469,7 @@ function AdminCollectionsContent() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => window.location.href = `/admin/galerias/${collection.id}/upload`}
+                      onClick={() => window.location.href = `/admin/galleries/${collection.id}/upload`}
                       title="Upload de fotos"
                     >
                       <UploadIcon className="w-4 h-4" />

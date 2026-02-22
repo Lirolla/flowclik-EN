@@ -17,13 +17,13 @@ export default function SidebarNavbar({ currentPage }: SidebarNavbarProps) {
 
   const navItems = [
     { icon: Home, label: "Início", path: SITE_ROUTES.home() },
-    { icon: Image, label: "Galerias", path: SITE_ROUTES.galerias() },
-    { icon: Briefcase, label: "Serviços", path: SITE_ROUTES.servicos() },
+    { icon: Image, label: "Galerias", path: SITE_ROUTES.galleries() },
+    { icon: Briefcase, label: "Serviços", path: SITE_ROUTES.services() },
     { icon: Camera, label: "Portfólio", path: SITE_ROUTES.portfolio() },
-    ...(showStockPhotos ? [{ icon: ShoppingCart, label: "Fotos Stock", path: SITE_ROUTES.fotosStock() }] : []),
+    ...(showStockPhotos ? [{ icon: ShoppingCart, label: "Fotos Stock", path: SITE_ROUTES.stockPhotos() }] : []),
     ...(showVideo ? [{ icon: Camera, label: "Vídeos", path: SITE_ROUTES.video() }] : []),
-    { icon: Info, label: "Sobre", path: SITE_ROUTES.sobre() },
-    { icon: Mail, label: "Contato", path: SITE_ROUTES.contato() },
+    { icon: Info, label: "Sobre", path: SITE_ROUTES.about() },
+    { icon: Mail, label: "Contato", path: SITE_ROUTES.contact() },
   ];
 
   return (
@@ -83,13 +83,13 @@ export default function SidebarNavbar({ currentPage }: SidebarNavbarProps) {
 
       {/* Footer */}
       <div className="p-4 border-t border-border space-y-2">
-        <Link href="/cliente-acesso">
+        <Link href="/client-access">
           <a className="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-muted-foreground hover:bg-accent/10 hover:text-accent">
             <User className="w-5 h-5" />
             <span className="font-medium">Cliente</span>
           </a>
         </Link>
-        <Link href="/carrinho">
+        <Link href="/cart">
           <a className="flex items-center gap-3 px-4 py-3 rounded-lg transition-colors text-muted-foreground hover:bg-accent/10 hover:text-accent">
             <ShoppingCart className="w-5 h-5" />
             <span className="font-medium">Carrinho</span>

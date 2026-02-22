@@ -72,7 +72,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                   Início
                 </a>
               </Link>
-            <Link href={SITE_ROUTES.galerias()}>
+            <Link href={SITE_ROUTES.galleries()}>
               <a className={`text-sm font-medium transition-colors ${
                 currentPage === "galerias" ? "text-accent font-semibold" : "hover:text-accent"
               }`}>
@@ -89,7 +89,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
               </Link>
             )}
             {showStockPhotos && (
-              <Link href={SITE_ROUTES.fotosStock()}>
+              <Link href={SITE_ROUTES.stockPhotos()}>
                 <a className={`text-sm font-medium transition-colors ${
                   currentPage === "fotos-stock" ? "text-accent font-semibold" : "hover:text-accent"
                 }`}>
@@ -97,7 +97,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                 </a>
               </Link>
             )}
-            <Link href={SITE_ROUTES.servicos()}>
+            <Link href={SITE_ROUTES.services()}>
               <a className={`text-sm font-medium transition-colors ${
                 currentPage === "servicos" ? "text-accent font-semibold" : "hover:text-accent"
               }`}>
@@ -111,14 +111,14 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                 Portfólio
               </a>
             </Link>
-            <Link href={SITE_ROUTES.sobre()}>
+            <Link href={SITE_ROUTES.about()}>
               <a className={`text-sm font-medium transition-colors ${
                 currentPage === "sobre" ? "text-accent font-semibold" : "hover:text-accent"
               }`}>
                 Sobre
               </a>
             </Link>
-            <Link href={SITE_ROUTES.contato()}>
+            <Link href={SITE_ROUTES.contact()}>
               <a className={`text-sm font-medium transition-colors ${
                 currentPage === "contato" ? "text-accent font-semibold" : "hover:text-accent"
               }`}>
@@ -129,13 +129,13 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
             
             {/* Botões de Ação (posicionados à direita) */}
             <div className="absolute right-0 flex items-center gap-2">
-              <Link href="/carrinho">
+              <Link href="/cart">
                 <a className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-primary-foreground text-xs font-medium rounded-md hover:bg-primary/90 transition-colors">
                   <ShoppingCart className="w-3.5 h-3.5" />
                   Carrinho
                 </a>
               </Link>
-              <Link href="/cliente-acesso">
+              <Link href="/client-access">
                 <a className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-primary-foreground text-xs font-medium rounded-md hover:bg-primary/90 transition-colors">
                   <User className="w-3.5 h-3.5" />
                   Cliente
@@ -182,7 +182,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                 </a>
               </Link>
 
-              <Link href={SITE_ROUTES.galerias()}>
+              <Link href={SITE_ROUTES.galleries()}>
                 <a 
                   onClick={closeMenu}
                   className={`text-base font-medium py-2 px-3 rounded-lg transition-colors ${
@@ -211,7 +211,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
               )}
 
               {showStockPhotos && (
-                <Link href={SITE_ROUTES.fotosStock()}>
+                <Link href={SITE_ROUTES.stockPhotos()}>
                   <a 
                     onClick={closeMenu}
                     className={`text-base font-medium py-2 px-3 rounded-lg transition-colors ${
@@ -225,7 +225,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                 </Link>
               )}
 
-              <Link href={SITE_ROUTES.servicos()}>
+              <Link href={SITE_ROUTES.services()}>
                 <a 
                   onClick={closeMenu}
                   className={`text-base font-medium py-2 px-3 rounded-lg transition-colors ${
@@ -251,7 +251,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                 </a>
               </Link>
 
-              <Link href={SITE_ROUTES.sobre()}>
+              <Link href={SITE_ROUTES.about()}>
                 <a 
                   onClick={closeMenu}
                   className={`text-base font-medium py-2 px-3 rounded-lg transition-colors ${
@@ -264,7 +264,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                 </a>
               </Link>
 
-              <Link href={SITE_ROUTES.contato()}>
+              <Link href={SITE_ROUTES.contact()}>
                 <a 
                   onClick={closeMenu}
                   className={`text-base font-medium py-2 px-3 rounded-lg transition-colors ${
@@ -278,7 +278,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
               </Link>
 
               <div className="mt-6 space-y-3">
-                <Link href="/carrinho">
+                <Link href="/cart">
                   <a 
                     onClick={closeMenu}
                     className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
@@ -287,7 +287,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                     Carrinho
                   </a>
                 </Link>
-                <Link href="/cliente-acesso">
+                <Link href="/client-access">
                   <a 
                     onClick={closeMenu}
                     className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"

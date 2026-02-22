@@ -135,7 +135,7 @@ export default function AdminPhotoSelections() {
                     onClick={() => {
                       const collection = collections?.find((c: any) => c.id === selectedCollectionId);
                       if (collection?.slug) {
-                        const link = `${window.location.origin}/album-final/${collection.slug}`;
+                        const link = `${window.location.origin}/final-album/${collection.slug}`;
                         navigator.clipboard.writeText(link);
                         toast({
                           title: "Link copiado!",
@@ -153,7 +153,7 @@ export default function AdminPhotoSelections() {
                     onClick={() => {
                       const collection = collections?.find((c: any) => c.id === selectedCollectionId);
                       if (collection?.slug) {
-                        window.open(`/album-final/${collection.slug}`, '_blank');
+                        window.open(`/final-album/${collection.slug}`, '_blank');
                       }
                     }}
                     className="gap-2"

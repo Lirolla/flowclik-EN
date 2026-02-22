@@ -67,19 +67,19 @@ export default function StockGallery() {
                 <a href="/" className="hover:text-primary transition-colors">
                   Início
                 </a>
-                <a href="/galerias" className="hover:text-primary transition-colors">
+                <a href="/galleries" className="hover:text-primary transition-colors">
                   Galerias
                 </a>
-                <a href="/servicos" className="hover:text-primary transition-colors">
+                <a href="/services" className="hover:text-primary transition-colors">
                   Serviços
                 </a>
                 <a href="/portfolio" className="hover:text-primary transition-colors">
                   Portfólio
                 </a>
-                <a href="/sobre" className="hover:text-primary transition-colors">
+                <a href="/about" className="hover:text-primary transition-colors">
                   Sobre
                 </a>
-                <a href="/contato" className="hover:text-primary transition-colors">
+                <a href="/contact" className="hover:text-primary transition-colors">
                   Contato
                 </a>
               </div>
@@ -98,7 +98,7 @@ export default function StockGallery() {
                 Fotos profissionais para download imediato
               </p>
             </div>
-            <Button onClick={() => setLocation("/carrinho")}>
+            <Button onClick={() => setLocation("/cart")}>
               <ShoppingCart className="w-4 h-4 mr-2" />
               Carrinho
             </Button>

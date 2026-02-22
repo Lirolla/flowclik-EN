@@ -9,7 +9,7 @@ import { useCurrency } from "@/hooks/useCurrency";
 
 export default function GalleryView() {
   const { format } = useCurrency();
-  const [, params] = useRoute("/galeria/:slug");
+  const [, params] = useRoute("/gallery/:slug");
   const slug = params?.slug || "";
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);

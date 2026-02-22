@@ -29,13 +29,13 @@ export default function CinematicNavbar({ currentPage }: CinematicNavbarProps) {
 
   const menuItems = [
     { label: "Início", href: SITE_ROUTES.home(), id: "/" },
-    { label: "Galerias", href: SITE_ROUTES.galerias(), id: "galerias" },
-    { label: "Serviços", href: SITE_ROUTES.servicos(), id: "servicos" },
+    { label: "Galerias", href: SITE_ROUTES.galleries(), id: "galerias" },
+    { label: "Serviços", href: SITE_ROUTES.services(), id: "servicos" },
     { label: "Portfólio", href: SITE_ROUTES.portfolio(), id: "portfolio" },
-    ...(showStock ? [{ label: "Fotos Stock", href: SITE_ROUTES.fotosStock(), id: "fotos-stock" }] : []),
+    ...(showStock ? [{ label: "Fotos Stock", href: SITE_ROUTES.stockPhotos(), id: "fotos-stock" }] : []),
     ...(showVideo ? [{ label: "Vídeos", href: SITE_ROUTES.video(), id: "video" }] : []),
-    { label: "Sobre", href: SITE_ROUTES.sobre(), id: "sobre" },
-    { label: "Contato", href: SITE_ROUTES.contato(), id: "contato" },
+    { label: "Sobre", href: SITE_ROUTES.about(), id: "sobre" },
+    { label: "Contato", href: SITE_ROUTES.contact(), id: "contato" },
   ];
 
   return (
@@ -95,12 +95,12 @@ export default function CinematicNavbar({ currentPage }: CinematicNavbarProps) {
               ))}
               
               <div className="flex items-center gap-4 ml-4 pl-4 border-l border-white/10">
-                <Link href="/cliente-acesso">
+                <Link href="/client-access">
                   <a className="text-white/50 hover:text-[#D4A574] transition-colors">
                     <User className="w-4 h-4" />
                   </a>
                 </Link>
-                <Link href="/carrinho">
+                <Link href="/cart">
                   <a className="text-white/50 hover:text-[#D4A574] transition-colors">
                     <ShoppingCart className="w-4 h-4" />
                   </a>
@@ -110,7 +110,7 @@ export default function CinematicNavbar({ currentPage }: CinematicNavbarProps) {
 
             {/* Mobile */}
             <div className="flex lg:hidden items-center gap-4">
-              <Link href="/carrinho">
+              <Link href="/cart">
                 <a className="text-white/50 hover:text-[#D4A574]">
                   <ShoppingCart className="w-4 h-4" />
                 </a>
@@ -160,7 +160,7 @@ export default function CinematicNavbar({ currentPage }: CinematicNavbarProps) {
               ))}
               
               <div className="pt-6 flex gap-4">
-                <Link href="/cliente-acesso">
+                <Link href="/client-access">
                   <a
                     onClick={closeMenu}
                     className="flex items-center gap-2 px-6 py-3 border border-[#D4A574]/30 text-[#D4A574] text-xs tracking-[0.2em] uppercase hover:bg-[#D4A574]/10 transition-colors"
@@ -169,7 +169,7 @@ export default function CinematicNavbar({ currentPage }: CinematicNavbarProps) {
                     Cliente
                   </a>
                 </Link>
-                <Link href="/carrinho">
+                <Link href="/cart">
                   <a
                     onClick={closeMenu}
                     className="flex items-center gap-2 px-6 py-3 border border-[#D4A574]/30 text-[#D4A574] text-xs tracking-[0.2em] uppercase hover:bg-[#D4A574]/10 transition-colors"

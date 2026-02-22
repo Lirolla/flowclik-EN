@@ -9,10 +9,10 @@ export default function ThemeWrapper({ children }: ThemeWrapperProps) {
   const [location] = useLocation();
   
   // Aplica tema personalizado em rotas do site do fotógrafo
-  // Exclui: /admin, /sistema, /cadastro, /login, /docs, /termos, /politica, /sobre-nos, /cliente
-  const isAdminRoute = location.startsWith('/admin') || location.startsWith('/sistema');
-  const isFlowClikRoute = location === '/cadastro' || location === '/login' || location === '/docs' || 
-                          location.startsWith('/termos') || location.startsWith('/politica') || location === '/sobre-nos';
+  // Exclui: /admin, /system, /register, /login, /docs, /termos, /politica, /about-nos, /cliente
+  const isAdminRoute = location.startsWith('/admin') || location.startsWith('/system');
+  const isFlowClikRoute = location === '/register' || location === '/login' || location === '/docs' || 
+                          location.startsWith('/termos') || location.startsWith('/politica') || location === '/about-nos';
   const isClientRoute = location.startsWith('/cliente');
   
   const shouldApplyTheme = !isAdminRoute && !isFlowClikRoute && !isClientRoute;

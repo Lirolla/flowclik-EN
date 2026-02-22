@@ -13,7 +13,7 @@ function checkSistemaAuth(): boolean {
 
 function sistemaLogout() {
   localStorage.removeItem(SISTEMA_TOKEN_KEY);
-  window.location.href = "/sistema/login";
+  window.location.href = "/system/login";
 }
 
 interface SistemaLayoutProps {
@@ -29,34 +29,34 @@ export default function SistemaLayout({ children }: SistemaLayoutProps) {
     setIsAuthenticated(authenticated);
     
     if (!authenticated) {
-      setLocation("/sistema/login");
+      setLocation("/system/login");
     }
   }, [setLocation]);
 
   const navItems = [
     {
       title: "Dashboard",
-      href: "/sistema",
+      href: "/system",
       icon: LayoutDashboard,
-      active: location === "/sistema",
+      active: location === "/system",
     },
     {
       title: "Fotógrafos",
-      href: "/sistema/fotografos",
+      href: "/system/photographers",
       icon: Users,
-      active: location === "/sistema/fotografos",
+      active: location === "/system/photographers",
     },
     {
       title: "Avisos",
-      href: "/sistema/avisos",
+      href: "/system/notices",
       icon: Bell,
-      active: location === "/sistema/avisos",
+      active: location === "/system/notices",
     },
     {
       title: "Tickets",
-      href: "/sistema/tickets",
+      href: "/system/tickets",
       icon: MessageSquare,
-      active: location === "/sistema/tickets",
+      active: location === "/system/tickets",
     },
   ];
 

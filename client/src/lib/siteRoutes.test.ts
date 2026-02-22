@@ -76,12 +76,12 @@ describe('siteRoutes', () => {
       expect(getSiteUrl('')).toBe('/site');
     });
 
-    it('deve gerar /site/servicos para servicos em localhost', () => {
+    it('deve gerar /site/services para servicos em localhost', () => {
       Object.defineProperty(window, 'location', {
         value: { hostname: 'localhost' },
         writable: true,
       });
-      expect(getSiteUrl('servicos')).toBe('/site/servicos');
+      expect(getSiteUrl('servicos')).toBe('/site/services');
     });
 
     it('deve gerar / para home em subdomínio', () => {
@@ -92,12 +92,12 @@ describe('siteRoutes', () => {
       expect(getSiteUrl('')).toBe('/');
     });
 
-    it('deve gerar /servicos para servicos em subdomínio', () => {
+    it('deve gerar /services para servicos em subdomínio', () => {
       Object.defineProperty(window, 'location', {
         value: { hostname: 'joao.flowclik.com' },
         writable: true,
       });
-      expect(getSiteUrl('servicos')).toBe('/servicos');
+      expect(getSiteUrl('servicos')).toBe('/services');
     });
 
     it('deve remover / inicial do path se fornecido', () => {
@@ -105,7 +105,7 @@ describe('siteRoutes', () => {
         value: { hostname: 'localhost' },
         writable: true,
       });
-      expect(getSiteUrl('/servicos')).toBe('/site/servicos');
+      expect(getSiteUrl('/services')).toBe('/site/services');
     });
   });
 
@@ -117,14 +117,14 @@ describe('siteRoutes', () => {
       });
 
       expect(SITE_ROUTES.home()).toBe('/site');
-      expect(SITE_ROUTES.servicos()).toBe('/site/servicos');
+      expect(SITE_ROUTES.services()).toBe('/site/services');
       expect(SITE_ROUTES.portfolio()).toBe('/site/portfolio');
-      expect(SITE_ROUTES.sobre()).toBe('/site/sobre');
-      expect(SITE_ROUTES.contato()).toBe('/site/contato');
-      expect(SITE_ROUTES.galerias()).toBe('/site/galerias');
-      expect(SITE_ROUTES.fotosStock()).toBe('/site/fotos-stock');
+      expect(SITE_ROUTES.about()).toBe('/site/about');
+      expect(SITE_ROUTES.contact()).toBe('/site/contact');
+      expect(SITE_ROUTES.galleries()).toBe('/site/galleries');
+      expect(SITE_ROUTES.stockPhotos()).toBe('/site/stock-photos');
       expect(SITE_ROUTES.video()).toBe('/site/video');
-      expect(SITE_ROUTES.agendar()).toBe('/site/agendar');
+      expect(SITE_ROUTES.book()).toBe('/site/book');
     });
 
     it('deve gerar rotas corretas em subdomínio', () => {
@@ -134,14 +134,14 @@ describe('siteRoutes', () => {
       });
 
       expect(SITE_ROUTES.home()).toBe('/');
-      expect(SITE_ROUTES.servicos()).toBe('/servicos');
+      expect(SITE_ROUTES.services()).toBe('/services');
       expect(SITE_ROUTES.portfolio()).toBe('/portfolio');
-      expect(SITE_ROUTES.sobre()).toBe('/sobre');
-      expect(SITE_ROUTES.contato()).toBe('/contato');
-      expect(SITE_ROUTES.galerias()).toBe('/galerias');
-      expect(SITE_ROUTES.fotosStock()).toBe('/fotos-stock');
+      expect(SITE_ROUTES.about()).toBe('/about');
+      expect(SITE_ROUTES.contact()).toBe('/contact');
+      expect(SITE_ROUTES.galleries()).toBe('/galleries');
+      expect(SITE_ROUTES.stockPhotos()).toBe('/stock-photos');
       expect(SITE_ROUTES.video()).toBe('/video');
-      expect(SITE_ROUTES.agendar()).toBe('/agendar');
+      expect(SITE_ROUTES.book()).toBe('/book');
     });
   });
 });

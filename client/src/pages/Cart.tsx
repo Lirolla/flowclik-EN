@@ -103,7 +103,7 @@ export default function Cart() {
                   <p className="text-muted-foreground mb-6">
                     Você ainda não adicionou nenhuma foto ao carrinho.
                   </p>
-                  <Button onClick={() => setLocation(SITE_ROUTES.fotosStock())}>
+                  <Button onClick={() => setLocation(SITE_ROUTES.stockPhotos())}>
                     <ArrowLeft className="w-4 h-4 mr-2" />
                     Ver Fotos Stock
                   </Button>
@@ -200,7 +200,7 @@ export default function Cart() {
                   )}
 
                   <div className="text-center pt-4">
-                    <Button onClick={() => setLocation(SITE_ROUTES.fotosStock())} variant="outline">
+                    <Button onClick={() => setLocation(SITE_ROUTES.stockPhotos())} variant="outline">
                       <ArrowLeft className="w-4 h-4 mr-2" />
                       Voltar às Fotos
                     </Button>

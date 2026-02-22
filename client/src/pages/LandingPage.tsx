@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 
 export default function LandingPage() {
   const handleStartNow = () => {
-    window.location.href = "/cadastro";
+    window.location.href = "/register";
   };
 
   return (
@@ -467,7 +467,7 @@ export default function LandingPage() {
             <div>
               <h4 className="font-semibold mb-4">Empresa</h4>
               <ul className="space-y-2 text-sm text-zinc-400">
-                <li><Link href="/sobre-nos"><a className="hover:text-white transition">Sobre Nós</a></Link></li>
+                <li><Link href="/about-nos"><a className="hover:text-white transition">Sobre Nós</a></Link></li>
                 <li><a href="#recursos" className="hover:text-white transition">Recursos</a></li>
                 <li><a href="#precos" className="hover:text-white transition">Preços</a></li>
                 <li><Link href="/docs"><a className="hover:text-white transition">Documentação</a></Link></li>
@@ -477,9 +477,9 @@ export default function LandingPage() {
             <div>
               <h4 className="font-semibold mb-4">Legal</h4>
               <ul className="space-y-2 text-sm text-zinc-400">
-                <li><Link href="/termos-de-servico"><a className="hover:text-white transition">Termos de Serviço</a></Link></li>
-                <li><Link href="/politica-de-privacidade"><a className="hover:text-white transition">Política de Privacidade</a></Link></li>
-                <li><Link href="/politica-de-reembolso"><a className="hover:text-white transition">Política de Reembolso</a></Link></li>
+                <li><Link href="/terms-of-service"><a className="hover:text-white transition">Termos de Serviço</a></Link></li>
+                <li><Link href="/privacy-policy"><a className="hover:text-white transition">Política de Privacidade</a></Link></li>
+                <li><Link href="/refund-policy"><a className="hover:text-white transition">Política de Reembolso</a></Link></li>
               </ul>
             </div>
           </div>

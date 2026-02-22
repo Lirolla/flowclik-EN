@@ -9,17 +9,17 @@ import { FontLoader } from "./components/FontLoader";
 import { useSiteConfig } from "./hooks/useSiteConfig";
 
 // ============================================================================
-// LAZY LOADING - Carrega páginas sob demanda
+// LAZY LOADING - Load pages on demand
 // ============================================================================
 
 // Landing & Marketing
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const CadastroSaaS = lazy(() => import('./pages/CadastroSaaS'));
 const Docs = lazy(() => import('./pages/DocsNew'));
-const TermosDeServico = lazy(() => import('./pages/TermosDeServico'));
-const PoliticaDePrivacidade = lazy(() => import('./pages/PoliticaDePrivacidade'));
-const PoliticaDeReembolso = lazy(() => import('./pages/PoliticaDeReembolso'));
-const SobreNos = lazy(() => import('./pages/SobreNos'));
+const TermsOfService = lazy(() => import('./pages/TermosDeServico'));
+const PrivacyPolicy = lazy(() => import('./pages/PoliticaDePrivacidade'));
+const RefundPolicy = lazy(() => import('./pages/PoliticaDeReembolso'));
+const AboutUs = lazy(() => import('./pages/SobreNos'));
 const Login = lazy(() => import('./pages/Login'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 
@@ -49,14 +49,14 @@ const AdminSubscription = lazy(() => import('./pages/admin/AdminSubscription'));
 const AdminSupport = lazy(() => import('./pages/admin/AdminSupport'));
 const AdminEmailMarketing = lazy(() => import('./pages/admin/AdminEmailMarketing'));
 
-// Sistema (Super Admin)
+// System (Super Admin)
 const SistemaLogin = lazy(() => import('./pages/sistema/SistemaLogin'));
 const SistemaDashboard = lazy(() => import('./pages/sistema/SistemaDashboard'));
 const SistemaTickets = lazy(() => import('./pages/sistema/SistemaTickets'));
 const SistemaFotografos = lazy(() => import('./pages/sistema/SistemaFotografos'));
 const SistemaAvisos = lazy(() => import('./pages/sistema/SistemaAvisos'));
 
-// Área do Cliente
+// Client Area
 const ClientDashboard = lazy(() => import('./pages/ClientDashboard'));
 const ClientGalleryAuth = lazy(() => import('./pages/ClientGalleryAuth'));
 const ClientFinalAlbumView = lazy(() => import('./pages/ClientFinalAlbumView'));
@@ -65,7 +65,7 @@ const ClientPayments = lazy(() => import('./pages/ClientPayments'));
 const ClientContract = lazy(() => import('./pages/ClientContract'));
 const ClienteAcesso = lazy(() => import('./pages/ClienteAcesso'));
 
-// Site Público
+// Public Site
 const Home = lazy(() => import('./pages/Home'));
 const Services = lazy(() => import('./pages/Services'));
 const Portfolio = lazy(() => import('./pages/Portfolio'));
@@ -76,7 +76,7 @@ const Galleries = lazy(() => import('./pages/Galleries'));
 const VideoPage = lazy(() => import('./pages/VideoPage'));
 const BookAppointment = lazy(() => import('./pages/BookAppointment'));
 
-// Páginas Públicas
+// Public Pages
 const PublicGalleries = lazy(() => import('./pages/PublicGalleries'));
 const PublicGalleryView = lazy(() => import('./pages/PublicGalleryView'));
 const SharedAlbum = lazy(() => import('./pages/SharedAlbum'));
@@ -86,7 +86,7 @@ const Cart = lazy(() => import('./pages/Cart'));
 const OrderStatus = lazy(() => import('./pages/OrderStatus'));
 
 // ============================================================================
-// COMPONENTES GLOBAIS (Carregados imediatamente)
+// GLOBAL COMPONENTS (Loaded immediately)
 // ============================================================================
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { CartButton } from './components/CartButton';
@@ -104,113 +104,113 @@ function PageLoader() {
 }
 
 function Router() {
-  // Scroll automático para o topo ao navegar entre páginas
+  // Auto scroll to top when navigating between pages
   useScrollToTop();
 
   return (
     <Suspense fallback={<PageLoader />}>
       <Switch>
         {/* ================================================================
-            RAIZ - ROTEAMENTO INTELIGENTE
+            ROOT - SMART ROUTING
             flowclik.com → Landing page
-            *.flowclik.com → Home do fotógrafo
+            *.flowclik.com → Photographer's home
             ================================================================ */}
         <Route path="/">
           {() => <RootRouter landingPage={LandingPage} photographerHome={Home} />}
         </Route>
-        <Route path="/cadastro" component={CadastroSaaS} />
+        <Route path="/register" component={CadastroSaaS} />
         <Route path="/login" component={Login} />
         <Route path="/docs" component={Docs} />
-        <Route path="/termos-de-servico" component={TermosDeServico} />
-        <Route path="/politica-de-privacidade" component={PoliticaDePrivacidade} />
-        <Route path="/politica-de-reembolso" component={PoliticaDeReembolso} />
-        <Route path="/sobre-nos" component={SobreNos} />
+        <Route path="/terms-of-service" component={TermsOfService} />
+        <Route path="/privacy-policy" component={PrivacyPolicy} />
+        <Route path="/refund-policy" component={RefundPolicy} />
+        <Route path="/about-us" component={AboutUs} />
 
         {/* ================================================================
-            ADMIN - DASHBOARD DO FOTÓGRAFO
+            ADMIN - PHOTOGRAPHER'S DASHBOARD
             ================================================================ */}
         <Route path="/admin" component={AdminDashboard} />
         
-        {/* Galerias */}
-        <Route path="/admin/galerias" component={AdminCollections} />
-        <Route path="/admin/galerias/:id/upload" component={AdminGalleryUpload} />
-        <Route path="/admin/galerias/:id/album-final" component={AdminFinalAlbum} />
+        {/* Galleries */}
+        <Route path="/admin/galleries" component={AdminCollections} />
+        <Route path="/admin/galleries/:id/upload" component={AdminGalleryUpload} />
+        <Route path="/admin/galleries/:id/final-album" component={AdminFinalAlbum} />
         
-        {/* Clientes */}
-        <Route path="/admin/clientes" component={AdminClients} />
-        <Route path="/admin/cliente/:email" component={AdminClientDetails} />
+        {/* Clients */}
+        <Route path="/admin/clients" component={AdminClients} />
+        <Route path="/admin/client/:email" component={AdminClientDetails} />
         
-        {/* Agendamentos */}
-        <Route path="/admin/agendamentos" component={AdminAppointments} />
-        <Route path="/admin/estatisticas" component={AdminAppointmentStats} />
-        <Route path="/admin/galeria/:appointmentId" component={AdminSessionGallery} />
-        <Route path="/admin/selecoes" component={AdminPhotoSelections} />
+        {/* Appointments */}
+        <Route path="/admin/appointments" component={AdminAppointments} />
+        <Route path="/admin/statistics" component={AdminAppointmentStats} />
+        <Route path="/admin/gallery/:appointmentId" component={AdminSessionGallery} />
+        <Route path="/admin/selections" component={AdminPhotoSelections} />
         
-        {/* Vendas */}
-        <Route path="/admin/pedidos" component={AdminOrders} />
-        <Route path="/admin/vendas-eventos" component={AdminEventoVendas} />
+        {/* Sales */}
+        <Route path="/admin/orders" component={AdminOrders} />
+        <Route path="/admin/event-sales" component={AdminEventoVendas} />
         <Route path="/admin/leads" component={AdminLeads} />
         
-        {/* Conteúdo */}
+        {/* Content */}
         <Route path="/admin/banner" component={AdminBanner} />
-        <Route path="/admin/servicos" component={AdminServices} />
+        <Route path="/admin/services" component={AdminServices} />
         <Route path="/admin/portfolio" component={AdminPortfolio} />
         <Route path="/admin/stock" component={AdminStock} />
         <Route path="/admin/videos" component={AdminVideos} />
-        <Route path="/admin/contratos" component={AdminContracts} />
+        <Route path="/admin/contracts" component={AdminContracts} />
         
-        {/* Comunicação */}
-        <Route path="/admin/mensagens" component={AdminMessages} />
+        {/* Communication */}
+        <Route path="/admin/messages" component={AdminMessages} />
         <Route path="/admin/email-marketing" component={AdminEmailMarketing} />
         
-        {/* Configurações */}
-        <Route path="/admin/configuracoes" component={AdminSettings} />
-        <Route path="/admin/dominio-email" component={lazy(() => import("./pages/admin/AdminDomainEmail"))} />
-        <Route path="/admin/assinatura" component={AdminSubscription} />
-        <Route path="/admin/suporte" component={AdminSupport} />
+        {/* Settings */}
+        <Route path="/admin/settings" component={AdminSettings} />
+        <Route path="/admin/domain-email" component={lazy(() => import("./pages/admin/AdminDomainEmail"))} />
+        <Route path="/admin/subscription" component={AdminSubscription} />
+        <Route path="/admin/support" component={AdminSupport} />
 
         {/* ================================================================
-            SISTEMA - ADMIN DO SAAS (Super Admin)
+            SYSTEM - SAAS ADMIN (Super Admin)
             ================================================================ */}
-        <Route path="/sistema/login" component={SistemaLogin} />
-        <Route path="/sistema" component={SistemaDashboard} />
-        <Route path="/sistema/tickets" component={SistemaTickets} />
-        <Route path="/sistema/fotografos" component={SistemaFotografos} />
-        <Route path="/sistema/avisos" component={SistemaAvisos} />
+        <Route path="/system/login" component={SistemaLogin} />
+        <Route path="/system" component={SistemaDashboard} />
+        <Route path="/system/tickets" component={SistemaTickets} />
+        <Route path="/system/photographers" component={SistemaFotografos} />
+        <Route path="/system/notices" component={SistemaAvisos} />
 
         {/* ================================================================
-            ÁREA DO CLIENTE (Clientes dos fotógrafos)
+            CLIENT AREA (Photographer's clients)
             ================================================================ */}
-        <Route path="/cliente-acesso" component={ClienteAcesso} />
-        <Route path="/cliente/dashboard/:id" component={ClientDashboard} />
-        <Route path="/cliente/galeria/:id" component={ClientGalleryAuth} />
-        <Route path="/cliente/album-final/:id" component={ClientFinalAlbumView} />
-        <Route path="/cliente/chat/:id" component={ClientChat} />
-        <Route path="/cliente/pagamentos/:id" component={ClientPayments} />
-        <Route path="/cliente/contrato/:id" component={ClientContract} />
+        <Route path="/client-access" component={ClienteAcesso} />
+        <Route path="/client/dashboard/:id" component={ClientDashboard} />
+        <Route path="/client/gallery/:id" component={ClientGalleryAuth} />
+        <Route path="/client/final-album/:id" component={ClientFinalAlbumView} />
+        <Route path="/client/chat/:id" component={ClientChat} />
+        <Route path="/client/payments/:id" component={ClientPayments} />
+        <Route path="/client/contract/:id" component={ClientContract} />
 
         {/* ================================================================
-            SITE PÚBLICO DO FOTÓGRAFO (Produção Real)
-            Rotas na raiz - sem mais /site/*
+            PHOTOGRAPHER'S PUBLIC SITE (Production)
+            Routes at root level
             ================================================================ */}
-        <Route path="/servicos" component={Services} />
+        <Route path="/services" component={Services} />
         <Route path="/portfolio" component={Portfolio} />
-        <Route path="/sobre" component={About} />
-        <Route path="/contato" component={Contact} />
-        <Route path="/fotos-stock" component={FotosStock} />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
+        <Route path="/stock-photos" component={FotosStock} />
         <Route path="/video" component={VideoPage} />
-        <Route path="/agendar" component={BookAppointment} />
+        <Route path="/book" component={BookAppointment} />
 
         {/* ================================================================
-            PÁGINAS PÚBLICAS (Galerias, Álbuns)
+            PUBLIC PAGES (Galleries, Albums)
             ================================================================ */}
-        <Route path="/galerias" component={PublicGalleries} />
-        <Route path="/galeria/:slug" component={PublicGalleryView} />
-        <Route path="/galeria-compra/:slug" component={GaleriaCompra} />
-        <Route path="/pedido/:id" component={OrderStatus} />
-              <Route path="/carrinho" component={Cart} />
-        <Route path="/album-final/:slug" component={ClientFinalAlbum} />
-        <Route path="/album-compartilhavel/:slug" component={SharedAlbum} />
+        <Route path="/galleries" component={PublicGalleries} />
+        <Route path="/gallery/:slug" component={PublicGalleryView} />
+        <Route path="/gallery-shop/:slug" component={GaleriaCompra} />
+        <Route path="/order/:id" component={OrderStatus} />
+        <Route path="/cart" component={Cart} />
+        <Route path="/final-album/:slug" component={ClientFinalAlbum} />
+        <Route path="/shared-album/:slug" component={SharedAlbum} />
 
         {/* ================================================================
             404 - NOT FOUND
@@ -234,7 +234,7 @@ function App() {
               <FontLoader font={font} />
               <Toaster />
               <Router />
-              {/* Componentes globais */}
+              {/* Global components */}
               <WhatsAppButton />
               <CartButton />
             </TooltipProvider>

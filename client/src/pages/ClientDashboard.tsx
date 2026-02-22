@@ -19,7 +19,7 @@ import {
 } from "lucide-react";
 
 export default function ClientDashboard() {
-  const [, params] = useRoute("/cliente/dashboard/:id");
+  const [, params] = useRoute("/client/dashboard/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
   const { data: user } = trpc.auth.me.useQuery();
   const [showProfileDialog, setShowProfileDialog] = useState(false);
@@ -191,7 +191,7 @@ export default function ClientDashboard() {
 
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Link href={`/cliente/galeria/${appointmentId}`}>
+          <Link href={`/client/gallery/${appointmentId}`}>
             <a>
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <ImageIcon className="h-8 w-8 text-red-600 mb-3" />
@@ -201,7 +201,7 @@ export default function ClientDashboard() {
             </a>
           </Link>
 
-          <Link href={`/cliente/chat/${appointmentId}`}>
+          <Link href={`/client/chat/${appointmentId}`}>
             <a>
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer relative">
                 <MessageSquare className="h-8 w-8 text-red-600 mb-3" />
@@ -216,7 +216,7 @@ export default function ClientDashboard() {
             </a>
           </Link>
 
-          <Link href={`/cliente/pagamentos/${appointmentId}`}>
+          <Link href={`/client/payments/${appointmentId}`}>
             <a>
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <CreditCard className="h-8 w-8 text-red-600 mb-3" />
@@ -226,7 +226,7 @@ export default function ClientDashboard() {
             </a>
           </Link>
 
-          <Link href={`/cliente/contrato/${appointmentId}`}>
+          <Link href={`/client/contract/${appointmentId}`}>
             <a>
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <Calendar className="h-8 w-8 text-red-600 mb-3" />
@@ -236,7 +236,7 @@ export default function ClientDashboard() {
             </a>
           </Link>
 
-          <Link href={`/cliente/album-final/${appointmentId}`}>
+          <Link href={`/client/final-album/${appointmentId}`}>
             <a>
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <ImageIcon className="h-8 w-8 text-red-600 mb-3" />
@@ -260,13 +260,13 @@ export default function ClientDashboard() {
             <p className="text-gray-300">Ensaio realizado! As fotos estão sendo editadas. Em breve você poderá visualizá-las.</p>
           )}
           {appointment.status === 'awaiting_selection' && (
-            <p className="text-gray-300">Suas fotos estão prontas! Acesse a <Link href={`/cliente/galeria/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link> para selecionar suas favoritas.</p>
+            <p className="text-gray-300">Suas fotos estão prontas! Acesse a <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link> para selecionar suas favoritas.</p>
           )}
           {appointment.status === 'final_editing' && (
             <p className="text-gray-300">Suas fotos selecionadas estão sendo editadas. Aguarde a entrega final!</p>
           )}
           {appointment.status === 'delivered' && (
-            <p className="text-gray-300">Projeto concluído! Suas fotos estão disponíveis para download na <Link href={`/cliente/galeria/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link>.</p>
+            <p className="text-gray-300">Projeto concluído! Suas fotos estão disponíveis para download na <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link>.</p>
           )}
         </Card>
       </div>

@@ -6,7 +6,7 @@ import { trpc } from "@/lib/trpc";
 import { AlertCircle, CheckCircle, FileText, Download } from "lucide-react";
 
 export default function ClientContract() {
-  const [, params] = useRoute("/cliente/contrato/:id");
+  const [, params] = useRoute("/client/contract/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
 
   const { data: appointment, isLoading } = trpc.appointments.getById.useQuery(
@@ -157,7 +157,7 @@ export default function ClientContract() {
           <Card className="bg-blue-900/20 border-blue-600 p-6">
             <p className="text-gray-300">
               <strong>Precisa assinar o contrato?</strong><br />
-              Entre em contato com o fotógrafo através do <a href={`/cliente/chat/${appointmentId}`} className="text-red-400 underline">chat</a> para combinar a assinatura.
+              Entre em contato com o fotógrafo através do <a href={`/client/chat/${appointmentId}`} className="text-red-400 underline">chat</a> para combinar a assinatura.
             </p>
           </Card>
         )}

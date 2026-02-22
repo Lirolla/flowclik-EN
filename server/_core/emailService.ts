@@ -470,7 +470,7 @@ export function templateNovoFotografoCadastrado(data: {
       { label: "📋 Plano", value: data.plan },
     ])}
 
-    ${emailButton("Ver no Painel Admin", "https://flowclik.com/sistema/fotografos")}
+    ${emailButton("Ver no Painel Admin", "https://flowclik.com/system/photographers")}
   `);
 }
 
@@ -498,7 +498,7 @@ export function templateNovoTicketSuporte(data: {
       </p>
     </div>
 
-    ${emailButton("Responder Ticket", "https://flowclik.com/sistema/tickets", "#ef4444")}
+    ${emailButton("Responder Ticket", "https://flowclik.com/system/tickets", "#ef4444")}
   `);
 }
 

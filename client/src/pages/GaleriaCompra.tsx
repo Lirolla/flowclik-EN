@@ -49,7 +49,7 @@ export default function GaleriaCompra() {
       return;
     }
 
-    setLocation("/carrinho");
+    setLocation("/cart");
   };
 
   if (isLoading) {
