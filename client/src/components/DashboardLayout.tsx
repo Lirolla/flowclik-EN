@@ -38,38 +38,38 @@ const menuItems = [
   { type: "separator" },
   
   // Gestão Principal
-  { icon: Users, label: "Clientes", path: "/admin/clients" },
-  { icon: Calendar, label: "Agendamentos", path: "/admin/appointments" },
+  { icon: Users, label: "Clients", path: "/admin/clients" },
+  { icon: Calendar, label: "Appointments", path: "/admin/appointments" },
   { icon: FolderOpen, label: "Galeria", path: "/admin/galleries" },
   { icon: Heart, label: "Seleção do Cliente", path: "/admin/selections" },
-  { icon: MessageSquare, label: "Mensagens", path: "/admin/messages" },
+  { icon: MessageSquare, label: "Messages", path: "/admin/messages" },
   { icon: Mail, label: "Email Marketing", path: "/admin/email-marketing" },
   
   // Separador
-  { type: "separator", label: "Vendas" },
+  { type: "separator", label: "Sales" },
   
   // Vendas
-  { icon: DollarSign, label: "Vendas de Eventos", path: "/admin/event-sales", group: "vendas" },
-  { icon: ImageIcon, label: "Fotos Stock", path: "/admin/stock", group: "vendas" },
-  { icon: ShoppingCart, label: "Pedidos", path: "/admin/orders", group: "vendas" },
+  { icon: DollarSign, label: "Event Sales", path: "/admin/event-sales", group: "vendas" },
+  { icon: ImageIcon, label: "Stock Photos", path: "/admin/stock", group: "vendas" },
+  { icon: ShoppingCart, label: "Orders", path: "/admin/orders", group: "vendas" },
   
   // Separador
-  { type: "separator", label: "Configurações" },
+  { type: "separator", label: "Settings" },
   
   // Configurações
   { icon: Image, label: "Banner", path: "/admin/banner", group: "config" },
-  { icon: Briefcase, label: "Serviços", path: "/admin/services", group: "config" },
-  { icon: Camera, label: "Portfólio", path: "/admin/portfolio", group: "config" },
-  { icon: FileText, label: "Contratos", path: "/admin/contracts", group: "config" },
+  { icon: Briefcase, label: "Services", path: "/admin/services", group: "config" },
+  { icon: Camera, label: "Portfolio", path: "/admin/portfolio", group: "config" },
+  { icon: FileText, label: "Contracts", path: "/admin/contracts", group: "config" },
   
   // Separador
-  { type: "separator", label: "Sistema" },
+  { type: "separator", label: "System" },
   
   // Sistema
-  { icon: CreditCard, label: "Assinatura", path: "/admin/subscription", group: "sistema" },
+  { icon: CreditCard, label: "Signature", path: "/admin/subscription", group: "sistema" },
   { icon: Globe, label: "Domínio", path: "/admin/domain-email", group: "sistema" },
-  { icon: MessageSquare, label: "Suporte", path: "/admin/support", group: "sistema" },
-  { icon: Settings, label: "Configurações", path: "/admin/settings", group: "sistema" },
+  { icon: MessageSquare, label: "Support", path: "/admin/support", group: "sistema" },
+  { icon: Settings, label: "Settings", path: "/admin/settings", group: "sistema" },
   
   // Separador
   { type: "separator" },

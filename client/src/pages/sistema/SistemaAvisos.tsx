@@ -145,7 +145,7 @@ export default function SistemaAvisos() {
             disabled={createMutation.isPending}
             className="w-full"
           >
-            {createMutation.isPending ? "Criando..." : "Criar Aviso"}
+            {createMutation.isPending ? "Creating..." : "Criar Aviso"}
           </Button>
         </div>
       </Card>
@@ -175,7 +175,7 @@ export default function SistemaAvisos() {
                     <span>
                       Enviado para:{" "}
                       {announcement.targetPlan === "all"
-                        ? "Todos"
+                        ? "All"
                         : announcement.targetPlan === "starter"
                         // @ts-ignore
                         ? "Plano Básico"

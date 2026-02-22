@@ -37,14 +37,14 @@ export default function AdminBanner() {
 
   const createSlide = trpc.banner.create.useMutation({
     onSuccess: () => {
-      toast({ title: "Slide criado com sucesso!" });
+      toast({ title: "Slide created successfully!" });
       refetch();
       resetForm();
       setIsDialogOpen(false);
     },
     onError: (error) => {
       toast({
-        title: "Erro ao criar slide",
+        title: "Error creating slide",
         description: error.message,
         variant: "destructive",
       });
@@ -53,14 +53,14 @@ export default function AdminBanner() {
 
   const updateSlide = trpc.banner.update.useMutation({
     onSuccess: () => {
-      toast({ title: "Slide atualizado!" });
+      toast({ title: "Slide updated!" });
       refetch();
       resetForm();
       setIsDialogOpen(false);
     },
     onError: (error) => {
       toast({
-        title: "Erro ao atualizar",
+        title: "Error updating",
         description: error.message,
         variant: "destructive",
       });
@@ -69,12 +69,12 @@ export default function AdminBanner() {
 
   const deleteSlide = trpc.banner.delete.useMutation({
     onSuccess: () => {
-      toast({ title: "Slide excluído!" });
+      toast({ title: "Slide deleted!" });
       refetch();
     },
     onError: (error) => {
       toast({
-        title: "Erro ao excluir",
+        title: "Error deleting",
         description: error.message,
         variant: "destructive",
       });
@@ -175,7 +175,7 @@ export default function AdminBanner() {
           <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle>
-                {editingSlide ? "Editar Slide" : "Novo Slide"}
+                {editingSlide ? "Edit Slide" : "New Slide"}
               </DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -350,10 +350,10 @@ export default function AdminBanner() {
                   disabled={createSlide.isPending || updateSlide.isPending}
                 >
                   {createSlide.isPending || updateSlide.isPending
-                    ? "Salvando..."
+                    ? "Saving..."
                     : editingSlide
-                    ? "Atualizar"
-                    : "Criar"}
+                    ? "Update"
+                    : "Create"}
                 </Button>
               </div>
             </form>
@@ -406,7 +406,7 @@ export default function AdminBanner() {
               </div>
               <CardHeader>
                 <CardTitle className="text-lg">
-                  {slide.title || "Sem título"}
+                  {slide.title || "No title"}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -429,7 +429,7 @@ export default function AdminBanner() {
                     size="sm"
                     onClick={() => {
                       if (
-                        confirm("Tem certeza que deseja excluir este slide?")
+                        confirm("Are you sure you want to delete this slide?")
                       ) {
                         deleteSlide.mutate({ id: slide.id });
                       }

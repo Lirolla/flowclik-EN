@@ -42,7 +42,7 @@ function AdminCollectionsContent() {
       utils.collections.getAll.invalidate();
       resetForm();
       setIsCreateOpen(false);
-      toast.success("Galeria criada com sucesso!");
+      toast.success("Gallery created successfully!");
     },
     onError: (error) => {
       toast.error(`Erro: ${error.message}`);
@@ -57,7 +57,7 @@ function AdminCollectionsContent() {
       resetForm();
       setEditingId(null);
       setIsCreateOpen(false);
-      toast.success("Galeria atualizada!");
+      toast.success("Gallery updated!");
     },
     onError: (error) => {
       toast.error(`Erro: ${error.message}`);
@@ -67,7 +67,7 @@ function AdminCollectionsContent() {
   const deleteMutation = trpc.collections.delete.useMutation({
     onSuccess: () => {
       utils.collections.getAll.invalidate();
-      toast.success("Galeria excluída!");
+      toast.success("Gallery deleted!");
     },
     onError: (error) => {
       toast.error(`Erro: ${error.message}`);
@@ -77,7 +77,7 @@ function AdminCollectionsContent() {
   const togglePublicMutation = trpc.collections.update.useMutation({
     onSuccess: () => {
       utils.collections.getAll.invalidate();
-      toast.success("Visibilidade atualizada!");
+      toast.success("Visibility updated!");
     },
   });
 
@@ -130,7 +130,7 @@ function AdminCollectionsContent() {
     
     // Marcar se tem cliente vinculado
     if (collection.appointmentId) {
-      setClientName("Cliente vinculado ao agendamento #" + collection.appointmentId);
+      setClientName("Client linked to appointment #" + collection.appointmentId);
     } else {
       setClientName("");
     }
@@ -138,7 +138,7 @@ function AdminCollectionsContent() {
 
   const handleSubmit = () => {
     if (!formData.title || !formData.slug) {
-      toast.error("Título e slug são obrigatórios");
+      toast.error("Title and slug are required");
       return;
     }
 
@@ -162,7 +162,7 @@ function AdminCollectionsContent() {
   };
 
   const handleDelete = (id: number) => {
-    if (confirm("Tem certeza que deseja excluir esta galeria?")) {
+    if (confirm("Are you sure you want to delete this gallery?")) {
       deleteMutation.mutate({ id });
     }
   };
@@ -208,9 +208,9 @@ function AdminCollectionsContent() {
           </DialogTrigger>
           <DialogContent className="max-w-2xl">
           <DialogHeader>
-            <DialogTitle>{editingId ? "Editar Galeria" : "Nova Galeria"}</DialogTitle>
+            <DialogTitle>{editingId ? "Edit Gallery" : "New Gallery"}</DialogTitle>
             <DialogDescription>
-              {editingId ? "Atualize os dados da galeria" : "Crie uma nova galeria para organizar suas fotos"}
+              {editingId ? "Update gallery details" : "Create a new gallery to organise your photos"}
             </DialogDescription>
             {editingId && clientName && (
               <div className="mt-2 p-2 bg-muted rounded-md">
@@ -251,7 +251,7 @@ function AdminCollectionsContent() {
                   id="description"
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  placeholder="Descreva a galeria..."
+                  placeholder="Describe the gallery..."
                   rows={3}
                 />
               </div>
@@ -276,9 +276,9 @@ function AdminCollectionsContent() {
                             data: base64.split(',')[1],
                           });
                           setFormData({ ...formData, coverImageUrl: result.url });
-                          toast.success("Imagem enviada!");
+                          toast.success("Image uploaded!");
                         } catch (error: any) {
-                          toast.error(error.message || "Erro ao enviar imagem");
+                          toast.error(error.message || "Error uploading image");
                         }
                       };
                       reader.readAsDataURL(file);
@@ -314,7 +314,7 @@ function AdminCollectionsContent() {
                   type="text"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  placeholder="Senha para cliente acessar galeria"
+                  placeholder="Password for client to access gallery"
                 />
                 <p className="text-xs text-muted-foreground">
                   Opcional: senha que será enviada ao cliente junto com o link
@@ -386,7 +386,7 @@ function AdminCollectionsContent() {
                   Cancelar
                 </Button>
                 <Button onClick={handleSubmit} className="flex-1">
-                  {editingId ? "Atualizar" : "Criar"}
+                  {editingId ? "Update" : "Create"}
                 </Button>
               </div>
             </div>
@@ -470,7 +470,7 @@ function AdminCollectionsContent() {
                       variant="outline"
                       size="sm"
                       onClick={() => window.location.href = `/admin/galleries/${collection.id}/upload`}
-                      title="Upload de fotos"
+                      title="Photo upload"
                     >
                       <UploadIcon className="w-4 h-4" />
                     </Button>
@@ -481,7 +481,7 @@ function AdminCollectionsContent() {
                         handleEdit(collection);
                         setIsCreateOpen(true);
                       }}
-                      title="Editar galeria"
+                      title="Edit gallery"
                     >
                       <Pencil className="w-4 h-4" />
                     </Button>
@@ -489,7 +489,7 @@ function AdminCollectionsContent() {
                       variant="outline"
                       size="sm"
                       onClick={() => handleDelete(collection.id)}
-                      title="Excluir galeria"
+                      title="Delete gallery"
                     >
                       <Trash2 className="w-4 h-4" />
                     </Button>

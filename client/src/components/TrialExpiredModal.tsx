@@ -90,7 +90,7 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
               className="w-full bg-purple-600 hover:bg-purple-700"
             >
               <CreditCard className="w-4 h-4 mr-2" />
-              {isLoading ? "Processando..." : "Assinar Agora"}
+              {isLoading ? "Processing..." : "Assinar Agora"}
             </Button>
           </div>
 

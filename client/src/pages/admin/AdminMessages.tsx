@@ -214,7 +214,7 @@ export default function AdminMessages() {
                   {/* Input de mensagem */}
                   <div className="flex gap-2">
                     <Input
-                      placeholder="Digite sua mensagem..."
+                      placeholder="Type your message..."
                       value={messageText}
                       onChange={(e) => setMessageText(e.target.value)}
                       onKeyDown={(e) => {

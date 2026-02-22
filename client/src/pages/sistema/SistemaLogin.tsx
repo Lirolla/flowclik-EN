@@ -104,7 +104,7 @@ export default function SistemaLogin() {
               className="w-full bg-purple-600 hover:bg-purple-700 text-white"
               disabled={isLoading}
             >
-              {isLoading ? "Entrando..." : "Entrar"}
+              {isLoading ? "Entrando..." : "Sign in"}
             </Button>
           </form>
           <div className="mt-6 pt-4 border-t border-gray-800">

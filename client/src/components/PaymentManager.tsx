@@ -65,7 +65,7 @@ export default function PaymentManager({
     },
     onError: (error) => {
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -85,7 +85,7 @@ export default function PaymentManager({
     },
     onError: (error) => {
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -104,7 +104,7 @@ export default function PaymentManager({
     },
     onError: (error) => {
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -126,7 +126,7 @@ export default function PaymentManager({
     },
     onError: (error) => {
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -504,7 +504,7 @@ export default function PaymentManager({
                 disabled={recordPaymentMutation.isPending}
                 className="flex-1"
               >
-                {recordPaymentMutation.isPending ? "Salvando..." : "Registrar Pagamento"}
+                {recordPaymentMutation.isPending ? "Saving..." : "Registrar Pagamento"}
               </Button>
             </div>
           </div>
@@ -560,7 +560,7 @@ export default function PaymentManager({
                   const priceValue = parseFloat(extraPrice);
                   if (!extraDescription || !extraPrice || isNaN(priceValue) || priceValue <= 0) {
                     toast({
-                      title: "Erro",
+                      title: "Error",
                       description: "Preencha todos os campos corretamente.",
                       variant: "destructive",
                     });
@@ -576,7 +576,7 @@ export default function PaymentManager({
                 disabled={addExtraMutation.isPending}
                 className="flex-1"
               >
-                {addExtraMutation.isPending ? "Adicionando..." : "Adicionar"}
+                {addExtraMutation.isPending ? "Adding..." : "Add"}
               </Button>
             </div>
           </div>

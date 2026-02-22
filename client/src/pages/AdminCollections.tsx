@@ -46,7 +46,7 @@ function AdminCollectionsContent() {
       utils.collections.getAll.invalidate();
       resetForm();
       setIsCreateOpen(false);
-      alert("Galeria criada com sucesso!");
+      alert("Gallery created successfully!");
     },
     onError: (error) => {
       alert(`Erro: ${error.message}`);
@@ -58,7 +58,7 @@ function AdminCollectionsContent() {
       utils.collections.getAll.invalidate();
       resetForm();
       setEditingId(null);
-      alert("Galeria atualizada!");
+      alert("Gallery updated!");
     },
     onError: (error) => {
       alert(`Erro: ${error.message}`);
@@ -68,7 +68,7 @@ function AdminCollectionsContent() {
   const deleteMutation = trpc.collections.delete.useMutation({
     onSuccess: () => {
       utils.collections.getAll.invalidate();
-      alert("Galeria excluída!");
+      alert("Gallery deleted!");
     },
     onError: (error) => {
       alert(`Erro: ${error.message}`);
@@ -133,7 +133,7 @@ function AdminCollectionsContent() {
   };
 
   const handleDelete = (id: number) => {
-    if (confirm("Tem certeza que deseja excluir esta galeria?")) {
+    if (confirm("Are you sure you want to delete this gallery?")) {
       deleteMutation.mutate({ id });
     }
   };
@@ -252,7 +252,7 @@ function AdminCollectionsContent() {
               </div>
 
               <Button onClick={handleCreate} className="w-full" disabled={createMutation.isPending}>
-                {createMutation.isPending ? "Criando..." : "Criar Galeria"}
+                {createMutation.isPending ? "Creating..." : "Criar Galeria"}
               </Button>
             </div>
           </DialogContent>
@@ -466,7 +466,7 @@ function AdminCollectionsContent() {
               </div>
 
               <Button onClick={handleUpdate} className="w-full" disabled={updateMutation.isPending}>
-                {updateMutation.isPending ? "Salvando..." : "Salvar Alterações"}
+                {updateMutation.isPending ? "Saving..." : "Salvar Alterações"}
               </Button>
             </div>
           </DialogContent>

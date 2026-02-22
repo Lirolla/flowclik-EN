@@ -14,7 +14,7 @@ interface PhoneInputProps {
 export function PhoneInput({
   value,
   onChange,
-  placeholder = "Telefone",
+  placeholder = "Phone",
   required = false,
   className,
   disabled = false

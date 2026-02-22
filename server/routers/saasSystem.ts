@@ -62,7 +62,7 @@ export const saasSystemRouter = router({
         name: input.name,
         subdomain: input.subdomain,
         email: input.email,
-        baseCountry: "Brasil",
+        baseCountry: "United Kingdom",
         baseCurrency: "BRL",
         currencySymbol: "R$",
         timezone: "America/Sao_Paulo",

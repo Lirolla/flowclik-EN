@@ -156,8 +156,8 @@ export default function BookAppointment() {
         <div className="flex items-center justify-center gap-4 mb-8">
           {[
             { num: 1, label: "Serviço" },
-            { num: 2, label: "Data" },
-            { num: 3, label: "Detalhes" },
+            { num: 2, label: "Date" },
+            { num: 3, label: "Details" },
           ].map((s, i) => (
             <div key={s.num} className="flex items-center gap-2">
               <div
@@ -432,7 +432,7 @@ export default function BookAppointment() {
                     disabled={createAppointment.isPending}
                     className="flex-1"
                   >
-                    {createAppointment.isPending ? "Enviando..." : "Enviar Agendamento"}
+                    {createAppointment.isPending ? "Sending..." : "Enviar Agendamento"}
                   </Button>
                 </div>
               </div>

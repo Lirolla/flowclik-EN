@@ -31,10 +31,10 @@ export default function OrderStatus() {
   const getStatusInfo = (status: string) => {
     const map: Record<string, { label: string; icon: any; color: string; desc: string }> = {
       pending: { label: "Aguardando Pagamento", icon: Clock, color: "text-yellow-500", desc: "Realize o pagamento para liberar o download das fotos." },
-      paid: { label: "Pago", icon: Check, color: "text-green-500", desc: "Pagamento confirmado! Suas fotos estão disponíveis para download." },
+      paid: { label: "Paid", icon: Check, color: "text-green-500", desc: "Pagamento confirmado! Suas fotos estão disponíveis para download." },
       processing: { label: "Processando", icon: Clock, color: "text-blue-500", desc: "Seu pedido está sendo processado." },
-      completed: { label: "Concluído", icon: Check, color: "text-green-600", desc: "Pedido concluído. Faça o download das suas fotos." },
-      cancelled: { label: "Cancelado", icon: XIcon, color: "text-red-500", desc: "Este pedido foi cancelado." },
+      completed: { label: "Completed", icon: Check, color: "text-green-600", desc: "Pedido concluído. Faça o download das suas fotos." },
+      cancelled: { label: "Cancelled", icon: XIcon, color: "text-red-500", desc: "Este pedido foi cancelado." },
     };
     return map[status] || map.pending;
   };
@@ -42,7 +42,7 @@ export default function OrderStatus() {
   const getMethodLabel = (method: string | null) => {
     if (!method) return "";
     const map: Record<string, string> = {
-      pix: "PIX",
+      pix: "Bank transfer",
       payment_link: "Link de Pagamento",
       bank_transfer: "Transferência Bancária",
     };

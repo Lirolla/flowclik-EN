@@ -47,7 +47,7 @@ export default function AdminDomainEmail() {
   // Copiar texto para clipboard
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
-    toast.success("Copiado!");
+    toast.success("Copied!");
   };
 
   // Handler: Adicionar Domínio (API real)

@@ -104,9 +104,9 @@ export const paymentMethodsRouter = router({
 
       // Mapear nomes dos métodos de pagamento
       const methodNames: Record<string, string> = {
-        cash: "Dinheiro",
+        cash: "Cash",
         bank_transfer: "Transferência Bancária",
-        pix: "PIX",
+        pix: "Bank transfer",
         payment_link: "Link de Pagamento",
       };
 

@@ -15,15 +15,15 @@ type Tab = 'dashboard' | 'events' | 'templates' | 'campaigns' | 'logs';
 type EventType = 'birthday' | 'wedding' | 'session' | 'anniversary' | 'other';
 
 const eventTypeLabels: Record<EventType, { label: string; icon: string; color: string }> = {
-  birthday: { label: "Aniversário", icon: "🎂", color: "text-pink-400" },
-  wedding: { label: "Casamento", icon: "💒", color: "text-rose-400" },
+  birthday: { label: "Birthday", icon: "🎂", color: "text-pink-400" },
+  wedding: { label: "Wedding", icon: "💒", color: "text-rose-400" },
   session: { label: "Sessão", icon: "📸", color: "text-blue-400" },
   anniversary: { label: "Aniversário de Casamento", icon: "💍", color: "text-amber-400" },
-  other: { label: "Outro", icon: "📅", color: "text-gray-400" },
+  other: { label: "Other", icon: "📅", color: "text-gray-400" },
 };
 
 const categoryLabels: Record<string, { label: string; icon: string }> = {
-  birthday: { label: "Aniversário", icon: "🎂" },
+  birthday: { label: "Birthday", icon: "🎂" },
   promotion: { label: "Promoção", icon: "🔥" },
   reminder: { label: "Lembrete", icon: "📅" },
   thank_you: { label: "Agradecimento", icon: "💜" },
@@ -319,7 +319,7 @@ function EventsTab() {
               disabled={createEvent.isPending}
               className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
             >
-              {createEvent.isPending ? "Salvando..." : "Salvar Evento"}
+              {createEvent.isPending ? "Saving..." : "Salvar Evento"}
             </button>
           </div>
         </div>
@@ -357,7 +357,7 @@ function EventsTab() {
                     title={event.templateId ? "Enviar email para o cliente" : "Sem template - selecione um template primeiro"}
                   >
                     <Send className="w-3 h-3" />
-                    {sendingEventId === event.id ? "Enviando..." : "Enviar Email"}
+                    {sendingEventId === event.id ? "Sending..." : "Enviar Email"}
                   </button>
                   <button
                     onClick={() => { if (confirm("Remover este evento?")) deleteEvent.mutate({ id: event.id }); }}
@@ -405,7 +405,7 @@ function TemplatesTab() {
               className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
             >
               <Sparkles className="w-4 h-4" />
-              {initDefaults.isPending ? "Criando..." : "Criar Templates Padrão"}
+              {initDefaults.isPending ? "Creating..." : "Criar Templates Padrão"}
             </button>
           )}
           <button
@@ -484,7 +484,7 @@ function TemplatesTab() {
               disabled={createTemplate.isPending}
               className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
             >
-              {createTemplate.isPending ? "Salvando..." : "Salvar Template"}
+              {createTemplate.isPending ? "Saving..." : "Salvar Template"}
             </button>
           </div>
         </div>
@@ -703,7 +703,7 @@ function CampaignsTab() {
               disabled={createCampaign.isPending}
               className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
             >
-              {createCampaign.isPending ? "Salvando..." : "Criar Campanha"}
+              {createCampaign.isPending ? "Saving..." : "Criar Campanha"}
             </button>
           </div>
         </div>
@@ -760,7 +760,7 @@ function CampaignsTab() {
                         className="flex items-center gap-1 px-3 py-1.5 bg-green-600 hover:bg-green-700 text-white rounded-lg text-xs font-medium transition-colors disabled:opacity-50"
                       >
                         <Send className="w-3 h-3" />
-                        {sendCampaign.isPending ? "Enviando..." : "Enviar"}
+                        {sendCampaign.isPending ? "Sending..." : "Send"}
                       </button>
                     )}
                     <button

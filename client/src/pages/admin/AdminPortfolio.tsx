@@ -146,7 +146,7 @@ export default function AdminPortfolio() {
       setFormData({ ...formData, imageUrl: url, thumbnailUrl: url });
       toast({ title: "Imagem enviada com sucesso!" });
     } catch (error) {
-      toast({ title: "Erro ao enviar imagem", variant: "destructive" });
+      toast({ title: "Error uploading image", variant: "destructive" });
     } finally {
       setUploading(false);
     }
@@ -394,7 +394,7 @@ export default function AdminPortfolio() {
                       Salvando...
                     </>
                   ) : (
-                    "Salvar"
+                    "Save"
                   )}
                 </Button>
               </div>

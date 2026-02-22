@@ -122,7 +122,7 @@ export default function ClienteAcesso() {
               className="w-full bg-red-600 hover:bg-red-700"
               disabled={isLoading}
             >
-              {isLoading ? "Buscando..." : "Acessar Painel"}
+              {isLoading ? "Searching..." : "Acessar Painel"}
             </Button>
           </form>
 

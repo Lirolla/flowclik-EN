@@ -55,7 +55,7 @@ function AdminEventoVendasContent() {
     if (!selectedEvent?.collectionPublicSlug) return;
     const link = `${window.location.origin}/gallery-shop/${selectedEvent.collectionPublicSlug}`;
     navigator.clipboard.writeText(link);
-    toast.success("Link copiado!");
+    toast.success("Link copied!");
   };
 
   const handleSendEmails = () => {
@@ -140,7 +140,7 @@ function AdminEventoVendasContent() {
                           <DollarSign className="w-8 h-8 text-green-500" />
                           <div>
                             <p className="text-2xl font-bold">
-                              {selectedEvent?.collectionSalesEnabled ? "Ativo" : "Inativo"}
+                              {selectedEvent?.collectionSalesEnabled ? "Active" : "Inactive"}
                             </p>
                             <p className="text-xs text-muted-foreground">Status de Vendas</p>
                           </div>

@@ -43,7 +43,7 @@ export default function Cadastro() {
 
     if (password !== confirmPassword) {
       toast({
-        title: "Erro",
+        title: "Error",
         description: "As senhas não coincidem",
         variant: "destructive",
       });
@@ -52,7 +52,7 @@ export default function Cadastro() {
 
     if (password.length < 6) {
       toast({
-        title: "Erro",
+        title: "Error",
         description: "A senha deve ter pelo menos 6 caracteres",
         variant: "destructive",
       });

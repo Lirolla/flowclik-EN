@@ -33,7 +33,7 @@ export default function AdminFinalAlbum() {
     },
     onError: (error) => {
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -57,7 +57,7 @@ export default function AdminFinalAlbum() {
 
     setUploading(true);
     toast({
-      title: "Enviando...",
+      title: "Sending...",
       description: `Fazendo upload de ${files.length} foto(s)...`,
     });
 
@@ -95,7 +95,7 @@ export default function AdminFinalAlbum() {
     } catch (error) {
       console.error("Erro no upload:", error);
       toast({
-        title: "Erro",
+        title: "Error",
         description: "Falha ao fazer upload das fotos.",
         variant: "destructive",
       });
@@ -146,7 +146,7 @@ export default function AdminFinalAlbum() {
           <label htmlFor="file-upload">
             <Button asChild disabled={uploading}>
               <span>
-                {uploading ? "Enviando..." : "Selecionar Arquivos"}
+                {uploading ? "Sending..." : "Selecionar Arquivos"}
               </span>
             </Button>
           </label>

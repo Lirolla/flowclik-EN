@@ -79,7 +79,7 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
     },
     onError: (error) => {
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -95,7 +95,7 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
     navigator.clipboard.writeText(link);
     setCopied(true);
     toast({
-      title: "Link copiado!",
+      title: "Link copied!",
       description: "Envie este link para o cliente acessar as fotos.",
     });
     setTimeout(() => setCopied(false), 2000);
@@ -289,7 +289,7 @@ function AdminAppointmentsContent() {
     onSuccess: () => {
       utils.appointments.getAll.invalidate();
       toast({
-        title: "Agendamento atualizado!",
+        title: "Appointment updated!",
         description: "As informações foram salvas com sucesso.",
       });
       setIsEditDialogOpen(false);
@@ -297,7 +297,7 @@ function AdminAppointmentsContent() {
     },
     onError: (error) => {
       toast({
-        title: "Erro ao atualizar",
+        title: "Error updating",
         description: error.message,
         variant: "destructive",
       });
@@ -315,7 +315,7 @@ function AdminAppointmentsContent() {
     },
     onError: (error) => {
       toast({
-        title: "Erro ao excluir",
+        title: "Error deleting",
         description: error.message,
         variant: "destructive",
       });
@@ -326,7 +326,7 @@ function AdminAppointmentsContent() {
     onSuccess: () => {
       utils.appointments.getAll.invalidate();
       toast({
-        title: "Agendamento criado!",
+        title: "Appointment created!",
         description: "O agendamento manual foi criado com sucesso.",
       });
       setIsCreateDialogOpen(false);
@@ -824,7 +824,7 @@ function AdminAppointmentsContent() {
                     const galleryUrl = `${window.location.origin}/galeria-cliente/${selectedAppointment.id}`;
                     navigator.clipboard.writeText(galleryUrl);
                     toast({
-                      title: "Link copiado!",
+                      title: "Link copied!",
                       description: "Envie este link para o cliente visualizar as fotos.",
                     });
                   }}
@@ -1112,7 +1112,7 @@ function AdminAppointmentsContent() {
                 id="edit-location"
                 value={editFormData.eventLocation}
                 onChange={(e) => setEditFormData({ ...editFormData, eventLocation: e.target.value })}
-                placeholder="Local do evento"
+                placeholder="Event location"
               />
             </div>
             <div>
@@ -1137,7 +1137,7 @@ function AdminAppointmentsContent() {
                 disabled={updateMutation.isPending}
                 className="flex-1"
               >
-                {updateMutation.isPending ? "Salvando..." : "Salvar"}
+                {updateMutation.isPending ? "Saving..." : "Save"}
               </Button>
             </div>
           </div>
@@ -1321,7 +1321,7 @@ function AdminAppointmentsContent() {
                 disabled={createManualMutation.isPending}
                 className="flex-1"
               >
-                {createManualMutation.isPending ? "Criando..." : "Criar Agendamento"}
+                {createManualMutation.isPending ? "Creating..." : "Criar Agendamento"}
               </Button>
             </div>
           </div>

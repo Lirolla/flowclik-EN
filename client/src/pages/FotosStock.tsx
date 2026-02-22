@@ -51,7 +51,7 @@ export default function FotosStock() {
                   <div className="relative aspect-[4/3]">
                     <img
                       src={photo.originalUrl}
-                      alt={photo.title || "Foto"}
+                      alt={photo.title || "Photo"}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-center justify-center gap-2">

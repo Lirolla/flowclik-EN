@@ -19,7 +19,7 @@ export default function AdminPhotoSelections() {
   const uploadEditedPhotoMutation = trpc.photoSelections.uploadEditedPhoto.useMutation({
     onSuccess: () => {
       toast({
-        title: "Sucesso",
+        title: "Success",
         description: "Foto editada enviada com sucesso!",
       });
       refetch();
@@ -52,7 +52,7 @@ export default function AdminPhotoSelections() {
       reader.readAsDataURL(file);
     } catch (error) {
       toast({
-        title: "Erro",
+        title: "Error",
         description: "Erro ao fazer upload da foto editada",
         variant: "destructive",
       });
@@ -138,7 +138,7 @@ export default function AdminPhotoSelections() {
                         const link = `${window.location.origin}/final-album/${collection.slug}`;
                         navigator.clipboard.writeText(link);
                         toast({
-                          title: "Link copiado!",
+                          title: "Link copied!",
                           description: "Envie este link para o cliente visualizar o álbum final.",
                         });
                       }

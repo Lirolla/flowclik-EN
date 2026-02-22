@@ -46,7 +46,7 @@ export default function Cart() {
 
   const handleCheckout = () => {
     if (items.length === 0) {
-      toast.error("Carrinho vazio");
+      toast.error("Cart is empty");
       return;
     }
     setStep("checkout");
@@ -375,7 +375,7 @@ export default function Cart() {
             <div className="mb-8">
               <h1 className="text-3xl font-bold mb-2">Carrinho de Compras</h1>
               <p className="text-muted-foreground">
-                {items.length} {items.length === 1 ? "foto" : "fotos"} selecionada{items.length === 1 ? "" : "s"}
+                {items.length} {items.length === 1 ? "photo" : "photos"} selecionada{items.length === 1 ? "" : "s"}
               </p>
             </div>
 

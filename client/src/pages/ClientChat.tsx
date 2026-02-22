@@ -35,7 +35,7 @@ export default function ClientChat() {
     },
     onError: (error) => {
       toast({
-        title: "Erro ao enviar mensagem",
+        title: "Error sending message",
         description: error.message,
         variant: "destructive",
       });
@@ -117,7 +117,7 @@ export default function ClientChat() {
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <span className="text-xs opacity-75">
-                        {isOwnMessage ? "Você" : "Fotógrafo"}
+                        {isOwnMessage ? "Você" : "Photographer"}
                       </span>
                       <span className="text-xs opacity-50">
                         {new Date(msg.createdAt).toLocaleString('pt-BR', {
@@ -153,7 +153,7 @@ export default function ClientChat() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Digite sua mensagem..."
+                placeholder="Type your message..."
                 className="flex-1 bg-gray-800 border-gray-700 text-white"
                 disabled={sendMessageMutation.isPending}
               />

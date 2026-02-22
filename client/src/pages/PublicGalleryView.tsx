@@ -106,7 +106,7 @@ export default function PublicGalleryView() {
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
                 className="w-full px-4 py-2 border rounded-md bg-background"
-                placeholder="Senha"
+                placeholder="Password"
                 autoFocus
               />
               {passwordError && (

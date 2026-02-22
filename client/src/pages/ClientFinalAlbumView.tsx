@@ -48,7 +48,7 @@ export default function ClientFinalAlbumView() {
   const handleShare = () => {
     if (!appointment?.slug) {
       toast({
-        title: "Erro",
+        title: "Error",
         description: "Não foi possível gerar link de compartilhamento.",
         variant: "destructive",
       });
@@ -63,7 +63,7 @@ export default function ClientFinalAlbumView() {
   const copyShareLink = () => {
     navigator.clipboard.writeText(shareUrl);
     toast({
-      title: "Link copiado!",
+      title: "Link copied!",
       description: "Link de compartilhamento copiado para a área de transferência.",
     });
   };

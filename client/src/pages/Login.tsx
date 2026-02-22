@@ -98,7 +98,7 @@ export default function Login() {
             disabled={isLoading}
           >
             <LogIn className="h-4 w-4 mr-2" />
-            {isLoading ? "Entrando..." : "Entrar"}
+            {isLoading ? "Entrando..." : "Sign in"}
           </Button>
         </form>
 

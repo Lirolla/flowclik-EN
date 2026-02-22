@@ -16,14 +16,14 @@ export default function SidebarNavbar({ currentPage }: SidebarNavbarProps) {
   const showStockPhotos = config?.stockPhotosEnabled === 1;
 
   const navItems = [
-    { icon: Home, label: "Início", path: SITE_ROUTES.home() },
-    { icon: Image, label: "Galerias", path: SITE_ROUTES.galleries() },
-    { icon: Briefcase, label: "Serviços", path: SITE_ROUTES.services() },
-    { icon: Camera, label: "Portfólio", path: SITE_ROUTES.portfolio() },
-    ...(showStockPhotos ? [{ icon: ShoppingCart, label: "Fotos Stock", path: SITE_ROUTES.stockPhotos() }] : []),
-    ...(showVideo ? [{ icon: Camera, label: "Vídeos", path: SITE_ROUTES.video() }] : []),
-    { icon: Info, label: "Sobre", path: SITE_ROUTES.about() },
-    { icon: Mail, label: "Contato", path: SITE_ROUTES.contact() },
+    { icon: Home, label: "Home", path: SITE_ROUTES.home() },
+    { icon: Image, label: "Galleries", path: SITE_ROUTES.galleries() },
+    { icon: Briefcase, label: "Services", path: SITE_ROUTES.services() },
+    { icon: Camera, label: "Portfolio", path: SITE_ROUTES.portfolio() },
+    ...(showStockPhotos ? [{ icon: ShoppingCart, label: "Stock Photos", path: SITE_ROUTES.stockPhotos() }] : []),
+    ...(showVideo ? [{ icon: Camera, label: "Videos", path: SITE_ROUTES.video() }] : []),
+    { icon: Info, label: "About", path: SITE_ROUTES.about() },
+    { icon: Mail, label: "Contact", path: SITE_ROUTES.contact() },
   ];
 
   return (

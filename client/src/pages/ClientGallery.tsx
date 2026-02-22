@@ -46,7 +46,7 @@ export default function ClientGallery() {
     },
     onError: (error) => {
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -64,7 +64,7 @@ export default function ClientGallery() {
     },
     onError: (error) => {
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -81,7 +81,7 @@ export default function ClientGallery() {
     },
     onError: (error) => {
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });

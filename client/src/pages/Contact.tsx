@@ -193,7 +193,7 @@ export default function Contact() {
                     disabled={sendMessageMutation.isPending}
                   >
                     {sendMessageMutation.isPending ? (
-                      "Enviando..."
+                      "Sending..."
                     ) : (
                       <>
                         <Send className="w-4 h-4 mr-2" />

@@ -28,7 +28,7 @@ export default function SendPaymentLinkDialog({
     if (paymentLink) {
       navigator.clipboard.writeText(paymentLink);
       toast({
-        title: "Link copiado!",
+        title: "Link copied!",
         description: "O link de pagamento foi copiado para a área de transferência.",
       });
     }

@@ -110,10 +110,10 @@ export default function SistemaTickets() {
 
     return (
       <Badge className={colors[priority] || colors.normal}>
-        {priority === "low" && "Baixa"}
+        {priority === "low" && "Low"}
         {priority === "normal" && "Normal"}
-        {priority === "high" && "Alta"}
-        {priority === "urgent" && "Urgente"}
+        {priority === "high" && "High"}
+        {priority === "urgent" && "Urgent"}
       </Badge>
     );
   };
@@ -233,7 +233,7 @@ export default function SistemaTickets() {
                 <div className="space-y-2">
                   <Label>Responder Ticket</Label>
                   <Textarea
-                    placeholder="Digite sua mensagem..."
+                    placeholder="Type your message..."
                     rows={4}
                     value={replyMessage}
                     onChange={(e) => setReplyMessage(e.target.value)}
@@ -251,7 +251,7 @@ export default function SistemaTickets() {
                   <div className="flex gap-2">
                     <Button onClick={handleReply} disabled={replyToTicket.isPending}>
                       <Send className="h-4 w-4 mr-2" />
-                      {replyToTicket.isPending ? "Enviando..." : "Enviar Resposta"}
+                      {replyToTicket.isPending ? "Sending..." : "Enviar Resposta"}
                     </Button>
                     {ticketDetails.ticket.status !== "resolved" && (
                       <Button

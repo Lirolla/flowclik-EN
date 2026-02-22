@@ -13,9 +13,9 @@ const docsStructure: Record<string, { icon: any; articles: { id: string; title: 
 # Como fazer login no sistema
 
 1. Acesse seu subdomínio: **seusite.flowclik.com**
-2. Clique em "Entrar" no menu superior
+2. Clique em "Sign in" no menu superior
 3. Digite seu email e senha cadastrados
-4. Clique em "Entrar"
+4. Clique em "Sign in"
 
 **Esqueceu a senha?**
 - Clique em "Esqueci minha senha" na tela de login
@@ -61,7 +61,7 @@ O cliente receberá email de confirmação automaticamente!
       ` },
     ],
   },
-  "Galerias": {
+  "Galleries": {
     icon: Image,
     articles: [
       { id: "criar-galeria", title: "Como criar uma galeria", content: `
@@ -132,7 +132,7 @@ Pronto! Agora você pode fazer upload de fotos.
       ` },
     ],
   },
-  "Agendamentos": {
+  "Appointments": {
     icon: Calendar,
     articles: [
       { id: "criar-agendamento", title: "Criar novo agendamento", content: `
@@ -182,7 +182,7 @@ Pronto! Agora você pode fazer upload de fotos.
       ` },
     ],
   },
-  "Clientes": {
+  "Clients": {
     icon: Users,
     articles: [
       { id: "cadastrar-cliente", title: "Cadastrar novo cliente", content: `
@@ -229,7 +229,7 @@ Pronto! Agora você pode fazer upload de fotos.
       ` },
     ],
   },
-  "Configurações": {
+  "Settings": {
     icon: Settings,
     articles: [
       { id: "configurar-servicos", title: "Configurar serviços e preços", content: `

@@ -336,7 +336,7 @@ export default function AdminSettings() {
                   <Textarea
                     value={aboutMission}
                     onChange={(e) => setAboutMission(e.target.value)}
-                    placeholder="Nossa missão é..."
+                    placeholder="Our mission is..."
                     rows={3}
                   />
                 </div>
@@ -345,7 +345,7 @@ export default function AdminSettings() {
                   <Textarea
                     value={aboutVision}
                     onChange={(e) => setAboutVision(e.target.value)}
-                    placeholder="Nossa visão é..."
+                    placeholder="Our vision is..."
                     rows={3}
                   />
                 </div>
@@ -354,7 +354,7 @@ export default function AdminSettings() {
                   <Textarea
                     value={aboutValues}
                     onChange={(e) => setAboutValues(e.target.value)}
-                    placeholder="Nossos valores são..."
+                    placeholder="Our values are..."
                     rows={3}
                   />
                 </div>

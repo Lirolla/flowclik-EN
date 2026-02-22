@@ -36,7 +36,7 @@ function AdminSessionGalleryContent() {
     },
     onError: (error) => {
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -52,7 +52,7 @@ function AdminSessionGalleryContent() {
     navigator.clipboard.writeText(link);
     setCopied(true);
     toast({
-      title: "Link copiado!",
+      title: "Link copied!",
       description: "Envie este link para o cliente acessar as fotos.",
     });
     setTimeout(() => setCopied(false), 2000);

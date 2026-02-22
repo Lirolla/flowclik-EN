@@ -51,7 +51,7 @@ export default function ClientGalleryAuth() {
     },
     onError: (error) => {
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -70,7 +70,7 @@ export default function ClientGalleryAuth() {
     },
     onError: (error) => {
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });

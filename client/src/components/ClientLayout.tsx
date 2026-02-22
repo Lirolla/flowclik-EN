@@ -16,8 +16,8 @@ export function ClientLayout({ children, appointmentId }: ClientLayoutProps) {
     { href: `/client/dashboard/${appointmentId}`, label: "Dashboard", icon: Home },
     { href: `/client/gallery/${appointmentId}`, label: "Galeria", icon: Image },
     { href: `/client/chat/${appointmentId}`, label: "Chat", icon: MessageSquare },
-    { href: `/client/payments/${appointmentId}`, label: "Pagamentos", icon: CreditCard },
-    { href: `/client/contract/${appointmentId}`, label: "Contrato", icon: FileText },
+    { href: `/client/payments/${appointmentId}`, label: "Payments", icon: CreditCard },
+    { href: `/client/contract/${appointmentId}`, label: "Contract", icon: FileText },
   ];
 
   return (

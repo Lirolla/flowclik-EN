@@ -40,7 +40,7 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
     },
     onError: (error) => {
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -171,7 +171,7 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
                   <Label htmlFor="city">Cidade *</Label>
                   <Input
                     id="city"
-                    placeholder="Cidade"
+                    placeholder="City"
                     value={formData.city}
                     onChange={(e) => handleChange("city", e.target.value)}
                     required
@@ -199,7 +199,7 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
               </Button>
             )}
             <Button type="submit" disabled={updateProfileMutation.isPending}>
-              {updateProfileMutation.isPending ? "Salvando..." : "Salvar dados"}
+              {updateProfileMutation.isPending ? "Saving..." : "Salvar dados"}
             </Button>
           </div>
         </form>

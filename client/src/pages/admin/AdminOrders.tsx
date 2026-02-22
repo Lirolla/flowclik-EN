@@ -51,11 +51,11 @@ export default function AdminOrders() {
 
   const getStatusBadge = (status: string) => {
     const variants: Record<string, { label: string; className: string }> = {
-      pending: { label: "Pendente", className: "bg-yellow-500/10 text-yellow-500" },
-      paid: { label: "Pago", className: "bg-green-500/10 text-green-500" },
+      pending: { label: "Pending", className: "bg-yellow-500/10 text-yellow-500" },
+      paid: { label: "Paid", className: "bg-green-500/10 text-green-500" },
       processing: { label: "Processando", className: "bg-blue-500/10 text-blue-500" },
-      completed: { label: "Concluído", className: "bg-green-600/10 text-green-600" },
-      cancelled: { label: "Cancelado", className: "bg-red-500/10 text-red-500" },
+      completed: { label: "Completed", className: "bg-green-600/10 text-green-600" },
+      cancelled: { label: "Cancelled", className: "bg-red-500/10 text-red-500" },
     };
     const variant = variants[status] || variants.pending;
     return <Badge className={variant.className}>{variant.label}</Badge>;
@@ -64,9 +64,9 @@ export default function AdminOrders() {
   const getPaymentMethodBadge = (method: string | null) => {
     if (!method) return null;
     const methods: Record<string, { label: string; icon: any; className: string }> = {
-      pix: { label: "PIX", icon: QrCode, className: "bg-green-500/10 text-green-500" },
+      pix: { label: "Bank transfer", icon: QrCode, className: "bg-green-500/10 text-green-500" },
       payment_link: { label: "Link de Pagamento", icon: Link2, className: "bg-purple-500/10 text-purple-500" },
-      bank_transfer: { label: "Transferência", icon: Building2, className: "bg-blue-500/10 text-blue-500" },
+      bank_transfer: { label: "Bank transfer", icon: Building2, className: "bg-blue-500/10 text-blue-500" },
     };
     const m = methods[method];
     if (!m) return null;
@@ -117,7 +117,7 @@ export default function AdminOrders() {
         {/* Filters */}
         <div className="flex gap-2 mb-6 flex-wrap">
           {[
-            { key: "all", label: "Todos" },
+            { key: "all", label: "All" },
             { key: "pending", label: "Pendentes" },
             { key: "paid", label: "Pagos" },
             { key: "completed", label: "Concluídos" },
@@ -199,7 +199,7 @@ export default function AdminOrders() {
                             variant="outline"
                             onClick={() => {
                               navigator.clipboard.writeText(order.paymentLink);
-                              toast.success("Link copiado!");
+                              toast.success("Link copied!");
                             }}
                           >
                             <Copy className="w-3 h-3" />

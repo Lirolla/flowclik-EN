@@ -37,14 +37,14 @@ export default function EditorialNavbar({ currentPage }: EditorialNavbarProps) {
   const showStock = config?.stockPhotosEnabled === 1;
 
   const menuItems = [
-    { label: "Início", href: SITE_ROUTES.home(), id: "/" },
-    { label: "Galerias", href: SITE_ROUTES.galleries(), id: "galerias" },
-    { label: "Serviços", href: SITE_ROUTES.services(), id: "servicos" },
-    { label: "Portfólio", href: SITE_ROUTES.portfolio(), id: "portfolio" },
-    ...(showStock ? [{ label: "Fotos Stock", href: SITE_ROUTES.stockPhotos(), id: "fotos-stock" }] : []),
-    ...(showVideo ? [{ label: "Vídeos", href: SITE_ROUTES.video(), id: "video" }] : []),
-    { label: "Sobre", href: SITE_ROUTES.about(), id: "sobre" },
-    { label: "Contato", href: SITE_ROUTES.contact(), id: "contato" },
+    { label: "Home", href: SITE_ROUTES.home(), id: "/" },
+    { label: "Galleries", href: SITE_ROUTES.galleries(), id: "galerias" },
+    { label: "Services", href: SITE_ROUTES.services(), id: "servicos" },
+    { label: "Portfolio", href: SITE_ROUTES.portfolio(), id: "portfolio" },
+    ...(showStock ? [{ label: "Stock Photos", href: SITE_ROUTES.stockPhotos(), id: "fotos-stock" }] : []),
+    ...(showVideo ? [{ label: "Videos", href: SITE_ROUTES.video(), id: "video" }] : []),
+    { label: "About", href: SITE_ROUTES.about(), id: "sobre" },
+    { label: "Contact", href: SITE_ROUTES.contact(), id: "contato" },
   ];
 
   return (

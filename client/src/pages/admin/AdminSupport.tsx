@@ -120,10 +120,10 @@ export default function AdminSupport() {
 
     return (
       <Badge className={colors[priority] || colors.normal}>
-        {priority === "low" && "Baixa"}
+        {priority === "low" && "Low"}
         {priority === "normal" && "Normal"}
-        {priority === "high" && "Alta"}
-        {priority === "urgent" && "Urgente"}
+        {priority === "high" && "High"}
+        {priority === "urgent" && "Urgent"}
       </Badge>
     );
   };
@@ -191,7 +191,7 @@ export default function AdminSupport() {
                     Cancelar
                   </Button>
                   <Button onClick={handleCreateTicket} disabled={createTicket.isPending}>
-                    {createTicket.isPending ? "Criando..." : "Criar Ticket"}
+                    {createTicket.isPending ? "Creating..." : "Criar Ticket"}
                   </Button>
                 </div>
               </div>
@@ -282,13 +282,13 @@ export default function AdminSupport() {
                   <div className="space-y-2">
                     <Label>Adicionar Resposta</Label>
                     <Textarea
-                      placeholder="Digite sua mensagem..."
+                      placeholder="Type your message..."
                       rows={4}
                       value={replyMessage}
                       onChange={(e) => setReplyMessage(e.target.value)}
                     />
                     <Button onClick={handleAddReply} disabled={addReply.isPending}>
-                      {addReply.isPending ? "Enviando..." : "Enviar Resposta"}
+                      {addReply.isPending ? "Sending..." : "Enviar Resposta"}
                     </Button>
                   </div>
                 )}

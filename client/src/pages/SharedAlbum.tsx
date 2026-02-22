@@ -32,7 +32,7 @@ export default function SharedAlbum() {
     onError: (error) => {
       console.error('Registration error:', error);
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message || "Não foi possível registrar seu email.",
         variant: "destructive",
       });
@@ -100,7 +100,7 @@ export default function SharedAlbum() {
               <Input
                 id="name"
                 type="text"
-                placeholder="Seu nome"
+                placeholder="Your name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="bg-gray-800 border-gray-700 text-white"

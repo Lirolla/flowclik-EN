@@ -149,7 +149,7 @@ export default function AdminClients() {
                 <div>
                   <Label>País</Label>
                   <Input
-                    value="Brasil"
+                    value="United Kingdom"
                     disabled
                     className="bg-gray-900 border-gray-700 text-gray-400"
                   />

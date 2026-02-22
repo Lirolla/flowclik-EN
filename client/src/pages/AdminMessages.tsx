@@ -37,7 +37,7 @@ export default function AdminMessages() {
     },
     onError: (error) => {
       toast({
-        title: "Erro",
+        title: "Error",
         description: error.message,
         variant: "destructive",
       });
@@ -225,7 +225,7 @@ export default function AdminMessages() {
                           handleSendMessage();
                         }
                       }}
-                      placeholder="Digite sua mensagem..."
+                      placeholder="Type your message..."
                       className="flex-1 bg-gray-800 border-gray-700"
                     />
                     <Button

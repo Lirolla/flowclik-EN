@@ -303,7 +303,7 @@ export default function AdminSubscription() {
                 <div className="flex items-center gap-3">
                   <CardTitle className="text-2xl">{planInfo.name}</CardTitle>
                   <Badge variant={isTrialActive ? "default" : isActive ? "default" : subscription?.status === "paused" || subscription?.status === "cancelled" || subscription?.status === "past_due" ? "destructive" : "secondary"}>
-                    {isTrialActive ? "Período de Teste" : isActive ? planInfo.badge : subscription?.status === "paused" ? "Suspenso" : subscription?.status === "cancelled" ? "Cancelado" : subscription?.status === "past_due" ? "Inadimplente" : "Inativo"}
+                    {isTrialActive ? "Período de Teste" : isActive ? planInfo.badge : subscription?.status === "paused" ? "Suspenso" : subscription?.status === "cancelled" ? "Cancelled" : subscription?.status === "past_due" ? "Inadimplente" : "Inactive"}
                   </Badge>
                 </div>
                 <CardDescription className="mt-2">
@@ -312,7 +312,7 @@ export default function AdminSubscription() {
               </div>
               <div className="text-right">
                 <p className={`text-4xl font-bold ${planInfo.color}`}>{planInfo.price === "Grátis" ? "Grátis" : `R$ ${planInfo.priceNum}`}</p>
-                <p className="text-sm text-muted-foreground">{planInfo.price === "Grátis" ? "para sempre" : "por mês"}</p>
+                <p className="text-sm text-muted-foreground">{planInfo.price === "Grátis" ? "para sempre" : "per month"}</p>
               </div>
             </div>
           </CardHeader>

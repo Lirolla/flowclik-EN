@@ -44,10 +44,10 @@ export default function SistemaTenants() {
 
     return (
       <Badge variant={variants[status] || "outline"}>
-        {status === "active" && "Ativo"}
+        {status === "active" && "Active"}
         {status === "trialing" && "Trial"}
         {status === "past_due" && "Vencido"}
-        {status === "cancelled" && "Cancelado"}
+        {status === "cancelled" && "Cancelled"}
         {status === "paused" && "Pausado"}
       </Badge>
     );

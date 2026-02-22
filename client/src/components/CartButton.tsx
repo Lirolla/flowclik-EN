@@ -18,7 +18,7 @@ export function CartButton() {
       size="lg"
     >
       <ShoppingCart className="w-5 h-5 mr-2" />
-      {totalItems} {totalItems === 1 ? "foto" : "fotos"}
+      {totalItems} {totalItems === 1 ? "photo" : "photos"}
       <span className="ml-2 font-bold">
         {format(totalPrice)}
       </span>

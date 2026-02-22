@@ -20,14 +20,14 @@ export default function WeddingNavbar({ currentPage }: WeddingNavbarProps) {
   const closeMenu = () => setMobileMenuOpen(false);
 
   const navItems = [
-    { label: "Início", path: SITE_ROUTES.home() },
-    { label: "Galerias", path: SITE_ROUTES.galleries() },
-    { label: "Serviços", path: SITE_ROUTES.services() },
-    { label: "Portfólio", path: SITE_ROUTES.portfolio() },
-    ...(showStockPhotos ? [{ label: "Fotos Stock", path: SITE_ROUTES.stockPhotos() }] : []),
-    ...(showVideo ? [{ label: "Vídeos", path: SITE_ROUTES.video() }] : []),
-    { label: "Sobre", path: SITE_ROUTES.about() },
-    { label: "Contato", path: SITE_ROUTES.contact() },
+    { label: "Home", path: SITE_ROUTES.home() },
+    { label: "Galleries", path: SITE_ROUTES.galleries() },
+    { label: "Services", path: SITE_ROUTES.services() },
+    { label: "Portfolio", path: SITE_ROUTES.portfolio() },
+    ...(showStockPhotos ? [{ label: "Stock Photos", path: SITE_ROUTES.stockPhotos() }] : []),
+    ...(showVideo ? [{ label: "Videos", path: SITE_ROUTES.video() }] : []),
+    { label: "About", path: SITE_ROUTES.about() },
+    { label: "Contact", path: SITE_ROUTES.contact() },
   ];
 
   return (

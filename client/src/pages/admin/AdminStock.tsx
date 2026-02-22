@@ -352,7 +352,7 @@ function AdminStockContent() {
                 disabled={uploading}
                 className="flex-1"
               >
-                {uploading ? "Enviando..." : "Fazer Upload"}
+                {uploading ? "Sending..." : "Fazer Upload"}
               </Button>
               <Button
                 variant="outline"
@@ -445,7 +445,7 @@ function AdminStockContent() {
                 disabled={updateMutation.isPending}
                 className="flex-1"
               >
-                {updateMutation.isPending ? "Salvando..." : "Salvar Alterações"}
+                {updateMutation.isPending ? "Saving..." : "Salvar Alterações"}
               </Button>
               <Button
                 variant="outline"

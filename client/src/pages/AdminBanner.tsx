@@ -67,7 +67,7 @@ export default function AdminBanner() {
         {showForm && (
           <Card className="p-6">
             <h3 className="text-xl font-bold mb-4">
-              {editingSlide ? "Editar Slide" : "Novo Slide"}
+              {editingSlide ? "Edit Slide" : "New Slide"}
             </h3>
             <SlideForm
               slide={editingSlide}
@@ -128,7 +128,7 @@ export default function AdminBanner() {
 
                 <div className="p-4">
                   <h3 className="font-bold text-lg mb-1">
-                    {slide.title || "Sem título"}
+                    {slide.title || "No title"}
                   </h3>
                   {slide.description && (
                     <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
@@ -198,11 +198,11 @@ function SlideForm({
 
   const createMutation = trpc.banner.create.useMutation({
     onSuccess: () => {
-      toast.success("Slide criado com sucesso!");
+      toast.success("Slide created successfully!");
       onSave();
     },
     onError: (error) => {
-      toast.error(error.message || "Erro ao criar slide");
+      toast.error(error.message || "Error creating slide");
     },
   });
 

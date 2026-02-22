@@ -15,7 +15,7 @@ export default function About() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold font-serif mb-6">
-              {siteConfig?.aboutTitle || "Sobre Nós"}
+              {siteConfig?.aboutTitle || "About Us"}
             </h1>
                {siteConfig?.siteTagline && (
               <p className="text-lg md:text-xl text-muted-foreground">
@@ -36,7 +36,7 @@ export default function About() {
                   <div className="order-2 md:order-1">
                     <img
                       src={siteConfig.aboutImage}
-                      alt={siteConfig.aboutTitle || "Sobre"}
+                      alt={siteConfig.aboutTitle || "About"}
                       className="rounded-lg shadow-xl w-full"
                     />
                   </div>

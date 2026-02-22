@@ -101,7 +101,7 @@ function AdminSettingsContent() {
   const [uploadingParallax, setUploadingParallax] = useState(false);
   
   // Regional settings (HARDCODED BRASIL)
-  const baseCountry = "Brasil";
+  const baseCountry = "United Kingdom";
   const baseCurrency = "BRL";
   const currencySymbol = "R$";
   const timezone = "America/Sao_Paulo";
@@ -291,7 +291,7 @@ function AdminSettingsContent() {
       parallaxTitle: parallaxTitle || undefined,
       
       // Regional settings (hardcoded Brasil)
-      baseCountry: "Brasil",
+      baseCountry: "United Kingdom",
       baseCurrency: "BRL",
       currencySymbol: "R$",
       timezone: "America/Sao_Paulo",
@@ -917,7 +917,7 @@ function AdminSettingsContent() {
                   <Textarea
                     value={aboutMission}
                     onChange={(e) => setAboutMission(e.target.value)}
-                    placeholder="Nossa missão é..."
+                    placeholder="Our mission is..."
                     rows={3}
                   />
                 </div>
@@ -926,7 +926,7 @@ function AdminSettingsContent() {
                   <Textarea
                     value={aboutVision}
                     onChange={(e) => setAboutVision(e.target.value)}
-                    placeholder="Nossa visão é..."
+                    placeholder="Our vision is..."
                     rows={3}
                   />
                 </div>
@@ -935,7 +935,7 @@ function AdminSettingsContent() {
                   <Textarea
                     value={aboutValues}
                     onChange={(e) => setAboutValues(e.target.value)}
-                    placeholder="Nossos valores são..."
+                    placeholder="Our values are..."
                     rows={3}
                   />
                 </div>

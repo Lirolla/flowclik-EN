@@ -70,7 +70,7 @@ function AdminClientDetailsContent() {
     );
   }
 
-  const clientName = appointments?.[0]?.clientName || orders?.[0]?.customerName || "Cliente";
+  const clientName = appointments?.[0]?.clientName || orders?.[0]?.customerName || "Client";
 
   return (
     <div className="container mx-auto py-8">

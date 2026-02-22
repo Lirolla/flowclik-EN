@@ -146,7 +146,7 @@ export default function ClientContract() {
               <iframe
                 src={appointment.contractUrl!}
                 className="w-full h-full"
-                title="Contrato"
+                title="Contract"
               />
             </div>
           </Card>

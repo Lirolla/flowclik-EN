@@ -22,7 +22,7 @@ export default function AdminContact() {
     city: "",
     state: "",
     zipCode: "",
-    country: "Brasil",
+    country: "United Kingdom",
     mapLatitude: "",
     mapLongitude: "",
     instagramUrl: "",
@@ -42,7 +42,7 @@ export default function AdminContact() {
         city: contactData.city || "",
         state: contactData.state || "",
         zipCode: contactData.zipCode || "",
-        country: contactData.country || "Brasil",
+        country: contactData.country || "United Kingdom",
         mapLatitude: contactData.mapLatitude || "",
         mapLongitude: contactData.mapLongitude || "",
         instagramUrl: contactData.instagramUrl || "",
@@ -57,14 +57,14 @@ export default function AdminContact() {
   const updateContact = trpc.contact.update.useMutation({
     onSuccess: () => {
       toast({
-        title: "Salvo com sucesso!",
+        title: "Saved successfully!",
         description: "As informações de contato foram atualizadas.",
       });
       utils.contact.get.invalidate();
     },
     onError: (error) => {
       toast({
-        title: "Erro ao salvar",
+        title: "Error saving",
         description: error.message,
         variant: "destructive",
       });
@@ -205,7 +205,7 @@ export default function AdminContact() {
                 onChange={(e) =>
                   setFormData({ ...formData, country: e.target.value })
                 }
-                placeholder="Brasil"
+                placeholder="United Kingdom"
               />
             </div>
           </CardContent>

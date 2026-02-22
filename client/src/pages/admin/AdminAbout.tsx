@@ -43,14 +43,14 @@ export default function AdminAbout() {
   const updateAbout = trpc.about.update.useMutation({
     onSuccess: () => {
       toast({
-        title: "Salvo com sucesso!",
-        description: "As informações da página Sobre foram atualizadas.",
+        title: "Saved successfully!",
+        description: "About page information has been updated.",
       });
       utils.about.get.invalidate();
     },
     onError: (error) => {
       toast({
-        title: "Erro ao salvar",
+        title: "Error saving",
         description: error.message,
         variant: "destructive",
       });
@@ -76,7 +76,7 @@ export default function AdminAbout() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Página Sobre</h1>
         <p className="text-muted-foreground">
-          Configure o conteúdo da página "Sobre" do seu site
+          Configure o conteúdo da página "About" do seu site
         </p>
       </div>
 
@@ -94,7 +94,7 @@ export default function AdminAbout() {
                 onChange={(e) =>
                   setFormData({ ...formData, title: e.target.value })
                 }
-                placeholder="Sobre Nós"
+                placeholder="About Us"
               />
             </div>
 
@@ -106,7 +106,7 @@ export default function AdminAbout() {
                 onChange={(e) =>
                   setFormData({ ...formData, subtitle: e.target.value })
                 }
-                placeholder="Nossa história e propósito"
+                placeholder="Our story and purpose"
               />
             </div>
 
@@ -119,7 +119,7 @@ export default function AdminAbout() {
                 onChange={(e) =>
                   setFormData({ ...formData, mainContent: e.target.value })
                 }
-                placeholder="Conte a história da sua empresa, como começou, seus valores..."
+                placeholder="Tell the story of your company, how it started, your values..."
               />
             </div>
 
@@ -160,7 +160,7 @@ export default function AdminAbout() {
                 onChange={(e) =>
                   setFormData({ ...formData, mission: e.target.value })
                 }
-                placeholder="Nossa missão é..."
+                placeholder="Our mission is..."
               />
             </div>
 
@@ -173,7 +173,7 @@ export default function AdminAbout() {
                 onChange={(e) =>
                   setFormData({ ...formData, vision: e.target.value })
                 }
-                placeholder="Nossa visão é..."
+                placeholder="Our vision is..."
               />
             </div>
 
@@ -186,7 +186,7 @@ export default function AdminAbout() {
                 onChange={(e) =>
                   setFormData({ ...formData, values: e.target.value })
                 }
-                placeholder="Nossos valores são..."
+                placeholder="Our values are..."
               />
             </div>
           </CardContent>
@@ -206,7 +206,7 @@ export default function AdminAbout() {
                 onChange={(e) =>
                   setFormData({ ...formData, teamDescription: e.target.value })
                 }
-                placeholder="Apresente sua equipe, experiência, especialidades..."
+                placeholder="Present your team, experience, specialties..."
               />
             </div>
           </CardContent>

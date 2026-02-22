@@ -20,7 +20,7 @@ export default function AdminLeads() {
     }
 
     // Create CSV content
-    const headers = ["Email", "Nome", "Relação", "Álbum", "Data de Visualização"];
+    const headers = ["Email", "Name", "Relação", "Álbum", "Data de Visualização"];
     const rows = leads.map((lead: any) => [
       lead.email,
       lead.name || "-",

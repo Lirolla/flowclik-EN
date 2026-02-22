@@ -67,8 +67,8 @@ export default function ClientDashboard() {
 
   // Status mapping
   const statusConfig = {
-    pending: { label: "Pendente", color: "text-yellow-500", icon: Clock, step: 1 },
-    confirmed: { label: "Confirmado", color: "text-blue-500", icon: CheckCircle2, step: 2 },
+    pending: { label: "Pending", color: "text-yellow-500", icon: Clock, step: 1 },
+    confirmed: { label: "Confirmed", color: "text-blue-500", icon: CheckCircle2, step: 2 },
     session_done: { label: "Ensaio Realizado", color: "text-green-500", icon: Camera, step: 3 },
     editing: { label: "Fotos em Edição", color: "text-purple-500", icon: ImageIcon, step: 4 },
     awaiting_selection: { label: "Aguardando Seleção", color: "text-orange-500", icon: ImageIcon, step: 5 },

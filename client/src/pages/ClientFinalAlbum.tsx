@@ -53,7 +53,7 @@ export default function ClientFinalAlbum() {
   const handleDownloadAll = async () => {
     if (!downloadUrls || downloadUrls.length === 0) {
       toast({
-        title: "Erro",
+        title: "Error",
         description: "Nenhuma foto editada disponível para download.",
         variant: "destructive",
       });
@@ -164,7 +164,7 @@ export default function ClientFinalAlbum() {
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
                 className="w-full px-4 py-2 border rounded-md bg-background"
-                placeholder="Senha"
+                placeholder="Password"
                 autoFocus
               />
               {passwordError && (
@@ -374,12 +374,12 @@ export default function ClientFinalAlbum() {
                   <>
                     <img
                       src={photos[lightboxIndex].editedPhotoUrl}
-                      alt={photos[lightboxIndex].title || "Foto"}
+                      alt={photos[lightboxIndex].title || "Photo"}
                       className="max-h-[85vh] w-auto object-contain mb-4"
                     />
                     <div className="w-full max-w-4xl mx-auto text-center">
                       <h3 className="text-xl font-semibold text-white mb-2">
-                        {photos[lightboxIndex].title || "Sem título"}
+                        {photos[lightboxIndex].title || "No title"}
                       </h3>
                       {photos[lightboxIndex].clientFeedback && (
                         <div className="bg-white/10 rounded-lg p-4 mb-4">
@@ -438,7 +438,7 @@ export default function ClientFinalAlbum() {
                   onClick={() => {
                     navigator.clipboard.writeText(shareLink);
                     toast({
-                      title: "Link copiado!",
+                      title: "Link copied!",
                       description: "O link foi copiado para a área de transferência.",
                     });
                   }}

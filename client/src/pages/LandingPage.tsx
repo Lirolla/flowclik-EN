@@ -381,7 +381,7 @@ export default function LandingPage() {
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-4 text-zinc-400 leading-relaxed">
-                Sim! Essa é uma das funcionalidades mais legais. Depois de entregar o álbum para o cliente principal, você ativa "Vendas de Eventos" e define preço por foto (ex: $25). O sistema gera link público onde amigos/família podem comprar fotos avulsas com cartão. Você recebe automaticamente via Stripe. Ótimo para formaturas, festas e casamentos!
+                Sim! Essa é uma das funcionalidades mais legais. Depois de entregar o álbum para o cliente principal, você ativa "Event Sales" e define preço por foto (ex: $25). O sistema gera link público onde amigos/família podem comprar fotos avulsas com cartão. Você recebe automaticamente via Stripe. Ótimo para formaturas, festas e casamentos!
               </p>
             </details>
 

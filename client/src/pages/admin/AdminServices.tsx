@@ -43,7 +43,7 @@ export default function AdminServices() {
       utils.services.getAll.invalidate();
       resetForm();
       setEditingId(null);
-      alert("Serviço atualizado!");
+      alert("Service updated!");
     },
     onError: (error) => {
       alert(`Erro: ${error.message}`);
@@ -53,7 +53,7 @@ export default function AdminServices() {
   const deleteMutation = trpc.services.delete.useMutation({
     onSuccess: () => {
       utils.services.getAll.invalidate();
-      alert("Serviço excluído!");
+      alert("Service deleted!");
     },
     onError: (error) => {
       alert(`Erro: ${error.message}`);
@@ -240,7 +240,7 @@ export default function AdminServices() {
               </div>
 
               <Button onClick={handleCreate} className="w-full" disabled={createMutation.isPending}>
-                {createMutation.isPending ? "Criando..." : "Criar Serviço"}
+                {createMutation.isPending ? "Creating..." : "Criar Serviço"}
               </Button>
             </div>
           </DialogContent>
@@ -321,7 +321,7 @@ export default function AdminServices() {
             </div>
 
             <Button onClick={handleUpdate} className="w-full" disabled={updateMutation.isPending}>
-              {updateMutation.isPending ? "Atualizando..." : "Atualizar Serviço"}
+              {updateMutation.isPending ? "Updating..." : "Atualizar Serviço"}
             </Button>
           </div>
         </DialogContent>

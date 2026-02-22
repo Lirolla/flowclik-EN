@@ -66,7 +66,7 @@ function AdminContractsContent() {
       setIsDialogOpen(false);
     },
     onError: (error: any) => {
-      toast({ title: "Erro ao atualizar", description: error.message, variant: "destructive" });
+      toast({ title: "Error updating", description: error.message, variant: "destructive" });
     },
   });
 
@@ -76,7 +76,7 @@ function AdminContractsContent() {
       refetch();
     },
     onError: (error: any) => {
-      toast({ title: "Erro ao excluir", description: error.message, variant: "destructive" });
+      toast({ title: "Error deleting", description: error.message, variant: "destructive" });
     },
   });
 
@@ -86,11 +86,11 @@ function AdminContractsContent() {
         toast({ title: `${data.count} templates prontos adicionados!`, description: "Modelos baseados na legislação brasileira." });
         refetch();
       } else {
-        toast({ title: "Aviso", description: data.message, variant: "destructive" });
+        toast({ title: "Notice", description: data.message, variant: "destructive" });
       }
     },
     onError: (error: any) => {
-      toast({ title: "Erro", description: error.message, variant: "destructive" });
+      toast({ title: "Error", description: error.message, variant: "destructive" });
     },
   });
 
@@ -198,7 +198,7 @@ function AdminContractsContent() {
               className="border-accent text-accent hover:bg-accent/10"
             >
               <Sparkles className="w-4 h-4 mr-2" />
-              {seedDefaults.isPending ? "Carregando..." : "Carregar Modelos Prontos"}
+              {seedDefaults.isPending ? "Loading..." : "Carregar Modelos Prontos"}
             </Button>
           )}
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -278,7 +278,7 @@ function AdminContractsContent() {
                     Cancelar
                   </Button>
                   <Button type="submit" className="flex-1" disabled={createTemplate.isPending || updateTemplate.isPending}>
-                    {createTemplate.isPending || updateTemplate.isPending ? "Salvando..." : editingTemplate ? "Atualizar" : "Criar"}
+                    {createTemplate.isPending || updateTemplate.isPending ? "Saving..." : editingTemplate ? "Update" : "Create"}
                   </Button>
                 </div>
               </form>
@@ -398,7 +398,7 @@ function AdminContractsContent() {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <FileText className="w-5 h-5" />
-              {generatedInfo?.templateName || "Contrato"}
+              {generatedInfo?.templateName || "Contract"}
             </DialogTitle>
           </DialogHeader>
           {generatedInfo && (
@@ -450,7 +450,7 @@ function AdminContractsContent() {
               className="border-green-600 text-green-600 hover:bg-green-600/10"
             >
               {saveContract.isPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <FileText className="w-4 h-4 mr-2" />}
-              {saveContract.isPending ? "Salvando..." : "Salvar"}
+              {saveContract.isPending ? "Saving..." : "Save"}
             </Button>
             <Button
               onClick={async () => {
@@ -500,7 +500,7 @@ function AdminContractsContent() {
               disabled={sendEmail.isPending}
             >
               {sendEmail.isPending ? <Loader2 className="w-4 h-4 mr-2 animate-spin" /> : <Mail className="w-4 h-4 mr-2" />}
-              {sendEmail.isPending ? "Enviando..." : "Email"}
+              {sendEmail.isPending ? "Sending..." : "Email"}
             </Button>
             <Button
               variant="outline"
@@ -518,7 +518,7 @@ function AdminContractsContent() {
               variant="outline"
               onClick={() => {
                 navigator.clipboard.writeText(generatedContent);
-                toast({ title: "Copiado!" });
+                toast({ title: "Copied!" });
               }}
             >
               Copiar
@@ -544,7 +544,7 @@ function AdminContractsContent() {
                 size="lg"
               >
                 <Sparkles className="w-5 h-5 mr-2" />
-                {seedDefaults.isPending ? "Carregando..." : "Carregar 4 Modelos Prontos"}
+                {seedDefaults.isPending ? "Loading..." : "Carregar 4 Modelos Prontos"}
               </Button>
             </CardContent>
           </Card>

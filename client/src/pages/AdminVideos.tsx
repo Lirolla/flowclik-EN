@@ -342,7 +342,7 @@ export default function AdminVideos() {
                   className="flex-1"
                   disabled={createMutation.isPending || updateMutation.isPending}
                 >
-                  {editingItem ? "Atualizar" : "Criar"}
+                  {editingItem ? "Update" : "Create"}
                 </Button>
               </div>
             </form>

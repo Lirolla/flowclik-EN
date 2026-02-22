@@ -41,13 +41,13 @@ export default function SistemaLayout({ children }: SistemaLayoutProps) {
       active: location === "/system",
     },
     {
-      title: "Fotógrafos",
+      title: "Photographers",
       href: "/system/photographers",
       icon: Users,
       active: location === "/system/photographers",
     },
     {
-      title: "Avisos",
+      title: "Notices",
       href: "/system/notices",
       icon: Bell,
       active: location === "/system/notices",

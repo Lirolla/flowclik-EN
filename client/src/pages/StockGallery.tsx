@@ -147,7 +147,7 @@ export default function StockGallery() {
             <CardContent className="py-20 text-center">
               <ImageIcon className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
               <h3 className="text-xl font-semibold mb-2">
-                {searchTerm || categoryFilter !== "all" ? "Nenhuma foto encontrada" : "Nenhuma foto disponível"}
+                {searchTerm || categoryFilter !== "all" ? "No photos found" : "Nenhuma foto disponível"}
               </h3>
               <p className="text-muted-foreground">
                 {searchTerm || categoryFilter !== "all"
