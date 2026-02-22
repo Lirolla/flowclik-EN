@@ -253,7 +253,7 @@ export const collectionsRouter = router({
         .where(and(eq(mediaItems.collectionId, input.id), eq(mediaItems.tenantId, tenantId)));
 
       // 2. Extrair keys do R2 a partir das URLs
-      const R2_PUBLIC_URL = "https://fotos.flowclik.com";
+      const R2_PUBLIC_URL = "https://pub-flowclikuk.r2.dev";
       const keysToDelete: string[] = [];
 
       for (const photo of photos) {
@@ -275,12 +275,12 @@ export const collectionsRouter = router({
             region: "auto",
             endpoint: `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`,
             credentials: {
-              accessKeyId: process.env.R2_ACCESS_KEY_ID || "3a48256592438734e7be28fee1fe752b",
-              secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || "83ebf944befd8c04123d483619ac174bd83a7fdd2aa9cdba310f749365897740",
+              accessKeyId: process.env.R2_ACCESS_KEY_ID || "928a0bf105386ca2e80d8e666c26af32",
+              secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || "de2bf4c9f70208e1482c2e6e29d098c687f71996e76d66ac9a9b89a7c6187dc5",
             },
             forcePathStyle: true,
           });
-          const bucket = process.env.R2_BUCKET_NAME || "flowclikbr";
+          const bucket = process.env.R2_BUCKET_NAME || "flowclikuk";
 
           // Dhetar em lotes de 1000 (limite do S3)
           for (let i = 0; i < keysToDelete.length; i += 1000) {

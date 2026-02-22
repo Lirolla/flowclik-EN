@@ -305,12 +305,12 @@ export const systemRouter = router({
           region: "auto",
           endpoint: `https://${process.env.R2_ACCOUNT_ID || "023a0bad3f17632316cd10358db2201f"}.r2.cloudflarestorage.com`,
           credentials: {
-            accessKeyId: process.env.R2_ACCESS_KEY_ID || "3a48256592438734e7be28fee1fe752b",
-            secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || "83ebf944befd8c04123d483619ac174bd83a7fdd2aa9cdba310f749365897740",
+            accessKeyId: process.env.R2_ACCESS_KEY_ID || "928a0bf105386ca2e80d8e666c26af32",
+            secretAccessKey: process.env.R2_SECRET_ACCESS_KEY || "de2bf4c9f70208e1482c2e6e29d098c687f71996e76d66ac9a9b89a7c6187dc5",
           },
           forcePathStyle: true,
         });
-        const bucket = process.env.R2_BUCKET_NAME || "flowclikbr";
+        const bucket = process.env.R2_BUCKET_NAME || "flowclikuk";
         const prefix = `tenant-${input.tenantId}/`;
         
         let continuationToken: string | undefined;

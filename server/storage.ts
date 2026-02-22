@@ -4,13 +4,13 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 // ============================================================
 // Configuration do R2 - HARDCODED para production Hostinger
-// Conta Cloudflare: flowclikbr
+// Conta Cloudflare: flowclikuk
 // ============================================================
 const R2_ACCOUNT_ID = "023a0bad3f17632316cd10358db2201f";
-const R2_ACCESS_KEY_ID = "3a48256592438734e7be28fee1fe752b";
-const R2_SECRET_ACCESS_KEY = "83ebf944befd8c04123d483619ac174bd83a7fdd2aa9cdba310f749365897740";
-const R2_BUCKET_NAME = "flowclikbr";
-const R2_PUBLIC_URL = "https://fotos.flowclik.com";
+const R2_ACCESS_KEY_ID = "928a0bf105386ca2e80d8e666c26af32";
+const R2_SECRET_ACCESS_KEY = "de2bf4c9f70208e1482c2e6e29d098c687f71996e76d66ac9a9b89a7c6187dc5";
+const R2_BUCKET_NAME = "flowclikuk";
+const R2_PUBLIC_URL = "https://pub-flowclikuk.r2.dev";
 
 // Endpoint de API do R2 (diferente do domain public)
 const R2_API_ENDPOINT = `https://${R2_ACCOUNT_ID}.r2.cloudflarestorage.com`;
