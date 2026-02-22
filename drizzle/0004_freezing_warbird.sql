@@ -1,0 +1,1 @@
+ALTER TABLE `photoSales` ADD `paymentMethod` enum('pix','boleto','credit_card','stripe') DEFAULT 'stripe';

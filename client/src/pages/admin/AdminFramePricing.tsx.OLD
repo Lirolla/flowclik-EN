@@ -1,0 +1,388 @@
+import { useState } from "react";
+import DashboardLayout from "@/components/DashboardLayout";
+import { trpc } from "@/lib/trpc";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { useToast } from "@/hooks/use-toast";
+import { formatCurrency as formatCurrencyHelper, getCountryConfig } from "@/lib/currency";
+import { Frame, DollarSign, Check, Loader2 } from "lucide-react";
+
+export default function AdminFramePricing() {
+  return (
+    <DashboardLayout>
+      <AdminFramePricingContent />
+    </DashboardLayout>
+  );
+}
+
+function AdminFramePricingContent() {
+  const { toast } = useToast();
+  const utils = trpc.useUtils();
+  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
+  
+  // Usar configuração de moeda do país
+  const countryConfig = getCountryConfig(siteConfig?.baseCountry || 'Brasil');
+  const currencySymbol = countryConfig.currencySymbol;
+
+  const { data: frameSizes, isLoading: loadingSizes } = trpc.frameConfig.getAllFrameSizes.useQuery();
+  const { data: frameTypes, isLoading: loadingTypes } = trpc.frameConfig.getAllFrameTypes.useQuery();
+
+  const initializeMutation = trpc.frameConfig.initializeDefaults.useMutation({
+    onSuccess: (data) => {
+      utils.frameConfig.getAllFrameSizes.invalidate();
+      utils.frameConfig.getAllFrameTypes.invalidate();
+      toast({
+        title: "Sucesso!",
+        description: data.message,
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Erro",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const updateSizeMutation = trpc.frameConfig.updateFrameSize.useMutation({
+    onSuccess: () => {
+      utils.frameConfig.getAllFrameSizes.invalidate();
+      toast({
+        title: "Atualizado!",
+        description: "Preço do tamanho atualizado com sucesso.",
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Erro",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const updateTypeMutation = trpc.frameConfig.updateFrameType.useMutation({
+    onSuccess: () => {
+      utils.frameConfig.getAllFrameTypes.invalidate();
+      toast({
+        title: "Atualizado!",
+        description: "Preço da moldura atualizado com sucesso.",
+      });
+    },
+    onError: (error) => {
+      toast({
+        title: "Erro",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  const handleUpdateSize = (id: number, basePrice: number) => {
+    updateSizeMutation.mutate({ id, basePrice });
+  };
+
+  const handleUpdateType = (id: number, additionalPrice: number) => {
+    updateTypeMutation.mutate({ id, additionalPrice });
+  };
+
+  const formatCurrency = (cents: number) => {
+    return formatCurrencyHelper(cents, countryConfig.name);
+  };
+
+  const parseCurrency = (value: string): number => {
+    // Remove tudo exceto números
+    const numbers = value.replace(/[^\d]/g, "");
+    return parseInt(numbers) || 0;
+  };
+
+  if (loadingSizes || loadingTypes) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="w-8 h-8 animate-spin text-gray-400" />
+      </div>
+    );
+  }
+
+  // If no data, show initialize button
+  if (!frameSizes || frameSizes.length === 0) {
+    return (
+      <div className="max-w-4xl mx-auto p-6">
+        <Card>
+          <CardHeader>
+            <CardTitle>Configuração de Preços</CardTitle>
+            <CardDescription>
+              Configure os preços para tamanhos de quadros e tipos de molduras
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="bg-blue-50 rounded-lg p-6 text-center">
+              <Frame className="w-12 h-12 mx-auto mb-4 text-blue-600" />
+              <h3 className="text-lg font-semibold mb-2">Inicializar Configurações</h3>
+              <p className="text-gray-600 mb-4">
+                Clique no botão abaixo para criar as configurações padrão de preços
+              </p>
+              <Button
+                onClick={() => initializeMutation.mutate()}
+                disabled={initializeMutation.isPending}
+              >
+                {initializeMutation.isPending ? (
+                  <>
+                    <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                    Inicializando...
+                  </>
+                ) : (
+                  "Inicializar Configurações"
+                )}
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  return (
+    <div className="max-w-6xl mx-auto p-6 space-y-6">
+      <div>
+        <h1 className="text-3xl font-bold mb-2">Configuração de Preços</h1>
+        <p className="text-gray-600">
+          Configure os preços para tamanhos de quadros e tipos de molduras
+        </p>
+      </div>
+
+      {/* Frame Sizes */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Frame className="w-5 h-5" />
+            Tamanhos de Quadros
+          </CardTitle>
+          <CardDescription>
+            Preço adicional por tamanho de quadro (além do preço da foto digital)
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {frameSizes?.map((size) => (
+              <FrameSizeRow
+                key={size.id}
+                size={size}
+                onUpdate={handleUpdateSize}
+                isUpdating={updateSizeMutation.isPending}
+                countryConfig={countryConfig}
+              />
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Frame Types */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <DollarSign className="w-5 h-5" />
+            Tipos de Moldura
+          </CardTitle>
+          <CardDescription>
+            Preço adicional por tipo de moldura (além do tamanho do quadro)
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {frameTypes?.map((type) => (
+              <FrameTypeRow
+                key={type.id}
+                type={type}
+                onUpdate={handleUpdateType}
+                isUpdating={updateTypeMutation.isPending}
+                countryConfig={countryConfig}
+              />
+            ))}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Price Calculator Preview */}
+      <Card className="bg-gradient-to-br from-blue-50 to-indigo-50">
+        <CardHeader>
+          <CardTitle>Exemplo de Cálculo</CardTitle>
+          <CardDescription>
+            Como o preço total é calculado para o cliente
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-3 text-sm">
+            <div className="flex justify-between">
+              <span>Foto Digital (base)</span>
+              <span className="font-semibold">{currencySymbol} 50,00</span>
+            </div>
+            <div className="flex justify-between text-gray-600">
+              <span>+ Quadro Médio (30x40)</span>
+              <span className="font-semibold">{formatCurrency(frameSizes?.[1]?.basePrice || 0)}</span>
+            </div>
+            <div className="flex justify-between text-gray-600">
+              <span>+ Moldura Dourada</span>
+              <span className="font-semibold">{formatCurrency(frameTypes?.[2]?.additionalPrice || 0)}</span>
+            </div>
+            <div className="border-t pt-2 flex justify-between text-lg font-bold text-blue-600">
+              <span>Total</span>
+              <span>
+                {formatCurrency(5000 + (frameSizes?.[1]?.basePrice || 0) + (frameTypes?.[2]?.additionalPrice || 0))}
+              </span>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </div>
+  );
+}
+
+function FrameSizeRow({
+  size,
+  onUpdate,
+  isUpdating,
+  countryConfig,
+}: {
+  size: any;
+  onUpdate: (id: number, basePrice: number) => void;
+  isUpdating: boolean;
+  countryConfig: any;
+}) {
+  const [price, setPrice] = useState(size.basePrice.toString());
+  const [isEditing, setIsEditing] = useState(false);
+
+  const formatCurrency = (cents: number) => {
+    return formatCurrencyHelper(cents, countryConfig.name);
+  };
+
+  const handleSave = () => {
+    const priceInCents = parseInt(price);
+    if (isNaN(priceInCents) || priceInCents < 0) {
+      return;
+    }
+    onUpdate(size.id, priceInCents);
+    setIsEditing(false);
+  };
+
+  return (
+    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+      <div>
+        <p className="font-semibold">{size.sizeLabel}</p>
+        <p className="text-sm text-gray-500">{size.size} cm</p>
+      </div>
+      <div className="flex items-center gap-3">
+        {isEditing ? (
+          <>
+            <Input
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              className="w-32"
+              placeholder="Preço em centavos"
+            />
+            <Button size="sm" onClick={handleSave} disabled={isUpdating}>
+              <Check className="w-4 h-4" />
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => setIsEditing(false)}>
+              Cancelar
+            </Button>
+          </>
+        ) : (
+          <>
+            <span className="text-lg font-bold text-gray-700 w-24 text-right">
+              {formatCurrency(size.basePrice)}
+            </span>
+            <Button size="sm" variant="outline" onClick={() => setIsEditing(true)}>
+              Editar
+            </Button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function FrameTypeRow({
+  type,
+  onUpdate,
+  isUpdating,
+  countryConfig,
+}: {
+  type: any;
+  onUpdate: (id: number, additionalPrice: number) => void;
+  isUpdating: boolean;
+  countryConfig: any;
+}) {
+  const [price, setPrice] = useState(type.additionalPrice.toString());
+  const [isEditing, setIsEditing] = useState(false);
+
+  const formatCurrency = (cents: number) => {
+    return formatCurrencyHelper(cents, countryConfig.name);
+  };
+
+  const handleSave = () => {
+    const priceInCents = parseInt(price);
+    if (isNaN(priceInCents) || priceInCents < 0) {
+      return;
+    }
+    onUpdate(type.id, priceInCents);
+    setIsEditing(false);
+  };
+
+  const getFrameColor = (frameType: string) => {
+    switch (frameType) {
+      case "white":
+        return "bg-white border-2 border-gray-300";
+      case "dark":
+        return "bg-gray-800";
+      case "gold":
+        return "bg-yellow-600";
+      default:
+        return "bg-gray-200";
+    }
+  };
+
+  return (
+    <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+      <div className="flex items-center gap-3">
+        <div className={`w-8 h-8 rounded ${getFrameColor(type.type)}`} />
+        <div>
+          <p className="font-semibold">{type.typeLabel}</p>
+          <p className="text-sm text-gray-500">Adicional ao tamanho</p>
+        </div>
+      </div>
+      <div className="flex items-center gap-3">
+        {isEditing ? (
+          <>
+            <Input
+              type="number"
+              value={price}
+              onChange={(e) => setPrice(e.target.value)}
+              className="w-32"
+              placeholder="Preço em centavos"
+            />
+            <Button size="sm" onClick={handleSave} disabled={isUpdating}>
+              <Check className="w-4 h-4" />
+            </Button>
+            <Button size="sm" variant="outline" onClick={() => setIsEditing(false)}>
+              Cancelar
+            </Button>
+          </>
+        ) : (
+          <>
+            <span className="text-lg font-bold text-gray-700 w-24 text-right">
+              {formatCurrency(type.additionalPrice)}
+            </span>
+            <Button size="sm" variant="outline" onClick={() => setIsEditing(true)}>
+              Editar
+            </Button>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}

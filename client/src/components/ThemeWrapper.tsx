@@ -1,0 +1,50 @@
+import { ReactNode, useEffect } from "react";
+import { trpc } from "@/lib/trpc";
+import { useLocation } from "wouter";
+interface ThemeWrapperProps {
+  children: ReactNode;
+}
+export default function ThemeWrapper({ children }: ThemeWrapperProps) {
+  const { data: siteConfig } = trpc.siteConfig.get.useQuery();
+  const [location] = useLocation();
+  
+  // Aplica tema personalizado em rotas do site do fotógrafo
+  // Exclui: /admin, /sistema, /cadastro, /login, /docs, /termos, /politica, /sobre-nos, /cliente
+  const isAdminRoute = location.startsWith('/admin') || location.startsWith('/sistema');
+  const isFlowClikRoute = location === '/cadastro' || location === '/login' || location === '/docs' || 
+                          location.startsWith('/termos') || location.startsWith('/politica') || location === '/sobre-nos';
+  const isClientRoute = location.startsWith('/cliente');
+  
+  const shouldApplyTheme = !isAdminRoute && !isFlowClikRoute && !isClientRoute;
+  useEffect(() => {
+    if (!siteConfig || !shouldApplyTheme) {
+      // Resetar para tema padrão se não for rota pública
+      const root = document.documentElement;
+      root.removeAttribute("data-theme-mode");
+      root.removeAttribute("data-accent-color");
+      root.removeAttribute("data-layout");
+      return;
+    }
+    const root = document.documentElement;
+    
+    // Apply layout first
+    const layout = siteConfig.siteThemeLayout || "classic";
+    root.setAttribute("data-layout", layout);
+    
+    // Wedding Videos tem cores fixas - não aplicar accent-color nem theme-mode
+    if (layout === "wedding-videos") {
+      root.removeAttribute("data-accent-color");
+      root.removeAttribute("data-theme-mode");
+      return;
+    }
+    
+    // Apply theme mode (light/dark)
+    const mode = siteConfig.siteThemeMode || "light";
+    root.setAttribute("data-theme-mode", mode);
+    
+    // Apply accent color
+    const accentColor = siteConfig.siteThemeAccentColor || "red";
+    root.setAttribute("data-accent-color", accentColor);
+  }, [siteConfig, shouldApplyTheme]);
+  return <>{children}</>;
+}

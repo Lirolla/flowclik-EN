@@ -1,0 +1,313 @@
+import { Request, Response } from "express";
+import Stripe from "stripe";
+import * as db from "../db";
+import { subscriptions } from "../../drizzle/schema";
+import { eq } from "drizzle-orm";
+import { ENV } from "./env";
+
+// Stripe é opcional
+let stripe: Stripe | null = null;
+
+if (ENV.stripeSecretKey) {
+  stripe = new Stripe(ENV.stripeSecretKey, {
+    apiVersion: "2025-11-17.clover",
+  });
+}
+
+const WEBHOOK_SECRET = ENV.stripeWebhookSecret;
+
+/**
+ * Handler para webhook do Stripe
+ * Processa eventos de assinatura e pagamento
+ */
+export async function handleStripeWebhook(req: Request, res: Response) {
+  if (!stripe || !WEBHOOK_SECRET) {
+    return res.status(503).send("Stripe não está configurado");
+  }
+  
+  const sig = req.headers["stripe-signature"];
+
+  if (!sig) {
+    return res.status(400).send("Missing stripe-signature header");
+  }
+
+  let event: Stripe.Event;
+
+  try {
+    // Verificar assinatura do webhook
+    event = stripe.webhooks.constructEvent(req.body, sig, WEBHOOK_SECRET);
+  } catch (err: any) {
+    console.error("⚠️ Webhook signature verification failed:", err.message);
+    return res.status(400).send(`Webhook Error: ${err.message}`);
+  }
+
+  console.log(`✅ Received event: ${event.type}`);
+
+  try {
+    switch (event.type) {
+      case "checkout.session.completed":
+        await handleCheckoutCompleted(event.data.object as Stripe.Checkout.Session);
+        break;
+
+      case "customer.subscription.created":
+        await handleSubscriptionCreated(event.data.object as Stripe.Subscription);
+        break;
+
+      case "customer.subscription.updated":
+        await handleSubscriptionUpdated(event.data.object as Stripe.Subscription);
+        break;
+
+      case "customer.subscription.deleted":
+        await handleSubscriptionDeleted(event.data.object as Stripe.Subscription);
+        break;
+
+      case "invoice.payment_succeeded":
+        await handleInvoicePaymentSucceeded(event.data.object as Stripe.Invoice);
+        break;
+
+      case "invoice.payment_failed":
+        await handleInvoicePaymentFailed(event.data.object as Stripe.Invoice);
+        break;
+
+      default:
+        console.log(`Unhandled event type: ${event.type}`);
+    }
+
+    res.json({ received: true });
+  } catch (error: any) {
+    console.error(`❌ Error processing webhook:`, error);
+    res.status(500).send(`Webhook handler failed: ${error.message}`);
+  }
+}
+
+/**
+ * Checkout concluído - criar/atualizar assinatura no banco
+ */
+async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
+  const tenantId = parseInt(session.metadata?.tenantId || "0");
+  const plan = session.metadata?.plan || "basic";
+
+  if (!tenantId) {
+    throw new Error("Missing tenantId in session metadata");
+  }
+
+  console.log(`💳 Checkout completed for tenant ${tenantId}, plan: ${plan}`);
+
+  // Buscar assinatura existente
+  const dbInstance = await db.getDb();
+  if (!dbInstance) throw new Error("Database not available");
+  
+  const [existing] = await dbInstance
+    .select()
+    .from(subscriptions)
+    .where(eq(subscriptions.tenantId, tenantId))
+    .limit(1);
+
+  if (existing) {
+    // Atualizar assinatura existente
+    await dbInstance
+      .update(subscriptions)
+      .set({
+        plan: plan as any,
+        status: "active",
+        stripeCustomerId: session.customer as string,
+        stripeSubscriptionId: session.subscription as string,
+        updatedAt: new Date().toISOString(),
+      })
+      .where(eq(subscriptions.id, existing.id));
+  } else {
+    // Criar nova assinatura
+    await dbInstance.insert(subscriptions).values({
+      tenantId,
+      plan: plan as any,
+      status: "active",
+      stripeCustomerId: session.customer as string,
+      stripeSubscriptionId: session.subscription as string,
+      storageLimit: 10737418240, // 10GB padrão
+      galleryLimit: 10, // 10 galerias padrão
+      extraStorage: 0,
+      extraGalleries: 0,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    });
+  }
+
+  console.log(`✅ Subscription created/updated for tenant ${tenantId}`);
+}
+
+/**
+ * Assinatura criada
+ */
+async function handleSubscriptionCreated(subscription: Stripe.Subscription) {
+  const customerId = subscription.customer as string;
+
+  console.log(`📝 Subscription created: ${subscription.id}`);
+
+  const dbInstance = await db.getDb();
+  if (!dbInstance) throw new Error("Database not available");
+
+  // Buscar tenant pelo customer ID
+  const [existing] = await dbInstance
+    .select()
+    .from(subscriptions)
+    .where(eq(subscriptions.stripeCustomerId, customerId))
+    .limit(1);
+
+  if (existing) {
+    await dbInstance
+      .update(subscriptions)
+      .set({
+        stripeSubscriptionId: subscription.id,
+        status: subscription.status as any,
+        updatedAt: new Date().toISOString(),
+      })
+      .where(eq(subscriptions.id, existing.id));
+  }
+}
+
+/**
+ * Assinatura atualizada - recalcular limites de add-ons
+ */
+async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
+  const customerId = subscription.customer as string;
+
+  console.log(`🔄 Subscription updated: ${subscription.id}`);
+
+  const dbInstance = await db.getDb();
+  if (!dbInstance) throw new Error("Database not available");
+
+  // Buscar tenant
+  const [existing] = await dbInstance
+    .select()
+    .from(subscriptions)
+    .where(eq(subscriptions.stripeCustomerId, customerId))
+    .limit(1);
+
+  if (!existing) {
+    console.warn(`⚠️ Subscription not found for customer ${customerId}`);
+    return;
+  }
+
+  // Contar add-ons
+  let storageAddons = 0;
+  let galleriesAddons = 0;
+
+  for (const item of subscription.items.data) {
+    if (item.price.id === "price_1SePMQ2ME98p2oJbxnhhP3Gi") {
+      // Add-on storage
+      storageAddons += item.quantity || 0;
+    } else if (item.price.id === "price_1SePMh2ME98p2oJb1nCJtxpE") {
+      // Add-on galerias
+      galleriesAddons += item.quantity || 0;
+    }
+  }
+
+  // Calcular novos limites
+  const baseStorage = 10737418240; // 10GB base em bytes
+  const baseGalleries = 10; // 10 galerias base
+  const newStorageLimit = baseStorage + storageAddons * 10737418240; // +10GB por add-on
+  const newGalleriesLimit = baseGalleries + galleriesAddons * 10;
+
+  // Atualizar no banco
+  await dbInstance
+    .update(subscriptions)
+    .set({
+      status: subscription.status as any,
+      extraStorage: storageAddons * 10737418240,
+      extraGalleries: galleriesAddons * 10,
+      updatedAt: new Date().toISOString(),
+    })
+    .where(eq(subscriptions.id, existing.id));
+
+  console.log(
+    `✅ Limits updated: ${newStorageLimit / 1073741824}GB storage, ${newGalleriesLimit} galleries`
+  );
+}
+
+/**
+ * Assinatura cancelada
+ */
+async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
+  const customerId = subscription.customer as string;
+
+  console.log(`❌ Subscription deleted: ${subscription.id}`);
+
+  const dbInstance = await db.getDb();
+  if (!dbInstance) throw new Error("Database not available");
+
+  // Buscar tenant
+  const [existing] = await dbInstance
+    .select()
+    .from(subscriptions)
+    .where(eq(subscriptions.stripeCustomerId, customerId))
+    .limit(1);
+
+  if (existing) {
+    await dbInstance
+      .update(subscriptions)
+      .set({
+        status: "cancelled",
+        canceledAt: new Date().toISOString(),
+        updatedAt: new Date().toISOString(),
+      })
+      .where(eq(subscriptions.id, existing.id));
+  }
+}
+
+/**
+ * Pagamento recorrente bem-sucedido
+ */
+async function handleInvoicePaymentSucceeded(invoice: Stripe.Invoice) {
+  const customerId = invoice.customer as string;
+
+  console.log(`💰 Invoice paid: ${invoice.id}`);
+
+  const dbInstance = await db.getDb();
+  if (!dbInstance) throw new Error("Database not available");
+
+  // Buscar tenant
+  const [existing] = await dbInstance
+    .select()
+    .from(subscriptions)
+    .where(eq(subscriptions.stripeCustomerId, customerId))
+    .limit(1);
+
+  if (existing) {
+    await dbInstance
+      .update(subscriptions)
+      .set({
+        status: "active",
+        updatedAt: new Date().toISOString(),
+      })
+      .where(eq(subscriptions.id, existing.id));
+  }
+}
+
+/**
+ * Pagamento recorrente falhou
+ */
+async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
+  const customerId = invoice.customer as string;
+
+  console.log(`⚠️ Invoice payment failed: ${invoice.id}`);
+
+  const dbInstance = await db.getDb();
+  if (!dbInstance) throw new Error("Database not available");
+
+  // Buscar tenant
+  const [existing] = await dbInstance
+    .select()
+    .from(subscriptions)
+    .where(eq(subscriptions.stripeCustomerId, customerId))
+    .limit(1);
+
+  if (existing) {
+    await dbInstance
+      .update(subscriptions)
+      .set({
+        status: "past_due",
+        updatedAt: new Date().toISOString(),
+      })
+      .where(eq(subscriptions.id, existing.id));
+  }
+}

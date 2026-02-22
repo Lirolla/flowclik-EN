@@ -1,0 +1,1 @@
+ALTER TABLE `subscriptions` ADD `currency` varchar(3) DEFAULT 'BRL' NOT NULL;

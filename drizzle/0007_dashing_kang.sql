@@ -1,0 +1,2 @@
+ALTER TABLE `announcements` MODIFY COLUMN `targetPlan` enum('all','basico','cortesia','vitalicio') NOT NULL DEFAULT 'all';--> statement-breakpoint
+ALTER TABLE `subscriptions` MODIFY COLUMN `plan` enum('basico','cortesia','vitalicio') NOT NULL DEFAULT 'basico';

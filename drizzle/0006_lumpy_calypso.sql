@@ -1,0 +1,2 @@
+ALTER TABLE `appointments` MODIFY COLUMN `paymentMethod` enum('cash','bank_transfer','pix','pagarme');--> statement-breakpoint
+ALTER TABLE `paymentTransactions` MODIFY COLUMN `paymentMethod` enum('cash','bank_transfer','pix','pagarme') NOT NULL;

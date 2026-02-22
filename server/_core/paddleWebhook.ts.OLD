@@ -1,0 +1,202 @@
+import { Request, Response } from "express";
+import { Paddle, EventName } from "@paddle/paddle-node-sdk";
+import { getDb } from "../db";
+import { subscriptions } from "../../drizzle/schema";
+import { eq } from "drizzle-orm";
+
+const paddle = new Paddle(process.env.PADDLE_API_KEY || "");
+
+export async function handlePaddleWebhook(req: Request, res: Response) {
+  try {
+    // Verificar assinatura do webhook
+    const signature = req.headers["paddle-signature"] as string;
+    
+    if (!signature) {
+      console.error("Paddle webhook: assinatura ausente");
+      return res.status(401).json({ error: "Unauthorized" });
+    }
+
+    // Paddle SDK valida automaticamente a assinatura
+    const eventData = req.body;
+    const eventType = eventData.event_type as EventName;
+
+    console.log(`[Paddle Webhook] Evento recebido: ${eventType}`);
+
+    // Processar evento baseado no tipo
+    switch (eventType) {
+      case EventName.SubscriptionCreated:
+        await handleSubscriptionCreated(eventData);
+        break;
+
+      case EventName.SubscriptionUpdated:
+        await handleSubscriptionUpdated(eventData);
+        break;
+
+      case EventName.SubscriptionCanceled:
+        await handleSubscriptionCanceled(eventData);
+        break;
+
+      case EventName.TransactionCompleted:
+        await handleTransactionCompleted(eventData);
+        break;
+
+      default:
+        console.log(`[Paddle Webhook] Evento não tratado: ${eventType}`);
+    }
+
+    res.status(200).json({ received: true });
+  } catch (error) {
+    console.error("[Paddle Webhook] Erro ao processar:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+}
+
+// Assinatura criada
+async function handleSubscriptionCreated(eventData: any) {
+  const db = await getDb();
+  if (!db) return;
+
+  const subscriptionId = eventData.data.id;
+  const customData = eventData.data.custom_data;
+  const tenantId = parseInt(customData?.tenantId || "1");
+  const plan = customData?.plan || "starter";
+
+  console.log(`[Paddle] Assinatura criada: ${subscriptionId} para tenant ${tenantId}`);
+
+  // Calcular limites baseado no plano
+  const limits = calculateLimits(plan, eventData.data.items);
+
+  // Atualizar ou criar assinatura no banco
+  const [existing] = await db
+    .select()
+    .from(subscriptions)
+    .where(eq(subscriptions.tenantId, tenantId))
+    .limit(1);
+
+  if (existing) {
+    await db
+      .update(subscriptions)
+      .set({
+        paddleSubscriptionId: subscriptionId,
+        plan,
+        status: "active",
+        storageLimit: limits.storage,
+        galleryLimit: limits.galleries,
+        currentPeriodEnd: new Date(eventData.data.current_billing_period.ends_at).toISOString(),
+      })
+      .where(eq(subscriptions.tenantId, tenantId));
+  } else {
+    await db.insert(subscriptions).values({
+      tenantId,
+      paddleSubscriptionId: subscriptionId,
+      plan,
+      status: "active",
+      storageLimit: limits.storage,
+      galleryLimit: limits.galleries,
+      currentPeriodEnd: new Date(eventData.data.current_billing_period.ends_at).toISOString(),
+    });
+  }
+}
+
+// Assinatura atualizada (upgrade, downgrade, add-ons)
+async function handleSubscriptionUpdated(eventData: any) {
+  const db = await getDb();
+  if (!db) return;
+
+  const subscriptionId = eventData.data.id;
+  const customData = eventData.data.custom_data;
+  const plan = customData?.plan || "starter";
+
+  console.log(`[Paddle] Assinatura atualizada: ${subscriptionId}`);
+
+  // Calcular novos limites
+  const limits = calculateLimits(plan, eventData.data.items);
+
+  // Atualizar no banco
+  await db
+    .update(subscriptions)
+    .set({
+      plan,
+      storageLimit: limits.storage,
+      galleryLimit: limits.galleries,
+      currentPeriodEnd: new Date(eventData.data.current_billing_period.ends_at).toISOString(),
+    })
+    .where(eq(subscriptions.paddleSubscriptionId, subscriptionId));
+}
+
+// Assinatura cancelada
+async function handleSubscriptionCanceled(eventData: any) {
+  const db = await getDb();
+  if (!db) return;
+
+  const subscriptionId = eventData.data.id;
+
+  console.log(`[Paddle] Assinatura cancelada: ${subscriptionId}`);
+
+  await db
+    .update(subscriptions)
+    .set({
+      status: "cancelled",
+      canceledAt: new Date().toISOString(),
+    })
+    .where(eq(subscriptions.paddleSubscriptionId, subscriptionId));
+}
+
+// Transação completada (pagamento confirmado)
+async function handleTransactionCompleted(eventData: any) {
+  const db = await getDb();
+  if (!db) return;
+
+  const transactionId = eventData.data.id;
+  const subscriptionId = eventData.data.subscription_id;
+
+  console.log(`[Paddle] Transação completada: ${transactionId}`);
+
+  if (subscriptionId) {
+    // Garantir que assinatura está ativa
+    await db
+      .update(subscriptions)
+      .set({
+        status: "active",
+      })
+      .where(eq(subscriptions.paddleSubscriptionId, subscriptionId));
+  }
+}
+
+// Calcular limites baseado no plano e add-ons
+function calculateLimits(plan: string, items: any[]) {
+  // Limites base por plano
+  const baseLimits: Record<string, { storage: number; galleries: number }> = {
+    starter: {
+      storage: 10 * 1024 * 1024 * 1024, // 10GB
+      galleries: 10,
+    },
+    pro: {
+      storage: 50 * 1024 * 1024 * 1024, // 50GB
+      galleries: 50,
+    },
+    enterprise: {
+      storage: 999 * 1024 * 1024 * 1024 * 1024, // 999TB (ilimitado)
+      galleries: 999999,
+    },
+  };
+
+  let limits = baseLimits[plan] || baseLimits.starter;
+
+  // Adicionar bônus de add-ons
+  items.forEach((item: any) => {
+    const priceId = item.price.id;
+
+    // Add-on de storage (+10GB cada)
+    if (priceId.includes("addon_storage")) {
+      limits.storage += item.quantity * 10 * 1024 * 1024 * 1024;
+    }
+
+    // Add-on de galerias (+10 cada)
+    if (priceId.includes("addon_galleries")) {
+      limits.galleries += item.quantity * 10;
+    }
+  });
+
+  return limits;
+}

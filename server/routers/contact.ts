@@ -1,0 +1,137 @@
+import { protectedProcedure, publicProcedure, router } from "../_core/trpc";
+import { z } from "zod";
+import { getDb, getTenantId } from "../db";
+import { contactInfo } from "../../drizzle/schema";
+import { notifyOwner } from "../_core/notification";
+import { eq } from "drizzle-orm";
+
+export const contactRouter = router({
+  /**
+   * Send contact form message
+   */
+  sendMessage: publicProcedure
+    .input(
+      z.object({
+        name: z.string().min(1, "Nome é obrigatório"),
+        email: z.string().email("Email inválido"),
+        phone: z.string().optional(),
+        subject: z.string().min(1, "Assunto é obrigatório"),
+        message: z.string().min(10, "Mensagem deve ter pelo menos 10 caracteres"),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      const content = `
+**Nova mensagem de contato**
+
+**Nome:** ${input.name}
+**Email:** ${input.email}
+${input.phone ? `**Telefone:** ${input.phone}` : ''}
+**Assunto:** ${input.subject}
+
+**Mensagem:**
+${input.message}
+      `.trim();
+
+      const success = await notifyOwner({
+        title: `Novo contato: ${input.subject}`,
+        content,
+      });
+
+      if (!success) {
+        throw new Error("Erro ao enviar mensagem. Tente novamente mais tarde.");
+      }
+
+      return { success: true };
+    }),
+
+  /**
+   * Get contact info (public)
+   */
+  get: publicProcedure.query(async ({ ctx }) => {
+    const db = await getDb();
+    if (!db) return null;
+    
+    const result = await db.select().from(contactInfo).limit(1)
+      .where(eq(contactInfo.tenantId, getTenantId(ctx)))
+    return result[0] || null;
+  }),
+
+  /**
+   * Update contact info (admin)
+   */
+  update: protectedProcedure
+    .input(
+      z.object({
+        email: z.string().email().optional(),
+        phone: z.string().optional(),
+        whatsapp: z.string().optional(),
+        address: z.string().optional(),
+        city: z.string().optional(),
+        state: z.string().optional(),
+        zipCode: z.string().optional(),
+        country: z.string().optional(),
+        mapLatitude: z.string().optional(),
+        mapLongitude: z.string().optional(),
+        instagramUrl: z.string().optional(),
+        facebookUrl: z.string().optional(),
+        linkedinUrl: z.string().optional(),
+        twitterUrl: z.string().optional(),
+        youtubeUrl: z.string().optional(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      if (ctx.user?.role !== 'admin') {
+        throw new Error('Unauthorized');
+      }
+
+      const db = await getDb();
+      if (!db) throw new Error("Database not available");
+
+      // Check if record exists
+      const existing = await db.select().from(contactInfo).limit(1)
+      .where(eq(contactInfo.tenantId, getTenantId(ctx)))
+
+      if (existing.length > 0) {
+        // Update existing
+        await db.update(contactInfo).set({
+          email: input.email || null,
+          phone: input.phone || null,
+          whatsapp: input.whatsapp || null,
+          address: input.address || null,
+          city: input.city || null,
+          state: input.state || null,
+          zipCode: input.zipCode || null,
+          country: input.country || null,
+          mapLatitude: input.mapLatitude || null,
+          mapLongitude: input.mapLongitude || null,
+          instagramUrl: input.instagramUrl || null,
+          facebookUrl: input.facebookUrl || null,
+          linkedinUrl: input.linkedinUrl || null,
+          twitterUrl: input.twitterUrl || null,
+          youtubeUrl: input.youtubeUrl || null,
+        });
+      } else {
+        // Insert new
+        await db.insert(contactInfo).values({
+          email: input.email || null,
+          phone: input.phone || null,
+          whatsapp: input.whatsapp || null,
+          address: input.address || null,
+          city: input.city || null,
+          state: input.state || null,
+          zipCode: input.zipCode || null,
+          country: input.country || null,
+          mapLatitude: input.mapLatitude || null,
+          mapLongitude: input.mapLongitude || null,
+          instagramUrl: input.instagramUrl || null,
+          facebookUrl: input.facebookUrl || null,
+          linkedinUrl: input.linkedinUrl || null,
+          twitterUrl: input.twitterUrl || null,
+          youtubeUrl: input.youtubeUrl || null,
+          tenantId: getTenantId(ctx),
+        });
+      }
+
+      return { success: true };
+    }),
+});

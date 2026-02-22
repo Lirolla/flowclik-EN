@@ -1,0 +1,472 @@
+import { z } from "zod";
+import { publicProcedure, protectedProcedure, router } from "../_core/trpc";
+import Stripe from "stripe";
+import * as db from "../db";
+import { subscriptions } from "../../drizzle/schema";
+import { eq, and } from "drizzle-orm";
+import { ENV } from "../_core/env";
+
+// Stripe é opcional - se não tiver a chave, as funções retornam erro
+let stripe: Stripe | null = null;
+
+if (ENV.stripeSecretKey) {
+  stripe = new Stripe(ENV.stripeSecretKey, {
+    apiVersion: "2025-11-17.clover",
+  });
+} else {
+  console.warn("[Subscriptions] STRIPE_SECRET_KEY não configurada - assinaturas desabilitadas");
+}
+
+// Price IDs dos produtos Stripe
+const PRICE_IDS = {
+  PLAN_BASIC: "price_1SePJU2ME98p2oJbnTJpUVso", // £8.99/mês
+  PLAN_LIFETIME: "price_1SePKu2ME98p2oJbv6dfRmwc", // £0.00 (pagamento único)
+  PLAN_FULL: "price_1SePLW2ME98p2oJbVwhpSVdX", // £0.00 (ilimitado grátis)
+  ADDON_STORAGE: "price_1SePMQ2ME98p2oJbxnhhP3Gi", // £3.99/mês (+10GB)
+  ADDON_GALLERIES: "price_1SePMh2ME98p2oJb1nCJtxpE", // £2.99/mês (+10 galerias)
+};
+
+export const subscriptionsRouter = router({
+  /**
+   * Verificar status do trial
+   */
+  checkTrialStatus: protectedProcedure.query(async ({ ctx }) => {
+    const tenantId = db.getTenantId(ctx);
+
+    const [subscription] = await ctx.db
+      .select()
+      .from(subscriptions)
+      .where(eq(subscriptions.tenantId, tenantId))
+      .limit(1);
+
+    if (!subscription) {
+      return {
+        isTrialing: false,
+        isExpired: true,
+        daysRemaining: 0,
+        status: 'no_subscription',
+      };
+    }
+
+    // Se já está ativo (pagou), não está em trial
+    if (subscription.status === 'active') {
+      return {
+        isTrialing: false,
+        isExpired: false,
+        daysRemaining: null,
+        status: 'active',
+      };
+    }
+
+    // Verificar trial
+    if (subscription.status === 'trialing' && subscription.trialEndsAt) {
+      const trialEnd = new Date(subscription.trialEndsAt);
+      const now = new Date();
+      const diffTime = trialEnd.getTime() - now.getTime();
+      const daysRemaining = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      return {
+        isTrialing: true,
+        isExpired: daysRemaining <= 0,
+        daysRemaining: Math.max(0, daysRemaining),
+        status: daysRemaining <= 0 ? 'trial_expired' : 'trialing',
+        trialEndsAt: subscription.trialEndsAt,
+      };
+    }
+
+    return {
+      isTrialing: false,
+      isExpired: subscription.status === 'cancelled' || subscription.status === 'past_due',
+      daysRemaining: 0,
+      status: subscription.status,
+    };
+  }),
+
+  /**
+   * Obter assinatura atual do tenant
+   */
+  getCurrent: protectedProcedure.query(async ({ ctx }) => {
+    const tenantId = db.getTenantId(ctx);
+
+    const [subscription] = await ctx.db
+      .select()
+      .from(subscriptions)
+      .where(eq(subscriptions.tenantId, tenantId))
+      .limit(1);
+
+    return subscription || null;
+  }),
+
+  /**
+   * Criar sessão de checkout para plano básico
+   */
+  createCheckoutSession: protectedProcedure
+    .input(
+      z.object({
+        plan: z.enum(["basic", "lifetime"]),
+        successUrl: z.string(),
+        cancelUrl: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      if (!stripe) {
+        throw new Error("Stripe não está configurado");
+      }
+      
+      const tenantId = db.getTenantId(ctx);
+      const user = ctx.user!;
+
+      // Determinar Price ID baseado no plano
+      const priceId =
+        input.plan === "basic" ? PRICE_IDS.PLAN_BASIC : PRICE_IDS.PLAN_LIFETIME;
+
+      // Criar sessão de checkout
+      const session = await stripe.checkout.sessions.create({
+        mode: input.plan === "basic" ? "subscription" : "payment",
+        customer_email: user.email,
+        line_items: [
+          {
+            price: priceId,
+            quantity: 1,
+          },
+        ],
+        success_url: input.successUrl,
+        cancel_url: input.cancelUrl,
+        metadata: {
+          tenantId: tenantId.toString(),
+          userId: user.id.toString(),
+          plan: input.plan,
+        },
+      });
+
+      return {
+        sessionId: session.id,
+        url: session.url,
+      };
+    }),
+
+  /**
+   * Adicionar add-on (storage ou galerias)
+   */
+  addAddon: protectedProcedure
+    .input(
+      z.object({
+        type: z.enum(["storage", "galleries"]),
+        quantity: z.number().min(1).max(10), // Máximo 10 add-ons do mesmo tipo
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      if (!stripe) {
+        throw new Error("Stripe não está configurado");
+      }
+      
+      const tenantId = db.getTenantId(ctx);
+      const user = ctx.user!;
+
+      // Buscar assinatura atual
+      const [subscription] = await ctx.db
+        .select()
+        .from(subscriptions)
+        .where(eq(subscriptions.tenantId, tenantId))
+        .limit(1);
+
+      if (!subscription) {
+        throw new Error("Nenhuma assinatura ativa encontrada");
+      }
+
+      // Bloquear add-ons para plano Full (já tem tudo ilimitado)
+      if (subscription.plan === "full") {
+        throw new Error("Plano Full já possui recursos ilimitados. Add-ons não são necessários.");
+      }
+
+      if (!subscription.stripeSubscriptionId) {
+        throw new Error("Assinatura não possui ID do Stripe");
+      }
+
+      // Determinar Price ID do add-on
+      const priceId =
+        input.type === "storage"
+          ? PRICE_IDS.ADDON_STORAGE
+          : PRICE_IDS.ADDON_GALLERIES;
+
+      // Adicionar item à assinatura existente
+      const stripeSubscription = await stripe.subscriptions.retrieve(
+        subscription.stripeSubscriptionId
+      );
+
+      await stripe.subscriptions.update(subscription.stripeSubscriptionId, {
+        items: [
+          ...stripeSubscription.items.data.map((item) => ({
+            id: item.id,
+          })),
+          {
+            price: priceId,
+            quantity: input.quantity,
+          },
+        ],
+      });
+
+      return { success: true };
+    }),
+
+  /**
+   * Remover add-on
+   */
+  removeAddon: protectedProcedure
+    .input(
+      z.object({
+        type: z.enum(["storage", "galleries"]),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      if (!stripe) {
+        throw new Error("Stripe não está configurado");
+      }
+      
+      const tenantId = db.getTenantId(ctx);
+
+      // Buscar assinatura atual
+      const [subscription] = await ctx.db
+        .select()
+        .from(subscriptions)
+        .where(eq(subscriptions.tenantId, tenantId))
+        .limit(1);
+
+      if (!subscription || !subscription.stripeSubscriptionId) {
+        throw new Error("Assinatura não encontrada");
+      }
+
+      // Bloquear remoção de add-ons para plano Full (não deveria ter)
+      if (subscription.plan === "full") {
+        throw new Error("Plano Full não possui add-ons para remover.");
+      }
+
+      // Determinar Price ID do add-on
+      const priceId =
+        input.type === "storage"
+          ? PRICE_IDS.ADDON_STORAGE
+          : PRICE_IDS.ADDON_GALLERIES;
+
+      // Buscar item na assinatura
+      const stripeSubscription = await stripe.subscriptions.retrieve(
+        subscription.stripeSubscriptionId
+      );
+
+      const itemToRemove = stripeSubscription.items.data.find(
+        (item) => item.price.id === priceId
+      );
+
+      if (!itemToRemove) {
+        throw new Error("Add-on não encontrado na assinatura");
+      }
+
+      // Remover item
+      await stripe.subscriptionItems.del(itemToRemove.id);
+
+      return { success: true };
+    }),
+
+  /**
+   * Cancelar assinatura
+   */
+  cancel: protectedProcedure.mutation(async ({ ctx }) => {
+    if (!stripe) {
+      throw new Error("Stripe não está configurado");
+    }
+    
+    const tenantId = db.getTenantId(ctx);
+
+    // Buscar assinatura atual
+    const [subscription] = await ctx.db
+      .select()
+      .from(subscriptions)
+      .where(eq(subscriptions.tenantId, tenantId))
+      .limit(1);
+
+    if (!subscription || !subscription.stripeSubscriptionId) {
+      throw new Error("Assinatura não encontrada");
+    }
+
+    // Cancelar no Stripe (no final do período)
+    await stripe.subscriptions.update(subscription.stripeSubscriptionId, {
+      cancel_at_period_end: true,
+    });
+
+    return { success: true };
+  }),
+
+  /**
+   * Reativar assinatura cancelada
+   */
+  reactivate: protectedProcedure.mutation(async ({ ctx }) => {
+    if (!stripe) {
+      throw new Error("Stripe não está configurado");
+    }
+    
+    const tenantId = db.getTenantId(ctx);
+
+    // Buscar assinatura atual
+    const [subscription] = await ctx.db
+      .select()
+      .from(subscriptions)
+      .where(eq(subscriptions.tenantId, tenantId))
+      .limit(1);
+
+    if (!subscription || !subscription.stripeSubscriptionId) {
+      throw new Error("Assinatura não encontrada");
+    }
+
+    // Reativar no Stripe
+    await stripe.subscriptions.update(subscription.stripeSubscriptionId, {
+      cancel_at_period_end: false,
+    });
+
+    return { success: true };
+  }),
+
+  /**
+   * Comprar add-on de storage (+10GB)
+   */
+  buyStorageAddon: protectedProcedure
+    .input(
+      z.object({
+        successUrl: z.string(),
+        cancelUrl: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      if (!stripe) {
+        throw new Error("Stripe não está configurado");
+      }
+      
+      const tenantId = db.getTenantId(ctx);
+      const user = ctx.user!;
+
+      // Buscar assinatura atual
+      const [subscription] = await ctx.db
+        .select()
+        .from(subscriptions)
+        .where(eq(subscriptions.tenantId, tenantId))
+        .limit(1);
+
+      if (!subscription) {
+        throw new Error("Nenhuma assinatura ativa encontrada");
+      }
+
+      // Criar sessão de checkout para add-on de storage
+      const session = await stripe.checkout.sessions.create({
+        mode: "payment",
+        customer_email: user.email,
+        line_items: [
+          {
+            price: PRICE_IDS.ADDON_STORAGE,
+            quantity: 1,
+          },
+        ],
+        success_url: input.successUrl,
+        cancel_url: input.cancelUrl,
+        metadata: {
+          tenantId: tenantId.toString(),
+          userId: user.id.toString(),
+          addonType: "storage",
+        },
+      });
+
+      return {
+        sessionId: session.id,
+        url: session.url,
+      };
+    }),
+
+  /**
+   * Comprar add-on de galerias (+10 galerias)
+   */
+  buyGalleriesAddon: protectedProcedure
+    .input(
+      z.object({
+        successUrl: z.string(),
+        cancelUrl: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      if (!stripe) {
+        throw new Error("Stripe não está configurado");
+      }
+      
+      const tenantId = db.getTenantId(ctx);
+      const user = ctx.user!;
+
+      // Buscar assinatura atual
+      const [subscription] = await ctx.db
+        .select()
+        .from(subscriptions)
+        .where(eq(subscriptions.tenantId, tenantId))
+        .limit(1);
+
+      if (!subscription) {
+        throw new Error("Nenhuma assinatura ativa encontrada");
+      }
+
+      // Criar sessão de checkout para add-on de galerias
+      const session = await stripe.checkout.sessions.create({
+        mode: "payment",
+        customer_email: user.email,
+        line_items: [
+          {
+            price: PRICE_IDS.ADDON_GALLERIES,
+            quantity: 1,
+          },
+        ],
+        success_url: input.successUrl,
+        cancel_url: input.cancelUrl,
+        metadata: {
+          tenantId: tenantId.toString(),
+          userId: user.id.toString(),
+          addonType: "galleries",
+        },
+      });
+
+      return {
+        sessionId: session.id,
+        url: session.url,
+      };
+    }),
+
+  /**
+   * Obter portal de gerenciamento do cliente
+   */
+  createPortalSession: protectedProcedure
+    .input(
+      z.object({
+        returnUrl: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      if (!stripe) {
+        throw new Error("Stripe não está configurado");
+      }
+      
+      const tenantId = db.getTenantId(ctx);
+
+      // Buscar assinatura atual
+      const [subscription] = await ctx.db
+        .select()
+        .from(subscriptions)
+        .where(eq(subscriptions.tenantId, tenantId))
+        .limit(1);
+
+      if (!subscription || !subscription.stripeCustomerId) {
+        throw new Error("Cliente Stripe não encontrado");
+      }
+
+      // Criar sessão do portal
+      const session = await stripe.billingPortal.sessions.create({
+        customer: subscription.stripeCustomerId,
+        return_url: input.returnUrl,
+      });
+
+      return {
+        url: session.url,
+      };
+    }),
+});

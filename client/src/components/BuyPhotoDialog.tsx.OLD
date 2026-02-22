@@ -1,0 +1,262 @@
+import { useState, useEffect } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Download, Frame, Loader2, ShoppingCart } from "lucide-react";
+import { trpc } from "@/lib/trpc";
+import { useToast } from "@/hooks/use-toast";
+import { Card } from "@/components/ui/card";
+
+interface BuyPhotoDialogProps {
+  photo: any;
+  basePrice: number; // Preço da foto digital em centavos
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+export default function BuyPhotoDialog({
+  photo,
+  basePrice,
+  open,
+  onOpenChange,
+}: BuyPhotoDialogProps) {
+  const { toast } = useToast();
+  const [productType, setProductType] = useState<"digital" | "framed">("digital");
+  const [frameSize, setFrameSize] = useState<string>("");
+  const [frameType, setFrameType] = useState<string>("");
+
+  const { data: frameSizes } = trpc.frameConfig.getFrameSizes.useQuery();
+  const { data: frameTypes } = trpc.frameConfig.getFrameTypes.useQuery();
+  
+  const { data: priceData } = trpc.frameConfig.calculatePrice.useQuery(
+    {
+      basePrice,
+      productType,
+      frameSize: productType === "framed" && frameSize ? frameSize : undefined,
+      frameType: productType === "framed" && frameType ? frameType : undefined,
+    },
+    { enabled: open }
+  );
+
+  const createCheckoutMutation = trpc.payments.createPhotoCheckout.useMutation({
+    onSuccess: (data) => {
+      // Redirect to Stripe checkout
+      if (data.checkoutUrl) {
+        window.location.href = data.checkoutUrl;
+      }
+    },
+    onError: (error) => {
+      toast({
+        title: "Erro ao processar",
+        description: error.message,
+        variant: "destructive",
+      });
+    },
+  });
+
+  // Reset selections when dialog opens
+  useEffect(() => {
+    if (open) {
+      setProductType("digital");
+      setFrameSize("");
+      setFrameType("");
+    }
+  }, [open]);
+
+  // Auto-select first frame size when switching to framed
+  useEffect(() => {
+    if (productType === "framed" && frameSizes && frameSizes.length > 0 && !frameSize) {
+      setFrameSize(frameSizes[0].size);
+    }
+    if (productType === "framed" && frameTypes && frameTypes.length > 0 && !frameType) {
+      setFrameType(frameTypes[0].type);
+    }
+  }, [productType, frameSizes, frameTypes, frameSize, frameType]);
+
+  const handlePurchase = () => {
+    if (productType === "framed" && (!frameSize || !frameType)) {
+      toast({
+        title: "Seleção incompleta",
+        description: "Por favor, selecione o tamanho e o tipo de moldura.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    createCheckoutMutation.mutate({
+      photoId: photo.id,
+      productType,
+      frameSize: productType === "framed" ? frameSize : undefined,
+      frameType: productType === "framed" ? frameType : undefined,
+    });
+  };
+
+  const formatPrice = (cents: number) => {
+    return new Intl.NumberFormat("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    }).format(cents / 100);
+  };
+
+  if (!photo) return null;
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="sm:max-w-[600px]">
+        <DialogHeader>
+          <DialogTitle>Comprar Foto</DialogTitle>
+          <DialogDescription>
+            Escolha como você deseja receber sua foto
+          </DialogDescription>
+        </DialogHeader>
+
+        <div className="space-y-6 py-4">
+          {/* Product Type Selection */}
+          <div className="space-y-3">
+            <Label>Formato de Compra</Label>
+            <RadioGroup value={productType} onValueChange={(v) => setProductType(v as "digital" | "framed")}>
+              <Card className={`p-4 cursor-pointer transition-all ${productType === "digital" ? "border-blue-500 bg-blue-50" : "border-gray-200"}`}>
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <RadioGroupItem value="digital" id="digital" className="mt-1" />
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2 mb-1">
+                      <Download className="w-5 h-5 text-blue-600" />
+                      <span className="font-semibold">Foto Digital</span>
+                    </div>
+                    <p className="text-sm text-gray-600">
+                      Download em alta resolução para impressão ou uso digital
+                    </p>
+                    <p className="text-lg font-bold text-blue-600 mt-2">
+                      {formatPrice(basePrice)}
+                    </p>
+                  </div>
+                </label>
+              </Card>
+
+              {photo.frameEnabled && (
+                <Card className={`p-4 cursor-pointer transition-all ${productType === "framed" ? "border-blue-500 bg-blue-50" : "border-gray-200"}`}>
+                  <label className="flex items-start gap-3 cursor-pointer">
+                    <RadioGroupItem value="framed" id="framed" className="mt-1" />
+                    <div className="flex-1">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Frame className="w-5 h-5 text-blue-600" />
+                        <span className="font-semibold">Quadro Emoldurado</span>
+                      </div>
+                      <p className="text-sm text-gray-600">
+                        Foto impressa em alta qualidade com moldura à sua escolha
+                      </p>
+                      <p className="text-sm text-gray-500 mt-1">
+                        Selecione tamanho e moldura abaixo
+                      </p>
+                    </div>
+                  </label>
+                </Card>
+              )}
+            </RadioGroup>
+          </div>
+
+          {/* Frame Options (only if framed is selected) */}
+          {productType === "framed" && (
+            <>
+              {/* Frame Size */}
+              <div className="space-y-3">
+                <Label>Tamanho do Quadro</Label>
+                <RadioGroup value={frameSize} onValueChange={setFrameSize}>
+                  <div className="grid gap-2">
+                    {frameSizes?.map((size) => (
+                      <Card
+                        key={size.id}
+                        className={`p-3 cursor-pointer transition-all ${frameSize === size.size ? "border-blue-500 bg-blue-50" : "border-gray-200"}`}
+                      >
+                        <label className="flex items-center justify-between cursor-pointer">
+                          <div className="flex items-center gap-3">
+                            <RadioGroupItem value={size.size} id={`size-${size.id}`} />
+                            <span className="font-medium">{size.sizeLabel}</span>
+                          </div>
+                          <span className="text-sm font-semibold text-gray-700">
+                            + {formatPrice(size.basePrice)}
+                          </span>
+                        </label>
+                      </Card>
+                    ))}
+                  </div>
+                </RadioGroup>
+              </div>
+
+              {/* Frame Type */}
+              <div className="space-y-3">
+                <Label>Tipo de Moldura</Label>
+                <RadioGroup value={frameType} onValueChange={setFrameType}>
+                  <div className="grid gap-2">
+                    {frameTypes?.map((type) => (
+                      <Card
+                        key={type.id}
+                        className={`p-3 cursor-pointer transition-all ${frameType === type.type ? "border-blue-500 bg-blue-50" : "border-gray-200"}`}
+                      >
+                        <label className="flex items-center justify-between cursor-pointer">
+                          <div className="flex items-center gap-3">
+                            <RadioGroupItem value={type.type} id={`type-${type.id}`} />
+                            <div className="flex items-center gap-2">
+                              <div
+                                className={`w-6 h-6 rounded border-2 ${
+                                  type.type === "white"
+                                    ? "bg-white border-gray-300"
+                                    : type.type === "dark"
+                                    ? "bg-gray-800 border-gray-900"
+                                    : "bg-yellow-600 border-yellow-700"
+                                }`}
+                              />
+                              <span className="font-medium">{type.typeLabel}</span>
+                            </div>
+                          </div>
+                          <span className="text-sm font-semibold text-gray-700">
+                            + {formatPrice(type.additionalPrice)}
+                          </span>
+                        </label>
+                      </Card>
+                    ))}
+                  </div>
+                </RadioGroup>
+              </div>
+            </>
+          )}
+
+          {/* Price Summary */}
+          <Card className="p-4 bg-gray-50">
+            <div className="flex items-center justify-between">
+              <span className="text-lg font-semibold">Total</span>
+              <span className="text-2xl font-bold text-blue-600">
+                {priceData ? formatPrice(priceData.totalPrice) : "Calculando..."}
+              </span>
+            </div>
+          </Card>
+
+          {/* Action Buttons */}
+          <div className="flex gap-3 pt-2">
+            <Button variant="outline" onClick={() => onOpenChange(false)} className="flex-1">
+              Cancelar
+            </Button>
+            <Button
+              onClick={handlePurchase}
+              disabled={createCheckoutMutation.isPending || (productType === "framed" && (!frameSize || !frameType))}
+              className="flex-1"
+            >
+              {createCheckoutMutation.isPending ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Processando...
+                </>
+              ) : (
+                <>
+                  <ShoppingCart className="w-4 h-4 mr-2" />
+                  Ir para Pagamento
+                </>
+              )}
+            </Button>
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}

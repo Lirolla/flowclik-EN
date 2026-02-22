@@ -1,0 +1,1 @@
+ALTER TABLE `siteConfig` ADD `siteFont` enum('poppins','inter','roboto','playfair','montserrat','lato') DEFAULT 'poppins' NOT NULL;

@@ -1,0 +1,28 @@
+# FlowClik - Wildcard Subdomain Configuration
+# Redireciona todos os subdomínios para o servidor Node.js na porta 3000
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Força HTTPS (se não estiver usando Cloudflare Flexible SSL)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+    
+    # Proxy para o servidor Node.js na porta 3000
+    # Preserva o hostname original para detecção de tenant
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ http://127.0.0.1:3000/$1 [P,L]
+    
+    # Preserva headers importantes
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteCond %{HTTPS} on
+    RewriteRule ^ - [E=HTTPS:on]
+</IfModule>
+
+# Habilita proxy
+<IfModule mod_proxy.c>
+    ProxyPreserveHost On
+    ProxyPass / http://127.0.0.1:3000/
+    ProxyPassReverse / http://127.0.0.1:3000/
+</IfModule>

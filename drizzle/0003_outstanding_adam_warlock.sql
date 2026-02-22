@@ -1,0 +1,1 @@
+ALTER TABLE `photoSales` ADD `pagarmeOrderId` varchar(255);

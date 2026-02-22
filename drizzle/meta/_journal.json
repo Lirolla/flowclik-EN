@@ -1,0 +1,69 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1767726605794,
+      "tag": "0000_worthless_famine",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1767727662414,
+      "tag": "0001_neat_mongoose",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1767729345345,
+      "tag": "0002_parched_terror",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1767729792054,
+      "tag": "0003_outstanding_adam_warlock",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1767729991448,
+      "tag": "0004_freezing_warbird",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1767731227338,
+      "tag": "0005_loud_miss_america",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "5",
+      "when": 1767734202546,
+      "tag": "0006_lumpy_calypso",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1767736074826,
+      "tag": "0007_dashing_kang",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1767749938583,
+      "tag": "0008_fluffy_salo",
+      "breakpoints": true
+    }
+  ]
+}

@@ -1,0 +1,215 @@
+import { Link } from "wouter";
+import Footer from "@/components/Footer";
+import { trpc } from "@/lib/trpc";
+import { Card } from "@/components/ui/card";
+import { Target, Eye, Heart, Users } from "lucide-react";
+
+export default function About() {
+  const { data: aboutData, isLoading } = trpc.about.get.useQuery();
+  const { data: siteConfig } = trpc.site.getConfig.useQuery();
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Navbar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b">
+        <div className="container">
+          <div className="flex flex-col items-center py-4">
+            <Link href="/">
+              <a className="flex items-center gap-3 mb-3">
+                {siteConfig?.logoUrl ? (
+                  <img
+                    src={siteConfig.logoUrl}
+                    alt={siteConfig.siteName || "Lirolla"}
+                    className="h-12 object-contain"
+                  />
+                ) : (
+                  <div className="flex items-center gap-2">
+                    <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+                      <span className="text-accent-foreground font-bold text-xl">
+                        {(siteConfig?.siteName || "L")[0]}
+                      </span>
+                    </div>
+                    <span className="text-2xl font-serif font-bold">
+                      {siteConfig?.siteName || "Lirolla"}
+                    </span>
+                  </div>
+                )}
+              </a>
+            </Link>
+
+            <div className="flex items-center gap-6">
+              <Link href="/">
+                <a className="text-sm font-medium hover:text-accent transition-colors">
+                  Início
+                </a>
+              </Link>
+              <Link href="/galerias">
+                <a className="text-sm font-medium hover:text-accent transition-colors">
+                  Galerias
+                </a>
+              </Link>
+              <Link href="/servicos">
+                <a className="text-sm font-medium hover:text-accent transition-colors">
+                  Serviços
+                </a>
+              </Link>
+              <Link href="/portfolio">
+                <a className="text-sm font-medium hover:text-accent transition-colors">
+                  Portfólio
+                </a>
+              </Link>
+              <Link href="/sobre">
+                <a className="text-sm font-medium text-accent">Sobre</a>
+              </Link>
+              <Link href="/contato">
+                <a className="text-sm font-medium hover:text-accent transition-colors">
+                  Contato
+                </a>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="pt-32 pb-20 bg-gradient-to-br from-background to-muted/30">
+        <div className="container">
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-5xl md:text-6xl font-bold font-serif mb-6">
+              {aboutData?.title || "Sobre Nós"}
+            </h1>
+            {aboutData?.subtitle && (
+              <p className="text-lg md:text-xl text-muted-foreground">
+                {aboutData.subtitle}
+              </p>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      {aboutData?.mainContent && (
+        <section className="py-20">
+          <div className="container">
+            <div className="max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                {aboutData.imageUrl && (
+                  <div className="order-2 md:order-1">
+                    <img
+                      src={aboutData.imageUrl}
+                      alt={aboutData.title}
+                      className="rounded-lg shadow-xl w-full"
+                    />
+                  </div>
+                )}
+                <div className={aboutData.imageUrl ? "order-1 md:order-2" : "col-span-2"}>
+                  <p className="text-lg leading-relaxed whitespace-pre-wrap">
+                    {aboutData.mainContent}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Mission, Vision, Values */}
+      {(aboutData?.mission || aboutData?.vision || aboutData?.values) && (
+        <section className="py-20 bg-muted/30">
+          <div className="container">
+            <div className="max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {aboutData.mission && (
+                  <Card className="p-8 text-center">
+                    <div className="flex justify-center mb-4">
+                      <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center">
+                        <Target className="h-8 w-8 text-accent" />
+                      </div>
+                    </div>
+                    <h3 className="text-2xl font-bold font-serif mb-4">Missão</h3>
+                    <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
+                      {aboutData.mission}
+                    </p>
+                  </Card>
+                )}
+
+                {aboutData.vision && (
+                  <Card className="p-8 text-center">
+                    <div className="flex justify-center mb-4">
+                      <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center">
+                        <Eye className="h-8 w-8 text-accent" />
+                      </div>
+                    </div>
+                    <h3 className="text-2xl font-bold font-serif mb-4">Visão</h3>
+                    <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
+                      {aboutData.vision}
+                    </p>
+                  </Card>
+                )}
+
+                {aboutData.values && (
+                  <Card className="p-8 text-center">
+                    <div className="flex justify-center mb-4">
+                      <div className="w-16 h-16 bg-accent/10 rounded-full flex items-center justify-center">
+                        <Heart className="h-8 w-8 text-accent" />
+                      </div>
+                    </div>
+                    <h3 className="text-2xl font-bold font-serif mb-4">Valores</h3>
+                    <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
+                      {aboutData.values}
+                    </p>
+                  </Card>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Team */}
+      {aboutData?.teamDescription && (
+        <section className="py-20">
+          <div className="container">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="flex justify-center mb-6">
+                <div className="w-20 h-20 bg-accent/10 rounded-full flex items-center justify-center">
+                  <Users className="h-10 w-10 text-accent" />
+                </div>
+              </div>
+              <h2 className="text-4xl font-bold font-serif mb-6">Nossa Equipe</h2>
+              <p className="text-lg text-muted-foreground leading-relaxed whitespace-pre-wrap">
+                {aboutData.teamDescription}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Empty State */}
+      {!isLoading && !aboutData?.mainContent && !aboutData?.mission && !aboutData?.vision && !aboutData?.values && !aboutData?.teamDescription && (
+        <section className="py-20">
+          <div className="container">
+            <Card className="p-12 text-center max-w-2xl mx-auto">
+              <h3 className="text-2xl font-bold mb-4">Conteúdo em breve</h3>
+              <p className="text-muted-foreground">
+                Esta página está sendo preparada. Volte em breve!
+              </p>
+            </Card>
+          </div>
+        </section>
+      )}
+
+      {/* Footer */}
+      <footer className="py-12 bg-background border-t">
+        <div className="container">
+          <div className="text-center">
+            <p className="text-sm text-muted-foreground">
+              © {new Date().getFullYear()} {siteConfig?.siteName || "Lirolla"}.
+              Todos os direitos reservados.
+            </p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
