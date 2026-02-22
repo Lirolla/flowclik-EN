@@ -196,7 +196,7 @@ function AdminStockContent() {
             onClick={() => document.getElementById("file-input")?.click()}
           >
             <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-            <p className="text-lg font-semibold mb-2">Arraste fotos here or click to select</p>
+            <p className="text-lg font-semibold mb-2">Drag photos here or click to select</p>
             <p className="text-sm text-muted-foreground">
               Formatos aceitos: JPG, PNG, WEBP
             </p>

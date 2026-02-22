@@ -147,11 +147,11 @@ export default function AdminGalleryUpload() {
     } catch (error: any) {
       updateFile(uploadFile.id, {
         uploading: false,
-        error: error.message || "Erro no upload",
+        error: error.message || "Upload error",
       });
       
       toast({
-        title: "Erro no upload",
+        title: "Upload error",
         description: error.message || "Not foi possible enviar a foto",
         variant: "destructive",
       });
@@ -190,7 +190,7 @@ export default function AdminGalleryUpload() {
       });
     } else if (errorCount > 0) {
       toast({
-        title: "Erro no upload",
+        title: "Upload error",
         description: `Falha ao enviar ${errorCount} foto${errorCount > 1 ? 's' : ''}`,
         variant: "destructive",
       });
@@ -250,7 +250,7 @@ export default function AdminGalleryUpload() {
           <div>
             <h1 className="text-3xl font-bold">{collection.name}</h1>
             <p className="text-muted-foreground mt-2">
-              Make upload de fotos para esta galeria
+              Upload photos to this gallery
             </p>
           </div>
           <Button
@@ -279,10 +279,10 @@ export default function AdminGalleryUpload() {
           >
             <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-xl font-semibold mb-2">
-              Arraste fotos here or click to select
+              Drag photos here or click to select
             </h3>
             <p className="text-muted-foreground mb-4">
-              Formatos suportados: JPG, PNG, WEBP
+              Supported formats: JPG, PNG, WEBP
             </p>
             <input
               type="file"

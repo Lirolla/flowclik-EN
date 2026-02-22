@@ -1417,7 +1417,7 @@ export default function ComponentsShowcase() {
                       "What is React?",
                       "Explain TypeScript",
                       "How to use tRPC?",
-                      "Best practices for web mustlopment",
+                      "Best practices for web development",
                     ]}
                   />
                 </div>

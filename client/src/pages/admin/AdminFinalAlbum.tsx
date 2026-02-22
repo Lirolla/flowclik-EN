@@ -93,7 +93,7 @@ export default function AdminFinalAlbum() {
         photos: uploadedPhotos,
       });
     } catch (error) {
-      console.error("Erro no upload:", error);
+      console.error("Upload error:", error);
       toast({
         title: "Error",
         description: "Falha ao fazer upload das fotos.",
@@ -132,7 +132,7 @@ export default function AdminFinalAlbum() {
             Upload Final Edited Photos
           </h3>
           <p className="text-sm text-muted-foreground mb-4">
-            Arraste fotos here or click to select
+            Drag photos here or click to select
           </p>
           <input
             type="file"

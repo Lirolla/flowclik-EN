@@ -19,7 +19,7 @@ describe('R2 Storage Configuration', () => {
     const { R2Paths } = await import('./storage');
     
     // Testar paths de galeria
-    const galeriaPath = R2Paths.galeria(1, 'casamento-maria', 'originais', 'foto.jpg');
+    const galeriaPath = R2Paths.gallery(1, 'casamento-maria', 'originais', 'foto.jpg');
     expect(galeriaPath).toBe('tenant-1/galleries/casamento-maria/originais/foto.jpg');
     
     // Testar paths de banner

@@ -232,7 +232,7 @@ export default function AdminBanner() {
                   }
                 />
                 <p className="text-xs text-muted-foreground mt-1">
-                  Formatos suportados: .m3u8, .mp4
+                  Supported formats: .m3u8, .mp4
                 </p>
               </div>
 

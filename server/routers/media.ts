@@ -47,7 +47,7 @@ export const mediaRouter = router({
       const fileName = `${timestamp}-${randomId}`;
 
       // Upload imagem original
-      const originalKey = R2Paths.galeria(getTenantId(ctx), collection.slug, 'originais', `${fileName}.jpg`);
+      const originalKey = R2Paths.gallery(getTenantId(ctx), collection.slug, 'originais', `${fileName}.jpg`);
       const originalBuffer = await originalImage.jpeg({ quality: 95 }).toBuffer();
       const { url: originalUrl } = await storagePut(
         originalKey,
@@ -61,7 +61,7 @@ export const mediaRouter = router({
         .jpeg({ quality: 80 })
         .toBuffer();
 
-      const thumbnailKey = R2Paths.galeria(getTenantId(ctx), collection.slug, 'thumbnails', `${fileName}.jpg`);
+      const thumbnailKey = R2Paths.gallery(getTenantId(ctx), collection.slug, 'thumbnails', `${fileName}.jpg`);
       const { url: thumbnailUrl } = await storagePut(
         thumbnailKey,
         thumbnailBuffer,
@@ -84,7 +84,7 @@ export const mediaRouter = router({
         .jpeg({ quality: 85 })
         .toBuffer();
 
-      const previewKey = R2Paths.galeria(getTenantId(ctx), collection.slug, 'preview', `${fileName}.jpg`);
+      const previewKey = R2Paths.gallery(getTenantId(ctx), collection.slug, 'preview', `${fileName}.jpg`);
       const { url: previewUrl } = await storagePut(
         previewKey,
         watermarkedBuffer,

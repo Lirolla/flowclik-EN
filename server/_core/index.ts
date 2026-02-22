@@ -12,6 +12,9 @@ import { handleStripeWebhook } from "./stripeWebhook";
 // import { handlePaddleWebhook } from "./paddleWebhook"; // REMOVIDO: Paddle
 import multer from "multer";
 import { storagePut, R2Paths } from "../storage";
+import jwt from "jsonwebtoken";
+import { detectTenantFromRequest } from "./tenantDetection";
+const JWT_SECRET_UPLOAD = process.env.JWT_SECRET || "lirolla-secret-key-change-in-production";
 
 function isPortAvailable(port: number): Promise<boolean> {
   return new Promise(resolve => {
@@ -233,8 +236,15 @@ async function startServer() {
       if (!req.file) {
         return res.status(400).json({ error: 'No file uploaded' });
       }
-      // TODO: Get tenantId from session/auth
-      const tenantId = 1; // Temporary hardcoded
+      // Get tenantId from JWT token or tenant detection
+      let tenantId = await detectTenantFromRequest(req);
+      const authHeader = req.headers.authorization;
+      if (authHeader && authHeader.startsWith('Bearer ')) {
+        try {
+          const decoded = jwt.verify(authHeader.substring(7), JWT_SECRET_UPLOAD) as { tenantId: number };
+          if (decoded.tenantId) tenantId = decoded.tenantId;
+        } catch (e) { /* use detected tenantId */ }
+      }
       const fileName = `${Date.now()}-${req.file.originalname}`;
       const fileKey = R2Paths.portfolio(tenantId, fileName);
       const { url } = await storagePut(fileKey, req.file.buffer, req.file.mimetype);
@@ -252,8 +262,8 @@ async function startServer() {
       createContext,
     })
   );
-  // mustlopment mode uses Vite, production mode uses static files
-  if (process.env.NODE_ENV === "mustlopment") {
+  // development mode uses Vite, production mode uses static files
+  if (process.env.NODE_ENV === "development") {
     await setupVite(app, server);
   } else {
     serveStatic(app);
