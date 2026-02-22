@@ -12,7 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 export default function ClientChat() {
   const [, params] = useRoute("/client/chat/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
-  // const { user } = useAuth(); // Clientes not usam OAuth, usam email+senha do agendamento
+  // const { user } = useAuth(); // Clients don't use OAuth, they use email+password from the booking
   const { toast } = useToast();
   
   const [message, setMessage] = useState("");
@@ -61,7 +61,7 @@ export default function ClientChat() {
 
     sendMessageMutation.mutate({
       appointmentId,
-      senderId: appointmentId, // Use appointmentId as identificapain do cliente
+      senderId: appointmentId, // Use appointmentId as client identifier
       senderRole: "client",
       message: message.trim(),
     });
@@ -74,13 +74,13 @@ export default function ClientChat() {
     }
   };
 
-  // Clientes acessam via appointmentId, not needsm de OAuth
+  // Clients access via appointmentId, no OAuth needed
   if (!appointmentId) {
     return (
       <ClientLayout appointmentId={appointmentId}>
         <div className="text-center py-12">
           <AlertCircle className="h-12 w-12 text-red-600 mx-auto mb-4" />
-          <p className="text-gray-400">Agendamento invalid</p>
+          <p className="text-gray-400">Invalid booking</p>
         </div>
       </ClientLayout>
     );
@@ -89,14 +89,14 @@ export default function ClientChat() {
   return (
     <ClientLayout appointmentId={appointmentId}>
       <div className="max-w-4xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">Chat com o Photographer</h1>
+        <h1 className="text-3xl font-bold mb-6">Chat with Photographer</h1>
 
         <Card className="bg-gray-900 border-gray-800 flex flex-col h-[600px]">
           {/* Messages Area */}
           <div className="flex-1 overflow-y-auto p-6 space-y-4">
             {messages && messages.length === 0 && (
               <div className="text-center py-12 text-gray-400">
-                <p>Nenhuma message still. Comece a conversa!</p>
+                <p>No messages yet. Start the conversation!</p>
               </div>
             )}
 
@@ -136,7 +136,7 @@ export default function ClientChat() {
                         rel="noopener noreferrer"
                         className="text-sm underline mt-2 block"
                       >
-                        📎 {msg.fileName || "Arquivo anexado"}
+                        📎 {msg.fileName || "Attached file"}
                       </a>
                     )}
                   </div>
@@ -166,7 +166,7 @@ export default function ClientChat() {
               </Button>
             </div>
             <p className="text-xs text-gray-500 mt-2">
-              Pressione Enter para enviar, Shift+Enter para new linha
+              Press Enter to send, Shift+Enter for new line
             </p>
           </div>
         </Card>

@@ -40,7 +40,7 @@ export default function ClientGallery() {
     onSuccess: () => {
       refetch();
       toast({
-        title: "Favourite atualizada!",
+        title: "Favourite updated!",
         description: "Your selection has been saved.",
       });
     },
@@ -59,7 +59,7 @@ export default function ClientGallery() {
       setComment("");
       toast({
         title: "Comment added!",
-        description: "O photographer foi notificado.",
+        description: "The photographer has been notified.",
       });
     },
     onError: (error) => {
@@ -138,7 +138,7 @@ export default function ClientGallery() {
           <div className="text-center mb-6">
             <h1 className="text-3xl font-bold mb-2">Your Session Photos</h1>
             <p className="text-muted-foreground">
-              Digite your email para acessar a galeria
+              Enter your email to access the gallery
             </p>
           </div>
           <form onSubmit={handleLogin} className="space-y-4">
@@ -154,7 +154,7 @@ export default function ClientGallery() {
               />
             </div>
             <Button type="submit" className="w-full">
-              Acessar Gallery
+              Access Gallery
             </Button>
           </form>
         </Card>
@@ -168,10 +168,10 @@ export default function ClientGallery() {
         <Card className="p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Gallery not found</h2>
           <p className="text-muted-foreground mb-6">
-            As fotos do your ensaio still not were enviadas pelo photographer.
+            Your session photos have not been uploaded by the photographer yet.
           </p>
           <Button onClick={() => setIsAuthenticated(false)}>
-            Tentar other email
+            Try another email
           </Button>
         </Card>
       </div>
@@ -197,7 +197,7 @@ export default function ClientGallery() {
             <div className="text-right flex items-center gap-4">
               <div>
                 <div className="text-sm text-muted-foreground">
-                  {photos.length} fotos
+                  {photos.length} photos
                 </div>
                 <div className="text-lg font-semibold flex items-center gap-2">
                   <Heart className="w-5 h-5 fill-red-500 text-red-500" />
@@ -207,12 +207,12 @@ export default function ClientGallery() {
               {downloadPermission?.allowed ? (
                 <div className="flex items-center gap-2 text-green-500 bg-green-500/10 border border-green-500/30 px-4 py-2 rounded">
                   <Unlock className="h-5 w-5" />
-                  <span className="text-sm font-medium">Download Liberado</span>
+                  <span className="text-sm font-medium">Download Enabled</span>
                 </div>
               ) : (
                 <div className="flex items-center gap-2 text-yellow-500 bg-yellow-500/10 border border-yellow-500/30 px-4 py-2 rounded">
                   <Lock className="h-5 w-5" />
-                  <span className="text-sm font-medium">Download Bloqueado</span>
+                  <span className="text-sm font-medium">Download Locked</span>
                 </div>
               )}
               {!appointment.selectionApproved && favoritesCount > 0 && (
@@ -222,7 +222,7 @@ export default function ClientGallery() {
                   className="bg-green-600 hover:bg-green-700"
                 >
                   <CheckCircle className="w-5 h-5 mr-2" />
-                  Aprovar Selection
+                  Approve Selection
                 </Button>
               )}
               {appointment.selectionApproved && (
@@ -246,8 +246,8 @@ export default function ClientGallery() {
         <Card className="p-6 bg-blue-500/10 border-blue-500/30">
           <p className="text-center">
             <strong>Instructions:</strong> Click the heart icon ❤️ to mark your favourite photos. 
-            Clique na foto para ver em tamanho grande e deixar comments.
-            {!appointment.selectionApproved && " Wedndo terminar, clique em 'Approve Selection' no topo."}
+            Click on a photo to view it full size and leave comments.
+            {!appointment.selectionApproved && " When you're done, click 'Approve Selection' at the top."}
           </p>
         </Card>
       </div>
@@ -387,18 +387,18 @@ export default function ClientGallery() {
                     ))}
                   {photoComments.filter(c => c.photoId === selectedPhoto.id).length === 0 && (
                     <p className="text-sm text-muted-foreground text-center py-8">
-                      None comment still
+                      No comments yet
                     </p>
                   )}
                 </div>
 
                 {/* Add Comment */}
                 <div className="space-y-2">
-                  <Label>Deixe um comment</Label>
+                  <Label>Leave a comment</Label>
                   <Textarea
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    placeholder="Ex: Whatro essa foto mais clara, apainei essa pose..."
+                    placeholder="Ex: I'd like this photo brighter, love this pose..."
                     rows={3}
                   />
                   <Button

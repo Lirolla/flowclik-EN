@@ -36,7 +36,7 @@ export function ClientLayout({ children, appointmentId }: ClientLayoutProps) {
                 <Link href="/">
                   <a className="flex items-center gap-2">
                     <LogOut className="h-4 w-4" />
-                    Sair
+                    Log Out
                   </a>
                 </Link>
               </Button>

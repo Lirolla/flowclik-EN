@@ -17,10 +17,10 @@ export default function ClienteAcesso() {
   const findAppointmentMutation = trpc.appointments.findByEmail.useMutation({
     onSuccess: (appointment) => {
       if (appointment) {
-        // Redirecionar para o dashboard do cliente
+        // Redirect to client dashboard
         setLocation(`/client/dashboard/${appointment.id}`);
       } else {
-        setError("Email ou senha incorretos.");
+        setError("Incorrect email or password.");
       }
       setIsLoading(false);
     },
@@ -35,12 +35,12 @@ export default function ClienteAcesso() {
     setError("");
     
     if (!email.trim()) {
-      setError("Why favor, digite your email.");
+      setError("Please enter your email.");
       return;
     }
 
     if (!password.trim()) {
-      setError("Why favor, digite a senha.");
+      setError("Please enter your password.");
       return;
     }
 
@@ -63,7 +63,7 @@ export default function ClienteAcesso() {
             </div>
             <h1 className="text-3xl font-bold mb-2">Client Area</h1>
             <p className="text-gray-400">
-              Acesse your painel para acompanhar your projeto
+              Access your panel to track your project
             </p>
           </div>
 
@@ -85,13 +85,13 @@ export default function ClienteAcesso() {
                 />
               </div>
               <p className="text-xs text-gray-500 mt-2">
-                Digite o email used no agendamento
+                Enter the email used for your booking
               </p>
             </div>
 
             <div>
               <label htmlFor="password" className="block text-sm font-medium mb-2">
-                Senha
+                Password
               </label>
               <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
@@ -106,7 +106,7 @@ export default function ClienteAcesso() {
                 />
               </div>
               <p className="text-xs text-gray-500 mt-2">
-                Senha fornecida pelo photographer
+                Password provided by the photographer
               </p>
             </div>
 
@@ -122,16 +122,16 @@ export default function ClienteAcesso() {
               className="w-full bg-red-600 hover:bg-red-700"
               disabled={isLoading}
             >
-              {isLoading ? "Searching..." : "Acessar Painel"}
+              {isLoading ? "Searching..." : "Access Panel"}
             </Button>
           </form>
 
           <div className="mt-6 pt-6 border-t border-gray-800">
             <p className="text-sm text-gray-400 text-center">
-              Not encontrou your agendamento?<br />
-              Get in touch conosco through do{" "}
+              Can't find your booking?<br />
+              Get in touch with us through the{" "}
               <a href="/contact" className="text-red-400 hover:underline">
-                formuthererio de contato
+                contact form
               </a>
             </p>
           </div>

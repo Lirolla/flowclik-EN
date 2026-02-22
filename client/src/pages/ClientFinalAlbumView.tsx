@@ -21,7 +21,7 @@ export default function ClientFinalAlbumView() {
   const [shareUrl, setShareUrl] = useState("");
   const [, setLocation] = useLocation();
 
-  // Protection anti-copy: desabilitar clique direito e arrastar
+  // Anti-copy protection: disable right-click and drag
   useEffect(() => {
     const preventContextMenu = (e: MouseEvent) => e.preventDefault();
     const preventDragStart = (e: DragEvent) => e.preventDefault();
@@ -49,7 +49,7 @@ export default function ClientFinalAlbumView() {
     if (!appointment?.slug) {
       toast({
         title: "Error",
-        description: "Not foi possible gerar link de compartilhamento.",
+        description: "Could not generate sharing link.",
         variant: "destructive",
       });
       return;
@@ -64,7 +64,7 @@ export default function ClientFinalAlbumView() {
     navigator.clipboard.writeText(shareUrl);
     toast({
       title: "Link copied!",
-      description: "Link de compartilhamento copiado para a area de transfer.",
+      description: "Sharing link copied to clipboard.",
     });
   };
 
@@ -74,15 +74,15 @@ export default function ClientFinalAlbumView() {
       // Open download URL in new tab
       window.open(data.downloadUrl, '_blank');
       toast({
-        title: "Download iniciado!",
-        description: `${finalPhotos?.length || 0} fotos sendo baixadas.`,
+        title: "Download started!",
+        description: `${finalPhotos?.length || 0} photos being downloaded.`,
       });
     },
     onError: (error) => {
-      console.error("Erro ao gerar ZIP:", error);
+      console.error("Error generating ZIP:", error);
       toast({
-        title: "Erro no download",
-        description: "Not foi possible preparar o download. Try again.",
+        title: "Download error",
+        description: "Could not prepare the download. Please try again.",
         variant: "destructive",
       });
     },
@@ -95,8 +95,8 @@ export default function ClientFinalAlbumView() {
     }
 
     toast({
-      title: "Preparando download...",
-      description: "Criando arquivo ZIP com everys as fotos. Isso can levar some seconds.",
+      title: "Preparing download...",
+      description: "Creating ZIP file with all photos. This may take a few seconds.",
     });
 
     generateZipMutation.mutate({ appointmentId });
@@ -126,14 +126,14 @@ export default function ClientFinalAlbumView() {
             className="mb-4"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Voltar para Dashboard
+            Back to Dashboard
           </Button>
 
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-3xl font-bold">Final Album</h1>
               <p className="text-muted-foreground mt-1">
-                {appointment?.serviceType} - {finalPhotos?.length || 0} fotos edited
+                {appointment?.serviceType} - {finalPhotos?.length || 0} edited photos
               </p>
             </div>
             <div className="flex gap-3">
@@ -143,7 +143,7 @@ export default function ClientFinalAlbumView() {
                 style={{ pointerEvents: (!finalPhotos || finalPhotos.length === 0) ? 'none' : 'auto', opacity: (!finalPhotos || finalPhotos.length === 0) ? 0.5 : 1 }}
               >
                 <Download className="w-4 h-4" />
-                Baixar Everys
+                Download All
               </a>
               <Button
                 onClick={handleShare}
@@ -151,7 +151,7 @@ export default function ClientFinalAlbumView() {
                 disabled={!finalPhotos || finalPhotos.length === 0}
               >
                 <Share2 className="w-4 h-4" />
-                Compartilhar Album
+                Share Album
               </Button>
             </div>
           </div>
@@ -163,10 +163,10 @@ export default function ClientFinalAlbumView() {
         {!finalPhotos || finalPhotos.length === 0 ? (
           <div className="text-center py-16 bg-card rounded-lg border">
             <p className="text-muted-foreground text-lg">
-              Your album final still not is available.
+              Your final album is not available yet.
             </p>
             <p className="text-sm text-muted-foreground mt-2">
-              Aguarde enquanto o photographer finaliza a editing das yours fotos.
+              Please wait while the photographer finishes editing your photos.
             </p>
           </div>
         ) : (
@@ -185,10 +185,10 @@ export default function ClientFinalAlbumView() {
                   draggable={false}
                   onContextMenu={(e) => e.preventDefault()}
                 />
-                {/* Overlay invisible para bloquear cliques na imagem */}
+                {/* Invisible overlay to block clicks on image */}
                 <div className="absolute inset-0 bg-transparent" style={{ pointerEvents: 'auto' }} onClick={() => openLightbox(index)} />
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors pointer-events-none" />
-                {/* Watermark CSS contra print screen */}
+                {/* CSS watermark against print screen */}
                 <div className="absolute inset-0 pointer-events-none" style={{
                   background: 'repeating-linear-gradient(45deg, transparent, transparent 100px, rgba(255,255,255,0.02) 100px, rgba(255,255,255,0.02) 101px)',
                 }}>
@@ -236,7 +236,7 @@ export default function ClientFinalAlbumView() {
               draggable={false}
               onContextMenu={(e) => e.preventDefault()}
             />
-            {/* Watermark no lightbox */}
+            {/* Lightbox watermark */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
               <div className="text-white/10 text-8xl font-bold rotate-[-45deg] select-none">
                 LIROLLA.COM
@@ -254,9 +254,9 @@ export default function ClientFinalAlbumView() {
       <Dialog open={showShareDialog} onOpenChange={setShowShareDialog}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Compartilhar Album</DialogTitle>
+            <DialogTitle>Share Album</DialogTitle>
             <DialogDescription>
-              Compartilhe your album com amigos e family!
+              Share your album with friends and family!
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
@@ -265,7 +265,7 @@ export default function ClientFinalAlbumView() {
             </div>
             <div className="flex gap-2">
               <Button onClick={copyShareLink} className="flex-1">
-                Copiar Link
+                Copy Link
               </Button>
               <Button
                 variant="outline"

@@ -72,7 +72,7 @@ export default function ClientDashboard() {
     session_done: { label: "Session Completed", color: "text-green-500", icon: Camera, step: 3 },
     editing: { label: "Photos in Editing", color: "text-purple-500", icon: ImageIcon, step: 4 },
     awaiting_selection: { label: "Awaiting Selection", color: "text-orange-500", icon: ImageIcon, step: 5 },
-    final_editing: { label: "Editando Shecionadas", color: "text-purple-500", icon: ImageIcon, step: 6 },
+    final_editing: { label: "Editing Selected", color: "text-purple-500", icon: ImageIcon, step: 6 },
     delivered: { label: "Delivered", color: "text-green-600", icon: CheckCircle2, step: 7 },
   };
 
@@ -84,8 +84,8 @@ export default function ClientDashboard() {
       <div className="max-w-6xl mx-auto space-y-8">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold mb-2">Bem-vindo!</h1>
-          <p className="text-gray-400">Acompanhe o andamento do your projeto photography</p>
+          <h1 className="text-2xl font-bold mb-2">Welcome!</h1>
+          <p className="text-gray-400">Track the progress of your photography project</p>
         </div>
         
         {/* Complete Profile Alert */}
@@ -102,7 +102,7 @@ export default function ClientDashboard() {
                 className="ml-4 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black"
                 onClick={() => setShowProfileDialog(true)}
               >
-                Completer now
+                Complete Now
               </Button>
             </AlertDescription>
           </Alert>
@@ -124,7 +124,7 @@ export default function ClientDashboard() {
               <StatusIcon className="h-6 w-6" />
             </div>
             <div>
-              <h2 className="text-xl font-semibold">Status do Project</h2>
+              <h2 className="text-lg font-semibold">Project Status</h2>
               <p className={`text-lg ${currentStatus.color}`}>{currentStatus.label}</p>
             </div>
           </div>
@@ -132,7 +132,7 @@ export default function ClientDashboard() {
           {/* Progress Bar */}
           <div className="mb-6">
             <div className="flex justify-between mb-2 text-sm text-gray-400">
-              <span>Progresso</span>
+              <span>Progress</span>
               <span>{Math.round((currentStatus.step / 7) * 100)}%</span>
             </div>
             <div className="w-full bg-gray-800 rounded-full h-2">
@@ -164,23 +164,23 @@ export default function ClientDashboard() {
 
         {/* Appointment Details */}
         <Card className="bg-gray-900 border-gray-800 p-6">
-          <h3 className="text-xl font-semibold mb-4">Details do Agendamento</h3>
+          <h3 className="text-lg font-semibold mb-4">Booking Details</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <p className="text-sm text-gray-400">Service</p>
               <p className="text-white font-medium">{appointment.serviceName || "Not specified"}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-400">Data e Hour</p>
+              <p className="text-sm text-gray-400">Date & Time</p>
               <p className="text-white font-medium">
                 {appointment.date && appointment.time 
                   ? `${new Date(appointment.date).toLocaleDateString('en-GB')} at ${appointment.time}`
-                  : "A definir"}
+                  : "To be confirmed"}
               </p>
             </div>
             <div>
-              <p className="text-sm text-gray-400">Local</p>
-              <p className="text-white font-medium">{appointment.location || "A definir"}</p>
+              <p className="text-sm text-gray-400">Location</p>
+              <p className="text-white font-medium">{appointment.location || "To be confirmed"}</p>
             </div>
             <div>
               <p className="text-sm text-gray-400">Number of People</p>
@@ -196,7 +196,7 @@ export default function ClientDashboard() {
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <ImageIcon className="h-8 w-8 text-red-600 mb-3" />
                 <h3 className="font-semibold mb-1">Gallery</h3>
-                <p className="text-sm text-gray-400">Ver e shecionar fotos</p>
+                <p className="text-sm text-gray-400">View and select photos</p>
               </Card>
             </a>
           </Link>
@@ -221,7 +221,7 @@ export default function ClientDashboard() {
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <CreditCard className="h-8 w-8 text-red-600 mb-3" />
                 <h3 className="font-semibold mb-1">Payments</h3>
-                <p className="text-sm text-gray-400">Ver pagamentos e recibos</p>
+                <p className="text-sm text-gray-400">View payments and receipts</p>
               </Card>
             </a>
           </Link>
@@ -231,7 +231,7 @@ export default function ClientDashboard() {
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <Calendar className="h-8 w-8 text-red-600 mb-3" />
                 <h3 className="font-semibold mb-1">Contract</h3>
-                <p className="text-sm text-gray-400">Ver contrato signed</p>
+                <p className="text-sm text-gray-400">View signed contract</p>
               </Card>
             </a>
           </Link>
@@ -249,24 +249,24 @@ export default function ClientDashboard() {
 
         {/* Next Steps */}
         <Card className="bg-gradient-to-r from-red-900/20 to-gray-900 border-red-600 p-6">
-          <h3 className="text-xl font-semibold mb-3">Nexts Steps</h3>
+          <h3 className="text-lg font-semibold mb-3">Next Steps</h3>
           {appointment.status === 'pending' && (
             <p className="text-gray-300">Awaiting confirmation from the photographer. You will receive a notification shortly!</p>
           )}
           {appointment.status === 'confirmed' && (
-            <p className="text-gray-300">Your ensaio is confirmado para {appointment.date && new Date(appointment.date).toLocaleDateString('en-GB')}. Prepare-se!</p>
+            <p className="text-gray-300">Your session is confirmed for {appointment.date && new Date(appointment.date).toLocaleDateString('en-GB')}. Get ready!</p>
           )}
           {appointment.status === 'session_done' && (
             <p className="text-gray-300">Session completed! The photos are being edited. You will soon be able to view them.</p>
           )}
           {appointment.status === 'awaiting_selection' && (
-            <p className="text-gray-300">Your photos are ready! Acesse a <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link> para shecionar yours favourite.</p>
+            <p className="text-gray-300">Your photos are ready! Go to the <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">gallery</a></Link> to select your favourites.</p>
           )}
           {appointment.status === 'final_editing' && (
-            <p className="text-gray-300">Yours fotos shecionadas are sendo edited. Aguarde a entrega final!</p>
+            <p className="text-gray-300">Your selected photos are being edited. Please wait for the final delivery!</p>
           )}
           {appointment.status === 'delivered' && (
-            <p className="text-gray-300">Project completed! Yours fotos are available para download na <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link>.</p>
+            <p className="text-gray-300">Project completed! Your photos are available for download in the <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">gallery</a></Link>.</p>
           )}
         </Card>
       </div>

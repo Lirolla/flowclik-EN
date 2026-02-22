@@ -29,7 +29,7 @@ export default function ClientFinalAlbum() {
     onSuccess: () => {
       toast({
         title: "Album approved!",
-        description: "Yours fotos edited were approveds com sucesso.",
+        description: "Your edited photos have been approved successfully.",
       });
       refetch();
     },
@@ -62,8 +62,8 @@ export default function ClientFinalAlbum() {
 
     setIsDownloading(true);
     toast({
-      title: "Preparando download...",
-      description: `Baixando ${downloadUrls.length} fotos. Please wait...`,
+      title: "Preparing download...",
+      description: `Downloading ${downloadUrls.length} photos. Please wait...`,
     });
 
     try {
@@ -80,7 +80,7 @@ export default function ClientFinalAlbum() {
           const filename = `${i + 1}-${photo.filename.replace(/[^a-z0-9]/gi, '-')}.${extension}`;
           zip.file(filename, blob);
         } catch (error) {
-          console.error(`Erro ao baixar foto ${photo.filename}:`, error);
+          console.error(`Error downloading photo ${photo.filename}:`, error);
         }
       }
 
@@ -91,7 +91,7 @@ export default function ClientFinalAlbum() {
       const url = window.URL.createObjectURL(content);
       const link = document.createElement('a');
       link.href = url;
-      link.download = `${collection?.name || 'album'}-fotos-edited.zip`;
+      link.download = `${collection?.name || 'album'}-edited-photos.zip`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -99,13 +99,13 @@ export default function ClientFinalAlbum() {
 
       toast({
         title: "Download completed!",
-        description: `${downloadUrls.length} fotos baixadas com sucesso.`,
+        description: `${downloadUrls.length} photos downloaded successfully.`,
       });
     } catch (error) {
-      console.error('Erro ao criar ZIP:', error);
+      console.error('Error creating ZIP:', error);
       toast({
-        title: "Erro no download",
-        description: "Ocorreu um erro ao preparar o arquivo. Try again.",
+        title: "Download error",
+        description: "An error occurred while preparing the file. Please try again.",
         variant: "destructive",
       });
     } finally {
@@ -128,7 +128,7 @@ export default function ClientFinalAlbum() {
         <Link href="/">
           <Button variant="outline">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Voltar para start
+            Back to home
           </Button>
         </Link>
       </div>
@@ -151,12 +151,12 @@ export default function ClientFinalAlbum() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="w-full max-w-md p-8 bg-card rounded-lg border">
           <h1 className="text-2xl font-bold mb-2">Final Album</h1>
-          <p className="text-muted-foreground mb-6">Este album is protegido por senha</p>
+          <p className="text-muted-foreground mb-6">This album is password protected</p>
           
           <form onSubmit={handlePasswordSubmit} className="space-y-4">
             <div>
               <label htmlFor="password" className="block text-sm font-medium mb-2">
-                Digite a senha
+                Enter the password
               </label>
               <input
                 type="password"
@@ -173,14 +173,14 @@ export default function ClientFinalAlbum() {
             </div>
             
             <Button type="submit" className="w-full">
-              Acessar Album
+              Access Album
             </Button>
           </form>
           
           <Link href="/" className="block mt-4">
             <Button variant="outline" className="w-full">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Voltar
+              Back
             </Button>
           </Link>
         </div>
@@ -215,7 +215,7 @@ export default function ClientFinalAlbum() {
   const handleApproveAlbum = async () => {
     if (!allPhotosEdited) {
       toast({
-        title: "Aguarde",
+        title: "Please wait",
         description: "Some photos are still being edited.",
         variant: "destructive",
       });
@@ -229,7 +229,7 @@ export default function ClientFinalAlbum() {
 
   return (
     <div className="min-h-screen bg-background">
-      <PublicNavbar currentPage="galerias" />
+      <PublicNavbar currentPage="galleries" />
 
       <div className="container py-8 pt-32">
         {/* Header */}
@@ -237,7 +237,7 @@ export default function ClientFinalAlbum() {
           <Link href="/galleries">
             <Button variant="ghost" className="mb-4">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Voltar para galerias
+              Back to galleries
             </Button>
           </Link>
           
@@ -251,7 +251,7 @@ export default function ClientFinalAlbum() {
             <div>
               <h2 className="text-xl font-semibold mb-1">Final Album - Edited Photos</h2>
               <p className="text-sm text-muted-foreground">
-                {completedCount} de {photos.length} fotos edited
+                {completedCount} of {photos.length} photos edited
               </p>
             </div>
               <div className="flex items-center gap-3">
@@ -267,18 +267,18 @@ export default function ClientFinalAlbum() {
                       {isDownloading ? (
                         <>
                           <Package className="w-5 h-5 animate-pulse" />
-                          Preparando...
+                          Preparing...
                         </>
                       ) : (
                         <>
                           <Download className="w-5 h-5" />
-                          Baixar Everys as Fotos
+                          Download All Photos
                         </>
                       )}
                     </Button>
                     <Button onClick={handleApproveAlbum} size="lg" className="gap-2">
                       <CheckCircle2 className="w-5 h-5" />
-                      Aprovar Album Complete
+                      Approve Complete Album
                     </Button>
                     <Button 
                       onClick={() => setShowShareDialog(true)} 
@@ -287,7 +287,7 @@ export default function ClientFinalAlbum() {
                       className="gap-2"
                     >
                       <Share2 className="w-5 h-5" />
-                      Compartilhar Album
+                      Share Album
                     </Button>
                   </>
                 )}
@@ -306,7 +306,7 @@ export default function ClientFinalAlbum() {
         {/* Photos Grid */}
         {photos.length === 0 ? (
           <div className="text-center py-12 bg-card rounded-lg border">
-            <p className="text-muted-foreground">Nenhuma foto shecionada para editing still.</p>
+            <p className="text-muted-foreground">No photos selected for editing yet.</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -383,20 +383,20 @@ export default function ClientFinalAlbum() {
                       </h3>
                       {photos[lightboxIndex].clientFeedback && (
                         <div className="bg-white/10 rounded-lg p-4 mb-4">
-                          <p className="text-sm text-white/80 mb-1">Your palpite:</p>
+                          <p className="text-sm text-white/80 mb-1">Your feedback:</p>
                           <p className="text-white">{photos[lightboxIndex].clientFeedback}</p>
                         </div>
                       )}
                       <div className="flex items-center justify-center gap-2 text-green-400">
                         <Check className="w-5 h-5" />
-                        <span>Foto edited</span>
+                        <span>Photo edited</span>
                       </div>
                     </div>
                   </>
                 ) : (
                   <div className="text-center text-white">
-                    <p className="text-lg mb-2">Esta foto still is sendo edited</p>
-                    <p className="text-sm text-white/60">Aguarde o photographer finalizar</p>
+                    <p className="text-lg mb-2">This photo is still being edited</p>
+                    <p className="text-sm text-white/60">Please wait for the photographer to finish</p>
                   </div>
                 )}
               </div>
@@ -418,7 +418,7 @@ export default function ClientFinalAlbum() {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Share2 className="w-5 h-5" />
-              Compartilhar Album
+              Share Album
             </DialogTitle>
             <DialogDescription>
               Share this album with friends and family! They will need to provide their email to view it.
@@ -427,7 +427,7 @@ export default function ClientFinalAlbum() {
           
           <div className="space-y-4">
             <div>
-              <label className="text-sm font-medium mb-2 block">Link do album</label>
+              <label className="text-sm font-medium mb-2 block">Album link</label>
               <div className="flex gap-2">
                 <Input 
                   value={shareLink} 
@@ -439,7 +439,7 @@ export default function ClientFinalAlbum() {
                     navigator.clipboard.writeText(shareLink);
                     toast({
                       title: "Link copied!",
-                      description: "O link foi copiado para a area de transfer.",
+                      description: "The link has been copied to your clipboard.",
                     });
                   }}
                   variant="outline"

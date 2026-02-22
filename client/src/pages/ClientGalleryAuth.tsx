@@ -18,7 +18,7 @@ export default function ClientGalleryAuth() {
   const [comment, setComment] = useState("");
   const { toast } = useToast();
 
-  // Buscar dados do agendamento para pegar o email do cliente
+  // Fetch appointment data to get client email
   const { data: appointment } = trpc.appointments.getById.useQuery(
     { id: appointmentId },
     { enabled: appointmentId > 0 }
@@ -45,7 +45,7 @@ export default function ClientGalleryAuth() {
     onSuccess: () => {
       refetch();
       toast({
-        title: "Favourite atualizada!",
+        title: "Favourite updated!",
         description: "Your selection has been saved.",
       });
     },
@@ -65,7 +65,7 @@ export default function ClientGalleryAuth() {
       setSelectedPhoto(null);
       toast({
         title: "Comment added!",
-        description: "Your feedback foi salvo.",
+        description: "Your feedback has been saved.",
       });
     },
     onError: (error) => {
@@ -101,8 +101,8 @@ export default function ClientGalleryAuth() {
     
     // Create ZIP and download
     toast({
-      title: "Download iniciado",
-      description: "Preparando yours fotos para download...",
+      title: "Download started",
+      description: "Preparing your photos for download...",
     });
     
     // TODO: Implement ZIP download
@@ -126,7 +126,7 @@ export default function ClientGalleryAuth() {
           <AlertCircle className="h-12 w-12 text-yellow-600 mx-auto mb-4" />
           <h2 className="text-2xl font-semibold mb-2">Gallery not available</h2>
           <p className="text-gray-400">
-            Yours fotos still not were enviadas pelo photographer.
+            Your photos have not been uploaded by the photographer yet.
           </p>
         </div>
       </ClientLayout>
@@ -159,12 +159,12 @@ export default function ClientGalleryAuth() {
               {canDownload ? (
                 <>
                   <Unlock className="h-5 w-5 text-green-500" />
-                  <span className="text-green-500 font-medium">Download Liberado</span>
+                  <span className="text-green-500 font-medium">Download Enabled</span>
                 </>
               ) : (
                 <>
                   <Lock className="h-5 w-5 text-yellow-500" />
-                  <span className="text-yellow-500 font-medium">Download Bloqueado</span>
+                  <span className="text-yellow-500 font-medium">Download Locked</span>
                 </>
               )}
             </div>
@@ -176,7 +176,7 @@ export default function ClientGalleryAuth() {
                 className="bg-red-600 hover:bg-red-700"
               >
                 <Download className="h-4 w-4 mr-2" />
-                Baixar Everys ({photos.length})
+                Download All ({photos.length})
               </Button>
             )}
           </div>
@@ -222,13 +222,13 @@ export default function ClientGalleryAuth() {
                 {canDownload ? (
                   <img
                     src={photo.thumbnailUrl || photo.originalUrl}
-                    alt={`Foto ${photo.id}`}
+                    alt={`Photo ${photo.id}`}
                     className="w-full aspect-square object-cover"
                   />
                 ) : (
                   <ProtectedImage
                     src={photo.thumbnailUrl || photo.originalUrl}
-                    alt={`Foto ${photo.id}`}
+                    alt={`Photo ${photo.id}`}
                     watermarkText="LIROLLA - PREVIEW"
                   />
                 )}
@@ -289,7 +289,7 @@ export default function ClientGalleryAuth() {
           <DialogContent className="max-w-4xl bg-gray-900 border-gray-800">
             <DialogHeader>
               <DialogTitle className="flex items-center justify-between">
-                <span>Foto #{selectedPhoto?.id}</span>
+                <span>Photo #{selectedPhoto?.id}</span>
                 <Button
                   size="icon"
                   variant="ghost"
@@ -307,13 +307,13 @@ export default function ClientGalleryAuth() {
                   canDownload ? (
                     <img
                       src={selectedPhoto.thumbnailUrl || selectedPhoto.originalUrl}
-                      alt={`Foto ${selectedPhoto.id}`}
+                      alt={`Photo ${selectedPhoto.id}`}
                       className="w-full rounded-lg"
                     />
                   ) : (
                     <ProtectedImage
                       src={selectedPhoto.thumbnailUrl || selectedPhoto.originalUrl}
-                      alt={`Foto ${selectedPhoto.id}`}
+                      alt={`Photo ${selectedPhoto.id}`}
                       watermarkText="LIROLLA - PREVIEW"
                     />
                   )
@@ -335,7 +335,7 @@ export default function ClientGalleryAuth() {
                       selectedPhoto?.isFavorite ? 'fill-white' : ''
                     }`}
                   />
-                  {selectedPhoto?.isFavorite ? 'Remover dos Favoritos' : 'Add aos Favoritos'}
+                  {selectedPhoto?.isFavorite ? 'Remove from Favourites' : 'Add to Favourites'}
                 </Button>
               </div>
 
@@ -366,7 +366,7 @@ export default function ClientGalleryAuth() {
                 {/* Add Comment */}
                 <div className="space-y-2">
                   <Textarea
-                    placeholder="Deixe um comment about esta foto..."
+                    placeholder="Leave a comment about this photo..."
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                     rows={3}

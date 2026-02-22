@@ -60,7 +60,7 @@ export default function ClientPayments() {
                 <div>
                   <h2 className="text-2xl font-semibold text-green-500">Payment Confirmed</h2>
                   <p className="text-gray-300 mt-1">
-                    Pagamento realizado em {appointment.paidAt && new Date(appointment.paidAt).toLocaleDateString('en-GB')}
+                    Payment made on {appointment.paidAt && new Date(appointment.paidAt).toLocaleDateString('en-GB')}
                   </p>
                 </div>
               </>
@@ -70,7 +70,7 @@ export default function ClientPayments() {
                 <div>
                   <h2 className="text-2xl font-semibold text-yellow-500">Payment Pending</h2>
                   <p className="text-gray-300 mt-1">
-                    Awaiting confirmation do pagamento
+                    Awaiting payment confirmation
                   </p>
                 </div>
               </>
@@ -82,7 +82,7 @@ export default function ClientPayments() {
         <Card className="bg-gray-900 border-gray-800 p-6">
           <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
             <CreditCard className="h-5 w-5" />
-            Details do Pagamento
+            Payment Details
           </h3>
           
           <div className="space-y-4">
@@ -95,7 +95,7 @@ export default function ClientPayments() {
 
             {extras.length > 0 && (
               <div className="pb-4 border-b border-gray-800">
-                <div className="text-gray-400 mb-2">Services Extras:</div>
+                <div className="text-gray-400 mb-2">Extra Services:</div>
                 <div className="space-y-2 ml-4">
                   {extras.map((extra) => (
                     <div key={extra.id} className="flex justify-between items-center">
@@ -108,14 +108,14 @@ export default function ClientPayments() {
             )}
 
             <div className="flex justify-between items-center pb-4 border-b border-gray-800">
-              <span className="text-gray-400 font-bold">Valor Total</span>
+              <span className="text-gray-400 font-bold">Total Amount</span>
               <span className="font-semibold text-xl">
                 £{(finalPrice / 100).toFixed(2)}
               </span>
             </div>
 
             <div className="flex justify-between items-center pb-4 border-b border-gray-800">
-              <span className="text-gray-400">Valor Pago</span>
+              <span className="text-gray-400">Amount Paid</span>
               <span className={`font-semibold ${isPaid ? 'text-green-500' : 'text-yellow-500'}`}>
                 £{(paidAmount / 100).toFixed(2)}
               </span>
@@ -123,7 +123,7 @@ export default function ClientPayments() {
 
             {!isPaid && remaining > 0 && (
               <div className="flex justify-between items-center pb-4 border-b border-gray-800">
-                <span className="text-gray-400">Saldo Restante</span>
+                <span className="text-gray-400">Remaining Balance</span>
                 <span className="font-semibold text-red-500">
                   £{(remaining / 100).toFixed(2)}
                 </span>
@@ -166,7 +166,7 @@ export default function ClientPayments() {
 
             {!isPaid && (
               <div className="text-center py-8 text-gray-400">
-                <p>None pagamento registrado still</p>
+                <p>No payment recorded yet</p>
               </div>
             )}
           </div>
@@ -176,8 +176,8 @@ export default function ClientPayments() {
         {!isPaid && (
           <Card className="bg-blue-900/20 border-blue-600 p-6">
             <p className="text-gray-300">
-              <strong>Precisa de help com o pagamento?</strong><br />
-              Get in touch com o photographer through do <a href={`/client/chat/${appointmentId}`} className="text-red-400 underline">chat</a> para combinar a better forma de pagamento.
+              <strong>Need help with payment?</strong><br />
+              Get in touch with the photographer via <a href={`/client/chat/${appointmentId}`} className="text-red-400 underline">chat</a> to arrange the best payment method.
             </p>
           </Card>
         )}
