@@ -36,7 +36,7 @@ import { finalAlbumsRouter } from './routers/finalAlbums';
 import { usageRouter } from './routers/usage';
 import { photoSalesRouter } from './routers/photoSales';
 import { supportTicketsRouter } from './routers/supportTickets';
-import { sistemaRouter } from './routers/system';
+import { sistemaRouter } from './routers/sistema';
 import { customAuthRouter } from './routers/customAuth';
 import { systemRouter as adminSystemRouter } from './routers/system';
 import { saasSystemRouter } from './routers/saasSystem';
