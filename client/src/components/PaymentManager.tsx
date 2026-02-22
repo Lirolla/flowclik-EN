@@ -32,7 +32,7 @@ export default function PaymentManager({
   const [isPaymentDialogOpen, setIsPaymentDialogOpen] = useState(false);
   const [isRecordPaymentOpen, setIsRecordPaymentOpen] = useState(false);
   const [isAddExtraOpen, setIsAddExtraOpen] = useState(false);
-  const [paymentMethod, setPaymentMethod] = useState<"cash" | "bank_transfer" | "pix" | "payment_link">("cash");
+  const [paymentMethod, setPaymentMethod] = useState<"cash" | "bank_transfer" | "payment_link">("cash");
   const [paymentAmount, setPaymentAmount] = useState("");
   const [paymentNotes, setPaymentNotes] = useState("");
   const [extraDescription, setExtraDescription] = useState("");
@@ -270,7 +270,7 @@ export default function PaymentManager({
               onValueChange={(value) => {
                 updatePaymentMethodMutation.mutate({
                   appointmentId,
-                  paymentMethod: value as "cash" | "bank_transfer" | "pix" | "payment_link",
+                  paymentMethod: value as "cash" | "bank_transfer" | "payment_link",
                 });
               }}
             >
@@ -294,14 +294,6 @@ export default function PaymentManager({
                     </div>
                   </SelectItem>
                 )}
-                {availableMethods?.pix && (
-                  <SelectItem value="pix">
-                    <div className="flex items-center gap-2">
-                      <QrCode className="w-4 h-4" />
-                      PIX
-                    </div>
-                  </SelectItem>
-                )}
                 <SelectItem value="payment_link">
                   <div className="flex items-center gap-2">
                     <Link2 className="w-4 h-4" />
@@ -321,12 +313,6 @@ export default function PaymentManager({
               <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded text-sm">
                 <p className="font-medium mb-1">Bank details:</p>
                 <pre className="whitespace-pre-wrap text-xs">{availableMethods.bankDetails}</pre>
-              </div>
-            )}
-            {currentMethod === "pix" && availableMethods?.pixKey && (
-              <div className="mt-2 p-3 bg-green-50 border border-green-200 rounded text-sm">
-                <p className="font-medium mb-1">PIX Key:</p>
-                <p className="text-sm font-mono">{availableMethods.pixKey}</p>
               </div>
             )}
             {currentMethod === "payment_link" && (
@@ -435,14 +421,6 @@ export default function PaymentManager({
                       <div className="flex items-center gap-2">
                         <Building2 className="w-4 h-4" />
                         Bank Transfer
-                      </div>
-                    </SelectItem>
-                  )}
-                  {availableMethods?.pix && (
-                    <SelectItem value="pix">
-                      <div className="flex items-center gap-2">
-                        <QrCode className="w-4 h-4" />
-                        PIX
                       </div>
                     </SelectItem>
                   )}
