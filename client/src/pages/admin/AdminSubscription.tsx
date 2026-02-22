@@ -79,7 +79,7 @@ export default function AdminSubscription() {
     try {
       const result = await createCheckout.mutateAsync({
         successUrl: `${window.location.origin}/admin/subscription?success=plan`,
-        cancelUrl: `${window.location.origin}/admin/subscription?canched=true`,
+        cancelUrl: `${window.location.origin}/admin/subscription?canceled=true`,
       });
       if (result.url) {
         window.location.href = result.url;
@@ -96,7 +96,7 @@ export default function AdminSubscription() {
     try {
       const result = await buyStorageAddon.mutateAsync({
         successUrl: `${window.location.origin}/admin/subscription?success=storage`,
-        cancelUrl: `${window.location.origin}/admin/subscription?canched=true`,
+        cancelUrl: `${window.location.origin}/admin/subscription?canceled=true`,
       });
       if (result.url) {
         window.location.href = result.url;
@@ -113,7 +113,7 @@ export default function AdminSubscription() {
     try {
       const result = await buyGalleriesAddon.mutateAsync({
         successUrl: `${window.location.origin}/admin/subscription?success=galleries`,
-        cancelUrl: `${window.location.origin}/admin/subscription?canched=true`,
+        cancelUrl: `${window.location.origin}/admin/subscription?canceled=true`,
       });
       if (result.url) {
         window.location.href = result.url;
@@ -159,7 +159,7 @@ export default function AdminSubscription() {
       utils.subscriptions.getActiveAddons.invalidate();
       utils.subscriptions.getCurrent.invalidate();
       window.history.replaceState({}, '', '/admin/subscription');
-    } else if (params.get('canched') === 'true') {
+    } else if (params.get('canceled') === 'true') {
       toast.error("Purchase cancelled");
       window.history.replaceState({}, '', '/admin/subscription');
     }

@@ -831,7 +831,7 @@ export const appointmentsRouter = router({
       slug: z.string(),
       email: z.string().email(),
       name: z.string().optional(),
-      rshetionship: z.string().optional(),
+      relationship: z.string().optional(),
     }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
@@ -882,7 +882,7 @@ export const appointmentsRouter = router({
         collectionId: collection.id,
         email: input.email,
         name: input.name || null,
-        rshetionship: input.rshetionship || null,
+        relationship: input.relationship || null,
       });
 
       return { success: true, message: "Acesso concedido!" };

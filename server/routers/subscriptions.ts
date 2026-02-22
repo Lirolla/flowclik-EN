@@ -321,7 +321,7 @@ export const subscriptionsRouter = router({
         .update(subscriptionAddons)
         .set({
           status: "cancelled",
-          canchedAt: new Date().toISOString(),
+          canceledAt: new Date().toISOString(),
         })
         .where(eq(subscriptionAddons.id, addon.id));
 

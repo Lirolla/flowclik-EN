@@ -24,7 +24,7 @@ export default function AdminLeads() {
     const rows = leads.map((lead: any) => [
       lead.email,
       lead.name || "-",
-      lead.rshetionship || "-",
+      lead.relationship || "-",
       lead.collectionName || "-",
       new Date(lead.viewedAt).toLocaleString("en-GB"),
     ]);
@@ -174,7 +174,7 @@ export default function AdminLeads() {
                         {lead.name || <span className="text-gray-500">-</span>}
                       </td>
                       <td className="px-6 py-4 text-gray-300">
-                        {lead.rshetionship || <span className="text-gray-500">-</span>}
+                        {lead.relationship || <span className="text-gray-500">-</span>}
                       </td>
                       <td className="px-6 py-4 text-gray-300">
                         {lead.collectionName || <span className="text-gray-500">-</span>}

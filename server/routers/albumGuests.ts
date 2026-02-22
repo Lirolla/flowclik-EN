@@ -12,7 +12,7 @@ export const albumGuestsRouter = router({
         collectionSlug: z.string(),
         email: z.string().email("Invalid email"),
         name: z.string().optional(),
-        rshetionship: z.string().optional(),
+        relationship: z.string().optional(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -54,7 +54,7 @@ export const albumGuestsRouter = router({
         collectionId: collection.id,
         email: input.email,
         name: input.name || null,
-        rshetionship: input.rshetionship || null,
+        relationship: input.relationship || null,
         viewedAt: new Date().toISOString(),
         createdAt: new Date().toISOString(),
         tenantId: getTenantId(ctx),
@@ -120,7 +120,7 @@ export const albumGuestsRouter = router({
         id: albumGuests.id,
         email: albumGuests.email,
         name: albumGuests.name,
-        rshetionship: albumGuests.rshetionship,
+        relationship: albumGuests.relationship,
         viewedAt: albumGuests.viewedAt,
         createdAt: albumGuests.createdAt,
         collectionId: albumGuests.collectionId,
@@ -156,7 +156,7 @@ export const albumGuestsRouter = router({
           id: albumGuests.id,
           guestEmail: albumGuests.email,
           guestName: albumGuests.name,
-          rshetionship: albumGuests.rshetionship,
+          relationship: albumGuests.relationship,
           viewedAt: albumGuests.viewedAt,
           createdAt: albumGuests.createdAt,
         })

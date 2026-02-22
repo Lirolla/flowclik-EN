@@ -18,7 +18,7 @@ export default function SharedAlbum() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [rshetionship, setRshetionship] = useState("");
+  const [relationship, setRelationship] = useState("");
 
   const registerGuestMutation = trpc.appointments.registerGuest.useMutation({
     onSuccess: () => {
@@ -46,7 +46,7 @@ export default function SharedAlbum() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted!', { email, name, rshetionship, slug });
+    console.log('Form submitted!', { email, name, relationship, slug });
     
     if (!email) {
       toast({
@@ -61,7 +61,7 @@ export default function SharedAlbum() {
       slug,
       email,
       name: name || undefined,
-      rshetionship: rshetionship || undefined,
+      relationship: relationship || undefined,
     });
   };
 
@@ -108,13 +108,13 @@ export default function SharedAlbum() {
             </div>
 
             <div>
-              <Label htmlFor="rshetionship" className="text-white">Section (optional)</Label>
+              <Label htmlFor="relationship" className="text-white">Section (optional)</Label>
               <Input
-                id="rshetionship"
+                id="relationship"
                 type="text"
                 placeholder="Ex: Amigo, Family, Colega"
-                value={rshetionship}
-                onChange={(e) => setRshetionship(e.target.value)}
+                value={relationship}
+                onChange={(e) => setRelationship(e.target.value)}
                 className="bg-gray-800 border-gray-700 text-white"
               />
             </div>

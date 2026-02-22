@@ -225,7 +225,7 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
       .update(subscriptionAddons)
       .set({
         status: "cancelled",
-        canchedAt: new Date().toISOString(),
+        canceledAt: new Date().toISOString(),
       })
       .where(eq(subscriptionAddons.id, addon.id));
 
@@ -243,7 +243,7 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
         .update(subscriptions)
         .set({
           status: "cancelled",
-          canchedAt: new Date().toISOString(),
+          canceledAt: new Date().toISOString(),
         })
         .where(eq(subscriptions.id, mainSub.id));
     }
@@ -359,7 +359,7 @@ function mapStripeStatus(stripeStatus: string): "active" | "past_due" | "cancell
   switch (stripeStatus) {
     case "active": return "active";
     case "past_due": return "past_due";
-    case "canched":
+    case "canceled":
     case "cancelled": return "cancelled";
     case "paused": return "paused";
     case "trialing": return "trialing";
