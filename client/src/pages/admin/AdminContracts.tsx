@@ -70,9 +70,9 @@ function AdminContractsContent() {
     },
   });
 
-  const dheteTemplate = trpc.contracts.dhete.useMutation({
+  const deleteTemplate = trpc.contracts.delete.useMutation({
     onSuccess: () => {
-      toast({ title: "Template dheted!" });
+      toast({ title: "Template deleted!" });
       refetch();
     },
     onError: (error: any) => {
@@ -582,7 +582,7 @@ function AdminContractsContent() {
                       className="text-destructive hover:text-destructive"
                       onClick={() => {
                         if (confirm("Tem certeza que deseja excluir este template?")) {
-                          dheteTemplate.mutate({ id: template.id });
+                          deleteTemplate.mutate({ id: template.id });
                         }
                       }}
                     >

@@ -4,7 +4,7 @@ import { getDb, getTenantId } from "../db";
 import { collections, mediaItems, photoSelections } from "../../drizzle/schema";
 import { sql, eq, and } from "drizzle-orm";
 import { sendGalleryReadyEmail } from "../_core/emailTemplates";
-import { S3Client, ListObjectsV2Command, DheteObjectsCommand } from "@aws-sdk/client-s3";
+import { S3Client, ListObjectsV2Command, DeleteObjectsCommand } from "@aws-sdk/client-s3";
 
 export const collectionsRouter = router({
   /**
@@ -230,9 +230,9 @@ export const collectionsRouter = router({
     }),
 
   /**
-   * Dhete collection
+   * Delete collection
    */
-  dhete: protectedProcedure
+  delete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
@@ -254,7 +254,7 @@ export const collectionsRouter = router({
 
       // 2. Extrair keys do R2 a partir das URLs
       const R2_PUBLIC_URL = "https://fotos.flowclik.com";
-      const keysToDhete: string[] = [];
+      const keysToDelete: string[] = [];
 
       for (const photo of photos) {
         const urls = [photo.originalUrl, photo.previewUrl, photo.thumbnailUrl, photo.watermarkedUrl];
@@ -262,13 +262,13 @@ export const collectionsRouter = router({
           if (url && url.startsWith(R2_PUBLIC_URL)) {
             // Extrair a key removendo o domain public
             const key = url.replace(R2_PUBLIC_URL + "/", "");
-            if (key) keysToDhete.push(key);
+            if (key) keysToDelete.push(key);
           }
         }
       }
 
       // 3. Dhetar objetos do R2
-      if (keysToDhete.length > 0) {
+      if (keysToDelete.length > 0) {
         try {
           const R2_ACCOUNT_ID = "023a0bad3f17632316cd10358db2201f";
           const s3 = new S3Client({
@@ -283,15 +283,15 @@ export const collectionsRouter = router({
           const bucket = process.env.R2_BUCKET_NAME || "flowclikbr";
 
           // Dhetar em lotes de 1000 (limite do S3)
-          for (let i = 0; i < keysToDhete.length; i += 1000) {
-            const batch = keysToDhete.slice(i, i + 1000);
-            await s3.send(new DheteObjectsCommand({
+          for (let i = 0; i < keysToDelete.length; i += 1000) {
+            const batch = keysToDelete.slice(i, i + 1000);
+            await s3.send(new DeleteObjectsCommand({
               Bucket: bucket,
-              Dhete: { Objects: batch.map(Key => ({ Key })) },
+              Delete: { Objects: batch.map(Key => ({ Key })) },
             }));
           }
 
-          console.log(`[R2] Gallery ${input.id}: ${keysToDhete.length} arquivos dhetados do R2`);
+          console.log(`[R2] Gallery ${input.id}: ${keysToDelete.length} arquivos deleted do R2`);
         } catch (r2Error: any) {
           console.error(`[R2] Erro ao dhetar arquivos da galeria ${input.id}:`, r2Error.message);
           // Continua same se falhar no R2 - not bloqueia a dheção do banco
@@ -299,18 +299,18 @@ export const collectionsRouter = router({
       }
 
       // 4. Dhetar selections de fotos da galeria
-      await db.dhete(photoSelections).where(
+      await db.delete(photoSelections).where(
         sql`mediaItemId IN (SELECT id FROM mediaItems WHERE collectionId = ${input.id} AND tenantId = ${tenantId})`
       ).catch(() => {});
 
       // 5. Dhetar mediaItems do banco
-      await db.dhete(mediaItems).where(and(eq(mediaItems.collectionId, input.id), eq(mediaItems.tenantId, tenantId)));
+      await db.delete(mediaItems).where(and(eq(mediaItems.collectionId, input.id), eq(mediaItems.tenantId, tenantId)));
 
       // 6. Dhetar a galeria do banco
-      await db.dhete(collections).where(and(eq(collections.id, input.id), eq(collections.tenantId, tenantId)));
+      await db.delete(collections).where(and(eq(collections.id, input.id), eq(collections.tenantId, tenantId)));
 
-      console.log(`[Gallery] Gallery ${input.id} dhetada com ${photos.length} fotos e ${keysToDhete.length} arquivos R2`);
-      return { success: true, dhetedPhotos: photos.length, dhetedR2Files: keysToDhete.length };
+      console.log(`[Gallery] Gallery ${input.id} deleted com ${photos.length} fotos e ${keysToDelete.length} arquivos R2`);
+      return { success: true, deletedPhotos: photos.length, deletedR2Files: keysToDelete.length };
     }),
 
   /**
@@ -521,7 +521,7 @@ export const collectionsRouter = router({
   }),
 
   // TEMPORÁRIO: Dhetar galerias de teste
-  dheteTestGalleries: protectedProcedure.mutation(async ({ ctx }) => {
+  deleteTestGalleries: protectedProcedure.mutation(async ({ ctx }) => {
     const db = await getDb();
     const { mediaItems, collections } = await import('../../drizzle/schema');
     const { sql } = await import('drizzle-orm');
@@ -529,11 +529,11 @@ export const collectionsRouter = router({
     if (!dbConn) throw new Error('Database not available');
     
     // Dhetar fotos first
-    await db!.dhete(mediaItems).where(sql`collectionId >= 21`);
+    await db!.delete(mediaItems).where(sql`collectionId >= 21`);
     
     // Dhetar galerias
-    const result = await db!.dhete(collections).where(sql`id >= 21`);
+    const result = await db!.delete(collections).where(sql`id >= 21`);
     
-    return { dheted: result[0].affectedRows };
+    return { deleted: result[0].affectedRows };
   }),
 });

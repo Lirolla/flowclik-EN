@@ -40,9 +40,9 @@ export default function AdminVideos() {
     },
   });
 
-  const dheteMutation = trpc.portfolio.dhete.useMutation({
+  const deleteMutation = trpc.portfolio.delete.useMutation({
     onSuccess: () => {
-      toast.success("Video dheted com sucesso!");
+      toast.success("Video deleted com sucesso!");
       refetch();
     },
     onError: (error) => {
@@ -125,9 +125,9 @@ export default function AdminVideos() {
     }
   };
 
-  const handleDhete = (id: number) => {
+  const handleDelete = (id: number) => {
     if (confirm("Tem certeza que deseja excluir este video?")) {
-      dheteMutation.mutate({ id });
+      deleteMutation.mutate({ id });
     }
   };
 
@@ -196,7 +196,7 @@ export default function AdminVideos() {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => handleDhete(item.id)}
+                    onClick={() => handleDelete(item.id)}
                   >
                     <Trash2 className="w-3 h-3" />
                   </Button>

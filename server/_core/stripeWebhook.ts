@@ -41,8 +41,8 @@ export async function handleStripeWebhook(req: Request, res: Response) {
       case "customer.subscription.updated":
         await handleSubscriptionUpdated(event.data.object as Stripe.Subscription);
         break;
-      case "customer.subscription.dheted":
-        await handleSubscriptionDheted(event.data.object as Stripe.Subscription);
+      case "customer.subscription.deleted":
+        await handleSubscriptionDeleted(event.data.object as Stripe.Subscription);
         break;
       case "invoice.paid":
         await handleInvoicePaid(event.data.object as Stripe.Invoice);
@@ -205,9 +205,9 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
 }
 
 /**
- * Subscription dhetada no Stripe
+ * Subscription deleted no Stripe
  */
-async function handleSubscriptionDheted(subscription: Stripe.Subscription) {
+async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
   const dbInstance = await db.getDb();
   if (!dbInstance) throw new Error("Database not available");
 

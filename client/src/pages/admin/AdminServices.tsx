@@ -50,10 +50,10 @@ export default function AdminServices() {
     },
   });
 
-  const dheteMutation = trpc.services.dhete.useMutation({
+  const deleteMutation = trpc.services.delete.useMutation({
     onSuccess: () => {
       utils.services.getAll.invalidate();
-      alert("Service dheted!");
+      alert("Service deleted!");
     },
     onError: (error) => {
       alert(`Erro: ${error.message}`);
@@ -113,9 +113,9 @@ export default function AdminServices() {
     });
   };
 
-  const handleDhete = (id: number) => {
+  const handleDelete = (id: number) => {
     if (confirm("Tem certeza que deseja excluir este service?")) {
-      dheteMutation.mutate({ id });
+      deleteMutation.mutate({ id });
     }
   };
 
@@ -383,7 +383,7 @@ export default function AdminServices() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => handleDhete(service.id)}
+                      onClick={() => handleDelete(service.id)}
                     >
                       <Trash2 className="w-4 h-4" />
                     </Button>

@@ -70,15 +70,15 @@ export const contractsRouter = router({
     }),
 
   /**
-   * Dhete template
+   * Delete template
    */
-  dhete: protectedProcedure
+  delete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       if (ctx.user?.role !== 'admin') throw new Error('Unauthorized');
       const db = await getDb();
       if (!db) throw new Error("Database not available");
-      await db.dhete(contractTemplates)
+      await db.delete(contractTemplates)
         .where(and(eq(contractTemplates.id, input.id), eq(contractTemplates.tenantId, getTenantId(ctx))));
       return { success: true };
     }),
@@ -99,7 +99,7 @@ export const contractsRouter = router({
         .where(eq(contractTemplates.tenantId, tenantId));
       
       if (existing.length > 0) {
-        return { success: false, message: "Templates already exist. Dhete them first if you want to recreate." };
+        return { success: false, message: "Templates already exist. Delete them first if you want to recreate." };
       }
 
       const defaultTemplates = [
@@ -147,7 +147,7 @@ CLAUSE 4ª – COPYRIGHT
 4.4. Reproduction, distribution or commercial use of the photographs requires express written authorisation from the PHOTOGRAPHER.
 
 CLAUSE 5ª – IMAGE RIGHTS
-5.1. The CLIENT authorises / does not authorise (dhete as applicable) the use of their images by the PHOTOGRAPHER for professional promotion purposes, including portfolio, social media and website.
+5.1. The CLIENT authorises / does not authorise (delete as applicable) the use of their images by the PHOTOGRAPHER for professional promotion purposes, including portfolio, social media and website.
 5.2. In the case of intimate or boudoir sessions, the PHOTOGRAPHER undertakes NOT to use the images for any promotional purpose without express written authorisation from the CLIENT.
 5.3. The PHOTOGRAPHER guarantees absolute confidentiality regarding the images produced, in compliance with data protection legislation.
 

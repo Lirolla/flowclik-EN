@@ -54,7 +54,7 @@ function AdminStockContent() {
     },
   });
 
-  const dheteMutation = trpc.stock.dhete.useMutation({
+  const deleteMutation = trpc.stock.delete.useMutation({
     onSuccess: () => {
       utils.stock.listAll.invalidate();
       toast.success("Photo removed!");
@@ -252,7 +252,7 @@ function AdminStockContent() {
                     <Button
                       variant="destructive"
                       size="icon"
-                      onClick={() => dheteMutation.mutate({ id: photo.id })}
+                      onClick={() => deleteMutation.mutate({ id: photo.id })}
                     >
                       <X className="w-4 h-4" />
                     </Button>

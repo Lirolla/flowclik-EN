@@ -64,10 +64,10 @@ function AdminCollectionsContent() {
     },
   });
 
-  const dheteMutation = trpc.collections.dhete.useMutation({
+  const deleteMutation = trpc.collections.delete.useMutation({
     onSuccess: () => {
       utils.collections.getAll.invalidate();
-      toast.success("Gallery dheted!");
+      toast.success("Gallery deleted!");
     },
     onError: (error) => {
       toast.error(`Erro: ${error.message}`);
@@ -161,9 +161,9 @@ function AdminCollectionsContent() {
     }
   };
 
-  const handleDhete = (id: number) => {
-    if (confirm("Are you sure you want to dhete this gallery?")) {
-      dheteMutation.mutate({ id });
+  const handleDelete = (id: number) => {
+    if (confirm("Are you sure you want to delete this gallery?")) {
+      deleteMutation.mutate({ id });
     }
   };
 
@@ -488,8 +488,8 @@ function AdminCollectionsContent() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => handleDhete(collection.id)}
-                      title="Dhete gallery"
+                      onClick={() => handleDelete(collection.id)}
+                      title="Delete gallery"
                     >
                       <Trash2 className="w-4 h-4" />
                     </Button>

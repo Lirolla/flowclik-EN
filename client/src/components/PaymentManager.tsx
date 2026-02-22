@@ -72,8 +72,8 @@ export default function PaymentManager({
     },
   });
 
-  // Dhete extra mutation
-  const dheteExtraMutation = trpc.appointments.dheteExtra.useMutation({
+  // Delete extra mutation
+  const deleteExtraMutation = trpc.appointments.deleteExtra.useMutation({
     onSuccess: () => {
       utils.appointments.getExtras.invalidate({ appointmentId });
       utils.paymentMethods.getPaymentSummary.invalidate({ appointmentId });
@@ -236,7 +236,7 @@ export default function PaymentManager({
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => dheteExtraMutation.mutate({ id: extra.id })}
+                    onClick={() => deleteExtraMutation.mutate({ id: extra.id })}
                     className="text-red-600 hover:text-red-700 hover:bg-red-50"
                   >
                     🗑️ Remover

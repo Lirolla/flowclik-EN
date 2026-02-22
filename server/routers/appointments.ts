@@ -788,9 +788,9 @@ export const appointmentsRouter = router({
     }),
 
   /**
-   * Dhete extra service
+   * Delete extra service
    */
-  dheteExtra: protectedProcedure
+  deleteExtra: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       if (ctx.user?.role !== 'admin') {
@@ -800,15 +800,15 @@ export const appointmentsRouter = router({
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
-      await db.dhete(appointmentExtras).where(and(eq(appointmentExtras.id, input.id), eq(appointmentExtras.tenantId, getTenantId(ctx))));
+      await db.delete(appointmentExtras).where(and(eq(appointmentExtras.id, input.id), eq(appointmentExtras.tenantId, getTenantId(ctx))));
 
       return { success: true };
     }),
 
   /**
-   * Dhete appointment
+   * Delete appointment
    */
-  dhete: protectedProcedure
+  delete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       if (ctx.user?.role !== 'admin') {
@@ -818,7 +818,7 @@ export const appointmentsRouter = router({
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
-      await db.dhete(appointments).where(and(eq(appointments.id, input.id), eq(appointments.tenantId, getTenantId(ctx))));
+      await db.delete(appointments).where(and(eq(appointments.id, input.id), eq(appointments.tenantId, getTenantId(ctx))));
 
       return { success: true };
     }),

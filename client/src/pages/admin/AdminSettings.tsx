@@ -136,7 +136,7 @@ function AdminSettingsContent() {
     },
   });
 
-  const dheteBlockMutation = trpc.blockedDates.dhete.useMutation({
+  const deleteBlockMutation = trpc.blockedDates.delete.useMutation({
     onSuccess: () => {
       toast.success("Bloqueio removido!");
     },
@@ -320,8 +320,8 @@ function AdminSettingsContent() {
     utils.blockedDates.list.invalidate();
   };
 
-  const handleDheteBlock = (id: number) => {
-    dheteBlockMutation.mutate({ id });
+  const handleDeleteBlock = (id: number) => {
+    deleteBlockMutation.mutate({ id });
     utils.blockedDates.list.invalidate();
   };
 
@@ -1447,8 +1447,8 @@ function AdminSettingsContent() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => handleDheteBlock(block.id)}
-                        disabled={dheteBlockMutation.isPending}
+                        onClick={() => handleDeleteBlock(block.id)}
+                        disabled={deleteBlockMutation.isPending}
                         className="ml-2"
                       >
                         <X className="w-4 h-4" />

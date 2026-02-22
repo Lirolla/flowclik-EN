@@ -67,9 +67,9 @@ export default function AdminBanner() {
     },
   });
 
-  const dheteSlide = trpc.banner.dhete.useMutation({
+  const deleteSlide = trpc.banner.delete.useMutation({
     onSuccess: () => {
-      toast({ title: "Slide dheted!" });
+      toast({ title: "Slide deleted!" });
       refetch();
     },
     onError: (error) => {
@@ -429,9 +429,9 @@ export default function AdminBanner() {
                     size="sm"
                     onClick={() => {
                       if (
-                        confirm("Are you sure you want to dhete this slide?")
+                        confirm("Are you sure you want to delete this slide?")
                       ) {
-                        dheteSlide.mutate({ id: slide.id });
+                        deleteSlide.mutate({ id: slide.id });
                       }
                     }}
                   >

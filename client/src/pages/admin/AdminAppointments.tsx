@@ -304,11 +304,11 @@ function AdminAppointmentsContent() {
     },
   });
 
-  const dheteMutation = trpc.appointments.dhete.useMutation({
+  const deleteMutation = trpc.appointments.delete.useMutation({
     onSuccess: () => {
       utils.appointments.getAll.invalidate();
       toast({
-        title: "Appointment dheted!",
+        title: "Appointment deleted!",
         description: "O agendamento foi removido com sucesso.",
       });
       setSelectedAppointment(null);
@@ -380,9 +380,9 @@ function AdminAppointmentsContent() {
     });
   };
 
-  const handleDhete = (id: number) => {
+  const handleDelete = (id: number) => {
     if (confirm("Tem certeza que deseja excluir este agendamento?")) {
-      dheteMutation.mutate({ id });
+      deleteMutation.mutate({ id });
     }
   };
 
@@ -869,7 +869,7 @@ function AdminAppointmentsContent() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => handleDhete(selectedAppointment.id)}
+                  onClick={() => handleDelete(selectedAppointment.id)}
                 >
                   <Trash2 className="w-4 h-4 mr-2" />
                   Excluir

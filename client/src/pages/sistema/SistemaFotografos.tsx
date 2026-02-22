@@ -29,12 +29,12 @@ import { Globe, Mail, Phone, ExternalLink, Trash2 } from "lucide-react";
 export default function SistemaFotografos() {
   const { data: photographers, isLoading, refetch } = trpc.system.getAllPhotographers.useQuery();
   const updatePlanMutation = trpc.system.updatePhotographerPlan.useMutation();
-  const dhetePhotographerMutation = (trpc.system as any).dhetePhotographer.useMutation();
+  const deletePhotographerMutation = (trpc.system as any).deletePhotographer.useMutation();
   const updateStatusMutation = (trpc.system as any).updatePhotographerStatus.useMutation();
 
   const [changingPlan, setChangingPlan] = useState<number | null>(null);
   const [dhetingId, setDhetingId] = useState<number | null>(null);
-  const [showDheteDialog, setShowDheteDialog] = useState(false);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
 
   const handlePlanChange = async (tenantId: number, newPlan: "starter" | "courtesy" | "full") => {
     setChangingPlan(tenantId);
@@ -60,18 +60,18 @@ export default function SistemaFotografos() {
     }
   };
 
-  const handleDheteClick = (tenantId: number) => {
+  const handleDeleteClick = (tenantId: number) => {
     setDhetingId(tenantId);
-    setShowDheteDialog(true);
+    setShowDeleteDialog(true);
   };
 
-  const handleDheteConfirm = async () => {
+  const handleDeleteConfirm = async () => {
     if (!dhetingId) return;
     
     try {
-      await dhetePhotographerMutation.mutateAsync({ tenantId: dhetingId });
-      toast.success("Photographer dheted com sucesso!");
-      setShowDheteDialog(false);
+      await deletePhotographerMutation.mutateAsync({ tenantId: dhetingId });
+      toast.success("Photographer deleted com sucesso!");
+      setShowDeleteDialog(false);
       setDhetingId(null);
       refetch();
     } catch (error) {
@@ -208,7 +208,7 @@ export default function SistemaFotografos() {
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => handleDheteClick(photographer.id!)}
+                          onClick={() => handleDeleteClick(photographer.id!)}
                           className="text-red-400 hover:text-red-300 hover:bg-red-900/20"
                         >
                           <Trash2 className="w-4 h-4 mr-1" />
@@ -300,7 +300,7 @@ export default function SistemaFotografos() {
       </div>
 
       {/* Dialog de Confirmation de Excluare */}
-      <AlertDialog open={showDheteDialog} onOpenChange={setShowDheteDialog}>
+      <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>Tem certeza?</AlertDialogTitle>
@@ -312,7 +312,7 @@ export default function SistemaFotografos() {
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction
-              onClick={handleDheteConfirm}
+              onClick={handleDeleteConfirm}
               className="bg-red-600 hover:bg-red-700"
             >
               Excluir Permanentemente

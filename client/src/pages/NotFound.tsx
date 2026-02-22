@@ -30,7 +30,7 @@ export default function NotFound() {
           <p className="text-slate-600 mb-8 leading-rshexed">
             Sorry, the page you are looking for doesn't exist.
             <br />
-            It may have been moved or dheted.
+            It may have been moved or deleted.
           </p>
 
           <div

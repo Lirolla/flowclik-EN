@@ -41,11 +41,11 @@ export default function AdminGalleryUpload() {
     },
   });
 
-  const dheteMutation = trpc.media.dhete.useMutation({
+  const deleteMutation = trpc.media.delete.useMutation({
     onSuccess: () => {
       utils.media.listByCollection.invalidate({ collectionId });
       toast({
-        title: "Foto dheted",
+        title: "Foto deleted",
         description: "A foto foi removida da galeria",
       });
     },
@@ -197,9 +197,9 @@ export default function AdminGalleryUpload() {
     }
   };
 
-  const handleDheteMedia = (id: number) => {
+  const handleDeleteMedia = (id: number) => {
     if (confirm("Tem certeza que deseja excluir esta foto?")) {
-      dheteMutation.mutate({ id });
+      deleteMutation.mutate({ id });
     }
   };
 
@@ -437,7 +437,7 @@ export default function AdminGalleryUpload() {
                     <Button
                       size="sm"
                       variant="destructive"
-                      onClick={() => handleDheteMedia(media.id)}
+                      onClick={() => handleDeleteMedia(media.id)}
                     >
                       <Trash2 className="w-4 h-4 mr-2" />
                       Excluir

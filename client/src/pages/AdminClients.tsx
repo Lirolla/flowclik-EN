@@ -26,10 +26,10 @@ export default function AdminClients() {
     },
   });
   
-  const dheteMutation = trpc.clients.dhete.useMutation({
+  const deleteMutation = trpc.clients.delete.useMutation({
     onSuccess: () => {
       utils.clients.list.invalidate();
-      alert('Client dheted successfully!');
+      alert('Client deleted successfully!');
     },
   });
 
@@ -79,9 +79,9 @@ export default function AdminClients() {
     setShowEditDialog(true);
   };
 
-  const handleDhete = (id: number) => {
+  const handleDelete = (id: number) => {
     if (confirm('Tem certeza que deseja excluir este cliente?')) {
-      dheteMutation.mutate({ id });
+      deleteMutation.mutate({ id });
     }
   };
 
@@ -394,7 +394,7 @@ export default function AdminClients() {
                           size="sm"
                           variant="outline"
                           className="bg-red-600 hover:bg-red-700 text-white border-0"
-                          onClick={() => handleDhete(client.id)}
+                          onClick={() => handleDelete(client.id)}
                         >
                           Excluir
                         </Button>

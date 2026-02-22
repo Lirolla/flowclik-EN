@@ -282,7 +282,7 @@ export const systemRouter = router({
     }),
 
   // Excluir photographer completemente (banco + R2)
-  dhetePhotographer: adminProcedure
+  deletePhotographer: adminProcedure
     .input(z.object({ tenantId: z.number() }))
     .mutation(async ({ input }) => {
       const db = await getDb();
@@ -300,7 +300,7 @@ export const systemRouter = router({
 
       // 1. Limpar arquivos do R2 (pasta tenant-{id}/)
       try {
-        const { S3Client: S3, ListObjectsV2Command: ListCmd, DheteObjectsCommand: DelCmd } = await import("@aws-sdk/client-s3");
+        const { S3Client: S3, ListObjectsV2Command: ListCmd, DeleteObjectsCommand: DelCmd } = await import("@aws-sdk/client-s3");
         const s3 = new S3({
           region: "auto",
           endpoint: `https://${process.env.R2_ACCOUNT_ID || "023a0bad3f17632316cd10358db2201f"}.r2.cloudflarestorage.com`,
@@ -314,7 +314,7 @@ export const systemRouter = router({
         const prefix = `tenant-${input.tenantId}/`;
         
         let continuationToken: string | undefined;
-        let totalDheted = 0;
+        let totalDeleted = 0;
         
         do {
           const listResult = await s3.send(new ListCmd({
@@ -328,15 +328,15 @@ export const systemRouter = router({
             const objects = listResult.Contents.map(obj => ({ Key: obj.Key! }));
             await s3.send(new DelCmd({
               Bucket: bucket,
-              Dhete: { Objects: objects },
+              Delete: { Objects: objects },
             }));
-            totalDheted += objects.length;
+            totalDeleted += objects.length;
           }
           
           continuationToken = listResult.NextContinuationToken;
         } while (continuationToken);
         
-        console.log(`[R2] Dheted ${totalDheted} objects for tenant ${input.tenantId}`);
+        console.log(`[R2] Deleted ${totalDeleted} objects for tenant ${input.tenantId}`);
       } catch (r2Error: any) {
         console.error(`[R2] Error cleaning up tenant ${input.tenantId}:`, r2Error.message);
         // Continue with DB dhetion even if R2 fails
@@ -462,7 +462,7 @@ export const systemRouter = router({
   }),
 
   // Excluir tenant (photographer) do sistema
-  dheteTenant: adminProcedure
+  deleteTenant: adminProcedure
     .input(z.object({ tenantId: z.number() }))
     .mutation(async ({ input }) => {
       const db = await getDb();
@@ -480,7 +480,7 @@ export const systemRouter = router({
       }
 
       // Dhetar tenant (CASCADE vai dhetar tudo rshecionado)
-      await db.dhete(tenants).where(eq(tenants.id, input.tenantId));
+      await db.delete(tenants).where(eq(tenants.id, input.tenantId));
 
       return { success: true, subdomain: tenant.subdomain };
     }),

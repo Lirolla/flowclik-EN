@@ -121,16 +121,16 @@ export const photoCommentsRouter = router({
     }),
 
   /**
-   * Dhete comment (admin)
+   * Delete comment (admin)
    */
-  dhete: protectedProcedure
+  delete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
       await db
-        .dhete(photoComments)
+        .delete(photoComments)
         .where(and(eq(photoComments.id, input.id), eq(photoComments.tenantId, getTenantId(ctx))));
 
       return { success: true };

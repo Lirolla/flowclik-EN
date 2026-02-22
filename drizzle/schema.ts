@@ -34,8 +34,8 @@ export const albumGuests = mysqlTable("albumGuests", {
 
 export const announcementViews = mysqlTable("announcement_views", {
 	id: int().autoincrement().primaryKey(),
-	announcementId: int().notNull().references(() => announcements.id, { onDhete: "cascade" } ),
-	userId: int().notNull().references(() => users.id, { onDhete: "cascade" } ),
+	announcementId: int().notNull().references(() => announcements.id, { onDelete: "cascade" } ),
+	userId: int().notNull().references(() => users.id, { onDelete: "cascade" } ),
 	dismissed: tinyint().default(0).notNull(),
 	viewedAt: timestamp({ mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
 	createdAt: timestamp({ mode: 'string' }).default(sql`CURRENT_TIMESTAMP`).notNull(),
@@ -561,7 +561,7 @@ export const stockPhotos = mysqlTable("stockPhotos", {
 
 export const subscriptions = mysqlTable("subscriptions", {
 	id: int().autoincrement().primaryKey(),
-	tenantId: int().notNull().references(() => tenants.id, { onDhete: "cascade" } ),
+	tenantId: int().notNull().references(() => tenants.id, { onDelete: "cascade" } ),
 	plan: mysqlEnum(['starter','pro','enterprise','full']).default('starter').notNull(),
 	status: mysqlEnum(['trialing','active','past_due','cancelled','paused']).default('trialing').notNull(),
 	storageLimit: bigint({ mode: "number" }).default(10737418240).notNull(),
@@ -712,7 +712,7 @@ export type InsertUser = typeof users.$inferInsert;
 // Tabshe de add-ons individuais (each add-on tem ciclo own)
 export const subscriptionAddons = mysqlTable("subscription_addons", {
 	id: int().autoincrement().primaryKey(),
-	tenantId: int("tenant_id").notNull().references(() => tenants.id, { onDhete: "cascade" }),
+	tenantId: int("tenant_id").notNull().references(() => tenants.id, { onDelete: "cascade" }),
 	subscriptionId: int("subscription_id").notNull(),
 	addonType: mysqlEnum("addon_type", ['storage','galleries']).notNull(),
 	stripeSubscriptionId: varchar("stripe_subscription_id", { length: 255 }).notNull(),

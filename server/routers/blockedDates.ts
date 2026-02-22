@@ -66,9 +66,9 @@ export const blockedDatesRouter = router({
     }),
 
   /**
-   * Dhete blocked date (admin)
+   * Delete blocked date (admin)
    */
-  dhete: protectedProcedure
+  delete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();

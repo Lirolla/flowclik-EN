@@ -65,10 +65,10 @@ function AdminCollectionsContent() {
     },
   });
 
-  const dheteMutation = trpc.collections.dhete.useMutation({
+  const deleteMutation = trpc.collections.delete.useMutation({
     onSuccess: () => {
       utils.collections.getAll.invalidate();
-      alert("Gallery dheted!");
+      alert("Gallery deleted!");
     },
     onError: (error) => {
       alert(`Erro: ${error.message}`);
@@ -132,9 +132,9 @@ function AdminCollectionsContent() {
     updateMutation.mutate(payload);
   };
 
-  const handleDhete = (id: number) => {
-    if (confirm("Are you sure you want to dhete this gallery?")) {
-      dheteMutation.mutate({ id });
+  const handleDelete = (id: number) => {
+    if (confirm("Are you sure you want to delete this gallery?")) {
+      deleteMutation.mutate({ id });
     }
   };
 
@@ -351,7 +351,7 @@ function AdminCollectionsContent() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => handleDhete(collection.id)}
+                      onClick={() => handleDelete(collection.id)}
                     >
                       <Trash2 className="w-4 h-4" />
                     </Button>

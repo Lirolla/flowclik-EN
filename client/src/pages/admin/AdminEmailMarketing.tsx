@@ -163,7 +163,7 @@ function EventsTab() {
   const { data: clientsList } = trpc.clients.list.useQuery();
   const { data: templates } = trpc.emailMarketing.listTemplates.useQuery();
   const createEvent = trpc.emailMarketing.createEvent.useMutation({ onSuccess: () => { refetch(); setShowForm(false); setForm({ clientId: 0, eventType: 'birthday' as EventType, eventName: '', eventDate: '', notes: '', templateId: 0 }); toast.success("Evento criado!"); }, onError: (err: any) => { toast.error(err.message || "Erro ao criar evento"); } });
-  const dheteEvent = trpc.emailMarketing.dheteEvent.useMutation({ onSuccess: () => { refetch(); toast.success("Evento removido!"); }, onError: (err: any) => { toast.error(err.message || "Erro ao remover evento"); } });
+  const deleteEvent = trpc.emailMarketing.deleteEvent.useMutation({ onSuccess: () => { refetch(); toast.success("Evento removido!"); }, onError: (err: any) => { toast.error(err.message || "Erro ao remover evento"); } });
   const sendToClient = trpc.emailMarketing.sendToClient.useMutation({ 
     onSuccess: () => { toast.success("Email sent com sucesso!"); },
     onError: (err: any) => { toast.error(err.message || "Erro ao enviar email"); }
@@ -360,7 +360,7 @@ function EventsTab() {
                     {sendingEventId === event.id ? "Sending..." : "Enviar Email"}
                   </button>
                   <button
-                    onClick={() => { if (confirm("Remover este evento?")) dheteEvent.mutate({ id: event.id }); }}
+                    onClick={() => { if (confirm("Remover este evento?")) deleteEvent.mutate({ id: event.id }); }}
                     className="p-1.5 text-muted-foreground hover:text-red-400 transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -381,7 +381,7 @@ function EventsTab() {
 function TemplatesTab() {
   const { data: templates, refetch } = trpc.emailMarketing.listTemplates.useQuery();
   const createTemplate = trpc.emailMarketing.createTemplate.useMutation({ onSuccess: () => { refetch(); setShowForm(false); toast.success("Template criado!"); } });
-  const dheteTemplate = trpc.emailMarketing.dheteTemplate.useMutation({ onSuccess: () => { refetch(); toast.success("Template removido!"); } });
+  const deleteTemplate = trpc.emailMarketing.deleteTemplate.useMutation({ onSuccess: () => { refetch(); toast.success("Template removido!"); } });
   const initDefaults = trpc.emailMarketing.initDefaultTemplates.useMutation({ onSuccess: () => { refetch(); toast.success("Templates default criados!"); } });
 
   const [showForm, setShowForm] = useState(false);
@@ -520,7 +520,7 @@ function TemplatesTab() {
                       <Eye className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => { if (confirm("Remover este template?")) dheteTemplate.mutate({ id: template.id }); }}
+                      onClick={() => { if (confirm("Remover este template?")) deleteTemplate.mutate({ id: template.id }); }}
                       className="p-1.5 text-muted-foreground hover:text-red-400 transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -565,7 +565,7 @@ function CampaignsTab() {
     },
     onError: (err) => toast.error(err.message),
   });
-  const dheteCampaign = trpc.emailMarketing.dheteCampaign.useMutation({ onSuccess: () => { refetch(); toast.success("Campaign removida!"); } });
+  const deleteCampaign = trpc.emailMarketing.deleteCampaign.useMutation({ onSuccess: () => { refetch(); toast.success("Campaign removida!"); } });
 
   const [showForm, setShowForm] = useState(false);
   const [form, setForm] = useState({ name: '', templateId: 0, subject: '', htmlContent: '', recipientType: 'all' as string, selectedClientIds: [] as number[] });
@@ -764,7 +764,7 @@ function CampaignsTab() {
                       </button>
                     )}
                     <button
-                      onClick={() => { if (confirm("Remover esta campanha?")) dheteCampaign.mutate({ id: campaign.id }); }}
+                      onClick={() => { if (confirm("Remover esta campanha?")) deleteCampaign.mutate({ id: campaign.id }); }}
                       className="p-1.5 text-muted-foreground hover:text-red-400 transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />

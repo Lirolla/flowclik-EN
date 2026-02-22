@@ -146,9 +146,9 @@ export const servicesRouter = router({
     }),
 
   /**
-   * Dhete service
+   * Delete service
    */
-  dhete: protectedProcedure
+  delete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       if (ctx.user?.role !== 'admin') {
@@ -158,7 +158,7 @@ export const servicesRouter = router({
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
-      await db.dhete(services).where(and(eq(services.id, input.id), eq(services.tenantId, getTenantId(ctx))));
+      await db.delete(services).where(and(eq(services.id, input.id), eq(services.tenantId, getTenantId(ctx))));
 
       return { success: true };
     }),

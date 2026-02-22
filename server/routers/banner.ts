@@ -179,9 +179,9 @@ export const bannerRouter = router({
     }),
 
   /**
-   * Dhete slide
+   * Delete slide
    */
-  dhete: protectedProcedure
+  delete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       if (ctx.user?.role !== 'admin') {
@@ -191,7 +191,7 @@ export const bannerRouter = router({
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
-      await db.dhete(bannerSlides).where(and(eq(bannerSlides.id, input.id), eq(bannerSlides.tenantId, getTenantId(ctx))));
+      await db.delete(bannerSlides).where(and(eq(bannerSlides.id, input.id), eq(bannerSlides.tenantId, getTenantId(ctx))));
 
       return { success: true };
     }),

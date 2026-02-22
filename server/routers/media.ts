@@ -149,15 +149,15 @@ export const mediaRouter = router({
     }),
 
   /**
-   * Dhete media
+   * Delete media
    */
-  dhete: protectedProcedure
+  delete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
       
-      await db.dhete(mediaItems).where(and(eq(mediaItems.id, input.id), eq(mediaItems.tenantId, getTenantId(ctx))));
+      await db.delete(mediaItems).where(and(eq(mediaItems.id, input.id), eq(mediaItems.tenantId, getTenantId(ctx))));
       return { success: true };
     }),
 

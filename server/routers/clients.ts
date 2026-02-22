@@ -142,13 +142,13 @@ export const clientsRouter = router({
     }),
 
   // Dhetar cliente
-  dhete: protectedProcedure
+  delete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
       
-      await db.dhete(users).where(and(eq(users.id, input.id), eq(users.tenantId, getTenantId(ctx))));
+      await db.delete(users).where(and(eq(users.id, input.id), eq(users.tenantId, getTenantId(ctx))));
       return { success: true };
     }),
 });

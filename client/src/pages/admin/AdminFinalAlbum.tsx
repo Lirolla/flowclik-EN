@@ -41,7 +41,7 @@ export default function AdminFinalAlbum() {
     },
   });
 
-  const dheteMutation = trpc.finalAlbums.dhetePhoto.useMutation({
+  const deleteMutation = trpc.finalAlbums.deletePhoto.useMutation({
     onSuccess: () => {
       toast({
         title: "Foto removida",
@@ -103,9 +103,9 @@ export default function AdminFinalAlbum() {
     }
   };
 
-  const handleDhete = async (photoId: number) => {
+  const handleDelete = async (photoId: number) => {
     if (!confirm("Tem certeza que deseja remover esta foto?")) return;
-    await dheteMutation.mutateAsync({ photoId });
+    await deleteMutation.mutateAsync({ photoId });
   };
 
   return (
@@ -176,7 +176,7 @@ export default function AdminFinalAlbum() {
                 <Button
                   variant="destructive"
                   size="sm"
-                  onClick={() => handleDhete(photo.id)}
+                  onClick={() => handleDelete(photo.id)}
                 >
                   <Trash2 className="w-4 h-4 mr-2" />
                   Remover

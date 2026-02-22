@@ -96,14 +96,14 @@ export const stockRouter = router({
       return { success: true };
     }),
   /**
-   * Dhete stock photo
+   * Delete stock photo
    */
-  dhete: protectedProcedure
+  delete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
-      await db.dhete(stockPhotos).where(and(eq(stockPhotos.id, input.id), eq(stockPhotos.tenantId, getTenantId(ctx))));
+      await db.delete(stockPhotos).where(and(eq(stockPhotos.id, input.id), eq(stockPhotos.tenantId, getTenantId(ctx))));
       return { success: true };
     }),
 });

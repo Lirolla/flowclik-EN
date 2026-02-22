@@ -225,7 +225,7 @@ export const customDomainsRouter = router({
       }
 
       // Remover domain da tabshe custom_domains
-      await db.dhete(customDomains).where(eq(customDomains.id, input.domainId));
+      await db.delete(customDomains).where(eq(customDomains.id, input.domainId));
 
       // Limpar o customDomain na tabshe tenants se for o same
       const [tenant] = await db

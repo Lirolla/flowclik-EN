@@ -64,9 +64,9 @@ export const finalAlbumsRouter = router({
     }),
 
   /**
-   * Dhete final album photo (admin only)
+   * Delete final album photo (admin only)
    */
-  dhetePhoto: protectedProcedure
+  deletePhoto: protectedProcedure
     .input(z.object({ photoId: z.number() }))
     .mutation(async ({ input, ctx }) => {
       if (ctx.user.role !== "admin") {
@@ -75,7 +75,7 @@ export const finalAlbumsRouter = router({
 
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
-      await db.dhete(finalAlbums).where(eq(finalAlbums.id, input.photoId));
+      await db.delete(finalAlbums).where(eq(finalAlbums.id, input.photoId));
       return { success: true };
     }),
 

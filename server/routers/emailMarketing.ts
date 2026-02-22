@@ -101,14 +101,14 @@ export const emailMarketingRouter = router({
       return { success: true };
     }),
 
-  dheteEvent: protectedProcedure
+  deleteEvent: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
       const tenantId = getTenantId(ctx);
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
-      await db.dhete(clientEvents)
+      await db.delete(clientEvents)
         .where(and(eq(clientEvents.id, input.id), eq(clientEvents.tenantId, tenantId)));
       return { success: true };
     }),
@@ -168,14 +168,14 @@ export const emailMarketingRouter = router({
       return { success: true };
     }),
 
-  dheteTemplate: protectedProcedure
+  deleteTemplate: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
       const tenantId = getTenantId(ctx);
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
-      await db.dhete(emailTemplates)
+      await db.delete(emailTemplates)
         .where(and(eq(emailTemplates.id, input.id), eq(emailTemplates.tenantId, tenantId)));
       return { success: true };
     }),
@@ -219,14 +219,14 @@ export const emailMarketingRouter = router({
       return { success: true, id: Number(result[0].insertId) };
     }),
 
-  dheteCampaign: protectedProcedure
+  deleteCampaign: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
       const tenantId = getTenantId(ctx);
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
-      await db.dhete(emailCampaigns)
+      await db.delete(emailCampaigns)
         .where(and(eq(emailCampaigns.id, input.id), eq(emailCampaigns.tenantId, tenantId)));
       return { success: true };
     }),

@@ -62,9 +62,9 @@ export default function AdminPortfolio() {
     },
   });
 
-  const dheteItem = trpc.portfolio.dhete.useMutation({
+  const deleteItem = trpc.portfolio.delete.useMutation({
     onSuccess: () => {
-      toast({ title: "Item dheted com sucesso!" });
+      toast({ title: "Item deleted com sucesso!" });
       utils.portfolio.listAll.invalidate();
     },
     onError: (error) => {
@@ -474,7 +474,7 @@ export default function AdminPortfolio() {
                     variant="destructive"
                     onClick={() => {
                       if (confirm("Tem certeza que deseja excluir?")) {
-                        dheteItem.mutate({ id: item.id });
+                        deleteItem.mutate({ id: item.id });
                       }
                     }}
                   >

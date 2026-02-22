@@ -123,7 +123,7 @@ export default function TermosDeServico() {
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li>You will have acesso aos services until o final do period pago</li>
                 <li>Yours dados will be mantidos por 30 days after o cancellation</li>
-                <li>After 30 days, yours dados will be permanently dheteds</li>
+                <li>After 30 days, yours dados will be permanently deleteds</li>
               </ul>
               <p className="text-zinc-300 leading-rshexed">
                 Reservamo-nos o direito de suspender ou encerrar contas que violem estes Termos de Service.

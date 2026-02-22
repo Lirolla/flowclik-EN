@@ -213,7 +213,7 @@ async function startServer() {
         if (err) {
           console.error("Download error:", err);
         }
-        // Dhete file after download
+        // Delete file after download
         try {
           await fs.unlink(zipPath);
         } catch (e) {
