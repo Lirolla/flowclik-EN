@@ -482,7 +482,7 @@ export default function AdminSubscription() {
                       </div>
                       <div className="flex items-center gap-4">
                         <div className="text-right">
-                          <p className={`font-bold ${addon.addonType === 'storage' ? 'text-blue-500' : 'text-purple-500'}`}>£ 3.99</p>
+                          <p className={`font-bold ${addon.addonType === 'storage' ? 'text-blue-500' : 'text-purple-500'}`}>{addon.addonType === 'storage' ? '£ 3.99' : '£ 2.99'}</p>
                           <p className="text-xs text-muted-foreground">/month</p>
                         </div>
                         <Badge variant="default" className="bg-green-600">Active</Badge>
@@ -572,7 +572,7 @@ export default function AdminSubscription() {
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <p className="text-4xl font-bold text-purple-600">£ 3.99</p>
+                    <p className="text-4xl font-bold text-purple-600">£ 2.99</p>
                     <p className="text-sm text-muted-foreground">/month</p>
                   </div>
                   <Button
