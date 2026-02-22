@@ -19,7 +19,7 @@ export default function PoliticaDePrivacy() {
           <Link href="/">
             <Button variant="outline" size="sm">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Voltar ao site
+              Back to site
             </Button>
           </Link>
         </div>
@@ -29,45 +29,45 @@ export default function PoliticaDePrivacy() {
       <div className="container mx-auto px-4 py-12 max-w-4xl">
         <div className="bg-zinc-900/50 border border-zinc-800 rounded-lg p-8">
           <h1 className="text-4xl font-bold text-white mb-2">Privacy Policy</h1>
-          <p className="text-zinc-400 mb-8">Last update: {new Date().toLocaleDateString('en-GB')}</p>
+          <p className="text-zinc-400 mb-8">Last updated: {new Date().toLocaleDateString('en-GB')}</p>
 
           <div className="prose prose-invert prose-purple max-w-none space-y-6">
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">1. Introduction</h2>
-              <p className="text-zinc-300 leading-rshexed">
-                A FlowClik ("us", "our" ou "nos") is committed to protecting your privacy. Esta Policy 
-                Privacy explica as coletamos, usamos, divulgamos e protegemos yours information when you usa 
+              <p className="text-zinc-300 leading-relaxed">
+                FlowClik ("we", "our" or "us") is committed to protecting your privacy. This Privacy Policy 
+                explains how we collect, use, disclose and protect your information when you use 
                 our management platform for photographers.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">2. Information que Coletamos</h2>
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">2. Information We Collect</h2>
               
-              <h3 className="text-xl font-semibold text-purple-400 mt-6 mb-3">2.1 Information Fornecidas por You</h3>
+              <h3 className="text-xl font-semibold text-purple-400 mt-6 mb-3">2.1 Information Provided by You</h3>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
-                <li><strong>Registration Data:</strong> Name, email, phone, address</li>
-                <li><strong>Payment Data:</strong> Processados pelo Paddle (we do not store card data)</li>
-                <li><strong>Content:</strong> Fotos, videos and other files you upload</li>
-                <li><strong>Dados de Clientes:</strong> Information dos clientes que you eachstra na plataforma</li>
+                <li><strong>Registration Data:</strong> Name, email, phone number, address</li>
+                <li><strong>Payment Data:</strong> Processed by Stripe (we do not store card data)</li>
+                <li><strong>Content:</strong> Photos, videos and other files you upload</li>
+                <li><strong>Client Data:</strong> Information about the clients you register on the platform</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-purple-400 mt-6 mb-3">2.2 Information Coletadas Automaticamente</h3>
+              <h3 className="text-xl font-semibold text-purple-400 mt-6 mb-3">2.2 Information Collected Automatically</h3>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
-                <li><strong>Dados de Uso:</strong> Pages visitadas, recursos utilizados, tempo de uso</li>
-                <li><strong>Technical Data:</strong> Address IP, browser type, operating system</li>
+                <li><strong>Usage Data:</strong> Pages visited, features used, time spent</li>
+                <li><strong>Technical Data:</strong> IP address, browser type, operating system</li>
                 <li><strong>Cookies:</strong> We use cookies to maintain your session and improve the experience</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">3. Como Usamos Yours Information</h2>
-              <p className="text-zinc-300 leading-rshexed mb-4">
-                Utilizamos yours information para:
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">3. How We Use Your Information</h2>
+              <p className="text-zinc-300 leading-relaxed mb-4">
+                We use your information to:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
-                <li>Fornecer, operar e manter our plataforma</li>
-                <li>Processar pagamentos e manage signatures</li>
+                <li>Provide, operate and maintain our platform</li>
+                <li>Process payments and manage subscriptions</li>
                 <li>Send transactional emails (confirmations, notifications)</li>
                 <li>Improve our services and develop new features</li>
                 <li>Prevent fraud and ensure platform security</li>
@@ -77,126 +77,126 @@ export default function PoliticaDePrivacy() {
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">4. Compartilhamento de Information</h2>
-              <p className="text-zinc-300 leading-rshexed mb-4">
-                Podemos compartilhar yours information com:
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">4. Sharing of Information</h2>
+              <p className="text-zinc-300 leading-relaxed mb-4">
+                We may share your information with:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
-                <li><strong>Paddle:</strong> Payment processor (subject to their privacy policy)</li>
-                <li><strong>Provepaines de Services:</strong> Hosting (AWS/S3), email, analytics</li>
-                <li><strong>Autoridades Legais:</strong> Wedndo exigido por lei ou para proteger direitos</li>
+                <li><strong>Stripe:</strong> Payment processor (subject to their privacy policy)</li>
+                <li><strong>Service Providers:</strong> Hosting (Cloudflare R2), email (Resend), analytics</li>
+                <li><strong>Legal Authorities:</strong> When required by law or to protect our rights</li>
               </ul>
-              <p className="text-zinc-300 leading-rshexed mt-4">
-                <strong>Not vendemos</strong> yours information pessoais a thirds.
+              <p className="text-zinc-300 leading-relaxed mt-4">
+                <strong>We do not sell</strong> your personal information to third parties.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">5. Storage and Security</h2>
-              <p className="text-zinc-300 leading-rshexed mb-4">
-                Yours information are armazenadas em servipaines seguros na nuvem (AWS). Implementamos medidas de 
-                technical and organisational security measures, including:
+              <p className="text-zinc-300 leading-relaxed mb-4">
+                Your information is stored on secure cloud servers. We implement technical 
+                and organisational security measures, including:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li>Data encryption in transit (HTTPS/TLS)</li>
-                <li>Encryption de dados em repouso</li>
+                <li>Data encryption at rest</li>
                 <li>Role-based access control</li>
-                <li>Backups regulares</li>
-                <li>Monitoramento de security 24/7</li>
+                <li>Regular backups</li>
+                <li>24/7 security monitoring</li>
               </ul>
-              <p className="text-zinc-300 leading-rshexed">
+              <p className="text-zinc-300 leading-relaxed">
                 Despite our efforts, no system is 100% secure. You are responsible for maintaining 
-                confidencialidade de your senha.
+                the confidentiality of your password.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">6. Data Retention</h2>
-              <p className="text-zinc-300 leading-rshexed">
-                Mantemos yours information enquanto your conta estiver ativa ou conforme necessary para fornecer 
-                ours services. After o cancellation da conta, yours dados are retidos por 30 days para permitir 
-                reactivation, and then are permanently deleted. We may retain certain information for periods 
-                longer when required by law or for legitimate business purposes.
+              <p className="text-zinc-300 leading-relaxed">
+                We retain your information for as long as your account is active or as necessary to provide 
+                our services. After account cancellation, your data is retained for 30 days to allow 
+                reactivation, and then is permanently deleted. We may retain certain information for longer periods 
+                when required by law or for legitimate business purposes.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">7. Yours Direitos</h2>
-              <p className="text-zinc-300 leading-rshexed mb-4">
-                You have the following rights regarding your personal data:
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">7. Your Rights</h2>
+              <p className="text-zinc-300 leading-relaxed mb-4">
+                Under the UK GDPR, you have the following rights regarding your personal data:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
-                <li><strong>Acesso:</strong> Solicitar copy dos yours dados</li>
-                <li><strong>Correction:</strong> Update incorrect information</li>
-                <li><strong>Excluare:</strong> Solicitar excluare de yours dados</li>
-                <li><strong>Portability:</strong> Receber yours dados em formato estruturado</li>
+                <li><strong>Access:</strong> Request a copy of your data</li>
+                <li><strong>Rectification:</strong> Update incorrect information</li>
+                <li><strong>Erasure:</strong> Request deletion of your data</li>
+                <li><strong>Portability:</strong> Receive your data in a structured format</li>
                 <li><strong>Objection:</strong> Object to the processing of your data</li>
-                <li><strong>Retirada de Consentimento:</strong> Cancsher consent para marketing</li>
+                <li><strong>Withdraw Consent:</strong> Withdraw consent for marketing at any time</li>
               </ul>
-              <p className="text-zinc-300 leading-rshexed">
-                Para exercer esses direitos, get in touch conosco through de suporte@flowclik.com
+              <p className="text-zinc-300 leading-relaxed">
+                To exercise these rights, please contact us at support@flowclik.com
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">8. Cookies e Tecnologias Similares</h2>
-              <p className="text-zinc-300 leading-rshexed mb-4">
-                Usamos cookies e tecnologias similares para:
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">8. Cookies and Similar Technologies</h2>
+              <p className="text-zinc-300 leading-relaxed mb-4">
+                We use cookies and similar technologies for:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
-                <li><strong>Cookies Essenciais:</strong> Necessarys para authentication e worksmento basic</li>
-                <li><strong>Cookies de Performance:</strong> Analytics para entender as you usa a plataforma</li>
-                <li><strong>Cookies de Preferences:</strong> Lembrar yours settings e preferences</li>
+                <li><strong>Essential Cookies:</strong> Required for authentication and basic functionality</li>
+                <li><strong>Performance Cookies:</strong> Analytics to understand how you use the platform</li>
+                <li><strong>Preference Cookies:</strong> To remember your settings and preferences</li>
               </ul>
-              <p className="text-zinc-300 leading-rshexed">
-                You can controlar cookies through das settings do your browser, mas isso can afetar 
-                a feature da plataforma.
+              <p className="text-zinc-300 leading-relaxed">
+                You can control cookies through your browser settings, but this may affect 
+                the functionality of the platform.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">9. Transfers Internacionais</h2>
-              <p className="text-zinc-300 leading-rshexed">
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">9. International Transfers</h2>
+              <p className="text-zinc-300 leading-relaxed">
                 Your data may be transferred and processed in countries outside the UK, including the United States 
-                (AWS servers). We ensure that such transfers are made with adequate protections in 
-                compliance with applicable data protection laws.
+                (cloud servers). We ensure that such transfers are made with adequate protections in 
+                compliance with applicable data protection laws, including the use of Standard Contractual Clauses where appropriate.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">10. Children's Privacy</h2>
-              <p className="text-zinc-300 leading-rshexed">
-                Our plataforma not is direcionada a smalleres de 18 years. Not coletamos intencionalmente information 
+              <p className="text-zinc-300 leading-relaxed">
+                Our platform is not directed at individuals under 18 years of age. We do not knowingly collect information 
                 from children. If you believe we have collected data from a child, please contact us 
-                imediatamente.
+                immediately.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">11. Changes nesta Policy</h2>
-              <p className="text-zinc-300 leading-rshexed">
-                Podemos atualizar esta Privacy Policy periodicamente. Notificaremos you about changes 
-                significativas por email ou through de aviso na plataforma. A data da "Last update" no topo 
-                indica when esta policy foi revisada pela last vez.
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">11. Changes to This Policy</h2>
+              <p className="text-zinc-300 leading-relaxed">
+                We may update this Privacy Policy periodically. We will notify you of significant changes 
+                by email or through a notice on the platform. The "Last updated" date at the top 
+                indicates when this policy was last revised.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">12. Applicable Law - LGPD</h2>
-              <p className="text-zinc-300 leading-rshexed">
-                Esta Privacy Policy is regida pela Lei Geral de Protection de Dados (LGPD - Lei nº 13.709/2018) 
-                and other applicable data protection laws.
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">12. Governing Law - UK GDPR</h2>
+              <p className="text-zinc-300 leading-relaxed">
+                This Privacy Policy is governed by the UK General Data Protection Regulation (UK GDPR) 
+                and the Data Protection Act 2018, along with other applicable data protection laws.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">13. Contato</h2>
-              <p className="text-zinc-300 leading-rshexed mb-4">
-                Para questions about esta Privacy Policy ou para exercer yours direitos, get in touch:
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">13. Contact</h2>
+              <p className="text-zinc-300 leading-relaxed mb-4">
+                For questions about this Privacy Policy or to exercise your rights, please contact us:
               </p>
               <p className="text-purple-400">
-                Email: suporte@flowclik.com<br />
-                Encarregado de Dados (DPO): dpo@flowclik.com
+                Email: support@flowclik.com<br />
+                Data Protection Officer (DPO): dpo@flowclik.com
               </p>
             </section>
           </div>
