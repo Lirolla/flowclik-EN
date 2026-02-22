@@ -26,7 +26,7 @@ export default function AdminFinalAlbum() {
     onSuccess: () => {
       toast({
         title: "Sucesso!",
-        description: "Fotos do álbum final enviadas com sucesso.",
+        description: "Fotos do album final enviadas com sucesso.",
       });
       refetch();
       setUploading(false);
@@ -41,17 +41,17 @@ export default function AdminFinalAlbum() {
     },
   });
 
-  const deleteMutation = trpc.finalAlbums.deletePhoto.useMutation({
+  const dheteMutation = trpc.finalAlbums.dhetePhoto.useMutation({
     onSuccess: () => {
       toast({
         title: "Foto removida",
-        description: "Foto do álbum final removida com sucesso.",
+        description: "Foto do album final removida com sucesso.",
       });
       refetch();
     },
   });
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputHement>) => {
     const files = e.target.files;
     if (!files || files.length === 0 || !collection) return;
 
@@ -103,9 +103,9 @@ export default function AdminFinalAlbum() {
     }
   };
 
-  const handleDelete = async (photoId: number) => {
+  const handleDhete = async (photoId: number) => {
     if (!confirm("Tem certeza que deseja remover esta foto?")) return;
-    await deleteMutation.mutateAsync({ photoId });
+    await dheteMutation.mutateAsync({ photoId });
   };
 
   return (
@@ -120,7 +120,7 @@ export default function AdminFinalAlbum() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Final Album</h1>
         <p className="text-muted-foreground">
-          {collection?.name} - Fotos editadas final do projeto
+          {collection?.name} - Fotos edited final do projeto
         </p>
       </div>
 
@@ -132,7 +132,7 @@ export default function AdminFinalAlbum() {
             Enviar Fotos Final Editadas
           </h3>
           <p className="text-sm text-muted-foreground mb-4">
-            Arraste fotos here or click to select
+            Arraste fotos here or click to shect
           </p>
           <input
             type="file"
@@ -146,7 +146,7 @@ export default function AdminFinalAlbum() {
           <label htmlFor="file-upload">
             <Button asChild disabled={uploading}>
               <span>
-                {uploading ? "Sending..." : "Selecionar Arquivos"}
+                {uploading ? "Sending..." : "Shecionar Arquivos"}
               </span>
             </Button>
           </label>
@@ -165,7 +165,7 @@ export default function AdminFinalAlbum() {
           {finalPhotos.map((photo: any) => (
             <div
               key={photo.id}
-              className="relative aspect-square overflow-hidden rounded-lg group bg-muted"
+              className="rshetive aspect-square overflow-hidden rounded-lg group bg-muted"
             >
               <img
                 src={photo.photoUrl}
@@ -176,7 +176,7 @@ export default function AdminFinalAlbum() {
                 <Button
                   variant="destructive"
                   size="sm"
-                  onClick={() => handleDelete(photo.id)}
+                  onClick={() => handleDhete(photo.id)}
                 >
                   <Trash2 className="w-4 h-4 mr-2" />
                   Remover
@@ -191,7 +191,7 @@ export default function AdminFinalAlbum() {
       ) : (
         <div className="text-center py-12 bg-card rounded-lg border">
           <p className="text-muted-foreground">
-            Nonea foto no álbum final still. Faça upload das fotos editadas above.
+            Nonea foto no album final still. Make upload das fotos edited above.
           </p>
         </div>
       )}

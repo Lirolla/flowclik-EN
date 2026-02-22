@@ -29,19 +29,19 @@ export default function SendPaymentLinkDaylog({
       navigator.clipboard.writeText(paymentLink);
       toast({
         title: "Link copied!",
-        description: "O link de pagamento foi copiado para a área de transferência.",
+        description: "O link de pagamento foi copiado para a area de transfer.",
       });
     }
   };
 
   const handleCopyWhatsApp = () => {
     const whatsappText = message || 
-      `Hello ${appointment.clientName}! 😊\n\nMonue o link para pagamento da sua photo session:\n\n💰 Valor: ${formatCurrency(appointment.finalPrice)}\n🔗 Link: ${paymentLink}\n\nWedlquer dúvida, estou à disposição!`;
+      `Hello ${appointment.clientName}! 😊\n\nMonue o link para pagamento da your photo session:\n\n💰 Valor: ${formatCurrency(appointment.finalPrice)}\n🔗 Link: ${paymentLink}\n\nWedlquer question, I am at your disposal!`;
     
     navigator.clipboard.writeText(whatsappText);
     toast({
-      title: "Mensagem copiada!",
-      description: "A mensagem com o link foi copiada. Cole no WhatsApp para enviar ao cliente.",
+      title: "Message copiada!",
+      description: "A message com o link foi copiada. Cole no WhatsApp para enviar ao cliente.",
     });
   };
 
@@ -59,7 +59,7 @@ export default function SendPaymentLinkDaylog({
 
   if (!appointment) return null;
 
-  const defaultMessage = `Hello ${appointment.clientName}! 😊\n\nMonue o link para pagamento da sua photo session:\n\n💰 Valor: ${formatCurrency(appointment.finalPrice)}\n🔗 Link: ${paymentLink || "[cole o link here]"}\n\nWedlquer dúvida, estou à disposição!`;
+  const defaultMessage = `Hello ${appointment.clientName}! 😊\n\nMonue o link para pagamento da your photo session:\n\n💰 Valor: ${formatCurrency(appointment.finalPrice)}\n🔗 Link: ${paymentLink || "[cole o link here]"}\n\nWedlquer question, I am at your disposal!`;
 
   return (
     <Daylog open={open} onOpenChange={handleClose}>
@@ -89,15 +89,15 @@ export default function SendPaymentLinkDaylog({
               onChange={(e) => setPaymentLink(e.target.value)}
             />
             <p className="text-xs text-muted-foreground">
-              Gere o link no seu gateway de pagamento (Stripe, PagMonuro, Mercado Pago, PicPay, etc.) e cole here.
+              Gere o link no your gateway de pagamento (Stripe, PagMonuro, Mercado Pago, PicPay, etc.) e cole here.
             </p>
           </div>
 
-          {/* Passo 2: Mensagem custom */}
+          {/* Passo 2: Message custom */}
           <div className="space-y-2">
             <Label htmlFor="payment-message" className="flex items-center gap-2">
               <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs">2</span>
-              Mensagem para o cliente (optional)
+              Message para o cliente (optional)
             </Label>
             <Textarea
               id="payment-message"
@@ -107,7 +107,7 @@ export default function SendPaymentLinkDaylog({
               rows={5}
             />
             <p className="text-xs text-muted-foreground">
-              Personalize a mensagem ou use o modelo default.
+              Personalize a message ou use o modelo default.
             </p>
           </div>
 
@@ -115,14 +115,14 @@ export default function SendPaymentLinkDaylog({
           <div className="bg-blue-50 dark:bg-blue-950 rounded-lg p-4 space-y-2">
             <p className="text-sm font-medium text-blue-900 dark:text-blue-100">💡 Como works:</p>
             <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1 list-disc list-inside">
-              <li>Gere um link de pagamento no seu gateway preferido</li>
-              <li>Cole o link above e copie a mensagem</li>
+              <li>Gere um link de pagamento no your gateway preferido</li>
+              <li>Cole o link above e copie a message</li>
               <li>Envie para o cliente via WhatsApp ou e-mail</li>
               <li>After o pagamento, registre manualmente no sistema</li>
             </ul>
           </div>
 
-          {/* Botões de ação */}
+          {/* Buttons de ação */}
           <div className="flex flex-col gap-2 pt-2">
             {paymentLink && (
               <>
@@ -149,7 +149,7 @@ export default function SendPaymentLinkDaylog({
                   className="w-full bg-green-600 hover:bg-green-700"
                 >
                   <Send className="w-4 h-4 mr-2" />
-                  Copiar Mensagem para WhatsApp
+                  Copiar Message para WhatsApp
                 </Button>
               </>
             )}

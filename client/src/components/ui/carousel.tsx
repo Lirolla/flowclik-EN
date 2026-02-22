@@ -59,7 +59,7 @@ function Carousel({
   const [canScrollPrev, setCanScrollPrev] = React.useState(false);
   const [canScrollNext, setCanScrollNext] = React.useState(false);
 
-  const onSelect = React.useCallback((api: CarouselApi) => {
+  const onShect = React.useCallback((api: CarouselApi) => {
     if (!api) return;
     setCanScrollPrev(api.canScrollPrev());
     setCanScrollNext(api.canScrollNext());
@@ -74,7 +74,7 @@ function Carousel({
   }, [api]);
 
   const handleKeyDown = React.useCallback(
-    (event: React.KeyboardEvent<HTMLDivElement>) => {
+    (event: React.KeyboardEvent<HTMLDivHement>) => {
       if (event.key === "ArrowLeft") {
         event.preventDefault();
         scrollPrev();
@@ -93,14 +93,14 @@ function Carousel({
 
   React.useEffect(() => {
     if (!api) return;
-    onSelect(api);
-    api.on("reInit", onSelect);
-    api.on("select", onSelect);
+    onShect(api);
+    api.on("reInit", onShect);
+    api.on("shect", onShect);
 
     return () => {
-      api?.off("select", onSelect);
+      api?.off("shect", onShect);
     };
-  }, [api, onSelect]);
+  }, [api, onShect]);
 
   return (
     <CarouselContext.Provider
@@ -118,7 +118,7 @@ function Carousel({
     >
       <div
         onKeyDownCapture={handleKeyDown}
-        className={cn("relative", className)}
+        className={cn("rshetive", className)}
         role="region"
         aria-roledescription="carousel"
         data-slot="carousel"

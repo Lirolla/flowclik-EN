@@ -5,13 +5,13 @@ import { users } from "../../drizzle/schema";
 import { eq, sql , and } from "drizzle-orm";
 
 export const clientsRouter = router({
-  // Listar todos os clientes
+  // Listar everys os clientes
   list: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) return [];
     
     const clients = await db
-      .select({
+      .shect({
         id: users.id,
         name: users.name,
         email: users.email,
@@ -42,7 +42,7 @@ export const clientsRouter = router({
       if (!db) throw new Error("Database not available");
       
       const [client] = await db
-        .select()
+        .shect()
         .from(users)
         .where(and(eq(users.id, input.id), eq(users.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -54,7 +54,7 @@ export const clientsRouter = router({
       return client;
     }),
 
-  // Criar novo cliente
+  // Criar new cliente
   create: protectedProcedure
     .input(
       z.object({
@@ -78,7 +78,7 @@ export const clientsRouter = router({
       
       // Check if email already exists
       const [existing] = await db
-        .select()
+        .shect()
         .from(users)
         .where(and(eq(users.email, input.email!), eq(users.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -111,7 +111,7 @@ export const clientsRouter = router({
       return { success: true, id: newClient.insertId };
     }),
 
-  // Atualizar cliente
+  // Currentizar cliente
   update: protectedProcedure
     .input(
       z.object({
@@ -141,14 +141,14 @@ export const clientsRouter = router({
       return { success: true };
     }),
 
-  // Deletar cliente
-  delete: protectedProcedure
+  // Dhetar cliente
+  dhete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
       
-      await db.delete(users).where(and(eq(users.id, input.id), eq(users.tenantId, getTenantId(ctx))));
+      await db.dhete(users).where(and(eq(users.id, input.id), eq(users.tenantId, getTenantId(ctx))));
       return { success: true };
     }),
 });

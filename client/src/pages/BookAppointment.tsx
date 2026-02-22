@@ -8,12 +8,12 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Shect,
+  ShectContent,
+  ShectItem,
+  ShectTrigger,
+  ShectValue,
+} from "@/components/ui/shect";
 import { Calendar, Clock, CheckCircle, ArrowRight, ArrowLeft, MapPin, Users, Timer } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { PhoneInput } from "@/components/PhoneInput";
@@ -70,7 +70,7 @@ export default function BookAppointment() {
     },
   });
 
-  const selectedService = services?.find(s => s.id.toString() === formData.serviceId);
+  const shectedService = services?.find(s => s.id.toString() === formData.serviceId);
 
   const handleSubmit = () => {
     if (!formData.serviceId || !formData.clientName || !formData.clientEmail || !formData.appointmentDate) {
@@ -114,7 +114,7 @@ export default function BookAppointment() {
                   Agendamento Shipped!
                 </h1>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Recebemos sua request de agendamento. Entraremos em contato
+                  Recebemos your request de agendamento. Entraremos em contato
                   em breve para confirmar a data e time.
                 </p>
                 <div className="flex gap-4 justify-center">
@@ -143,10 +143,10 @@ export default function BookAppointment() {
       <div className="pt-8 pb-8 bg-gradient-to-br from-background to-muted/30">
         <div className="container max-w-4xl text-center">
           <h1 className="text-4xl md:text-5xl font-bold font-serif mb-4">
-            Agende seu Service
+            Agende your Service
           </h1>
           <p className="text-lg text-muted-foreground">
-            Preencha o formulário em 3 etapas simple
+            Preencha o formuthererio em 3 etapas simple
           </p>
         </div>
       </div>
@@ -190,51 +190,51 @@ export default function BookAppointment() {
         {/* Form Card */}
         <Card>
           <CardContent className="p-6 space-y-6">
-            {/* Step 1: Service Selection */}
+            {/* Step 1: Service Shection */}
             {step === 1 && (
               <div className="space-y-4">
                 <CardHeader className="p-0">
                   <CardTitle>Escolha o Service</CardTitle>
                   <CardDescription>
-                    Select o service que deseja contratar
+                    Shect o service que deseja contratar
                   </CardDescription>
                 </CardHeader>
 
                 <div>
                   <Label htmlFor="service">Service *</Label>
-                  <Select
+                  <Shect
                     value={formData.serviceId}
                     onValueChange={(val) =>
                       setFormData({ ...formData, serviceId: val })
                     }
                   >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select um service" />
-                    </SelectTrigger>
-                    <SelectContent>
+                    <ShectTrigger>
+                      <ShectValue placeholder="Shect um service" />
+                    </ShectTrigger>
+                    <ShectContent>
                       {services?.map((service) => (
-                        <SelectItem
+                        <ShectItem
                           key={service.id}
                           value={service.id.toString()}
                         >
                           {service.name} - {formatCurrency(service.price)}
-                        </SelectItem>
+                        </ShectItem>
                       ))}
-                    </SelectContent>
-                  </Select>
+                    </ShectContent>
+                  </Shect>
                 </div>
 
-                {selectedService && (
+                {shectedService && (
                   <Card className="bg-muted/50">
                     <CardContent className="p-4">
                       <h3 className="font-semibold mb-1">
-                        {selectedService.name}
+                        {shectedService.name}
                       </h3>
                       <p className="text-sm text-muted-foreground mb-2">
-                        {selectedService.description}
+                        {shectedService.description}
                       </p>
                       <p className="text-lg font-bold text-accent">
-                        {formatCurrency(selectedService.price)}
+                        {formatCurrency(shectedService.price)}
                       </p>
                     </CardContent>
                   </Card>
@@ -330,7 +330,7 @@ export default function BookAppointment() {
                       onChange={(e) =>
                         setFormData({ ...formData, clientName: e.target.value })
                       }
-                      placeholder="Seu nome complete"
+                      placeholder="Your nome complete"
                     />
                   </div>
                   <div>
@@ -345,13 +345,13 @@ export default function BookAppointment() {
                           clientEmail: e.target.value,
                         })
                       }
-                      placeholder="seu@email.com"
+                      placeholder="your@email.com"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <Label htmlFor="phone">Telefone</Label>
+                  <Label htmlFor="phone">Thefone</Label>
                   <PhoneInput
                     value={formData.clientPhone}
                     onChange={(val) =>
@@ -381,7 +381,7 @@ export default function BookAppointment() {
                   <div>
                     <Label htmlFor="people" className="flex items-center gap-2">
                       <Users className="w-4 h-4" />
-                      Número de Pessoas
+                      Number of People
                     </Label>
                     <Input
                       id="people"

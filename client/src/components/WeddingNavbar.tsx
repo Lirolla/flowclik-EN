@@ -77,7 +77,7 @@ export default function WeddingNavbar({ currentPage }: WeddingNavbarProps) {
                 })}
               </ul>
               
-              {/* Botões Cliente e Carrinho */}
+              {/* Buttons Cliente e Carrinho */}
               <div className="flex items-center gap-3">
                 <Link href="/client-access">
                   <a className="px-3 py-1.5 text-xs bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors flex items-center gap-2">

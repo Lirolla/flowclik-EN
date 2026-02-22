@@ -125,7 +125,7 @@ function AdminSessionGalleryContent() {
         <Card>
           <CardHeader>
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Selection Fee
+              Shection Fee
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -157,12 +157,12 @@ function AdminSessionGalleryContent() {
             <Button asChild>
               <a href={clientLink} target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="w-4 h-4 mr-2" />
-                Visualizar
+                Viyourlizar
               </a>
             </Button>
           </div>
           <p className="text-sm text-muted-foreground mt-2">
-            O cliente needsrá digitar o email cadastrado para acessar as fotos
+            The client will need to enter their registered email to access the photos
           </p>
         </CardContent>
       </Card>
@@ -176,7 +176,7 @@ function AdminSessionGalleryContent() {
           <div className="text-center py-8">
             <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
             <p className="text-muted-foreground mb-4">
-              Use a página de <strong>Galleries</strong> para fazer upload das fotos do ensaio
+              Use a page de <strong>Galleries</strong> para fazer upload das fotos do ensaio
             </p>
             <Button asChild>
               <Link href={`/admin/galleries/${galleryData.id}/upload`}>
@@ -184,7 +184,7 @@ function AdminSessionGalleryContent() {
               </Link>
             </Button>
             <p className="text-sm text-muted-foreground mt-4">
-              Dica: Select a galeria "{galleryData.name}" ao fazer upload
+              Dica: Shect a galeria "{galleryData.name}" ao fazer upload
             </p>
           </div>
         </CardContent>

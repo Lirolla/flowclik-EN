@@ -74,9 +74,9 @@ export default function AdminAbout() {
     <DashboardLayout>
     <div className="container max-w-4xl py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">Page Sobre</h1>
+        <h1 className="text-3xl font-bold mb-2">Page About</h1>
         <p className="text-muted-foreground">
-          Configure o content da página "About" do seu site
+          Configure o content da page "About" do your site
         </p>
       </div>
 

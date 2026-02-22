@@ -15,7 +15,7 @@ export const clientDetailsRouter = router({
       if (!db) throw new Error("Database not available");
 
       return await db
-        .select()
+        .shect()
         .from(appointments)
         .where(and(eq(appointments.clientEmail, input.email), eq(appointments.tenantId, getTenantId(ctx))))
         .orderBy(appointments.appointmentDate);
@@ -31,7 +31,7 @@ export const clientDetailsRouter = router({
       if (!db) throw new Error("Database not available");
 
       return await db
-        .select()
+        .shect()
         .from(orders)
         .where(and(eq(orders.customerEmail, input.email), eq(orders.tenantId, getTenantId(ctx))))
         .orderBy(orders.createdAt);
@@ -47,12 +47,12 @@ export const clientDetailsRouter = router({
       if (!db) throw new Error("Database not available");
 
       const clientAppointments = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(and(eq(appointments.clientEmail, input.email), eq(appointments.tenantId, getTenantId(ctx))));
 
       const clientOrders = await db
-        .select()
+        .shect()
         .from(orders)
         .where(and(eq(orders.customerEmail, input.email), eq(orders.tenantId, getTenantId(ctx))));
 

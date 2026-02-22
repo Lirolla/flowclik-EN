@@ -32,7 +32,7 @@ export default function AdminUsage() {
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
           <AlertDescription>
-            Error loading estatísticas de uso. Try again mais tarde.
+            Error loading statistics de uso. Try again mais tarde.
           </AlertDescription>
         </Alert>
       </div>
@@ -60,7 +60,7 @@ export default function AdminUsage() {
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Uso da Conta</h1>
           <p className="text-muted-foreground mt-2">
-            Monitore o uso de armazenamento, galerias e fotos da sua conta
+            Monitore o uso de storage, galerias e fotos da your conta
           </p>
         </div>
         <Button onClick={() => navigate("/admin/subscription")} className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700">
@@ -98,7 +98,7 @@ export default function AdminUsage() {
                 <AlertDescription className="text-sm">
                   {stats.storage.percentage >= 90 
                     ? "Limite quase atingido! Considere fazer upgrade."
-                    : "You is usando mais de 80% do seu armazenamento."}
+                    : "You is usando mais de 80% do your storage."}
                 </AlertDescription>
               </Alert>
             )}
@@ -132,7 +132,7 @@ export default function AdminUsage() {
                 <AlertDescription className="text-sm">
                   {stats.galleries.percentage >= 90 
                     ? "Limite de galerias quase atingido!"
-                    : "You is usando mais de 80% das suas galerias."}
+                    : "You is usando mais de 80% das yours galerias."}
                 </AlertDescription>
               </Alert>
             )}
@@ -161,7 +161,7 @@ export default function AdminUsage() {
               <span className="font-medium">{stats.photos.raw}</span>
             </div>
             <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Fotos editadas:</span>
+              <span className="text-muted-foreground">Fotos edited:</span>
               <span className="font-medium">{stats.photos.edited}</span>
             </div>
           </CardContent>
@@ -175,10 +175,10 @@ export default function AdminUsage() {
             <div>
               <CardTitle className="text-2xl flex items-center gap-2">
                 <CreditCard className="w-6 h-6 text-primary" />
-                Plyear Atual
+                Plyear Current
               </CardTitle>
               <CardDescription className="mt-2">
-                Gerencie sua signature e add-ons
+                Gerencie your signature e add-ons
               </CardDescription>
             </div>
             <div className="text-right">

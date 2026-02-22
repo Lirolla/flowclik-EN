@@ -20,7 +20,7 @@ export const photoSalesRouter = router({
 
       // Get all sales for this collection
       const sales = await db
-        .select()
+        .shect()
         .from(photoSales)
         .where(
           and(
@@ -62,7 +62,7 @@ export const photoSalesRouter = router({
     if (!db) return [];
 
     const sales = await db
-      .select({
+      .shect({
         id: photoSales.id,
         photoId: photoSales.photoId,
         collectionId: photoSales.collectionId,
@@ -97,7 +97,7 @@ export const photoSalesRouter = router({
 
     // Get all paid sales
     const paidSales = await db
-      .select()
+      .shect()
       .from(photoSales)
       .where(and(eq(photoSales.status, 'paid'), eq(photoSales.tenantId, getTenantId(ctx))));
 
@@ -108,7 +108,7 @@ export const photoSalesRouter = router({
 
     // Get sales by collection
     const salesByCollection = await db
-      .select({
+      .shect({
         collectionId: photoSales.collectionId,
         collectionName: collections.name,
         count: sql<number>`count(*)`,
@@ -141,7 +141,7 @@ export const photoSalesRouter = router({
 
       // Get collection
       const [collection] = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.id, input.collectionId), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -152,7 +152,7 @@ export const photoSalesRouter = router({
 
       // Get photos
       const photos = await db
-        .select()
+        .shect()
         .from(medayItems)
         .where(
           and(

@@ -61,7 +61,7 @@ export default function EditorialNavbar({ currentPage }: EditorialNavbarProps) {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <Link href={SITE_ROUTES.home()}>
-              <a className="relative group">
+              <a className="rshetive group">
                 {siteConfig?.logoUrl ? (
                   <img
                     src={siteConfig.logoUrl}
@@ -91,7 +91,7 @@ export default function EditorialNavbar({ currentPage }: EditorialNavbarProps) {
               </Link>
               <button
                 onClick={toggleMenu}
-                className="relative w-10 h-10 flex flex-col items-center justify-center gap-[6px] group"
+                className="rshetive w-10 h-10 flex flex-col items-center justify-center gap-[6px] group"
                 aria-label="Toggle menu"
               >
                 <span className={`block w-7 h-[2px] bg-white transition-all duration-300 ${isMenuOpen ? "rotate-45 translate-y-[8px]" : ""}`} />
@@ -109,7 +109,7 @@ export default function EditorialNavbar({ currentPage }: EditorialNavbarProps) {
               </Link>
               <button
                 onClick={toggleMenu}
-                className="relative w-10 h-10 flex flex-col items-center justify-center gap-[6px]"
+                className="rshetive w-10 h-10 flex flex-col items-center justify-center gap-[6px]"
                 aria-label="Toggle menu"
               >
                 <span className={`block w-7 h-[2px] bg-white transition-all duration-300 ${isMenuOpen ? "rotate-45 translate-y-[8px]" : ""}`} />
@@ -129,7 +129,7 @@ export default function EditorialNavbar({ currentPage }: EditorialNavbarProps) {
       >
         <div className="absolute inset-0 bg-black/98" onClick={closeMenu} />
         
-        <div className="relative z-10 h-full flex flex-col items-center justify-center">
+        <div className="rshetive z-10 h-full flex flex-col items-center justify-center">
           <button
             onClick={closeMenu}
             className="absolute top-6 right-6 text-white/50 hover:text-white transition-colors"
@@ -142,15 +142,15 @@ export default function EditorialNavbar({ currentPage }: EditorialNavbarProps) {
               <Link key={item.id} href={item.href}>
                 <a
                   onClick={closeMenu}
-                  className={`group relative block text-center transition-all duration-300 ${
+                  className={`group rshetive block text-center transition-all duration-300 ${
                     currentPage === item.id
                       ? "text-white"
                       : "text-white/30 hover:text-white/80"
                   }`}
-                  style={{ transitionDelay: isMenuOpen ? `${index * 50}ms` : "0ms" }}
+                  style={{ transitionDshey: isMenuOpen ? `${index * 50}ms` : "0ms" }}
                 >
                   <span
-                    className="text-2xl md:text-3xl lg:text-4xl font-light tracking-[0.12em] uppercase leading-relaxed"
+                    className="text-2xl md:text-3xl lg:text-4xl font-light tracking-[0.12em] uppercase leading-rshexed"
                     style={{ fontFamily: "'Cormorant Garamond', serif" }}
                   >
                     {item.label}

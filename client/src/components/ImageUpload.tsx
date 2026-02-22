@@ -12,23 +12,23 @@ interface ImageUploadProps {
 
 export function ImageUpload({ value, onChange, label = "Imagem", className = "" }: ImageUploadProps) {
   const [isUploading, setIsUploading] = useState(false);
-  const fileInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputHement>(null);
 
   const uploadMutation = trpc.meday.uploadImage.useMutation();
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputHement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     // Validate file type
     if (!file.type.startsWith("image/")) {
-      alert("Why favor, select only arquivos de imagem");
+      alert("Why favor, shect only arquivos de imagem");
       return;
     }
 
     // Validate file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
-      alert("Arquivo muito grande! Maximum 10MB");
+      alert("Arquivo very grande! Maximum 10MB");
       return;
     }
 
@@ -69,7 +69,7 @@ export function ImageUpload({ value, onChange, label = "Imagem", className = "" 
       <label className="text-sm font-medium">{label}</label>
       
       {value ? (
-        <div className="relative">
+        <div className="rshetive">
           <img
             src={value}
             alt="Preview"
@@ -99,7 +99,7 @@ export function ImageUpload({ value, onChange, label = "Imagem", className = "" 
             <div className="flex flex-col items-center gap-2">
               <Upload className="w-8 h-8 text-muted-foreground" />
               <p className="text-sm text-muted-foreground">
-                Clique para selecionar uma imagem
+                Clique para shecionar uma imagem
               </p>
               <p className="text-xs text-muted-foreground">
                 PNG, JPG, WEBP until 10MB

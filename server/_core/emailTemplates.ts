@@ -12,7 +12,7 @@ function getResend(): Resend {
 }
 
 // ============================================================
-// Envio genérico via Resend
+// Envio genisrico via Resend
 // ============================================================
 export async function sendEmail(opts: {
   to: string | string[];
@@ -65,7 +65,7 @@ ${content}
 </td></tr>
 <tr><td align="center" style="padding:30px 20px;">
   <p style="color:#4b5563;font-size:12px;margin:0;line-height:1.6;">
-    ${footer || "Este email foi sent automaticamente pela plataforma FlowClik."}<br>
+    ${footer || "Este email foi sent automaticamente pshe plataforma FlowClik."}<br>
     <a href="https://flowclik.com" style="color:#e879f9;text-decoration:none;">flowclik.com</a>
   </p>
   <p style="color:#374151;font-size:11px;margin:15px 0 0 0;">&copy; ${new Date().getFullYear()} FlowClik - All rights reserved</p>
@@ -118,11 +118,11 @@ interface PaymentData {
   paymentDate: string;
 }
 
-interface SelectionData {
+interface ShectionData {
   clientName: string;
   clientEmail: string;
   galleryTitle: string;
-  selectedCount: number;
+  shectedCount: number;
   totalPhotos: number;
 }
 
@@ -133,9 +133,9 @@ interface SelectionData {
 export async function sendAppointmentConfirmationEmail(data: AppointmentData): Promise<boolean> {
   const html = base(`
 <h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">📅 Agendamento Confirmado!</h1>
-<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Seu ensaio photography is marcado</p>
+<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Your ensaio photography is marcado</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.clientName}</strong>,</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Your appointment has been confirmed com sucesso! Estamos ansiosos para capturar moments especiais para you.</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Your appointment has been confirmed com sucesso! Estamos ansiosos para capturar moments special para you.</p>
 ${card([
   {label:"📸 Service", value: data.serviceName},
   {label:"📅 Data", value: data.appointmentDate},
@@ -144,7 +144,7 @@ ${card([
 ])}
 <p style="color:#9ca3af;font-size:14px;line-height:1.7;margin-top:20px;">
 <strong style="color:#e5e7eb;">O que vem now?</strong><br>
-O photographer entrará em contato para confirmar os details final. After a sesare, you receberá um link para visualizar e selecionar suas fotos favoritas.</p>
+The photographer will contact you to confirm the final details. After the session, you will receive a link to view and select your favourite photos.</p>
   `);
   return sendEmail({ to: data.clientEmail, subject: "📅 Agendamento Confirmado!", html });
 }
@@ -152,14 +152,14 @@ O photographer entrará em contato para confirmar os details final. After a sesa
 export async function sendAppointmentCancelledEmail(data: AppointmentData): Promise<boolean> {
   const html = base(`
 <h1 style="color:#ef4444;font-size:24px;margin:0 0 8px 0;">❌ Agendamento Cancelled</h1>
-<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Seu agendamento foi cancelled</p>
+<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Your agendamento foi cancelled</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.clientName}</strong>,</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Infelizmente seu agendamento foi cancelled.</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Infelizmente your agendamento foi cancelled.</p>
 ${card([
   {label:"📸 Service", value: data.serviceName || "N/A"},
   {label:"📅 Data", value: data.appointmentDate || "N/A"},
 ])}
-<p style="color:#d1d5db;font-size:14px;line-height:1.7;">Se you tiver alguma dúvida ou quiser reagendar, get in touch conosco.</p>
+<p style="color:#d1d5db;font-size:14px;line-height:1.7;">Se you tiver somea question ou quiser reagendar, get in touch conosco.</p>
   `);
   return sendEmail({ to: data.clientEmail, subject: "❌ Agendamento Cancelled", html });
 }
@@ -172,40 +172,40 @@ export async function sendGalleryReadyEmail(data: GalleryData): Promise<boolean>
 </div>` : "";
 
   const html = base(`
-<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">📸 Sua Gallery Está Pronta!</h1>
+<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">📸 Your Gallery Is Pronta!</h1>
 <p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Hour de ver os resultados</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.clientName}</strong>,</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Great news! Your photos are ready e already estão disponíveis na sua galeria online!</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Great news! Your photos are ready e already are available na your galeria online!</p>
 ${card([
   {label:"📁 Gallery", value: data.galleryTitle},
   {label:"🖼️ Total de Fotos", value: data.photoCount + " fotos"},
 ])}
 ${passwordSection}
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Access your gallery privada para ver todas as fotos e selecionar suas favoritas!</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Access your gallery privada para ver everys as fotos e shecionar yours favourite!</p>
 ${btn("🖼️ Acessar Minha Gallery", data.galleryUrl)}
-<p style="color:#6b7280;font-size:13px;margin-top:15px;text-align:center;">Navegue pelas fotos e clique no ❤️ nas suas favoritas.</p>
+<p style="color:#6b7280;font-size:13px;margin-top:15px;text-align:center;">Navegue pshes fotos e clique no ❤️ nas yours favourite.</p>
   `);
-  return sendEmail({ to: data.clientEmail, subject: '📸 Sua galeria "' + data.galleryTitle + '" is ready!', html });
+  return sendEmail({ to: data.clientEmail, subject: '📸 Your galeria "' + data.galleryTitle + '" is ready!', html });
 }
 
-export async function sendSelectionNotificationEmail(data: SelectionData): Promise<boolean> {
+export async function sendShectionNotificationEmail(data: ShectionData): Promise<boolean> {
   const html = base(`
-<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">❤️ Photo Selection Recebida!</h1>
-<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Thank you pela sua selection</p>
+<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">❤️ Photo Shection Recebida!</h1>
+<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Thank you pshe your shection</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.clientName}</strong>,</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Recebemos suas selections de fotos favoritas! Thank you por dedicar tempo para escolher as melhores imagens.</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Recebemos yours shections de fotos favourite! Thank you por dedicar tempo para escolher as betteres imagens.</p>
 ${card([
   {label:"📁 Gallery", value: data.galleryTitle},
-  {label:"❤️ Selected Photos", value: data.selectedCount + " de " + data.totalPhotos},
+  {label:"❤️ Shected Photos", value: data.shectedCount + " de " + data.totalPhotos},
 ])}
 <p style="color:#d1d5db;font-size:14px;line-height:1.7;"><strong style="color:#e5e7eb;">Next steps:</strong></p>
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:10px 0;">
-<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">🎨 Agora vamos editar suas fotos selecionadas com todo carinho</td></tr>
-<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">⏰ As fotos editadas ficarão prontas em until 5 business days</td></tr>
-<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">📧 You receberá um email com o link para download</td></tr>
+<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">🎨 Now vamos editar yours fotos shecionadas com every carinho</td></tr>
+<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">⏰ The edited photos will be ready within 5 business days</td></tr>
+<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">📧 You will receive um email com o link para download</td></tr>
 </table>
   `);
-  return sendEmail({ to: data.clientEmail, subject: "❤️ Photo Selection Recebida!", html });
+  return sendEmail({ to: data.clientEmail, subject: "❤️ Photo Shection Recebida!", html });
 }
 
 export async function sendPhotosDeliveredEmail(data: {
@@ -215,16 +215,16 @@ export async function sendPhotosDeliveredEmail(data: {
   downloadUrl: string;
 }): Promise<boolean> {
   const html = base(`
-<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">🎉 Suas Fotos Foram Delivereds!</h1>
+<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">🎉 Yours Fotos Outsidem Delivereds!</h1>
 <p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Download available</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.clientName}</strong>,</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Suas fotos editadas estão prontas para download! It was a pleasure working with you.</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Yours fotos edited are prontas para download! It was a pleasure working with you.</p>
 ${card([{label:"📁 Gallery", value: data.galleryTitle}])}
 ${btn("📥 Baixar Minhas Fotos", data.downloadUrl)}
 <p style="color:#d1d5db;font-size:14px;line-height:1.7;margin-top:20px;text-align:center;">
 Thank you por nos escolher! Se gostou do trabalho, share with friends and family. 💚</p>
   `);
-  return sendEmail({ to: data.clientEmail, subject: "🎉 Suas Fotos Foram Delivereds!", html });
+  return sendEmail({ to: data.clientEmail, subject: "🎉 Yours Fotos Outsidem Delivereds!", html });
 }
 
 export async function sendPaymentConfirmationEmail(data: PaymentData): Promise<boolean> {
@@ -232,7 +232,7 @@ export async function sendPaymentConfirmationEmail(data: PaymentData): Promise<b
 <h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">✅ Pagamento Confirmado!</h1>
 <p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Thank you pelo pagamento</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.clientName}</strong>,</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Seu pagamento foi confirmado com sucesso!</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Your pagamento foi confirmado com sucesso!</p>
 ${card([
   {label:"📸 Service", value: data.serviceName},
   {label:"💰 Valor", value: "£ " + data.amount.toFixed(2).replace(".",",")},
@@ -253,20 +253,20 @@ export async function sendWelcomePhotographerEmail(data: {
 }): Promise<boolean> {
   const html = base(`
 <h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">🎉 Bem-vindo(a) ao FlowClik!</h1>
-<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Sua plataforma de photography is pronta</p>
+<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Your plataforma de photography is pronta</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.name}</strong>,</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Seja muito bem-vindo(a) ao FlowClik! Sua conta foi criada com sucesso e seu site already is no ar.</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Seja very bem-vindo(a) ao FlowClik! Your conta foi criada com sucesso e your site already is no ar.</p>
 ${card([
-  {label:"🌐 Seu Site", value: data.subdomain + ".flowclik.com"},
+  {label:"🌐 Your Site", value: data.subdomain + ".flowclik.com"},
   {label:"📊 Painel Admin", value: "Access via the button below"},
 ])}
 <p style="color:#d1d5db;font-size:15px;line-height:1.7;"><strong style="color:#e5e7eb;">Next steps:</strong></p>
 <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:10px 0;">
-<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Personalize seu site (cores, logo, about)</td></tr>
-<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Adicione seus services e preços</td></tr>
-<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Faça upload do seu portfólio</td></tr>
-<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Configure seus times disponíveis</td></tr>
-<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Compartilhe seu link com clientes!</td></tr>
+<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Personalize your site (cores, logo, about)</td></tr>
+<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Adicione yours services e prices</td></tr>
+<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Make upload do your portfolio</td></tr>
+<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Configure yours times available</td></tr>
+<tr><td style="color:#d1d5db;font-size:14px;padding:6px 0;">✅ Compartilhe your link com clientes!</td></tr>
 </table>
 ${btn("🚀 Acessar Meu Painel", "https://" + data.subdomain + ".flowclik.com/admin")}
   `);
@@ -285,42 +285,42 @@ export async function sendNewAppointmentNotification(data: {
   price: string;
 }): Promise<boolean> {
   const html = base(`
-<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">📅 Novo Agendamento!</h1>
+<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">📅 New Agendamento!</h1>
 <p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Um cliente acabou de agendar</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.photographerName}</strong>,</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">You recebeu um novo agendamento! Confira os details:</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">You recebeu um new agendamento! Confira os details:</p>
 ${card([
   {label:"👤 Cliente", value: data.clientName},
   {label:"📧 Email", value: data.clientEmail},
-  {label:"📱 Telefone", value: data.clientPhone},
+  {label:"📱 Thefone", value: data.clientPhone},
   {label:"📸 Service", value: data.serviceName},
   {label:"📅 Data", value: data.date},
   {label:"🕐 Time", value: data.time},
   {label:"💰 Valor", value: data.price},
 ])}
   `);
-  return sendEmail({ to: data.photographerEmail, subject: "📅 Novo Agendamento - " + data.clientName, html });
+  return sendEmail({ to: data.photographerEmail, subject: "📅 New Agendamento - " + data.clientName, html });
 }
 
-export async function sendClientSelectionNotification(data: {
+export async function sendClientShectionNotification(data: {
   photographerEmail: string;
   photographerName: string;
   clientName: string;
   galleryTitle: string;
-  selectedCount: number;
+  shectedCount: number;
 }): Promise<boolean> {
   const html = base(`
-<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">✅ Cliente Selecionou Fotos!</h1>
-<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Selection pronta para reviare</p>
+<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">✅ Cliente Shecionou Fotos!</h1>
+<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Shection pronta para reviare</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.photographerName}</strong>,</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;"><strong style="color:#e879f9;">${data.clientName}</strong> finalizou a selection de fotos da galeria <strong>"${data.galleryTitle}"</strong>.</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;"><strong style="color:#e879f9;">${data.clientName}</strong> finalizou a shection de fotos da galeria <strong>"${data.galleryTitle}"</strong>.</p>
 ${card([
   {label:"📁 Gallery", value: data.galleryTitle},
-  {label:"🖼️ Selected Photos", value: data.selectedCount + " fotos"},
+  {label:"🖼️ Shected Photos", value: data.shectedCount + " fotos"},
 ])}
-<p style="color:#d1d5db;font-size:14px;line-height:1.7;">Acesse o painel para revisar a selection e iniciar a editing final.</p>
+<p style="color:#d1d5db;font-size:14px;line-height:1.7;">Acesse o painel para revisar a shection e iniciar a editing final.</p>
   `);
-  return sendEmail({ to: data.photographerEmail, subject: "✅ " + data.clientName + " selecionou fotos - " + data.galleryTitle, html });
+  return sendEmail({ to: data.photographerEmail, subject: "✅ " + data.clientName + " shecionou fotos - " + data.galleryTitle, html });
 }
 
 export async function sendTicketReplyNotification(data: {
@@ -333,7 +333,7 @@ export async function sendTicketReplyNotification(data: {
 <h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">💬 Ticket Answered</h1>
 <p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Support FlowClik</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.photographerName}</strong>,</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Seu ticket de suporte recebeu uma resposta:</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Your ticket de suporte recebeu uma resposta:</p>
 ${card([{label:"📋 Assunto", value: data.ticketSubject}])}
 <div style="background-color:#141824;border-radius:10px;padding:15px 20px;margin:15px 0;border-left:3px solid #e879f9;">
 <p style="color:#d1d5db;font-size:14px;line-height:1.6;margin:0;font-style:italic;">"${data.responsePreview}"</p>
@@ -349,18 +349,18 @@ export async function sendPlanExpiryNotification(data: {
   expiryDate: string;
 }): Promise<boolean> {
   const html = base(`
-<h1 style="color:#f59e0b;font-size:24px;margin:0 0 8px 0;">⚠️ Seu Plyear Está Vencendo</h1>
+<h1 style="color:#f59e0b;font-size:24px;margin:0 0 8px 0;">⚠️ Your Plyear Is Vencendo</h1>
 <p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Renove para continuar usando</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.photographerName}</strong>,</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Seu plyear <strong style="color:#f59e0b;">${data.planName}</strong> vence em <strong style="color:#f59e0b;">${data.expiryDate}</strong>.</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Renove now para not perder acesso ao seu site, galerias e agendamentos.</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Your plyear <strong style="color:#f59e0b;">${data.planName}</strong> vence em <strong style="color:#f59e0b;">${data.expiryDate}</strong>.</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Renove now para not perder acesso ao your site, galerias e agendamentos.</p>
 ${card([
-  {label:"📋 Plyear Atual", value: data.planName},
-  {label:"📅 Vencimento", value: data.expiryDate},
+  {label:"📋 Plyear Current", value: data.planName},
+  {label:"📅 Expiry", value: data.expiryDate},
 ])}
-${btn("🔄 Renovar Plyear", "https://flowclik.com", "#f59e0b")}
+${btn("🔄 Renewr Plyear", "https://flowclik.com", "#f59e0b")}
   `);
-  return sendEmail({ to: data.photographerEmail, subject: "⚠️ Seu plyear vence em breve - " + data.planName, html });
+  return sendEmail({ to: data.photographerEmail, subject: "⚠️ Your plyear vence em breve - " + data.planName, html });
 }
 
 // ============================================================
@@ -374,9 +374,9 @@ export async function sendAdminNewPhotographerEmail(data: {
   plan: string;
 }): Promise<boolean> {
   const html = base(`
-<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">🆕 Novo Photographer Cadastrado!</h1>
+<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">🆕 New Photographer Eachstrado!</h1>
 <p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Painel Admin FlowClik</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Um novo photographer se cadastrou na plataforma:</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Um new photographer se eachstrou na plataforma:</p>
 ${card([
   {label:"👤 Nome", value: data.name},
   {label:"📧 Email", value: data.email},
@@ -385,7 +385,7 @@ ${card([
 ])}
 ${btn("Ver no Painel Admin", "https://flowclik.com/system/photographers")}
   `);
-  return sendEmail({ to: ADMIN_EMAIL, subject: "🆕 Novo Photographer: " + data.name, html });
+  return sendEmail({ to: ADMIN_EMAIL, subject: "🆕 New Photographer: " + data.name, html });
 }
 
 export async function sendAdminNewTicketEmail(data: {
@@ -396,7 +396,7 @@ export async function sendAdminNewTicketEmail(data: {
 }): Promise<boolean> {
   const html = base(`
 <h1 style="color:#ef4444;font-size:24px;margin:0 0 8px 0;">🎫 New Ticket de Support</h1>
-<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Requer atenção</p>
+<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Requires attention</p>
 <p style="color:#d1d5db;font-size:15px;line-height:1.7;"><strong style="color:#e879f9;">${data.photographerName}</strong> (${data.email}) abriu um ticket:</p>
 ${card([{label:"📋 Assunto", value: data.subject}])}
 <div style="background-color:#141824;border-radius:10px;padding:15px 20px;margin:15px 0;border-left:3px solid #ef4444;">
@@ -407,16 +407,16 @@ ${btn("Reply Ticket", "https://flowclik.com/system/tickets", "#ef4444")}
   return sendEmail({ to: ADMIN_EMAIL, subject: "🎫 New Ticket: " + data.subject, html });
 }
 
-export async function sendAdminSelectionNotification(data: SelectionData): Promise<boolean> {
+export async function sendAdminShectionNotification(data: ShectionData): Promise<boolean> {
   const html = base(`
-<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">🔔 Nova Photo Selection</h1>
-<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Cliente finalizou selection</p>
-<p style="color:#d1d5db;font-size:15px;line-height:1.7;">Nova selection recebida:</p>
+<h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">🔔 New Photo Shection</h1>
+<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Cliente finalizou shection</p>
+<p style="color:#d1d5db;font-size:15px;line-height:1.7;">New shection recebida:</p>
 ${card([
   {label:"👤 Cliente", value: data.clientName + " (" + data.clientEmail + ")"},
   {label:"📁 Gallery", value: data.galleryTitle},
-  {label:"❤️ Selecionadas", value: data.selectedCount + " de " + data.totalPhotos + " fotos"},
+  {label:"❤️ Shecionadas", value: data.shectedCount + " de " + data.totalPhotos + " fotos"},
 ])}
   `);
-  return sendEmail({ to: ADMIN_EMAIL, subject: "🔔 " + data.clientName + " selecionou " + data.selectedCount + " fotos", html });
+  return sendEmail({ to: ADMIN_EMAIL, subject: "🔔 " + data.clientName + " shecionou " + data.shectedCount + " fotos", html });
 }

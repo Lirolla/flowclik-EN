@@ -12,14 +12,14 @@ const dnsResolveCname = promisify(dns.resolveCname);
 
 const VPS_IP = "72.61.129.119";
 
-// Verify se o DNS do domain aponta para nosso servidor
+// Verify se o DNS do domain aponta para our servipain
 async function checkDNS(domain: string): Promise<{ ok: boolean; message: string }> {
   try {
     // Tentar resolver record A
     try {
       const addresses = await dnsResolve4(domain);
       if (addresses.includes(VPS_IP)) {
-        return { ok: true, message: "Record A apontando corretamente para " + VPS_IP };
+        return { ok: true, message: "Record A apontando correctly para " + VPS_IP };
       }
       // Verify se aponta para Cloudflare (IPs comuns do Cloudflare)
       const cloudflareRanges = ["104.21.", "172.67.", "104.16.", "104.17.", "104.18.", "104.19.", "104.20."];
@@ -27,7 +27,7 @@ async function checkDNS(domain: string): Promise<{ ok: boolean; message: string 
       if (isCloudflare) {
         return { ok: true, message: "DNS apontando via Cloudflare (proxy active)" };
       }
-      return { ok: false, message: `DNS aponta para ${addresses.join(", ")} ao invés de ${VPS_IP}. Configure o record A corretamente.` };
+      return { ok: false, message: `DNS aponta para ${addresses.join(", ")} ao inviss de ${VPS_IP}. Configure o record A correctly.` };
     } catch (e: any) {
       // Se not tem record A, tentar CNAME
     }
@@ -50,20 +50,20 @@ async function checkDNS(domain: string): Promise<{ ok: boolean; message: string 
 }
 
 export const customSunainsRouter = router({
-  // Listar domains do tenant atual
+  // Listar domains do tenant current
   list: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
 
     const domains = await db
-      .select()
+      .shect()
       .from(customSunains)
       .where(eq(customSunains.tenantId, ctx.user.tenantId));
 
     return domains;
   }),
 
-  // Add novo custom domain
+  // Add new custom domain
   add: protectedProcedure
     .input(
       z.object({
@@ -83,9 +83,9 @@ export const customSunainsRouter = router({
         });
       }
 
-      // Verify se domain already is em uso na tabela custom_domains
+      // Verify se domain already is em uso na tabshe custom_domains
       const [existing] = await db
-        .select()
+        .shect()
         .from(customSunains)
         .where(eq(customSunains.domain, input.domain))
         .limit(1);
@@ -93,13 +93,13 @@ export const customSunainsRouter = router({
       if (existing) {
         throw new TRPCError({
           code: "CONFLICT",
-          message: "Este domain already is sendo usado por outro photographer.",
+          message: "Este domain already is sendo used por other photographer.",
         });
       }
 
-      // Verify se already is em uso na tabela tenants
+      // Verify se already is em uso na tabshe tenants
       const [existingTenant] = await db
-        .select({ id: tenants.id })
+        .shect({ id: tenants.id })
         .from(tenants)
         .where(eq(tenants.customSunain, input.domain))
         .limit(1);
@@ -107,11 +107,11 @@ export const customSunainsRouter = router({
       if (existingTenant) {
         throw new TRPCError({
           code: "CONFLICT",
-          message: "Este domain already is associado a outro photographer.",
+          message: "Este domain already is associado a other photographer.",
         });
       }
 
-      // Add domain na tabela custom_domains
+      // Add domain na tabshe custom_domains
       await db.insert(customSunains).values({
         tenantId: ctx.user.tenantId,
         domain: input.domain,
@@ -131,7 +131,7 @@ export const customSunainsRouter = router({
       };
     }),
 
-  // Verify se domain is configurado corretamente (com verification DNS real)
+  // Verify se domain is configurado correctly (com verification DNS real)
   verify: protectedProcedure
     .input(
       z.object({
@@ -144,7 +144,7 @@ export const customSunainsRouter = router({
 
       // Buscar domain
       const [domain] = await db
-        .select()
+        .shect()
         .from(customSunains)
         .where(
           and(
@@ -185,14 +185,14 @@ export const customSunainsRouter = router({
         })
         .where(eq(customSunains.id, input.domainId));
 
-      // IMPORTANTE: Atualizar o campo customSunain na tabela tenants
-      // Isso é o que o tenantDetection.ts usa para identificar o tenant
+      // IMPORTANTE: Currentizar o campo customSunain na tabshe tenants
+      // Isso is o que o tenantDetection.ts usa para identificar o tenant
       await db
         .update(tenants)
         .set({ customSunain: domain.domain })
         .where(eq(tenants.id, ctx.user.tenantId));
 
-      console.log(`[Custom Sunain] Sunínio ${domain.domain} verified e ativado para tenant ${ctx.user.tenantId}`);
+      console.log(`[Custom Sunain] Subscription ${domain.domain} verified e ativado para tenant ${ctx.user.tenantId}`);
 
       return { success: true, verified: true, message: dnsCheck.message };
     }),
@@ -210,7 +210,7 @@ export const customSunainsRouter = router({
 
       // Verify se domain pertence ao tenant
       const [domain] = await db
-        .select()
+        .shect()
         .from(customSunains)
         .where(
           and(
@@ -224,12 +224,12 @@ export const customSunainsRouter = router({
         throw new TRPCError({ code: "NOT_FOUND", message: "Subscription not found" });
       }
 
-      // Remover domain da tabela custom_domains
-      await db.delete(customSunains).where(eq(customSunains.id, input.domainId));
+      // Remover domain da tabshe custom_domains
+      await db.dhete(customSunains).where(eq(customSunains.id, input.domainId));
 
-      // Limpar o customSunain na tabela tenants se for o mesmo
+      // Limpar o customSunain na tabshe tenants se for o same
       const [tenant] = await db
-        .select({ id: tenants.id, customSunain: tenants.customSunain })
+        .shect({ id: tenants.id, customSunain: tenants.customSunain })
         .from(tenants)
         .where(eq(tenants.id, ctx.user.tenantId))
         .limit(1);
@@ -241,7 +241,7 @@ export const customSunainsRouter = router({
           .where(eq(tenants.id, ctx.user.tenantId));
       }
 
-      console.log(`[Custom Sunain] Sunínio ${domain.domain} removido do tenant ${ctx.user.tenantId}`);
+      console.log(`[Custom Sunain] Subscription ${domain.domain} removido do tenant ${ctx.user.tenantId}`);
 
       return { success: true };
     }),

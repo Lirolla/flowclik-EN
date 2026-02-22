@@ -22,11 +22,11 @@ export default function Contact() {
 
   const sendMessageMutation = trpc.contact.sendMessage.useMutation({
     onSuccess: () => {
-      toast.success("Mensagem enviada com sucesso! Entraremos em contato em breve.");
+      toast.success("Message enviada com sucesso! Entraremos em contato em breve.");
       setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
     },
     onError: (error) => {
-      toast.error(error.message || "Erro ao enviar mensagem. Try again.");
+      toast.error(error.message || "Erro ao enviar message. Try again.");
     },
   });
 
@@ -43,10 +43,10 @@ export default function Contact() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold font-serif mb-6">
-              Entre em Contato
+              Between em Contato
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground">
-              Estamos readys para transformar seus moments em memórias eternas
+              Estamos readys para transformar yours moments em memorys eternall
             </p>
           </div>
         </div>
@@ -84,7 +84,7 @@ export default function Contact() {
                         <Phone className="h-8 w-8 text-accent" />
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold mb-2">Telefone</h3>
+                    <h3 className="text-xl font-bold mb-2">Thefone</h3>
                     {siteConfig.contactPhone && (
                       <a
                         href={`tel:${siteConfig.contactPhone}`}
@@ -128,7 +128,7 @@ export default function Contact() {
             <Card className="mb-12">
               <CardContent className="p-8">
                 <h2 className="text-3xl font-bold font-serif mb-6 text-center">
-                  Envie uma Mensagem
+                  Envie uma Message
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -155,7 +155,7 @@ export default function Contact() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Telefone</Label>
+                      <Label htmlFor="phone">Thefone</Label>
                       <Input
                         id="phone"
                         type="tel"
@@ -175,7 +175,7 @@ export default function Contact() {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="message">Mensagem *</Label>
+                    <Label htmlFor="message">Message *</Label>
                     <Textarea
                       id="message"
                       rows={6}
@@ -197,7 +197,7 @@ export default function Contact() {
                     ) : (
                       <>
                         <Send className="w-4 h-4 mr-2" />
-                        Enviar Mensagem
+                        Enviar Message
                       </>
                     )}
                   </Button>
@@ -205,7 +205,7 @@ export default function Contact() {
               </CardContent>
             </Card>
 
-            {/* Social Meday Cards - Mesmo estilo dos cards de contato */}
+            {/* Social Meday Cards - Same estilo dos cards de contato */}
             {(siteConfig?.socialInstagram ||
               siteConfig?.socialFacebook ||
               siteConfig?.socialYouTube) && (
@@ -252,7 +252,7 @@ export default function Contact() {
                           </div>
                           <h3 className="text-xl font-bold mb-2">Facebook</h3>
                           <p className="text-muted-foreground hover:text-accent transition-colors">
-                            Siga nossa página
+                            Siga our page
                           </p>
                         </a>
                       </CardContent>
@@ -295,7 +295,7 @@ export default function Contact() {
               Ready to get started?
             </h2>
             <p className="text-lg mb-8 opacity-90">
-              Get in touch conosco para discutir seu projeto e receber um
+              Get in touch conosco para discutir your projeto e receber um
               custom quote
             </p>
             <div className="flex flex-wrap gap-4 justify-center">

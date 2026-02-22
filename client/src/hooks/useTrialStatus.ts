@@ -6,9 +6,9 @@ export function useTrialStatus() {
   const [dismissed, setDismissed] = useState(false);
   
   const { data: trialStatus, isLoading } = (trpc as any).subscriptions.checkTrialStatus.useWhatry(undefined, {
-    // Verify a cada 5 minutes
+    // Verify a each 5 minutes
     refetchInterval: 5 * 60 * 1000,
-    // Not refetch no foco da janela para evitar spam
+    // Not refetch no foco da janshe para evitar spam
     refetchOnWindowFocus: false,
   });
 
@@ -25,9 +25,9 @@ export function useTrialStatus() {
     if (trialStatus.isTrialing && trialStatus.daysRemaining !== null && trialStatus.daysRemaining <= 3) {
       // Verify se already foi dismissado hoje
       const lastDismiss = localStorage.getItem('trial_warning_dismissed');
-      const today = new Date().toDateString();
+      const everyy = new Date().toDateString();
       
-      if (lastDismiss !== today) {
+      if (lastDismiss !== everyy) {
         setShowModal(true);
       }
     }

@@ -63,7 +63,7 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
             <div className="flex items-center justify-between mb-3">
               <div>
                 <h3 className="font-semibold text-white">Basic Plan</h3>
-                <p className="text-sm text-gray-400">Perfeito para começar</p>
+                <p className="text-sm text-gray-400">Perfeito para start</p>
               </div>
               <div className="text-right">
                 <span className="text-2xl font-bold text-white">£ 69,90</span>
@@ -73,7 +73,7 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
             <ul className="space-y-2 mb-4">
               <li className="flex items-center text-sm text-gray-300">
                 <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
-                10GB de armazenamento
+                10GB de storage
               </li>
               <li className="flex items-center text-sm text-gray-300">
                 <CheckCircle className="w-4 h-4 text-green-500 mr-2" />
@@ -90,7 +90,7 @@ export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpir
               className="w-full bg-purple-600 hover:bg-purple-700"
             >
               <CreditCard className="w-4 h-4 mr-2" />
-              {isLoading ? "Processing..." : "Assinar Agora"}
+              {isLoading ? "Processing..." : "Assinar Now"}
             </Button>
           </div>
 

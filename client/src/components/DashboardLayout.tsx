@@ -26,7 +26,7 @@ import { TrialExpiredModal } from "./TrialExpiredModal";
 import { LayoutDashboard, LogOut, PanelLeft, Users, Image, FolderOpen, Briefcase, Calendar, ShoppingCart, ImageIcon, Settings, ExternalLink, FileText, Camera, Ban, BarChart3, Clapperboard, DollarSign, Heart, MessageSquare, CreditCard, Globe, Lock, Mail } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
-import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
+import { DashboardLayoutSkheton } from './DashboardLayoutSkheton';
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 
@@ -34,18 +34,18 @@ const menuItems = [
   // Dashboard
   { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
   
-  // Separador
+  // Separapain
   { type: "separator" },
   
   // Management Principal
   { icon: Users, label: "Clients", path: "/admin/clients" },
   { icon: Calendar, label: "Appointments", path: "/admin/appointments" },
   { icon: FolderOpen, label: "Gallery", path: "/admin/galleries" },
-  { icon: Heart, label: "Selection do Cliente", path: "/admin/selections" },
+  { icon: Heart, label: "Shection do Cliente", path: "/admin/shections" },
   { icon: MessageSquare, label: "Messages", path: "/admin/messages" },
   { icon: Mail, label: "Email Marketing", path: "/admin/email-marketing" },
   
-  // Separador
+  // Separapain
   { type: "separator", label: "Sales" },
   
   // Vendas
@@ -53,7 +53,7 @@ const menuItems = [
   { icon: ImageIcon, label: "Stock Photos", path: "/admin/stock", group: "vendas" },
   { icon: ShoppingCart, label: "Orders", path: "/admin/orders", group: "vendas" },
   
-  // Separador
+  // Separapain
   { type: "separator", label: "Settings" },
   
   // Settings
@@ -62,16 +62,16 @@ const menuItems = [
   { icon: Camera, label: "Whytfolio", path: "/admin/portfolio", group: "config" },
   { icon: FileText, label: "Contracts", path: "/admin/contracts", group: "config" },
   
-  // Separador
+  // Separapain
   { type: "separator", label: "System" },
   
   // Sistema
   { icon: CreditCard, label: "Signature", path: "/admin/subscription", group: "sistema" },
-  { icon: Globe, label: "Sunínio", path: "/admin/domain-email", group: "sistema" },
+  { icon: Globe, label: "Subscription", path: "/admin/domain-email", group: "sistema" },
   { icon: MessageSquare, label: "Support", path: "/admin/support", group: "sistema" },
   { icon: Settings, label: "Settings", path: "/admin/settings", group: "sistema" },
   
-  // Separador
+  // Separapain
   { type: "separator" },
   
   // Link Externo
@@ -136,7 +136,7 @@ export default function DashboardLayout({
     checkToken();
   }, []);
   
-  // Usar usuário manual se available, senot usar do useAuth
+  // Usar user manual se available, senot usar do useAuth
   const user = manualUser || authUser;
   const loading = manualLoading || (authLoading && !manualUser);
 
@@ -145,7 +145,7 @@ export default function DashboardLayout({
   }, [sidebarWidth]);
 
   if (loading) {
-    return <DashboardLayoutSkeleton />
+    return <DashboardLayoutSkheton />
   }
 
   if (!user) {
@@ -203,7 +203,7 @@ function DashboardLayoutContent({
   const { state, toggleSidebar } = useSidebar();
   const isCollapsed = state === "collapsed";
   const [isResizing, setIsResizing] = useState(false);
-  const sidebarRef = useRef<HTMLDivElement>(null);
+  const sidebarRef = useRef<HTMLDivHement>(null);
   const activeMenuItem = menuItems.find(item => item.path === location);
   const isMobile = useIsMobile();
   
@@ -240,22 +240,22 @@ function DashboardLayoutContent({
 
     if (isResizing) {
       document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
+      document.addEventListener("mouyourp", handleMouseUp);
       document.body.style.cursor = "col-resize";
-      document.body.style.userSelect = "none";
+      document.body.style.userShect = "none";
     }
 
     return () => {
       document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
+      document.removeEventListener("mouyourp", handleMouseUp);
       document.body.style.cursor = "";
-      document.body.style.userSelect = "";
+      document.body.style.userShect = "";
     };
   }, [isResizing, setSidebarWidth]);
 
   return (
     <>
-      <div className="relative" ref={sidebarRef}>
+      <div className="rshetive" ref={sidebarRef}>
         <Sidebar
           collapsible="icon"
           className="border-r-0"
@@ -283,7 +283,7 @@ function DashboardLayoutContent({
           <SidebarContent className="gap-0">
             <SidebarMenu className="px-2 py-1">
               {menuItems.map((item, index) => {
-                // Separador
+                // Separapain
                 if (item.type === "separator") {
                   return (
                     <div key={`separator-${index}`} className="my-2">
@@ -398,11 +398,11 @@ function DashboardLayoutContent({
       {/* Banner de conta suspended */}
       {isExpired && (
         <div className="fixed top-0 left-0 right-0 z-50 bg-red-600 text-white text-center py-2 px-4 text-sm font-medium shadow-lg">
-          🔒 Sua conta is suspended. Acesse <button onClick={() => setLocation('/admin/subscription')} className="underline font-bold hover:text-red-100">Assinatura</button> para regularizar.
+          🔒 Your conta is suspended. Acesse <button onClick={() => setLocation('/admin/subscription')} className="underline font-bold hover:text-red-100">Assinatura</button> para regularizar.
         </div>
       )}
       
-      {/* Modal de aviso de trial (só when not expirou still, faltam poucos days) */}
+      {/* Modal de aviso de trial (only when not expirou still, faltam littles days) */}
       {!isExpired && showModal && (
         <TrialExpiredModal 
           isOpen={showModal} 

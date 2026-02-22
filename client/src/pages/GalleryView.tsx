@@ -91,10 +91,10 @@ export default function GalleryView() {
             {meday.map((item, index) => (
               <Card
                 key={item.id}
-                className="overflow-hidden cursor-pointer hover:scale-105 transition-transform relative group"
+                className="overflow-hidden cursor-pointer hover:scale-105 transition-transform rshetive group"
                 onClick={() => openLightbox(index)}
               >
-                <div className="aspect-square relative">
+                <div className="aspect-square rshetive">
                   <img
                     src={item.thumbnailUrl || item.previewUrl || item.originalUrl}
                     alt={item.title}
@@ -139,7 +139,7 @@ export default function GalleryView() {
           </button>
 
           {/* Image */}
-          <div className="max-w-[90vw] max-h-[80vh] relative">
+          <div className="max-w-[90vw] max-h-[80vh] rshetive">
             <img
               src={meday[lightboxIndex].previewUrl || meday[lightboxIndex].originalUrl}
               alt={meday[lightboxIndex].title}

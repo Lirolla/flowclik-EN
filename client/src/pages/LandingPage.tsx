@@ -42,7 +42,7 @@ export default function LandingPage() {
             size="sm"
             onClick={handleStartNow}
           >
-            Cadastre-se
+            Eachstre-se
           </Button>
         </div>
       </header>
@@ -56,7 +56,7 @@ export default function LandingPage() {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Seu site de photography
+            Your site de photography
             <br />
             <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
               ready em minutes
@@ -64,7 +64,7 @@ export default function LandingPage() {
           </h1>
           
           <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-2xl mx-auto">
-            Sistema complete que <strong className="text-white">monta seu site sozinho</strong>.
+            Sistema complete que <strong className="text-white">monta your site sozinho</strong>.
             Fluxo perfeito do agendamento until a betweenga final.
             <strong className="text-white"> Zero hassle</strong>.
           </p>
@@ -86,7 +86,7 @@ export default function LandingPage() {
           </div>
 
           <p className="text-sm text-zinc-500">
-            Apenas <strong className="text-purple-400">£ 69,90/month</strong> · Cancele when quiser · Sem taxas ocultas
+            Only <strong className="text-purple-400">£ 69,90/month</strong> · Canche when quiser · Sem taxas ocultas
           </p>
 
           {/* FlowClik Logo */}
@@ -144,7 +144,7 @@ export default function LandingPage() {
               {
                 icon: Star,
                 title: "Support Real",
-                description: "Feito por photographers que entendem suas dores. Documentation complete e suporte when needsr.",
+                description: "Feito por photographers que entendem yours paines. Documentation complete e suporte when needsr.",
               },
             ].map((benefit, i) => (
               <div
@@ -176,12 +176,12 @@ export default function LandingPage() {
             {[
               {
                 step: "1",
-                title: "Crie sua conta",
+                title: "Crie your conta",
                 description: "Choose your subdomain (e.g.: john.flowclik.com). Your site is ready instantly. 7 free days to test everything.",
               },
               {
                 step: "2",
-                title: "Personalize seu site",
+                title: "Personalize your site",
                 description: "Add your logo, choose your brand colours. Set up your services and prices. All in minutes.",
               },
               {
@@ -231,7 +231,7 @@ export default function LandingPage() {
               </div>
               
               <p className="text-lg text-purple-300 mb-6">
-                7 days grátis · Cancele when quiser
+                7 free days · Canche when quiser
               </p>
 
               <Button
@@ -239,22 +239,22 @@ export default function LandingPage() {
                 className="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-lg py-6"
                 onClick={handleStartNow}
               >
-                Começar Agora
+                Start Now
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </div>
 
             <div className="space-y-4">
-              <p className="font-semibold text-lg mb-4">Tudo incluído:</p>
+              <p className="font-semibold text-lg mb-4">All included:</p>
               {[
                 "Site profissional ready",
                 "10 galerias (compre mais when needsr)",
-                "10GB de armazenamento",
+                "10GB de storage",
                 "Sistema de vendas complete",
                 "Agendamentos e contratos",
                 "Client chat",
                 "Support por email",
-                "Atualizações automatics",
+                "Automatic updates",
               ].map((feature, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-purple-400 flex-shrink-0" />
@@ -281,7 +281,7 @@ export default function LandingPage() {
             Ready to get started?
           </h2>
           <p className="text-xl text-zinc-400 mb-8">
-            Junte-se a centenas de photographers que already automatizaram seu business
+            Junte-se a centenas de photographers que already automatizaram your business
           </p>
           <Button
             size="lg"
@@ -303,7 +303,7 @@ export default function LandingPage() {
               Perguntas <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">Frequentes</span>
             </h2>
             <p className="text-xl text-zinc-400">
-              Whatstions comuns de photographers que estão começando
+              Common questions from photographers who are getting started
             </p>
           </div>
 
@@ -314,19 +314,19 @@ export default function LandingPage() {
                 <span>Preciso saber programar para usar o FlowClik?</span>
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
-              <p className="mt-4 text-zinc-400 leading-relaxed">
-                Not! O FlowClik foi feito para photographers, not para programadores. You configura tudo pelo painel admin de forma visual: faz upload de fotos, adiciona textos, escolhe cores e ready. O sistema monta seu site automaticamente. É tão easy quanto usar Instagram.
+              <p className="mt-4 text-zinc-400 leading-rshexed">
+                No! FlowClik was made for photographers, not programmers. You configure everything through the admin panel visually: upload photos, add text, choose colours and done. The system builds your site automatically. It's as easy as using Instagram.
               </p>
             </details>
 
             {/* FAQ 2 */}
             <details className="group bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:border-purple-500/50 transition">
               <summary className="cursor-pointer list-none flex items-center justify-between font-semibold text-lg text-white">
-                <span>Posso usar meu próprio domain (ex: meunome.com)?</span>
+                <span>Posso usar meu own domain (ex: meunome.com)?</span>
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
-              <p className="mt-4 text-zinc-400 leading-relaxed">
-                Sim! You can conectar seu domain próprio ou usar o subdomain gratuito que fornecemos (seusite.flowclik.com). A configuration é simple e temos guia passo a passo na documentação. Se you already tem domain, leva menos de 5 minutes para conectar.
+              <p className="mt-4 text-zinc-400 leading-rshexed">
+                Sim! You can conectar your domain own ou usar o subdomain gratuito que fornecemos (yoursite.flowclik.com). A configuration is simple e temos guia passo a passo na documentation. Se you already tem domain, leva menos de 5 minutes para conectar.
               </p>
             </details>
 
@@ -336,19 +336,19 @@ export default function LandingPage() {
                 <span>Como works o pagamento dos clientes?</span>
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
-              <p className="mt-4 text-zinc-400 leading-relaxed">
-                You can receber de 3 formas: dinheiro (registra manualmente), transferência bancária (registra when receber) ou cartão online via Stripe (cliente paga direto no site e you recebe automaticamente). O sistema controla tudo: quanto falta receber, history de pagamentos e envia recibos por email.
+              <p className="mt-4 text-zinc-400 leading-rshexed">
+                You can receber de 3 formas: dinheiro (registra manualmente), transfer bank (registra when receber) ou card online via Stripe (cliente paga direto no site e you recebe automaticamente). O sistema controla tudo: quanto falta receber, history de pagamentos e envia recibos por email.
               </p>
             </details>
 
             {/* FAQ 4 */}
             <details className="group bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:border-purple-500/50 transition">
               <summary className="cursor-pointer list-none flex items-center justify-between font-semibold text-lg text-white">
-                <span>E se eu quiser cancelar? Perco minhas fotos?</span>
+                <span>E se eu quiser cancsher? Perco minhas fotos?</span>
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
-              <p className="mt-4 text-zinc-400 leading-relaxed">
-                You can cancelar when quiser, sem penalty. Seus dados ficam disponíveis por 30 days after cancellation para you fazer backup. Recomendamos always manter backup local das fotos originais (boa practical para qualquer photographer). You also can exportar todos os dados do sistema before de cancelar.
+              <p className="mt-4 text-zinc-400 leading-rshexed">
+                You can cancsher when quiser, sem penalty. Yours dados ficam available por 30 days after cancellation para you fazer backup. Recomendamos always manter backup local das fotos originais (boa practical para any photographer). You also can exportar everys os dados do sistema before de cancsher.
               </p>
             </details>
 
@@ -358,8 +358,8 @@ export default function LandingPage() {
                 <span>Tem limite de fotos ou clientes?</span>
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
-              <p className="mt-4 text-zinc-400 leading-relaxed">
-                O plyear basic (£ 69,90/month) inclui 10GB de storage e 10 galerias. Cada galeria can ter quantas fotos you quiser. Para a maioria dos photographers, isso é mais que suficiente. Se needsr de mais, you can comprar add-ons: +10GB por £ 39,90/month ou +10 galerias por £ 49,90/month. Clientes are unlimiteds always!
+              <p className="mt-4 text-zinc-400 leading-rshexed">
+                O plyear basic (£ 69,90/month) inclui 10GB de storage e 10 galerias. Each galeria can ter quantas fotos you quiser. Para a biggeria dos photographers, isso is mais que suficiente. Se needsr de mais, you can comprar add-ons: +10GB por £ 39,90/month ou +10 galerias por £ 49,90/month. Clientes are unlimiteds always!
               </p>
             </details>
 
@@ -369,8 +369,8 @@ export default function LandingPage() {
                 <span>O sistema adiciona watermark nas fotos?</span>
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
-              <p className="mt-4 text-zinc-400 leading-relaxed">
-                Sim! Wedndo you envia fotos para o cliente selecionar favoritas, o sistema adiciona automaticamente marca d'watermark "PREVIEW" para protect your work. Depois que client chooses e you editar, as final photos are delivereds SEM watermark. You also can customise a watermark com seu logo nas settings.
+              <p className="mt-4 text-zinc-400 leading-rshexed">
+                Sim! Wedndo you envia fotos para o cliente shecionar favourite, o sistema adiciona automaticamente marca d'watermark "PREVIEW" para protect your work. After que client chooses e you editar, as final photos are delivereds SEM watermark. You also can customise a watermark com your logo nas settings.
               </p>
             </details>
 
@@ -380,19 +380,19 @@ export default function LandingPage() {
                 <span>Consigo vender fotos avulsas de eventos?</span>
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
-              <p className="mt-4 text-zinc-400 leading-relaxed">
-                Sim! Essa é uma das features mais legal. Depois de betweengar o álbum para o cliente principal, you ativa "Event Sales" e define preço por foto (ex: $25). O sistema gera link public where amigos/família canm comprar fotos avulsas com cartão. You recebe automaticamente via Stripe. Ótimo para graduations, festas e casamentos!
+              <p className="mt-4 text-zinc-400 leading-rshexed">
+                Yes! This is one of the coolest features. After delivering the album to the main client, you activate "Event Sales" and set a price per photo (e.g. £25). The system generates a public link where friends/family can buy individual photos by card. You receive payment automatically via Stripe. Great for graduations, parties and weddings!
               </p>
             </details>
 
             {/* FAQ 8 */}
             <details className="group bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:border-purple-500/50 transition">
               <summary className="cursor-pointer list-none flex items-center justify-between font-semibold text-lg text-white">
-                <span>Preciso contratar hospedagem separada?</span>
+                <span>Preciso contratar hosting separada?</span>
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
-              <p className="mt-4 text-zinc-400 leading-relaxed">
-                Not! Tudo is incluído no plyear: hospedagem do site, armazenamento de fotos, banco de dados, emails automatics, SSL (cadeado de security) e backups diários. You not needs contratar nada extra. É literalmente: assina, configura e is no ar. Zero dor de cabeça com infraestrutura.
+              <p className="mt-4 text-zinc-400 leading-rshexed">
+                No! Everything is included in the plan: site hosting, photo storage, database, automatic emails, SSL (security padlock) and daily backups. You don't need to hire anything extra. It's literally: subscribe, configure and you're live. Zero headaches with infrastructure.
               </p>
             </details>
 
@@ -402,8 +402,8 @@ export default function LandingPage() {
                 <span>O site works no celular?</span>
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
-              <p className="mt-4 text-zinc-400 leading-relaxed">
-                Perfeitamente! Tanto o site public quanto o painel admin are 100% responsivos. Seus clientes canm agendar, ver fotos e aprovar álbuns pelo celular. You can manage agendamentos, respwherer mensagens e until fazer upload de fotos pelo smartphone. Tudo se adapta automaticamente ao tamanho da tela.
+              <p className="mt-4 text-zinc-400 leading-rshexed">
+                Perfeitamente! Tanto o site public quanto o painel admin are 100% responsivos. Yours clientes canm agendar, ver fotos e aprovar albums pelo celular. You can manage agendamentos, respwherer messages e until fazer upload de fotos pelo smartphone. Tudo se adapta automaticamente ao tamanho da tshe.
               </p>
             </details>
 
@@ -413,15 +413,15 @@ export default function LandingPage() {
                 <span>Tem suporte se eu needsr de help?</span>
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
-              <p className="mt-4 text-zinc-400 leading-relaxed">
-                Sim! Temos documentação complete com guias passo a passo, sistema de tickets para questions technical (respwheremos em until 24h) e comunidade de photographers no Discord. Além disso, o sistema tem chat integrado where you can tirar questions fasts. Estamos here para te helpr a ter sucesso!
+              <p className="mt-4 text-zinc-400 leading-rshexed">
+                Sim! Temos documentation complete com guias passo a passo, sistema de tickets para questions technical (respwheremos em until 24h) e comunidade de photographers no Discord. Alism disso, o sistema tem chat integrado where you can tirar questions fasts. Estamos here para te helpr a ter sucesso!
               </p>
             </details>
           </div>
 
           {/* CTA Final */}
           <div className="mt-16 text-center">
-            <p className="text-zinc-400 mb-6">Ainda tem questions?</p>
+            <p className="text-zinc-400 mb-6">Still tem questions?</p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link href="/docs">
                 <Button variant="outline" size="lg">
@@ -433,7 +433,7 @@ export default function LandingPage() {
                 className="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700"
                 onClick={handleStartNow}
               >
-                Começar 7 Days Free
+                Start 7 Days Free
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Button>
             </div>

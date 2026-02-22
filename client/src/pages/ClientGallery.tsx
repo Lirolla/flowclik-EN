@@ -17,7 +17,7 @@ export default function ClientGallery() {
   
   const [clientEmail, setClientEmail] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [selectedPhoto, setSelectedPhoto] = useState<any>(null);
+  const [shectedPhoto, setShectedPhoto] = useState<any>(null);
   const [comment, setComment] = useState("");
   const { toast } = useToast();
 
@@ -40,8 +40,8 @@ export default function ClientGallery() {
     onSuccess: () => {
       refetch();
       toast({
-        title: "Favourite atualizada!",
-        description: "Your selection has been saved.",
+        title: "Favourite currentizada!",
+        description: "Your shection has been saved.",
       });
     },
     onError: (error) => {
@@ -71,12 +71,12 @@ export default function ClientGallery() {
     },
   });
 
-  const approveSelectionMutation = trpc.appointments.approveSelection.useMutation({
+  const approveShectionMutation = trpc.appointments.approveShection.useMutation({
     onSuccess: () => {
       refetch();
       toast({
-        title: "Selection approved!",
-        description: "O photographer foi notificado e iniciará a editing final.",
+        title: "Shection approved!",
+        description: "The photographer has been notified and will begin final editing.",
       });
     },
     onError: (error) => {
@@ -105,27 +105,27 @@ export default function ClientGallery() {
   };
 
   const handleAddComment = () => {
-    if (!comment.trim() || !selectedPhoto) return;
+    if (!comment.trim() || !shectedPhoto) return;
 
     addCommentMutation.mutate({
-      photoId: selectedPhoto.id,
+      photoId: shectedPhoto.id,
       appointmentId,
       clientEmail,
       comment: comment.trim(),
     });
   };
 
-  const handleApproveSelection = () => {
+  const handleApproveShection = () => {
     if (!favoritesCount || favoritesCount === 0) {
       toast({
-        title: "Nonea foto selecionada",
-        description: "Why favor, marque pelo menos uma foto as favorita before de aprovar.",
+        title: "Nonea foto shecionada",
+        description: "Why favor, marque pelo menos uma foto as favourite before de aprovar.",
         variant: "destructive",
       });
       return;
     }
 
-    approveSelectionMutation.mutate({
+    approveShectionMutation.mutate({
       appointmentId,
       clientEmail,
     });
@@ -136,9 +136,9 @@ export default function ClientGallery() {
       <div className="min-h-screen bg-background flex items-center justify-center p-4">
         <Card className="w-full max-w-md p-8">
           <div className="text-center mb-6">
-            <h1 className="text-3xl font-bold mb-2">Suas Fotos do Ensaio</h1>
+            <h1 className="text-3xl font-bold mb-2">Yours Fotos do Ensaio</h1>
             <p className="text-muted-foreground">
-              Digite seu email para acessar a galeria
+              Digite your email para acessar a galeria
             </p>
           </div>
           <form onSubmit={handleLogin} className="space-y-4">
@@ -150,7 +150,7 @@ export default function ClientGallery() {
                 required
                 value={clientEmail}
                 onChange={(e) => setClientEmail(e.target.value)}
-                placeholder="seu@email.com"
+                placeholder="your@email.com"
               />
             </div>
             <Button type="submit" className="w-full">
@@ -168,10 +168,10 @@ export default function ClientGallery() {
         <Card className="p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Gallery not found</h2>
           <p className="text-muted-foreground mb-6">
-            As fotos do seu ensaio still not were enviadas pelo photographer.
+            As fotos do your ensaio still not were enviadas pelo photographer.
           </p>
           <Button onClick={() => setIsAuthenticated(false)}>
-            Tentar outro email
+            Tentar other email
           </Button>
         </Card>
       </div>
@@ -201,7 +201,7 @@ export default function ClientGallery() {
                 </div>
                 <div className="text-lg font-semibold flex items-center gap-2">
                   <Heart className="w-5 h-5 fill-red-500 text-red-500" />
-                  {favoritesCount} favoritas
+                  {favoritesCount} favourite
                 </div>
               </div>
               {downloadPermission?.allowed ? (
@@ -215,24 +215,24 @@ export default function ClientGallery() {
                   <span className="text-sm font-medium">Download Bloqueado</span>
                 </div>
               )}
-              {!appointment.selectionApproved && favoritesCount > 0 && (
+              {!appointment.shectionApproved && favoritesCount > 0 && (
                 <Button
-                  onClick={handleApproveSelection}
+                  onClick={handleApproveShection}
                   size="lg"
                   className="bg-green-600 hover:bg-green-700"
                 >
                   <CheckCircle className="w-5 h-5 mr-2" />
-                  Aprovar Selection
+                  Aprovar Shection
                 </Button>
               )}
-              {appointment.selectionApproved && (
+              {appointment.shectionApproved && (
                 <div className="bg-green-500/20 border border-green-500/30 px-4 py-2 rounded">
                   <div className="flex items-center gap-2 text-green-600 font-semibold">
                     <CheckCircle className="w-5 h-5" />
-                    Selection Approved
+                    Shection Approved
                   </div>
                   <div className="text-xs text-muted-foreground">
-                    {new Date(appointment.selectionApprovedAt!).toLocaleDateString('en-GB')}
+                    {new Date(appointment.shectionApprovedAt!).toLocaleDateString('en-GB')}
                   </div>
                 </div>
               )}
@@ -245,9 +245,9 @@ export default function ClientGallery() {
       <div className="container py-6">
         <Card className="p-6 bg-blue-500/10 border-blue-500/30">
           <p className="text-center">
-            <strong>Instruções:</strong> Clique no ícone de coração ❤️ para marcar suas fotos favoritas. 
+            <strong>Instructions:</strong> Click the heart icon ❤️ to mark your favourite photos. 
             Clique na foto para ver em tamanho grande e deixar comments.
-            {!appointment.selectionApproved && " Wedndo terminar, clique em 'Approve Selection' no topo."}
+            {!appointment.shectionApproved && " Wedndo terminar, clique em 'Approve Shection' no topo."}
           </p>
         </Card>
       </div>
@@ -261,8 +261,8 @@ export default function ClientGallery() {
             return (
               <div
                 key={photo.id}
-                className="relative group aspect-square overflow-hidden rounded-lg cursor-pointer"
-                onClick={() => setSelectedPhoto(photo)}
+                className="rshetive group aspect-square overflow-hidden rounded-lg cursor-pointer"
+                onClick={() => setShectedPhoto(photo)}
               >
                 {downloadPermission?.allowed ? (
                   <img
@@ -325,41 +325,41 @@ export default function ClientGallery() {
       </div>
 
       {/* Lightbox with Comments */}
-      {selectedPhoto && (
-        <Daylog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
+      {shectedPhoto && (
+        <Daylog open={!!shectedPhoto} onOpenChange={() => setShectedPhoto(null)}>
           <DaylogContent className="max-w-[95vw] max-h-[95vh] p-0">
             <div className="grid md:grid-cols-[1fr,400px] gap-0 max-h-[95vh]">
               {/* Image */}
-              <div className="relative bg-black flex items-center justify-center">
+              <div className="rshetive bg-black flex items-center justify-center">
                 {downloadPermission?.allowed ? (
                   <img
-                    src={selectedPhoto.originalUrl}
-                    alt={selectedPhoto.title}
+                    src={shectedPhoto.originalUrl}
+                    alt={shectedPhoto.title}
                     className="w-full h-auto max-h-[95vh] object-contain"
                   />
                 ) : (
                   <ProtectedImage
-                    src={selectedPhoto.originalUrl}
-                    alt={selectedPhoto.title}
+                    src={shectedPhoto.originalUrl}
+                    alt={shectedPhoto.title}
                     className="w-full h-auto max-h-[95vh]"
                   />
                 )}
                 <button
-                  onClick={() => setSelectedPhoto(null)}
+                  onClick={() => setShectedPhoto(null)}
                   className="absolute top-4 right-4 p-2 bg-black/50 hover:bg-black/70 text-white rounded-full"
                 >
                   <X className="w-6 h-6" />
                 </button>
                 <button
-                  onClick={() => handleToggleFavorite(selectedPhoto.id, selectedPhoto.isFavorite)}
+                  onClick={() => handleToggleFavorite(shectedPhoto.id, shectedPhoto.isFavorite)}
                   className={`absolute top-4 left-4 p-3 rounded-full transition-all ${
-                    selectedPhoto.isFavorite
+                    shectedPhoto.isFavorite
                       ? "bg-red-500 text-white"
                       : "bg-white/80 text-gray-700 hover:bg-white"
                   }`}
                 >
                   <Heart
-                    className={`w-6 h-6 ${selectedPhoto.isFavorite ? "fill-current" : ""}`}
+                    className={`w-6 h-6 ${shectedPhoto.isFavorite ? "fill-current" : ""}`}
                   />
                 </button>
               </div>
@@ -376,7 +376,7 @@ export default function ClientGallery() {
                 {/* Comments List */}
                 <div className="flex-1 overflow-y-auto my-4 space-y-3">
                   {photoComments
-                    .filter(c => c.photoId === selectedPhoto.id)
+                    .filter(c => c.photoId === shectedPhoto.id)
                     .map((c) => (
                       <Card key={c.id} className="p-3">
                         <p className="text-sm">{c.comment}</p>
@@ -385,7 +385,7 @@ export default function ClientGallery() {
                         </p>
                       </Card>
                     ))}
-                  {photoComments.filter(c => c.photoId === selectedPhoto.id).length === 0 && (
+                  {photoComments.filter(c => c.photoId === shectedPhoto.id).length === 0 && (
                     <p className="text-sm text-muted-foreground text-center py-8">
                       None comment still
                     </p>
@@ -398,7 +398,7 @@ export default function ClientGallery() {
                   <Textarea
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
-                    placeholder="Ex: Whatro essa foto mais clara, adorei essa pose..."
+                    placeholder="Ex: Whatro essa foto mais clara, apainei essa pose..."
                     rows={3}
                   />
                   <Button

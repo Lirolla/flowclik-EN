@@ -31,9 +31,9 @@ export default function OrderStatus() {
   const getStatusInfo = (status: string) => {
     const map: Record<string, { label: string; icon: any; color: string; desc: string }> = {
       pending: { label: "Awaiting Pagamento", icon: Clock, color: "text-yellow-500", desc: "Realize o pagamento para liberar o download das fotos." },
-      paid: { label: "Paid", icon: Check, color: "text-green-500", desc: "Payment confirmed! Suas fotos estão disponíveis para download." },
-      processing: { label: "Processing", icon: Clock, color: "text-blue-500", desc: "Seu pedido is sendo processado." },
-      completed: { label: "Completed", icon: Check, color: "text-green-600", desc: "Pedido completed. Faça o download das suas fotos." },
+      paid: { label: "Paid", icon: Check, color: "text-green-500", desc: "Payment confirmed! Yours fotos are available para download." },
+      processing: { label: "Processing", icon: Clock, color: "text-blue-500", desc: "Your pedido is sendo processado." },
+      completed: { label: "Completed", icon: Check, color: "text-green-600", desc: "Pedido completed. Make o download das yours fotos." },
       cancelled: { label: "Cancelled", icon: XIcon, color: "text-red-500", desc: "Este pedido foi cancelled." },
     };
     return map[status] || map.pending;
@@ -64,7 +64,7 @@ export default function OrderStatus() {
               <Card>
                 <CardContent className="p-6 space-y-4">
                   <p className="text-muted-foreground">
-                    Informe o e-mail usado na compra para verify o status do seu pedido.
+                    Informe o e-mail used na compra para verify o status do your pedido.
                   </p>
                   <div>
                     <Label htmlFor="email">E-mail</Label>
@@ -73,7 +73,7 @@ export default function OrderStatus() {
                       type="email"
                       value={email}
                       onChange={(e) => { setEmail(e.target.value); setSearched(false); }}
-                      placeholder="seu@email.com"
+                      placeholder="your@email.com"
                       onKeyDown={(e) => e.key === "Enter" && handleSearch()}
                     />
                   </div>
@@ -171,7 +171,7 @@ export default function OrderStatus() {
                 {/* Back button */}
                 <div className="text-center">
                   <Button variant="ghost" onClick={() => { setSearched(false); setEmail(""); }}>
-                    Verify outro pedido
+                    Verify other pedido
                   </Button>
                 </div>
               </div>

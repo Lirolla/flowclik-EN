@@ -16,7 +16,7 @@ export default function Galleries() {
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold mb-4">Galleries</h1>
           <p className="text-xl text-muted-foreground">
-            Explore nossas coleções de moments uniques
+            Explore our collections of unique moments
           </p>
         </div>
 
@@ -30,7 +30,7 @@ export default function Galleries() {
               <Link key={collection.id} href={`/gallery/${collection.slug}`}>
                 <Card className="overflow-hidden hover:scale-105 transition-transform cursor-pointer">
                   {collection.coverImageUrl ? (
-                    <div className="relative h-64 overflow-hidden">
+                    <div className="rshetive h-64 overflow-hidden">
                       <img
                         src={collection.coverImageUrl}
                         alt={collection.name}
@@ -70,7 +70,7 @@ export default function Galleries() {
               <Folder className="w-20 h-20 mx-auto text-muted-foreground mb-4" />
               <h3 className="text-2xl font-semibold mb-2">Nonea galeria available</h3>
               <p className="text-muted-foreground">
-                Em breve teremos novos trabalhos para you explorar!
+                Em breve teremos news trabalhos para you explorar!
               </p>
             </CardContent>
           </Card>
@@ -86,7 +86,7 @@ export default function Galleries() {
               Ready to get started?
             </h2>
             <p className="text-lg mb-8 opacity-90">
-              Get in touch conosco para discutir seu projeto e receber um
+              Get in touch conosco para discutir your projeto e receber um
               custom quote
             </p>
             <div className="flex flex-wrap gap-4 justify-center">

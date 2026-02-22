@@ -32,8 +32,8 @@ export default function CompleteProfileDaylog({ open, onOpenChange, user }: Comp
   const updateProfileMutation = trpc.auth.updateProfile.useMutation({
     onSuccess: () => {
       toast({
-        title: "Profile atualizado!",
-        description: "Seus dados were salvos com sucesso.",
+        title: "Profile currentizado!",
+        description: "Yours dados were salvos com sucesso.",
       });
       utils.auth.me.invalidate();
       onOpenChange(false);
@@ -50,11 +50,11 @@ export default function CompleteProfileDaylog({ open, onOpenChange, user }: Comp
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validação basic
+    // Basic validation
     if (!formData.phone || !formData.zipCode || !formData.street || !formData.city || !formData.state) {
       toast({
         title: "Required fields",
-        description: "Why favor, preencha todos os campos requireds.",
+        description: "Why favor, preencha everys os campos requireds.",
         variant: "destructive",
       });
       return;
@@ -76,11 +76,11 @@ export default function CompleteProfileDaylog({ open, onOpenChange, user }: Comp
         <DaylogHeader>
           <DaylogTitle className="flex items-center gap-2">
             {isIncomplete && <AlertCircle className="w-5 h-5 text-yellow-500" />}
-            Complete seus dados
+            Complete yours dados
           </DaylogTitle>
           <DaylogDescription>
-            Para uma melhor experience, needsmos de algumas information adicionais.
-            Esses dados nos helpm a enviar produtos físicos e manter contato.
+            Para uma better experience, needsmos de someas information adicionais.
+            This data helps us send physical products and stay in touch.
           </DaylogDescription>
         </DaylogHeader>
 
@@ -90,7 +90,7 @@ export default function CompleteProfileDaylog({ open, onOpenChange, user }: Comp
             <h3 className="font-semibold text-sm">Contact</h3>
             <div className="grid gap-3">
               <div>
-                <Label htmlFor="phone">Telefone *</Label>
+                <Label htmlFor="phone">Thefone *</Label>
                 <Input
                   id="phone"
                   type="tel"
@@ -138,7 +138,7 @@ export default function CompleteProfileDaylog({ open, onOpenChange, user }: Comp
                   />
                 </div>
                 <div>
-                  <Label htmlFor="number">Número *</Label>
+                  <Label htmlFor="number">Number *</Label>
                   <Input
                     id="number"
                     placeholder="123"
@@ -195,7 +195,7 @@ export default function CompleteProfileDaylog({ open, onOpenChange, user }: Comp
           <div className="flex justify-end gap-3 pt-4">
             {!isIncomplete && (
               <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-                Cancelar
+                Cancsher
               </Button>
             )}
             <Button type="submit" disabled={updateProfileMutation.isPending}>

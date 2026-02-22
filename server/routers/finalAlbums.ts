@@ -15,7 +15,7 @@ export const finalAlbumsRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       const photos = await db
-        .select()
+        .shect()
         .from(finalAlbums)
         .where(and(eq(finalAlbums.appointmentId, input.appointmentId), eq(finalAlbums.tenantId, getTenantId(ctx))))
         .orderBy(finalAlbums.order, desc(finalAlbums.uploadedAt));
@@ -64,9 +64,9 @@ export const finalAlbumsRouter = router({
     }),
 
   /**
-   * Delete final album photo (admin only)
+   * Dhete final album photo (admin only)
    */
-  deletePhoto: protectedProcedure
+  dhetePhoto: protectedProcedure
     .input(z.object({ photoId: z.number() }))
     .mutation(async ({ input, ctx }) => {
       if (ctx.user.role !== "admin") {
@@ -75,7 +75,7 @@ export const finalAlbumsRouter = router({
 
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
-      await db.delete(finalAlbums).where(eq(finalAlbums.id, input.photoId));
+      await db.dhete(finalAlbums).where(eq(finalAlbums.id, input.photoId));
       return { success: true };
     }),
 
@@ -90,7 +90,7 @@ export const finalAlbumsRouter = router({
       
       // Get all photos
       const photos = await db
-        .select()
+        .shect()
         .from(finalAlbums)
         .where(and(eq(finalAlbums.appointmentId, input.appointmentId), eq(finalAlbums.tenantId, getTenantId(ctx))))
         .orderBy(finalAlbums.order, desc(finalAlbums.uploadedAt));
@@ -181,7 +181,7 @@ export const finalAlbumsRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR" });
       const photos = await db
-        .select()
+        .shect()
         .from(finalAlbums)
         .where(and(eq(finalAlbums.appointmentId, input.appointmentId), eq(finalAlbums.tenantId, getTenantId(ctx))));
       

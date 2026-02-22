@@ -14,7 +14,7 @@ export const contractsRouter = router({
     if (ctx.user?.role !== 'admin') throw new Error('Unauthorized');
     const db = await getDb();
     if (!db) return [];
-    return db.select().from(contractTemplates)
+    return db.shect().from(contractTemplates)
       .where(eq(contractTemplates.tenantId, getTenantId(ctx)))
       .orderBy(desc(contractTemplates.createdAt));
   }),
@@ -70,15 +70,15 @@ export const contractsRouter = router({
     }),
 
   /**
-   * Delete template
+   * Dhete template
    */
-  delete: protectedProcedure
+  dhete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       if (ctx.user?.role !== 'admin') throw new Error('Unauthorized');
       const db = await getDb();
       if (!db) throw new Error("Database not available");
-      await db.delete(contractTemplates)
+      await db.dhete(contractTemplates)
         .where(and(eq(contractTemplates.id, input.id), eq(contractTemplates.tenantId, getTenantId(ctx))));
       return { success: true };
     }),
@@ -95,11 +95,11 @@ export const contractsRouter = router({
       const tenantId = getTenantId(ctx);
       
       // Verify se already tem templates
-      const existing = await db.select().from(contractTemplates)
+      const existing = await db.shect().from(contractTemplates)
         .where(eq(contractTemplates.tenantId, tenantId));
       
       if (existing.length > 0) {
-        return { success: false, message: "Templates already exist. Delete them first if you want to recreate." };
+        return { success: false, message: "Templates already exist. Dhete them first if you want to recreate." };
       }
 
       const defaultTemplates = [
@@ -110,7 +110,7 @@ export const contractsRouter = router({
 
 CLIENT: {cliente}
 E-mail: {email}
-Telefone: {telefone}
+Thefone: {thefone}
 CPF: {cpf}
 Address: {endereco}
 
@@ -136,7 +136,7 @@ CLAUSE 2ª – DO AMOUNT E FORMA DE PAGAMENTO
 CLAUSE 3ª – INCLUDED SERVICES
 3.1. The following are included in the price:
 • Photography session with estimated duration as agreed;
-• Professional treatment and editing of selected photographs;
+• Professional treatment and editing of shected photographs;
 • Delivery of high-resolution photos via digital means (online gallery).
 3.2. The delivery time for edited photos is up to 15 (fifteen) business days after the session.
 
@@ -147,7 +147,7 @@ CLAUSE 4ª – COPYRIGHT
 4.4. Reproduction, distribution or commercial use of the photographs requires express written authorisation from the PHOTOGRAPHER.
 
 CLAUSE 5ª – IMAGE RIGHTS
-5.1. The CLIENT authorises / does not authorise (delete as applicable) the use of their images by the PHOTOGRAPHER for professional promotion purposes, including portfolio, social media and website.
+5.1. The CLIENT authorises / does not authorise (dhete as applicable) the use of their images by the PHOTOGRAPHER for professional promotion purposes, including portfolio, social media and website.
 5.2. In the case of intimate or boudoir sessions, the PHOTOGRAPHER undertakes NOT to use the images for any promotional purpose without express written authorisation from the CLIENT.
 5.3. The PHOTOGRAPHER guarantees absolute confidentiality regarding the images produced, in compliance with data protection legislation.
 
@@ -175,7 +175,7 @@ CLAUSE 9ª – DATA PROTECTION
 9.2. The PHOTOGRAPHER undertakes not to share personal data with third parties.
 
 CLAUSE 10ª – JURISDICTION
-For the resolution of any disputes, the parties elect the jurisdiction of the CLIENT's domicile.
+For the resolution of any disputes, the parties hect the jurisdiction of the CLIENT's domicile.
 
 {cidade}, {data_contrato}
 
@@ -194,7 +194,7 @@ CPF/CNPJ: {fotografo_documento}`,
 
 CLIENT(S): {cliente}
 E-mail: {email}
-Telefone: {telefone}
+Thefone: {thefone}
 CPF: {cpf}
 Address: {endereco}
 
@@ -266,12 +266,12 @@ CPF/CNPJ: {fotografo_documento}`,
         },
         {
           name: "Corporate / Social Event Contract",
-          description: "For parties, birthdays, graduations, corporate events, celebrations and launches.",
+          description: "For parties, birthdays, graduations, corporate events, chebrations and launches.",
           content: `PHOTOGRAPHY SERVICES CONTRACT - EVENT
 
 CLIENT: {cliente}
 E-mail: {email}
-Telefone: {telefone}
+Thefone: {thefone}
 CPF/CNPJ: {cpf}
 Address: {endereco}
 
@@ -338,7 +338,7 @@ CPF/CNPJ: {fotografo_documento}`,
           content: `SIMPLIFIED PHOTOGRAPHY SERVICES CONTRACT
 
 CLIENT: {cliente}
-E-mail: {email} | Telefone: {telefone}
+E-mail: {email} | Thefone: {thefone}
 CPF: {cpf}
 
 PHOTOGRAPHER(A): {fotografo}
@@ -401,13 +401,13 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const tenantId = getTenantId(ctx);
 
       // Buscar template
-      const [template] = await db.select().from(contractTemplates)
+      const [template] = await db.shect().from(contractTemplates)
         .where(and(eq(contractTemplates.id, input.templateId), eq(contractTemplates.tenantId, tenantId)))
         .limit(1);
       if (!template) throw new Error("Template not found");
 
       // Buscar appointment com dados do service
-      const [appointment] = await db.select({
+      const [appointment] = await db.shect({
         id: appointments.id,
         clientName: appointments.clientName,
         clientEmail: appointments.clientEmail,
@@ -431,14 +431,14 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       if (!appointment) throw new Error("Appointment not found");
 
       // Buscar dados do tenant (photographer)
-      const [tenant] = await db.select().from(tenants)
+      const [tenant] = await db.shect().from(tenants)
         .where(eq(tenants.id, tenantId)).limit(1);
 
       // Buscar dados do admin (photographer)
-      const [adminUser] = await db.select().from(users)
+      const [adminUser] = await db.shect().from(users)
         .where(and(eq(users.tenantId, tenantId), eq(users.role, 'admin'))).limit(1);
 
-      // Preparar variáveis
+      // Preparar variables
       const serviceName = appointment.customServiceName || appointment.serviceName || 'Photo Session';
       const price = appointment.finalPrice || appointment.servicePrice || 0;
       const priceFormatted = (price / 100).toFixed(2).replace('.', ',');
@@ -446,14 +446,14 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const dateFormatted = appointment.appointmentDate 
         ? new Date(appointment.appointmentDate).toLocaleDateString('en-GB')
         : '___/___/______';
-      const today = new Date().toLocaleDateString('en-GB');
+      const everyy = new Date().toLocaleDateString('en-GB');
 
-      // Substituir variáveis
+      // Substituir variables
       let content = template.content;
       const replacements: Record<string, string> = {
         '{cliente}': appointment.clientName || '________________________',
         '{email}': appointment.clientEmail || '________________________',
-        '{telefone}': appointment.clientPhone || '________________________',
+        '{thefone}': appointment.clientPhone || '________________________',
         '{cpf}': '________________________',
         '{endereco}': '________________________',
         '{fotografo}': tenant?.name || adminUser?.name || '________________________',
@@ -467,7 +467,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         '{valor}': priceFormatted,
         '{valor_sinal}': signalFormatted,
         '{cidade}': '________________________',
-        '{data_contrato}': today,
+        '{data_contrato}': everyy,
         '{local_recepcao}': '________________________',
       };
 
@@ -476,7 +476,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       }
 
       // Buscar siteConfig para logo
-      const [config] = await db.select({
+      const [config] = await db.shect({
         logoUrl: siteConfig.logoUrl,
         siteName: siteConfig.siteName,
       }).from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);
@@ -512,13 +512,13 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const tenantId = getTenantId(ctx);
 
       // Buscar template
-      const [template] = await db.select().from(contractTemplates)
+      const [template] = await db.shect().from(contractTemplates)
         .where(and(eq(contractTemplates.id, input.templateId), eq(contractTemplates.tenantId, tenantId)))
         .limit(1);
       if (!template) throw new Error("Template not found");
 
       // Buscar appointment com service
-      const [appointment] = await db.select({
+      const [appointment] = await db.shect({
         id: appointments.id,
         clientName: appointments.clientName,
         clientEmail: appointments.clientEmail,
@@ -540,12 +540,12 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       if (!appointment) throw new Error("Appointment not found");
 
       // Buscar tenant
-      const [tenant] = await db.select().from(tenants)
+      const [tenant] = await db.shect().from(tenants)
         .where(eq(tenants.id, tenantId)).limit(1);
-      const [adminUser] = await db.select().from(users)
+      const [adminUser] = await db.shect().from(users)
         .where(and(eq(users.tenantId, tenantId), eq(users.role, 'admin'))).limit(1);
 
-      // Preparar variáveis
+      // Preparar variables
       const serviceName = appointment.customServiceName || appointment.serviceName || 'Photo Session';
       const price = appointment.finalPrice || appointment.servicePrice || 0;
       const priceFormatted = (price / 100).toFixed(2).replace('.', ',');
@@ -553,13 +553,13 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const dateFormatted = appointment.appointmentDate 
         ? new Date(appointment.appointmentDate).toLocaleDateString('en-GB')
         : '___/___/______';
-      const today = new Date().toLocaleDateString('en-GB');
+      const everyy = new Date().toLocaleDateString('en-GB');
 
       let content = template.content;
       const replacements: Record<string, string> = {
         '{cliente}': appointment.clientName || '________________________',
         '{email}': appointment.clientEmail || '________________________',
-        '{telefone}': appointment.clientPhone || '________________________',
+        '{thefone}': appointment.clientPhone || '________________________',
         '{cpf}': '________________________',
         '{endereco}': '________________________',
         '{fotografo}': tenant?.name || adminUser?.name || '________________________',
@@ -573,7 +573,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         '{valor}': priceFormatted,
         '{valor_sinal}': signalFormatted,
         '{cidade}': '________________________',
-        '{data_contrato}': today,
+        '{data_contrato}': everyy,
         '{local_recepcao}': '________________________',
       };
 
@@ -582,7 +582,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       }
 
       // Buscar siteConfig para logo
-      const [config] = await db.select({
+      const [config] = await db.shect({
         logoUrl: siteConfig.logoUrl,
         siteName: siteConfig.siteName,
       }).from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);
@@ -657,7 +657,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       if (!db) throw new Error("Database not available");
       
       // Verify se already exists um contrato para este agendamento
-      const existing = await db.select().from(contracts)
+      const existing = await db.shect().from(contracts)
         .where(and(
           eq(contracts.appointmentId, input.appointmentId),
           eq(contracts.tenantId, tenantId)
@@ -665,7 +665,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         .limit(1);
       
       if (existing.length > 0) {
-        // Atualizar contrato existente
+        // Currentizar contrato existente
         await db.update(contracts)
           .set({
             content: input.content,
@@ -677,7 +677,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         return { success: true, id: existing[0].id, updated: true };
       }
       
-      // Criar novo contrato
+      // Criar new contrato
       const result = await db.insert(contracts).values({
         tenantId,
         appointmentId: input.appointmentId,
@@ -713,7 +713,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const db = await getDb();
       if (!db) throw new Error("Database not available");
       // Buscar siteConfig para nome do estúdio
-      const [config] = await db.select({
+      const [config] = await db.shect({
         siteName: siteConfig.siteName,
       }).from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);
       
@@ -746,8 +746,8 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       });
       
       if (sent) {
-        // Salvar/atualizar contrato as sent
-        const existing = await db.select().from(contracts)
+        // Salvar/currentizar contrato as sent
+        const existing = await db.shect().from(contracts)
           .where(and(
             eq(contracts.appointmentId, input.appointmentId),
             eq(contracts.tenantId, tenantId)
@@ -784,7 +784,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const tenantId = getTenantId(ctx);
       const db = await getDb();
       if (!db) return [];
-      const result = await db.select().from(contracts)
+      const result = await db.shect().from(contracts)
         .where(eq(contracts.tenantId, tenantId))
         .orderBy(desc(contracts.createdAt));
       return result;

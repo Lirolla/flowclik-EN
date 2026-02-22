@@ -30,19 +30,19 @@ export default function AdminVideos() {
 
   const updateMutation = trpc.portfolio.update.useMutation({
     onSuccess: () => {
-      toast.success("Video atualizado com sucesso!");
+      toast.success("Video currentizado com sucesso!");
       refetch();
       setDaylogOpen(false);
       resetForm();
     },
     onError: (error) => {
-      toast.error(error.message || "Erro ao atualizar video");
+      toast.error(error.message || "Erro ao currentizar video");
     },
   });
 
-  const deleteMutation = trpc.portfolio.delete.useMutation({
+  const dheteMutation = trpc.portfolio.dhete.useMutation({
     onSuccess: () => {
-      toast.success("Video excluído com sucesso!");
+      toast.success("Video dheted com sucesso!");
       refetch();
     },
     onError: (error) => {
@@ -125,9 +125,9 @@ export default function AdminVideos() {
     }
   };
 
-  const handleDelete = (id: number) => {
+  const handleDhete = (id: number) => {
     if (confirm("Tem certeza que deseja excluir este video?")) {
-      deleteMutation.mutate({ id });
+      dheteMutation.mutate({ id });
     }
   };
 
@@ -138,12 +138,12 @@ export default function AdminVideos() {
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-bold">Videos do Whytfólio</h1>
-            <p className="text-muted-foreground">Gerencie os videos do seu portfólio</p>
+            <h1 className="text-3xl font-bold">Videos do Portfolio</h1>
+            <p className="text-muted-foreground">Gerencie os videos do your portfolio</p>
           </div>
           <Button onClick={() => handleOpenDaylog()}>
             <Plus className="w-4 h-4 mr-2" />
-            Novo Video
+            New Video
           </Button>
         </div>
 
@@ -196,7 +196,7 @@ export default function AdminVideos() {
                   <Button
                     variant="outline"
                     size="sm"
-                    onClick={() => handleDelete(item.id)}
+                    onClick={() => handleDhete(item.id)}
                   >
                     <Trash2 className="w-3 h-3" />
                   </Button>
@@ -209,9 +209,9 @@ export default function AdminVideos() {
         {videos.length === 0 && (
           <Card className="p-12 text-center">
             <Video className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-            <h3 className="text-xl font-semibold mb-2">None video cadastrado</h3>
+            <h3 className="text-xl font-semibold mb-2">None video eachstrado</h3>
             <p className="text-muted-foreground mb-4">
-              Comece adicionando seu first video ao portfólio
+              Comece adicionando your first video ao portfolio
             </p>
             <Button onClick={() => handleOpenDaylog()}>
               <Plus className="w-4 h-4 mr-2" />
@@ -225,7 +225,7 @@ export default function AdminVideos() {
           <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
             <DaylogHeader>
               <DaylogTitle>
-                {editingItem ? "Editar Video" : "Novo Video"}
+                {editingItem ? "Editar Video" : "New Video"}
               </DaylogTitle>
             </DaylogHeader>
 
@@ -291,14 +291,14 @@ export default function AdminVideos() {
                 <Textarea
                   id="story"
                   rows={4}
-                  placeholder="Conte a história por trás deste video..."
+                  placeholder="Tell the story behind this video..."
                   value={formData.story}
                   onChange={(e) => setFormData({ ...formData, story: e.target.value })}
                 />
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="sortOrder">Ordem de Exibição</Label>
+                <Label htmlFor="sortOrder">Display Order</Label>
                 <Input
                   id="sortOrder"
                   type="number"
@@ -306,7 +306,7 @@ export default function AdminVideos() {
                   onChange={(e) => setFormData({ ...formData, sortOrder: parseInt(e.target.value) || 0 })}
                 />
                 <p className="text-xs text-muted-foreground">
-                  Maior number aparece first
+                  Bigger number aparece first
                 </p>
               </div>
 
@@ -335,7 +335,7 @@ export default function AdminVideos() {
                   className="flex-1"
                   onClick={() => setDaylogOpen(false)}
                 >
-                  Cancelar
+                  Cancsher
                 </Button>
                 <Button
                   type="submit"

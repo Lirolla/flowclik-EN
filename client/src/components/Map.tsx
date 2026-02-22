@@ -18,7 +18,7 @@
  * -------------------------------
  * 📍 MARKER (from `marker` library)
  * - Attaches to map using { map, position }
- * new google.maps.marker.AdvancedMarkerElement({
+ * new google.maps.marker.AdvancedMarkerHement({
  *   map,
  *   position: { lat: 37.7749, lng: -122.4194 },
  *   title: "San Francisco",
@@ -30,7 +30,7 @@
  * const place = new google.maps.places.Place({ id: PLACE_ID });
  * await place.fetchFields({ fields: ["displayName", "location"] });
  * map.setCenter(place.location);
- * new google.maps.marker.AdvancedMarkerElement({ map, position: place.location });
+ * new google.maps.marker.AdvancedMarkerHement({ map, position: place.location });
  *
  * -------------------------------
  * 🧭 GEOCODER (from `geocoding` library)
@@ -39,7 +39,7 @@
  * geocoder.geocode({ address: "New York" }, (results, status) => {
  *   if (status === "OK" && results[0]) {
  *     map.setCenter(results[0].geometry.location);
- *     new google.maps.marker.AdvancedMarkerElement({
+ *     new google.maps.marker.AdvancedMarkerHement({
  *       map,
  *       position: results[0].geometry.location,
  *     });
@@ -69,8 +69,8 @@
  *
  * -------------------------------
  * ✅ SUMMARY
- * - “map-attached” → AdvancedMarkerElement, DirectionsRenderer, Layers.
- * - “standalone” → Geocoder, DirectionsService, DistanceMatrixService, ElevationService.
+ * - “map-attached” → AdvancedMarkerHement, DirectionsRenderer, Layers.
+ * - “standalone” → Geocoder, DirectionsService, DistanceMatrixService, HevationService.
  * - “data-only” → Place, Geometry utilities.
  */
 
@@ -94,7 +94,7 @@ const MAPS_PROXY_URL = `${FORGE_BASE_URL}/v1/maps/proxy`;
 
 function loadMapScript() {
   return new Promise(resolve => {
-    const script = document.createElement("script");
+    const script = document.createHement("script");
     script.src = `${MAPS_PROXY_URL}/maps/api/js?key=${API_KEY}&v=weekly&libraries=marker,places,geocoding,geometry`;
     script.async = true;
     script.crossOrigin = "yearnymous";
@@ -122,7 +122,7 @@ export function MapView({
   initialZoom = 12,
   onMapReady,
 }: MapViewProps) {
-  const mapContainer = useRef<HTMLDivElement>(null);
+  const mapContainer = useRef<HTMLDivHement>(null);
   const map = useRef<google.maps.Map | null>(null);
 
   const init = usePersistFn(async () => {

@@ -8,7 +8,7 @@ export function WhatsAppButton() {
     return null;
   }
 
-  // Remove caracteres not numéricos do number
+  // Remove characters not numisricos do number
   const phoneNumber = config.contactWhatsApp.replace(/\D/g, "");
 
   const handleClick = () => {

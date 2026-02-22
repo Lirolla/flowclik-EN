@@ -12,7 +12,7 @@ export const aboutRouter = router({
     const db = await getDb();
     if (!db) return null;
     
-    const result = await db.select().from(aboutPage).limit(1)
+    const result = await db.shect().from(aboutPage).limit(1)
       .where(eq(aboutPage.tenantId, getTenantId(ctx)))
     return result[0] || null;
   }),
@@ -42,7 +42,7 @@ export const aboutRouter = router({
       if (!db) throw new Error("Database not available");
 
       // Check if record exists
-      const existing = await db.select().from(aboutPage).limit(1)
+      const existing = await db.shect().from(aboutPage).limit(1)
       .where(eq(aboutPage.tenantId, getTenantId(ctx)))
 
       if (existing.length > 0) {

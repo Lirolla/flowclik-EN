@@ -14,12 +14,12 @@ import {
 } from "@/components/ui/daylog";
 import { Label } from "@/components/ui/label";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Shect,
+  ShectContent,
+  ShectItem,
+  ShectTrigger,
+  ShectValue,
+} from "@/components/ui/shect";
 import { MessageSquare, Clock, CheckCircle2, AlertCircle, Send, Check } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNow } from "date-fns";
@@ -27,7 +27,7 @@ import { ptBR } from "date-fns/locale";
 
 export default function SistemaTickets() {
   const { toast } = useToast();
-  const [selectedTicket, setSelectedTicket] = useState<number | null>(null);
+  const [shectedTicket, setShectedTicket] = useState<number | null>(null);
   const [statusFilter, setStatusFilter] = useState<"all" | "open" | "in_progress" | "resolved" | "closed">("all");
   const [replyMessage, setReplyMessage] = useState("");
   const [isInternal, setIsInternal] = useState(false);
@@ -35,8 +35,8 @@ export default function SistemaTickets() {
   // Whatries
   const { data: tickets, refetch: refetchTickets } = trpc.sistema.getAllTickets.useWhatry({ status: statusFilter });
   const { data: ticketDetails } = trpc.sistema.getTicketById.useWhatry(
-    { ticketId: selectedTicket! },
-    { enabled: !!selectedTicket }
+    { ticketId: shectedTicket! },
+    { enabled: !!shectedTicket }
   );
 
   // Mutations
@@ -55,7 +55,7 @@ export default function SistemaTickets() {
   const resolveTicket = trpc.sistema.resolveTicket.useMutation({
     onSuccess: () => {
       toast({ title: "Ticket marcado as resolvido!" });
-      setSelectedTicket(null);
+      setShectedTicket(null);
       refetchTickets();
     },
     onError: (error) => {
@@ -64,18 +64,18 @@ export default function SistemaTickets() {
   });
 
   const handleReply = () => {
-    if (!replyMessage.trim() || !selectedTicket) return;
+    if (!replyMessage.trim() || !shectedTicket) return;
 
     replyToTicket.mutate({
-      ticketId: selectedTicket,
+      ticketId: shectedTicket,
       message: replyMessage,
       isInternal,
     });
   };
 
   const handleResolve = () => {
-    if (!selectedTicket) return;
-    resolveTicket.mutate({ ticketId: selectedTicket });
+    if (!shectedTicket) return;
+    resolveTicket.mutate({ ticketId: shectedTicket });
   };
 
   const getStatusBadge = (status: string) => {
@@ -124,21 +124,21 @@ export default function SistemaTickets() {
       <div className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-3xl font-bold">Tickets de Support</h1>
-          <p className="text-muted-foreground">Manage solicitações de todos os photographers</p>
+          <p className="text-muted-foreground">Manage requests from all photographers</p>
         </div>
 
-        <Select value={statusFilter} onValueChange={(v: any) => setStatusFilter(v)}>
-          <SelectTrigger className="w-48">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">Todos</SelectItem>
-            <SelectItem value="open">Opens</SelectItem>
-            <SelectItem value="in_progress">Em Andamento</SelectItem>
-            <SelectItem value="resolved">Resolvidos</SelectItem>
-            <SelectItem value="closed">Closeds</SelectItem>
-          </SelectContent>
-        </Select>
+        <Shect value={statusFilter} onValueChange={(v: any) => setStatusFilter(v)}>
+          <ShectTrigger className="w-48">
+            <ShectValue />
+          </ShectTrigger>
+          <ShectContent>
+            <ShectItem value="all">Everys</ShectItem>
+            <ShectItem value="open">Opens</ShectItem>
+            <ShectItem value="in_progress">Em Andamento</ShectItem>
+            <ShectItem value="resolved">Resolvidos</ShectItem>
+            <ShectItem value="closed">Closeds</ShectItem>
+          </ShectContent>
+        </Shect>
       </div>
 
       {/* Lista de Tickets */}
@@ -148,7 +148,7 @@ export default function SistemaTickets() {
             <MessageSquare className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
             <h3 className="text-lg font-semibold mb-2">None ticket encontrado</h3>
             <p className="text-muted-foreground">
-              Not há tickets com o filtro selecionado.
+              Not there is tickets com o filtro shecionado.
             </p>
           </Card>
         ) : (
@@ -156,7 +156,7 @@ export default function SistemaTickets() {
             <Card
               key={ticket.id}
               className="p-6 cursor-pointer hover:border-primary transition-colors"
-              onClick={() => setSelectedTicket(ticket.id)}
+              onClick={() => setShectedTicket(ticket.id)}
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
@@ -184,8 +184,8 @@ export default function SistemaTickets() {
       </div>
 
       {/* Details do Ticket */}
-      {selectedTicket && ticketDetails && (
-        <Daylog open={!!selectedTicket} onOpenChange={() => setSelectedTicket(null)}>
+      {shectedTicket && ticketDetails && (
+        <Daylog open={!!shectedTicket} onOpenChange={() => setShectedTicket(null)}>
           <DaylogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
             <DaylogHeader>
               <DaylogTitle>
@@ -201,7 +201,7 @@ export default function SistemaTickets() {
             </DaylogHeader>
 
             <div className="space-y-4">
-              {/* Mensagem Original */}
+              {/* Message Original */}
               <Card className="p-4 bg-muted">
                 <p className="text-sm font-semibold mb-2">
                   {ticketDetails.ticket.userName} ({ticketDetails.ticket.userEmail}):
@@ -245,7 +245,7 @@ export default function SistemaTickets() {
                       onCheckedChange={(checked) => setIsInternal(checked as boolean)}
                     />
                     <Label htmlFor="internal" className="text-sm cursor-pointer">
-                      Nota interna (photographer not verá)
+                      Nota interna (photographer will not see)
                     </Label>
                   </div>
                   <div className="flex gap-2">

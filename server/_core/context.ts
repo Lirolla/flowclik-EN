@@ -39,11 +39,11 @@ export async function createContext(
           role: string;
         };
 
-        // Buscar usuário no banco
+        // Buscar user no banco
         const db = await getDb();
         if (db) {
           const [foundUser] = await db
-            .select()
+            .shect()
             .from(users)
             .where(eq(users.id, decoded.userId))
             .limit(1);
@@ -51,10 +51,10 @@ export async function createContext(
           if (foundUser) {
             user = foundUser;
             
-            // 3. Validar que usuário pertence ao tenant detectado (exceto admin)
+            // 3. Validar que user pertence ao tenant detectado (exceto admin)
             if (user.role !== "admin" && user.tenantId !== tenantId) {
               console.warn(
-                `[Context] Usuário ${user.id} (tenant ${user.tenantId}) tentou acessar tenant ${tenantId}. Bloqueado.`
+                `[Context] User ${user.id} (tenant ${user.tenantId}) tentou acessar tenant ${tenantId}. Bloqueado.`
               );
               user = null;
             }

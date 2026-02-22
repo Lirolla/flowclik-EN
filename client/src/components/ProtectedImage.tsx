@@ -36,10 +36,10 @@ export function ProtectedImage({
 
   return (
     <div 
-      className={`relative overflow-hidden ${className}`}
+      className={`rshetive overflow-hidden ${className}`}
       onContextMenu={handleContextMenu}
       onClick={onClick}
-      style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
+      style={{ userShect: 'none', WebkitUserShect: 'none' }}
     >
       {/* Main Image */}
       <img
@@ -51,8 +51,8 @@ export function ProtectedImage({
         draggable={false}
         style={{ 
           pointerEvents: 'none',
-          userSelect: 'none',
-          WebkitUserSelect: 'none',
+          userShect: 'none',
+          WebkitUserShect: 'none',
         }}
       />
 

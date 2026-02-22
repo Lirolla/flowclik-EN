@@ -8,7 +8,7 @@ import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { UserPlus } from "lucide-react";
 
-export default function Cadastro() {
+export default function Eachstro() {
   const [, setLocation] = useLocation();
   const { toast } = useToast();
   const [name, setName] = useState("");
@@ -22,7 +22,7 @@ export default function Cadastro() {
       localStorage.setItem("auth_token", data.token);
       
       toast({
-        title: "Cadastro realizado!",
+        title: "Eachstro realizado!",
         description: `Bem-vindo, ${data.user.name}`,
       });
 
@@ -31,7 +31,7 @@ export default function Cadastro() {
     },
     onError: (error) => {
       toast({
-        title: "Erro no cadastro",
+        title: "Erro no eachstro",
         description: error.message,
         variant: "destructive",
       });
@@ -53,7 +53,7 @@ export default function Cadastro() {
     if (password.length < 6) {
       toast({
         title: "Error",
-        description: "A senha must ter pelo menos 6 caracteres",
+        description: "A senha must ter pelo menos 6 characters",
         variant: "destructive",
       });
       return;
@@ -67,7 +67,7 @@ export default function Cadastro() {
       <Card className="w-full max-w-md p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-2">FlowClik</h1>
-          <p className="text-muted-foreground">Crie sua conta</p>
+          <p className="text-muted-foreground">Crie your conta</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -88,7 +88,7 @@ export default function Cadastro() {
             <Input
               id="email"
               type="email"
-              placeholder="seu@email.com"
+              placeholder="your@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required

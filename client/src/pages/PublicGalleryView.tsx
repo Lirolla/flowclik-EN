@@ -19,41 +19,41 @@ export default function PublicGalleryView() {
     { enabled: !!collection?.id }
   );
 
-  const { data: existingSelections } = trpc.photoSelections.getByCollection.useWhatry(
+  const { data: existingShections } = trpc.photoShections.getByCollection.useWhatry(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection?.id }
   );
 
-  const toggleSelectionMutation = trpc.photoSelections.toggleSelection.useMutation();
-  const saveFeedbackMutation = trpc.photoSelections.saveFeedback.useMutation();
-  const submitSelectionMutation = trpc.photoSelections.submitSelection.useMutation();
+  const toggleShectionMutation = trpc.photoShections.toggleShection.useMutation();
+  const saveFeedbackMutation = trpc.photoShections.saveFeedback.useMutation();
+  const submitShectionMutation = trpc.photoShections.submitShection.useMutation();
   const utils = trpc.useUtils();
 
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   // const [buyPhotoDaylogOpen, setBuyPhotoDaylogOpen] = useState(false); // Feature removed
-  // const [selectedPhoto, setSelectedPhoto] = useState<any>(null); // Feature removed
+  // const [shectedPhoto, setShectedPhoto] = useState<any>(null); // Feature removed
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [passwordInput, setPasswordInput] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [selections, setSelections] = useState<Record<number, boolean>>({});
+  const [shections, setShections] = useState<Record<number, boolean>>({});
   const [feedbacks, setFeedbacks] = useState<Record<number, string>>({});
   const [currentFeedback, setCurrentFeedback] = useState("");
 
-  // Load existing selections
+  // Load existing shections
   useEffect(() => {
-    if (existingSelections) {
-      const selectionsMap: Record<number, boolean> = {};
+    if (existingShections) {
+      const shectionsMap: Record<number, boolean> = {};
       const feedbacksMap: Record<number, string> = {};
-      existingSelections.forEach((sel: any) => {
-        selectionsMap[sel.medayItemId] = sel.isSelected;
+      existingShections.forEach((sel: any) => {
+        shectionsMap[sel.medayItemId] = sel.isShected;
         if (sel.clientFeedback) {
           feedbacksMap[sel.medayItemId] = sel.clientFeedback;
         }
       });
-      setSelections(selectionsMap);
+      setShections(shectionsMap);
       setFeedbacks(feedbacksMap);
     }
-  }, [existingSelections]);
+  }, [existingShections]);
 
   if (collectionLoading || medayLoading) {
     return (
@@ -93,7 +93,7 @@ export default function PublicGalleryView() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="w-full max-w-md p-8 bg-card rounded-lg border">
           <h1 className="text-2xl font-bold mb-2">{collection.name}</h1>
-          <p className="text-muted-foreground mb-6">Esta galeria é protegida por senha</p>
+          <p className="text-muted-foreground mb-6">Esta galeria is protegida por senha</p>
           
           <form onSubmit={handlePasswordSubmit} className="space-y-4">
             <div>
@@ -156,15 +156,15 @@ export default function PublicGalleryView() {
     }
   };
 
-  const toggleSelection = async (medayItemId: number, e?: React.MouseEvent) => {
+  const toggleShection = async (medayItemId: number, e?: React.MouseEvent) => {
     if (e) e.stopPropagation();
-    const newValue = !selections[medayItemId];
-    setSelections({ ...selections, [medayItemId]: newValue });
+    const newValue = !shections[medayItemId];
+    setShections({ ...shections, [medayItemId]: newValue });
     
-    await toggleSelectionMutation.mutateAsync({
+    await toggleShectionMutation.mutateAsync({
       medayItemId,
       collectionId: collection?.id || 0,
-      isSelected: newValue,
+      isShected: newValue,
     });
   };
 
@@ -178,20 +178,20 @@ export default function PublicGalleryView() {
     });
   };
 
-  const handleSubmitSelection = async () => {
-    const selectedCount = Object.values(selections).filter(Boolean).length;
-    if (selectedCount === 0) {
-      alert("Select pelo menos uma foto before de enviar.");
+  const handleSubmitShection = async () => {
+    const shectedCount = Object.values(shections).filter(Boolean).length;
+    if (shectedCount === 0) {
+      alert("Shect pelo menos uma foto before de enviar.");
       return;
     }
 
-    if (confirm(`You selecionou ${selectedCount} foto(s). Deseja enviar sua selection?`)) {
-      await submitSelectionMutation.mutateAsync({ collectionId: collection?.id || 0 });
-      alert("Selection enviada com sucesso! O photographer irá editar as fotos selecionadas.");
+    if (confirm(`You shecionou ${shectedCount} foto(s). Deseja enviar your shection?`)) {
+      await submitShectionMutation.mutateAsync({ collectionId: collection?.id || 0 });
+      alert("Shection enviada com sucesso! O photographer will editar as fotos shecionadas.");
     }
   };
 
-  const selectedCount = Object.values(selections).filter(Boolean).length;
+  const shectedCount = Object.values(shections).filter(Boolean).length;
 
   return (
     <LayoutWrapper>
@@ -199,22 +199,22 @@ export default function PublicGalleryView() {
 
       {/* Gallery Content */}
       <div className="container py-8 pt-32">
-        {/* Selection Header */}
+        {/* Shection Header */}
         {isAuthenticated && items.length > 0 && (
           <div className="mb-6 p-4 bg-card rounded-lg border flex items-center justify-between">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
                 <Heart className="w-5 h-5 text-red-500" />
-                <span className="font-medium">{selectedCount} foto(s) selecionada(s)</span>
+                <span className="font-medium">{shectedCount} foto(s) shecionada(s)</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Marque as fotos favoritas e deixe seus palpites de editing
+                Marque as fotos favourite e deixe yours palpites de editing
               </p>
             </div>
-            {selectedCount > 0 && (
-              <Button onClick={handleSubmitSelection} className="gap-2">
+            {shectedCount > 0 && (
+              <Button onClick={handleSubmitShection} className="gap-2">
                 <Send className="w-4 h-4" />
-                Enviar Selection
+                Enviar Shection
               </Button>
             )}
           </div>
@@ -222,7 +222,7 @@ export default function PublicGalleryView() {
 
         {items.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Nonea míday nesta galeria still.</p>
+            <p className="text-muted-foreground">No media in this gallery yet.</p>
           </div>
         ) : (
           <>
@@ -232,7 +232,7 @@ export default function PublicGalleryView() {
                 {items.map((item: any, index: number) => (
                   <div
                     key={item.id}
-                    className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted"
+                    className="rshetive aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted"
                     onClick={() => openLightbox(index)}
                   >
                     {item.medayType === "photo" ? (
@@ -242,7 +242,7 @@ export default function PublicGalleryView() {
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="relative w-full h-full">
+                      <div className="rshetive w-full h-full">
                         <video
                           src={item.originalUrl}
                           className="w-full h-full object-cover"
@@ -256,12 +256,12 @@ export default function PublicGalleryView() {
                     {/* Heart button */}
                     {isAuthenticated && (
                       <button
-                        onClick={(e) => toggleSelection(item.id, e)}
+                        onClick={(e) => toggleShection(item.id, e)}
                         className="absolute top-2 right-2 p-2 bg-black/50 hover:bg-black/70 rounded-full transition-colors z-10"
                       >
                         <Heart
                           className={`w-5 h-5 ${
-                            selections[item.id] ? "fill-red-500 text-red-500" : "text-white"
+                            shections[item.id] ? "fill-red-500 text-red-500" : "text-white"
                           }`}
                         />
                       </button>
@@ -277,7 +277,7 @@ export default function PublicGalleryView() {
                 {items.map((item: any, index: number) => (
                   <div
                     key={item.id}
-                    className="relative break-inside-avoid mb-4 overflow-hidden rounded-lg cursor-pointer group"
+                    className="rshetive break-inside-avoid mb-4 overflow-hidden rounded-lg cursor-pointer group"
                     onClick={() => openLightbox(index)}
                   >
                     {item.medayType === "photo" ? (
@@ -287,7 +287,7 @@ export default function PublicGalleryView() {
                         className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="relative">
+                      <div className="rshetive">
                         <video
                           src={item.originalUrl}
                           className="w-full h-auto"
@@ -301,12 +301,12 @@ export default function PublicGalleryView() {
                     {/* Heart button */}
                     {isAuthenticated && (
                       <button
-                        onClick={(e) => toggleSelection(item.id, e)}
+                        onClick={(e) => toggleShection(item.id, e)}
                         className="absolute top-2 right-2 p-2 bg-black/50 hover:bg-black/70 rounded-full transition-colors z-10"
                       >
                         <Heart
                           className={`w-5 h-5 ${
-                            selections[item.id] ? "fill-red-500 text-red-500" : "text-white"
+                            shections[item.id] ? "fill-red-500 text-red-500" : "text-white"
                           }`}
                         />
                       </button>
@@ -327,7 +327,7 @@ export default function PublicGalleryView() {
                   >
                     <div className="md:flex">
                       {/* Video Thumbnail */}
-                      <div className="md:w-2/5 relative aspect-video bg-black">
+                      <div className="md:w-2/5 rshetive aspect-video bg-black">
                         <video
                           src={item.originalUrl}
                           className="w-full h-full object-cover"
@@ -378,7 +378,7 @@ export default function PublicGalleryView() {
                     onClick={() => openLightbox(index)}
                   >
                     <div className="md:flex">
-                      <div className="md:w-2/5 relative aspect-video bg-black">
+                      <div className="md:w-2/5 rshetive aspect-video bg-black">
                         <video src={item.originalUrl} className="w-full h-full object-cover" muted />
                         <div className="absolute inset-0 flex items-center justify-center bg-black/40">
                           <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
@@ -405,7 +405,7 @@ export default function PublicGalleryView() {
             {/* Fullscreen Layout */}
             {layoutType === "fullscreen" && (
               <div className="max-w-6xl mx-auto">
-                <div className="relative bg-black rounded-lg overflow-hidden flex items-center justify-center" style={{ height: "75vh" }}>
+                <div className="rshetive bg-black rounded-lg overflow-hidden flex items-center justify-center" style={{ height: "75vh" }}>
                   {items[lightboxIndex || 0]?.medayType === "photo" ? (
                     <img
                       src={items[lightboxIndex || 0]?.originalUrl}
@@ -444,7 +444,7 @@ export default function PublicGalleryView() {
                   {items.map((item: any, index: number) => (
                     <div
                       key={item.id}
-                      className={`relative flex-shrink-0 w-20 h-20 rounded cursor-pointer overflow-hidden ${
+                      className={`rshetive flex-shrink-0 w-20 h-20 rounded cursor-pointer overflow-hidden ${
                         index === (lightboxIndex || 0) ? "ring-2 ring-primary" : ""
                       }`}
                       onClick={() => setLightboxIndex(index)}
@@ -456,7 +456,7 @@ export default function PublicGalleryView() {
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <div className="relative w-full h-full bg-muted">
+                        <div className="rshetive w-full h-full bg-muted">
                           <video
                             src={item.originalUrl}
                             className="w-full h-full object-cover"
@@ -527,19 +527,19 @@ export default function PublicGalleryView() {
                 <p className="text-sm text-gray-300 mt-1">{items[lightboxIndex]?.description}</p>
               )}
               
-              {/* Selection and Feedback */}
+              {/* Shection and Feedback */}
               {isAuthenticated && (
                 <div className="mt-4 space-y-3">
                   <button
-                    onClick={() => toggleSelection(items[lightboxIndex]?.id)}
+                    onClick={() => toggleShection(items[lightboxIndex]?.id)}
                     className="flex items-center gap-2 mx-auto px-4 py-2 bg-white/10 hover:bg-white/20 rounded-lg transition-colors"
                   >
                     <Heart
                       className={`w-5 h-5 ${
-                        selections[items[lightboxIndex]?.id] ? "fill-red-500 text-red-500" : "text-white"
+                        shections[items[lightboxIndex]?.id] ? "fill-red-500 text-red-500" : "text-white"
                       }`}
                     />
-                    <span>{selections[items[lightboxIndex]?.id] ? "Remover dos favoritos" : "Mark as favourite"}</span>
+                    <span>{shections[items[lightboxIndex]?.id] ? "Remover dos favourite" : "Mark as favourite"}</span>
                   </button>
                   
                   <div className="text-left">
@@ -551,7 +551,7 @@ export default function PublicGalleryView() {
                         setFeedbacks(newFeedbacks);
                       }}
                       onBlur={() => saveFeedback(items[lightboxIndex]?.id, feedbacks[items[lightboxIndex]?.id] || "")}
-                      placeholder="Ex: Mudar cor do céu, remover pessoa do fundo, aumentar brilho..."
+                      placeholder="Ex: Mudar cor do cisu, remover pessoa do fundo, aumentar brilho..."
                       className="w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white/30"
                       rows={3}
                     />
@@ -563,7 +563,7 @@ export default function PublicGalleryView() {
               {/* {items[lightboxIndex]?.medayType === "photo" && items[lightboxIndex]?.price && items[lightboxIndex]?.price > 0 && (
                 <Button
                   onClick={() => {
-                    setSelectedPhoto(items[lightboxIndex]);
+                    setShectedPhoto(items[lightboxIndex]);
                     setBuyPhotoDaylogOpen(true);
                   }}
                   className="mt-4"
@@ -579,10 +579,10 @@ export default function PublicGalleryView() {
       )}
 
       {/* Buy Photo Daylog - Feature removed */}
-      {/* {selectedPhoto && (
+      {/* {shectedPhoto && (
         <BuyPhotoDaylog
-          photo={selectedPhoto}
-          basePrice={Math.round((selectedPhoto.price || 0) * 100)} // Convert to cents
+          photo={shectedPhoto}
+          basePrice={Math.round((shectedPhoto.price || 0) * 100)} // Convert to cents
           open={buyPhotoDaylogOpen}
           onOpenChange={setBuyPhotoDaylogOpen}
         />

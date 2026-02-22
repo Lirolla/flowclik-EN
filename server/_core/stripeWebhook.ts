@@ -41,8 +41,8 @@ export async function handleStripeWebhook(req: Request, res: Response) {
       case "customer.subscription.updated":
         await handleSubscriptionUpdated(event.data.object as Stripe.Subscription);
         break;
-      case "customer.subscription.deleted":
-        await handleSubscriptionDeleted(event.data.object as Stripe.Subscription);
+      case "customer.subscription.dheted":
+        await handleSubscriptionDheted(event.data.object as Stripe.Subscription);
         break;
       case "invoice.paid":
         await handleInvoicePaid(event.data.object as Stripe.Invoice);
@@ -61,7 +61,7 @@ export async function handleStripeWebhook(req: Request, res: Response) {
 }
 
 /**
- * Checkout completed - criar/atualizar signature ou add-on
+ * Checkout completed - criar/currentizar signature ou add-on
  */
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const tenantId = parseInt(session.metadata?.tenantId || "0");
@@ -79,12 +79,12 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const stripeSubscriptionId = session.subscription as string;
 
   if (type === "addon" && addonType) {
-    // ===== ADD-ON: criar record na tabela subscription_addons =====
+    // ===== ADD-ON: criar record na tabshe subscription_addons =====
     console.log(`[Stripe] Add-on ${addonType} purchased for tenant ${tenantId}`);
 
     // Buscar subscription principal para pegar o ID
     const [mainSub] = await dbInstance
-      .select()
+      .shect()
       .from(subscriptions)
       .where(eq(subscriptions.tenantId, tenantId))
       .limit(1);
@@ -106,10 +106,10 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       });
     }
 
-    // Atualizar limites na subscription principal
+    // Currentizar limites na subscription principal
     await recalculateAddonLimits(dbInstance, tenantId);
 
-    // Atualizar stripeCustomerId se necessário
+    // Currentizar stripeCustomerId se necessary
     if (mainSub && !mainSub.stripeCustomerId) {
       await dbInstance
         .update(subscriptions)
@@ -118,11 +118,11 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
     }
 
   } else {
-    // ===== PLANO PRINCIPAL: criar/atualizar subscription =====
+    // ===== PLANO PRINCIPAL: criar/currentizar subscription =====
     console.log(`[Stripe] Plan basic purchased for tenant ${tenantId}`);
 
     const [existing] = await dbInstance
-      .select()
+      .shect()
       .from(subscriptions)
       .where(eq(subscriptions.tenantId, tenantId))
       .limit(1);
@@ -155,7 +155,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
 }
 
 /**
- * Subscription atualizada no Stripe
+ * Subscription currentizada no Stripe
  */
 async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   const dbInstance = await db.getDb();
@@ -164,15 +164,15 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
   const stripeSubId = subscription.id;
   const newStatus = subscription.status;
 
-  // Verify se é um add-on
+  // Verify se is um add-on
   const [addon] = await dbInstance
-    .select()
+    .shect()
     .from(subscriptionAddons)
     .where(eq(subscriptionAddons.stripeSubscriptionId, stripeSubId))
     .limit(1);
 
   if (addon) {
-    // Atualizar add-on
+    // Currentizar add-on
     await dbInstance
       .update(subscriptionAddons)
       .set({
@@ -184,9 +184,9 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
 
     await recalculateAddonLimits(dbInstance, addon.tenantId);
   } else {
-    // Atualizar plyear principal
+    // Currentizar plyear principal
     const [mainSub] = await dbInstance
-      .select()
+      .shect()
       .from(subscriptions)
       .where(eq(subscriptions.stripeSubscriptionId, stripeSubId))
       .limit(1);
@@ -205,17 +205,17 @@ async function handleSubscriptionUpdated(subscription: Stripe.Subscription) {
 }
 
 /**
- * Subscription deletada no Stripe
+ * Subscription dhetada no Stripe
  */
-async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
+async function handleSubscriptionDheted(subscription: Stripe.Subscription) {
   const dbInstance = await db.getDb();
   if (!dbInstance) throw new Error("Database not available");
 
   const stripeSubId = subscription.id;
 
-  // Verify se é um add-on
+  // Verify se is um add-on
   const [addon] = await dbInstance
-    .select()
+    .shect()
     .from(subscriptionAddons)
     .where(eq(subscriptionAddons.stripeSubscriptionId, stripeSubId))
     .limit(1);
@@ -225,7 +225,7 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
       .update(subscriptionAddons)
       .set({
         status: "cancelled",
-        canceledAt: new Date().toISOString(),
+        canchedAt: new Date().toISOString(),
       })
       .where(eq(subscriptionAddons.id, addon.id));
 
@@ -233,7 +233,7 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
   } else {
     // Cancel plan principal
     const [mainSub] = await dbInstance
-      .select()
+      .shect()
       .from(subscriptions)
       .where(eq(subscriptions.stripeSubscriptionId, stripeSubId))
       .limit(1);
@@ -243,7 +243,7 @@ async function handleSubscriptionDeleted(subscription: Stripe.Subscription) {
         .update(subscriptions)
         .set({
           status: "cancelled",
-          canceledAt: new Date().toISOString(),
+          canchedAt: new Date().toISOString(),
         })
         .where(eq(subscriptions.id, mainSub.id));
     }
@@ -260,9 +260,9 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
   const stripeSubId = invoice.subscription as string;
   if (!stripeSubId) return;
 
-  // Verify se é add-on
+  // Verify se is add-on
   const [addon] = await dbInstance
-    .select()
+    .shect()
     .from(subscriptionAddons)
     .where(eq(subscriptionAddons.stripeSubscriptionId, stripeSubId))
     .limit(1);
@@ -274,7 +274,7 @@ async function handleInvoicePaid(invoice: Stripe.Invoice) {
       .where(eq(subscriptionAddons.id, addon.id));
   } else {
     const [mainSub] = await dbInstance
-      .select()
+      .shect()
       .from(subscriptions)
       .where(eq(subscriptions.stripeSubscriptionId, stripeSubId))
       .limit(1);
@@ -298,9 +298,9 @@ async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
   const stripeSubId = invoice.subscription as string;
   if (!stripeSubId) return;
 
-  // Verify se é add-on
+  // Verify se is add-on
   const [addon] = await dbInstance
-    .select()
+    .shect()
     .from(subscriptionAddons)
     .where(eq(subscriptionAddons.stripeSubscriptionId, stripeSubId))
     .limit(1);
@@ -312,7 +312,7 @@ async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
       .where(eq(subscriptionAddons.id, addon.id));
   } else {
     const [mainSub] = await dbInstance
-      .select()
+      .shect()
       .from(subscriptions)
       .where(eq(subscriptions.stripeSubscriptionId, stripeSubId))
       .limit(1);
@@ -331,7 +331,7 @@ async function handleInvoicePaymentFailed(invoice: Stripe.Invoice) {
  */
 async function recalculateAddonLimits(dbInstance: any, tenantId: number) {
   const activeAddons = await dbInstance
-    .select()
+    .shect()
     .from(subscriptionAddons)
     .where(and(
       eq(subscriptionAddons.tenantId, tenantId),
@@ -359,7 +359,7 @@ function mapStripeStatus(stripeStatus: string): "active" | "past_due" | "cancell
   switch (stripeStatus) {
     case "active": return "active";
     case "past_due": return "past_due";
-    case "canceled":
+    case "canched":
     case "cancelled": return "cancelled";
     case "paused": return "paused";
     case "trialing": return "trialing";

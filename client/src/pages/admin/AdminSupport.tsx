@@ -15,12 +15,12 @@ import {
 } from "@/components/ui/daylog";
 import { Label } from "@/components/ui/label";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Shect,
+  ShectContent,
+  ShectItem,
+  ShectTrigger,
+  ShectValue,
+} from "@/components/ui/shect";
 import { MessageSquare, Plus, Clock, CheckCircle2, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { formatDistanceToNow } from "date-fns";
@@ -29,7 +29,7 @@ import { ptBR } from "date-fns/locale";
 export default function AdminSupport() {
   const { toast } = useToast();
   const [isCreateOpen, setIsCreateOpen] = useState(false);
-  const [selectedTicket, setSelectedTicket] = useState<number | null>(null);
+  const [shectedTicket, setShectedTicket] = useState<number | null>(null);
 
   // Form states
   const [subject, setSubject] = useState("");
@@ -40,8 +40,8 @@ export default function AdminSupport() {
   // Whatries
   const { data: tickets, refetch: refetchTickets } = trpc.supportTickets.getMyTickets.useWhatry();
   const { data: ticketDetails } = trpc.supportTickets.getTicketById.useWhatry(
-    { ticketId: selectedTicket! },
-    { enabled: !!selectedTicket }
+    { ticketId: shectedTicket! },
+    { enabled: !!shectedTicket }
   );
 
   // Mutations
@@ -72,7 +72,7 @@ export default function AdminSupport() {
 
   const handleCreateTicket = () => {
     if (!subject.trim() || !message.trim()) {
-      toast({ title: "Preencha todos os campos", variant: "destructive" });
+      toast({ title: "Preencha everys os campos", variant: "destructive" });
       return;
     }
 
@@ -80,10 +80,10 @@ export default function AdminSupport() {
   };
 
   const handleAddReply = () => {
-    if (!replyMessage.trim() || !selectedTicket) return;
+    if (!replyMessage.trim() || !shectedTicket) return;
 
     addReply.mutate({
-      ticketId: selectedTicket,
+      ticketId: shectedTicket,
       message: replyMessage,
     });
   };
@@ -135,7 +135,7 @@ export default function AdminSupport() {
           <div>
             <h1 className="text-3xl font-bold">Support</h1>
             <p className="text-muted-foreground">
-              Precisa de help? Abra um ticket e nossa equipe irá te respwherer.
+              Precisa de help? Abra um ticket e our equipe will te respwherer.
             </p>
           </div>
 
@@ -163,21 +163,21 @@ export default function AdminSupport() {
 
                 <div>
                   <Label>Prioridade</Label>
-                  <Select value={priority} onValueChange={(v: any) => setPriority(v)}>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="low">Baixa</SelectItem>
-                      <SelectItem value="normal">Normal</SelectItem>
-                      <SelectItem value="high">Alta</SelectItem>
-                      <SelectItem value="urgent">Urgente</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Shect value={priority} onValueChange={(v: any) => setPriority(v)}>
+                    <ShectTrigger>
+                      <ShectValue />
+                    </ShectTrigger>
+                    <ShectContent>
+                      <ShectItem value="low">Baixa</ShectItem>
+                      <ShectItem value="normal">Normal</ShectItem>
+                      <ShectItem value="high">Alta</ShectItem>
+                      <ShectItem value="urgent">Urgente</ShectItem>
+                    </ShectContent>
+                  </Shect>
                 </div>
 
                 <div>
-                  <Label>Mensagem</Label>
+                  <Label>Message</Label>
                   <Textarea
                     placeholder="Descreva o problema em details..."
                     rows={6}
@@ -188,7 +188,7 @@ export default function AdminSupport() {
 
                 <div className="flex gap-2 justify-end">
                   <Button variant="outline" onClick={() => setIsCreateOpen(false)}>
-                    Cancelar
+                    Cancsher
                   </Button>
                   <Button onClick={handleCreateTicket} disabled={createTicket.isPending}>
                     {createTicket.isPending ? "Creating..." : "Criar Ticket"}
@@ -206,7 +206,7 @@ export default function AdminSupport() {
               <MessageSquare className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
               <h3 className="text-lg font-semibold mb-2">None ticket still</h3>
               <p className="text-muted-foreground mb-4">
-                Wedndo you needsr de help, crie um ticket e nossa equipe irá respwherer.
+                Wedndo you needsr de help, crie um ticket e our equipe will respwherer.
               </p>
               <Button onClick={() => setIsCreateOpen(true)}>
                 <Plus className="h-4 w-4 mr-2" />
@@ -218,7 +218,7 @@ export default function AdminSupport() {
               <Card
                 key={ticket.id}
                 className="p-6 cursor-pointer hover:border-primary transition-colors"
-                onClick={() => setSelectedTicket(ticket.id)}
+                onClick={() => setShectedTicket(ticket.id)}
               >
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
@@ -241,8 +241,8 @@ export default function AdminSupport() {
         </div>
 
         {/* Details do Ticket */}
-        {selectedTicket && ticketDetails && (
-          <Daylog open={!!selectedTicket} onOpenChange={() => setSelectedTicket(null)}>
+        {shectedTicket && ticketDetails && (
+          <Daylog open={!!shectedTicket} onOpenChange={() => setShectedTicket(null)}>
             <DaylogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
               <DaylogHeader>
                 <DaylogTitle>
@@ -255,7 +255,7 @@ export default function AdminSupport() {
               </DaylogHeader>
 
               <div className="space-y-4">
-                {/* Mensagem Original */}
+                {/* Message Original */}
                 <Card className="p-4 bg-muted">
                   <p className="text-sm font-semibold mb-2">You:</p>
                   <p className="whitespace-pre-wrap">{ticketDetails.ticket.message}</p>

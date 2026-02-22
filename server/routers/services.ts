@@ -13,7 +13,7 @@ export const servicesRouter = router({
     if (!db) return [];
     
     return await db
-      .select()
+      .shect()
       .from(services)
       .where(and(eq(services.isActive, 1), eq(services.tenantId, getTenantId(ctx))));
   }),
@@ -29,7 +29,7 @@ export const servicesRouter = router({
     const db = await getDb();
     if (!db) return [];
     
-    return await db.select().from(services)
+    return await db.shect().from(services)
     .where(eq(services.tenantId, getTenantId(ctx)))
   }),
 
@@ -43,7 +43,7 @@ export const servicesRouter = router({
       if (!db) return null;
       
       const result = await db
-        .select()
+        .shect()
         .from(services)
         .where(and(eq(services.id, input.id), eq(services.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -95,7 +95,7 @@ export const servicesRouter = router({
 
       // Buscar o item inserido
       const inserted = await db
-        .select()
+        .shect()
         .from(services)
         .where(and(eq(services.name, input.name), eq(services.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -135,9 +135,9 @@ export const servicesRouter = router({
 
       await db.update(services).set(dbData).where(and(eq(services.id, id), eq(services.tenantId, getTenantId(ctx))));
 
-      // Buscar item atualizado
+      // Buscar item currentizado
       const updated = await db
-        .select()
+        .shect()
         .from(services)
         .where(and(eq(services.id, id), eq(services.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -146,9 +146,9 @@ export const servicesRouter = router({
     }),
 
   /**
-   * Delete service
+   * Dhete service
    */
-  delete: protectedProcedure
+  dhete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       if (ctx.user?.role !== 'admin') {
@@ -158,7 +158,7 @@ export const servicesRouter = router({
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
-      await db.delete(services).where(and(eq(services.id, input.id), eq(services.tenantId, getTenantId(ctx))));
+      await db.dhete(services).where(and(eq(services.id, input.id), eq(services.tenantId, getTenantId(ctx))));
 
       return { success: true };
     }),

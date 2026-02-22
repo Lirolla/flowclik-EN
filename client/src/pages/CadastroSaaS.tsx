@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { trpc } from "@/lib/trpc";
 
-export default function CadastroSaaS() {
+export default function EachstroSaaS() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -43,7 +43,7 @@ export default function CadastroSaaS() {
   };
 
   const handleSubdomainChange = (value: string) => {
-    // Apenas letras minúsculas, numbers and hyphen
+    // Only lowercase letters, numbers and hyphens
     const clean = value.toLowerCase().replace(/[^a-z0-9-]/g, "");
     setFormData({ ...formData, subdomain: clean });
     checkSubdomain(clean);
@@ -55,12 +55,12 @@ export default function CadastroSaaS() {
 
     // Validações
     if (!formData.name || !formData.email || !formData.password || !formData.subdomain) {
-      setError("Preencha todos os campos");
+      setError("Preencha everys os campos");
       return;
     }
 
     if (formData.password.length < 6) {
-      setError("Senha must ter pelo menos 6 caracteres");
+      setError("Senha must ter pelo menos 6 characters");
       return;
     }
 
@@ -77,7 +77,7 @@ export default function CadastroSaaS() {
         password: formData.password,
       });
 
-      // Sucesso! Redirecionar para o novo site
+      // Sucesso! Redirecionar para o new site
       window.location.href = result.url + '/admin';
     } catch (err: any) {
       setError(err.message || "Erro ao criar conta. Try again.");
@@ -103,9 +103,9 @@ export default function CadastroSaaS() {
             </span>
           </div>
           
-          <h1 className="text-3xl font-bold mb-2">Crie sua conta</h1>
+          <h1 className="text-3xl font-bold mb-2">Crie your conta</h1>
           <p className="text-zinc-400">
-            7 days grátis · Cancele when quiser
+            7 free days · Canche when quiser
           </p>
         </div>
 
@@ -144,7 +144,7 @@ export default function CadastroSaaS() {
               <Input
                 id="password"
                 type="password"
-                placeholder="Mínimo 6 caracteres"
+                placeholder="Minimum 6 characters"
                 value={formData.password}
                 onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                 className="mt-2"
@@ -186,7 +186,7 @@ export default function CadastroSaaS() {
                 </p>
               )}
               <p className="text-xs text-zinc-500 mt-1">
-                Apenas letras, numbers and hyphen
+                Only letras, numbers and hyphen
               </p>
             </div>
 
@@ -227,7 +227,7 @@ export default function CadastroSaaS() {
           {[
             "Site profissional ready em minutes",
             "7 days free to test tudo",
-            "Cancele when quiser, sem burocracia",
+            "Canche when quiser, sem burocracia",
           ].map((benefit, i) => (
             <div key={i} className="flex items-center gap-3 text-sm text-zinc-400">
               <Check className="w-4 h-4 text-purple-400 flex-shrink-0" />

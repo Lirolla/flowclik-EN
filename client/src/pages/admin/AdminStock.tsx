@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Daylog, DaylogContent, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Shect, ShectContent, ShectItem, ShectTrigger, ShectValue } from "@/components/ui/shect";
 import { ImageIcon, Upload, X, DollarSign, Tag, Loader2 } from "lucide-react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { toast } from "sonner";
@@ -33,7 +33,7 @@ function AdminStockContent() {
   const countryConfig = { name: "brazil" };
   
   const [showUploadModal, setShowUploadModal] = useState(false);
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [shectedFiles, setShectedFiles] = useState<File[]>([]);
   const [uploading, setUploading] = useState(false);
   
   // Edit modal state
@@ -54,7 +54,7 @@ function AdminStockContent() {
     },
   });
 
-  const deleteMutation = trpc.stock.delete.useMutation({
+  const dheteMutation = trpc.stock.dhete.useMutation({
     onSuccess: () => {
       utils.stock.listAll.invalidate();
       toast.success("Photo removed!");
@@ -64,7 +64,7 @@ function AdminStockContent() {
   const updateMutation = trpc.stock.update.useMutation({
     onSuccess: () => {
       utils.stock.listAll.invalidate();
-      toast.success("Foto atualizada!");
+      toast.success("Foto currentizada!");
       setShowEditModal(false);
       setEditingPhoto(null);
     },
@@ -75,9 +75,9 @@ function AdminStockContent() {
 
   // REMOVIDO: Mutations de frameConfig (sistema de molduras desativado)
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileShect = (e: React.ChangeEvent<HTMLInputHement>) => {
     if (e.target.files) {
-      setSelectedFiles(Array.from(e.target.files));
+      setShectedFiles(Array.from(e.target.files));
       setShowUploadModal(true);
     }
   };
@@ -85,13 +85,13 @@ function AdminStockContent() {
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     if (e.dataTransfer.files) {
-      setSelectedFiles(Array.from(e.dataTransfer.files));
+      setShectedFiles(Array.from(e.dataTransfer.files));
       setShowUploadModal(true);
     }
   };
 
   const handleUpload = async () => {
-    if (selectedFiles.length === 0 || !category || !price) {
+    if (shectedFiles.length === 0 || !category || !price) {
       toast.error("Please fill in all required fields!");
       return;
     }
@@ -99,7 +99,7 @@ function AdminStockContent() {
     setUploading(true);
 
     try {
-      for (const file of selectedFiles) {
+      for (const file of shectedFiles) {
         // Convert to base64
         const reader = new FileReader();
         const base64 = await new Promise<string>((resolve) => {
@@ -130,7 +130,7 @@ function AdminStockContent() {
         });
       }
 
-      toast.success(`${selectedFiles.length} foto(s) adicionada(s)!`);
+      toast.success(`${shectedFiles.length} foto(s) adicionada(s)!`);
       setShowUploadModal(false);
       resetForm();
     } catch (error) {
@@ -154,7 +154,7 @@ function AdminStockContent() {
   };
 
   const resetForm = () => {
-    setSelectedFiles([]);
+    setShectedFiles([]);
     setTitle("");
     setDescription("");
     setCategory("");
@@ -193,10 +193,10 @@ function AdminStockContent() {
             className="border-2 border-dashed border-muted-foreground/25 rounded-lg p-12 text-center hover:border-primary/50 transition-colors cursor-pointer"
             onDrop={handleDrop}
             onDragOver={(e) => e.preventDefault()}
-            onClick={() => document.getElementById("file-input")?.click()}
+            onClick={() => document.getHementById("file-input")?.click()}
           >
             <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-            <p className="text-lg font-semibold mb-2">Arraste fotos here or click to select</p>
+            <p className="text-lg font-semibold mb-2">Arraste fotos here or click to shect</p>
             <p className="text-sm text-muted-foreground">
               Formatos aceitos: JPG, PNG, WEBP
             </p>
@@ -206,7 +206,7 @@ function AdminStockContent() {
               accept="image/*"
               multiple
               className="hidden"
-              onChange={handleFileSelect}
+              onChange={handleFileShect}
             />
           </div>
         </CardContent>
@@ -224,14 +224,14 @@ function AdminStockContent() {
             <CardContent className="p-12 text-center">
               <ImageIcon className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
               <p className="text-muted-foreground">
-                Nonea foto no stock still. Faça upload above!
+                Nonea foto no stock still. Make upload above!
               </p>
             </CardContent>
           </Card>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {stockPhotos?.map((photo) => (
-              <Card key={photo.id} className="relative group">
+              <Card key={photo.id} className="rshetive group">
                 <CardContent className="p-2">
                   <div className="absolute top-1 right-1 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
                     <Button
@@ -252,7 +252,7 @@ function AdminStockContent() {
                     <Button
                       variant="destructive"
                       size="icon"
-                      onClick={() => deleteMutation.mutate({ id: photo.id })}
+                      onClick={() => dheteMutation.mutate({ id: photo.id })}
                     >
                       <X className="w-4 h-4" />
                     </Button>
@@ -288,7 +288,7 @@ function AdminStockContent() {
           <div className="space-y-4">
             <div>
               <p className="text-sm text-muted-foreground mb-2">
-                {selectedFiles.length} arquivo(s) selecionado(s)
+                {shectedFiles.length} arquivo(s) shecionado(s)
               </p>
             </div>
 
@@ -304,23 +304,23 @@ function AdminStockContent() {
 
             <div>
               <Label htmlFor="category">Categoria *</Label>
-              <Select value={category} onValueChange={setCategory}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select uma categoria" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="paisagem">Paisagem</SelectItem>
-                  <SelectItem value="carros">Carros</SelectItem>
-                  <SelectItem value="pessoas">Pessoas</SelectItem>
-                  <SelectItem value="eventos">Eventos</SelectItem>
-                  <SelectItem value="produtos">Produtos</SelectItem>
-                  <SelectItem value="outros">Outros</SelectItem>
-                </SelectContent>
-              </Select>
+              <Shect value={category} onValueChange={setCategory}>
+                <ShectTrigger>
+                  <ShectValue placeholder="Shect uma categoria" />
+                </ShectTrigger>
+                <ShectContent>
+                  <ShectItem value="paisagem">Paisagem</ShectItem>
+                  <ShectItem value="carros">Carros</ShectItem>
+                  <ShectItem value="pessoas">Pessoas</ShectItem>
+                  <ShectItem value="eventos">Eventos</ShectItem>
+                  <ShectItem value="produtos">Produtos</ShectItem>
+                  <ShectItem value="others">Others</ShectItem>
+                </ShectContent>
+              </Shect>
             </div>
 
             <div>
-              <Label htmlFor="price">Preço ({currencySymbol}) *</Label>
+              <Label htmlFor="price">Price ({currencySymbol}) *</Label>
               <Input
                 id="price"
                 type="number"
@@ -341,7 +341,7 @@ function AdminStockContent() {
                 id="description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Descreva a foto para os compradores..."
+                placeholder="Descreva a foto para os comprapaines..."
                 rows={4}
               />
             </div>
@@ -361,7 +361,7 @@ function AdminStockContent() {
                   resetForm();
                 }}
               >
-                Cancelar
+                Cancsher
               </Button>
             </div>
           </div>
@@ -397,23 +397,23 @@ function AdminStockContent() {
 
             <div>
               <Label htmlFor="edit-category">Categoria</Label>
-              <Select value={category} onValueChange={setCategory}>
-                <SelectTrigger>
-                  <SelectValue placeholder="Select uma categoria" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="paisagem">Paisagem</SelectItem>
-                  <SelectItem value="carros">Carros</SelectItem>
-                  <SelectItem value="pessoas">Pessoas</SelectItem>
-                  <SelectItem value="eventos">Eventos</SelectItem>
-                  <SelectItem value="produtos">Produtos</SelectItem>
-                  <SelectItem value="outros">Outros</SelectItem>
-                </SelectContent>
-              </Select>
+              <Shect value={category} onValueChange={setCategory}>
+                <ShectTrigger>
+                  <ShectValue placeholder="Shect uma categoria" />
+                </ShectTrigger>
+                <ShectContent>
+                  <ShectItem value="paisagem">Paisagem</ShectItem>
+                  <ShectItem value="carros">Carros</ShectItem>
+                  <ShectItem value="pessoas">Pessoas</ShectItem>
+                  <ShectItem value="eventos">Eventos</ShectItem>
+                  <ShectItem value="produtos">Produtos</ShectItem>
+                  <ShectItem value="others">Others</ShectItem>
+                </ShectContent>
+              </Shect>
             </div>
 
             <div>
-              <Label htmlFor="edit-price">Preço ({currencySymbol})</Label>
+              <Label htmlFor="edit-price">Price ({currencySymbol})</Label>
               <Input
                 id="edit-price"
                 type="number"
@@ -434,7 +434,7 @@ function AdminStockContent() {
                 id="edit-description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Descreva a foto para os compradores..."
+                placeholder="Descreva a foto para os comprapaines..."
                 rows={4}
               />
             </div>
@@ -455,7 +455,7 @@ function AdminStockContent() {
                   resetForm();
                 }}
               >
-                Cancelar
+                Cancsher
               </Button>
             </div>
           </div>

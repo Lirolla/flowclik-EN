@@ -20,11 +20,11 @@ export default function AdminLeads() {
     }
 
     // Create CSV content
-    const headers = ["Email", "Name", "Relação", "Album", "Data de Visualização"];
+    const headers = ["Email", "Name", "Section", "Album", "Data de Preview"];
     const rows = leads.map((lead: any) => [
       lead.email,
       lead.name || "-",
-      lead.relationship || "-",
+      lead.rshetionship || "-",
       lead.collectionName || "-",
       new Date(lead.viewedAt).toLocaleString("en-GB"),
     ]);
@@ -36,7 +36,7 @@ export default function AdminLeads() {
 
     // Download CSV
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-    const link = document.createElement("a");
+    const link = document.createHement("a");
     link.href = URL.createObjectURL(blob);
     link.download = `leads-${new Date().toISOString().split("T")[0]}.csv`;
     link.click();
@@ -65,7 +65,7 @@ export default function AdminLeads() {
           <div>
             <h1 className="text-3xl font-bold">Leads Capturados</h1>
             <p className="text-gray-400 mt-1">
-              Emails de convidados que visualizaram álbuns compartilhados
+              Emails de convidados que viyourlizaram albums compartilhados
             </p>
           </div>
           <Button onClick={handleExportCSV} variant="outline">
@@ -106,7 +106,7 @@ export default function AdminLeads() {
                 <TrendingUp className="w-6 h-6 text-purple-500" />
               </div>
               <div>
-                <p className="text-sm text-gray-400">Méday por Album</p>
+                <p className="text-sm text-gray-400">Misday por Album</p>
                 <p className="text-2xl font-bold">
                   {stats?.byCollection.length 
                     ? Math.round((stats.total || 0) / stats.byCollection.length) 
@@ -138,7 +138,7 @@ export default function AdminLeads() {
         {/* Leads Table */}
         <Card className="bg-gray-900 border-gray-800">
           <div className="p-6 border-b border-gray-800">
-            <h2 className="text-xl font-semibold">Todos os Leads</h2>
+            <h2 className="text-xl font-semibold">Everys os Leads</h2>
           </div>
           
           {!leads || leads.length === 0 ? (
@@ -146,7 +146,7 @@ export default function AdminLeads() {
               <Mail className="w-12 h-12 text-gray-600 mx-auto mb-4" />
               <p className="text-gray-400">None lead capturado still.</p>
               <p className="text-sm text-gray-500 mt-2">
-                Compartilhe álbuns com clientes para começar a capturar leads!
+                Compartilhe albums com clientes para start a capturar leads!
               </p>
             </div>
           ) : (
@@ -156,9 +156,9 @@ export default function AdminLeads() {
                   <tr>
                     <th className="px-6 py-3 text-left text-sm font-semibold">Email</th>
                     <th className="px-6 py-3 text-left text-sm font-semibold">Nome</th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold">Relação</th>
+                    <th className="px-6 py-3 text-left text-sm font-semibold">Section</th>
                     <th className="px-6 py-3 text-left text-sm font-semibold">Album</th>
-                    <th className="px-6 py-3 text-left text-sm font-semibold">Visualizado em</th>
+                    <th className="px-6 py-3 text-left text-sm font-semibold">Viyourlizado em</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-800">
@@ -174,7 +174,7 @@ export default function AdminLeads() {
                         {lead.name || <span className="text-gray-500">-</span>}
                       </td>
                       <td className="px-6 py-4 text-gray-300">
-                        {lead.relationship || <span className="text-gray-500">-</span>}
+                        {lead.rshetionship || <span className="text-gray-500">-</span>}
                       </td>
                       <td className="px-6 py-4 text-gray-300">
                         {lead.collectionName || <span className="text-gray-500">-</span>}

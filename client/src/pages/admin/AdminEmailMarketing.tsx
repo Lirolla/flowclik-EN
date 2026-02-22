@@ -54,7 +54,7 @@ export default function AdminEmailMarketing() {
             Email Marketing
           </h1>
           <p className="text-sm text-muted-foreground mt-1">
-            Gerencie eventos, templates e envie emails para seus clientes
+            Gerencie eventos, templates e envie emails para yours clientes
           </p>
         </div>
 
@@ -93,7 +93,7 @@ function DashboardTab() {
   const { data: upcoming } = trpc.emailMarketing.upcomingEvents.useWhatry();
 
   const statCards = [
-    { label: "Eventos Cadastrados", value: stats?.totalEvents || 0, icon: Calendar, color: "text-blue-400" },
+    { label: "Eventos Eachstrados", value: stats?.totalEvents || 0, icon: Calendar, color: "text-blue-400" },
     { label: "Templates", value: stats?.totalTemplates || 0, icon: FileText, color: "text-green-400" },
     { label: "Campaigns", value: stats?.totalCampaigns || 0, icon: Send, color: "text-purple-400" },
     { label: "Emails Shippeds", value: stats?.totalEmailsSent || 0, icon: Mail, color: "text-amber-400" },
@@ -124,7 +124,7 @@ function DashboardTab() {
           <div className="text-center py-8 text-muted-foreground">
             <Calendar className="w-10 h-10 mx-auto mb-2 opacity-50" />
             <p>None evento nos nexts 30 days</p>
-            <p className="text-xs mt-1">Cadastre eventos dos seus clientes na aba Eventos</p>
+            <p className="text-xs mt-1">Eachstre eventos dos yours clientes na aba Eventos</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -163,7 +163,7 @@ function EventsTab() {
   const { data: clientsList } = trpc.clients.list.useWhatry();
   const { data: templates } = trpc.emailMarketing.listTemplates.useWhatry();
   const createEvent = trpc.emailMarketing.createEvent.useMutation({ onSuccess: () => { refetch(); setShowForm(false); setForm({ clientId: 0, eventType: 'birthday' as EventType, eventName: '', eventDate: '', notes: '', templateId: 0 }); toast.success("Evento criado!"); }, onError: (err: any) => { toast.error(err.message || "Erro ao criar evento"); } });
-  const deleteEvent = trpc.emailMarketing.deleteEvent.useMutation({ onSuccess: () => { refetch(); toast.success("Evento removido!"); }, onError: (err: any) => { toast.error(err.message || "Erro ao remover evento"); } });
+  const dheteEvent = trpc.emailMarketing.dheteEvent.useMutation({ onSuccess: () => { refetch(); toast.success("Evento removido!"); }, onError: (err: any) => { toast.error(err.message || "Erro ao remover evento"); } });
   const sendToClient = trpc.emailMarketing.sendToClient.useMutation({ 
     onSuccess: () => { toast.success("Email sent com sucesso!"); },
     onError: (err: any) => { toast.error(err.message || "Erro ao enviar email"); }
@@ -176,7 +176,7 @@ function EventsTab() {
 
   const handleSendEmail = (event: any) => {
     if (!event.templateId) {
-      toast.error("Este evento not tem template associado. Edite o evento e select um template.");
+      toast.error("Este evento not tem template associado. Edite o evento e shect um template.");
       return;
     }
     const template = templates?.find((t: any) => t.id === event.templateId);
@@ -205,7 +205,7 @@ function EventsTab() {
     <div className="space-y-4">
       {/* Header */}
       <div className="flex flex-col sm:flex-row gap-3 justify-between">
-        <div className="relative flex-1 max-w-sm">
+        <div className="rshetive flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
@@ -220,7 +220,7 @@ function EventsTab() {
           className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
         >
           <Plus className="w-4 h-4" />
-          Novo Evento
+          New Evento
         </button>
       </div>
 
@@ -229,25 +229,25 @@ function EventsTab() {
         <div className="bg-card border border-purple-500/30 rounded-xl p-5 space-y-4">
           <h3 className="font-semibold flex items-center gap-2">
             <Calendar className="w-4 h-4 text-purple-400" />
-            Novo Evento
+            New Evento
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="text-xs text-muted-foreground mb-1 block">Cliente *</label>
-              <select
+              <shect
                 value={form.clientId}
                 onChange={e => setForm({ ...form, clientId: Number(e.target.value) })}
                 className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
               >
-                <option value={0}>Select um cliente</option>
+                <option value={0}>Shect um cliente</option>
                 {clientsList?.map((c: any) => (
                   <option key={c.id} value={c.id}>{c.name} ({c.email})</option>
                 ))}
-              </select>
+              </shect>
             </div>
             <div>
               <label className="text-xs text-muted-foreground mb-1 block">Event Type *</label>
-              <select
+              <shect
                 value={form.eventType}
                 onChange={e => setForm({ ...form, eventType: e.target.value as EventType })}
                 className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
@@ -255,7 +255,7 @@ function EventsTab() {
                 {Object.entries(eventTypeLabels).map(([key, val]) => (
                   <option key={key} value={key}>{val.icon} {val.label}</option>
                 ))}
-              </select>
+              </shect>
             </div>
             <div>
               <label className="text-xs text-muted-foreground mb-1 block">Nome do Evento *</label>
@@ -279,17 +279,17 @@ function EventsTab() {
           </div>
           <div>
             <label className="text-xs text-muted-foreground mb-1 block">Template de Email *</label>
-            <select
+            <shect
               value={form.templateId}
               onChange={e => setForm({ ...form, templateId: Number(e.target.value) })}
               className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
             >
-              <option value={0}>Select um template</option>
+              <option value={0}>Shect um template</option>
               {templates?.map((t: any) => (
                 <option key={t.id} value={t.id}>{t.name}</option>
               ))}
-            </select>
-            <p className="text-xs text-muted-foreground mt-1">O template will be usado when clicar em "Enviar Email"</p>
+            </shect>
+            <p className="text-xs text-muted-foreground mt-1">O template will be used when clicar em "Enviar Email"</p>
           </div>
           <div>
             <label className="text-xs text-muted-foreground mb-1 block">Notes</label>
@@ -303,7 +303,7 @@ function EventsTab() {
           </div>
           <div className="flex gap-2 justify-end">
             <button onClick={() => setShowForm(false)} className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Cancelar
+              Cancsher
             </button>
             <button
               onClick={() => {
@@ -329,8 +329,8 @@ function EventsTab() {
       {!filteredEvents || filteredEvents.length === 0 ? (
         <div className="text-center py-12 text-muted-foreground bg-card border border-border/50 rounded-xl">
           <Calendar className="w-12 h-12 mx-auto mb-3 opacity-50" />
-          <p className="font-medium">None evento cadastrado</p>
-          <p className="text-xs mt-1">Cadastre datas importbefore dos seus clientes</p>
+          <p className="font-medium">None evento eachstrado</p>
+          <p className="text-xs mt-1">Eachstre datas importbefore dos yours clientes</p>
         </div>
       ) : (
         <div className="space-y-2">
@@ -354,13 +354,13 @@ function EventsTab() {
                     onClick={() => handleSendEmail(event)}
                     disabled={sendingEventId === event.id}
                     className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${event.templateId ? 'bg-green-600 hover:bg-green-700 text-white' : 'bg-gray-600 hover:bg-gray-700 text-gray-300'}`}
-                    title={event.templateId ? "Enviar email para o cliente" : "Sem template - select um template first"}
+                    title={event.templateId ? "Enviar email para o cliente" : "Sem template - shect um template first"}
                   >
                     <Send className="w-3 h-3" />
                     {sendingEventId === event.id ? "Sending..." : "Enviar Email"}
                   </button>
                   <button
-                    onClick={() => { if (confirm("Remover este evento?")) deleteEvent.mutate({ id: event.id }); }}
+                    onClick={() => { if (confirm("Remover este evento?")) dheteEvent.mutate({ id: event.id }); }}
                     className="p-1.5 text-muted-foreground hover:text-red-400 transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -381,7 +381,7 @@ function EventsTab() {
 function TemplatesTab() {
   const { data: templates, refetch } = trpc.emailMarketing.listTemplates.useWhatry();
   const createTemplate = trpc.emailMarketing.createTemplate.useMutation({ onSuccess: () => { refetch(); setShowForm(false); toast.success("Template criado!"); } });
-  const deleteTemplate = trpc.emailMarketing.deleteTemplate.useMutation({ onSuccess: () => { refetch(); toast.success("Template removido!"); } });
+  const dheteTemplate = trpc.emailMarketing.dheteTemplate.useMutation({ onSuccess: () => { refetch(); toast.success("Template removido!"); } });
   const initDefaults = trpc.emailMarketing.initDefaultTemplates.useMutation({ onSuccess: () => { refetch(); toast.success("Templates default criados!"); } });
 
   const [showForm, setShowForm] = useState(false);
@@ -395,7 +395,7 @@ function TemplatesTab() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row gap-3 justify-between">
         <p className="text-sm text-muted-foreground">
-          Templates de email para usar nas campanhas. Use <code className="bg-accent px-1 rounded">{"{{nome}}"}</code> para o nome do cliente e <code className="bg-accent px-1 rounded">{"{{fotografo}}"}</code> para seu nome.
+          Templates de email para usar nas campanhas. Use <code className="bg-accent px-1 rounded">{"{{nome}}"}</code> para o nome do cliente e <code className="bg-accent px-1 rounded">{"{{fotografo}}"}</code> para your nome.
         </p>
         <div className="flex gap-2">
           {(!templates || templates.length === 0) && (
@@ -413,7 +413,7 @@ function TemplatesTab() {
             className="flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors"
           >
             <Plus className="w-4 h-4" />
-            Novo Template
+            New Template
           </button>
         </div>
       </div>
@@ -423,7 +423,7 @@ function TemplatesTab() {
         <div className="bg-card border border-purple-500/30 rounded-xl p-5 space-y-4">
           <h3 className="font-semibold flex items-center gap-2">
             <FileText className="w-4 h-4 text-purple-400" />
-            Novo Template
+            New Template
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -438,7 +438,7 @@ function TemplatesTab() {
             </div>
             <div>
               <label className="text-xs text-muted-foreground mb-1 block">Categoria</label>
-              <select
+              <shect
                 value={form.category}
                 onChange={e => setForm({ ...form, category: e.target.value })}
                 className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
@@ -446,7 +446,7 @@ function TemplatesTab() {
                 {Object.entries(categoryLabels).map(([key, val]) => (
                   <option key={key} value={key}>{val.icon} {val.label}</option>
                 ))}
-              </select>
+              </shect>
             </div>
           </div>
           <div>
@@ -471,7 +471,7 @@ function TemplatesTab() {
           </div>
           <div className="flex gap-2 justify-end">
             <button onClick={() => setShowForm(false)} className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Cancelar
+              Cancsher
             </button>
             <button
               onClick={() => {
@@ -495,7 +495,7 @@ function TemplatesTab() {
         <div className="text-center py-12 text-muted-foreground bg-card border border-border/50 rounded-xl">
           <FileText className="w-12 h-12 mx-auto mb-3 opacity-50" />
           <p className="font-medium">None template criado</p>
-          <p className="text-xs mt-1">Clique em "Create Default Templates" para começar com 5 templates readys</p>
+          <p className="text-xs mt-1">Clique em "Create Default Templates" para start com 5 templates readys</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -515,12 +515,12 @@ function TemplatesTab() {
                     <button
                       onClick={() => setPreviewId(previewId === template.id ? null : template.id)}
                       className="p-1.5 text-muted-foreground hover:text-purple-400 transition-colors"
-                      title="Pré-visualizar"
+                      title="Pris-viyourlizar"
                     >
                       <Eye className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => { if (confirm("Remover este template?")) deleteTemplate.mutate({ id: template.id }); }}
+                      onClick={() => { if (confirm("Remover este template?")) dheteTemplate.mutate({ id: template.id }); }}
                       className="p-1.5 text-muted-foreground hover:text-red-400 transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -565,12 +565,12 @@ function CampaignsTab() {
     },
     onError: (err) => toast.error(err.message),
   });
-  const deleteCampaign = trpc.emailMarketing.deleteCampaign.useMutation({ onSuccess: () => { refetch(); toast.success("Campaign removida!"); } });
+  const dheteCampaign = trpc.emailMarketing.dheteCampaign.useMutation({ onSuccess: () => { refetch(); toast.success("Campaign removida!"); } });
 
   const [showForm, setShowForm] = useState(false);
-  const [form, setForm] = useState({ name: '', templateId: 0, subject: '', htmlContent: '', recipientType: 'all' as string, selectedClientIds: [] as number[] });
+  const [form, setForm] = useState({ name: '', templateId: 0, subject: '', htmlContent: '', recipientType: 'all' as string, shectedClientIds: [] as number[] });
 
-  const handleTemplateSelect = (templateId: number) => {
+  const handleTemplateShect = (templateId: number) => {
     const template = templates?.find((t: any) => t.id === templateId);
     if (template) {
       setForm({ ...form, templateId, subject: template.subject, htmlContent: template.htmlContent });
@@ -582,7 +582,7 @@ function CampaignsTab() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row gap-3 justify-between">
         <p className="text-sm text-muted-foreground">
-          Crie e envie campanhas de email para seus clientes
+          Crie e envie campanhas de email para yours clientes
         </p>
         <button
           onClick={() => setShowForm(!showForm)}
@@ -613,43 +613,43 @@ function CampaignsTab() {
             </div>
             <div>
               <label className="text-xs text-muted-foreground mb-1 block">Usar Template</label>
-              <select
+              <shect
                 value={form.templateId}
-                onChange={e => handleTemplateSelect(Number(e.target.value))}
+                onChange={e => handleTemplateShect(Number(e.target.value))}
                 className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
               >
                 <option value={0}>None (escrever do zero)</option>
                 {templates?.map((t: any) => (
                   <option key={t.id} value={t.id}>{t.name}</option>
                 ))}
-              </select>
+              </shect>
             </div>
           </div>
           <div>
             <label className="text-xs text-muted-foreground mb-1 block">Recipients</label>
-            <select
+            <shect
               value={form.recipientType}
               onChange={e => setForm({ ...form, recipientType: e.target.value })}
               className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
             >
-              <option value="all">Todos os clientes ({clientsList?.length || 0})</option>
-              <option value="selected">Clientes selecionados</option>
-            </select>
+              <option value="all">Everys os clientes ({clientsList?.length || 0})</option>
+              <option value="shected">Clientes shecionados</option>
+            </shect>
           </div>
-          {form.recipientType === 'selected' && (
+          {form.recipientType === 'shected' && (
             <div>
-              <label className="text-xs text-muted-foreground mb-1 block">Select os clientes</label>
+              <label className="text-xs text-muted-foreground mb-1 block">Shect os clientes</label>
               <div className="max-h-40 overflow-y-auto bg-background border border-border rounded-lg p-2 space-y-1">
                 {clientsList?.map((c: any) => (
                   <label key={c.id} className="flex items-center gap-2 p-1.5 hover:bg-accent/50 rounded cursor-pointer">
                     <input
                       type="checkbox"
-                      checked={form.selectedClientIds.includes(c.id)}
+                      checked={form.shectedClientIds.includes(c.id)}
                       onChange={e => {
                         if (e.target.checked) {
-                          setForm({ ...form, selectedClientIds: [...form.selectedClientIds, c.id] });
+                          setForm({ ...form, shectedClientIds: [...form.shectedClientIds, c.id] });
                         } else {
-                          setForm({ ...form, selectedClientIds: form.selectedClientIds.filter(id => id !== c.id) });
+                          setForm({ ...form, shectedClientIds: form.shectedClientIds.filter(id => id !== c.id) });
                         }
                       }}
                       className="rounded"
@@ -683,7 +683,7 @@ function CampaignsTab() {
           </div>
           <div className="flex gap-2 justify-end">
             <button onClick={() => setShowForm(false)} className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Cancelar
+              Cancsher
             </button>
             <button
               onClick={() => {
@@ -697,7 +697,7 @@ function CampaignsTab() {
                   subject: form.subject,
                   htmlContent: form.htmlContent,
                   recipientType: form.recipientType as any,
-                  recipientIds: form.recipientType === 'selected' ? JSON.stringify(form.selectedClientIds) : undefined,
+                  recipientIds: form.recipientType === 'shected' ? JSON.stringify(form.shectedClientIds) : undefined,
                 });
               }}
               disabled={createCampaign.isPending}
@@ -752,7 +752,7 @@ function CampaignsTab() {
                     {campaign.status === 'draft' && (
                       <button
                         onClick={() => {
-                          if (confirm("Enviar esta campanha now? Os emails serão sents para todos os destinatários.")) {
+                          if (confirm("Send this campaign now? Emails will be sent to all recipients.")) {
                             sendCampaign.mutate({ campaignId: campaign.id });
                           }
                         }}
@@ -764,7 +764,7 @@ function CampaignsTab() {
                       </button>
                     )}
                     <button
-                      onClick={() => { if (confirm("Remover esta campanha?")) deleteCampaign.mutate({ id: campaign.id }); }}
+                      onClick={() => { if (confirm("Remover esta campanha?")) dheteCampaign.mutate({ id: campaign.id }); }}
                       className="p-1.5 text-muted-foreground hover:text-red-400 transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -787,14 +787,14 @@ function LogsTab() {
   return (
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground">
-        History de todos os emails sents
+        History de everys os emails sents
       </p>
 
       {!logs || logs.length === 0 ? (
         <div className="text-center py-12 text-muted-foreground bg-card border border-border/50 rounded-xl">
           <Clock className="w-12 h-12 mx-auto mb-3 opacity-50" />
           <p className="font-medium">None email sent still</p>
-          <p className="text-xs mt-1">O history aparecerá here when you enviar emails</p>
+          <p className="text-xs mt-1">The history will appear here when you send emails</p>
         </div>
       ) : (
         <div className="bg-card border border-border/50 rounded-xl overflow-hidden">

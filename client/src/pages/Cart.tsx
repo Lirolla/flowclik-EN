@@ -17,7 +17,7 @@ export default function Cart() {
   const { items, removeItem, clearCart, totalPrice } = useCart();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [step, setStep] = useState<"cart" | "checkout" | "confirmation">("cart");
-  const [selectedMethod, setSelectedMethod] = useState<"pix" | "payment_link" | "bank_transfer" | null>(null);
+  const [shectedMethod, setShectedMethod] = useState<"pix" | "payment_link" | "bank_transfer" | null>(null);
   const [customerName, setCustomerName] = useState("");
   const [customerEmail, setCustomerEmail] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
@@ -54,15 +54,15 @@ export default function Cart() {
 
   const handleConfirmOrder = () => {
     if (!customerName.trim()) {
-      toast.error("Informe seu nome");
+      toast.error("Informe your nome");
       return;
     }
     if (!customerEmail.trim() || !customerEmail.includes("@")) {
       toast.error("Informe um e-mail valid");
       return;
     }
-    if (!selectedMethod) {
-      toast.error("Select uma forma de pagamento");
+    if (!shectedMethod) {
+      toast.error("Shect uma forma de pagamento");
       return;
     }
 
@@ -71,7 +71,7 @@ export default function Cart() {
       customerName: customerName.trim(),
       customerEmail: customerEmail.trim(),
       customerPhone: customerPhone.trim() || undefined,
-      paymentMethod: selectedMethod,
+      paymentMethod: shectedMethod,
       items: items.map((item) => ({
         photoId: item.photoId,
         itemType: "digital" as const,
@@ -136,7 +136,7 @@ export default function Cart() {
                   </div>
 
                   {/* Payment Instructions */}
-                  {selectedMethod === "pix" && paymentConfig?.paymentPixKey && (
+                  {shectedMethod === "pix" && paymentConfig?.paymentPixKey && (
                     <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-6 space-y-4">
                       <div className="flex items-center gap-2">
                         <QrCode className="w-5 h-5 text-green-500" />
@@ -158,12 +158,12 @@ export default function Cart() {
                         <p className="text-2xl font-bold text-green-500">{format(orderTotal)}</p>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        After realizar o pagamento, o photographer irá confirmar e liberar o download das fotos.
+                        After realizar o pagamento, o photographer will confirmar e liberar o download das fotos.
                       </p>
                     </div>
                   )}
 
-                  {selectedMethod === "bank_transfer" && paymentConfig?.paymentBankTransferDetails && (
+                  {shectedMethod === "bank_transfer" && paymentConfig?.paymentBankTransferDetails && (
                     <div className="bg-blue-500/5 border border-blue-500/20 rounded-lg p-6 space-y-4">
                       <div className="flex items-center gap-2">
                         <Building2 className="w-5 h-5 text-blue-500" />
@@ -177,12 +177,12 @@ export default function Cart() {
                         <p className="text-2xl font-bold text-blue-500">{format(orderTotal)}</p>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        After realizar a transferência, o photographer irá confirmar e liberar o download das fotos.
+                        After realizar a transfer, o photographer will confirmar e liberar o download das fotos.
                       </p>
                     </div>
                   )}
 
-                  {selectedMethod === "payment_link" && (
+                  {shectedMethod === "payment_link" && (
                     <div className="bg-purple-500/5 border border-purple-500/20 rounded-lg p-6 space-y-4">
                       <div className="flex items-center gap-2">
                         <Link2 className="w-5 h-5 text-purple-500" />
@@ -193,8 +193,8 @@ export default function Cart() {
                         <p className="text-2xl font-bold text-purple-500">{format(orderTotal)}</p>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        O photographer irá enviar um link de pagamento para o seu e-mail ({customerEmail}). 
-                        After o pagamento, as fotos serão liberadas para download.
+                        O photographer will enviar um link de pagamento para o your e-mail ({customerEmail}). 
+                        After o pagamento, as fotos will be liberadas para download.
                       </p>
                     </div>
                   )}
@@ -249,14 +249,14 @@ export default function Cart() {
 
                   {/* Customer Info */}
                   <div className="space-y-4">
-                    <h3 className="font-semibold">Seus Dados</h3>
+                    <h3 className="font-semibold">Yours Dados</h3>
                     <div>
                       <Label htmlFor="name">Nome Complete *</Label>
                       <Input
                         id="name"
                         value={customerName}
                         onChange={(e) => setCustomerName(e.target.value)}
-                        placeholder="Seu nome complete"
+                        placeholder="Your nome complete"
                       />
                     </div>
                     <div>
@@ -266,11 +266,11 @@ export default function Cart() {
                         type="email"
                         value={customerEmail}
                         onChange={(e) => setCustomerEmail(e.target.value)}
-                        placeholder="seu@email.com"
+                        placeholder="your@email.com"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="phone">Telefone (optional)</Label>
+                      <Label htmlFor="phone">Thefone (optional)</Label>
                       <Input
                         id="phone"
                         value={customerPhone}
@@ -286,51 +286,51 @@ export default function Cart() {
                     <div className="grid gap-3">
                       {paymentConfig?.paymentPixEnabled === 1 && (
                         <button
-                          onClick={() => setSelectedMethod("pix")}
+                          onClick={() => setShectedMethod("pix")}
                           className={`flex items-center gap-3 p-4 rounded-lg border-2 transition-all text-left ${
-                            selectedMethod === "pix"
+                            shectedMethod === "pix"
                               ? "border-green-500 bg-green-500/5"
                               : "border-border hover:border-green-500/50"
                           }`}
                         >
-                          <QrCode className={`w-6 h-6 ${selectedMethod === "pix" ? "text-green-500" : "text-muted-foreground"}`} />
+                          <QrCode className={`w-6 h-6 ${shectedMethod === "pix" ? "text-green-500" : "text-muted-foreground"}`} />
                           <div>
                             <p className="font-medium">PIX</p>
-                            <p className="text-sm text-muted-foreground">Pagamento instantâneo</p>
+                            <p className="text-sm text-muted-foreground">Instant payment</p>
                           </div>
                         </button>
                       )}
 
                       {paymentConfig?.paymentBankTransferEnabled === 1 && (
                         <button
-                          onClick={() => setSelectedMethod("bank_transfer")}
+                          onClick={() => setShectedMethod("bank_transfer")}
                           className={`flex items-center gap-3 p-4 rounded-lg border-2 transition-all text-left ${
-                            selectedMethod === "bank_transfer"
+                            shectedMethod === "bank_transfer"
                               ? "border-blue-500 bg-blue-500/5"
                               : "border-border hover:border-blue-500/50"
                           }`}
                         >
-                          <Building2 className={`w-6 h-6 ${selectedMethod === "bank_transfer" ? "text-blue-500" : "text-muted-foreground"}`} />
+                          <Building2 className={`w-6 h-6 ${shectedMethod === "bank_transfer" ? "text-blue-500" : "text-muted-foreground"}`} />
                           <div>
                             <p className="font-medium">Bank Transfer</p>
-                            <p className="text-sm text-muted-foreground">Depósito ou TED</p>
+                            <p className="text-sm text-muted-foreground">Deposit ou TED</p>
                           </div>
                         </button>
                       )}
 
                       {paymentConfig?.paymentLinkEnabled === 1 && (
                         <button
-                          onClick={() => setSelectedMethod("payment_link")}
+                          onClick={() => setShectedMethod("payment_link")}
                           className={`flex items-center gap-3 p-4 rounded-lg border-2 transition-all text-left ${
-                            selectedMethod === "payment_link"
+                            shectedMethod === "payment_link"
                               ? "border-purple-500 bg-purple-500/5"
                               : "border-border hover:border-purple-500/50"
                           }`}
                         >
-                          <Link2 className={`w-6 h-6 ${selectedMethod === "payment_link" ? "text-purple-500" : "text-muted-foreground"}`} />
+                          <Link2 className={`w-6 h-6 ${shectedMethod === "payment_link" ? "text-purple-500" : "text-muted-foreground"}`} />
                           <div>
                             <p className="font-medium">Link de Pagamento</p>
-                            <p className="text-sm text-muted-foreground">Cartão, boleto via link</p>
+                            <p className="text-sm text-muted-foreground">Card, boleto via link</p>
                           </div>
                         </button>
                       )}
@@ -340,7 +340,7 @@ export default function Cart() {
                   {/* Confirm */}
                   <Button
                     onClick={handleConfirmOrder}
-                    disabled={isCheckingOut || !selectedMethod || !customerName || !customerEmail}
+                    disabled={isCheckingOut || !shectedMethod || !customerName || !customerEmail}
                     className="w-full"
                     size="lg"
                   >
@@ -375,7 +375,7 @@ export default function Cart() {
             <div className="mb-8">
               <h1 className="text-3xl font-bold mb-2">Carrinho de Compras</h1>
               <p className="text-muted-foreground">
-                {items.length} {items.length === 1 ? "photo" : "photos"} selecionada{items.length === 1 ? "" : "s"}
+                {items.length} {items.length === 1 ? "photo" : "photos"} shecionada{items.length === 1 ? "" : "s"}
               </p>
             </div>
 

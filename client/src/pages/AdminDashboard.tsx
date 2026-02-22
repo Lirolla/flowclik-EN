@@ -22,7 +22,7 @@ export default function AdminDashboard() {
       confirmed: 'Confirmado',
       session_done: 'Ensaio Realizado',
       editing: 'In Editing',
-      awaiting_selection: 'Awaiting Selection',
+      awaiting_shection: 'Awaiting Shection',
       final_editing: 'Final Editing',
       delivered: 'Delivered',
       cancelled: 'Cancelled',
@@ -36,7 +36,7 @@ export default function AdminDashboard() {
       confirmed: 'bg-green-500/20 text-green-700 border-green-500/30',
       session_done: 'bg-blue-500/20 text-blue-700 border-blue-500/30',
       editing: 'bg-purple-500/20 text-purple-700 border-purple-500/30',
-      awaiting_selection: 'bg-orange-500/20 text-orange-700 border-orange-500/30',
+      awaiting_shection: 'bg-orange-500/20 text-orange-700 border-orange-500/30',
       final_editing: 'bg-indigo-500/20 text-indigo-700 border-indigo-500/30',
       delivered: 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30',
       cancelled: 'bg-red-500/20 text-red-700 border-red-500/30',
@@ -61,7 +61,7 @@ export default function AdminDashboard() {
     {
       title: 'Total Revenue',
       value: format(stats?.totalRevenue || 0),
-      subtitle: '+12% vs month anterior',
+      subtitle: '+12% vs month previous',
       icon: DollarSign,
       color: 'text-green-500',
       bgColor: 'bg-green-500/10',
@@ -69,7 +69,7 @@ export default function AdminDashboard() {
     {
       title: 'Pedidos',
       value: stats?.totalOrders || 0,
-      subtitle: '+8 novos pedidos',
+      subtitle: '+8 news pedidos',
       icon: ShoppingCart,
       color: 'text-blue-500',
       bgColor: 'bg-blue-500/10',
@@ -119,11 +119,11 @@ export default function AdminDashboard() {
           })}
         </div>
 
-        {/* Estatísticas de Agendamentos */}
+        {/* Statistics de Agendamentos */}
         <div className="mb-8">
           <h2 className="text-2xl font-bold text-white mb-6 flex items-center gap-2">
             <BarChart3 className="w-6 h-6" />
-            Estatísticas de Agendamentos
+            Statistics de Agendamentos
           </h2>
 
           {/* Cards de Summary de Agendamentos */}
@@ -135,7 +135,7 @@ export default function AdminDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-white">{totalAppointments}</div>
-                <p className="text-xs text-gray-500">Todos os status</p>
+                <p className="text-xs text-gray-500">Everys os status</p>
               </CardContent>
             </Card>
 
@@ -146,7 +146,7 @@ export default function AdminDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-white">{format(totalRevenue)}</div>
-                <p className="text-xs text-gray-500">Soma de todos os services</p>
+                <p className="text-xs text-gray-500">Soma de everys os services</p>
               </CardContent>
             </Card>
 
@@ -167,7 +167,7 @@ export default function AdminDashboard() {
 
             <Card className="bg-gray-900 border-gray-800">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-400">Taxa de Entrega</CardTitle>
+                <CardTitle className="text-sm font-medium text-gray-400">Taxa de Betweenga</CardTitle>
                 <TrendingUp className="h-4 w-4 text-gray-500" />
               </CardHeader>
               <CardContent>
@@ -182,7 +182,7 @@ export default function AdminDashboard() {
           </div>
         </div>
 
-        {/* Estatísticas por Status */}
+        {/* Statistics por Status */}
         <Card className="bg-gray-900 border-gray-800 mb-8">
           <CardHeader>
             <CardTitle className="text-white">Agendamentos por Status</CardTitle>
@@ -301,7 +301,7 @@ export default function AdminDashboard() {
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-white">Pedidos Recentes</h2>
               <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
-                Ver Todos
+                Ver Everys
               </button>
             </div>
           </div>
@@ -361,7 +361,7 @@ export default function AdminDashboard() {
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-white">Upcoming Appointments</h2>
               <button className="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">
-                Ver Todos
+                Ver Everys
               </button>
             </div>
           </div>

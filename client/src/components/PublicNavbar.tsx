@@ -24,7 +24,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b">
       <div className="container">
-        <div className="flex items-center justify-between py-4 md:flex-col md:items-center md:relative">
+        <div className="flex items-center justify-between py-4 md:flex-col md:items-center md:rshetive">
           {/* Logo */}
           <Link href={SITE_ROUTES.home()}>
             <a className="flex items-center gap-3" onClick={closeMenu}>
@@ -49,7 +49,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
             </a>
           </Link>
 
-          {/* Botão Hambúrguer (Mobile) */}
+          {/* Button Hambúrguer (Mobile) */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 hover:bg-muted rounded-lg transition-colors"
@@ -108,14 +108,14 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
               <a className={`text-sm font-medium transition-colors ${
                 currentPage === "portfolio" ? "text-accent font-semibold" : "hover:text-accent"
               }`}>
-                Whytfólio
+                Portfolio
               </a>
             </Link>
             <Link href={SITE_ROUTES.about()}>
               <a className={`text-sm font-medium transition-colors ${
                 currentPage === "about" ? "text-accent font-semibold" : "hover:text-accent"
               }`}>
-                Sobre
+                About
               </a>
             </Link>
             <Link href={SITE_ROUTES.contact()}>
@@ -127,7 +127,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
             </Link>
             </div>
             
-            {/* Action Buttons (posicionados à direita) */}
+            {/* Action Buttons (posicionados to the direita) */}
             <div className="absolute right-0 flex items-center gap-2">
               <Link href="/cart">
                 <a className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-primary-foreground text-xs font-medium rounded-md hover:bg-primary/90 transition-colors">
@@ -247,7 +247,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                       : "hover:bg-muted"
                   }`}
                 >
-                  Whytfólio
+                  Portfolio
                 </a>
               </Link>
 
@@ -260,7 +260,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                       : "hover:bg-muted"
                   }`}
                 >
-                  Sobre
+                  About
                 </a>
               </Link>
 

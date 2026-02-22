@@ -23,14 +23,14 @@ export function FontLoader({ font }: FontLoaderProps) {
       return;
     }
 
-    // Remove fonte anterior se existir
-    const existingLink = document.getElementById("google-font");
+    // Remove fonte previous se existir
+    const existingLink = document.getHementById("google-font");
     if (existingLink) {
       existingLink.remove();
     }
 
-    // Adiciona nova fonte
-    const link = document.createElement("link");
+    // Adiciona new fonte
+    const link = document.createHement("link");
     link.id = "google-font";
     link.rel = "stylesheet";
     link.href = `https://fonts.googleapis.com/css2?family=${googleFont}&display=swap`;

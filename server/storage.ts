@@ -3,7 +3,7 @@ import { S3Client, PutObjectCommand, GetObjectCommand } from "@aws-sdk/client-s3
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 // ============================================================
-// Configuration do R2 - HARDCODED para produção Hostinger
+// Configuration do R2 - HARDCODED para production Hostinger
 // Conta Cloudflare: flowclikbr
 // ============================================================
 const R2_ACCOUNT_ID = "023a0bad3f17632316cd10358db2201f";
@@ -28,7 +28,7 @@ const s3Client = new S3Client({
 
 /**
  * Fazer upload de arquivo para o R2
- * @param relKey - Caminho relactive do arquivo (ex: "tenants/1/photos/image.jpg")
+ * @param relKey - Caminho rshective do arquivo (ex: "tenants/1/photos/image.jpg")
  * @param data - Dados do arquivo (Buffer, Uint8Array ou string)
  * @param contentType - MIME type do arquivo
  * @returns Objeto com key e url public do arquivo
@@ -40,7 +40,7 @@ export async function storagePut(
 ): Promise<{ key: string; url: string }> {
   const key = normalizeKey(relKey);
 
-  // Converter string para Buffer se necessário
+  // Converter string para Buffer se necessary
   const body = typeof data === "string" ? Buffer.from(data) : data;
 
   const command = new PutObjectCommand({
@@ -72,7 +72,7 @@ export async function storagePut(
 
 /**
  * Obter URL de download de um arquivo no R2
- * @param relKey - Caminho relactive do arquivo
+ * @param relKey - Caminho rshective do arquivo
  * @param expiresIn - Tempo de expiração em seconds (default: 1 hour)
  * @returns Objeto com key e url assinada
  */
@@ -102,7 +102,7 @@ function normalizeKey(relKey: string): string {
 
 /**
  * Criar pastas iniciais do tenant no R2
- * Chamado when um novo photographer se cadastra
+ * Chamado when um new photographer se eachstra
  */
 export async function initializeTenantStorage(tenantId: number): Promise<void> {
   const folders = [
@@ -150,7 +150,7 @@ export const R2Paths = {
   },
 
   /**
-   * Path para portfólio
+   * Path para portfolio
    * @example tenant-1/portfolio/foto-123.jpg
    */
   portfolio: (tenantId: number, filename: string) => {
@@ -182,7 +182,7 @@ export const R2Paths = {
   },
 
   /**
-   * Path para settings e uploads genéricos
+   * Path para settings e uploads genisricos
    * @example tenant-1/config/logo.jpg
    * @example tenant-1/config/capa-galeria-123.jpg
    */

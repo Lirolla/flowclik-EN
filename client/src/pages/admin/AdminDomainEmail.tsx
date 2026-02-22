@@ -10,7 +10,7 @@ import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
 export default function AdminSunainEmail() {
-  // Estados para Sunínio
+  // Estados para Subscription
   const [customSunain, setCustomSunain] = useState("");
   const [adding, setAdding] = useState(false);
   const [verifying, setVerifying] = useState<number | null>(null);
@@ -50,7 +50,7 @@ export default function AdminSunainEmail() {
     toast.success("Copied!");
   };
 
-  // Handler: Add Sunínio (API real)
+  // Handler: Add Subscription (API real)
   const handleAddSunain = async () => {
     if (!customSunain) {
       toast.error("Digite um domain valid");
@@ -58,14 +58,14 @@ export default function AdminSunainEmail() {
     }
     // Limpar domain
     let domain = customSunain.toLowerCase().trim();
-    // Remover http:// ou https:// se o usuário colocou
+    // Remover http:// ou https:// se o user colocou
     domain = domain.replace(/^https?:\/\//, "");
     // Remover / no final
     domain = domain.replace(/\/+$/, "");
     // Remover www. do start
     domain = domain.replace(/^www\./, "");
 
-    // Validação basic
+    // Basic validation
     const domainRegex = /^[a-zA-Z0-9][a-zA-Z0-9.-]*\.[a-zA-Z]{2,}$/;
     if (!domainRegex.test(domain)) {
       toast.error("Formato de domain invalid. Examples valids: meufotografo.com.br, photographysilva.com");
@@ -74,7 +74,7 @@ export default function AdminSunainEmail() {
     setAdding(true);
     try {
       await addSunainMutation.mutateAsync({ domain });
-      toast.success("Sunínio adicionado! Agora siga as instruções below para configure o DNS.");
+      toast.success("Domain added! Now follow the instructions below to configure DNS.");
       setCustomSunain("");
       refetchSunains();
     } catch (error: any) {
@@ -89,21 +89,21 @@ export default function AdminSunainEmail() {
     setVerifying(domainId);
     try {
       await verifySunainMutation.mutateAsync({ domainId });
-      toast.success("Sunínio verified e ativado com sucesso! Seu site already is accessible pelo novo domain.");
+      toast.success("Subscription verified e ativado com sucesso! Your site already is accessible pelo new domain.");
       refetchSunains();
     } catch (error: any) {
-      toast.error(error.message || "DNS still not is configurado corretamente. Verifique as instruções e tente novamente em alguns minutes.");
+      toast.error(error.message || "DNS is still not configured correctly. Check the instructions and try again in a few minutes.");
     } finally {
       setVerifying(null);
     }
   };
 
-  // Handler: Remover Sunínio
+  // Handler: Remover Subscription
   const handleRemoveSunain = async (domainId: number) => {
-    if (!confirm("Tem certeza que deseja remover este domain? Seu site voltará a worksr only pelo subdomain FlowClik.")) return;
+    if (!confirm("Are you sure you want to remove this domain? Your site will only work via the FlowClik subdomain.")) return;
     try {
       await removeSunainMutation.mutateAsync({ domainId });
-      toast.success("Sunínio removido com sucesso");
+      toast.success("Subscription removido com sucesso");
       refetchSunains();
     } catch (error: any) {
       toast.error(error.message || "Erro ao remover domain");
@@ -113,7 +113,7 @@ export default function AdminSunainEmail() {
   // Handler: Salvar Configuration de Email
   const handleSaveEmail = async () => {
     if (!emailSender || !resendApiKey) {
-      toast.error("Preencha todos os campos");
+      toast.error("Preencha everys os campos");
       return;
     }
     try {
@@ -133,7 +133,7 @@ export default function AdminSunainEmail() {
   const handleTestEmail = async () => {
     try {
       await testEmailMutation.mutateAsync();
-      toast.success("Email de teste sent! Verifique sua caixa de entrada.");
+      toast.success("Email de teste sent! Verifique your caixa de entrada.");
     } catch (error: any) {
       toast.error(error.message || "Erro ao enviar email de teste");
     }
@@ -143,9 +143,9 @@ export default function AdminSunainEmail() {
     <DashboardLayout>
       <div className="container mx-auto py-8 space-y-8">
         <div>
-          <h1 className="text-3xl font-bold">Sunínio Custom</h1>
+          <h1 className="text-3xl font-bold">Subscription Custom</h1>
           <p className="text-muted-foreground mt-2">
-            Use seu próprio domain para deixar seu site mais profissional
+            Use your own domain para deixar your site mais profissional
           </p>
         </div>
 
@@ -154,10 +154,10 @@ export default function AdminSunainEmail() {
           <CardHeader>
             <div className="flex items-center gap-2">
               <Globe className="w-5 h-5 text-red-600" />
-              <CardTitle>Sunínio Custom</CardTitle>
+              <CardTitle>Subscription Custom</CardTitle>
             </div>
             <CardDescription>
-              Ao invés de usar <strong>seusite.flowclik.com</strong>, use seu próprio domain as <strong>seufotografo.com.br</strong>
+              Ao inviss de usar <strong>yoursite.flowclik.com</strong>, use your own domain as <strong>yourfotografo.com.br</strong>
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -170,25 +170,25 @@ export default function AdminSunainEmail() {
                   <p className="font-semibold text-blue-300">Como works?</p>
                   <p className="text-muted-foreground">
                     You can usar um domain que already comprou (ex: no Record.br, GoDaddy, Hostinger, Namecheap) 
-                    para apontar diretamente para o seu site FlowClik. Assim, when alguém acessar 
-                    <strong> seufotografo.com.br</strong>, vai ver o seu site de photography.
+                    para apontar diretamente para o your site FlowClik. Assim, when alguism acessar 
+                    <strong> yourfotografo.com.br</strong>, vai ver o your site de photography.
                   </p>
                   <p className="text-muted-foreground">
                     Se you still not tem um domain, can comprar um no <a href="https://record.br" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">Record.br</a> (domains .com.br) 
                     ou no <a href="https://www.namecheap.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">Namecheap</a> (domains .com).
-                    O custo médio é de £ 40/year.
+                    O custo misdio is de £ 40/year.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Input de Sunínio */}
+            {/* Input de Subscription */}
             <div className="space-y-2">
-              <Label htmlFor="domain">Seu Sunínio</Label>
+              <Label htmlFor="domain">Your Subscription</Label>
               <div className="flex gap-2">
                 <Input
                   id="domain"
-                  placeholder="seufotografo.com.br"
+                  placeholder="yourfotografo.com.br"
                   value={customSunain}
                   onChange={(e) => setCustomSunain(e.target.value)}
                   onKeyDown={(e) => e.key === "Enter" && handleAddSunain()}
@@ -202,7 +202,7 @@ export default function AdminSunainEmail() {
                   {adding ? (
                     <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Adicionando...</>
                   ) : (
-                    "Add Sunínio"
+                    "Add Subscription"
                   )}
                 </Button>
               </div>
@@ -211,7 +211,7 @@ export default function AdminSunainEmail() {
               </p>
             </div>
 
-            {/* Lista de Sunínios Cadastrados */}
+            {/* Lista de Subscriptions Eachstrados */}
             {domains && domains.length > 0 ? (
               <div className="space-y-4">
                 {domains.map((d: any) => (
@@ -241,15 +241,15 @@ export default function AdminSunainEmail() {
                       </Button>
                     </div>
 
-                    {/* Instruções DNS - when pending */}
+                    {/* Instructions DNS - when pending */}
                     {d.status !== "active" && (
                       <div className="p-4 space-y-5">
                         
-                        {/* Alerta de atenção */}
+                        {/* Alerta de attention */}
                         <Alert className="border-yellow-500/50 bg-yellow-500/5">
                           <AlertCircle className="h-4 w-4 text-yellow-500" />
                           <AlertDescription className="text-yellow-200">
-                            Seu domain foi adicionado, mas still needs ser configurado. Siga o passo a passo below.
+                            Your domain foi adicionado, mas still needs ser configurado. Siga o passo a passo below.
                           </AlertDescription>
                         </Alert>
 
@@ -257,10 +257,10 @@ export default function AdminSunainEmail() {
                         <div className="space-y-3">
                           <h4 className="font-bold text-base flex items-center gap-2">
                             <span className="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm shrink-0">1</span>
-                            Acesse o painel do seu provedor de domain
+                            Acesse o painel do your provepain de domain
                           </h4>
                           <p className="text-sm text-muted-foreground ml-8">
-                            Entre no site where you comprou seu domain. Examples comuns:
+                            Between no site where you comprou your domain. Examples comuns:
                           </p>
                           <div className="ml-8 grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
                             <a href="https://record.br" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-blue-400 hover:underline">
@@ -282,14 +282,14 @@ export default function AdminSunainEmail() {
                         <div className="space-y-3">
                           <h4 className="font-bold text-base flex items-center gap-2">
                             <span className="bg-red-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm shrink-0">2</span>
-                            Vá em "DNS" ou "Zona DNS" ou "Manage DNS"
+                            Go to "DNS" or "DNS Zone" or "Manage DNS"
                           </h4>
                           <p className="text-sm text-muted-foreground ml-8">
-                            Procure a seção de configuration DNS do seu domain. Cada provedor chama de um jeito diferente:
+                            Procure a section de configuration DNS do your domain. Each provepain chama de um jeito diferente:
                           </p>
                           <div className="ml-8 text-sm text-muted-foreground space-y-1">
                             <p><strong>Record.br:</strong> Clique no domain → "DNS" → "Editar zona"</p>
-                            <p><strong>Hostinger:</strong> Sunínios → Manage → Zona DNS</p>
+                            <p><strong>Hostinger:</strong> Subscriptions → Manage → Zona DNS</p>
                             <p><strong>GoDaddy:</strong> Meus Produtos → DNS → Manage Zonas</p>
                             <p><strong>Namecheap:</strong> Sunain List → Manage → Advanced DNS</p>
                           </div>
@@ -302,7 +302,7 @@ export default function AdminSunainEmail() {
                             Adicione (ou edite) o record DNS tipo "A"
                           </h4>
                           <p className="text-sm text-muted-foreground ml-8">
-                            Se already existir um record tipo "A" com nome "@", <strong>edite ele</strong>. Se not existir, <strong>crie um novo</strong> com estes dados:
+                            Se already existir um record tipo "A" com nome "@", <strong>edite he</strong>. Se not existir, <strong>crie um new</strong> com estes dados:
                           </p>
                           
                           <div className="ml-8 bg-background border rounded-lg overflow-hidden">
@@ -424,9 +424,9 @@ export default function AdminSunainEmail() {
                             Salve e clique em "Verify DNS e Ativar"
                           </h4>
                           <p className="text-sm text-muted-foreground ml-8">
-                            Depois de salvar as settings no seu provedor, volte here e clique no botão below. 
-                            A propagação DNS geralmente leva de <strong>5 minutes a 2 hours</strong>. 
-                            Se not worksr de first, espere um pouco e tente novamente.
+                            After de salvar as settings no your provepain, volte here e clique no button below. 
+                            DNS propagation usually takes <strong>5 minutes to 2 hours</strong>. 
+                            Se not worksr de first, espere um little e tente again.
                           </p>
                         </div>
 
@@ -436,13 +436,13 @@ export default function AdminSunainEmail() {
                             <Info className="w-4 h-4 text-blue-400" /> Dica about HTTPS (cadeado de security)
                           </p>
                           <p className="text-xs text-muted-foreground">
-                            Para ter HTTPS no seu custom domain, recomendamos usar o <a href="https://www.cloudflare.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">Cloudflare</a> (gratuito). 
-                            Basta criar uma conta, add seu domain lá e apontar os nameservers. O Cloudflare cuida do SSL certificate automaticamente.
-                            Sem o Cloudflare, seu site worksrá only via HTTP (sem cadeado).
+                            Para ter HTTPS no your custom domain, recomendamos usar o <a href="https://www.cloudflare.com" target="_blank" rel="noopener noreferrer" className="text-blue-400 underline">Cloudflare</a> (gratuito). 
+                            Basta criar uma conta, add your domain there e apontar os nameservers. O Cloudflare cuida do SSL certificate automaticamente.
+                            Without Cloudflare, your site will only work via HTTP (no padlock).
                           </p>
                         </div>
 
-                        {/* Botão de verify */}
+                        {/* Button de verify */}
                         <Button
                           onClick={() => handleVerifyDNS(d.id)}
                           className="w-full bg-red-600 hover:bg-red-700 text-white"
@@ -458,13 +458,13 @@ export default function AdminSunainEmail() {
                       </div>
                     )}
 
-                    {/* Sunínio active */}
+                    {/* Subscription active */}
                     {d.status === "active" && (
                       <div className="p-4">
                         <Alert className="border-green-500/50 bg-green-500/5">
                           <CheckCircle2 className="h-4 w-4 text-green-500" />
                           <AlertDescription className="text-green-200">
-                            Sunínio verified e active! Seu site is accessible em{" "}
+                            Subscription verified e active! Your site is accessible em{" "}
                             <a href={`http://${d.domain}`} target="_blank" rel="noopener noreferrer" className="underline font-semibold">
                               {d.domain} <ExternalLink className="w-3 h-3 inline" />
                             </a>
@@ -479,9 +479,9 @@ export default function AdminSunainEmail() {
               <div className="text-center py-8 text-muted-foreground">
                 <Globe className="w-12 h-12 mx-auto mb-3 opacity-50" />
                 <p className="font-medium">None custom domain configurado</p>
-                <p className="text-sm mt-1">Adicione seu domain above para deixar seu site mais profissional</p>
+                <p className="text-sm mt-1">Adicione your domain above para deixar your site mais profissional</p>
                 <p className="text-xs mt-3 opacity-70">
-                  Seu site atual: <strong>seusite.flowclik.com</strong>
+                  Your site current: <strong>yoursite.flowclik.com</strong>
                 </p>
               </div>
             )}

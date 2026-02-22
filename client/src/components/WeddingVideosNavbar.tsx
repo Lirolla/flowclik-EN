@@ -85,7 +85,7 @@ export default function WeddingVideosNavbar({ currentPage }: WeddingVideosNavbar
                 </Link>
               ))}
               
-              {/* Botões Cliente e Carrinho */}
+              {/* Buttons Cliente e Carrinho */}
               <Link href="/client-access">
                 <a className="px-4 py-2 bg-[#C9A961] text-white text-xs font-light tracking-widest hover:bg-[#D4AF37] transition-colors flex items-center gap-2">
                   <User className="w-4 h-4" />

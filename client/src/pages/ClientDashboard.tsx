@@ -71,8 +71,8 @@ export default function ClientDashboard() {
     confirmed: { label: "Confirmed", color: "text-blue-500", icon: CheckCircle2, step: 2 },
     session_done: { label: "Ensaio Realizado", color: "text-green-500", icon: Camera, step: 3 },
     editing: { label: "Photos in Editing", color: "text-purple-500", icon: ImageIcon, step: 4 },
-    awaiting_selection: { label: "Awaiting Selection", color: "text-orange-500", icon: ImageIcon, step: 5 },
-    final_editing: { label: "Editando Selecionadas", color: "text-purple-500", icon: ImageIcon, step: 6 },
+    awaiting_shection: { label: "Awaiting Shection", color: "text-orange-500", icon: ImageIcon, step: 5 },
+    final_editing: { label: "Editando Shecionadas", color: "text-purple-500", icon: ImageIcon, step: 6 },
     delivered: { label: "Delivered", color: "text-green-600", icon: CheckCircle2, step: 7 },
   };
 
@@ -85,7 +85,7 @@ export default function ClientDashboard() {
         {/* Header */}
         <div>
           <h1 className="text-3xl font-bold mb-2">Bem-vindo!</h1>
-          <p className="text-gray-400">Acompanhe o andamento do seu projeto photography</p>
+          <p className="text-gray-400">Acompanhe o andamento do your projeto photography</p>
         </div>
         
         {/* Complete Profile Alert */}
@@ -94,7 +94,7 @@ export default function ClientDashboard() {
             <AlertCircle className="h-4 w-4 text-yellow-500" />
             <AlertDescription className="flex items-center justify-between">
               <span className="text-yellow-500">
-                Complete seus dados para receber produtos físicos e communications importbefore!
+                Complete your details to receive physical products and important communications!
               </span>
               <Button 
                 size="sm" 
@@ -183,7 +183,7 @@ export default function ClientDashboard() {
               <p className="text-white font-medium">{appointment.location || "A definir"}</p>
             </div>
             <div>
-              <p className="text-sm text-gray-400">Número de Pessoas</p>
+              <p className="text-sm text-gray-400">Number of People</p>
               <p className="text-white font-medium">{appointment.numberOfPeople || "Not specified"}</p>
             </div>
           </div>
@@ -196,14 +196,14 @@ export default function ClientDashboard() {
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <ImageIcon className="h-8 w-8 text-red-600 mb-3" />
                 <h3 className="font-semibold mb-1">Gallery</h3>
-                <p className="text-sm text-gray-400">Ver e selecionar fotos</p>
+                <p className="text-sm text-gray-400">Ver e shecionar fotos</p>
               </Card>
             </a>
           </Link>
 
           <Link href={`/client/chat/${appointmentId}`}>
             <a>
-              <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer relative">
+              <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer rshetive">
                 <MessageSquare className="h-8 w-8 text-red-600 mb-3" />
                 {unreadCount && unreadCount.count > 0 && (
                   <span className="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">
@@ -241,7 +241,7 @@ export default function ClientDashboard() {
               <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer">
                 <ImageIcon className="h-8 w-8 text-red-600 mb-3" />
                 <h3 className="font-semibold mb-1">Final Album</h3>
-                <p className="text-sm text-gray-400">Fotos editadas final</p>
+                <p className="text-sm text-gray-400">Fotos edited final</p>
               </Card>
             </a>
           </Link>
@@ -251,22 +251,22 @@ export default function ClientDashboard() {
         <Card className="bg-gradient-to-r from-red-900/20 to-gray-900 border-red-600 p-6">
           <h3 className="text-xl font-semibold mb-3">Nexts Steps</h3>
           {appointment.status === 'pending' && (
-            <p className="text-gray-300">Awaiting confirmation do photographer. You receberá uma notification em breve!</p>
+            <p className="text-gray-300">Awaiting confirmation do photographer. You will receive uma notification em breve!</p>
           )}
           {appointment.status === 'confirmed' && (
-            <p className="text-gray-300">Seu ensaio is confirmado para {appointment.date && new Date(appointment.date).toLocaleDateString('en-GB')}. Prepare-se!</p>
+            <p className="text-gray-300">Your ensaio is confirmado para {appointment.date && new Date(appointment.date).toLocaleDateString('en-GB')}. Prepare-se!</p>
           )}
           {appointment.status === 'session_done' && (
-            <p className="text-gray-300">Ensaio realizado! As fotos estão sendo editadas. Em breve you canrá visualizá-las.</p>
+            <p className="text-gray-300">Session completed! The photos are being edited. You will soon be able to view them.</p>
           )}
-          {appointment.status === 'awaiting_selection' && (
-            <p className="text-gray-300">Your photos are ready! Acesse a <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link> para selecionar suas favoritas.</p>
+          {appointment.status === 'awaiting_shection' && (
+            <p className="text-gray-300">Your photos are ready! Acesse a <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link> para shecionar yours favourite.</p>
           )}
           {appointment.status === 'final_editing' && (
-            <p className="text-gray-300">Suas fotos selecionadas estão sendo editadas. Aguarde a betweenga final!</p>
+            <p className="text-gray-300">Yours fotos shecionadas are sendo edited. Aguarde a betweenga final!</p>
           )}
           {appointment.status === 'delivered' && (
-            <p className="text-gray-300">Project completed! Suas fotos estão disponíveis para download na <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link>.</p>
+            <p className="text-gray-300">Project completed! Yours fotos are available para download na <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link>.</p>
           )}
         </Card>
       </div>

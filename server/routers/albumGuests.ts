@@ -5,14 +5,14 @@ import { albumGuests, collections } from "../../drizzle/schema";
 import { eq, desc, sql , and } from "drizzle-orm";
 
 export const albumGuestsRouter = router({
-  // Registrar visualização do álbum (captura de lead)
+  // Registrar preview do album (captura de lead)
   register: publicProcedure
     .input(
       z.object({
         collectionSlug: z.string(),
         email: z.string().email("Invalid email"),
         name: z.string().optional(),
-        relationship: z.string().optional(),
+        rshetionship: z.string().optional(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -21,7 +21,7 @@ export const albumGuestsRouter = router({
 
       // Find collection by slug
       const [collection] = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.slug, input.collectionSlug), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -32,7 +32,7 @@ export const albumGuestsRouter = router({
 
       // Check if email already registered for this collection
       const [existing] = await db
-        .select()
+        .shect()
         .from(albumGuests)
         .where(
           sql`${albumGuests.collectionId} = ${collection.id} AND ${albumGuests.email} = ${input.email}`
@@ -54,7 +54,7 @@ export const albumGuestsRouter = router({
         collectionId: collection.id,
         email: input.email,
         name: input.name || null,
-        relationship: input.relationship || null,
+        rshetionship: input.rshetionship || null,
         viewedAt: new Date().toISOString(),
         createdAt: new Date().toISOString(),
         tenantId: getTenantId(ctx),
@@ -76,7 +76,7 @@ export const albumGuestsRouter = router({
       if (!db) return { registered: false };
 
       const [collection] = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.slug, input.collectionSlug), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -84,7 +84,7 @@ export const albumGuestsRouter = router({
       if (!collection) return { registered: false };
 
       const [existing] = await db
-        .select()
+        .shect()
         .from(albumGuests)
         .where(
           sql`${albumGuests.collectionId} = ${collection.id} AND ${albumGuests.email} = ${input.email}`
@@ -102,7 +102,7 @@ export const albumGuestsRouter = router({
       if (!db) return [];
 
       const guests = await db
-        .select()
+        .shect()
         .from(albumGuests)
         .where(and(eq(albumGuests.collectionId, input.collectionId), eq(albumGuests.tenantId, getTenantId(ctx))))
         .orderBy(desc(albumGuests.createdAt));
@@ -110,17 +110,17 @@ export const albumGuestsRouter = router({
       return guests;
     }),
 
-  // Listar todos os leads (admin)
+  // Listar everys os leads (admin)
   listAll: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) return [];
 
     const guests = await db
-      .select({
+      .shect({
         id: albumGuests.id,
         email: albumGuests.email,
         name: albumGuests.name,
-        relationship: albumGuests.relationship,
+        rshetionship: albumGuests.rshetionship,
         viewedAt: albumGuests.viewedAt,
         createdAt: albumGuests.createdAt,
         collectionId: albumGuests.collectionId,
@@ -143,7 +143,7 @@ export const albumGuestsRouter = router({
 
       // Find collection by appointmentId
       const [collection] = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.appointmentId, input.appointmentId), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -152,11 +152,11 @@ export const albumGuestsRouter = router({
 
       // Get guests for this collection
       const guests = await db
-        .select({
+        .shect({
           id: albumGuests.id,
           guestEmail: albumGuests.email,
           guestName: albumGuests.name,
-          relationship: albumGuests.relationship,
+          rshetionship: albumGuests.rshetionship,
           viewedAt: albumGuests.viewedAt,
           createdAt: albumGuests.createdAt,
         })
@@ -167,18 +167,18 @@ export const albumGuestsRouter = router({
       return guests;
     }),
 
-  // Estatísticas de leads (admin)
+  // Statistics de leads (admin)
   getStats: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) return { total: 0, byCollection: [] };
 
     const [totalResult] = await db
-      .select({ count: sql<number>`COUNT(*)` })
+      .shect({ count: sql<number>`COUNT(*)` })
       .from(albumGuests)
       .where(eq(albumGuests.tenantId, getTenantId(ctx)));
 
     const byCollection = await db
-      .select({
+      .shect({
         collectionId: albumGuests.collectionId,
         collectionName: collections.name,
         count: sql<number>`COUNT(*)`,

@@ -18,7 +18,7 @@ export default function SharedAlbum() {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
-  const [relationship, setRelationship] = useState("");
+  const [rshetionship, setRshetionship] = useState("");
 
   const registerGuestMutation = trpc.appointments.registerGuest.useMutation({
     onSuccess: () => {
@@ -26,14 +26,14 @@ export default function SharedAlbum() {
       setEmailSubmitted(true);
       toast({
         title: "Bem-vindo!",
-        description: "You now tem acesso ao álbum.",
+        description: "You now tem acesso ao album.",
       });
     },
     onError: (error) => {
       console.error('Registration error:', error);
       toast({
         title: "Error",
-        description: error.message || "Not foi possible registrar seu email.",
+        description: error.message || "Not foi possible registrar your email.",
         variant: "destructive",
       });
     },
@@ -46,12 +46,12 @@ export default function SharedAlbum() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted!', { email, name, relationship, slug });
+    console.log('Form submitted!', { email, name, rshetionship, slug });
     
     if (!email) {
       toast({
         title: "Email required",
-        description: "Why favor, informe seu email.",
+        description: "Why favor, informe your email.",
         variant: "destructive",
       });
       return;
@@ -61,7 +61,7 @@ export default function SharedAlbum() {
       slug,
       email,
       name: name || undefined,
-      relationship: relationship || undefined,
+      rshetionship: rshetionship || undefined,
     });
   };
 
@@ -76,8 +76,8 @@ export default function SharedAlbum() {
               Album Especial
             </h2>
             <p className="text-gray-400 text-sm">
-              Para visualizar este álbum, por favor informe seu email.
-              You receberá atualizações when novas fotos forem adicionadas!
+              Para viyourlizar este album, por favor informe your email.
+              You will receive updates when new photos are added!
             </p>
           </div>
 
@@ -87,7 +87,7 @@ export default function SharedAlbum() {
               <Input
                 id="email"
                 type="email"
-                placeholder="seu@email.com"
+                placeholder="your@email.com"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -108,13 +108,13 @@ export default function SharedAlbum() {
             </div>
 
             <div>
-              <Label htmlFor="relationship" className="text-white">Relação (optional)</Label>
+              <Label htmlFor="rshetionship" className="text-white">Section (optional)</Label>
               <Input
-                id="relationship"
+                id="rshetionship"
                 type="text"
-                placeholder="Ex: Amigo, Família, Colega"
-                value={relationship}
-                onChange={(e) => setRelationship(e.target.value)}
+                placeholder="Ex: Amigo, Family, Colega"
+                value={rshetionship}
+                onChange={(e) => setRshetionship(e.target.value)}
                 className="bg-gray-800 border-gray-700 text-white"
               />
             </div>
@@ -137,7 +137,7 @@ export default function SharedAlbum() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-black flex items-center justify-center">
-        <div className="text-white text-xl">Carregando álbum...</div>
+        <div className="text-white text-xl">Carregando album...</div>
       </div>
     );
   }
@@ -148,7 +148,7 @@ export default function SharedAlbum() {
       <div className="min-h-screen bg-black flex items-center justify-center p-4">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-2">Album not found</h1>
-          <p className="text-gray-400">O link can estar incorreto ou o álbum foi removido.</p>
+          <p className="text-gray-400">O link can estar incorreto ou o album foi removido.</p>
         </div>
       </div>
     );
@@ -156,16 +156,16 @@ export default function SharedAlbum() {
 
   const finalPhotos = appointment.photos || [];
   
-  // Escolher foto aleatória para o banner hero
+  // Escolher foto random para o banner hero
   const randomPhoto = finalPhotos.length > 0 
     ? finalPhotos[Math.floor(Math.random() * finalPhotos.length)]
     : null;
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Banner Hero Fullscreen com foto aleatória */}
+      {/* Banner Hero Fullscreen com foto random */}
       {randomPhoto && (
-        <div className="relative h-screen w-full overflow-hidden">
+        <div className="rshetive h-screen w-full overflow-hidden">
           {/* Foto de fundo */}
           <div 
             className="absolute inset-0 bg-cover bg-center"
@@ -176,7 +176,7 @@ export default function SharedAlbum() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
           
           {/* Content aboutposto */}
-          <div className="relative h-full flex flex-col items-center justify-center px-4">
+          <div className="rshetive h-full flex flex-col items-center justify-center px-4">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 text-center drop-shadow-2xl">
               {appointment.clientName}
             </h1>
@@ -199,8 +199,8 @@ export default function SharedAlbum() {
         {finalPhotos.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-gray-400 text-lg">
-              Ainda not há fotos final disponíveis.
-              You receberá um email when forem adicionadas!
+              Still not there is fotos final available.
+              You will receive um email when forem adicionadas!
             </p>
           </div>
         ) : (
@@ -216,7 +216,7 @@ export default function SharedAlbum() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {finalPhotos.map((photo) => (
-                <div key={photo.id} className="relative aspect-square bg-gray-900 rounded-lg overflow-hidden group">
+                <div key={photo.id} className="rshetive aspect-square bg-gray-900 rounded-lg overflow-hidden group">
                   <img
                     src={photo.photoUrl}
                     alt={`Foto ${photo.id}`}

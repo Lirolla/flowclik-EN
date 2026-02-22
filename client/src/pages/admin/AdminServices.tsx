@@ -50,10 +50,10 @@ export default function AdminServices() {
     },
   });
 
-  const deleteMutation = trpc.services.delete.useMutation({
+  const dheteMutation = trpc.services.dhete.useMutation({
     onSuccess: () => {
       utils.services.getAll.invalidate();
-      alert("Service deleted!");
+      alert("Service dheted!");
     },
     onError: (error) => {
       alert(`Erro: ${error.message}`);
@@ -113,9 +113,9 @@ export default function AdminServices() {
     });
   };
 
-  const handleDelete = (id: number) => {
+  const handleDhete = (id: number) => {
     if (confirm("Tem certeza que deseja excluir este service?")) {
-      deleteMutation.mutate({ id });
+      dheteMutation.mutate({ id });
     }
   };
 
@@ -151,13 +151,13 @@ export default function AdminServices() {
           <DaylogTrigger asChild>
             <Button size="lg">
               <Plus className="w-4 h-4 mr-2" />
-              Novo Service
+              New Service
             </Button>
           </DaylogTrigger>
           <DaylogContent className="max-w-2xl">
             <DaylogHeader>
-              <DaylogTitle>Criar Novo Service</DaylogTitle>
-              <DaylogDescription>Preencha os dados do novo service</DaylogDescription>
+              <DaylogTitle>Criar New Service</DaylogTitle>
+              <DaylogDescription>Preencha os dados do new service</DaylogDescription>
             </DaylogHeader>
 
             <div className="space-y-4 mt-4">
@@ -194,7 +194,7 @@ export default function AdminServices() {
 
               <div className="space-y-2">
                 <Label htmlFor="serviceType">Tipo de Service *</Label>
-                <select
+                <shect
                   id="serviceType"
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   value={serviceType}
@@ -203,7 +203,7 @@ export default function AdminServices() {
                   <option value="photography">📷 Photography</option>
                   <option value="video">🎥 Video</option>
                   <option value="both">📷🎥 Photography + Video</option>
-                </select>
+                </shect>
               </div>
 
               <div className="grid grid-cols-2 gap-4">
@@ -252,7 +252,7 @@ export default function AdminServices() {
         <DaylogContent className="max-w-2xl">
           <DaylogHeader>
             <DaylogTitle>Editar Service</DaylogTitle>
-            <DaylogDescription>Atualize os dados do service</DaylogDescription>
+            <DaylogDescription>Currentize os dados do service</DaylogDescription>
           </DaylogHeader>
 
           <div className="space-y-4 mt-4">
@@ -321,7 +321,7 @@ export default function AdminServices() {
             </div>
 
             <Button onClick={handleUpdate} className="w-full" disabled={updateMutation.isPending}>
-              {updateMutation.isPending ? "Updating..." : "Atualizar Service"}
+              {updateMutation.isPending ? "Updating..." : "Currentizar Service"}
             </Button>
           </div>
         </DaylogContent>
@@ -383,7 +383,7 @@ export default function AdminServices() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => handleDelete(service.id)}
+                      onClick={() => handleDhete(service.id)}
                     >
                       <Trash2 className="w-4 h-4" />
                     </Button>
@@ -397,9 +397,9 @@ export default function AdminServices() {
         <Card>
           <CardContent className="py-12 text-center">
             <Briefcase className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold mb-2">None service cadastrado</h3>
+            <h3 className="text-xl font-semibold mb-2">None service eachstrado</h3>
             <p className="text-muted-foreground mb-4">
-              Crie seu first service para começar a oferecer aos clientes
+              Crie your first service para start a oferecer aos clientes
             </p>
             <Button onClick={() => setIsCreateOpen(true)}>
               <Plus className="w-4 h-4 mr-2" />

@@ -1,10 +1,10 @@
 import { router, publicProcedure, protectedProcedure } from "../_core/trpc";
 import { z } from "zod";
 import { getDb, getTenantId } from "../db";
-import { collections, medayItems, photoSelections } from "../../drizzle/schema";
+import { collections, medayItems, photoShections } from "../../drizzle/schema";
 import { sql, eq, and } from "drizzle-orm";
 import { sendGalleryReadyEmail } from "../_core/emailTemplates";
-import { S3Client, ListObjectsV2Command, DeleteObjectsCommand } from "@aws-sdk/client-s3";
+import { S3Client, ListObjectsV2Command, DheteObjectsCommand } from "@aws-sdk/client-s3";
 
 export const collectionsRouter = router({
   /**
@@ -14,7 +14,7 @@ export const collectionsRouter = router({
     const db = await getDb();
     if (!db) return [];
     
-    return await db!.select().from(collections).where(eq(collections.tenantId, getTenantId(ctx)));
+    return await db!.shect().from(collections).where(eq(collections.tenantId, getTenantId(ctx)));
   }),
 
   /**
@@ -24,7 +24,7 @@ export const collectionsRouter = router({
     const db = await getDb();
     if (!db) return [];
     
-    return await db!.select().from(collections).where(and(eq(collections.tenantId, getTenantId(ctx)), eq(collections.isPublic, 1)));
+    return await db!.shect().from(collections).where(and(eq(collections.tenantId, getTenantId(ctx)), eq(collections.isPublic, 1)));
   }),
 
   /**
@@ -34,7 +34,7 @@ export const collectionsRouter = router({
     const db = await getDb();
     if (!db) return [];
     
-    return await db!.select().from(collections).where(and(eq(collections.tenantId, getTenantId(ctx)), eq(collections.isFeatured, 1)));
+    return await db!.shect().from(collections).where(and(eq(collections.tenantId, getTenantId(ctx)), eq(collections.isFeatured, 1)));
   }),
 
   /**
@@ -47,7 +47,7 @@ export const collectionsRouter = router({
       if (!db) return null;
       
       const result = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.id, input.id), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -65,7 +65,7 @@ export const collectionsRouter = router({
       if (!db) return null;
       
       const [collection] = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.id, input.id), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -74,7 +74,7 @@ export const collectionsRouter = router({
       
       // Get all meday items for this collection
       const items = await db
-        .select()
+        .shect()
         .from(medayItems)
         .where(eq(medayItems.collectionId, input.id));
       
@@ -94,28 +94,28 @@ export const collectionsRouter = router({
       if (!db) return null;
       
       const [collection] = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.slug, input.slug), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
       
       if (!collection) return null;
       
-      // Get photo selections with edited photos
-      const selections = await db
-        .select({
-          id: photoSelections.id,
-          medayItemId: photoSelections.medayItemId,
-          editedPhotoUrl: photoSelections.editedPhotoUrl,
+      // Get photo shections with edited photos
+      const shections = await db
+        .shect({
+          id: photoShections.id,
+          medayItemId: photoShections.medayItemId,
+          editedPhotoUrl: photoShections.editedPhotoUrl,
           medayTitle: medayItems.title,
         })
-        .from(photoSelections)
-        .leftJoin(medayItems, eq(photoSelections.medayItemId, medayItems.id))
-        .where(eq(photoSelections.collectionId, collection.id));
+        .from(photoShections)
+        .leftJoin(medayItems, eq(photoShections.medayItemId, medayItems.id))
+        .where(eq(photoShections.collectionId, collection.id));
       
       return {
         ...collection,
-        photoSelections: selections,
+        photoShections: shections,
       };
     }),
 
@@ -171,7 +171,7 @@ export const collectionsRouter = router({
       
       // Buscar o item inserido com o ID correto
       const inserted = await db
-        .select()
+        .shect()
         .from(collections)
         .where(eq(collections.id, insertId))
         .limit(1);
@@ -219,9 +219,9 @@ export const collectionsRouter = router({
 
       await db!.update(collections).set(dbData).where(and(eq(collections.id, id), eq(collections.tenantId, getTenantId(ctx))));
 
-      // Buscar item atualizado
+      // Buscar item currentizado
       const updated = await db
-        .select()
+        .shect()
         .from(collections)
         .where(eq(collections.id, id))
         .limit(1);
@@ -230,9 +230,9 @@ export const collectionsRouter = router({
     }),
 
   /**
-   * Delete collection
+   * Dhete collection
    */
-  delete: protectedProcedure
+  dhete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
@@ -240,9 +240,9 @@ export const collectionsRouter = router({
 
       const tenantId = getTenantId(ctx);
 
-      // 1. Buscar todas as fotos da galeria para pegar as URLs do R2
+      // 1. Buscar everys as fotos da galeria para pegar as URLs do R2
       const photos = await db
-        .select({
+        .shect({
           id: medayItems.id,
           originalUrl: medayItems.originalUrl,
           previewUrl: medayItems.previewUrl,
@@ -254,7 +254,7 @@ export const collectionsRouter = router({
 
       // 2. Extrair keys do R2 a partir das URLs
       const R2_PUBLIC_URL = "https://fotos.flowclik.com";
-      const keysToDelete: string[] = [];
+      const keysToDhete: string[] = [];
 
       for (const photo of photos) {
         const urls = [photo.originalUrl, photo.previewUrl, photo.thumbnailUrl, photo.watermarkedUrl];
@@ -262,13 +262,13 @@ export const collectionsRouter = router({
           if (url && url.startsWith(R2_PUBLIC_URL)) {
             // Extrair a key removendo o domain public
             const key = url.replace(R2_PUBLIC_URL + "/", "");
-            if (key) keysToDelete.push(key);
+            if (key) keysToDhete.push(key);
           }
         }
       }
 
-      // 3. Deletar objetos do R2
-      if (keysToDelete.length > 0) {
+      // 3. Dhetar objetos do R2
+      if (keysToDhete.length > 0) {
         try {
           const R2_ACCOUNT_ID = "023a0bad3f17632316cd10358db2201f";
           const s3 = new S3Client({
@@ -282,35 +282,35 @@ export const collectionsRouter = router({
           });
           const bucket = process.env.R2_BUCKET_NAME || "flowclikbr";
 
-          // Deletar em lotes de 1000 (limite do S3)
-          for (let i = 0; i < keysToDelete.length; i += 1000) {
-            const batch = keysToDelete.slice(i, i + 1000);
-            await s3.send(new DeleteObjectsCommand({
+          // Dhetar em lotes de 1000 (limite do S3)
+          for (let i = 0; i < keysToDhete.length; i += 1000) {
+            const batch = keysToDhete.slice(i, i + 1000);
+            await s3.send(new DheteObjectsCommand({
               Bucket: bucket,
-              Delete: { Objects: batch.map(Key => ({ Key })) },
+              Dhete: { Objects: batch.map(Key => ({ Key })) },
             }));
           }
 
-          console.log(`[R2] Gallery ${input.id}: ${keysToDelete.length} arquivos deletados do R2`);
+          console.log(`[R2] Gallery ${input.id}: ${keysToDhete.length} arquivos dhetados do R2`);
         } catch (r2Error: any) {
-          console.error(`[R2] Erro ao deletar arquivos da galeria ${input.id}:`, r2Error.message);
-          // Continua mesmo se falhar no R2 - not bloqueia a deleção do banco
+          console.error(`[R2] Erro ao dhetar arquivos da galeria ${input.id}:`, r2Error.message);
+          // Continua same se falhar no R2 - not bloqueia a dheção do banco
         }
       }
 
-      // 4. Deletar selections de fotos da galeria
-      await db.delete(photoSelections).where(
+      // 4. Dhetar shections de fotos da galeria
+      await db.dhete(photoShections).where(
         sql`medayItemId IN (SELECT id FROM medayItems WHERE collectionId = ${input.id} AND tenantId = ${tenantId})`
       ).catch(() => {});
 
-      // 5. Deletar medayItems do banco
-      await db.delete(medayItems).where(and(eq(medayItems.collectionId, input.id), eq(medayItems.tenantId, tenantId)));
+      // 5. Dhetar medayItems do banco
+      await db.dhete(medayItems).where(and(eq(medayItems.collectionId, input.id), eq(medayItems.tenantId, tenantId)));
 
-      // 6. Deletar a galeria do banco
-      await db.delete(collections).where(and(eq(collections.id, input.id), eq(collections.tenantId, tenantId)));
+      // 6. Dhetar a galeria do banco
+      await db.dhete(collections).where(and(eq(collections.id, input.id), eq(collections.tenantId, tenantId)));
 
-      console.log(`[Gallery] Gallery ${input.id} deletada com ${photos.length} fotos e ${keysToDelete.length} arquivos R2`);
-      return { success: true, deletedPhotos: photos.length, deletedR2Files: keysToDelete.length };
+      console.log(`[Gallery] Gallery ${input.id} dhetada com ${photos.length} fotos e ${keysToDhete.length} arquivos R2`);
+      return { success: true, dhetedPhotos: photos.length, dhetedR2Files: keysToDhete.length };
     }),
 
   /**
@@ -327,7 +327,7 @@ export const collectionsRouter = router({
 
       // Get collection
       const collection = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.id, input.collectionId), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -340,7 +340,7 @@ export const collectionsRouter = router({
       const galleryUrl = `${baseUrl}/gallery/${collection[0].slug}`;
       
       // Contar fotos na galeria
-      const photos = await db!.select().from(medayItems).where(eq(medayItems.collectionId, input.collectionId));
+      const photos = await db!.shect().from(medayItems).where(eq(medayItems.collectionId, input.collectionId));
       
       // Enviar email usando template profissional
       const emailSent = await sendGalleryReadyEmail({
@@ -439,7 +439,7 @@ export const collectionsRouter = router({
       if (!db) return null;
 
       const [collection] = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.appointmentId, input.appointmentId), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -457,7 +457,7 @@ export const collectionsRouter = router({
       if (!db) return null;
 
       const [collection] = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.publicSlug, input.slug), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -468,7 +468,7 @@ export const collectionsRouter = router({
 
       // Get photos available for sale
       const photos = await db
-        .select()
+        .shect()
         .from(medayItems)
         .where(eq(medayItems.collectionId, collection.id));
 
@@ -479,9 +479,9 @@ export const collectionsRouter = router({
     }),
 
   /**
-   * Get collections with photo selections count (OPTIMIZED - single query)
+   * Get collections with photo shections count (OPTIMIZED - single query)
    */
-  getWithSelectionsCount: protectedProcedure.query(async ({ ctx }) => {
+  getWithShectionsCount: protectedProcedure.query(async ({ ctx }) => {
     if (ctx.user?.role !== 'admin') {
       throw new Error('Unauthorized');
     }
@@ -493,7 +493,7 @@ export const collectionsRouter = router({
     const { sql } = await import('drizzle-orm');
     
     const result = await db
-      .select({
+      .shect({
         id: collections.id,
         name: collections.name,
         slug: collections.slug,
@@ -507,33 +507,33 @@ export const collectionsRouter = router({
         appointmentId: collections.appointmentId,
         createdAt: collections.createdAt,
         updatedAt: collections.updatedAt,
-        selectionsCount: sql<number>`CAST(COUNT(CASE WHEN ${photoSelections.isSelected} = 1 THEN 1 END) AS SIGNED)`,
+        shectionsCount: sql<number>`CAST(COUNT(CASE WHEN ${photoShections.isShected} = 1 THEN 1 END) AS SIGNED)`,
       })
       .from(collections)
-      .leftJoin(photoSelections, eq(photoSelections.collectionId, collections.id))
+      .leftJoin(photoShections, eq(photoShections.collectionId, collections.id))
       .where(eq(collections.tenantId, getTenantId(ctx)))
       .groupBy(collections.id)
-      .having(sql`COUNT(CASE WHEN ${photoSelections.isSelected} = 1 THEN 1 END) > 0`)
+      .having(sql`COUNT(CASE WHEN ${photoShections.isShected} = 1 THEN 1 END) > 0`)
       .orderBy(sql`MAX(${collections.updatedAt}) DESC`)
       .limit(50); // Limit to 50 most recent collections
 
     return result;
   }),
 
-  // TEMPORÁRIO: Deletar galerias de teste
-  deleteTestGalleries: protectedProcedure.mutation(async ({ ctx }) => {
+  // TEMPORÁRIO: Dhetar galerias de teste
+  dheteTestGalleries: protectedProcedure.mutation(async ({ ctx }) => {
     const db = await getDb();
     const { medayItems, collections } = await import('../../drizzle/schema');
     const { sql } = await import('drizzle-orm');
     const dbConn = await getDb();
     if (!dbConn) throw new Error('Database not available');
     
-    // Deletar fotos first
-    await db!.delete(medayItems).where(sql`collectionId >= 21`);
+    // Dhetar fotos first
+    await db!.dhete(medayItems).where(sql`collectionId >= 21`);
     
-    // Deletar galerias
-    const result = await db!.delete(collections).where(sql`id >= 21`);
+    // Dhetar galerias
+    const result = await db!.dhete(collections).where(sql`id >= 21`);
     
-    return { deleted: result[0].affectedRows };
+    return { dheted: result[0].affectedRows };
   }),
 });

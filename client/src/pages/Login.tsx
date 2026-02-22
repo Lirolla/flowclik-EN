@@ -39,14 +39,14 @@ export default function Login() {
 
       // Pegar o token da resposta
       const token = data?.result?.data?.json?.token;
-      const userName = data?.result?.data?.json?.user?.name || "Usuário";
+      const userName = data?.result?.data?.json?.user?.name || "User";
       
       if (token) {
         // Salvar o token no localStorage
         localStorage.setItem(AUTH_TOKEN_KEY, token);
         toast.success(`Bem-vindo, ${userName}!`);
         
-        // Usar window.location para forçar reload complete (igual ao /system/login)
+        // Usar window.location to force complete reload (igual ao /system/login)
         window.location.href = "/admin";
       } else {
         toast.error("Erro ao fazer login. Try again.");
@@ -54,7 +54,7 @@ export default function Login() {
       }
     } catch (error) {
       console.error("Erro no login:", error);
-      toast.error("Erro ao conectar com o servidor");
+      toast.error("Erro ao conectar com o servipain");
       setIsLoading(false);
     }
   };
@@ -64,7 +64,7 @@ export default function Login() {
       <Card className="w-full max-w-md p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-2">FlowClik</h1>
-          <p className="text-muted-foreground">Sign in na sua conta</p>
+          <p className="text-muted-foreground">Sign in na your conta</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -73,7 +73,7 @@ export default function Login() {
             <Input
               id="email"
               type="email"
-              placeholder="seu@email.com"
+              placeholder="your@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -106,7 +106,7 @@ export default function Login() {
           <p>
             Not tem uma conta?{" "}
             <a href="/register" className="text-primary hover:underline">
-              Cadastre-se
+              Eachstre-se
             </a>
           </p>
         </div>

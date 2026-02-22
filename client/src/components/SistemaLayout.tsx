@@ -60,11 +60,11 @@ export default function SistemaLayout({ children }: SistemaLayoutProps) {
     },
   ];
 
-  // Verificando autenticação
+  // Verificando authentication
   if (isAuthenticated === null) {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <div className="text-white">Verificando autenticação...</div>
+        <div className="text-white">Verificando authentication...</div>
       </div>
     );
   }
@@ -104,7 +104,7 @@ export default function SistemaLayout({ children }: SistemaLayoutProps) {
           })}
         </nav>
 
-        {/* Botão Sair */}
+        {/* Button Sair */}
         <div className="p-4 border-t border-gray-800">
           <Button
             variant="ghost"

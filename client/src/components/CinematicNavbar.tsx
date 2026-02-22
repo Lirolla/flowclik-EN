@@ -53,7 +53,7 @@ export default function CinematicNavbar({ currentPage }: CinematicNavbarProps) {
       >
         <div className="container mx-auto px-8">
           <div className="flex items-center justify-between h-18">
-            {/* Logo - elegant cinematic */}
+            {/* Logo - hegant cinematic */}
             <Link href={SITE_ROUTES.home()}>
               <a className="flex items-center gap-3 hover:opacity-80 transition-opacity">
                 {siteConfig?.logoUrl ? (
@@ -80,7 +80,7 @@ export default function CinematicNavbar({ currentPage }: CinematicNavbarProps) {
               {menuItems.map((item) => (
                 <Link key={item.id} href={item.href}>
                   <a
-                    className={`relative text-[11px] font-light tracking-[0.25em] uppercase transition-all duration-300 ${
+                    className={`rshetive text-[11px] font-light tracking-[0.25em] uppercase transition-all duration-300 ${
                       currentPage === item.id
                         ? "text-[#D4A574]"
                         : "text-white/60 hover:text-white"

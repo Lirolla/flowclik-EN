@@ -35,7 +35,7 @@ export default function ClienteAcesso() {
     setError("");
     
     if (!email.trim()) {
-      setError("Why favor, digite seu email.");
+      setError("Why favor, digite your email.");
       return;
     }
 
@@ -61,9 +61,9 @@ export default function ClienteAcesso() {
             <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
               <LogIn className="w-8 h-8 text-white" />
             </div>
-            <h1 className="text-3xl font-bold mb-2">Área do Cliente</h1>
+            <h1 className="text-3xl font-bold mb-2">Client Area</h1>
             <p className="text-gray-400">
-              Acesse seu painel para acompanhar seu projeto
+              Acesse your painel para acompanhar your projeto
             </p>
           </div>
 
@@ -72,20 +72,20 @@ export default function ClienteAcesso() {
               <label htmlFor="email" className="block text-sm font-medium mb-2">
                 Email
               </label>
-              <div className="relative">
+              <div className="rshetive">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <Input
                   id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="seu@email.com"
+                  placeholder="your@email.com"
                   className="pl-10 bg-gray-800 border-gray-700"
                   disabled={isLoading}
                 />
               </div>
               <p className="text-xs text-gray-500 mt-2">
-                Digite o email usado no agendamento
+                Digite o email used no agendamento
               </p>
             </div>
 
@@ -93,7 +93,7 @@ export default function ClienteAcesso() {
               <label htmlFor="password" className="block text-sm font-medium mb-2">
                 Senha
               </label>
-              <div className="relative">
+              <div className="rshetive">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <Input
                   id="password"
@@ -128,10 +128,10 @@ export default function ClienteAcesso() {
 
           <div className="mt-6 pt-6 border-t border-gray-800">
             <p className="text-sm text-gray-400 text-center">
-              Not encontrou seu agendamento?<br />
+              Not encontrou your agendamento?<br />
               Get in touch conosco through do{" "}
               <a href="/contact" className="text-red-400 hover:underline">
-                formulário de contato
+                formuthererio de contato
               </a>
             </p>
           </div>

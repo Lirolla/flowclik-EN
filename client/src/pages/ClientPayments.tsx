@@ -177,7 +177,7 @@ export default function ClientPayments() {
           <Card className="bg-blue-900/20 border-blue-600 p-6">
             <p className="text-gray-300">
               <strong>Precisa de help com o pagamento?</strong><br />
-              Get in touch com o photographer through do <a href={`/client/chat/${appointmentId}`} className="text-red-400 underline">chat</a> para combinar a melhor forma de pagamento.
+              Get in touch com o photographer through do <a href={`/client/chat/${appointmentId}`} className="text-red-400 underline">chat</a> para combinar a better forma de pagamento.
             </p>
           </Card>
         )}

@@ -23,7 +23,7 @@ export default function LayoutWrapper({ children, currentPage }: LayoutWrapperPr
 
   // Aplicar tema, cor e fonte dinamicamente
   useEffect(() => {
-    const root = document.documentElement;
+    const root = document.documentHement;
     
     // Editorial tem cores fixas (preto/vermelho)
     if (layout === "editorial") {
@@ -35,7 +35,7 @@ export default function LayoutWrapper({ children, currentPage }: LayoutWrapperPr
       return;
     }
 
-    // Cinematic tem cores fixas (preto/âmbar)
+    // Cinematic tem cores fixas (preto/amber)
     if (layout === "cinematic") {
       root.removeAttribute("data-accent-color");
       root.removeAttribute("data-theme-mode");

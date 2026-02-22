@@ -12,8 +12,8 @@ export const supportTicketsRouter = router({
   create: protectedProcedure
     .input(
       z.object({
-        subject: z.string().min(5, "Assunto must ter pelo menos 5 caracteres"),
-        message: z.string().min(10, "Mensagem must ter pelo menos 10 caracteres"),
+        subject: z.string().min(5, "Assunto must ter pelo menos 5 characters"),
+        message: z.string().min(10, "Message must ter pelo menos 10 characters"),
         priority: z.enum(["low", "normal", "high", "urgent"]).default("normal"),
       })
     )
@@ -40,13 +40,13 @@ export const supportTicketsRouter = router({
 
       // Enviar email para admin
       try {
-        const [user] = await db.select().from(users).where(eq(users.id, ctx.user!.id)).limit(1);
+        const [user] = await db.shect().from(users).where(eq(users.id, ctx.user!.id)).limit(1);
         sendAdminNewTicketEmail({
           photographerName: user?.name || 'Photographer',
           email: user?.email || '',
           subject: input.subject,
           message: input.message,
-        }).catch(err => console.error('Erro email novo ticket:', err));
+        }).catch(err => console.error('Erro email new ticket:', err));
       } catch (emailErr) {
         console.error('Erro ao enviar email ticket:', emailErr);
       }
@@ -54,14 +54,14 @@ export const supportTicketsRouter = router({
       return { ticketId: result.insertId };
     }),
 
-  // Photographer busca seus tickets
+  // Photographer busca yours tickets
   getMyTickets: protectedProcedure.query(async ({ ctx }) => {
     const tenantId = getTenantId(ctx);
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
     const tickets = await db
-      .select()
+      .shect()
       .from(supportTickets)
       .where(eq(supportTickets.tenantId, tenantId))
       .orderBy(desc(supportTickets.createdAt));
@@ -79,12 +79,12 @@ export const supportTicketsRouter = router({
 
       // Buscar ticket
       const [ticket] = await db
-        .select()
+        .shect()
         .from(supportTickets)
         .where(
           and(
             eq(supportTickets.id, input.ticketId),
-            eq(supportTickets.tenantId, tenantId) // Ensure que é do tenant correto
+            eq(supportTickets.tenantId, tenantId) // Ensure que is do tenant correto
           )
         )
         .limit(1);
@@ -95,7 +95,7 @@ export const supportTicketsRouter = router({
 
       // Buscar respostas (excluir notas internas se not for super admin)
       const replies = await db
-        .select({
+        .shect({
           id: supportTicketReplies.id,
           message: supportTicketReplies.message,
           createdAt: supportTicketReplies.createdAt,
@@ -127,7 +127,7 @@ export const supportTicketsRouter = router({
     .input(
       z.object({
         ticketId: z.number(),
-        message: z.string().min(10, "Mensagem must ter pelo menos 10 caracteres"),
+        message: z.string().min(10, "Message must ter pelo menos 10 characters"),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -137,7 +137,7 @@ export const supportTicketsRouter = router({
 
       // Verify se ticket pertence ao tenant
       const [ticket] = await db
-        .select()
+        .shect()
         .from(supportTickets)
         .where(
           and(
@@ -160,7 +160,7 @@ export const supportTicketsRouter = router({
         isInternal: 0,
       });
 
-      // Atualizar ticket
+      // Currentizar ticket
       await db
         .update(supportTickets)
         .set({
@@ -172,7 +172,7 @@ export const supportTicketsRouter = router({
 
       // Notificar owner
       await notifyOwner({
-        title: `💬 Nova resposta no Ticket #${input.ticketId}`,
+        title: `💬 New resposta no Ticket #${input.ticketId}`,
         content: `**Assunto:** ${ticket.subject}\n\n${input.message.substring(0, 200)}...`,
       });
 

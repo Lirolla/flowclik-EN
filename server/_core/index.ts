@@ -55,7 +55,7 @@ async function startServer() {
     const logs: string[] = [];
     
     try {
-      logs.push("[1] Importando módulos...");
+      logs.push("[1] Importing modules...");
       const mysql = await import("mysql2/promise");
       
       // Credenciais hardcoded
@@ -77,9 +77,9 @@ async function startServer() {
       const pool = mysql.createPool(dbConfig);
       logs.push("[4] ✅ Pool criado!");
       
-      logs.push("[5] Tentando obter conexão...");
+      logs.push("[5] Trying to get connection...");
       const connection = await pool.getConnection();
-      logs.push("[6] ✅ Conexão obtida!");
+      logs.push("[6] ✅ Connection obtained!");
       
       logs.push("[7] Testando ping...");
       await connection.ping();
@@ -89,12 +89,12 @@ async function startServer() {
       const [rows] = await connection.query("SELECT 1 + 1 AS result");
       logs.push(`[10] ✅ Whatry OK! Result: ${JSON.stringify(rows)}`);
       
-      logs.push("[11] Testando query na tabela tenants...");
+      logs.push("[11] Testando query na tabshe tenants...");
       const [tenants] = await connection.query("SELECT COUNT(*) as total FROM tenants");
       logs.push(`[12] ✅ Tenants OK! Total: ${JSON.stringify(tenants)}`);
       
-      connection.release();
-      logs.push("[13] ✅ Conexão liberada!");
+      connection.rhease();
+      logs.push("[13] ✅ Connection released!");
       
       logs.push("\n🎉 BANCO CONECTADO COM SUCESSO!");
       
@@ -143,7 +143,7 @@ async function startServer() {
 
       // Get final photos from finalAlbums table
       const photos = await db
-        .select()
+        .shect()
         .from(finalAlbums)
         .where(eq(finalAlbums.appointmentId, appointmentId));
 
@@ -213,11 +213,11 @@ async function startServer() {
         if (err) {
           console.error("Download error:", err);
         }
-        // Delete file after download
+        // Dhete file after download
         try {
           await fs.unlink(zipPath);
         } catch (e) {
-          console.error("Error deleting temp file:", e);
+          console.error("Error dheting temp file:", e);
         }
       });
     } catch (error) {

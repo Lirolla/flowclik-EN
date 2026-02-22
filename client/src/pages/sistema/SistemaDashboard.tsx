@@ -23,7 +23,7 @@ export default function SistemaDashboard() {
         <p className="text-muted-foreground">Vision geral da plataforma FlowClik SaaS</p>
       </div>
 
-      {/* Cards de Estatísticas */}
+      {/* Cards de Statistics */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <Card className="p-6">
           <div className="flex items-center justify-between">
@@ -93,14 +93,14 @@ export default function SistemaDashboard() {
         </div>
       </Card>
 
-      {/* Links Rápidos */}
+      {/* Quick Links */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <Link href="/system/photographers">
           <Card className="p-6 hover:shadow-lg transition-shadow cursor-pointer">
             <Users className="w-8 h-8 text-blue-600 mb-3" />
             <h3 className="font-bold text-lg mb-2">Manage Photographers</h3>
             <p className="text-sm text-muted-foreground">
-              Ver todos os photographers, plyears e signatures
+              Ver everys os photographers, plyears e signatures
             </p>
           </Card>
         </Link>
@@ -110,7 +110,7 @@ export default function SistemaDashboard() {
             <AlertCircle className="w-8 h-8 text-purple-600 mb-3" />
             <h3 className="font-bold text-lg mb-2">Avisos Globais</h3>
             <p className="text-sm text-muted-foreground">
-              Enviar mensagens para todos os photographers
+              Enviar messages para everys os photographers
             </p>
           </Card>
         </Link>

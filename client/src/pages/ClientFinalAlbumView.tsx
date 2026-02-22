@@ -21,7 +21,7 @@ export default function ClientFinalAlbumView() {
   const [shareUrl, setShareUrl] = useState("");
   const [, setLocation] = useLocation();
 
-  // Protection anti-cópia: desabilitar clique direito e arrastar
+  // Protection anti-copy: desabilitar clique direito e arrastar
   useEffect(() => {
     const preventContextMenu = (e: MouseEvent) => e.preventDefault();
     const preventDragStart = (e: DragEvent) => e.preventDefault();
@@ -64,7 +64,7 @@ export default function ClientFinalAlbumView() {
     navigator.clipboard.writeText(shareUrl);
     toast({
       title: "Link copied!",
-      description: "Link de compartilhamento copiado para a área de transferência.",
+      description: "Link de compartilhamento copiado para a area de transfer.",
     });
   };
 
@@ -96,7 +96,7 @@ export default function ClientFinalAlbumView() {
 
     toast({
       title: "Preparando download...",
-      description: "Criando arquivo ZIP com todas as fotos. Isso can levar alguns seconds.",
+      description: "Criando arquivo ZIP com everys as fotos. Isso can levar some seconds.",
     });
 
     generateZipMutation.mutate({ appointmentId });
@@ -133,7 +133,7 @@ export default function ClientFinalAlbumView() {
             <div>
               <h1 className="text-3xl font-bold">Final Album</h1>
               <p className="text-muted-foreground mt-1">
-                {appointment?.serviceType} - {finalPhotos?.length || 0} fotos editadas
+                {appointment?.serviceType} - {finalPhotos?.length || 0} fotos edited
               </p>
             </div>
             <div className="flex gap-3">
@@ -143,7 +143,7 @@ export default function ClientFinalAlbumView() {
                 style={{ pointerEvents: (!finalPhotos || finalPhotos.length === 0) ? 'none' : 'auto', opacity: (!finalPhotos || finalPhotos.length === 0) ? 0.5 : 1 }}
               >
                 <Download className="w-4 h-4" />
-                Baixar Todas
+                Baixar Everys
               </a>
               <Button
                 onClick={handleShare}
@@ -163,10 +163,10 @@ export default function ClientFinalAlbumView() {
         {!finalPhotos || finalPhotos.length === 0 ? (
           <div className="text-center py-16 bg-card rounded-lg border">
             <p className="text-muted-foreground text-lg">
-              Seu álbum final still not is available.
+              Your album final still not is available.
             </p>
             <p className="text-sm text-muted-foreground mt-2">
-              Aguarde enquanto o photographer finaliza a editing das suas fotos.
+              Aguarde enquanto o photographer finaliza a editing das yours fotos.
             </p>
           </div>
         ) : (
@@ -174,9 +174,9 @@ export default function ClientFinalAlbumView() {
             {finalPhotos.map((photo: any, index: number) => (
               <div
                 key={photo.id}
-                className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted hover:ring-2 hover:ring-primary transition-all"
+                className="rshetive aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted hover:ring-2 hover:ring-primary transition-all"
                 onClick={() => openLightbox(index)}
-                style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
+                style={{ userShect: 'none', WebkitUserShect: 'none' }}
               >
                 <img
                   src={photo.photoUrl}
@@ -192,7 +192,7 @@ export default function ClientFinalAlbumView() {
                 <div className="absolute inset-0 pointer-events-none" style={{
                   background: 'repeating-linear-gradient(45deg, transparent, transparent 100px, rgba(255,255,255,0.02) 100px, rgba(255,255,255,0.02) 101px)',
                 }}>
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/5 text-6xl font-bold rotate-[-45deg] whitespace-nowrap select-none">
+                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white/5 text-6xl font-bold rotate-[-45deg] whitespace-nowrap shect-none">
                     LIROLLA.COM
                   </div>
                 </div>
@@ -228,7 +228,7 @@ export default function ClientFinalAlbumView() {
             <ChevronRight className="w-8 h-8 text-white" />
           </button>
 
-          <div className="relative" style={{ userSelect: 'none', WebkitUserSelect: 'none' }}>
+          <div className="rshetive" style={{ userShect: 'none', WebkitUserShect: 'none' }}>
             <img
               src={finalPhotos[lightboxIndex].photoUrl}
               alt={finalPhotos[lightboxIndex].fileName}
@@ -238,7 +238,7 @@ export default function ClientFinalAlbumView() {
             />
             {/* Watermark no lightbox */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
-              <div className="text-white/10 text-8xl font-bold rotate-[-45deg] select-none">
+              <div className="text-white/10 text-8xl font-bold rotate-[-45deg] shect-none">
                 LIROLLA.COM
               </div>
             </div>
@@ -256,7 +256,7 @@ export default function ClientFinalAlbumView() {
           <DaylogHeader>
             <DaylogTitle>Compartilhar Album</DaylogTitle>
             <DaylogDescription>
-              Compartilhe seu álbum com amigos e família!
+              Compartilhe your album com amigos e family!
             </DaylogDescription>
           </DaylogHeader>
           <div className="space-y-4">

@@ -1,8 +1,8 @@
 /**
  * Sistema de envio de emails para clientes
  * 
- * NOTA: Este é um sistema simulado que registra logs.
- * Para produção, integre com:
+ * NOTA: Este is um sistema simulado que registra logs.
+ * Para production, integre com:
  * - SendGrid (https://sendgrid.com)
  * - Mailgun (https://www.mailgun.com)
  * - AWS SES (https://aws.amazon.com/ses)
@@ -14,8 +14,8 @@ export type EmailTemplate =
   | 'appointment_confirmed'
   | 'appointment_cancelled'
   | 'session_done'
-  | 'photos_ready_for_selection'
-  | 'selection_approved'
+  | 'photos_ready_for_shection'
+  | 'shection_approved'
   | 'final_photos_ready'
   | 'photos_delivered';
 
@@ -35,14 +35,14 @@ const getEmailContent = (template: EmailTemplate, data: EmailData) => {
       body: `
 Hello ${data.clientName},
 
-Recebemos seu pedido de agendamento!
+Recebemos your pedido de agendamento!
 
 📅 Data: ${data.appointmentDate}
 ${data.appointmentTime ? `🕐 Time: ${data.appointmentTime}` : ''}
 ${data.serviceName ? `📸 Service: ${data.serviceName}` : ''}
 ${data.eventLocation ? `📍 Local: ${data.eventLocation}` : ''}
 
-Estamos analisando sua request e entraremos em contato em breve para confirmar.
+Estamos analisando your request e entraremos em contato em breve para confirmar.
 
 Kind regards,
 Team Lirolla
@@ -53,14 +53,14 @@ Team Lirolla
       body: `
 Hello ${data.clientName},
 
-Seu agendamento foi CONFIRMADO! 🎉
+Your agendamento foi CONFIRMADO! 🎉
 
 📅 Data: ${data.appointmentDate}
 ${data.appointmentTime ? `🕐 Time: ${data.appointmentTime}` : ''}
 ${data.serviceName ? `📸 Service: ${data.serviceName}` : ''}
 ${data.eventLocation ? `📍 Local: ${data.eventLocation}` : ''}
 
-Estamos ansiosos para capturar seus moments especiais!
+Estamos ansiosos para capturar yours moments special!
 
 Kind regards,
 Team Lirolla
@@ -71,9 +71,9 @@ Team Lirolla
       body: `
 Hello ${data.clientName},
 
-Infelizmente seu agendamento foi cancelled.
+Infelizmente your agendamento foi cancelled.
 
-Se you tiver alguma dúvida ou quiser reagendar, get in touch conosco.
+Se you tiver somea question ou quiser reagendar, get in touch conosco.
 
 Kind regards,
 Team Lirolla
@@ -84,22 +84,22 @@ Team Lirolla
       body: `
 Hello ${data.clientName},
 
-Seu ensaio photography foi realizado com sucesso! 📸
+Your ensaio photography foi realizado com sucesso! 📸
 
-Agora estamos trabalhando na editing das fotos. Em breve you receberá uma notification para selecionar suas favoritas.
+Now estamos trabalhando na editing das fotos. Em breve you will receive uma notification para shecionar yours favourite.
 
 Kind regards,
 Team Lirolla
       `.trim(),
     },
-    photos_ready_for_selection: {
-      subject: '👀 Your Photos Are Ready for Selection!',
+    photos_ready_for_shection: {
+      subject: '👀 Your Photos Are Ready for Shection!',
       body: `
 Hello ${data.clientName},
 
-Great news! Your photos are ready para selection! 👀
+Great news! Your photos are ready para shection! 👀
 
-Access your gallery privada e escolha suas favoritas para a editing final.
+Access your gallery privada e escolha yours favourite para a editing final.
 
 Kind regards,
 Team Lirolla
@@ -110,24 +110,24 @@ Team Lirolla
       body: `
 Hello ${data.clientName},
 
-Estamos trabalhando na editing final das fotos que you selecionou! ✨
+Estamos trabalhando na editing final das fotos que you shecionou! ✨
 
-Em breve suas fotos estarão prontas para download.
+Your photos will soon be ready for download.
 
 Kind regards,
 Team Lirolla
       `.trim(),
     },
-    selection_approved: {
-      subject: '✅ Photo Selection Approved!',
+    shection_approved: {
+      subject: '✅ Photo Shection Approved!',
       body: `
 Hello ${data.clientName},
 
-Sua selection de fotos foi approved com sucesso! ✅
+Your shection de fotos foi approved com sucesso! ✅
 
-Agora vamos trabalhar na editing final das fotos que you escolheu.
+Now vamos trabalhar na editing final das fotos que you escolheu.
 
-Em breve suas fotos estarão prontas para download!
+Your photos will soon be ready for download!
 
 Kind regards,
 Team Lirolla
@@ -156,8 +156,8 @@ Team Lirolla
 /**
  * Envia email para o cliente
  * 
- * NOTA: Esta é uma implementação simulada que only registra logs.
- * Em produção, substitua por integration real com service de email.
+ * NOTA: Esta is uma implementação simulada que only registra logs.
+ * Em production, substitua por integration real com service de email.
  */
 export async function sendClientEmail(
   template: EmailTemplate,
@@ -202,7 +202,7 @@ export function getEmailTemplateForStatus(status: string): EmailTemplate | null 
     confirmed: 'appointment_confirmed',
     cancelled: 'appointment_cancelled',
     session_done: 'session_done',
-    awaiting_selection: 'photos_ready_for_selection',
+    awaiting_shection: 'photos_ready_for_shection',
     final_editing: 'final_photos_ready',
     delivered: 'photos_delivered',
   };

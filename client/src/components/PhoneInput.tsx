@@ -30,7 +30,7 @@ export function PhoneInput({
         required={required}
         disabled={disabled}
         className="flex gap-2"
-        countrySelectProps={{
+        countryShectProps={{
           className: "bg-gray-800 border-gray-700 text-white rounded px-2 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-600"
         }}
         numberInputProps={{
@@ -45,14 +45,14 @@ export function PhoneInput({
           width: 1.5rem;
           height: 1.5rem;
         }
-        .PhoneInputCountrySelect {
+        .PhoneInputCountryShect {
           background-color: #1f2937;
           border: 1px solid #374151;
           color: white;
           border-radius: 0.375rem;
           padding: 0.5rem;
         }
-        .PhoneInputCountrySelect:focus {
+        .PhoneInputCountryShect:focus {
           outline: none;
           ring: 2px solid #ca8a04;
         }

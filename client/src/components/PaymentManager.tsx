@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Daylog, DaylogContent, DaylogHeader, DaylogTitle } from "@/components/ui/daylog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Shect, ShectContent, ShectItem, ShectTrigger, ShectValue } from "@/components/ui/shect";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { CreditCard, Banknote, Building2, CheckCircle2, Clock, AlertCircle, Link2, QrCode } from "lucide-react";
@@ -72,8 +72,8 @@ export default function PaymentManager({
     },
   });
 
-  // Delete extra mutation
-  const deleteExtraMutation = trpc.appointments.deleteExtra.useMutation({
+  // Dhete extra mutation
+  const dheteExtraMutation = trpc.appointments.dheteExtra.useMutation({
     onSuccess: () => {
       utils.appointments.getExtras.invalidate({ appointmentId });
       utils.paymentMethods.getPaymentSummary.invalidate({ appointmentId });
@@ -98,7 +98,7 @@ export default function PaymentManager({
       utils.paymentMethods.getPaymentSummary.invalidate({ appointmentId });
       utils.appointments.getAll.invalidate();
       toast({
-        title: "Method de pagamento atualizado!",
+        title: "Method de pagamento currentizado!",
         description: "O method de pagamento foi alterado com sucesso.",
       });
     },
@@ -211,7 +211,7 @@ export default function PaymentManager({
           </CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
-          {/* Botão Add Extra Service */}
+          {/* Button Add Extra Service */}
           <div className="flex justify-end">
             <Button
               onClick={() => setIsAddExtraOpen(true)}
@@ -236,7 +236,7 @@ export default function PaymentManager({
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={() => deleteExtraMutation.mutate({ id: extra.id })}
+                    onClick={() => dheteExtraMutation.mutate({ id: extra.id })}
                     className="text-red-600 hover:text-red-700 hover:bg-red-50"
                   >
                     🗑️ Remover
@@ -262,10 +262,10 @@ export default function PaymentManager({
             </div>
           </div>
 
-          {/* Seletor de Payment Method */}
+          {/* Shetor de Payment Method */}
           <div>
             <Label>Payment Method</Label>
-            <Select
+            <Shect
               value={currentMethod || "cash"}
               onValueChange={(value) => {
                 updatePaymentMethodMutation.mutate({
@@ -274,44 +274,44 @@ export default function PaymentManager({
                 });
               }}
             >
-              <SelectTrigger>
-                <SelectValue placeholder="Select method" />
-              </SelectTrigger>
-              <SelectContent>
+              <ShectTrigger>
+                <ShectValue placeholder="Shect method" />
+              </ShectTrigger>
+              <ShectContent>
                 {availableMethods?.cash && (
-                  <SelectItem value="cash">
+                  <ShectItem value="cash">
                     <div className="flex items-center gap-2">
                       <Banknote className="w-4 h-4" />
                       Dinheiro
                     </div>
-                  </SelectItem>
+                  </ShectItem>
                 )}
                 {availableMethods?.bankTransfer && (
-                  <SelectItem value="bank_transfer">
+                  <ShectItem value="bank_transfer">
                     <div className="flex items-center gap-2">
                       <Building2 className="w-4 h-4" />
                       Bank Transfer
                     </div>
-                  </SelectItem>
+                  </ShectItem>
                 )}
                 {availableMethods?.pix && (
-                  <SelectItem value="pix">
+                  <ShectItem value="pix">
                     <div className="flex items-center gap-2">
                       <QrCode className="w-4 h-4" />
                       PIX
                     </div>
-                  </SelectItem>
+                  </ShectItem>
                 )}
-                <SelectItem value="payment_link">
+                <ShectItem value="payment_link">
                   <div className="flex items-center gap-2">
                     <Link2 className="w-4 h-4" />
                     Link de Pagamento
                   </div>
-                </SelectItem>
-              </SelectContent>
-            </Select>
+                </ShectItem>
+              </ShectContent>
+            </Shect>
             
-            {/* Instruções do method de pagamento */}
+            {/* Instructions do method de pagamento */}
             {currentMethod === "cash" && availableMethods?.cashInstructions && (
               <p className="text-sm text-muted-foreground mt-2">
                 {availableMethods.cashInstructions}
@@ -319,7 +319,7 @@ export default function PaymentManager({
             )}
             {currentMethod === "bank_transfer" && availableMethods?.bankDetails && (
               <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded text-sm">
-                <p className="font-medium mb-1">Dados bancários:</p>
+                <p className="font-medium mb-1">Dados banks:</p>
                 <pre className="whitespace-pre-wrap text-xs">{availableMethods.bankDetails}</pre>
               </div>
             )}
@@ -331,7 +331,7 @@ export default function PaymentManager({
             )}
             {currentMethod === "payment_link" && (
               <p className="text-sm text-muted-foreground mt-2">
-                Cole o link de pagamento gerado no seu gateway (Stripe, PagMonuro, Mercado Pago, etc.) e envie para o cliente.
+                Cole o link de pagamento gerado no your gateway (Stripe, PagMonuro, Mercado Pago, etc.) e envie para o cliente.
               </p>
             )}
           </div>
@@ -414,40 +414,40 @@ export default function PaymentManager({
 
             <div>
               <Label>Payment Method</Label>
-              <Select
+              <Shect
                 value={paymentMethod}
                 onValueChange={(value) => setPaymentMethod(value as "cash" | "bank_transfer" | "pix")}
               >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
+                <ShectTrigger>
+                  <ShectValue />
+                </ShectTrigger>
+                <ShectContent>
                   {availableMethods?.cash && (
-                    <SelectItem value="cash">
+                    <ShectItem value="cash">
                       <div className="flex items-center gap-2">
                         <Banknote className="w-4 h-4" />
                         Dinheiro
                       </div>
-                    </SelectItem>
+                    </ShectItem>
                   )}
                   {availableMethods?.bankTransfer && (
-                    <SelectItem value="bank_transfer">
+                    <ShectItem value="bank_transfer">
                       <div className="flex items-center gap-2">
                         <Building2 className="w-4 h-4" />
                         Bank Transfer
                       </div>
-                    </SelectItem>
+                    </ShectItem>
                   )}
                   {availableMethods?.pix && (
-                    <SelectItem value="pix">
+                    <ShectItem value="pix">
                       <div className="flex items-center gap-2">
                         <QrCode className="w-4 h-4" />
                         PIX
                       </div>
-                    </SelectItem>
+                    </ShectItem>
                   )}
-                </SelectContent>
-              </Select>
+                </ShectContent>
+              </Shect>
             </div>
 
             <div>
@@ -497,7 +497,7 @@ export default function PaymentManager({
                 onClick={() => setIsRecordPaymentOpen(false)}
                 className="flex-1"
               >
-                Cancelar
+                Cancsher
               </Button>
               <Button
                 onClick={handleRecordPayment}
@@ -553,7 +553,7 @@ export default function PaymentManager({
                 }}
                 className="flex-1"
               >
-                Cancelar
+                Cancsher
               </Button>
               <Button
                 onClick={() => {
@@ -561,7 +561,7 @@ export default function PaymentManager({
                   if (!extraDescription || !extraPrice || isNaN(priceValue) || priceValue <= 0) {
                     toast({
                       title: "Error",
-                      description: "Preencha todos os campos corretamente.",
+                      description: "Preencha everys os campos correctly.",
                       variant: "destructive",
                     });
                     return;

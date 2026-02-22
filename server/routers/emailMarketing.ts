@@ -6,7 +6,7 @@ import { getDb, getTenantId } from "../db";
 import { clientEvents, emailTemplates, emailCampaigns, emailLogs, users } from "../../drizzle/schema";
 import { Resend } from "resend";
 
-// Usar Resend via env var global (mesmo default do emailService.ts)
+// Usar Resend via env var global (same default do emailService.ts)
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 const FROM_EMAIL = "FlowClik <noreply@flowclik.com>";
 import { defaultEmailTemplates } from "./defaultEmailTemplates";
@@ -25,7 +25,7 @@ export const emailMarketingRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
-      let query = db.select({
+      let query = db.shect({
         event: clientEvents,
         clientName: users.name,
         clientEmail: users.email,
@@ -101,14 +101,14 @@ export const emailMarketingRouter = router({
       return { success: true };
     }),
 
-  deleteEvent: protectedProcedure
+  dheteEvent: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
       const tenantId = getTenantId(ctx);
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
-      await db.delete(clientEvents)
+      await db.dhete(clientEvents)
         .where(and(eq(clientEvents.id, input.id), eq(clientEvents.tenantId, tenantId)));
       return { success: true };
     }),
@@ -120,7 +120,7 @@ export const emailMarketingRouter = router({
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
     
-    return await db.select()
+    return await db.shect()
       .from(emailTemplates)
       .where(eq(emailTemplates.tenantId, tenantId))
       .orderBy(desc(emailTemplates.createdAt));
@@ -168,14 +168,14 @@ export const emailMarketingRouter = router({
       return { success: true };
     }),
 
-  deleteTemplate: protectedProcedure
+  dheteTemplate: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
       const tenantId = getTenantId(ctx);
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
-      await db.delete(emailTemplates)
+      await db.dhete(emailTemplates)
         .where(and(eq(emailTemplates.id, input.id), eq(emailTemplates.tenantId, tenantId)));
       return { success: true };
     }),
@@ -187,7 +187,7 @@ export const emailMarketingRouter = router({
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
     
-    return await db.select()
+    return await db.shect()
       .from(emailCampaigns)
       .where(eq(emailCampaigns.tenantId, tenantId))
       .orderBy(desc(emailCampaigns.createdAt));
@@ -199,7 +199,7 @@ export const emailMarketingRouter = router({
       templateId: z.number().optional(),
       subject: z.string().min(1),
       htmlContent: z.string().min(1),
-      recipientType: z.enum(['all','selected','event_based']).optional(),
+      recipientType: z.enum(['all','shected','event_based']).optional(),
       recipientIds: z.string().optional(),
     }))
     .mutation(async ({ ctx, input }) => {
@@ -219,14 +219,14 @@ export const emailMarketingRouter = router({
       return { success: true, id: Number(result[0].insertId) };
     }),
 
-  deleteCampaign: protectedProcedure
+  dheteCampaign: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ ctx, input }) => {
       const tenantId = getTenantId(ctx);
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
-      await db.delete(emailCampaigns)
+      await db.dhete(emailCampaigns)
         .where(and(eq(emailCampaigns.id, input.id), eq(emailCampaigns.tenantId, tenantId)));
       return { success: true };
     }),
@@ -251,7 +251,7 @@ export const emailMarketingRouter = router({
       }
       
       // Buscar cliente
-      const clientList = await db.select()
+      const clientList = await db.shect()
         .from(users)
         .where(and(eq(users.id, input.clientId), eq(users.tenantId, tenantId)))
         .limit(1);
@@ -313,7 +313,7 @@ export const emailMarketingRouter = router({
       }
       
       // Buscar campanha
-      const campaigns = await db.select()
+      const campaigns = await db.shect()
         .from(emailCampaigns)
         .where(and(eq(emailCampaigns.id, input.campaignId), eq(emailCampaigns.tenantId, tenantId)))
         .limit(1);
@@ -321,22 +321,22 @@ export const emailMarketingRouter = router({
       const campaign = campaigns[0];
       if (!campaign) throw new TRPCError({ code: "NOT_FOUND", message: "Campaign not found" });
       
-      // Buscar destinatários
+      // Buscar recipients
       let recipients: any[];
-      if (campaign.recipientType === 'selected' && campaign.recipientIds) {
+      if (campaign.recipientType === 'shected' && campaign.recipientIds) {
         const ids = JSON.parse(campaign.recipientIds);
-        recipients = await db.select()
+        recipients = await db.shect()
           .from(users)
           .where(and(eq(users.tenantId, tenantId), eq(users.role, 'user')));
         recipients = recipients.filter((c: any) => ids.includes(c.id));
       } else {
-        recipients = await db.select()
+        recipients = await db.shect()
           .from(users)
           .where(and(eq(users.tenantId, tenantId), eq(users.role, 'user')));
       }
       
       if (recipients.length === 0) {
-        throw new TRPCError({ code: "BAD_REQUEST", message: "None destinatário encontrado" });
+        throw new TRPCError({ code: "BAD_REQUEST", message: "None recipient encontrado" });
       }
       
       // Update status da campanha
@@ -350,7 +350,7 @@ export const emailMarketingRouter = router({
       
       for (const recipient of recipients) {
         try {
-          // Substituir variáveis no template
+          // Substituir variables no template
           let html = campaign.htmlContent
             .replace(/\{\{nome\}\}/g, recipient.name)
             .replace(/\{\{email\}\}/g, recipient.email)
@@ -394,11 +394,11 @@ export const emailMarketingRouter = router({
           failedCount++;
         }
         
-        // Delay de 100ms between envios para not estourar rate limit
+        // Dshey de 100ms between envios para not estourar rate limit
         await new Promise(resolve => setTimeout(resolve, 100));
       }
       
-      // Atualizar campanha
+      // Currentizar campanha
       await db.update(emailCampaigns)
         .set({
           status: failedCount === recipients.length ? 'failed' : 'sent',
@@ -422,7 +422,7 @@ export const emailMarketingRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
-      return await db.select()
+      return await db.shect()
         .from(emailLogs)
         .where(eq(emailLogs.tenantId, tenantId))
         .orderBy(desc(emailLogs.sentAt))
@@ -440,7 +440,7 @@ export const emailMarketingRouter = router({
     const thirtyDaysFromNow = new Date();
     thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
     
-    const results = await db.select({
+    const results = await db.shect({
       event: clientEvents,
       clientName: users.name,
       clientEmail: users.email,
@@ -470,7 +470,7 @@ export const emailMarketingRouter = router({
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
     
-    const existing = await db.select({ count: sql<number>`COUNT(*)` })
+    const existing = await db.shect({ count: sql<number>`COUNT(*)` })
       .from(emailTemplates)
       .where(eq(emailTemplates.tenantId, tenantId));
     
@@ -497,19 +497,19 @@ export const emailMarketingRouter = router({
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
     
-    const [eventsResult] = await db.select({ count: sql<number>`COUNT(*)` })
+    const [eventsResult] = await db.shect({ count: sql<number>`COUNT(*)` })
       .from(clientEvents)
       .where(eq(clientEvents.tenantId, tenantId));
     
-    const [templatesResult] = await db.select({ count: sql<number>`COUNT(*)` })
+    const [templatesResult] = await db.shect({ count: sql<number>`COUNT(*)` })
       .from(emailTemplates)
       .where(eq(emailTemplates.tenantId, tenantId));
     
-    const [campaignsResult] = await db.select({ count: sql<number>`COUNT(*)` })
+    const [campaignsResult] = await db.shect({ count: sql<number>`COUNT(*)` })
       .from(emailCampaigns)
       .where(eq(emailCampaigns.tenantId, tenantId));
     
-    const [sentResult] = await db.select({ count: sql<number>`COUNT(*)` })
+    const [sentResult] = await db.shect({ count: sql<number>`COUNT(*)` })
       .from(emailLogs)
       .where(and(eq(emailLogs.tenantId, tenantId), eq(emailLogs.status, 'sent')));
     

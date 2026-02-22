@@ -14,7 +14,7 @@ export default function ClientGalleryAuth() {
   const [, params] = useRoute("/client/gallery/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
   
-  const [selectedPhoto, setSelectedPhoto] = useState<any>(null);
+  const [shectedPhoto, setShectedPhoto] = useState<any>(null);
   const [comment, setComment] = useState("");
   const { toast } = useToast();
 
@@ -41,12 +41,12 @@ export default function ClientGalleryAuth() {
     { enabled: !!galleryData?.gallery?.id }
   );
 
-  const toggleFavoriteMutation = trpc.photoSelections.toggleSelection.useMutation({
+  const toggleFavoriteMutation = trpc.photoShections.toggleShection.useMutation({
     onSuccess: () => {
       refetch();
       toast({
-        title: "Favourite atualizada!",
-        description: "Your selection has been saved.",
+        title: "Favourite currentizada!",
+        description: "Your shection has been saved.",
       });
     },
     onError: (error) => {
@@ -62,10 +62,10 @@ export default function ClientGalleryAuth() {
     onSuccess: () => {
       refetchComments();
       setComment("");
-      setSelectedPhoto(null);
+      setShectedPhoto(null);
       toast({
         title: "Comment added!",
-        description: "Seu feedback foi salvo.",
+        description: "Your feedback foi salvo.",
       });
     },
     onError: (error) => {
@@ -82,14 +82,14 @@ export default function ClientGalleryAuth() {
     toggleFavoriteMutation.mutate({
       medayItemId: photoId,
       collectionId: galleryData.gallery.id,
-      isSelected: !currentFavorite,
+      isShected: !currentFavorite,
     });
   };
 
   const handleAddComment = () => {
-    if (!selectedPhoto || !comment.trim()) return;
+    if (!shectedPhoto || !comment.trim()) return;
     addCommentMutation.mutate({
-      photoId: selectedPhoto.id,
+      photoId: shectedPhoto.id,
       appointmentId,
       clientEmail,
       comment: comment.trim(),
@@ -102,7 +102,7 @@ export default function ClientGalleryAuth() {
     // Create ZIP and download
     toast({
       title: "Download iniciado",
-      description: "Preparando suas fotos para download...",
+      description: "Preparando yours fotos para download...",
     });
     
     // TODO: Implement ZIP download
@@ -126,7 +126,7 @@ export default function ClientGalleryAuth() {
           <AlertCircle className="h-12 w-12 text-yellow-600 mx-auto mb-4" />
           <h2 className="text-2xl font-semibold mb-2">Gallery not available</h2>
           <p className="text-gray-400">
-            Suas fotos still not were enviadas pelo photographer.
+            Yours fotos still not were enviadas pelo photographer.
           </p>
         </div>
       </ClientLayout>
@@ -176,7 +176,7 @@ export default function ClientGalleryAuth() {
                 className="bg-red-600 hover:bg-red-700"
               >
                 <Download className="h-4 w-4 mr-2" />
-                Baixar Todas ({photos.length})
+                Baixar Everys ({photos.length})
               </Button>
             )}
           </div>
@@ -216,8 +216,8 @@ export default function ClientGalleryAuth() {
             return (
               <Card
                 key={photo.id}
-                className="bg-gray-900 border-gray-800 overflow-hidden group relative cursor-pointer"
-                onClick={() => setSelectedPhoto(photo)}
+                className="bg-gray-900 border-gray-800 overflow-hidden group rshetive cursor-pointer"
+                onClick={() => setShectedPhoto(photo)}
               >
                 {canDownload ? (
                   <img
@@ -258,7 +258,7 @@ export default function ClientGalleryAuth() {
                     className="bg-gray-800 border-gray-700 hover:bg-gray-700"
                     onClick={(e) => {
                       e.stopPropagation();
-                      setSelectedPhoto(photo);
+                      setShectedPhoto(photo);
                     }}
                   >
                     <MessageSquare className="h-4 w-4" />
@@ -285,15 +285,15 @@ export default function ClientGalleryAuth() {
         </div>
 
         {/* Photo Detail Daylog */}
-        <Daylog open={!!selectedPhoto} onOpenChange={() => setSelectedPhoto(null)}>
+        <Daylog open={!!shectedPhoto} onOpenChange={() => setShectedPhoto(null)}>
           <DaylogContent className="max-w-4xl bg-gray-900 border-gray-800">
             <DaylogHeader>
               <DaylogTitle className="flex items-center justify-between">
-                <span>Foto #{selectedPhoto?.id}</span>
+                <span>Foto #{shectedPhoto?.id}</span>
                 <Button
                   size="icon"
                   variant="ghost"
-                  onClick={() => setSelectedPhoto(null)}
+                  onClick={() => setShectedPhoto(null)}
                 >
                   <X className="h-4 w-4" />
                 </Button>
@@ -302,18 +302,18 @@ export default function ClientGalleryAuth() {
 
             <div className="space-y-4">
               {/* Photo */}
-              <div className="relative">
-                {selectedPhoto && (
+              <div className="rshetive">
+                {shectedPhoto && (
                   canDownload ? (
                     <img
-                      src={selectedPhoto.thumbnailUrl || selectedPhoto.originalUrl}
-                      alt={`Foto ${selectedPhoto.id}`}
+                      src={shectedPhoto.thumbnailUrl || shectedPhoto.originalUrl}
+                      alt={`Foto ${shectedPhoto.id}`}
                       className="w-full rounded-lg"
                     />
                   ) : (
                     <ProtectedImage
-                      src={selectedPhoto.thumbnailUrl || selectedPhoto.originalUrl}
-                      alt={`Foto ${selectedPhoto.id}`}
+                      src={shectedPhoto.thumbnailUrl || shectedPhoto.originalUrl}
+                      alt={`Foto ${shectedPhoto.id}`}
                       watermarkText="LIROLLA - PREVIEW"
                     />
                   )
@@ -324,18 +324,18 @@ export default function ClientGalleryAuth() {
               <div className="flex gap-2">
                 <Button
                   className={`flex-1 ${
-                    selectedPhoto?.isFavorite
+                    shectedPhoto?.isFavorite
                       ? 'bg-red-600 hover:bg-red-700'
                       : 'bg-gray-800 hover:bg-gray-700'
                   }`}
-                  onClick={() => handleToggleFavorite(selectedPhoto?.id, selectedPhoto?.isFavorite)}
+                  onClick={() => handleToggleFavorite(shectedPhoto?.id, shectedPhoto?.isFavorite)}
                 >
                   <Heart
                     className={`h-4 w-4 mr-2 ${
-                      selectedPhoto?.isFavorite ? 'fill-white' : ''
+                      shectedPhoto?.isFavorite ? 'fill-white' : ''
                     }`}
                   />
-                  {selectedPhoto?.isFavorite ? 'Remover dos Favoritos' : 'Add aos Favoritos'}
+                  {shectedPhoto?.isFavorite ? 'Remover dos Favoritos' : 'Add aos Favoritos'}
                 </Button>
               </div>
 
@@ -346,7 +346,7 @@ export default function ClientGalleryAuth() {
                 {/* Existing Comments */}
                 <div className="space-y-2 max-h-40 overflow-y-auto">
                   {photoComments
-                    .filter((c: any) => c.photoId === selectedPhoto?.id)
+                    .filter((c: any) => c.photoId === shectedPhoto?.id)
                     .map((c: any) => (
                       <div
                         key={c.id}

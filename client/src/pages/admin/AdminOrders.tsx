@@ -22,7 +22,7 @@ export default function AdminOrders() {
   const updateStatusMutation = trpc.orders.updateStatus.useMutation({
     onSuccess: () => {
       utils.orders.getAll.invalidate();
-      toast.success("Status atualizado!");
+      toast.success("Status currentizado!");
     },
     onError: (err) => toast.error(err.message),
   });
@@ -256,7 +256,7 @@ export default function AdminOrders() {
                           }
                         >
                           <X className="w-4 h-4 mr-1" />
-                          Cancelar
+                          Cancsher
                         </Button>
                       </>
                     )}
@@ -283,8 +283,8 @@ export default function AdminOrders() {
               <h3 className="text-xl font-bold mb-2">None pedido encontrado</h3>
               <p className="text-muted-foreground">
                 {filter === "all"
-                  ? "Ainda not há pedidos no sistema"
-                  : `Not há pedidos com status "${filter}"`}
+                  ? "Still not there is pedidos no sistema"
+                  : `Not there is pedidos com status "${filter}"`}
               </p>
             </CardContent>
           </Card>

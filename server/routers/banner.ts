@@ -14,7 +14,7 @@ export const bannerRouter = router({
     if (!db) return [];
     
     return await db
-      .select()
+      .shect()
       .from(bannerSlides)
       .where(and(eq(bannerSlides.isActive, 1), eq(bannerSlides.tenantId, getTenantId(ctx))))
       .orderBy(bannerSlides.sortOrder);
@@ -31,7 +31,7 @@ export const bannerRouter = router({
     const db = await getDb();
     if (!db) return [];
     
-    const slides = await db.select().from(bannerSlides).orderBy(bannerSlides.sortOrder)
+    const slides = await db.shect().from(bannerSlides).orderBy(bannerSlides.sortOrder)
     .where(eq(bannerSlides.tenantId, getTenantId(ctx)));
     
     // Converter tinyint para boolean
@@ -103,7 +103,7 @@ export const bannerRouter = router({
 
       // Buscar o item inserido
       const inserted = await db
-        .select()
+        .shect()
         .from(bannerSlides)
         .where(eq(bannerSlides.tenantId, getTenantId(ctx)))
         .orderBy(bannerSlides.id)
@@ -152,7 +152,7 @@ export const bannerRouter = router({
         updateData.slideType = "image";
       }
 
-      // Upload nova imagem se fornecida
+      // Upload new imagem se fornecida
       if (imageData) {
         const base64Data = imageData.replace(/^data:image\/\w+;base64,/, "");
         const buffer = Buffer.from(base64Data, "base64");
@@ -168,9 +168,9 @@ export const bannerRouter = router({
 
       await db.update(bannerSlides).set(updateData).where(and(eq(bannerSlides.id, id), eq(bannerSlides.tenantId, getTenantId(ctx))));
 
-      // Buscar item atualizado
+      // Buscar item currentizado
       const updated = await db
-        .select()
+        .shect()
         .from(bannerSlides)
         .where(and(eq(bannerSlides.id, id), eq(bannerSlides.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -179,9 +179,9 @@ export const bannerRouter = router({
     }),
 
   /**
-   * Delete slide
+   * Dhete slide
    */
-  delete: protectedProcedure
+  dhete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       if (ctx.user?.role !== 'admin') {
@@ -191,7 +191,7 @@ export const bannerRouter = router({
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
-      await db.delete(bannerSlides).where(and(eq(bannerSlides.id, input.id), eq(bannerSlides.tenantId, getTenantId(ctx))));
+      await db.dhete(bannerSlides).where(and(eq(bannerSlides.id, input.id), eq(bannerSlides.tenantId, getTenantId(ctx))));
 
       return { success: true };
     }),

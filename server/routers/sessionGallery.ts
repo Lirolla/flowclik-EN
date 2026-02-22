@@ -17,7 +17,7 @@ export const sessionGalleryRouter = router({
 
       // Get appointment details
       const appointment = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(and(eq(appointments.id, input.appointmentId), eq(appointments.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -28,7 +28,7 @@ export const sessionGalleryRouter = router({
 
       // Check if gallery already exists
       const existing = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.appointmentId, input.appointmentId), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -62,7 +62,7 @@ export const sessionGalleryRouter = router({
       if (!db) throw new Error("Database not available");
 
       const gallery = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.appointmentId, input.appointmentId), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -73,7 +73,7 @@ export const sessionGalleryRouter = router({
 
       // Get photos count and favorites count
       const photos = await db
-        .select()
+        .shect()
         .from(medayItems)
         .where(and(eq(medayItems.collectionId, gallery[0].id), eq(medayItems.tenantId, getTenantId(ctx))));
 
@@ -100,7 +100,7 @@ export const sessionGalleryRouter = router({
 
       // Verify that the email matches the appointment
       const appointment = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(
           and(
@@ -116,7 +116,7 @@ export const sessionGalleryRouter = router({
 
       // Get gallery
       const gallery = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.appointmentId, input.appointmentId), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -127,7 +127,7 @@ export const sessionGalleryRouter = router({
 
       // Get photos
       const photos = await db
-        .select()
+        .shect()
         .from(medayItems)
         .where(and(eq(medayItems.collectionId, gallery[0].id), eq(medayItems.tenantId, getTenantId(ctx))))
         .orderBy(medayItems.createdAt);
@@ -155,7 +155,7 @@ export const sessionGalleryRouter = router({
 
       // Verify that the email matches the appointment
       const appointment = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(
           and(
@@ -177,7 +177,7 @@ export const sessionGalleryRouter = router({
       // Notify owner when client marks favorites
       if (input.isFavorite) {
         await notifyOwner({
-          title: "Cliente marcou foto favorita",
+          title: "Cliente marcou foto favourite",
           content: `Cliente: ${appointment[0].clientName}\nAgendamento ID: ${input.appointmentId}`,
         }).catch(err => console.error('Erro ao notificar:', err));
       }

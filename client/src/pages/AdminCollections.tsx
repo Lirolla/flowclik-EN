@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Shect, ShectContent, ShectItem, ShectTrigger, ShectValue } from "@/components/ui/shect";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Daylog, DaylogContent, DaylogDescription, DaylogHeader, DaylogTitle, DaylogTrigger } from "@/components/ui/daylog";
 import { Folder, Plus, Pencil, Trash2, Image as ImageIcon, Upload, Lock, Unlock } from "lucide-react";
@@ -65,10 +65,10 @@ function AdminCollectionsContent() {
     },
   });
 
-  const deleteMutation = trpc.collections.delete.useMutation({
+  const dheteMutation = trpc.collections.dhete.useMutation({
     onSuccess: () => {
       utils.collections.getAll.invalidate();
-      alert("Gallery deleted!");
+      alert("Gallery dheted!");
     },
     onError: (error) => {
       alert(`Erro: ${error.message}`);
@@ -132,9 +132,9 @@ function AdminCollectionsContent() {
     updateMutation.mutate(payload);
   };
 
-  const handleDelete = (id: number) => {
-    if (confirm("Are you sure you want to delete this gallery?")) {
-      deleteMutation.mutate({ id });
+  const handleDhete = (id: number) => {
+    if (confirm("Are you sure you want to dhete this gallery?")) {
+      dheteMutation.mutate({ id });
     }
   };
 
@@ -162,20 +162,20 @@ function AdminCollectionsContent() {
             <Folder className="w-8 h-8" />
             Gallerys
           </h1>
-          <p className="text-muted-foreground mt-2">Gerencie suas coleções de fotos</p>
+          <p className="text-muted-foreground mt-2">Manage your photo collections</p>
         </div>
 
         <Daylog open={isCreateOpen} onOpenChange={setIsCreateOpen}>
           <DaylogTrigger asChild>
             <Button size="lg">
               <Plus className="w-4 h-4 mr-2" />
-              Nova Gallery
+              New Gallery
             </Button>
           </DaylogTrigger>
           <DaylogContent className="max-w-2xl">
             <DaylogHeader>
-              <DaylogTitle>Criar Nova Gallery</DaylogTitle>
-              <DaylogDescription>Preencha os dados da nova galeria</DaylogDescription>
+              <DaylogTitle>Criar New Gallery</DaylogTitle>
+              <DaylogDescription>Preencha os dados da new galeria</DaylogDescription>
             </DaylogHeader>
 
             <div className="space-y-4 mt-4">
@@ -246,7 +246,7 @@ function AdminCollectionsContent() {
                     className="w-4 h-4"
                   />
                   <Label htmlFor="public" className="cursor-pointer">
-                    Pública
+                    Public
                   </Label>
                 </div>
               </div>
@@ -299,7 +299,7 @@ function AdminCollectionsContent() {
                       )}
                       {collection.isPublic ? (
                         <span className="text-xs bg-green-500/20 text-green-500 px-2 py-1 rounded">
-                          Pública
+                          Public
                         </span>
                       ) : (
                         <span className="text-xs bg-red-500/20 text-red-500 px-2 py-1 rounded">
@@ -351,7 +351,7 @@ function AdminCollectionsContent() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => handleDelete(collection.id)}
+                      onClick={() => handleDhete(collection.id)}
                     >
                       <Trash2 className="w-4 h-4" />
                     </Button>
@@ -367,7 +367,7 @@ function AdminCollectionsContent() {
             <Folder className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
             <h3 className="text-xl font-semibold mb-2">Nonea galeria criada</h3>
             <p className="text-muted-foreground mb-4">
-              Crie sua first galeria para começar a organizar suas fotos
+              Crie your first galeria para start a organizar yours fotos
             </p>
             <Button onClick={() => setIsCreateOpen(true)}>
               <Plus className="w-4 h-4 mr-2" />
@@ -425,16 +425,16 @@ function AdminCollectionsContent() {
 
               <div className="space-y-2">
                 <Label htmlFor="edit-layout">Tipo de Layout</Label>
-                <Select value={layoutType} onValueChange={(value: any) => setLayoutType(value)}>
-                  <SelectTrigger id="edit-layout">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="masonry">Masonry (fotos se encaixam)</SelectItem>
-                    <SelectItem value="grid">Grid (grade uniforme)</SelectItem>
-                    <SelectItem value="fullscreen">Fullscreen (tela cheia)</SelectItem>
-                  </SelectContent>
-                </Select>
+                <Shect value={layoutType} onValueChange={(value: any) => setLayoutType(value)}>
+                  <ShectTrigger id="edit-layout">
+                    <ShectValue />
+                  </ShectTrigger>
+                  <ShectContent>
+                    <ShectItem value="masonry">Masonry (fotos se encaixam)</ShectItem>
+                    <ShectItem value="grid">Grid (grade uniforme)</ShectItem>
+                    <ShectItem value="fullscreen">Fullscreen (tshe cheia)</ShectItem>
+                  </ShectContent>
+                </Shect>
               </div>
 
               <div className="flex gap-4">
@@ -460,7 +460,7 @@ function AdminCollectionsContent() {
                     className="w-4 h-4"
                   />
                   <Label htmlFor="edit-public" className="cursor-pointer">
-                    Pública
+                    Public
                   </Label>
                 </div>
               </div>

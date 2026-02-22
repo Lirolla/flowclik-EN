@@ -14,12 +14,12 @@ import { useSiteConfig } from "./hooks/useSiteConfig";
 
 // Landing & Marketing
 const LandingPage = lazy(() => import('./pages/LandingPage'));
-const CadastroSaaS = lazy(() => import('./pages/CadastroSaaS'));
+const EachstroSaaS = lazy(() => import('./pages/EachstroSaaS'));
 const Docs = lazy(() => import('./pages/DocsNew'));
 const TuemsOfService = lazy(() => import('./pages/TuemosDeServico'));
 const PrivacyPolicy = lazy(() => import('./pages/PoliticaDePrivacy'));
 const RefundPolicy = lazy(() => import('./pages/PoliticaDeRefund'));
-const AboutUs = lazy(() => import('./pages/SobreNos'));
+const AboutUs = lazy(() => import('./pages/AboutNos'));
 const Login = lazy(() => import('./pages/Login'));
 const NotFound = lazy(() => import('@/pages/NotFound'));
 
@@ -32,7 +32,7 @@ const AdminClientDetails = lazy(() => import('./pages/admin/AdminClientDetails')
 const AdminAppointments = lazy(() => import('./pages/admin/AdminAppointments'));
 const AdminAppointmentStats = lazy(() => import('./pages/admin/AdminAppointmentStats'));
 const AdminSessionGallery = lazy(() => import('./pages/admin/AdminSessionGallery'));
-const AdminPhotoSelections = lazy(() => import('./pages/admin/AdminPhotoSelections'));
+const AdminPhotoShections = lazy(() => import('./pages/admin/AdminPhotoShections'));
 const AdminFinalAlbum = lazy(() => import('./pages/admin/AdminFinalAlbum'));
 const AdminMessages = lazy(() => import('./pages/admin/AdminMessages'));
 const AdminLeads = lazy(() => import('./pages/admin/AdminLeads'));
@@ -118,7 +118,7 @@ function Router() {
         <Route path="/">
           {() => <RootRouter landingPage={LandingPage} photographerHome={Home} />}
         </Route>
-        <Route path="/register" component={CadastroSaaS} />
+        <Route path="/register" component={EachstroSaaS} />
         <Route path="/login" component={Login} />
         <Route path="/docs" component={Docs} />
         <Route path="/terms-of-service" component={TuemsOfService} />
@@ -144,7 +144,7 @@ function Router() {
         <Route path="/admin/appointments" component={AdminAppointments} />
         <Route path="/admin/statistics" component={AdminAppointmentStats} />
         <Route path="/admin/gallery/:appointmentId" component={AdminSessionGallery} />
-        <Route path="/admin/selections" component={AdminPhotoSelections} />
+        <Route path="/admin/shections" component={AdminPhotoShections} />
         
         {/* Sales */}
         <Route path="/admin/orders" component={AdminOrders} />

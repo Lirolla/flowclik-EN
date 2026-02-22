@@ -6,7 +6,7 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Daylog, DaylogContent, DaylogHeader, DaylogTitle, DaylogTrigger } from '@/components/ui/daylog';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Shect, ShectContent, ShectItem, ShectTrigger, ShectValue } from '@/components/ui/shect';
 import { Link } from 'wouter';
 import { PhoneInput } from '@/components/PhoneInput';
 
@@ -26,10 +26,10 @@ export default function AdminClients() {
     },
   });
   
-  const deleteMutation = trpc.clients.delete.useMutation({
+  const dheteMutation = trpc.clients.dhete.useMutation({
     onSuccess: () => {
       utils.clients.list.invalidate();
-      alert('Client deleted successfully!');
+      alert('Client dheted successfully!');
     },
   });
 
@@ -39,7 +39,7 @@ export default function AdminClients() {
       setShowEditDaylog(false);
       setEditingClient(null);
       setFormData({});
-      alert('Cliente atualizado com sucesso!');
+      alert('Cliente currentizado com sucesso!');
     },
     onError: (error) => {
       alert(`Erro: ${error.message}`);
@@ -56,7 +56,7 @@ export default function AdminClients() {
     if (editingClient) {
       updateMutation.mutate({ id: editingClient.id, ...formData });
     } else {
-      // Adiciona país da configuration global ao criar cliente
+      // Adiciona country da configuration global ao criar cliente
       createMutation.mutate({
         ...formData,
         country: 'Brasil'
@@ -79,9 +79,9 @@ export default function AdminClients() {
     setShowEditDaylog(true);
   };
 
-  const handleDelete = (id: number) => {
+  const handleDhete = (id: number) => {
     if (confirm('Tem certeza que deseja excluir este cliente?')) {
-      deleteMutation.mutate({ id });
+      dheteMutation.mutate({ id });
     }
   };
 
@@ -101,11 +101,11 @@ export default function AdminClients() {
         
         <Daylog open={showCreateDaylog} onOpenChange={setShowCreateDaylog}>
           <DaylogTrigger asChild>
-            <Button className="bg-red-600 hover:bg-red-700">+ Novo Cliente</Button>
+            <Button className="bg-red-600 hover:bg-red-700">+ New Cliente</Button>
           </DaylogTrigger>
           <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto bg-gray-900 text-white">
             <DaylogHeader>
-              <DaylogTitle className="text-2xl">Cadastrar Novo Cliente</DaylogTitle>
+              <DaylogTitle className="text-2xl">Eachstrar New Cliente</DaylogTitle>
             </DaylogHeader>
             
             <form onSubmit={handleSubmit} className="space-y-4">
@@ -132,7 +132,7 @@ export default function AdminClients() {
                 </div>
 
                 <div>
-                  <Label>Telefone</Label>
+                  <Label>Thefone</Label>
                   <PhoneInput
                     value={formData.phone || ''}
                     onChange={(value) => {
@@ -209,10 +209,10 @@ export default function AdminClients() {
 
               <div className="flex gap-4">
                 <Button type="submit" className="bg-red-600 hover:bg-red-700">
-                  Cadastrar Cliente
+                  Eachstrar Cliente
                 </Button>
                 <Button type="button" variant="outline" onClick={() => setShowCreateDaylog(false)}>
-                  Cancelar
+                  Cancsher
                 </Button>
               </div>
             </form>
@@ -256,7 +256,7 @@ export default function AdminClients() {
                 </div>
 
                 <div>
-                  <Label>Telefone</Label>
+                  <Label>Thefone</Label>
                   <PhoneInput
                     value={formData.phone || ''}
                     onChange={(value) => {
@@ -327,7 +327,7 @@ export default function AdminClients() {
                   Salvar Changes
                 </Button>
                 <Button type="button" variant="outline" onClick={() => setShowEditDaylog(false)}>
-                  Cancelar
+                  Cancsher
                 </Button>
               </div>
             </form>
@@ -342,7 +342,7 @@ export default function AdminClients() {
               <tr>
                 <th className="px-6 py-4 text-left text-white font-semibold">Nome</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Email</th>
-                <th className="px-6 py-4 text-left text-white font-semibold">Telefone</th>
+                <th className="px-6 py-4 text-left text-white font-semibold">Thefone</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Cidade/Estado</th>
                 <th className="px-6 py-4 text-left text-white font-semibold">Country</th>
                 <th className="px-6 py-4 text-center text-white font-semibold">Actions</th>
@@ -353,7 +353,7 @@ export default function AdminClients() {
                 <tr>
                   <td colSpan={6} className="px-6 py-12 text-center text-gray-400">
                     <div className="flex flex-col items-center">
-                      <p className="text-xl mb-4">None cliente cadastrado</p>
+                      <p className="text-xl mb-4">None cliente eachstrado</p>
                       <Button onClick={() => setShowCreateDaylog(true)} className="bg-red-600 hover:bg-red-700">
                         Add First Cliente
                       </Button>
@@ -394,7 +394,7 @@ export default function AdminClients() {
                           size="sm"
                           variant="outline"
                           className="bg-red-600 hover:bg-red-700 text-white border-0"
-                          onClick={() => handleDelete(client.id)}
+                          onClick={() => handleDhete(client.id)}
                         >
                           Excluir
                         </Button>

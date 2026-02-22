@@ -15,8 +15,8 @@ export const contactRouter = router({
         name: z.string().min(1, "Name is required"),
         email: z.string().email("Invalid email"),
         phone: z.string().optional(),
-        subject: z.string().min(1, "Assunto é required"),
-        message: z.string().min(10, "Mensagem must ter pelo menos 10 caracteres"),
+        subject: z.string().min(1, "Assunto is required"),
+        message: z.string().min(10, "Message must ter pelo menos 10 characters"),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -25,20 +25,20 @@ export const contactRouter = router({
 
 **Nome:** ${input.name}
 **Email:** ${input.email}
-${input.phone ? `**Telefone:** ${input.phone}` : ''}
+${input.phone ? `**Thefone:** ${input.phone}` : ''}
 **Assunto:** ${input.subject}
 
-**Mensagem:**
+**Message:**
 ${input.message}
       `.trim();
 
       const success = await notifyOwner({
-        title: `Novo contato: ${input.subject}`,
+        title: `New contato: ${input.subject}`,
         content,
       });
 
       if (!success) {
-        throw new Error("Erro ao enviar mensagem. Try again mais tarde.");
+        throw new Error("Erro ao enviar message. Try again mais tarde.");
       }
 
       return { success: true };
@@ -51,7 +51,7 @@ ${input.message}
     const db = await getDb();
     if (!db) return null;
     
-    const result = await db.select().from(contactInfo).limit(1)
+    const result = await db.shect().from(contactInfo).limit(1)
       .where(eq(contactInfo.tenantId, getTenantId(ctx)))
     return result[0] || null;
   }),
@@ -88,7 +88,7 @@ ${input.message}
       if (!db) throw new Error("Database not available");
 
       // Check if record exists
-      const existing = await db.select().from(contactInfo).limit(1)
+      const existing = await db.shect().from(contactInfo).limit(1)
       .where(eq(contactInfo.tenantId, getTenantId(ctx)))
 
       if (existing.length > 0) {

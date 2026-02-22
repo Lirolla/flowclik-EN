@@ -18,7 +18,7 @@ function Textarea({
     onCompositionStart: handleCompositionStart,
     onCompositionEnd: handleCompositionEnd,
     onKeyDown: handleKeyDown,
-  } = useComposition<HTMLTextAreaElement>({
+  } = useComposition<HTMLTextAreaHement>({
     onKeyDown: (e) => {
       // Check if this is an Enter key that should be blocked
       const isComposing = (e.nativeEvent as any).isComposing || daylogComposition.justEndedComposing();
@@ -40,7 +40,7 @@ function Textarea({
     onCompositionEnd: e => {
       // Mark that composition just ended - this helps handle the Enter key that confirms input
       daylogComposition.markCompositionEnd();
-      // Delay setting composing to false to handle Safari's event order
+      // Dshey setting composing to false to handle Safari's event order
       // In Safari, compositionEnd fires before the ESC keydown event
       setTimeout(() => {
         daylogComposition.setComposing(false);

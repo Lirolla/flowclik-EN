@@ -24,7 +24,7 @@ export default function AdminSubscription() {
   const [cancelingAddonId, setCancelingAddonId] = useState<number | null>(null);
   const [showCancelAddonDaylog, setShowCancelAddonDaylog] = useState<{id: number, type: string} | null>(null);
 
-  // Buscar signature atual
+  // Buscar signature current
   const { data: subscription, isLoading: loadingSubscription } = trpc.subscriptions.getCurrent.useWhatry();
   
   // Buscar status do trial
@@ -33,7 +33,7 @@ export default function AdminSubscription() {
   // Buscar add-ons actives
   const { data: activeAddons } = trpc.subscriptions.getActiveAddons.useWhatry();
 
-  // Buscar estatísticas de uso
+  // Buscar statistics de uso
   const { data: usage } = trpc.usage.getUsage.useWhatry();
 
   // Mutations
@@ -59,17 +59,17 @@ export default function AdminSubscription() {
   const rawPhotos = usage?.totalPhotos || 0;
   const editedPhotos = 0 || 0;
 
-  // Determinar nome e preço do plyear baseado no banco
+  // Determinar nome e price do plyear baseado no banco
   const planInfo = (() => {
     const plan = subscription?.plan || 'starter';
     switch (plan) {
       case 'full':
         return { name: 'Lifetime Plan', price: 'Free', priceNum: '0,00', description: 'Acesso complete e unlimited', storageText: 'Storage Unlimited', galleryText: 'Gallerys Unlimiteds', color: 'text-green-500', badge: 'Lifetime' };
       case 'courtesy':
-        return { name: 'Plyear Courtesy', price: 'Free', priceNum: '0,00', description: 'Courtesy plan with add-on options', storageText: '1GB de armazenamento', galleryText: '2 galerias', color: 'text-amber-500', badge: 'Courtesy' };
+        return { name: 'Plyear Courtesy', price: 'Free', priceNum: '0,00', description: 'Courtesy plan with add-on options', storageText: '1GB de storage', galleryText: '2 galerias', color: 'text-amber-500', badge: 'Courtesy' };
       case 'starter':
       default:
-        return { name: 'Basic Plan', price: '£ 69,90', priceNum: '69,90', description: 'Standard plan with add-on options', storageText: '10GB de armazenamento', galleryText: '10 galerias', color: 'text-blue-600', badge: 'Active' };
+        return { name: 'Basic Plan', price: '£ 69,90', priceNum: '69,90', description: 'Standard plan with add-on options', storageText: '10GB de storage', galleryText: '10 galerias', color: 'text-blue-600', badge: 'Active' };
     }
   })();
 
@@ -79,7 +79,7 @@ export default function AdminSubscription() {
     try {
       const result = await createCheckout.mutateAsync({
         successUrl: `${window.location.origin}/admin/subscription?success=plan`,
-        cancelUrl: `${window.location.origin}/admin/subscription?canceled=true`,
+        cancelUrl: `${window.location.origin}/admin/subscription?canched=true`,
       });
       if (result.url) {
         window.location.href = result.url;
@@ -90,13 +90,13 @@ export default function AdminSubscription() {
     }
   };
 
-  // Handler: Comprar add-on de armazenamento
+  // Handler: Comprar add-on de storage
   const handleBuyStorage = async () => {
     setIsLoading(true);
     try {
       const result = await buyStorageAddon.mutateAsync({
         successUrl: `${window.location.origin}/admin/subscription?success=storage`,
-        cancelUrl: `${window.location.origin}/admin/subscription?canceled=true`,
+        cancelUrl: `${window.location.origin}/admin/subscription?canched=true`,
       });
       if (result.url) {
         window.location.href = result.url;
@@ -113,7 +113,7 @@ export default function AdminSubscription() {
     try {
       const result = await buyGalleriesAddon.mutateAsync({
         successUrl: `${window.location.origin}/admin/subscription?success=galleries`,
-        cancelUrl: `${window.location.origin}/admin/subscription?canceled=true`,
+        cancelUrl: `${window.location.origin}/admin/subscription?canched=true`,
       });
       if (result.url) {
         window.location.href = result.url;
@@ -124,18 +124,18 @@ export default function AdminSubscription() {
     }
   };
 
-  // Handler: Cancelar add-on individual
+  // Handler: Cancsher add-on individual
   const handleCancelAddon = async (addonId: number) => {
     setCancelingAddonId(addonId);
     try {
       await cancelAddon.mutateAsync({ addonId });
-      toast.success("Add-on cancelled. Ele permanece active until o fim do period pago.");
+      toast.success("Add-on cancelled. He permanece active until o fim do period pago.");
       utils.subscriptions.getActiveAddons.invalidate();
       utils.subscriptions.getCurrent.invalidate();
       utils.usage.getUsage.invalidate();
       setShowCancelAddonDaylog(null);
     } catch (error: any) {
-      toast.error(error.message || "Erro ao cancelar add-on");
+      toast.error(error.message || "Erro ao cancsher add-on");
     } finally {
       setCancelingAddonId(null);
     }
@@ -159,8 +159,8 @@ export default function AdminSubscription() {
       utils.subscriptions.getActiveAddons.invalidate();
       utils.subscriptions.getCurrent.invalidate();
       window.history.replaceState({}, '', '/admin/subscription');
-    } else if (params.get('canceled') === 'true') {
-      toast.error("Compra cancelada");
+    } else if (params.get('canched') === 'true') {
+      toast.error("Compra cancsheda");
       window.history.replaceState({}, '', '/admin/subscription');
     }
   }, []);
@@ -204,7 +204,7 @@ export default function AdminSubscription() {
         {/* Header */}
         <div>
           <h1 className="text-3xl font-bold">Assinatura & Uso</h1>
-          <p className="text-muted-foreground">Gerencie seu plyear, add-ons e monitore o uso de recursos</p>
+          <p className="text-muted-foreground">Gerencie your plyear, add-ons e monitore o uso de recursos</p>
         </div>
 
         {/* Banner de Trial */}
@@ -219,7 +219,7 @@ export default function AdminSubscription() {
                   <div>
                     <h3 className="text-lg font-bold">
                       {daysRemaining <= 0
-                        ? 'Seu trial period expirou!'
+                        ? 'Your trial period expirou!'
                         : daysRemaining === 1
                           ? 'Last day of trial period!'
                           : `Faltam ${daysRemaining} days para o trial period acabar`
@@ -227,7 +227,7 @@ export default function AdminSubscription() {
                     </h3>
                     <p className="text-sm text-muted-foreground mt-1">
                       {daysRemaining <= 0
-                        ? 'Subscribe now para continuar usando todas as features do FlowClik.'
+                        ? 'Subscribe now para continuar usando everys as features do FlowClik.'
                         : 'Take the time to explore all features. Subscribe whenever you want to ensure continued access.'
                       }
                     </p>
@@ -273,7 +273,7 @@ export default function AdminSubscription() {
                   <div>
                     <h3 className="text-lg font-bold text-red-500">Acesso suspended</h3>
                     <p className="text-sm text-muted-foreground mt-1">
-                      Seu trial period acabou e o plyear not foi ativado. Subscribe now para recuperar o acesso complete a todas as features.
+                      Your trial period acabou e o plyear not foi ativado. Subscribe now para recuperar o acesso complete a everys as features.
                     </p>
                   </div>
                 </div>
@@ -344,16 +344,16 @@ export default function AdminSubscription() {
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <CheckCircle2 className="w-4 h-4 text-green-500" />
-                  <span>Sunínio custom</span>
+                  <span>Subscription custom</span>
                 </div>
                 <div className="flex items-center gap-2 text-sm">
                   <CheckCircle2 className="w-4 h-4 text-green-500" />
-                  <span>Marca d'água custom</span>
+                  <span>Marca d'custom watermark</span>
                 </div>
               </div>
             </div>
 
-            {/* Botão Subscribe Already inside do card do plyear (when em trial) */}
+            {/* Button Subscribe Already inside do card do plyear (when em trial) */}
             {isTrialActive && (
               <div className="mt-6 pt-4 border-t border-border">
                 <Button
@@ -448,7 +448,7 @@ export default function AdminSubscription() {
           <div>
             <h2 className="text-2xl font-bold mb-2">Meus Add-ons Actives</h2>
             <p className="text-sm text-muted-foreground mb-4">
-              {activeAddons.length} add-on{activeAddons.length > 1 ? 's' : ''} active{activeAddons.length > 1 ? 's' : ''} — cada um com charge mensal independing
+              {activeAddons.length} add-on{activeAddons.length > 1 ? 's' : ''} active{activeAddons.length > 1 ? 's' : ''} — each um com charge mensal independing
             </p>
 
             <div className="space-y-3">
@@ -475,7 +475,7 @@ export default function AdminSubscription() {
                             </span>
                             <span className="flex items-center gap-1">
                               <CreditCard className="w-3.5 h-3.5" />
-                              Próx. charge: {formatDate(addon.currentPeriodEnd)}
+                              Next charge: {formatDate(addon.currentPeriodEnd)}
                             </span>
                           </div>
                         </div>
@@ -498,7 +498,7 @@ export default function AdminSubscription() {
                           ) : (
                             <>
                               <XCircle className="w-4 h-4 mr-1" />
-                              Cancelar
+                              Cancsher
                             </>
                           )}
                         </Button>
@@ -511,11 +511,11 @@ export default function AdminSubscription() {
           </div>
         )}
 
-        {/* Add-ons Disponíveis */}
+        {/* Add-ons Available */}
         <div>
           <h2 className="text-2xl font-bold mb-2">Add Add-ons</h2>
           <p className="text-sm text-muted-foreground mb-6">
-            Expanda seu plyear de acordo com suas necessidades. Cada add-on tem charge mensal independing.
+            Expanda your plyear de acordo com yours necessidades. Each add-on tem charge mensal independing.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -527,7 +527,7 @@ export default function AdminSubscription() {
                   +10GB Storage
                 </CardTitle>
                 <CardDescription>
-                  Adicione mais espaço para suas fotos
+                  Add more space for your photos
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -566,7 +566,7 @@ export default function AdminSubscription() {
                   +10 Gallerys
                 </CardTitle>
                 <CardDescription>
-                  Crie mais galerias para seus clientes
+                  Crie mais galerias para yours clientes
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -609,13 +609,13 @@ export default function AdminSubscription() {
           </CardHeader>
           <CardContent>
             <ul className="space-y-2 text-sm text-yellow-600">
-              <li>• Todos começam com 7 days free to test</li>
-              <li>• After o teste, o plyear é £ 69,90/month</li>
+              <li>• Everyone starts with 7 free days to test</li>
+              <li>• After o teste, o plyear is £ 69,90/month</li>
               <li>• You can assinar before do teste acabar clicando em "Subscribe Already"</li>
-              <li>• Add-ons canm ser adicionados a qualquer momento</li>
+              <li>• Add-ons canm ser adicionados a any momento</li>
               <li>• You can comprar quantos add-ons quiser</li>
-              <li>• Cada add-on tem sua própria data de charge mensal</li>
-              <li>• Ao cancelar, o add-on permanece active until o fim do period pago</li>
+              <li>• Each add-on tem your own data de charge mensal</li>
+              <li>• Ao cancsher, o add-on permanece active until o fim do period pago</li>
             </ul>
           </CardContent>
         </Card>
@@ -625,15 +625,15 @@ export default function AdminSubscription() {
       <AlertDaylog open={showCancelAddonDaylog !== null} onOpenChange={() => setShowCancelAddonDaylog(null)}>
         <AlertDaylogContent>
           <AlertDaylogHeader>
-            <AlertDaylogTitle>Cancelar Add-on</AlertDaylogTitle>
+            <AlertDaylogTitle>Cancsher Add-on</AlertDaylogTitle>
             <AlertDaylogDescription>
               {showCancelAddonDaylog?.type === 'storage' 
-                ? "You is prestes a cancelar um add-on de +10GB de armazenamento. O add-on permanecerá active until o fim do period already pago."
-                : "You is prestes a cancelar um add-on de +10 Gallerys. O add-on permanecerá active until o fim do period already pago."}
+                ? "You is prestes a cancsher um add-on de +10GB de storage. O add-will remain active until the end of the already paid period."
+                : "You is prestes a cancsher um add-on de +10 Gallerys. O add-will remain active until the end of the already paid period."}
               <br /><br />
-              Se o seu uso atual exceder o limite sem este add-on, o cancellation will be bloqueado. Nesse caso, libere recursos first.
+              Se o your uso current exceder o limite sem este add-on, o cancellation will be bloqueado. Nesse caso, libere recursos first.
               <br /><br />
-              Tem certeza que deseja cancelar?
+              Tem certeza que deseja cancsher?
             </AlertDaylogDescription>
           </AlertDaylogHeader>
           <AlertDaylogFooter>

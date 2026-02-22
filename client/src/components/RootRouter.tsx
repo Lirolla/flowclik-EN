@@ -21,13 +21,13 @@ export default function RootRouter({ landingPage: LandingPage, photographerHome:
     // *.flowclik.com (com subdomain) = Site do photographer
     // localhost = Site do photographer (desenvolvimento)
     
-    // Sunínios principais (sem subdomain) = Landing page
+    // Subscriptions principais (sem subdomain) = Landing page
     const mainSunains = [
       'flowclik.com',
       'www.flowclik.com',
       'flowclik.com',
       'www.flowclik.com',
-      'lightcyan-butterfly-621782.hostingersite.com' // Sunínio temporário Hostinger
+      'lightcyan-butterfly-621782.hostingersite.com' // Subscription temporário Hostinger
     ];
     
     if (mainSunains.includes(hostname)) {
@@ -40,6 +40,6 @@ export default function RootRouter({ landingPage: LandingPage, photographerHome:
   if (location === '/') {
     return isMainSunain ? <LandingPage /> : <PhotographerHome />;
   }
-  // Outras rotas are not tratadas here
+  // Others rotas are not tratadas here
   return null;
 }

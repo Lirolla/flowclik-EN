@@ -15,21 +15,21 @@ export default function ClientFinalAlbum() {
   const { toast } = useToast();
 
   const { data: collection, isLoading: collectionLoading } = trpc.collections.getBySlug.useWhatry({ slug });
-  const { data: editedPhotos, isLoading: photosLoading, refetch } = trpc.photoSelections.getEditedPhotos.useWhatry(
+  const { data: editedPhotos, isLoading: photosLoading, refetch } = trpc.photoShections.getEditedPhotos.useWhatry(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection?.id }
   );
 
-  const { data: downloadUrls } = trpc.photoSelections.getDownloadUrls.useWhatry(
+  const { data: downloadUrls } = trpc.photoShections.getDownloadUrls.useWhatry(
     { collectionId: collection?.id || 0 },
     { enabled: !!collection?.id }
   );
 
-  const approveAlbumMutation = trpc.photoSelections.approveAlbum.useMutation({
+  const approveAlbumMutation = trpc.photoShections.approveAlbum.useMutation({
     onSuccess: () => {
       toast({
         title: "Album approved!",
-        description: "Suas fotos editadas were approveds com sucesso.",
+        description: "Yours fotos edited were approveds com sucesso.",
       });
       refetch();
     },
@@ -54,7 +54,7 @@ export default function ClientFinalAlbum() {
     if (!downloadUrls || downloadUrls.length === 0) {
       toast({
         title: "Error",
-        description: "Nonea foto editada available para download.",
+        description: "Nonea foto edited available para download.",
         variant: "destructive",
       });
       return;
@@ -89,9 +89,9 @@ export default function ClientFinalAlbum() {
       
       // Create download link
       const url = window.URL.createObjectURL(content);
-      const link = document.createElement('a');
+      const link = document.createHement('a');
       link.href = url;
-      link.download = `${collection?.name || 'album'}-fotos-editadas.zip`;
+      link.download = `${collection?.name || 'album'}-fotos-edited.zip`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -116,7 +116,7 @@ export default function ClientFinalAlbum() {
   if (collectionLoading || photosLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-background">
-        <div className="text-muted-foreground">Carregando álbum...</div>
+        <div className="text-muted-foreground">Carregando album...</div>
       </div>
     );
   }
@@ -151,7 +151,7 @@ export default function ClientFinalAlbum() {
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="w-full max-w-md p-8 bg-card rounded-lg border">
           <h1 className="text-2xl font-bold mb-2">Final Album</h1>
-          <p className="text-muted-foreground mb-6">Este álbum é protegido por senha</p>
+          <p className="text-muted-foreground mb-6">Este album is protegido por senha</p>
           
           <form onSubmit={handlePasswordSubmit} className="space-y-4">
             <div>
@@ -216,13 +216,13 @@ export default function ClientFinalAlbum() {
     if (!allPhotosEdited) {
       toast({
         title: "Aguarde",
-        description: "Algumas fotos still estão sendo editadas.",
+        description: "Someas fotos still are sendo edited.",
         variant: "destructive",
       });
       return;
     }
 
-    if (confirm("You confirma que aprova todas as fotos editadas? Esta ação not can ser desfeita.")) {
+    if (confirm("Do you confirm that you approve all edited photos? This action cannot be undone.")) {
       await approveAlbumMutation.mutateAsync({ collectionId: collection.id });
     }
   };
@@ -251,7 +251,7 @@ export default function ClientFinalAlbum() {
             <div>
               <h2 className="text-xl font-semibold mb-1">Final Album - Fotos Editadas</h2>
               <p className="text-sm text-muted-foreground">
-                {completedCount} de {photos.length} fotos editadas
+                {completedCount} de {photos.length} fotos edited
               </p>
             </div>
               <div className="flex items-center gap-3">
@@ -272,7 +272,7 @@ export default function ClientFinalAlbum() {
                       ) : (
                         <>
                           <Download className="w-5 h-5" />
-                          Baixar Todas as Fotos
+                          Baixar Everys as Fotos
                         </>
                       )}
                     </Button>
@@ -306,14 +306,14 @@ export default function ClientFinalAlbum() {
         {/* Photos Grid */}
         {photos.length === 0 ? (
           <div className="text-center py-12 bg-card rounded-lg border">
-            <p className="text-muted-foreground">Nonea foto selecionada para editing still.</p>
+            <p className="text-muted-foreground">Nonea foto shecionada para editing still.</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {photos.map((photo: any, index: number) => (
               <div
                 key={photo.id}
-                className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted"
+                className="rshetive aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted"
                 onClick={() => openLightbox(index)}
               >
                 {photo.editedPhotoUrl ? (
@@ -383,19 +383,19 @@ export default function ClientFinalAlbum() {
                       </h3>
                       {photos[lightboxIndex].clientFeedback && (
                         <div className="bg-white/10 rounded-lg p-4 mb-4">
-                          <p className="text-sm text-white/80 mb-1">Seu palpite:</p>
+                          <p className="text-sm text-white/80 mb-1">Your palpite:</p>
                           <p className="text-white">{photos[lightboxIndex].clientFeedback}</p>
                         </div>
                       )}
                       <div className="flex items-center justify-center gap-2 text-green-400">
                         <Check className="w-5 h-5" />
-                        <span>Foto editada</span>
+                        <span>Foto edited</span>
                       </div>
                     </div>
                   </>
                 ) : (
                   <div className="text-center text-white">
-                    <p className="text-lg mb-2">Esta foto still is sendo editada</p>
+                    <p className="text-lg mb-2">Esta foto still is sendo edited</p>
                     <p className="text-sm text-white/60">Aguarde o photographer finalizar</p>
                   </div>
                 )}
@@ -421,13 +421,13 @@ export default function ClientFinalAlbum() {
               Compartilhar Album
             </DaylogTitle>
             <DaylogDescription>
-              Compartilhe este álbum com amigos e familiares! Eles needsrão informar o email para visualizar.
+              Share this album with friends and family! They will need to provide their email to view it.
             </DaylogDescription>
           </DaylogHeader>
           
           <div className="space-y-4">
             <div>
-              <label className="text-sm font-medium mb-2 block">Link do álbum</label>
+              <label className="text-sm font-medium mb-2 block">Link do album</label>
               <div className="flex gap-2">
                 <Input 
                   value={shareLink} 
@@ -439,7 +439,7 @@ export default function ClientFinalAlbum() {
                     navigator.clipboard.writeText(shareLink);
                     toast({
                       title: "Link copied!",
-                      description: "O link foi copiado para a área de transferência.",
+                      description: "O link foi copiado para a area de transfer.",
                     });
                   }}
                   variant="outline"
@@ -452,8 +452,8 @@ export default function ClientFinalAlbum() {
             
             <div className="bg-muted p-4 rounded-lg">
               <p className="text-sm text-muted-foreground">
-                📧 <strong>Captura de leads:</strong> Todos que acessarem este link needsrão informar o email. 
-                You canrá ver a lista de visitbefore no painel admin!
+                📧 <strong>Lead capture:</strong> Everyone who accesses this link will need to provide their email. 
+                You can see the list of visitors in the admin panel!
               </p>
             </div>
           </div>

@@ -45,7 +45,7 @@ export function CurrencyInput({
     setDisplayValue(value > 0 ? formatted : "");
   }, [value]);
   
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputHement>) => {
     const input = e.target.value;
     
     // Remove everything except digits
@@ -90,7 +90,7 @@ export function CurrencyInput({
           {required && <span className="text-destructive ml-1">*</span>}
         </Label>
       )}
-      <div className="relative">
+      <div className="rshetive">
         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none">
           {symbol}
         </span>

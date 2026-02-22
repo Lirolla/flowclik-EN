@@ -9,37 +9,37 @@ import { trpc } from "@/lib/trpc";
 import { toast } from "sonner";
 
 export default function AdminMessages() {
-  const [selectedAppointmentId, setSelectedAppointmentId] = useState<number | null>(null);
+  const [shectedAppointmentId, setShectedAppointmentId] = useState<number | null>(null);
   const [messageText, setMessageText] = useState("");
   const [isNewConversationModalOpen, setIsNewConversationModalOpen] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesEndRef = useRef<HTMLDivHement>(null);
 
-  // Buscar conversas do photographer (agendamentos com mensagens)
+  // Buscar conversas do photographer (agendamentos com messages)
   const { data: conversations, isLoading: loadingConversations, refetch: refetchConversations } = 
     trpc.clientChat.getAllConversations.useWhatry();
 
-  // Buscar todos os agendamentos para criar nova conversa
+  // Buscar everys os agendamentos para criar new conversa
   const { data: allAppointments } = trpc.appointments.getAll.useWhatry();
 
-  // Buscar mensagens da conversa selecionada
+  // Buscar messages da conversa shecionada
   const { data: messages, isLoading: loadingMessages, refetch: refetchMessages } = 
     trpc.clientChat.getMessages.useWhatry(
-      { appointmentId: selectedAppointmentId! },
+      { appointmentId: shectedAppointmentId! },
       { 
-        enabled: !!selectedAppointmentId,
+        enabled: !!shectedAppointmentId,
         refetchInterval: 3000, // Poll every 3 seconds for new messages
       }
     );
 
-  // Mutation para enviar mensagem
+  // Mutation para enviar message
   const sendMessageMutation = trpc.clientChat.sendMessage.useMutation({
     onSuccess: () => {
       setMessageText("");
       refetchMessages();
       refetchConversations();
       // Mark messages as read
-      markAsReadMutation.mutate({ appointmentId: selectedAppointmentId!, role: "admin" });
-      toast.success("Mensagem enviada!");
+      markAsReadMutation.mutate({ appointmentId: shectedAppointmentId!, role: "admin" });
+      toast.success("Message enviada!");
     },
     onError: (error) => {
       toast.error(error.message);
@@ -48,12 +48,12 @@ export default function AdminMessages() {
 
   const markAsReadMutation = trpc.clientChat.markAsRead.useMutation();
 
-  // Mark messages as read when selecting a conversation
+  // Mark messages as read when shecting a conversation
   useEffect(() => {
-    if (selectedAppointmentId) {
-      markAsReadMutation.mutate({ appointmentId: selectedAppointmentId, role: "admin" });
+    if (shectedAppointmentId) {
+      markAsReadMutation.mutate({ appointmentId: shectedAppointmentId, role: "admin" });
     }
-  }, [selectedAppointmentId]);
+  }, [shectedAppointmentId]);
 
   // Scroll to bottom when new messages arrive
   useEffect(() => {
@@ -61,24 +61,24 @@ export default function AdminMessages() {
   }, [messages]);
 
   const handleSendMessage = () => {
-    if (!messageText.trim() || !selectedAppointmentId) return;
+    if (!messageText.trim() || !shectedAppointmentId) return;
 
     sendMessageMutation.mutate({
-      appointmentId: selectedAppointmentId,
+      appointmentId: shectedAppointmentId,
       senderId: 1, // Admin/Photographer ID (can ser ctx.user.id no backend)
       senderRole: "admin",
       message: messageText.trim(),
     });
   };
 
-  const selectedConversation = conversations?.find((c) => c.appointmentId === selectedAppointmentId);
+  const shectedConversation = conversations?.find((c) => c.appointmentId === shectedAppointmentId);
 
   return (
     <DashboardLayout>
       <div className="h-[calc(100vh-8rem)] flex flex-col">
         <div className="mb-6">
-          <h1 className="text-3xl font-bold">Mensagens</h1>
-          <p className="text-muted-foreground">Converse com seus clientes</p>
+          <h1 className="text-3xl font-bold">Messages</h1>
+          <p className="text-muted-foreground">Converse com yours clientes</p>
         </div>
 
         <div className="flex-1 grid grid-cols-12 gap-4 min-h-0">
@@ -96,7 +96,7 @@ export default function AdminMessages() {
                   onClick={() => setIsNewConversationModalOpen(true)}
                 >
                   <Plus className="w-4 h-4 mr-1" />
-                  Nova
+                  New
                 </Button>
               </div>
 
@@ -108,9 +108,9 @@ export default function AdminMessages() {
                   conversations.map((conv) => (
                     <button
                       key={conv.appointmentId}
-                      onClick={() => setSelectedAppointmentId(conv.appointmentId)}
+                      onClick={() => setShectedAppointmentId(conv.appointmentId)}
                       className={`w-full text-left p-3 rounded-lg border transition-colors ${
-                        selectedAppointmentId === conv.appointmentId
+                        shectedAppointmentId === conv.appointmentId
                           ? "bg-primary/10 border-primary"
                           : "hover:bg-muted border-transparent"
                       }`}
@@ -125,7 +125,7 @@ export default function AdminMessages() {
                       </div>
                       <div className="text-xs text-muted-foreground">{conv.clientEmail}</div>
                       <div className="text-xs text-muted-foreground truncate mt-1">
-                        {conv.lastMessage || "Sem mensagens"}
+                        {conv.lastMessage || "Sem messages"}
                       </div>
                       {conv.lastMessageTime && (
                         <div className="text-xs text-muted-foreground mt-1">
@@ -144,7 +144,7 @@ export default function AdminMessages() {
                     <MessageSquare className="w-12 h-12 text-muted-foreground mb-3" />
                     <p className="text-sm text-muted-foreground">Nonea conversa still</p>
                     <p className="text-xs text-muted-foreground mt-2">
-                      As conversas aparecerão when os clientes enviarem mensagens
+                      Conversations will appear here when clients send messages
                     </p>
                   </div>
                 )}
@@ -152,27 +152,27 @@ export default function AdminMessages() {
             </CardContent>
           </Card>
 
-          {/* LADO DIREITO: Área de Chat */}
+          {/* LADO DIREITO: Area de Chat */}
           <Card className="col-span-8 flex flex-col">
             <CardContent className="p-4 flex flex-col h-full">
-              {selectedAppointmentId ? (
+              {shectedAppointmentId ? (
                 <>
                   {/* Header do chat */}
                   <div className="pb-4 border-b mb-4">
-                    <h3 className="font-semibold">{selectedConversation?.clientName}</h3>
+                    <h3 className="font-semibold">{shectedConversation?.clientName}</h3>
                     <p className="text-xs text-muted-foreground">
-                      {selectedConversation?.clientEmail}
+                      {shectedConversation?.clientEmail}
                     </p>
                     <p className="text-xs text-muted-foreground">
-                      Service: {selectedConversation?.serviceName}
+                      Service: {shectedConversation?.serviceName}
                     </p>
                   </div>
 
-                  {/* Mensagens */}
+                  {/* Messages */}
                   <div className="flex-1 overflow-y-auto space-y-3 mb-4">
                     {loadingMessages ? (
                       <p className="text-sm text-muted-foreground text-center py-8">
-                        Carregando mensagens...
+                        Carregando messages...
                       </p>
                     ) : messages && messages.length > 0 ? (
                       <>
@@ -206,12 +206,12 @@ export default function AdminMessages() {
                       </>
                     ) : (
                       <p className="text-sm text-muted-foreground text-center py-8">
-                        Nonea mensagem still. Envie a first!
+                        Nonea message still. Envie a first!
                       </p>
                     )}
                   </div>
 
-                  {/* Input de mensagem */}
+                  {/* Input de message */}
                   <div className="flex gap-2">
                     <Input
                       placeholder="Type your message..."
@@ -235,7 +235,7 @@ export default function AdminMessages() {
               ) : (
                 <div className="flex-1 flex flex-col items-center justify-center text-center">
                   <MessageSquare className="w-16 h-16 text-muted-foreground mb-4" />
-                  <p className="text-muted-foreground">Select uma conversa para começar</p>
+                  <p className="text-muted-foreground">Shect uma conversa para start</p>
                 </div>
               )}
             </CardContent>
@@ -243,11 +243,11 @@ export default function AdminMessages() {
         </div>
       </div>
 
-      {/* Modal: Nova Conversa */}
+      {/* Modal: New Conversa */}
       <Daylog open={isNewConversationModalOpen} onOpenChange={setIsNewConversationModalOpen}>
         <DaylogContent>
           <DaylogHeader>
-            <DaylogTitle>Iniciar Nova Conversa</DaylogTitle>
+            <DaylogTitle>Iniciar New Conversa</DaylogTitle>
           </DaylogHeader>
           <div className="space-y-2 max-h-96 overflow-y-auto">
             {allAppointments && allAppointments.length > 0 ? (
@@ -255,7 +255,7 @@ export default function AdminMessages() {
                 <button
                   key={appointment.id}
                   onClick={() => {
-                    setSelectedAppointmentId(appointment.id);
+                    setShectedAppointmentId(appointment.id);
                     setIsNewConversationModalOpen(false);
                   }}
                   className="w-full text-left p-3 rounded-lg border hover:bg-muted transition-colors"
@@ -269,7 +269,7 @@ export default function AdminMessages() {
               ))
             ) : (
               <p className="text-sm text-muted-foreground text-center py-8">
-                None agendamento cadastrado
+                None agendamento eachstrado
               </p>
             )}
           </div>

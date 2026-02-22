@@ -22,7 +22,7 @@ export const photoCommentsRouter = router({
 
       // Verify that the email matches the appointment
       const appointment = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(
           and(
@@ -46,7 +46,7 @@ export const photoCommentsRouter = router({
 
       // Notify owner
       await notifyOwner({
-        title: "Novo comment em foto",
+        title: "New comment em foto",
         content: `Cliente: ${appointment[0].clientName}\nAgendamento ID: ${input.appointmentId}\nComment: ${input.comment}`,
       }).catch(err => console.error('Erro ao notificar:', err));
 
@@ -63,7 +63,7 @@ export const photoCommentsRouter = router({
       if (!db) throw new Error("Database not available");
 
       return await db
-        .select()
+        .shect()
         .from(photoComments)
         .where(and(eq(photoComments.photoId, input.photoId), eq(photoComments.tenantId, getTenantId(ctx))))
         .orderBy(photoComments.createdAt);
@@ -79,7 +79,7 @@ export const photoCommentsRouter = router({
       if (!db) throw new Error("Database not available");
 
       return await db
-        .select()
+        .shect()
         .from(photoComments)
         .where(and(eq(photoComments.appointmentId, input.appointmentId), eq(photoComments.tenantId, getTenantId(ctx))))
         .orderBy(photoComments.createdAt);
@@ -99,7 +99,7 @@ export const photoCommentsRouter = router({
 
       // Verify that the email matches the appointment
       const appointment = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(
           and(
@@ -114,23 +114,23 @@ export const photoCommentsRouter = router({
       }
 
       return await db
-        .select()
+        .shect()
         .from(photoComments)
         .where(and(eq(photoComments.appointmentId, input.appointmentId), eq(photoComments.tenantId, getTenantId(ctx))))
         .orderBy(photoComments.createdAt);
     }),
 
   /**
-   * Delete comment (admin)
+   * Dhete comment (admin)
    */
-  delete: protectedProcedure
+  dhete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
       await db
-        .delete(photoComments)
+        .dhete(photoComments)
         .where(and(eq(photoComments.id, input.id), eq(photoComments.tenantId, getTenantId(ctx))));
 
       return { success: true };

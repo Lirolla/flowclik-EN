@@ -83,11 +83,11 @@ export default function AdminSettings() {
     }
   }, [config]);
 
-  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputHement>) => {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        toast.error("Why favor, select only imagens");
+        toast.error("Why favor, shect only imagens");
         return;
       }
 
@@ -217,7 +217,7 @@ export default function AdminSettings() {
             Site Settings
           </CardTitle>
           <CardDescription>
-            Complete todas as seções para configure seu site. 🔴 Vermelho = Not preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Complete
+            Complete everys as sections para configure your site. 🔴 Vermelho = Not preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Complete
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -227,7 +227,7 @@ export default function AdminSettings() {
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getBasicInfoStatus()} />
-                  <span className="font-semibold">Information Básicas</span>
+                  <span className="font-semibold">Basic Information</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-6 pt-4">
@@ -281,7 +281,7 @@ export default function AdminSettings() {
                     id="siteTagline"
                     value={siteTagline}
                     onChange={(e) => setSiteTagline(e.target.value)}
-                    placeholder="Capturing unique moments and turning them into timeless art"
+                    placeholder="Capturing unique moments and turning them into timtheys art"
                     rows={3}
                   />
                 </div>
@@ -289,7 +289,7 @@ export default function AdminSettings() {
                 {/* Current Logo URL (readonly) */}
                 {logoUrl && !logoFile && (
                   <div className="space-y-2">
-                    <Label>URL do Logo Atual</Label>
+                    <Label>URL do Logo Current</Label>
                     <Input value={logoUrl} readOnly className="text-xs text-muted-foreground" />
                   </div>
                 )}
@@ -301,17 +301,17 @@ export default function AdminSettings() {
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getAboutStatus()} />
-                  <span className="font-semibold">Page Sobre</span>
+                  <span className="font-semibold">Page About</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
                 <div>
-                  <Label>Title da Seção *</Label>
+                  <Label>Title da Section *</Label>
                   <Input
                     // @ts-ignore
                     value={aboutTitle}
                     onChange={(e) => setAboutTitle(e.target.value)}
-                    placeholder="Ex: Sobre Mim"
+                    placeholder="Ex: About Mim"
                   />
                 </div>
                 <div>
@@ -371,7 +371,7 @@ export default function AdminSettings() {
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
                 <div>
-                  <Label>Texto Introdutório *</Label>
+                  <Label>Introductory Text *</Label>
                   <Textarea
                     value={servicesIntro}
                     onChange={(e) => setServicesIntro(e.target.value)}
@@ -380,7 +380,7 @@ export default function AdminSettings() {
                   />
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Os services individuais are gerenciados na página Admin → Services
+                  Os services individuais are gerenciados na page Admin → Services
                 </p>
               </AccordionContent>
             </AccordionItem>
@@ -395,7 +395,7 @@ export default function AdminSettings() {
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
                 <div>
-                  <Label>Telefone</Label>
+                  <Label>Thefone</Label>
                   <Input
                     value={contactPhone}
                     onChange={(e) => setContactPhone(e.target.value)}
@@ -445,7 +445,7 @@ export default function AdminSettings() {
                   <Input
                     value={socialInstagram}
                     onChange={(e) => setSocialInstagram(e.target.value)}
-                    placeholder="https://instagram.com/seu_usuario"
+                    placeholder="https://instagram.com/your_uyourrio"
                   />
                 </div>
                 <div>
@@ -453,7 +453,7 @@ export default function AdminSettings() {
                   <Input
                     value={socialFacebook}
                     onChange={(e) => setSocialFacebook(e.target.value)}
-                    placeholder="https://facebook.com/sua_pagina"
+                    placeholder="https://facebook.com/your_pagina"
                   />
                 </div>
                 <div>
@@ -461,7 +461,7 @@ export default function AdminSettings() {
                   <Input
                     value={socialYouTube}
                     onChange={(e) => setSocialYouTube(e.target.value)}
-                    placeholder="https://youtube.com/@seu_canal"
+                    placeholder="https://youtube.com/@your_canal"
                   />
                 </div>
               </AccordionContent>
@@ -487,7 +487,7 @@ export default function AdminSettings() {
                   Salvando...
                 </>
               ) : (
-                "Salvar Todas as Settings"
+                "Salvar Everys as Settings"
               )}
             </Button>
           </div>
@@ -496,10 +496,10 @@ export default function AdminSettings() {
           <div className="bg-muted p-4 rounded-lg text-sm space-y-2 mt-6">
             <p className="font-semibold">ℹ️ Information:</p>
             <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-              <li>Complete todas as seções marcadas em vermelho</li>
-              <li>O logo e nome aparecem no cabeçalho do site</li>
-              <li>O content de Sobre/Services aparece nas páginas publics</li>
-              <li>Changes are aplicadas imedaytamente</li>
+              <li>Complete everys as sections mareachs em vermelho</li>
+              <li>The logo and name appear in the site header</li>
+              <li>O content de About/Services aparece nas pages publics</li>
+              <li>Changes are aplieachs imedaytamente</li>
             </ul>
           </div>
         </CardContent>

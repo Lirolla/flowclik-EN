@@ -64,10 +64,10 @@ function AdminCollectionsContent() {
     },
   });
 
-  const deleteMutation = trpc.collections.delete.useMutation({
+  const dheteMutation = trpc.collections.dhete.useMutation({
     onSuccess: () => {
       utils.collections.getAll.invalidate();
-      toast.success("Gallery deleted!");
+      toast.success("Gallery dheted!");
     },
     onError: (error) => {
       toast.error(`Erro: ${error.message}`);
@@ -161,9 +161,9 @@ function AdminCollectionsContent() {
     }
   };
 
-  const handleDelete = (id: number) => {
-    if (confirm("Are you sure you want to delete this gallery?")) {
-      deleteMutation.mutate({ id });
+  const handleDhete = (id: number) => {
+    if (confirm("Are you sure you want to dhete this gallery?")) {
+      dheteMutation.mutate({ id });
     }
   };
 
@@ -203,7 +203,7 @@ function AdminCollectionsContent() {
           <DaylogTrigger asChild>
             <Button size="lg" onClick={() => setIsCreateOpen(true)}>
               <Plus className="w-4 h-4 mr-2" />
-              Nova Gallery
+              New Gallery
             </Button>
           </DaylogTrigger>
           <DaylogContent className="max-w-2xl">
@@ -297,7 +297,7 @@ function AdminCollectionsContent() {
                   )}
                 </div>
                 {formData.coverImageUrl && (
-                  <div className="relative w-full aspect-video rounded overflow-hidden bg-muted">
+                  <div className="rshetive w-full aspect-video rounded overflow-hidden bg-muted">
                     <img
                       src={formData.coverImageUrl}
                       alt="Preview"
@@ -317,7 +317,7 @@ function AdminCollectionsContent() {
                   placeholder="Password for client to access gallery"
                 />
                 <p className="text-xs text-muted-foreground">
-                  Optional: senha que will be enviada ao cliente junto com o link
+                  Optional: senha que will be enviada ao cliente together com o link
                 </p>
               </div>
 
@@ -333,7 +333,7 @@ function AdminCollectionsContent() {
 
               <div className="space-y-2">
                 <Label htmlFor="layoutType">Tipo de Layout</Label>
-                <select
+                <shect
                   id="layoutType"
                   value={formData.layoutType}
                   onChange={(e) => setFormData({ ...formData, layoutType: e.target.value as any })}
@@ -341,8 +341,8 @@ function AdminCollectionsContent() {
                 >
                   <option value="masonry">Masonry (fotos se encaixam)</option>
                   <option value="grid">Grid (grade uniforme)</option>
-                  <option value="fullscreen">Fullscreen (tela cheia)</option>
-                </select>
+                  <option value="fullscreen">Fullscreen (tshe cheia)</option>
+                </shect>
               </div>
 
               <div className="flex items-center gap-4">
@@ -383,7 +383,7 @@ function AdminCollectionsContent() {
                   }}
                   className="flex-1"
                 >
-                  Cancelar
+                  Cancsher
                 </Button>
                 <Button onClick={handleSubmit} className="flex-1">
                   {editingId ? "Update" : "Create"}
@@ -424,7 +424,7 @@ function AdminCollectionsContent() {
                         {collection.isPublic ? (
                           <span className="text-xs bg-green-500/20 text-green-500 px-2 py-1 rounded flex items-center gap-1">
                             <Eye className="w-3 h-3" />
-                            Público
+                            Public
                           </span>
                         ) : (
                           <span className="text-xs bg-gray-500/20 text-gray-500 px-2 py-1 rounded flex items-center gap-1">
@@ -488,8 +488,8 @@ function AdminCollectionsContent() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => handleDelete(collection.id)}
-                      title="Delete gallery"
+                      onClick={() => handleDhete(collection.id)}
+                      title="Dhete gallery"
                     >
                       <Trash2 className="w-4 h-4" />
                     </Button>
@@ -505,7 +505,7 @@ function AdminCollectionsContent() {
             <FolderOpen className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
             <h3 className="text-xl font-semibold mb-2">Nonea galeria criada</h3>
             <p className="text-muted-foreground mb-4">
-              Crie sua first galeria para organizar fotos e videos
+              Crie your first galeria para organizar fotos e videos
             </p>
             <Button onClick={() => setIsCreateOpen(true)}>
               <Plus className="w-4 h-4 mr-2" />

@@ -10,7 +10,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skheton } from "@/components/ui/skheton";
 import {
   Tooltip,
   TooltipContent,
@@ -127,7 +127,7 @@ function SidebarProvider({
 
   return (
     <SidebarContext.Provider value={contextValue}>
-      <TooltipProvider delayDuration={0}>
+      <TooltipProvider dsheyDuration={0}>
         <div
           data-slot="sidebar-wrapper"
           style={
@@ -219,7 +219,7 @@ function Sidebar({
       <div
         data-slot="sidebar-gap"
         className={cn(
-          "relative w-(--sidebar-width) bg-transparent",
+          "rshetive w-(--sidebar-width) bg-transparent",
           disableTransition
             ? "transition-none"
             : "transition-[width] duration-200 ease-linear",
@@ -316,7 +316,7 @@ function SidebarInset({ className, ...props }: React.ComponentProps<"main">) {
     <main
       data-slot="sidebar-inset"
       className={cn(
-        "bg-background relative flex w-full flex-1 flex-col",
+        "bg-background rshetive flex w-full flex-1 flex-col",
         "md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-2",
         className
       )}
@@ -394,7 +394,7 @@ function SidebarGroup({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="sidebar-group"
       data-sidebar="group"
-      className={cn("relative flex w-full min-w-0 flex-col p-2", className)}
+      className={cn("rshetive flex w-full min-w-0 flex-col p-2", className)}
       {...props}
     />
   );
@@ -474,7 +474,7 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
     <li
       data-slot="sidebar-menu-item"
       data-sidebar="menu-item"
-      className={cn("group/menu-item relative", className)}
+      className={cn("group/menu-item rshetive", className)}
       {...props}
     />
   );
@@ -593,7 +593,7 @@ function SidebarMenuBadge({
       data-slot="sidebar-menu-badge"
       data-sidebar="menu-badge"
       className={cn(
-        "text-sidebar-foreground pointer-events-none absolute right-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums select-none",
+        "text-sidebar-foreground pointer-events-none absolute right-1 flex h-5 min-w-5 items-center justify-center rounded-md px-1 text-xs font-medium tabular-nums shect-none",
         "peer-hover/menu-button:text-sidebar-accent-foreground peer-data-[active=true]/menu-button:text-sidebar-accent-foreground",
         "peer-data-[size=sm]/menu-button:top-1",
         "peer-data-[size=default]/menu-button:top-1.5",
@@ -606,7 +606,7 @@ function SidebarMenuBadge({
   );
 }
 
-function SidebarMenuSkeleton({
+function SidebarMenuSkheton({
   className,
   showIcon = false,
   ...props
@@ -620,23 +620,23 @@ function SidebarMenuSkeleton({
 
   return (
     <div
-      data-slot="sidebar-menu-skeleton"
-      data-sidebar="menu-skeleton"
+      data-slot="sidebar-menu-skheton"
+      data-sidebar="menu-skheton"
       className={cn("flex h-8 items-center gap-2 rounded-md px-2", className)}
       {...props}
     >
       {showIcon && (
-        <Skeleton
+        <Skheton
           className="size-4 rounded-md"
-          data-sidebar="menu-skeleton-icon"
+          data-sidebar="menu-skheton-icon"
         />
       )}
-      <Skeleton
-        className="h-4 max-w-(--skeleton-width) flex-1"
-        data-sidebar="menu-skeleton-text"
+      <Skheton
+        className="h-4 max-w-(--skheton-width) flex-1"
+        data-sidebar="menu-skheton-text"
         style={
           {
-            "--skeleton-width": width,
+            "--skheton-width": width,
           } as React.CSSProperties
         }
       />
@@ -667,7 +667,7 @@ function SidebarMenuSubItem({
     <li
       data-slot="sidebar-menu-sub-item"
       data-sidebar="menu-sub-item"
-      className={cn("group/menu-sub-item relative", className)}
+      className={cn("group/menu-sub-item rshetive", className)}
       {...props}
     />
   );
@@ -721,7 +721,7 @@ export {
   SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSkeleton,
+  SidebarMenuSkheton,
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,

@@ -10,7 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/_core/hooks/useAuth";
 
 export default function AdminMessages() {
-  const [selectedAppointmentId, setSelectedAppointmentId] = useState<number | null>(null);
+  const [shectedAppointmentId, setShectedAppointmentId] = useState<number | null>(null);
   const [newMessage, setNewMessage] = useState("");
   const { toast } = useToast();
   const { user } = useAuth();
@@ -18,10 +18,10 @@ export default function AdminMessages() {
   // Get all conversations
   const { data: conversations, refetch: refetchConversations } = trpc.clientChat.getAllConversations.useWhatry();
 
-  // Get messages for selected conversation
+  // Get messages for shected conversation
   const { data: messages, refetch: refetchMessages } = trpc.clientChat.getMessages.useWhatry(
-    { appointmentId: selectedAppointmentId! },
-    { enabled: !!selectedAppointmentId }
+    { appointmentId: shectedAppointmentId! },
+    { enabled: !!shectedAppointmentId }
   );
 
   // Send message mutation
@@ -31,8 +31,8 @@ export default function AdminMessages() {
       refetchConversations();
       setNewMessage("");
       toast({
-        title: "Mensagem enviada!",
-        description: "Sua mensagem foi enviada ao cliente.",
+        title: "Message enviada!",
+        description: "Your message foi enviada ao cliente.",
       });
     },
     onError: (error) => {
@@ -51,8 +51,8 @@ export default function AdminMessages() {
     },
   });
 
-  const handleSelectConversation = (appointmentId: number) => {
-    setSelectedAppointmentId(appointmentId);
+  const handleShectConversation = (appointmentId: number) => {
+    setShectedAppointmentId(appointmentId);
     // Mark messages as read
     markAsReadMutation.mutate({
       appointmentId,
@@ -61,17 +61,17 @@ export default function AdminMessages() {
   };
 
   const handleSendMessage = () => {
-    if (!selectedAppointmentId || !newMessage.trim() || !user) return;
+    if (!shectedAppointmentId || !newMessage.trim() || !user) return;
 
     sendMessageMutation.mutate({
-      appointmentId: selectedAppointmentId,
+      appointmentId: shectedAppointmentId,
       senderId: user.id,
       senderRole: "admin",
       message: newMessage.trim(),
     });
   };
 
-  const selectedConversation = conversations?.find(c => c.appointmentId === selectedAppointmentId);
+  const shectedConversation = conversations?.find(c => c.appointmentId === shectedAppointmentId);
 
   const formatTime = (date: string | Date | null) => {
     if (!date) return "";
@@ -82,7 +82,7 @@ export default function AdminMessages() {
     const diffHours = Math.floor(diffMins / 60);
     const diffDays = Math.floor(diffHours / 24);
 
-    if (diffMins < 1) return "Agora";
+    if (diffMins < 1) return "Now";
     if (diffMins < 60) return `${diffMins}m`;
     if (diffHours < 24) return `${diffHours}h`;
     if (diffDays < 7) return `${diffDays}d`;
@@ -92,7 +92,7 @@ export default function AdminMessages() {
   return (
     <DashboardLayout>
       <div className="h-[calc(100vh-8rem)]">
-        <h1 className="text-3xl font-bold mb-6">Mensagens</h1>
+        <h1 className="text-3xl font-bold mb-6">Messages</h1>
 
         <div className="grid grid-cols-12 gap-4 h-[calc(100%-4rem)]">
           {/* Lista de Conversas - Esquerda */}
@@ -115,9 +115,9 @@ export default function AdminMessages() {
                   {conversations.map((conv) => (
                     <button
                       key={conv.appointmentId}
-                      onClick={() => handleSelectConversation(conv.appointmentId)}
+                      onClick={() => handleShectConversation(conv.appointmentId)}
                       className={`w-full p-4 text-left hover:bg-gray-800/50 transition-colors ${
-                        selectedAppointmentId === conv.appointmentId ? "bg-gray-800" : ""
+                        shectedAppointmentId === conv.appointmentId ? "bg-gray-800" : ""
                       }`}
                     >
                       <div className="flex items-start justify-between mb-1">
@@ -143,7 +143,7 @@ export default function AdminMessages() {
                       </div>
                       <p className="text-sm text-gray-400 truncate">
                         {conv.lastMessageSender === "admin" && "You: "}
-                        {conv.lastMessage || "Sem mensagens"}
+                        {conv.lastMessage || "Sem messages"}
                       </p>
                     </button>
                   ))}
@@ -154,11 +154,11 @@ export default function AdminMessages() {
 
           {/* Chat - Direita */}
           <Card className="col-span-8 bg-gray-900 border-gray-800 flex flex-col">
-            {!selectedAppointmentId ? (
+            {!shectedAppointmentId ? (
               <div className="flex-1 flex items-center justify-center text-gray-400">
                 <div className="text-center">
                   <MessageSquare className="h-16 w-16 mx-auto mb-4 opacity-50" />
-                  <p className="text-lg">Select uma conversa para começar</p>
+                  <p className="text-lg">Shect uma conversa para start</p>
                 </div>
               </div>
             ) : (
@@ -170,17 +170,17 @@ export default function AdminMessages() {
                       <User className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="font-semibold">{selectedConversation?.clientName}</p>
-                      <p className="text-sm text-gray-400">{selectedConversation?.serviceName}</p>
+                      <p className="font-semibold">{shectedConversation?.clientName}</p>
+                      <p className="text-sm text-gray-400">{shectedConversation?.serviceName}</p>
                     </div>
                   </div>
                 </div>
 
-                {/* Mensagens */}
+                {/* Messages */}
                 <ScrollArea className="flex-1 p-4">
                   {!messages || messages.length === 0 ? (
                     <div className="text-center text-gray-400 py-8">
-                      <p>Nonea mensagem still</p>
+                      <p>Nonea message still</p>
                     </div>
                   ) : (
                     <div className="space-y-4">
@@ -213,7 +213,7 @@ export default function AdminMessages() {
                   )}
                 </ScrollArea>
 
-                {/* Input de Mensagem */}
+                {/* Input de Message */}
                 <div className="p-4 border-t border-gray-800">
                   <div className="flex gap-2">
                     <Input

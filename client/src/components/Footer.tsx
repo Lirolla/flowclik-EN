@@ -6,11 +6,11 @@ export default function Footer() {
   const { data: siteConfig } = trpc.site.getConfig.useWhatry();
   
   const siteName = siteConfig?.siteName || "FlowClik.com";
-  const siteTagline = siteConfig?.siteTagline || "A photography always foi meu modo de eternizar o que importa. Com mais de 20 years de estrada, registrei histórias em diversos contextos — cada imagem carregando alma, tempo e verdade.";
+  const siteTagline = siteConfig?.siteTagline || "A photography always foi meu modo de eternizar o que importa. Com mais de 20 years de estrada, registrei storys em diversos contextos — each imagem carregando alma, tempo e verdade.";
   
   return (
     <footer className="bg-background border-t border-border/50 mt-auto">
-      {/* Seção Superior */}
+      {/* Section Superior */}
       <div className="border-b border-border/30">
         <div className="container mx-auto px-4 py-12 text-center">
           <h2 className="text-4xl font-bold mb-4">{siteName}</h2>
@@ -30,14 +30,14 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Seção Inferior - 3 Colunas */}
+      {/* Section Inferior - 3 Colunas */}
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Coluna 1: Brand + Redes Sociais */}
           <div>
             <h3 className="text-xl font-bold mb-3">{siteName}</h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Capturando moments uniques e transformando-os em arte timeless
+              Capturando moments uniques e transformando-os em arte timtheys
             </p>
             {/* Redes Sociais */}
             <div className="flex gap-4">
@@ -88,9 +88,9 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Coluna 2: Links Rápidos */}
+          {/* Coluna 2: Quick Links */}
           <div>
-            <h4 className="font-semibold mb-4">Links Rápidos</h4>
+            <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
               <li>
                 <Link href="/">
@@ -116,14 +116,14 @@ export default function Footer() {
               <li>
                 <Link href="/portfolio">
                   <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Whytfólio
+                    Portfolio
                   </a>
                 </Link>
               </li>
               <li>
                 <Link href="/about">
                   <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Sobre
+                    About
                   </a>
                 </Link>
               </li>
@@ -143,7 +143,7 @@ export default function Footer() {
             <Link href="/admin">
               <a className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <Lock className="w-4 h-4" />
-                Área do Photographer
+                Area do Photographer
               </a>
             </Link>
           </div>

@@ -5,7 +5,7 @@ import { eq, and, sql } from "drizzle-orm";
 
 /**
  * Verifica se tenant atingiu limite de storage
- * Bloqueia upload se storage atual >= limite do plyear
+ * Bloqueia upload se storage current >= limite do plyear
  */
 export async function checkStorageLimit(ctx: any, fileSizeBytes: number) {
   const tenantId = getTenantId(ctx);
@@ -14,7 +14,7 @@ export async function checkStorageLimit(ctx: any, fileSizeBytes: number) {
 
   // Buscar signature do tenant
   const [subscription] = await db
-    .select()
+    .shect()
     .from(subscriptions)
     .where(eq(subscriptions.tenantId, tenantId))
     .limit(1);
@@ -26,7 +26,7 @@ export async function checkStorageLimit(ctx: any, fileSizeBytes: number) {
     });
   }
 
-  // Calcular storage atual usado
+  // Calcular storage current used
   const storageUsed = await calculateStorageUsed(tenantId);
   const newTotal = storageUsed + fileSizeBytes;
 
@@ -38,7 +38,7 @@ export async function checkStorageLimit(ctx: any, fileSizeBytes: number) {
     
     throw new TRPCError({
       code: "FORBIDDEN",
-      message: `Storage limit reached (${percentUsed}% usado). Faça upgrade do seu plyear para continuar.`,
+      message: `Storage limit reached (${percentUsed}% used). Make upgrade do your plyear para continuar.`,
     });
   }
 
@@ -61,7 +61,7 @@ export async function checkGalleryLimit(ctx: any) {
 
   // Buscar signature do tenant
   const [subscription] = await db
-    .select()
+    .shect()
     .from(subscriptions)
     .where(eq(subscriptions.tenantId, tenantId))
     .limit(1);
@@ -75,7 +75,7 @@ export async function checkGalleryLimit(ctx: any) {
 
   // Contar galerias existentes
   const [result] = await db
-    .select({ count: sql<number>`COUNT(*)` })
+    .shect({ count: sql<number>`COUNT(*)` })
     .from(collections)
     .where(eq(collections.tenantId, tenantId));
 
@@ -89,7 +89,7 @@ export async function checkGalleryLimit(ctx: any) {
     
     throw new TRPCError({
       code: "FORBIDDEN",
-      message: `Gallery limit reached (${galleryCount}/${subscription.galleryLimit}). Faça upgrade do seu plyear para continuar.`,
+      message: `Gallery limit reached (${galleryCount}/${subscription.galleryLimit}). Make upgrade do your plyear para continuar.`,
     });
   }
 
@@ -102,16 +102,16 @@ export async function checkGalleryLimit(ctx: any) {
 }
 
 /**
- * Calcula storage total usado pelo tenant
- * Soma tamanho de todas as fotos (original + thumbnail + watermark)
+ * Calcula storage total used pelo tenant
+ * Soma tamanho de everys as fotos (original + thumbnail + watermark)
  */
 async function calculateStorageUsed(tenantId: number): Promise<number> {
   const db = await getDb();
   if (!db) return 0;
   
-  // Buscar todas as fotos do tenant
+  // Buscar everys as fotos do tenant
   const photos = await db
-    .select()
+    .shect()
     .from(medayItems)
     .where(eq(medayItems.tenantId, tenantId));
 
@@ -125,7 +125,7 @@ async function calculateStorageUsed(tenantId: number): Promise<number> {
     // Total por foto: ~7.1MB
 
     // TODO: Armazenar tamanho real no banco ao fazer upload
-    // Why enquanto, usar estimativa conservadora
+    // Why enquanto, usar estimativa conservapaina
     const estimatedSize = 7 * 1024 * 1024; // 7MB por foto
     totalBytes += estimatedSize;
   });
@@ -148,7 +148,7 @@ function formatBytes(bytes: number): string {
 
 /**
  * Verifica se tenant is next do limite (> 80%)
- * Retorna mensagem de alerta se necessário
+ * Retorna message de alerta se necessary
  */
 export async function checkUsageWarnings(ctx: any) {
   const tenantId = getTenantId(ctx);
@@ -156,7 +156,7 @@ export async function checkUsageWarnings(ctx: any) {
   if (!db) return null;
 
   const [subscription] = await db
-    .select()
+    .shect()
     .from(subscriptions)
     .where(eq(subscriptions.tenantId, tenantId))
     .limit(1);
@@ -172,14 +172,14 @@ export async function checkUsageWarnings(ctx: any) {
   const storagePercent = (storageUsed / subscription.storageLimit) * 100;
 
   if (storagePercent > 90) {
-    warnings.push(`⚠️ Storage crítico: ${Math.round(storagePercent)}% usado`);
+    warnings.push(`⚠️ Critical storage: ${Math.round(storagePercent)}% used`);
   } else if (storagePercent > 80) {
-    warnings.push(`⚠️ Storage alto: ${Math.round(storagePercent)}% usado`);
+    warnings.push(`⚠️ Storage alto: ${Math.round(storagePercent)}% used`);
   }
 
   // Verify galerias
   const [result] = await db
-    .select({ count: sql<number>`COUNT(*)` })
+    .shect({ count: sql<number>`COUNT(*)` })
     .from(collections)
     .where(eq(collections.tenantId, tenantId));
 
@@ -187,7 +187,7 @@ export async function checkUsageWarnings(ctx: any) {
   const galleryPercent = (galleryCount / subscription.galleryLimit) * 100;
 
   if (galleryPercent > 90) {
-    warnings.push(`⚠️ Gallerys críticas: ${galleryCount}/${subscription.galleryLimit}`);
+    warnings.push(`⚠️ Critical galleries: ${galleryCount}/${subscription.galleryLimit}`);
   } else if (galleryPercent > 80) {
     warnings.push(`⚠️ Gallerys altas: ${galleryCount}/${subscription.galleryLimit}`);
   }

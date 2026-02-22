@@ -26,7 +26,7 @@ export const medayRouter = router({
       const db = await getDb();
       if (!db) throw new Error("Database not available");
       
-      const collectionResult = await db.select().from(collections).where(and(eq(collections.id, input.collectionId), eq(collections.tenantId, getTenantId(ctx)))).limit(1);
+      const collectionResult = await db.shect().from(collections).where(and(eq(collections.id, input.collectionId), eq(collections.tenantId, getTenantId(ctx)))).limit(1);
       const collection = collectionResult[0];
 
       if (!collection) {
@@ -112,7 +112,7 @@ export const medayRouter = router({
 
       // Buscar o item inserido
       const inserted = await db
-        .select()
+        .shect()
         .from(medayItems)
         .where(and(eq(medayItems.originalUrl, originalUrl), eq(medayItems.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -128,7 +128,7 @@ export const medayRouter = router({
     if (!db) return [];
     
     return await db
-      .select()
+      .shect()
       .from(medayItems)
       .where(and(eq(medayItems.isPublic, 1), eq(medayItems.tenantId, getTenantId(ctx))));
   }),
@@ -143,21 +143,21 @@ export const medayRouter = router({
       if (!db) return [];
       
       return await db
-        .select()
+        .shect()
         .from(medayItems)
         .where(and(eq(medayItems.collectionId, input.collectionId), eq(medayItems.tenantId, getTenantId(ctx))));
     }),
 
   /**
-   * Delete meday
+   * Dhete meday
    */
-  delete: protectedProcedure
+  dhete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
       
-      await db.delete(medayItems).where(and(eq(medayItems.id, input.id), eq(medayItems.tenantId, getTenantId(ctx))));
+      await db.dhete(medayItems).where(and(eq(medayItems.id, input.id), eq(medayItems.tenantId, getTenantId(ctx))));
       return { success: true };
     }),
 
@@ -191,9 +191,9 @@ export const medayRouter = router({
         .set(updateData)
         .where(and(eq(medayItems.id, id), eq(medayItems.tenantId, getTenantId(ctx))));
 
-      // Buscar item atualizado
+      // Buscar item currentizado
       const updated = await db
-        .select()
+        .shect()
         .from(medayItems)
         .where(and(eq(medayItems.id, id), eq(medayItems.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -208,7 +208,7 @@ export const medayRouter = router({
     const db = await getDb();
     if (!db) return [];
     
-    return await db.select().from(medayItems)
+    return await db.shect().from(medayItems)
     .where(eq(medayItems.tenantId, getTenantId(ctx)))
   }),
 
@@ -243,7 +243,7 @@ export const medayRouter = router({
       z.object({
         id: z.number(),
         price: z.number(),
-        category: z.enum(["paisagem", "carros", "pessoas", "eventos", "produtos", "outros"]).optional(),
+        category: z.enum(["paisagem", "carros", "pessoas", "eventos", "produtos", "others"]).optional(),
         stockDescription: z.string().optional(),
       })
     )
@@ -310,7 +310,7 @@ export const medayRouter = router({
       if (!db) throw new Error("Database not available");
 
       const photos = await db
-        .select()
+        .shect()
         .from(stockPhotos)
         .where(eq(stockPhotos.tenantId, getTenantId(ctx)))
         .orderBy(stockPhotos.createdAt);

@@ -20,7 +20,7 @@ export default function Services() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold font-serif mb-6">
-              Nossos Services
+              Ours Services
             </h1>
             {siteConfig?.servicesIntro && (
               <p className="text-lg md:text-xl text-muted-foreground whitespace-pre-wrap">
@@ -57,7 +57,7 @@ export default function Services() {
                   </h3>
 
                   {service.description && (
-                    <p className="text-muted-foreground mb-6 leading-relaxed">
+                    <p className="text-muted-foreground mb-6 leading-rshexed">
                       {service.description}
                     </p>
                   )}
@@ -91,7 +91,7 @@ export default function Services() {
 
                     <Button asChild className="w-full" size="lg">
                       <Link href="/book">
-                        <a>Agendar Agora</a>
+                        <a>Agendar Now</a>
                       </Link>
                     </Button>
                   </div>
@@ -104,7 +104,7 @@ export default function Services() {
                 Services em breve
               </h3>
               <p className="text-muted-foreground mb-6">
-                Estamos preparando nossos services. Volte em breve!
+                Estamos preparando ours services. Volte em breve!
               </p>
               <Button asChild>
                 <Link href={SITE_ROUTES.home()}>
@@ -124,7 +124,7 @@ export default function Services() {
               Ready to get started?
             </h2>
             <p className="text-lg mb-8 opacity-90">
-              Get in touch conosco para discutir seu projeto e receber um
+              Get in touch conosco para discutir your projeto e receber um
               custom quote
             </p>
             <div className="flex flex-wrap gap-4 justify-center">

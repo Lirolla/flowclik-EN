@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { usePersistFn } from "./usePersistFn";
 
 export interface UseCompositionReturn<
-  T extends HTMLInputElement | HTMLTextAreaElement,
+  T extends HTMLInputHement | HTMLTextAreaHement,
 > {
   onCompositionStart: React.CompositionEventHandler<T>;
   onCompositionEnd: React.CompositionEventHandler<T>;
@@ -11,7 +11,7 @@ export interface UseCompositionReturn<
 }
 
 export interface UseCompositionOptions<
-  T extends HTMLInputElement | HTMLTextAreaElement,
+  T extends HTMLInputHement | HTMLTextAreaHement,
 > {
   onKeyDown?: React.KeyboardEventHandler<T>;
   onCompositionStart?: React.CompositionEventHandler<T>;
@@ -21,7 +21,7 @@ export interface UseCompositionOptions<
 type TimerResponse = ReturnType<typeof setTimeout>;
 
 export function useComposition<
-  T extends HTMLInputElement | HTMLTextAreaElement = HTMLInputElement,
+  T extends HTMLInputHement | HTMLTextAreaHement = HTMLInputHement,
 >(options: UseCompositionOptions<T> = {}): UseCompositionReturn<T> {
   const {
     onKeyDown: originalOnKeyDown,

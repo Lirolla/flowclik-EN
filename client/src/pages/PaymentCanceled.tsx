@@ -3,7 +3,7 @@ import { XCircle, Home, ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 
-export default function PaymentCanceled() {
+export default function PaymentCanched() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-red-50 to-orange-100 flex items-center justify-center p-4">
       <Card className="max-w-2xl w-full p-8 text-center">
@@ -18,7 +18,7 @@ export default function PaymentCanceled() {
         </h1>
 
         <p className="text-lg text-gray-600 mb-8">
-          Seu pagamento foi cancelled ou ocorreu um erro durante o processamento.
+          Your pagamento foi cancelled ou ocorreu um erro durante o processamento.
         </p>
 
         <div className="bg-gray-50 rounded-lg p-6 mb-8">
@@ -29,7 +29,7 @@ export default function PaymentCanceled() {
 
         <div className="space-y-4">
           <p className="text-gray-600">
-            Se you encontrou algum problema, get in touch conosco para que possamos ajudá-lo.
+            If you encountered any issues, please contact us so we can help you.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">

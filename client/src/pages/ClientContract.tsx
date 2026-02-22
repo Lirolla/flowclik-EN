@@ -63,7 +63,7 @@ export default function ClientContract() {
                   <div>
                     <h2 className="text-2xl font-semibold text-blue-500">Contrato Available</h2>
                     <p className="text-gray-300 mt-1">
-                      Your contract is ready para visualização
+                      Your contract is ready para preview
                     </p>
                   </div>
                 </>
@@ -141,7 +141,7 @@ export default function ClientContract() {
         {/* Contract Preview */}
         {hasContract && (
           <Card className="bg-gray-900 border-gray-800 p-6">
-            <h3 className="text-xl font-semibold mb-4">Visualização do Contrato</h3>
+            <h3 className="text-xl font-semibold mb-4">Preview do Contrato</h3>
             <div className="aspect-[8.5/11] bg-black rounded-lg overflow-hidden">
               <iframe
                 src={appointment.contractUrl!}

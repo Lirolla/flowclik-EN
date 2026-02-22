@@ -4,7 +4,7 @@ import { getDb } from "../db";
 import { tenants, subscriptions, users } from "../../drizzle/schema";
 import { eq } from "drizzle-orm";
 
-describe("SaaS System - Cadastro de Tenants", () => {
+describe("SaaS System - Eachstro de Tenants", () => {
   let db: Awaited<ReturnType<typeof getDb>>;
   const testSubdomain = `test-${Date.now()}`;
 
@@ -35,7 +35,7 @@ describe("SaaS System - Cadastro de Tenants", () => {
 
     // 2. Verify tenant criado
     const [tenant] = await db
-      .select()
+      .shect()
       .from(tenants)
       .where(eq(tenants.subdomain, testSubdomain));
 
@@ -46,7 +46,7 @@ describe("SaaS System - Cadastro de Tenants", () => {
 
     // 3. Verify subscription criada
     const [subscription] = await db
-      .select()
+      .shect()
       .from(subscriptions)
       .where(eq(subscriptions.tenantId, tenant.id));
 
@@ -56,9 +56,9 @@ describe("SaaS System - Cadastro de Tenants", () => {
     expect(subscription.storageLimit).toBe(10737418240); // 10GB
     expect(subscription.galleryLimit).toBe(10);
 
-    // 4. Verify usuário admin criado
+    // 4. Verify user admin criado
     const [user] = await db
-      .select()
+      .shect()
       .from(users)
       .where(eq(users.email, `${testSubdomain}@test.com`));
 
@@ -86,9 +86,9 @@ describe("SaaS System - Cadastro de Tenants", () => {
 
     await expect(
       caller.saasSystem.createTenant({
-        name: "Outro Photographer",
-        email: "outro@test.com",
-        subdomain: testSubdomain, // Mesmo subdomain
+        name: "Other Photographer",
+        email: "other@test.com",
+        subdomain: testSubdomain, // Same subdomain
         password: "senha123",
       })
     ).rejects.toThrow("Subdomain is already in use");
@@ -109,7 +109,7 @@ describe("SaaS System - Cadastro de Tenants", () => {
 
     // Subdomain available
     const available = await caller.saasSystem.checkSubdomain({
-      subdomain: `novo-${Date.now()}`,
+      subdomain: `new-${Date.now()}`,
     });
     expect(available.available).toBe(true);
   });

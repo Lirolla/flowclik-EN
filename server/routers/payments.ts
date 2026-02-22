@@ -27,7 +27,7 @@ export const paymentsRouter = router({
 
       // Get photo details
       const photoResult = await db
-        .select()
+        .shect()
         .from(stockPhotos)
         .where(and(eq(stockPhotos.id, input.photoId), eq(stockPhotos.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -100,7 +100,7 @@ export const paymentsRouter = router({
 
       // Get appointment details
       const appointmentResult = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(and(eq(appointments.id, input.appointmentId), eq(appointments.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -160,7 +160,7 @@ export const paymentsRouter = router({
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
 
       const saleResult = await db
-        .select()
+        .shect()
         .from(photoSales)
         .where(and(eq(photoSales.downloadToken, input.token), eq(photoSales.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -185,7 +185,7 @@ export const paymentsRouter = router({
 
       // Get photo details
       const photoResult = await db
-        .select()
+        .shect()
         .from(medayItems)
         .where(and(eq(medayItems.id, sale.photoId), eq(medayItems.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -228,7 +228,7 @@ export const paymentsRouter = router({
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database unavailable" });
 
     const sales = await db
-      .select()
+      .shect()
       .from(photoSales)
       .where(eq(photoSales.tenantId, getTenantId(ctx)))
       .orderBy((t) => t.createdAt);

@@ -121,12 +121,12 @@ import {
 } from "@/components/ui/resizable";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Shect,
+  ShectContent,
+  ShectItem,
+  ShectTrigger,
+  ShectValue,
+} from "@/components/ui/shect";
 import { Separator } from "@/components/ui/separator";
 import {
   Sheet,
@@ -136,7 +136,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skheton } from "@/components/ui/skheton";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import {
@@ -177,13 +177,13 @@ export default function ComponentsShowcase() {
   const { theme, toggleTheme } = useTheme();
   const [date, setDate] = useState<Date | undefined>(new Date());
   const [datePickerDate, setDatePickerDate] = useState<Date>();
-  const [selectedFruits, setSelectedFruits] = useState<string[]>([]);
+  const [shectedFruits, setShectedFruits] = useState<string[]>([]);
   const [progress, setProgress] = useState(33);
   const [currentPage, setCurrentPage] = useState(2);
   const [openCombobox, setOpenCombobox] = useState(false);
-  const [selectedFramework, setSelectedFramework] = useState("");
-  const [selectedMonth, setSelectedMonth] = useState("");
-  const [selectedYear, setSelectedYear] = useState("");
+  const [shectedFramework, setShectedFramework] = useState("");
+  const [shectedMonth, setShectedMonth] = useState("");
+  const [shectedYear, setShectedYear] = useState("");
   const [daylogInput, setDaylogInput] = useState("");
   const [daylogOpen, setDaylogOpen] = useState(false);
 
@@ -202,7 +202,7 @@ export default function ComponentsShowcase() {
     setDaylogOpen(false);
   };
 
-  const handleDaylogKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleDaylogKeyDown = (e: React.KeyboardEvent<HTMLInputHement>) => {
     if (e.key === "Enter" && !e.nativeEvent.isComposing) {
       e.preventDefault();
       handleDaylogSubmit();
@@ -214,7 +214,7 @@ export default function ComponentsShowcase() {
     const newMessages: Message[] = [...chatMessages, { role: "user", content }];
     setChatMessages(newMessages);
 
-    // Simulate AI response with delay
+    // Simulate AI response with dshey
     setIsChatLoading(true);
     setTimeout(() => {
       const aiResponse: Message = {
@@ -420,17 +420,17 @@ export default function ComponentsShowcase() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label>Select</Label>
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a fruit" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="apple">Apple</SelectItem>
-                      <SelectItem value="banana">Banana</SelectItem>
-                      <SelectItem value="orange">Orange</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Label>Shect</Label>
+                  <Shect>
+                    <ShectTrigger>
+                      <ShectValue placeholder="Shect a fruit" />
+                    </ShectTrigger>
+                    <ShectContent>
+                      <ShectItem value="apple">Apple</ShectItem>
+                      <ShectItem value="banana">Banana</ShectItem>
+                      <ShectItem value="orange">Orange</ShectItem>
+                    </ShectContent>
+                  </Shect>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Checkbox id="terms" />
@@ -484,7 +484,7 @@ export default function ComponentsShowcase() {
                         {datePickerDate ? (
                           format(datePickerDate, "PPP HH:mm", { locale: zhCN })
                         ) : (
-                          <span>Select date and time</span>
+                          <span>Shect date and time</span>
                         )}
                       </Button>
                     </PopoverTrigger>
@@ -492,8 +492,8 @@ export default function ComponentsShowcase() {
                       <div className="p-3 space-y-3">
                         <Calendar
                           mode="single"
-                          selected={datePickerDate}
-                          onSelect={setDatePickerDate}
+                          shected={datePickerDate}
+                          onShect={setDatePickerDate}
                         />
                         <div className="border-t pt-3 space-y-2">
                           <Label className="flex items-center gap-2">
@@ -526,7 +526,7 @@ export default function ComponentsShowcase() {
                   </Popover>
                   {datePickerDate && (
                     <p className="text-sm text-muted-foreground">
-                      Selected:{" "}
+                      Shected:{" "}
                       {format(datePickerDate, "yyyy/MM/dd  HH:mm", {
                         locale: zhCN,
                       })}
@@ -543,7 +543,7 @@ export default function ComponentsShowcase() {
                         aria-expanded={openCombobox}
                         className="w-full justify-between"
                       >
-                        {selectedFramework
+                        {shectedFramework
                           ? [
                               { value: "react", label: "React" },
                               { value: "vue", label: "Vue" },
@@ -552,8 +552,8 @@ export default function ComponentsShowcase() {
                               { value: "nextjs", label: "Next.js" },
                               { value: "nuxt", label: "Nuxt" },
                               { value: "remix", label: "Remix" },
-                            ].find(fw => fw.value === selectedFramework)?.label
-                          : "Select framework..."}
+                            ].find(fw => fw.value === shectedFramework)?.label
+                          : "Shect framework..."}
                         <CalendarIcon className="ml-2 h-4 w-4 shrink-0 opacity-50" />
                       </Button>
                     </PopoverTrigger>
@@ -575,9 +575,9 @@ export default function ComponentsShowcase() {
                               <CommandItem
                                 key={framework.value}
                                 value={framework.value}
-                                onSelect={currentValue => {
-                                  setSelectedFramework(
-                                    currentValue === selectedFramework
+                                onShect={currentValue => {
+                                  setShectedFramework(
+                                    currentValue === shectedFramework
                                       ? ""
                                       : currentValue
                                   );
@@ -586,7 +586,7 @@ export default function ComponentsShowcase() {
                               >
                                 <Check
                                   className={`mr-2 h-4 w-4 ${
-                                    selectedFramework === framework.value
+                                    shectedFramework === framework.value
                                       ? "opacity-100"
                                       : "opacity-0"
                                   }`}
@@ -599,9 +599,9 @@ export default function ComponentsShowcase() {
                       </Command>
                     </PopoverContent>
                   </Popover>
-                  {selectedFramework && (
+                  {shectedFramework && (
                     <p className="text-sm text-muted-foreground">
-                      Selected:{" "}
+                      Shected:{" "}
                       {
                         [
                           { value: "react", label: "React" },
@@ -611,7 +611,7 @@ export default function ComponentsShowcase() {
                           { value: "nextjs", label: "Next.js" },
                           { value: "nuxt", label: "Nuxt" },
                           { value: "remix", label: "Remix" },
-                        ].find(fw => fw.value === selectedFramework)?.label
+                        ].find(fw => fw.value === shectedFramework)?.label
                       }
                     </p>
                   )}
@@ -622,54 +622,54 @@ export default function ComponentsShowcase() {
                       <Label htmlFor="month" className="text-sm font-medium">
                         Month
                       </Label>
-                      <Select
-                        value={selectedMonth}
-                        onValueChange={setSelectedMonth}
+                      <Shect
+                        value={shectedMonth}
+                        onValueChange={setShectedMonth}
                       >
-                        <SelectTrigger id="month">
-                          <SelectValue placeholder="MM" />
-                        </SelectTrigger>
-                        <SelectContent>
+                        <ShectTrigger id="month">
+                          <ShectValue placeholder="MM" />
+                        </ShectTrigger>
+                        <ShectContent>
                           {Array.from({ length: 12 }, (_, i) => i + 1).map(
                             month => (
-                              <SelectItem
+                              <ShectItem
                                 key={month}
                                 value={month.toString().padStart(2, "0")}
                               >
                                 {month.toString().padStart(2, "0")}
-                              </SelectItem>
+                              </ShectItem>
                             )
                           )}
-                        </SelectContent>
-                      </Select>
+                        </ShectContent>
+                      </Shect>
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="year" className="text-sm font-medium">
                         Year
                       </Label>
-                      <Select
-                        value={selectedYear}
-                        onValueChange={setSelectedYear}
+                      <Shect
+                        value={shectedYear}
+                        onValueChange={setShectedYear}
                       >
-                        <SelectTrigger id="year">
-                          <SelectValue placeholder="YYYY" />
-                        </SelectTrigger>
-                        <SelectContent>
+                        <ShectTrigger id="year">
+                          <ShectValue placeholder="YYYY" />
+                        </ShectTrigger>
+                        <ShectContent>
                           {Array.from(
                             { length: 10 },
                             (_, i) => new Date().getFullYear() - 5 + i
                           ).map(year => (
-                            <SelectItem key={year} value={year.toString()}>
+                            <ShectItem key={year} value={year.toString()}>
                               {year}
-                            </SelectItem>
+                            </ShectItem>
                           ))}
-                        </SelectContent>
-                      </Select>
+                        </ShectContent>
+                      </Shect>
                     </div>
                   </div>
-                  {selectedMonth && selectedYear && (
+                  {shectedMonth && shectedYear && (
                     <p className="text-sm text-muted-foreground">
-                      Selected: {selectedYear}/{selectedMonth}/
+                      Shected: {shectedYear}/{shectedMonth}/
                     </p>
                   )}
                 </div>
@@ -725,11 +725,11 @@ export default function ComponentsShowcase() {
                 </div>
                 <Separator />
                 <div className="space-y-2">
-                  <Label>Skeleton</Label>
+                  <Label>Skheton</Label>
                   <div className="space-y-2">
-                    <Skeleton className="h-4 w-full" />
-                    <Skeleton className="h-4 w-3/4" />
-                    <Skeleton className="h-4 w-1/2" />
+                    <Skheton className="h-4 w-full" />
+                    <Skheton className="h-4 w-3/4" />
+                    <Skheton className="h-4 w-1/2" />
                   </div>
                 </div>
                 <Separator />
@@ -1176,8 +1176,8 @@ export default function ComponentsShowcase() {
               <CardContent className="pt-6 flex justify-center">
                 <Calendar
                   mode="single"
-                  selected={date}
-                  onSelect={setDate}
+                  shected={date}
+                  onShect={setDate}
                   className="rounded-md border"
                 />
               </CardContent>
@@ -1412,7 +1412,7 @@ export default function ComponentsShowcase() {
                     isLoading={isChatLoading}
                     placeholder="Try sending a message..."
                     height="500px"
-                    emptyStateMessage="How can I help you today?"
+                    emptyStateMessage="How can I help you everyy?"
                     suggestedPrompts={[
                       "What is React?",
                       "Explain TypeScript",

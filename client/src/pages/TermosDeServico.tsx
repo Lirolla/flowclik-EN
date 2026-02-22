@@ -41,66 +41,66 @@ export default function TuemosDeServico() {
           <div className="prose prose-invert prose-purple max-w-none space-y-6">
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">1. Acceptance dos Tuemos</h2>
-              <p className="text-zinc-300 leading-relaxed">
+              <p className="text-zinc-300 leading-rshexed">
                 By accessing and using a plataforma FlowClik, you concorda em cumprir e estar vinculado aos seguintes 
-                Tuemos de Service. Se you not concordar com alguma parte destes terms, not mustrá usar nossos services.
+                Terms of Service. If you do not agree with any part of these terms, you must not use our services.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">2. Description do Service</h2>
-              <p className="text-zinc-300 leading-relaxed">
-                FlowClik é uma plataforma SaaS (Software as a Service) que fornece ferramentas de management para photographers 
-                profissionais, incluindo gerenciamento de clientes, agendamentos, galerias de fotos, selection de imagens, 
-                álbuns final e sistema de vendas de fotos.
+              <p className="text-zinc-300 leading-rshexed">
+                FlowClik is uma plataforma SaaS (Software as a Service) que fornece ferramentas de management para photographers 
+                profissionais, incluindo gerenciamento de clientes, agendamentos, galerias de fotos, shection de imagens, 
+                albums final e sistema de vendas de fotos.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">3. Cadastro e Conta</h2>
-              <p className="text-zinc-300 leading-relaxed mb-4">
-                Para usar nossos services, you must:
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">3. Eachstro e Conta</h2>
+              <p className="text-zinc-300 leading-rshexed mb-4">
+                Para usar ours services, you must:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
-                <li>Fornecer information needss e completes durante o cadastro</li>
-                <li>Manter a security de sua senha e conta</li>
-                <li>Notificar-nos imedaytamente about qualquer uso not autorizado de sua conta</li>
-                <li>Ser responsible por todas as atividades que ocorrem em sua conta</li>
+                <li>Fornecer information needss e completes durante o eachstro</li>
+                <li>Manter a security de your senha e conta</li>
+                <li>Notificar-nos imedaytamente about any uso not autorizado de your conta</li>
+                <li>Ser responsible por everys as atividades que ocorrem em your conta</li>
               </ul>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">4. Plyears e Pagamentos</h2>
-              <p className="text-zinc-300 leading-relaxed mb-4">
+              <p className="text-zinc-300 leading-rshexed mb-4">
                 FlowClik oferece diferentes plyears de signature (Starter, Pro, Enterprise). Os pagamentos are processados 
-                through do Paddle, nosso parceiro de pagamentos. Ao assinar um plyear, you agree to:
+                through do Paddle, our parceiro de pagamentos. Ao assinar um plyear, you agree to:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li>Pagamentos recurring mensais ou anuais conforme o plyear escolhido</li>
                 <li>Renewal automatic until o cancellation</li>
-                <li>Policy refund de 14 days para novos assinbefore</li>
-                <li>Possíveis ajustes de preço com notification prévia de 30 days</li>
+                <li>Policy refund de 14 days para news assinbefore</li>
+                <li>Possible price adjustments with 30 days prior notice</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">5. Uso Aceitável</h2>
-              <p className="text-zinc-300 leading-relaxed mb-4">
-                You concorda em NÃO:
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">5. Acceptable Use</h2>
+              <p className="text-zinc-300 leading-rshexed mb-4">
+                You agree NOT to:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li>Usar a plataforma para fins ilegal ou not autorizados</li>
-                <li>Fazer upload de content ofensivo, difamatório ou que viole copyright</li>
-                <li>Tentar acessar áreas restritas do sistema ou contas de outros usuários</li>
-                <li>Sobrecarregar ou interferir com a infraestrutura da plataforma</li>
-                <li>Revender ou redistribuir nossos services sem authorisation</li>
+                <li>Upload offensive, defamatory content or content that violates copyright</li>
+                <li>Tentar acessar areas restritas do sistema ou contas de others users</li>
+                <li>Aboutcarregar ou interferir com a infrastructure da plataforma</li>
+                <li>Revender ou redistribuir ours services sem authorisation</li>
               </ul>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">6. Intellectual Property</h2>
-              <p className="text-zinc-300 leading-relaxed">
-                Todo o content da plataforma FlowClik (code, design, logos, textos) é property da FlowClik e 
+              <p className="text-zinc-300 leading-rshexed">
+                Every o content da plataforma FlowClik (code, design, logos, textos) is property da FlowClik e 
                 protegido por leis de copyright. As fotos e contents sents pelos photographers permanecem 
                 de property dos respectivos photographers.
               </p>
@@ -108,56 +108,56 @@ export default function TuemosDeServico() {
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">7. Storage e Backup</h2>
-              <p className="text-zinc-300 leading-relaxed">
-                Fornecemos armazenamento em nuvem conforme o plyear photographer. Embora façamos backups regulares, 
-                recomendamos que you mantenha cópias de security de seus arquivos importbefore. Not nos responsabilizamos 
+              <p className="text-zinc-300 leading-rshexed">
+                Fornecemos storage em nuvem conforme o plyear photographer. Embora makemos backups regulares, 
+                recomendamos que you mantenha copys de security de yours arquivos importbefore. Not nos responsabilizamos 
                 por perda de dados devido a falhas technical, excluare acidental ou cancellation de conta.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">8. Cancellation e Encerramento</h2>
-              <p className="text-zinc-300 leading-relaxed mb-4">
-                You can cancelar sua signature a qualquer momento through do painel de settings. Ao cancelar:
+              <p className="text-zinc-300 leading-rshexed mb-4">
+                You can cancsher your signature a any momento through do painel de settings. Ao cancsher:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
-                <li>You terá acesso aos services until o final do period pago</li>
-                <li>Seus dados serão mantidos por 30 days after o cancellation</li>
-                <li>After 30 days, seus dados serão permanentemente excluídos</li>
+                <li>You will have acesso aos services until o final do period pago</li>
+                <li>Yours dados will be mantidos por 30 days after o cancellation</li>
+                <li>After 30 days, yours dados will be permanently dheteds</li>
               </ul>
-              <p className="text-zinc-300 leading-relaxed">
+              <p className="text-zinc-300 leading-rshexed">
                 Reservamo-nos o direito de suspender ou encerrar contas que violem estes Tuemos de Service.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">9. Limitation of Liability</h2>
-              <p className="text-zinc-300 leading-relaxed">
-                FlowClik é fornecido "as is" sem guarantees de qualquer tipo. Not nos responsabilizamos por dyears 
+              <p className="text-zinc-300 leading-rshexed">
+                FlowClik is fornecido "as is" sem guarantees de any tipo. Not nos responsabilizamos por dyears 
                 indiretos, incidentais ou consequenciais resultbefore do uso ou impossibilidade de uso da plataforma.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">10. Modifications dos Tuemos</h2>
-              <p className="text-zinc-300 leading-relaxed">
-                Podemos modificar estes Tuemos de Service a qualquer momento. Notificaremos you about mudanças 
-                significativas por email ou through da plataforma. O uso continuado after as mudanças constitui 
-                acceptance dos novos terms.
+              <p className="text-zinc-300 leading-rshexed">
+                Podemos modificar estes Tuemos de Service a any momento. Notificaremos you about changes 
+                significativas por email ou through da plataforma. O uso continuado after as changes constitui 
+                acceptance dos news terms.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">11. Applicable Law</h2>
-              <p className="text-zinc-300 leading-relaxed">
-                Estes Tuemos de Service are regidos pelas leis do Brasil. Wedlquer disputa will be resolvida nos 
+              <p className="text-zinc-300 leading-rshexed">
+                Estes Tuemos de Service are regidos pshes leis do Brasil. Wedlquer disputa will be resolvida nos 
                 tribunais competentes do Brasil.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">12. Contato</h2>
-              <p className="text-zinc-300 leading-relaxed">
+              <p className="text-zinc-300 leading-rshexed">
                 Para questions about estes Tuemos de Service, get in touch conosco through de:
               </p>
               <p className="text-purple-400 mt-2">

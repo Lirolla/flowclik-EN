@@ -12,16 +12,16 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Shect,
+  ShectContent,
+  ShectItem,
+  ShectTrigger,
+  ShectValue,
+} from "@/components/ui/shect";
 import { Settings, Upload, Loader2, Image as ImageIcon, CheckCircle2, AlertCircle, Camera, Video, Briefcase, Calendar, X, Plus } from "lucide-react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { toast } from "sonner";
-// REMOVIDO: Multi-país (now 100% Brasil)
+// REMOVIDO: Multi-country (now 100% Brasil)
 // import { COUNTRIES, COUNTRY_LIST, type CountryCode } from "@/lib/currency";
 // import { COUNTRY_MAP, CountryInfo } from "../../../../shared/countryUtils";
 
@@ -38,7 +38,7 @@ function AdminSettingsContent() {
   const [businessMode, setBusinessMode] = useState<"photography_only" | "video_only" | "both">("photography_only");
   const [stockPhotosEnabled, setStockPhotosEnabled] = useState(false);
   
-  // Visual Theme
+  // Viyourl Theme
   const [siteThemeLayout, setSiteThemeLayout] = useState<"classic" | "sidebar" | "wedding" | "wedding-videos" | "editorial" | "cinematic">("classic");
   const [siteThemeMode, setSiteThemeMode] = useState<"light" | "dark">("dark");
   const [siteThemeAccentColor, setSiteThemeAccentColor] = useState<"red" | "black" | "blue">("red");
@@ -123,7 +123,7 @@ function AdminSettingsContent() {
 
   const updateBusinessModeMutation = trpc.siteConfig.updateBusinessMode.useMutation({
     onSuccess: () => {
-      toast.success("Modo de business atualizado!");
+      toast.success("Modo de business currentizado!");
     },
   });
 
@@ -136,7 +136,7 @@ function AdminSettingsContent() {
     },
   });
 
-  const deleteBlockMutation = trpc.blockedDates.delete.useMutation({
+  const dheteBlockMutation = trpc.blockedDates.dhete.useMutation({
     onSuccess: () => {
       toast.success("Bloqueio removido!");
     },
@@ -198,11 +198,11 @@ function AdminSettingsContent() {
     }
   }, [config]);
 
-  const handleLogoChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLogoChange = (e: React.ChangeEvent<HTMLInputHement>) => {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        toast.error("Why favor, select only imagens");
+        toast.error("Why favor, shect only imagens");
         return;
       }
 
@@ -320,8 +320,8 @@ function AdminSettingsContent() {
     utils.blockedDates.list.invalidate();
   };
 
-  const handleDeleteBlock = (id: number) => {
-    deleteBlockMutation.mutate({ id });
+  const handleDheteBlock = (id: number) => {
+    dheteBlockMutation.mutate({ id });
     utils.blockedDates.list.invalidate();
   };
 
@@ -389,7 +389,7 @@ function AdminSettingsContent() {
             Site Settings
           </CardTitle>
           <CardDescription>
-            Complete todas as seções para configure seu site. 🔴 Vermelho = Not preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Complete
+            Complete everys as sections para configure your site. 🔴 Vermelho = Not preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Complete
           </CardDescription>
         </CardHeader>
       </Card>
@@ -420,7 +420,7 @@ function AdminSettingsContent() {
                       }`}
                     >
                       <Camera className="w-12 h-12 mx-auto mb-3 text-blue-600" />
-                      <h3 className="font-semibold mb-2">Só Photography</h3>
+                      <h3 className="font-semibold mb-2">Photography Only</h3>
                       <p className="text-sm text-muted-foreground">
                         Foco em photography services
                       </p>
@@ -435,9 +435,9 @@ function AdminSettingsContent() {
                       }`}
                     >
                       <Video className="w-12 h-12 mx-auto mb-3 text-red-600" />
-                      <h3 className="font-semibold mb-2">Só Video</h3>
+                      <h3 className="font-semibold mb-2">Video Only</h3>
                       <p className="text-sm text-muted-foreground">
-                        Foco em produção de videos
+                        Foco em production de videos
                       </p>
                     </button>
 
@@ -455,7 +455,7 @@ function AdminSettingsContent() {
                       </div>
                       <h3 className="font-semibold mb-2">Photography + Video</h3>
                       <p className="text-sm text-muted-foreground">
-                        Ofereço ambos os services
+                        I offer both services
                       </p>
                     </button>
                   </div>
@@ -466,7 +466,7 @@ function AdminSettingsContent() {
                       <div className="space-y-1">
                         <Label className="text-base font-semibold">Ativar Stock Photos</Label>
                         <p className="text-sm text-muted-foreground">
-                          Habilite uma página public para vender fotos avulsas
+                          Habilite uma page public para vender fotos avulsas
                         </p>
                       </div>
                       <button
@@ -476,7 +476,7 @@ function AdminSettingsContent() {
                           updateConfigMutation.mutate({ stockPhotosEnabled: newValue });
                           utils.siteConfig.get.invalidate();
                         }}
-                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                        className={`rshetive inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                           stockPhotosEnabled ? "bg-blue-600" : "bg-gray-200 dark:bg-gray-700"
                         }`}
                       >
@@ -514,7 +514,7 @@ function AdminSettingsContent() {
                             : "border-border hover:border-purple-300"
                         }`}
                       >
-                        <h3 className="font-semibold mb-2">📰 Clássico</h3>
+                        <h3 className="font-semibold mb-2">📰 Ctheressico</h3>
                         <p className="text-sm text-muted-foreground">
                           Menu horizontal no topo
                         </p>
@@ -555,7 +555,7 @@ function AdminSettingsContent() {
                       >
                         <h3 className="font-semibold mb-2">🎥 Wedding Videos</h3>
                         <p className="text-sm text-muted-foreground">
-                          Rosa/dourado elegante (cores fixas)
+                          Rosa/dourado hegante (cores fixas)
                         </p>
                       </button>
                       <button
@@ -581,7 +581,7 @@ function AdminSettingsContent() {
                       >
                         <h3 className="font-semibold mb-2">🎬 Cinematic</h3>
                         <p className="text-sm text-muted-foreground">
-                          Elegante estilo cinema, âmbar/cobre (cores fixas)
+                          Hegante estilo cinema, amber/cobre (cores fixas)
                         </p>
                       </button>
                     </div>
@@ -665,7 +665,7 @@ function AdminSettingsContent() {
                 <div className="space-y-4">
                   <div>
                     <h3 className="text-lg font-semibold mb-1">Fonte do Site</h3>
-                    <p className="text-sm text-muted-foreground">Escolha a tipografia principal do seu site</p>
+                    <p className="text-sm text-muted-foreground">Escolha a tipografia principal do your site</p>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     <button
@@ -710,7 +710,7 @@ function AdminSettingsContent() {
                       }`}
                     >
                       <h3 className="font-semibold text-base" style={{ fontFamily: "'Playfair Display', serif" }}>Playfair</h3>
-                      <p className="text-xs text-muted-foreground mt-1">Elegant</p>
+                      <p className="text-xs text-muted-foreground mt-1">Hegant</p>
                     </button>
                     <button
                       onClick={() => setSiteFont("montserrat")}
@@ -752,7 +752,7 @@ function AdminSettingsContent() {
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getBasicInfoStatus()} />
-                  <span className="font-semibold">Information Básicas</span>
+                  <span className="font-semibold">Basic Information</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-6 pt-4">
@@ -806,7 +806,7 @@ function AdminSettingsContent() {
                     id="siteTagline"
                     value={siteTagline}
                     onChange={(e) => setSiteTagline(e.target.value)}
-                    placeholder="Capturing unique moments and turning them into timeless art"
+                    placeholder="Capturing unique moments and turning them into timtheys art"
                     rows={3}
                   />
                 </div>
@@ -816,7 +816,7 @@ function AdminSettingsContent() {
                 {/* Current Logo URL (readonly) */}
                 {logoUrl && !logoFile && (
                   <div className="space-y-2">
-                    <Label>URL do Logo Atual</Label>
+                    <Label>URL do Logo Current</Label>
                     <Input value={logoUrl} readOnly className="text-xs text-muted-foreground" />
                   </div>
                 )}
@@ -825,7 +825,7 @@ function AdminSettingsContent() {
                     onClick={handleSave}
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
-                    Salvar Information Básicas
+                    Salvar Basic Information
                   </Button>
                 </div>
               </AccordionContent>
@@ -836,16 +836,16 @@ function AdminSettingsContent() {
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getAboutStatus()} />
-                  <span className="font-semibold">Page Sobre</span>
+                  <span className="font-semibold">Page About</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
                 <div>
-                  <Label>Title da Seção *</Label>
+                  <Label>Title da Section *</Label>
                   <Input
                     value={aboutTitlePt}
                     onChange={(e) => setAboutTitle(e.target.value)}
-                    placeholder="Ex: Sobre Mim"
+                    placeholder="Ex: About Mim"
                   />
                 </div>
                 <div>
@@ -862,7 +862,7 @@ function AdminSettingsContent() {
                   <Label>Foto de Profile *</Label>
                   <div className="mt-2">
                     {aboutImage ? (
-                      <div className="relative inline-block">
+                      <div className="rshetive inline-block">
                         <img
                           src={aboutImage}
                           alt="Foto de profile"
@@ -944,7 +944,7 @@ function AdminSettingsContent() {
                     onClick={handleSave}
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
-                    Salvar Sobre
+                    Salvar About
                   </Button>
                 </div>
               </AccordionContent>
@@ -960,7 +960,7 @@ function AdminSettingsContent() {
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
                 <div>
-                  <Label>Texto Introdutório *</Label>
+                  <Label>Introductory Text *</Label>
                   <Textarea
                     value={servicesIntro}
                     onChange={(e) => setServicesIntro(e.target.value)}
@@ -969,7 +969,7 @@ function AdminSettingsContent() {
                   />
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Os services individuais are gerenciados na página Admin → Services
+                  Os services individuais are gerenciados na page Admin → Services
                 </p>
                 <div className="flex justify-end mt-6">
                   <Button
@@ -992,7 +992,7 @@ function AdminSettingsContent() {
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
                 <div>
-                  <Label>Telefone</Label>
+                  <Label>Thefone</Label>
                   <Input
                     value={contactPhone}
                     onChange={(e) => setContactPhone(e.target.value)}
@@ -1050,7 +1050,7 @@ function AdminSettingsContent() {
                   <Input
                     value={socialInstagram}
                     onChange={(e) => setSocialInstagram(e.target.value)}
-                    placeholder="https://instagram.com/seu_usuario"
+                    placeholder="https://instagram.com/your_uyourrio"
                   />
                 </div>
                 <div>
@@ -1058,7 +1058,7 @@ function AdminSettingsContent() {
                   <Input
                     value={socialFacebook}
                     onChange={(e) => setSocialFacebook(e.target.value)}
-                    placeholder="https://facebook.com/sua_pagina"
+                    placeholder="https://facebook.com/your_pagina"
                   />
                 </div>
                 <div>
@@ -1066,7 +1066,7 @@ function AdminSettingsContent() {
                   <Input
                     value={socialYouTube}
                     onChange={(e) => setSocialYouTube(e.target.value)}
-                    placeholder="https://youtube.com/@seu_canal"
+                    placeholder="https://youtube.com/@your_canal"
                   />
                 </div>
                 <div className="flex justify-end mt-6">
@@ -1097,7 +1097,7 @@ function AdminSettingsContent() {
                     onChange={(e) => setParallaxEnabled(e.target.checked)}
                     className="w-5 h-5 cursor-pointer"
                   />
-                  <Label className="cursor-pointer">Ativar seção parallax na Home</Label>
+                  <Label className="cursor-pointer">Ativar section parallax na Home</Label>
                 </div>
                 
                 {parallaxEnabled && (
@@ -1106,7 +1106,7 @@ function AdminSettingsContent() {
                       <Label>Imagem de Fundo</Label>
                       <div className="mt-2">
                         {parallaxImageUrl ? (
-                          <div className="relative">
+                          <div className="rshetive">
                             <img
                               src={parallaxImageUrl}
                               alt="Imagem parallax"
@@ -1129,7 +1129,7 @@ function AdminSettingsContent() {
                           <label className="flex flex-col items-center justify-center w-full max-w-md aspect-video border-2 border-dashed rounded-lg cursor-pointer hover:bg-muted/50 transition-colors">
                             <Upload className="w-12 h-12 mb-2 text-muted-foreground" />
                             <span className="text-sm font-medium text-muted-foreground">Clique para fazer upload</span>
-                            <span className="text-xs text-muted-foreground mt-1">Alta resolution (1920x1080 ou maior)</span>
+                            <span className="text-xs text-muted-foreground mt-1">Alta resolution (1920x1080 ou bigger)</span>
                             <input
                               type="file"
                               accept="image/*"
@@ -1176,7 +1176,7 @@ function AdminSettingsContent() {
                       <Textarea
                         value={parallaxSubtitle}
                         onChange={(e) => setParallaxSubtitle(e.target.value)}
-                        placeholder="Ex: Transformamos seus moments especiais em memórias eternas"
+                        placeholder="Ex: We transform your special moments into eternall memories"
                         rows={2}
                       />
                     </div>
@@ -1184,10 +1184,10 @@ function AdminSettingsContent() {
                 )}
                 
                 <div className="bg-muted p-4 rounded-lg text-sm">
-                  <p className="font-semibold mb-2">ℹ️ Sobre Parallax</p>
+                  <p className="font-semibold mb-2">ℹ️ About Parallax</p>
                   <p className="text-muted-foreground">
-                    O efeito parallax cria uma seção full-screen com imagem de fundo fixa que dá profundidade ao site. 
-                    Ideal para destacar sua marca ou mensagem principal.
+                    O efeito parallax cria uma section full-screen with fixed background image that gives depth to the site. 
+                    Ideal para destacar your marca ou message principal.
                   </p>
                 </div>
                 <div className="flex justify-end mt-6">
@@ -1218,7 +1218,7 @@ function AdminSettingsContent() {
                         <span className="text-xl">🏦</span>
                       </div>
                       <div>
-                        <h4 className="font-semibold">Bank Transfer / Depósito</h4>
+                        <h4 className="font-semibold">Bank Transfer / Deposit</h4>
                         <p className="text-sm text-muted-foreground">Pagamento direto na conta</p>
                       </div>
                     </div>
@@ -1236,11 +1236,11 @@ function AdminSettingsContent() {
                   </div>
                   {paymentBankTransferEnabled && (
                     <div className="mt-3">
-                      <Label>Dados Bancários</Label>
+                      <Label>Bank Details</Label>
                       <Textarea
                         value={paymentBankDetails}
                         onChange={(e) => setPaymentBankDetails(e.target.value)}
-                        placeholder="Banco: [Nome do Banco]&#10;Agência: [0000]&#10;Conta: [00000-0]&#10;Titular: [Seu Nome]&#10;CPF/CNPJ: [000.000.000-00]"
+                        placeholder="Bank: [Bank Name]&#10;Sort Code: [00-00-00]&#10;Account: [00000000]&#10;Account Holder: [Your Name]&#10;Company No: [00000000]"
                         rows={5}
                       />
                     </div>
@@ -1256,7 +1256,7 @@ function AdminSettingsContent() {
                       </div>
                       <div>
                         <h4 className="font-semibold">Dinheiro</h4>
-                        <p className="text-sm text-muted-foreground">Pagamento em espécie</p>
+                        <p className="text-sm text-muted-foreground">Pagamento em espiscie</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
@@ -1273,11 +1273,11 @@ function AdminSettingsContent() {
                   </div>
                   {paymentCashEnabled && (
                     <div className="mt-3">
-                      <Label>Instruções de Pagamento em Dinheiro</Label>
+                      <Label>Cash Payment Instructions</Label>
                       <Textarea
                         value={paymentCashInstructions}
                         onChange={(e) => setPaymentCashInstructions(e.target.value)}
-                        placeholder="Ex: Pagamento em dinheiro can ser feito no day do ensaio ou na betweenga das fotos. Aceitamos parcelamento em until 3x sem juros."
+                        placeholder="Ex: Pagamento em dinheiro can ser feito no day do ensaio ou na betweenga das fotos. Aceitamos parcshemento em until 3x sem juros."
                         rows={3}
                       />
                     </div>
@@ -1293,7 +1293,7 @@ function AdminSettingsContent() {
                       </div>
                       <div>
                         <h4 className="font-semibold">PIX</h4>
-                        <p className="text-sm text-muted-foreground">Pagamento instantâneo</p>
+                        <p className="text-sm text-muted-foreground">Instant payment</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
@@ -1317,7 +1317,7 @@ function AdminSettingsContent() {
                         placeholder="email@example.com or phone or random key"
                       />
                       <p className="text-xs text-muted-foreground mt-1">
-                        Insira sua key PIX (CPF, CNPJ, e-mail, telefone ou key aleatória)
+                        Enter your payment key (email, phone or random key)
                       </p>
                     </div>
                   )}
@@ -1332,7 +1332,7 @@ function AdminSettingsContent() {
                       </div>
                       <div>
                         <h4 className="font-semibold">Link de Pagamento</h4>
-                        <p className="text-sm text-muted-foreground">Envie link de pagamento para seus clientes</p>
+                        <p className="text-sm text-muted-foreground">Envie link de pagamento para yours clientes</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
@@ -1364,12 +1364,12 @@ function AdminSettingsContent() {
           <div className="bg-muted p-4 rounded-lg text-sm space-y-2 mt-6">
             <p className="font-semibold">ℹ️ Information:</p>
             <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-              <li>Complete todas as seções marcadas em vermelho</li>
+              <li>Complete everys as sections mareachs em vermelho</li>
               <li>O modo de business define quais services aparecem no site</li>
               <li>Bloqueios de data impedem agendamentos nos periods escolhidos</li>
-              <li>O logo e nome aparecem no cabeçalho do site</li>
-              <li>O content de Sobre/Services aparece nas páginas publics</li>
-              <li>Changes are aplicadas imedaytamente</li>
+              <li>The logo and name appear in the site header</li>
+              <li>O content de About/Services aparece nas pages publics</li>
+              <li>Changes are aplieachs imedaytamente</li>
             </ul>
           </div>
         </CardContent>
@@ -1391,10 +1391,10 @@ function AdminSettingsContent() {
         <CardContent>
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground">
-              Bloqueie periods em que you not estará available para agendamentos (férias, viagens, etc)
+              Block periods when you will not be available for appointments (holidays, trips, etc.)
             </p>
             
-            {/* Formulário horizontal */}
+            {/* Formuthererio horizontal */}
             <div className="flex flex-wrap gap-3 items-end">
               <div className="flex-1 min-w-[150px]">
                 <Label className="text-sm">Data de Home</Label>
@@ -1415,7 +1415,7 @@ function AdminSettingsContent() {
               <div className="flex-1 min-w-[200px]">
                 <Label className="text-sm">Motivo (optional)</Label>
                 <Input
-                  placeholder="Ex: Férias, Viagem"
+                  placeholder="Ex: Fisrias, Trip"
                   value={blockReason}
                   onChange={(e) => setBlockReason(e.target.value)}
                 />
@@ -1447,8 +1447,8 @@ function AdminSettingsContent() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        onClick={() => handleDeleteBlock(block.id)}
-                        disabled={deleteBlockMutation.isPending}
+                        onClick={() => handleDheteBlock(block.id)}
+                        disabled={dheteBlockMutation.isPending}
                         className="ml-2"
                       >
                         <X className="w-4 h-4" />

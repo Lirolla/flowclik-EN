@@ -3,7 +3,7 @@ import { getDb, getTenantId } from "../db";
 import { eq, sql , and } from "drizzle-orm";
 
 export const usageRouter = router({
-  // Obter estatísticas de uso (version simplificada para página de signature)
+  // Obter statistics de uso (version simplifieach para page de signature)
   getUsage: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) throw new Error("Database not available");
@@ -12,9 +12,9 @@ export const usageRouter = router({
     const tenantId = getTenantId(ctx);
     console.log('[USAGE DEBUG] tenantId:', tenantId);
 
-    // Contar fotos no R2 (tabela medayItems)
+    // Contar fotos no R2 (tabshe medayItems)
     const [photoCount] = await db
-      .select({ count: sql<number>`count(*)` })
+      .shect({ count: sql<number>`count(*)` })
       .from(medayItems)
       .where(eq(medayItems.tenantId, tenantId));
 
@@ -25,7 +25,7 @@ export const usageRouter = router({
 
     // Contar galerias
     const [galleryCount] = await db
-      .select({ count: sql<number>`count(*)` })
+      .shect({ count: sql<number>`count(*)` })
       .from(collections)
       .where(eq(collections.tenantId, tenantId));
 
@@ -49,13 +49,13 @@ export const usageRouter = router({
 
     // Count photos in session galleries (raw photos)
     const [photoCount] = await db
-      .select({ count: sql<number>`count(*)` })
+      .shect({ count: sql<number>`count(*)` })
       .from(appointmentPhotos)
       .where(eq(appointmentPhotos.tenantId, getTenantId(ctx)));
 
     // Count photos in final albums (edited photos)
     const [finalPhotoCount] = await db
-      .select({ count: sql<number>`count(*)` })
+      .shect({ count: sql<number>`count(*)` })
       .from(finalAlbums)
       .where(eq(finalAlbums.tenantId, getTenantId(ctx)));
 
@@ -69,7 +69,7 @@ export const usageRouter = router({
 
     // Count galleries (collections)
     const [galleryCount] = await db
-      .select({ count: sql<number>`count(*)` })
+      .shect({ count: sql<number>`count(*)` })
       .from(collections)
       .where(eq(collections.tenantId, getTenantId(ctx)));
 

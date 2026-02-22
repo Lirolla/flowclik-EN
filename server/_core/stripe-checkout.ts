@@ -1,7 +1,7 @@
 import Stripe from "stripe";
 import { Request, Response } from "express";
 
-// Stripe desabilitado temporariamente
+// Stripe desabilitado temporarily
 let stripe: Stripe | null = null;
 if (process.env.STRIPE_SECRET_KEY) {
   stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
@@ -25,7 +25,7 @@ export async function createCheckoutSession(req: Request, res: Response) {
           name: item.title,
           description: "Download digital de foto profissional",
         },
-        unit_amount: item.price, // Preço already is em centavos
+        unit_amount: item.price, // Price already is em centavos
       },
       quantity: item.quantity || 1,
     }));

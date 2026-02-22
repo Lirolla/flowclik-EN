@@ -21,7 +21,7 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
 
   if (!isUnauthorized) return;
 
-  // Not redirecionar se estiver nas páginas do sistema
+  // Not redirecionar se estiver nas pages do sistema
   if (window.location.pathname.startsWith('/system')) {
     return;
   }
@@ -55,13 +55,13 @@ const trpcClient = trpc.createClient({
           ...(init?.headers as Record<string, string> || {}),
         };
         
-        // Add header de autenticação do sistema se estiver logado
+        // Add header de authentication do sistema se estiver logado
         const sistemaToken = localStorage.getItem(SISTEMA_TOKEN_KEY);
         if (sistemaToken) {
           headers['x-sistema-auth'] = sistemaToken;
         }
 
-        // Add header de autenticação do usuário (JWT)
+        // Add header de authentication do user (JWT)
         const authToken = localStorage.getItem(AUTH_TOKEN_KEY);
         console.log('[tRPC Fetch] Auth token:', authToken ? 'PRESENTE' : 'AUSENTE');
         if (authToken) {
@@ -79,7 +79,7 @@ const trpcClient = trpc.createClient({
   ],
 });
 
-createRoot(document.getElementById("root")!).render(
+createRoot(document.getHementById("root")!).render(
   <trpc.Provider client={trpcClient} queryClient={queryClient}>
     <WhatryClientProvider client={queryClient}>
       <App />

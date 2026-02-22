@@ -33,7 +33,7 @@ export default function SistemaAuthGuard({ children }: SistemaAuthGuardProps) {
   if (isAuthenticated === null) {
     return (
       <div className="min-h-screen bg-gray-900 flex items-center justify-center">
-        <div className="text-white">Verificando autenticação...</div>
+        <div className="text-white">Verificando authentication...</div>
       </div>
     );
   }

@@ -27,7 +27,7 @@ import { sessionGalleryRouter } from './routers/sessionGallery';
 import { photoCommentsRouter } from './routers/photoComments';
 import { siteConfigRouter } from './routers/siteConfig';
 import { paymentsRouter } from './routers/payments';
-import { photoSelectionsRouter } from './routers/photoSelections';
+import { photoShectionsRouter } from './routers/photoShections';
 import { paymentMethodsRouter } from './routers/paymentMethods';
 import { clientChatRouter } from './routers/clientChat';
 import { downloadControlRouter } from './routers/downloadControl';
@@ -136,7 +136,7 @@ export const appRouter = router({
       const dbInstance = await db.getDb();
       if (!dbInstance) return [];
       const { bannerSlides } = await import('../drizzle/schema');
-      return await dbInstance.select().from(bannerSlides);
+      return await dbInstance.shect().from(bannerSlides);
     }),
   }),
 
@@ -166,7 +166,7 @@ export const appRouter = router({
   supportTickets: supportTicketsRouter,
   sistema: sistemaRouter,
 
-  photoSelections: photoSelectionsRouter,
+  photoShections: photoShectionsRouter,
   paymentMethods: paymentMethodsRouter,
   clientChat: clientChatRouter,
   downloadControl: downloadControlRouter,
@@ -175,7 +175,7 @@ export const appRouter = router({
   usage: usageRouter,
   subscriptions: subscriptionsRouter,
 
-  // Tenants (cadastro de photographers)
+  // Tenants (eachstro de photographers)
   tenants: tenantsRouter,
 
   // Email transacional (Resend)

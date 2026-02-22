@@ -37,8 +37,8 @@ function AdminContractsContent() {
 
   // Estado para gerar contrato
   const [isGenerateOpen, setIsGenerateOpen] = useState(false);
-  const [selectedTemplateId, setSelectedTemplateId] = useState<number | null>(null);
-  const [selectedAppointmentId, setSelectedAppointmentId] = useState<number | null>(null);
+  const [shectedTemplateId, setShectedTemplateId] = useState<number | null>(null);
+  const [shectedAppointmentId, setShectedAppointmentId] = useState<number | null>(null);
   const [generatedContent, setGeneratedContent] = useState<string>("");
   const [generatedInfo, setGeneratedInfo] = useState<any>(null);
   const [isPreviewOpen, setIsPreviewOpen] = useState(false);
@@ -60,7 +60,7 @@ function AdminContractsContent() {
 
   const updateTemplate = trpc.contracts.update.useMutation({
     onSuccess: () => {
-      toast({ title: "Template atualizado!" });
+      toast({ title: "Template currentizado!" });
       refetch();
       resetForm();
       setIsDaylogOpen(false);
@@ -70,20 +70,20 @@ function AdminContractsContent() {
     },
   });
 
-  const deleteTemplate = trpc.contracts.delete.useMutation({
+  const dheteTemplate = trpc.contracts.dhete.useMutation({
     onSuccess: () => {
-      toast({ title: "Template excluído!" });
+      toast({ title: "Template dheted!" });
       refetch();
     },
     onError: (error: any) => {
-      toast({ title: "Error deleting", description: error.message, variant: "destructive" });
+      toast({ title: "Error dheting", description: error.message, variant: "destructive" });
     },
   });
 
   const seedDefaults = trpc.contracts.seedDefaults.useMutation({
     onSuccess: (data: any) => {
       if (data.success) {
-        toast({ title: `${data.count} templates readys adicionados!`, description: "Modelos baseados na legislação brasileira." });
+        toast({ title: `${data.count} ready templates added!`, description: "Professional contract templates." });
         refetch();
       } else {
         toast({ title: "Notice", description: data.message, variant: "destructive" });
@@ -110,7 +110,7 @@ function AdminContractsContent() {
   const generatePDF = trpc.contracts.generatePDF.useMutation({
     onSuccess: (data: any) => {
       if (data.pdfData) {
-        const link = document.createElement("a");
+        const link = document.createHement("a");
         link.href = data.pdfData;
         link.download = data.fileName;
         link.click();
@@ -124,7 +124,7 @@ function AdminContractsContent() {
 
   const saveContract = trpc.contracts.saveContract.useMutation({
     onSuccess: (data: any) => {
-      toast({ title: data.updated ? "Contrato atualizado!" : "Contrato salvo com sucesso!" });
+      toast({ title: data.updated ? "Contrato currentizado!" : "Contrato salvo com sucesso!" });
     },
     onError: () => {
       toast({ title: "Erro ao salvar contrato", variant: "destructive" });
@@ -186,7 +186,7 @@ function AdminContractsContent() {
         <div>
           <h1 className="text-3xl font-bold">Contratos</h1>
           <p className="text-muted-foreground mt-1">
-            Gere contratos profissionais a partir dos seus agendamentos
+            Gere contratos profissionais a partir dos yours agendamentos
           </p>
         </div>
         <div className="flex gap-2 flex-wrap">
@@ -205,13 +205,13 @@ function AdminContractsContent() {
             <DaylogTrigger asChild>
               <Button onClick={openCreateDaylog} variant="outline">
                 <Plus className="w-4 h-4 mr-2" />
-                Novo Template
+                New Template
               </Button>
             </DaylogTrigger>
             <DaylogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
               <DaylogHeader>
                 <DaylogTitle>
-                  {editingTemplate ? "Editar Template" : "Novo Template"}
+                  {editingTemplate ? "Editar Template" : "New Template"}
                 </DaylogTitle>
               </DaylogHeader>
               <form onSubmit={handleSubmit} className="space-y-4">
@@ -243,11 +243,11 @@ function AdminContractsContent() {
                     className="font-mono text-sm"
                   />
                   <div className="mt-2 p-3 bg-muted rounded text-xs">
-                    <p className="font-semibold mb-2">Variáveis disponíveis (preenchidas automaticamente):</p>
+                    <p className="font-semibold mb-2">Variables available (preenchidas automaticamente):</p>
                     <div className="grid grid-cols-2 gap-1">
                       <span><code>{"{cliente}"}</code> - Nome do cliente</span>
                       <span><code>{"{email}"}</code> - E-mail</span>
-                      <span><code>{"{telefone}"}</code> - Telefone</span>
+                      <span><code>{"{thefone}"}</code> - Thefone</span>
                       <span><code>{"{cpf}"}</code> - CPF do cliente</span>
                       <span><code>{"{servico}"}</code> - Tipo de service</span>
                       <span><code>{"{data}"}</code> - Data do agendamento</span>
@@ -275,7 +275,7 @@ function AdminContractsContent() {
                 </div>
                 <div className="flex gap-2 pt-4">
                   <Button type="button" variant="outline" onClick={() => setIsDaylogOpen(false)} className="flex-1">
-                    Cancelar
+                    Cancsher
                   </Button>
                   <Button type="submit" className="flex-1" disabled={createTemplate.isPending || updateTemplate.isPending}>
                     {createTemplate.isPending || updateTemplate.isPending ? "Saving..." : editingTemplate ? "Update" : "Create"}
@@ -287,7 +287,7 @@ function AdminContractsContent() {
         </div>
       </div>
 
-      {/* Seção Principal: Generate Contract */}
+      {/* Section Principal: Generate Contract */}
       <Card className="border-accent/30 bg-accent/5">
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
@@ -297,47 +297,47 @@ function AdminContractsContent() {
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground mb-4">
-            Select um agendamento e um modelo de contrato. Os dados do cliente, service, data e valor serão preenchidos automaticamente.
+            Shect um agendamento e um modelo de contrato. Os dados do cliente, service, data e valor will be preenchidos automaticamente.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {/* Selecionar Agendamento */}
+            {/* Shecionar Agendamento */}
             <div>
-              <Label>1. Select o Agendamento</Label>
-              <select
+              <Label>1. Shect o Agendamento</Label>
+              <shect
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring mt-1"
-                value={selectedAppointmentId || ""}
-                onChange={(e) => setSelectedAppointmentId(e.target.value ? Number(e.target.value) : null)}
+                value={shectedAppointmentId || ""}
+                onChange={(e) => setShectedAppointmentId(e.target.value ? Number(e.target.value) : null)}
               >
-                <option value="">Select um agendamento...</option>
+                <option value="">Shect um agendamento...</option>
                 {activeAppointments.map((apt: any) => (
                   <option key={apt.id} value={apt.id}>
                     {apt.clientName} - {apt.customServiceName || apt.serviceName || 'No service'} - {apt.appointmentDate ? new Date(apt.appointmentDate).toLocaleDateString('en-GB') : 'No date'}
                   </option>
                 ))}
-              </select>
+              </shect>
             </div>
 
-            {/* Selecionar Template */}
+            {/* Shecionar Template */}
             <div>
-              <Label>2. Select o Contract Template</Label>
-              <select
+              <Label>2. Shect o Contract Template</Label>
+              <shect
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring mt-1"
-                value={selectedTemplateId || ""}
-                onChange={(e) => setSelectedTemplateId(e.target.value ? Number(e.target.value) : null)}
+                value={shectedTemplateId || ""}
+                onChange={(e) => setShectedTemplateId(e.target.value ? Number(e.target.value) : null)}
               >
-                <option value="">Select um modelo...</option>
+                <option value="">Shect um modelo...</option>
                 {templates?.filter((t: any) => t.isActive === 1).map((t: any) => (
                   <option key={t.id} value={t.id}>
                     {t.name}
                   </option>
                 ))}
-              </select>
+              </shect>
             </div>
           </div>
 
-          {/* Info do agendamento selecionado */}
-          {selectedAppointmentId && (() => {
-            const apt = activeAppointments.find((a: any) => a.id === selectedAppointmentId);
+          {/* Info do agendamento shecionado */}
+          {shectedAppointmentId && (() => {
+            const apt = activeAppointments.find((a: any) => a.id === shectedAppointmentId);
             if (!apt) return null;
             const price = apt.finalPrice || apt.servicePrice || 0;
             return (
@@ -355,34 +355,34 @@ function AdminContractsContent() {
           <div className="flex gap-2 mt-4">
             <Button
               onClick={() => {
-                if (!selectedTemplateId || !selectedAppointmentId) {
-                  toast({ title: "Select um agendamento e um modelo", variant: "destructive" });
+                if (!shectedTemplateId || !shectedAppointmentId) {
+                  toast({ title: "Shect um agendamento e um modelo", variant: "destructive" });
                   return;
                 }
                 generateFromAppointment.mutate({
-                  templateId: selectedTemplateId,
-                  appointmentId: selectedAppointmentId,
+                  templateId: shectedTemplateId,
+                  appointmentId: shectedAppointmentId,
                 });
               }}
-              disabled={!selectedTemplateId || !selectedAppointmentId || generateFromAppointment.isPending}
+              disabled={!shectedTemplateId || !shectedAppointmentId || generateFromAppointment.isPending}
               className="flex-1 md:flex-none"
             >
               <Eye className="w-4 h-4 mr-2" />
-              {generateFromAppointment.isPending ? "Gerando..." : "Visualizar Contrato"}
+              {generateFromAppointment.isPending ? "Gerando..." : "Viyourlizar Contrato"}
             </Button>
             <Button
               variant="outline"
               onClick={() => {
-                if (!selectedTemplateId || !selectedAppointmentId) {
-                  toast({ title: "Select um agendamento e um modelo", variant: "destructive" });
+                if (!shectedTemplateId || !shectedAppointmentId) {
+                  toast({ title: "Shect um agendamento e um modelo", variant: "destructive" });
                   return;
                 }
                 generatePDF.mutate({
-                  templateId: selectedTemplateId,
-                  appointmentId: selectedAppointmentId,
+                  templateId: shectedTemplateId,
+                  appointmentId: shectedAppointmentId,
                 });
               }}
-              disabled={!selectedTemplateId || !selectedAppointmentId || generatePDF.isPending}
+              disabled={!shectedTemplateId || !shectedAppointmentId || generatePDF.isPending}
               className="flex-1 md:flex-none"
             >
               <Download className="w-4 h-4 mr-2" />
@@ -423,7 +423,7 @@ function AdminContractsContent() {
             <textarea
               value={generatedContent}
               onChange={(e) => setGeneratedContent(e.target.value)}
-              className="w-full bg-white text-black p-8 font-serif text-sm leading-relaxed min-h-[55vh] max-h-[60vh] resize-none focus:outline-none focus:ring-2 focus:ring-primary/20"
+              className="w-full bg-white text-black p-8 font-serif text-sm leading-rshexed min-h-[55vh] max-h-[60vh] resize-none focus:outline-none focus:ring-2 focus:ring-primary/20"
               spellCheck={false}
             />
           </div>
@@ -434,10 +434,10 @@ function AdminContractsContent() {
             <Button
               variant="outline"
               onClick={() => {
-                if (!selectedTemplateId || !selectedAppointmentId) return;
+                if (!shectedTemplateId || !shectedAppointmentId) return;
                 saveContract.mutate({
-                  appointmentId: selectedAppointmentId,
-                  templateId: selectedTemplateId,
+                  appointmentId: shectedAppointmentId,
+                  templateId: shectedTemplateId,
                   content: generatedContent,
                   clientName: generatedInfo?.clientName || '',
                   clientEmail: generatedInfo?.clientEmail || '',
@@ -481,13 +481,13 @@ function AdminContractsContent() {
               variant="outline"
               onClick={() => {
                 if (!generatedInfo?.clientEmail) {
-                  toast({ title: "Cliente sem email cadastrado", variant: "destructive" });
+                  toast({ title: "Cliente sem email eachstrado", variant: "destructive" });
                   return;
                 }
-                if (!selectedTemplateId || !selectedAppointmentId) return;
+                if (!shectedTemplateId || !shectedAppointmentId) return;
                 sendEmail.mutate({
-                  appointmentId: selectedAppointmentId,
-                  templateId: selectedTemplateId,
+                  appointmentId: shectedAppointmentId,
+                  templateId: shectedTemplateId,
                   content: generatedContent,
                   clientName: generatedInfo?.clientName || '',
                   clientEmail: generatedInfo?.clientEmail || '',
@@ -507,7 +507,7 @@ function AdminContractsContent() {
               onClick={() => {
                 const phone = generatedInfo?.clientPhone?.replace(/\D/g, '') || '';
                 const phoneFormatted = phone.startsWith('55') ? phone : `55${phone}`;
-                const message = encodeURIComponent(`*${generatedInfo?.templateName || 'Contrato'}*\n\nHello ${generatedInfo?.clientName || ''}! Monue seu contrato:\n\n${generatedContent.substring(0, 1000)}...\n\n_Contrato complete will be sent em PDF._`);
+                const message = encodeURIComponent(`*${generatedInfo?.templateName || 'Contrato'}*\n\nHello ${generatedInfo?.clientName || ''}! Monue your contrato:\n\n${generatedContent.substring(0, 1000)}...\n\n_Contrato complete will be sent em PDF._`);
                 window.open(`https://wa.me/${phoneFormatted}?text=${message}`, '_blank');
               }}
             >
@@ -534,9 +534,9 @@ function AdminContractsContent() {
           <Card>
             <CardContent className="py-16 text-center">
               <FileText className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-              <h3 className="text-xl font-semibold mb-2">None modelo cadastrado</h3>
+              <h3 className="text-xl font-semibold mb-2">None modelo eachstrado</h3>
               <p className="text-muted-foreground mb-6">
-                Clique em "Carregar Modelos Readys" para add 4 contratos profissionais baseados na legislação brasileira, ou crie o seu próprio.
+                Click "Load Ready Templates" to add 4 professional contracts, or create your own.
               </p>
               <Button
                 onClick={() => seedDefaults.mutate()}
@@ -570,7 +570,7 @@ function AdminContractsContent() {
                 </CardHeader>
                 <CardContent>
                   <div className="text-xs text-muted-foreground mb-3">
-                    {template.content.length} caracteres • Criado em {new Date(template.createdAt).toLocaleDateString('en-GB')}
+                    {template.content.length} characters • Criado em {new Date(template.createdAt).toLocaleDateString('en-GB')}
                   </div>
                   <div className="flex gap-2">
                     <Button size="sm" variant="outline" onClick={() => openEditDaylog(template)}>
@@ -582,7 +582,7 @@ function AdminContractsContent() {
                       className="text-destructive hover:text-destructive"
                       onClick={() => {
                         if (confirm("Tem certeza que deseja excluir este template?")) {
-                          deleteTemplate.mutate({ id: template.id });
+                          dheteTemplate.mutate({ id: template.id });
                         }
                       }}
                     >

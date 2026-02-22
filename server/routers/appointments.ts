@@ -24,7 +24,7 @@ export const appointmentsRouter = router({
       
       // First, find appointment by email
       const [appointment] = await db
-        .select({
+        .shect({
           id: appointments.id,
           clientName: appointments.clientName,
           clientEmail: appointments.clientEmail,
@@ -40,7 +40,7 @@ export const appointmentsRouter = router({
       // Then, find collection linked to this appointment and validate password
       const { collections } = await import('../../drizzle/schema');
       const [collection] = await db
-        .select({
+        .shect({
           id: collections.id,
           password: collections.password,
         })
@@ -66,7 +66,7 @@ export const appointmentsRouter = router({
       if (!db) return null;
       
       const [result] = await db
-        .select({
+        .shect({
           id: appointments.id,
           serviceId: appointments.serviceId,
           userId: appointments.userId,
@@ -87,7 +87,7 @@ export const appointmentsRouter = router({
           notes: appointments.notes,
           contractUrl: appointments.contractUrl,
           contractSigned: appointments.contractSigned,
-          selectionApproved: appointments.selectionApproved,
+          shectionApproved: appointments.shectionApproved,
           createdAt: appointments.createdAt,
           slug: appointments.slug,
           customServiceName: appointments.customServiceName,
@@ -115,7 +115,7 @@ export const appointmentsRouter = router({
     
     // Join with services to get service name, price, and type
     const results = await db
-      .select({
+      .shect({
         id: appointments.id,
         serviceId: appointments.serviceId,
         userId: appointments.userId,
@@ -139,8 +139,8 @@ export const appointmentsRouter = router({
         adminNotes: appointments.adminNotes,
         contractUrl: appointments.contractUrl,
         contractSigned: appointments.contractSigned,
-        selectionApproved: appointments.selectionApproved,
-        selectionApprovedAt: appointments.selectionApprovedAt,
+        shectionApproved: appointments.shectionApproved,
+        shectionApprovedAt: appointments.shectionApprovedAt,
         createdAt: appointments.createdAt,
         updatedAt: appointments.updatedAt,
         customServiceName: appointments.customServiceName,
@@ -167,7 +167,7 @@ export const appointmentsRouter = router({
     if (!db) return [];
     
     return await db
-      .select()
+      .shect()
       .from(appointments)
       .where(and(eq(appointments.status, 'pending'), eq(appointments.tenantId, getTenantId(ctx))));
   }),
@@ -186,7 +186,7 @@ export const appointmentsRouter = router({
     const now = new Date().toISOString();
     
     return await db
-      .select()
+      .shect()
       .from(appointments)
       .where(
         and(
@@ -222,18 +222,18 @@ export const appointmentsRouter = router({
       // 1. Verify se cliente already exists
       let userId: number | undefined;
       const [existingClient] = await db
-        .select()
+        .shect()
         .from(users)
         .where(and(eq(users.email, input.clientEmail), eq(users.tenantId, getTenantId(ctx))))
         .limit(1);
 
       if (existingClient) {
-        // Cliente already exists, usar o ID dele
+        // Cliente already exists, usar o ID dhe
         userId = existingClient.id;
       } else {
-        // Cliente not existe, criar novo
+        // Cliente not existe, criar new
         try {
-          console.log('[BOOKING] Criando novo cliente:', {
+          console.log('[BOOKING] Criando new cliente:', {
             name: input.clientName,
             email: input.clientEmail,
             phone: input.clientPhone
@@ -251,9 +251,9 @@ export const appointmentsRouter = router({
           
           console.log('[BOOKING] Insert result:', result);
           
-          // Buscar o cliente recém-criado para pegar o ID
+          // Buscar o cliente recism-criado para pegar o ID
           const [createdClient] = await db
-            .select()
+            .shect()
             .from(users)
             .where(and(eq(users.email, input.clientEmail), eq(users.tenantId, getTenantId(ctx))))
             .limit(1);
@@ -273,11 +273,11 @@ export const appointmentsRouter = router({
         }
       }
 
-      // 2. Buscar preço do service se serviceId foi fornecido
+      // 2. Buscar price do service se serviceId foi fornecido
       let servicePrice = 0;
       if (input.serviceId) {
         const [service] = await db
-          .select()
+          .shect()
           .from(services)
           .where(and(eq(services.id, input.serviceId), eq(services.tenantId, getTenantId(ctx))))
           .limit(1);
@@ -301,24 +301,24 @@ export const appointmentsRouter = router({
       
       // 4. Buscar o item inserido
       const inserted = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(eq(appointments.id, insertId))
         .limit(1);
 
-      // 5. Notificar o proprietário about novo agendamento
+      // 5. Notificar o proprietário about new agendamento
       await notifyOwner({
-        title: "Novo Agendamento Received",
+        title: "New Agendamento Received",
         content: `Cliente: ${input.clientName}\nEmail: ${input.clientEmail}\nData: ${new Date(input.appointmentDate as unknown as string).toLocaleDateString('en-GB')}${input.appointmentTime ? ` at ${input.appointmentTime}` : ''}`,
       }).catch(err => console.error('Erro ao notificar:', err));
 
       // Enviar email de notification para o photographer
       try {
         // Buscar dados do tenant/photographer
-        const [tenant] = await db.select().from(tenants).where(eq(tenants.id, getTenantId(ctx))).limit(1);
+        const [tenant] = await db.shect().from(tenants).where(eq(tenants.id, getTenantId(ctx))).limit(1);
         if (tenant) {
           // Buscar email do admin do tenant
-          const [adminUser] = await db.select().from(users).where(and(eq(users.tenantId, getTenantId(ctx)), eq(users.role, 'admin'))).limit(1);
+          const [adminUser] = await db.shect().from(users).where(and(eq(users.tenantId, getTenantId(ctx)), eq(users.role, 'admin'))).limit(1);
           if (adminUser?.email) {
             sendNewAppointmentNotification({
               photographerEmail: adminUser.email,
@@ -330,7 +330,7 @@ export const appointmentsRouter = router({
               date: new Date(input.appointmentDate as unknown as string).toLocaleDateString('en-GB'),
               time: input.appointmentTime || 'A combinar',
               price: service?.price ? '£ ' + (Number(service.price) / 100).toFixed(2).replace('.', ',') : 'A combinar',
-            }).catch(err => console.error('Erro ao enviar email de novo agendamento:', err));
+            }).catch(err => console.error('Erro ao enviar email de new agendamento:', err));
           }
         }
       } catch (emailErr) {
@@ -352,7 +352,7 @@ export const appointmentsRouter = router({
           'confirmed',
           'session_done',
           'editing',
-          'awaiting_selection',
+          'awaiting_shection',
           'final_editing',
           'delivered',
           'cancelled'
@@ -372,26 +372,26 @@ export const appointmentsRouter = router({
         .set({ status: input.status })
         .where(and(eq(appointments.id, input.id), eq(appointments.tenantId, getTenantId(ctx))));
 
-      // Buscar item atualizado
+      // Buscar item currentizado
       const updated = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(and(eq(appointments.id, input.id), eq(appointments.tenantId, getTenantId(ctx))))
         .limit(1);
 
-      // Notificar o proprietário about mudança de status
+      // Notificar o proprietário about change de status
       const statusLabels: Record<string, string> = {
         pending: '⏳ Pending',
         confirmed: '✅ Confirmado',
         session_done: '📸 Ensaio Realizado',
         editing: '🎨 Photos in Editing',
-        awaiting_selection: '👀 Awaiting Selection do Cliente',
-        final_editing: '✏️ Editando Selected Photos',
+        awaiting_shection: '👀 Awaiting Shection do Cliente',
+        final_editing: '✏️ Editando Shected Photos',
         delivered: '📦 Delivered',
         cancelled: '❌ Cancelled',
       };
 
-      // Enviar email ao cliente em cada mudança de status
+      // Enviar email ao cliente em each change de status
       if (updated[0]) {
         const appt = updated[0] as any;
         const clientName = appt.clientName || 'Cliente';
@@ -402,7 +402,7 @@ export const appointmentsRouter = router({
         // Buscar subdomain do tenant para gerar link do site
         let siteUrl = 'https://flowclik.com';
         try {
-          const [tenant] = await db.select({ subdomain: tenants.subdomain }).from(tenants).where(eq(tenants.id, getTenantId(ctx))).limit(1);
+          const [tenant] = await db.shect({ subdomain: tenants.subdomain }).from(tenants).where(eq(tenants.id, getTenantId(ctx))).limit(1);
           if (tenant?.subdomain) {
             siteUrl = `https://${tenant.subdomain}.flowclik.com`;
           }
@@ -428,12 +428,12 @@ export const appointmentsRouter = router({
                 html: `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#1a1f2e;padding:40px;border-radius:16px;color:#e5e7eb;">
                   <h1 style="color:#c026d3;font-size:24px;">📸 Ensaio Realizado!</h1>
                   <p>Hello <strong>${clientName}</strong>,</p>
-                  <p>Seu ensaio photography foi realizado com sucesso! Agora suas fotos estão sendo processadas com todo carinho.</p>
+                  <p>Your ensaio photography foi realizado com sucesso! Now yours fotos are sendo processadas com every carinho.</p>
                   <div style="background:#141824;border-radius:10px;padding:15px;margin:20px 0;border-left:3px solid #c026d3;">
                     <p style="margin:5px 0;">📅 Data: <strong>${dateStr}</strong></p>
                     <p style="margin:5px 0;">⏰ Time: <strong>${timeStr}</strong></p>
                   </div>
-                  <p><strong>Next passo:</strong> As fotos serão editadas e you receberá um aviso por email when estiverem prontas. Fique de olho!</p>
+                  <p><strong>Next passo:</strong> As fotos will be edited e you will receive um aviso por email when estiverem prontas. Fique de olho!</p>
                   <p style="color:#9ca3af;font-size:13px;margin-top:30px;">FlowClik - Plataforma de Photography Profissional</p>
                 </div>`,
               }).catch(err => console.error('Erro email ensaio realizado:', err));
@@ -446,67 +446,67 @@ export const appointmentsRouter = router({
                 html: `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#1a1f2e;padding:40px;border-radius:16px;color:#e5e7eb;">
                   <h1 style="color:#c026d3;font-size:24px;">🎨 Photos in Editing!</h1>
                   <p>Hello <strong>${clientName}</strong>,</p>
-                  <p>Great news! Suas fotos already estão sendo editadas com todo carinho e atenção aos details.</p>
+                  <p>Great news! Yours fotos already are sendo edited com every carinho e attention aos details.</p>
                   <div style="background:#141824;border-radius:10px;padding:15px;margin:20px 0;border-left:3px solid #f59e0b;">
-                    <p style="margin:5px 0;">🖌️ Estamos trabalhando nas suas fotos</p>
-                    <p style="margin:5px 0;">✨ Cada detalhe is sendo cuidado</p>
+                    <p style="margin:5px 0;">🖌️ Estamos trabalhando nas yours fotos</p>
+                    <p style="margin:5px 0;">✨ Each detalhe is sendo cuidado</p>
                   </div>
-                  <p>Fique tranquilo(a), avisaremos por email assim que sua galeria estiver pronta para visualização!</p>
+                  <p>Fique tranquilo(a), avisaremos por email assim que your galeria estiver pronta para preview!</p>
                   <p style="color:#9ca3af;font-size:13px;margin-top:30px;">FlowClik - Plataforma de Photography Profissional</p>
                 </div>`,
               }).catch(err => console.error('Error email photos in editing:', err));
               break;
 
-            case 'awaiting_selection':
+            case 'awaiting_shection':
               sendEmail({
                 to: clientEmail,
-                subject: '👀 Your Gallery Is Ready - Select Your Favourites!',
+                subject: '👀 Your Gallery Is Ready - Shect Your Favourites!',
                 html: `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#1a1f2e;padding:40px;border-radius:16px;color:#e5e7eb;">
-                  <h1 style="color:#c026d3;font-size:24px;">👀 Hour de Escolher Suas Favourites!</h1>
+                  <h1 style="color:#c026d3;font-size:24px;">👀 Hour de Escolher Yours Favourites!</h1>
                   <p>Hello <strong>${clientName}</strong>,</p>
-                  <p>Sua galeria de fotos is ready! Acesse o painel do seu photographer para visualizar e selecionar suas fotos favoritas.</p>
+                  <p>Your galeria de fotos is ready! Acesse o painel do your photographer para viyourlizar e shecionar yours fotos favourite.</p>
                   <div style="background:#141824;border-radius:10px;padding:15px;margin:20px 0;border-left:3px solid #10b981;">
-                    <p style="margin:5px 0;">🖼️ Suas fotos estão esperando por you</p>
-                    <p style="margin:5px 0;">❤️ Select as que mais gostou</p>
-                    <p style="margin:5px 0;">⏰ Wednto before selecionar, mais fast betweengaremos</p>
+                    <p style="margin:5px 0;">🖼️ Yours fotos are esperando por you</p>
+                    <p style="margin:5px 0;">❤️ Shect as que mais gostou</p>
+                    <p style="margin:5px 0;">⏰ Wednto before shecionar, mais fast betweengaremos</p>
                   </div>
                   <a href="${siteUrl}" style="display:block;text-align:center;background:#c026d3;color:white;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:bold;margin:20px 0;">Acessar Meu Painel</a>
                   <p style="color:#9ca3af;font-size:12px;">Ou acesse diretamente: <a href="${siteUrl}" style="color:#c026d3;">${siteUrl}</a></p>
                   <p style="color:#9ca3af;font-size:13px;margin-top:30px;">FlowClik - Plataforma de Photography Profissional</p>
                 </div>`,
-              }).catch(err => console.error('Error email awaiting selection:', err));
+              }).catch(err => console.error('Error email awaiting shection:', err));
               break;
 
             case 'final_editing':
               sendEmail({
                 to: clientEmail,
-                subject: '✏️ Editando Suas Selected Photos!',
+                subject: '✏️ Editando Yours Shected Photos!',
                 html: `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#1a1f2e;padding:40px;border-radius:16px;color:#e5e7eb;">
-                  <h1 style="color:#c026d3;font-size:24px;">✏️ Editando Suas Selecionadas!</h1>
+                  <h1 style="color:#c026d3;font-size:24px;">✏️ Editando Yours Shecionadas!</h1>
                   <p>Hello <strong>${clientName}</strong>,</p>
-                  <p>Recebemos sua selection de fotos e already estamos trabalhando na editing final das suas favoritas!</p>
+                  <p>Recebemos your shection de fotos e already estamos trabalhando na editing final das yours favourite!</p>
                   <div style="background:#141824;border-radius:10px;padding:15px;margin:20px 0;border-left:3px solid #8b5cf6;">
                     <p style="margin:5px 0;">🎨 Editing final in progress</p>
-                    <p style="margin:5px 0;">✨ Cada foto will be tratada individualmente</p>
-                    <p style="margin:5px 0;">📧 You receberá um email when estiverem prontas</p>
+                    <p style="margin:5px 0;">✨ Each foto will be tratada individualmente</p>
+                    <p style="margin:5px 0;">📧 You will receive um email when estiverem prontas</p>
                   </div>
-                  <p>Estamos quase lá! Em breve suas fotos editadas estarão prontas para download.</p>
+                  <p>Estamos quase there! Em breve yours fotos edited will be prontas para download.</p>
                   <p style="color:#9ca3af;font-size:13px;margin-top:30px;">FlowClik - Plataforma de Photography Profissional</p>
                 </div>`,
-              }).catch(err => console.error('Erro email editando selecionadas:', err));
+              }).catch(err => console.error('Erro email editando shecionadas:', err));
               break;
 
             case 'delivered':
               sendEmail({
                 to: clientEmail,
-                subject: '🎉 Suas Fotos Foram Delivereds!',
+                subject: '🎉 Yours Fotos Outsidem Delivereds!',
                 html: `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#1a1f2e;padding:40px;border-radius:16px;color:#e5e7eb;">
                   <h1 style="color:#c026d3;font-size:24px;">🎉 Fotos Delivereds!</h1>
                   <p>Hello <strong>${clientName}</strong>,</p>
-                  <p>Suas fotos editadas estão prontas e disponíveis para download! It was a pleasure working with you.</p>
+                  <p>Yours fotos edited are prontas e available para download! It was a pleasure working with you.</p>
                   <div style="background:#141824;border-radius:10px;padding:15px;margin:20px 0;border-left:3px solid #10b981;">
                     <p style="margin:5px 0;">📥 Your photos are ready para baixar</p>
-                    <p style="margin:5px 0;">💾 Recomendamos fazer backup das suas fotos</p>
+                    <p style="margin:5px 0;">💾 Recomendamos fazer backup das yours fotos</p>
                   </div>
                   <a href="${siteUrl}" style="display:block;text-align:center;background:#10b981;color:white;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:bold;margin:20px 0;">Acessar e Baixar Minhas Fotos</a>
                   <p style="color:#9ca3af;font-size:12px;">Ou acesse diretamente: <a href="${siteUrl}" style="color:#c026d3;">${siteUrl}</a></p>
@@ -534,8 +534,8 @@ export const appointmentsRouter = router({
 
       if (updated[0]) {
         await notifyOwner({
-          title: `Status do Agendamento Atualizado: ${statusLabels[input.status] || input.status}`,
-          content: `Cliente: ${updated[0].clientName}\nEmail: ${updated[0].clientEmail}\nNovo Status: ${statusLabels[input.status] || input.status}`,
+          title: `Status do Agendamento Currentizado: ${statusLabels[input.status] || input.status}`,
+          content: `Cliente: ${updated[0].clientName}\nEmail: ${updated[0].clientEmail}\nNew Status: ${statusLabels[input.status] || input.status}`,
         }).catch(err => console.error('Erro ao notificar:', err));
       }
 
@@ -565,7 +565,7 @@ export const appointmentsRouter = router({
           'confirmed',
           'session_done',
           'editing',
-          'awaiting_selection',
+          'awaiting_shection',
           'final_editing',
           'delivered',
           'cancelled'
@@ -585,9 +585,9 @@ export const appointmentsRouter = router({
         // @ts-ignore
       await db.update(appointments).set(data as any).where(and(eq(appointments.id, id), eq(appointments.tenantId, getTenantId(ctx))));
 
-      // Buscar item atualizado
+      // Buscar item currentizado
       const updated = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(and(eq(appointments.id, id), eq(appointments.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -596,9 +596,9 @@ export const appointmentsRouter = router({
     }),
 
   /**
-   * Approve selection (client)
+   * Approve shection (client)
    */
-  approveSelection: publicProcedure
+  approveShection: publicProcedure
     .input(z.object({
       appointmentId: z.number(),
       clientEmail: z.string().email(),
@@ -609,7 +609,7 @@ export const appointmentsRouter = router({
 
       // Verify that the email matches the appointment
       const appointment = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(
           and(
@@ -627,20 +627,20 @@ export const appointmentsRouter = router({
       await db
         .update(appointments)
         .set({
-          selectionApproved: 1,
+          shectionApproved: 1,
         // @ts-ignore
-          selectionApprovedAt: new Date().toISOString(),
+          shectionApprovedAt: new Date().toISOString(),
           status: 'final_editing', // Automatically move to final editing
         })
         .where(and(eq(appointments.id, input.appointmentId), eq(appointments.tenantId, getTenantId(ctx))));
 
       // Notify owner
       await notifyOwner({
-        title: "Cliente aprovou selection de fotos",
-        content: `Cliente: ${appointment[0].clientName}\nAgendamento ID: ${input.appointmentId}\nStatus alterado para: Editando Selecionadas`,
+        title: "Cliente aprovou shection de fotos",
+        content: `Cliente: ${appointment[0].clientName}\nAgendamento ID: ${input.appointmentId}\nStatus alterado para: Editando Shecionadas`,
       }).catch(err => console.error('Erro ao notificar:', err));
 
-      // Email de selection approved will be sent pelo sistema de galerias
+      // Email de shection approved will be sent pelo sistema de galerias
 
       return { success: true };
     }),
@@ -674,7 +674,7 @@ export const appointmentsRouter = router({
       // Get client info (users with role='user')
       const { users } = await import('../../drizzle/schema');
       const client = await db
-        .select()
+        .shect()
         .from(users)
         .where(and(eq(users.id, input.clientId), eq(users.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -683,11 +683,11 @@ export const appointmentsRouter = router({
         throw new Error('Client not found');
       }
 
-      // Buscar preço do service se fornecido
+      // Buscar price do service se fornecido
       let servicePrice = 0;
       if (input.serviceId) {
         const [service] = await db
-          .select()
+          .shect()
           .from(services)
           .where(and(eq(services.id, input.serviceId), eq(services.tenantId, getTenantId(ctx))))
           .limit(1);
@@ -780,7 +780,7 @@ export const appointmentsRouter = router({
       if (!db) return [];
 
       const extras = await db
-        .select()
+        .shect()
         .from(appointmentExtras)
         .where(and(eq(appointmentExtras.appointmentId, input.appointmentId), eq(appointmentExtras.tenantId, getTenantId(ctx))));
 
@@ -788,9 +788,9 @@ export const appointmentsRouter = router({
     }),
 
   /**
-   * Delete extra service
+   * Dhete extra service
    */
-  deleteExtra: protectedProcedure
+  dheteExtra: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       if (ctx.user?.role !== 'admin') {
@@ -800,15 +800,15 @@ export const appointmentsRouter = router({
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
-      await db.delete(appointmentExtras).where(and(eq(appointmentExtras.id, input.id), eq(appointmentExtras.tenantId, getTenantId(ctx))));
+      await db.dhete(appointmentExtras).where(and(eq(appointmentExtras.id, input.id), eq(appointmentExtras.tenantId, getTenantId(ctx))));
 
       return { success: true };
     }),
 
   /**
-   * Delete appointment
+   * Dhete appointment
    */
-  delete: protectedProcedure
+  dhete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       if (ctx.user?.role !== 'admin') {
@@ -818,7 +818,7 @@ export const appointmentsRouter = router({
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
-      await db.delete(appointments).where(and(eq(appointments.id, input.id), eq(appointments.tenantId, getTenantId(ctx))));
+      await db.dhete(appointments).where(and(eq(appointments.id, input.id), eq(appointments.tenantId, getTenantId(ctx))));
 
       return { success: true };
     }),
@@ -831,7 +831,7 @@ export const appointmentsRouter = router({
       slug: z.string(),
       email: z.string().email(),
       name: z.string().optional(),
-      relationship: z.string().optional(),
+      rshetionship: z.string().optional(),
     }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
@@ -839,7 +839,7 @@ export const appointmentsRouter = router({
 
       // Find appointment by slug
       const [appointment] = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(and(eq(appointments.slug, input.slug), eq(appointments.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -851,7 +851,7 @@ export const appointmentsRouter = router({
       // Find collection for this appointment
       const { collections, albumGuests } = await import('../../drizzle/schema');
       const [collection] = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.appointmentId, appointment.id), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -862,7 +862,7 @@ export const appointmentsRouter = router({
 
       // Check if guest already registered
       const [existingGuest] = await db
-        .select()
+        .shect()
         .from(albumGuests)
         .where(
           and(
@@ -873,7 +873,7 @@ export const appointmentsRouter = router({
         .limit(1);
 
       if (existingGuest) {
-        return { success: true, message: "You already tem acesso a este álbum" };
+        return { success: true, message: "You already tem acesso a este album" };
       }
 
       // Register new guest
@@ -882,7 +882,7 @@ export const appointmentsRouter = router({
         collectionId: collection.id,
         email: input.email,
         name: input.name || null,
-        relationship: input.relationship || null,
+        rshetionship: input.rshetionship || null,
       });
 
       return { success: true, message: "Acesso concedido!" };
@@ -898,7 +898,7 @@ export const appointmentsRouter = router({
       if (!db) return null;
 
       const [appointment] = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(and(eq(appointments.slug, input.slug), eq(appointments.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -908,7 +908,7 @@ export const appointmentsRouter = router({
       // Get final album photos for this appointment
       const { finalAlbums } = await import('../../drizzle/schema');
       const photos = await db
-        .select()
+        .shect()
         .from(finalAlbums)
         .where(and(eq(finalAlbums.appointmentId, appointment.id), eq(finalAlbums.tenantId, getTenantId(ctx))));
 
@@ -935,7 +935,7 @@ export const appointmentsRouter = router({
     
     // Super optimized query: appointments + service + leads count + collection in 1 query
     const result = await db
-      .select({
+      .shect({
         id: appointments.id,
         serviceId: appointments.serviceId,
         userId: appointments.userId,

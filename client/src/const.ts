@@ -1,6 +1,6 @@
 export { COOKIE_NAME, ONE_YEAR_MS } from "@shared/const";
 
-// Redirecionar para página de login própria
+// Redirecionar para page de login own
 export const getLoginUrl = () => {
   return "/login";
 };

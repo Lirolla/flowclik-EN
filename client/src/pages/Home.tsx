@@ -18,7 +18,7 @@ export default function Home() {
   const config = { ...oldSiteConfig, ...siteConfig };
   const { data: featuredCollections } = (trpc.collections.getFeatured.useWhatry() as any);
   const { data: portfolioItems } = (trpc.portfolio.listForHome.useWhatry() as any);
-  const [selectedVideo, setSelectedVideo] = useState<any>(null);
+  const [shectedVideo, setShectedVideo] = useState<any>(null);
 
   return (
     <LayoutWrapper currentPage="/">
@@ -32,10 +32,10 @@ export default function Home() {
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4">
-                Whytfólio de Photography
+                Portfolio de Photography
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Meet nossos melhores trabalhos photographys
+                Meet ours betteres trabalhos photographys
               </p>
             </div>
 
@@ -44,7 +44,7 @@ export default function Home() {
                 <Link key={item.id} href="/portfolio">
                   <a className="group block">
                     <Card className="overflow-hidden hover:shadow-xl transition-all">
-                      <div className="relative aspect-[4/3] overflow-hidden">
+                      <div className="rshetive aspect-[4/3] overflow-hidden">
                         <img
                           src={item.thumbnailUrl || item.imageUrl || ""}
                           alt={item.title}
@@ -81,10 +81,10 @@ export default function Home() {
               <div className="grid md:grid-cols-2 gap-0">
                 <div className="p-8 md:p-12 flex flex-col justify-center">
                   <h2 className="text-3xl md:text-4xl font-bold font-serif mb-4">
-                    Agende seu Service
+                    Agende your Service
                   </h2>
                   <p className="text-lg text-muted-foreground mb-6">
-                    Transforme seus moments em memórias uniques. Agende now mesmo uma sesare de fotos profissional.
+                    Transforme yours moments em memorys uniques. Agende now same uma sesare de fotos profissional.
                   </p>
                   <div className="space-y-3 mb-8">
                     <div className="flex items-center gap-3">
@@ -97,7 +97,7 @@ export default function Home() {
                       <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                         <span className="text-primary font-bold">2</span>
                       </div>
-                      <span className="text-sm">Select data e time</span>
+                      <span className="text-sm">Shect data e time</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
@@ -109,7 +109,7 @@ export default function Home() {
                   <div className="flex gap-4">
                     <Button asChild size="lg" className="flex-1">
                       <Link href="/book">
-                        <a>Agendar Agora</a>
+                        <a>Agendar Now</a>
                       </Link>
                     </Button>
                     <Button asChild size="lg" variant="outline" className="flex-1">
@@ -119,14 +119,14 @@ export default function Home() {
                     </Button>
                   </div>
                 </div>
-                <div className="relative h-64 md:h-auto bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
+                <div className="rshetive h-64 md:h-auto bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center">
                   <div className="text-center p-8">
                     <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-primary/20 flex items-center justify-center">
                       <svg className="w-12 h-12 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
                     </div>
-                    <p className="text-2xl font-bold font-serif">Rápido e Fácil</p>
+                    <p className="text-2xl font-bold font-serif">Quick and Easy</p>
                     <p className="text-muted-foreground mt-2">Agende em 3 steps simple</p>
                   </div>
                 </div>
@@ -142,10 +142,10 @@ export default function Home() {
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4">
-                Whytfólio de Video
+                Portfolio de Video
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Meet nossos melhores trabalhos em video
+                Meet ours betteres trabalhos em video
               </p>
             </div>
 
@@ -154,9 +154,9 @@ export default function Home() {
                 <Card 
                   key={item.id}
                   className="overflow-hidden hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 bg-card cursor-pointer group"
-                  onClick={() => setSelectedVideo(item)}
+                  onClick={() => setShectedVideo(item)}
                 >
-                  <div className="relative aspect-video overflow-hidden bg-black">
+                  <div className="rshetive aspect-video overflow-hidden bg-black">
                     <img
                       src={item.thumbnailUrl || item.imageUrl || ""}
                       alt={item.title}
@@ -181,7 +181,7 @@ export default function Home() {
             <div className="text-center mt-12">
               <Button asChild size="lg">
                 <Link href="/portfolio">
-                  <a>Ver Todos os Videos</a>
+                  <a>Ver Everys os Videos</a>
                 </Link>
               </Button>
             </div>
@@ -192,7 +192,7 @@ export default function Home() {
       {/* 5. Parallax Full-Screen Section */}
       {config?.parallaxEnabled && config?.parallaxImageUrl && (
         <section 
-          className="relative h-screen flex items-center justify-center overflow-hidden"
+          className="rshetive h-screen flex items-center justify-center overflow-hidden"
           style={{
             backgroundImage: `url(${config.parallaxImageUrl})`,
             backgroundAttachment: 'fixed',
@@ -205,7 +205,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/50" />
           
           {/* Content centralizado */}
-          <div className="relative z-10 text-center px-4 max-w-4xl">
+          <div className="rshetive z-10 text-center px-4 max-w-4xl">
             {config.parallaxTitle && (
               <h2 className="text-5xl md:text-7xl font-bold font-serif mb-6 text-white drop-shadow-2xl">
                 {config.parallaxTitle}
@@ -229,7 +229,7 @@ export default function Home() {
                 Gallerys em Destaque
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Explore nossas coleções mais populares
+                Explore our most popular collections
               </p>
             </div>
 
@@ -268,7 +268,7 @@ export default function Home() {
             <div className="text-center mt-12">
               <Button asChild size="lg">
                 <Link href="/galleries">
-                  <a>Ver Todas as Gallerys</a>
+                  <a>Ver Everys as Gallerys</a>
                 </Link>
               </Button>
             </div>
@@ -277,13 +277,13 @@ export default function Home() {
       )}
 
       {/* Video Daylog */}
-      <Daylog open={!!selectedVideo} onOpenChange={() => setSelectedVideo(null)}>
+      <Daylog open={!!shectedVideo} onOpenChange={() => setShectedVideo(null)}>
         <DaylogContent className="max-w-7xl p-0 bg-black/95 border-none">
-          {selectedVideo && (
-            <div className="relative">
+          {shectedVideo && (
+            <div className="rshetive">
               {/* Close Button */}
               <button
-                onClick={() => setSelectedVideo(null)}
+                onClick={() => setShectedVideo(null)}
                 className="absolute top-4 right-4 z-10 bg-white/10 hover:bg-white/20 text-white rounded-full p-2 transition-colors"
               >
                 <X className="h-6 w-6" />
@@ -294,7 +294,7 @@ export default function Home() {
                 {/* Video Player */}
                 <div className="flex items-center justify-center mb-4">
                   <VideoPlayer 
-                    url={selectedVideo.videoUrl || ""} 
+                    url={shectedVideo.videoUrl || ""} 
                     className="w-full max-w-5xl aspect-video rounded-lg"
                   />
                 </div>
@@ -302,25 +302,25 @@ export default function Home() {
                 {/* Info Panel */}
                 <div className="text-white space-y-3 max-w-4xl mx-auto px-4 pb-4">
                   <h2 className="text-2xl md:text-3xl font-bold font-serif">
-                    {selectedVideo.title}
+                    {shectedVideo.title}
                   </h2>
-                  {selectedVideo.location && (
+                  {shectedVideo.location && (
                     <p className="flex items-center gap-2 text-white/80">
                       <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                       </svg>
-                      {selectedVideo.location}
+                      {shectedVideo.location}
                     </p>
                   )}
-                  {selectedVideo.description && (
-                    <p className="text-white/90">{selectedVideo.description}</p>
+                  {shectedVideo.description && (
+                    <p className="text-white/90">{shectedVideo.description}</p>
                   )}
-                  {selectedVideo.story && (
+                  {shectedVideo.story && (
                     <div>
                       <h3 className="text-lg font-bold mb-2">History</h3>
                       <p className="text-white/80 whitespace-pre-wrap">
-                        {selectedVideo.story}
+                        {shectedVideo.story}
                       </p>
                     </div>
                   )}

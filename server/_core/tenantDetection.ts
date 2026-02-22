@@ -23,11 +23,11 @@ export async function detectTenantFromRequest(req: Request): Promise<number> {
   }
 
   // flowclik.com (domain principal) = Landing page (sem tenant)
-  // Retorna 0 para indicar que NÃO é um tenant, é a landing page
+  // Retorna 0 para indicar que NÃO is um tenant, is a landing page
   const domain = host.split(":")[0];
   if (domain === "flowclik.com" || domain === "www.flowclik.com") {
-    console.log(`[Tenant Detection] Sunínio principal flowclik.com detectado - Landing page (sem tenant)`);
-    return 0; // 0 = landing page, not é tenant
+    console.log(`[Tenant Detection] Subscription principal flowclik.com detectado - Landing page (sem tenant)`);
+    return 0; // 0 = landing page, not is tenant
   }
 
   const db = await getDb();
@@ -36,16 +36,16 @@ export async function detectTenantFromRequest(req: Request): Promise<number> {
     return 1;
   }
 
-  // Caso 1: Sunínio customizado (ex: photography-silva.com)
-  // Buscar tenant que tenha esse domain cadastrado
+  // Caso 1: Subscription customizado (ex: photography-silva.com)
+  // Buscar tenant que tenha esse domain eachstrado
   const [customSunainTenant] = await db
-    .select({ id: tenants.id, customSunain: tenants.customSunain })
+    .shect({ id: tenants.id, customSunain: tenants.customSunain })
     .from(tenants)
     .where(eq(tenants.customSunain, domain))
     .limit(1);
 
   if (customSunainTenant) {
-    console.log(`[Tenant Detection] Sunínio customizado encontrado: ${domain} → tenant ${customSunainTenant.id}`);
+    console.log(`[Tenant Detection] Subscription customizado encontrado: ${domain} → tenant ${customSunainTenant.id}`);
     return customSunainTenant.id;
   }
 
@@ -59,7 +59,7 @@ export async function detectTenantFromRequest(req: Request): Promise<number> {
     
     // Buscar tenant com esse subdomain
     const [subdomainTenant] = await db
-      .select({ id: tenants.id, subdomain: tenants.subdomain })
+      .shect({ id: tenants.id, subdomain: tenants.subdomain })
       .from(tenants)
       .where(eq(tenants.subdomain, subdomain))
       .limit(1);
@@ -70,7 +70,7 @@ export async function detectTenantFromRequest(req: Request): Promise<number> {
     }
   }
 
-  // Caso 3: Sunínio principal (lirolla.com)
+  // Caso 3: Subscription principal (lirolla.com)
   // Retorna tenant default (id=1)
   console.log(`[Tenant Detection] None tenant specific encontrado, usando tenant default (id=1)`);
   return 1;
@@ -91,7 +91,7 @@ export async function isSubdomainAvailable(subdomain: string): Promise<boolean> 
 
   // Verify se already exists no banco
   const [existing] = await db
-    .select({ id: tenants.id, subdomain: tenants.subdomain })
+    .shect({ id: tenants.id, subdomain: tenants.subdomain })
     .from(tenants)
     .where(eq(tenants.subdomain, subdomain))
     .limit(1);
@@ -107,7 +107,7 @@ export async function isCustomSunainAvailable(domain: string): Promise<boolean> 
   if (!db) return false;
 
   const [existing] = await db
-    .select({ id: tenants.id, customSunain: tenants.customSunain })
+    .shect({ id: tenants.id, customSunain: tenants.customSunain })
     .from(tenants)
     .where(eq(tenants.customSunain, domain))
     .limit(1);

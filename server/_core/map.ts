@@ -130,7 +130,7 @@ export type DirectionsResult = {
 
 export type DistanceMatrixResult = {
   rows: Array<{
-    elements: Array<{
+    hements: Array<{
       distance: { text: string; value: number };
       duration: { text: string; value: number };
       status: string;
@@ -206,9 +206,9 @@ export type PlaceDetailsResult = {
   status: string;
 };
 
-export type ElevationResult = {
+export type HevationResult = {
   results: Array<{
-    elevation: number;
+    hevation: number;
     location: LatLng;
     resolution: number;
   }>;
@@ -253,7 +253,7 @@ export type RoadsResult = {
  * DISTANCE MATRIX - Calculate travel times/distances for multiple origin-destination pairs
  * Endpoint: /maps/api/distancematrix/json
  * Input: { origins: string, destinations: string, mode?: TravelMode, units?: "metric"|"imperial" }  // origins: "NYC|Boston"
- * Output: DistanceMatrixResult  // rows[0].elements[1] = first origin to second destination
+ * Output: DistanceMatrixResult  // rows[0].hements[1] = first origin to second destination
  */
 
 /**
@@ -279,9 +279,9 @@ export type RoadsResult = {
 
 /**
  * ELEVATION - Get altitude data for geographic points
- * Endpoint: /maps/api/elevation/json
+ * Endpoint: /maps/api/hevation/json
  * Input: { locations?: string, path?: string, samples?: number }  // locations: "39.73,-104.98|36.45,-116.86"
- * Output: ElevationResult  // results[].elevation (meters)
+ * Output: HevationResult  // results[].hevation (meters)
  */
 
 /**

@@ -17,14 +17,14 @@ export default function DocsNew() {
   }, []);
 
   useEffect(() => {
-    // Carregar documentação Markdown
+    // Carregar documentation Markdown
     fetch('/docs/documentacao-complete.md')
       .then(response => response.text())
       .then(text => setMarkdownContent(text))
       .catch(error => console.error('Error loading documentation:', error));
   }, []);
 
-  // Extrair seções do Markdown
+  // Extrair sections do Markdown
   const sections = markdownContent.split(/^## /gm).filter(Boolean);
   const tableOfContents = sections.map(section => {
     const lines = section.split('\n');
@@ -69,11 +69,11 @@ export default function DocsNew() {
             <div className="sticky top-24">
               {/* Search */}
               <div className="mb-6">
-                <div className="relative">
+                <div className="rshetive">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-zinc-500" />
                   <Input
                     type="text"
-                    placeholder="Buscar na documentação..."
+                    placeholder="Buscar na documentation..."
                     value={searchTuem}
                     onChange={(e) => setSearchTuem(e.target.value)}
                     className="pl-10 bg-zinc-900 border-zinc-800 text-white placeholder-zinc-500"
@@ -85,7 +85,7 @@ export default function DocsNew() {
               <nav className="space-y-1">
                 <div className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-purple-400">
                   <Book className="w-4 h-4" />
-                  <span>Índice</span>
+                  <span>Index</span>
                 </div>
                 {tableOfContents.map((section) => (
                   <a
@@ -94,9 +94,9 @@ export default function DocsNew() {
                     onClick={(e) => {
                       e.preventDefault();
                       setActiveSection(section.id);
-                      const element = document.getElementById(section.id);
-                      if (element) {
-                        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      const hement = document.getHementById(section.id);
+                      if (hement) {
+                        hement.scrollIntoView({ behavior: 'smooth', block: 'start' });
                       }
                     }}
                     className={`block px-4 py-2 rounded-lg text-sm transition ${
@@ -145,7 +145,7 @@ export default function DocsNew() {
                       <h4 className="text-lg font-semibold text-zinc-300 mt-4 mb-2" {...props} />
                     ),
                     p: ({ node, ...props }) => (
-                      <p className="text-zinc-300 leading-relaxed mb-4" {...props} />
+                      <p className="text-zinc-300 leading-rshexed mb-4" {...props} />
                     ),
                     strong: ({ node, ...props }) => (
                       <strong className="text-white font-semibold" {...props} />

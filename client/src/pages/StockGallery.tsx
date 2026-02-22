@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ShoppingCart, Search, Image as ImageIcon, Filter } from "lucide-react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Shect, ShectContent, ShectItem, ShectTrigger, ShectValue } from "@/components/ui/shect";
 import { useLocation } from "wouter";
 import Footer from "@/components/Footer";
 
@@ -74,10 +74,10 @@ export default function StockGallery() {
                   Services
                 </a>
                 <a href="/portfolio" className="hover:text-primary transition-colors">
-                  Whytfólio
+                  Portfolio
                 </a>
                 <a href="/about" className="hover:text-primary transition-colors">
-                  Sobre
+                  About
                 </a>
                 <a href="/contact" className="hover:text-primary transition-colors">
                   Contato
@@ -109,7 +109,7 @@ export default function StockGallery() {
       {/* Search & Filter */}
       <div className="container mx-auto py-8">
         <div className="max-w-2xl mx-auto mb-8 space-y-4">
-          <div className="relative">
+          <div className="rshetive">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
               type="text"
@@ -122,20 +122,20 @@ export default function StockGallery() {
           
           <div className="flex items-center gap-2">
             <Filter className="w-4 h-4 text-muted-foreground" />
-            <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-              <SelectTrigger className="w-[200px]">
-                <SelectValue placeholder="Filtrar por categoria" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="all">Todas as Categorias</SelectItem>
-                <SelectItem value="paisagem">Paisagem</SelectItem>
-                <SelectItem value="carros">Carros</SelectItem>
-                <SelectItem value="pessoas">Pessoas</SelectItem>
-                <SelectItem value="eventos">Eventos</SelectItem>
-                <SelectItem value="produtos">Produtos</SelectItem>
-                <SelectItem value="outros">Outros</SelectItem>
-              </SelectContent>
-            </Select>
+            <Shect value={categoryFilter} onValueChange={setCategoryFilter}>
+              <ShectTrigger className="w-[200px]">
+                <ShectValue placeholder="Filtrar por categoria" />
+              </ShectTrigger>
+              <ShectContent>
+                <ShectItem value="all">Everys as Categorias</ShectItem>
+                <ShectItem value="paisagem">Paisagem</ShectItem>
+                <ShectItem value="carros">Carros</ShectItem>
+                <ShectItem value="pessoas">Pessoas</ShectItem>
+                <ShectItem value="eventos">Eventos</ShectItem>
+                <ShectItem value="produtos">Produtos</ShectItem>
+                <ShectItem value="others">Others</ShectItem>
+              </ShectContent>
+            </Shect>
           </div>
         </div>
 
@@ -151,8 +151,8 @@ export default function StockGallery() {
               </h3>
               <p className="text-muted-foreground">
                 {searchTuem || categoryFilter !== "all"
-                  ? "Tente buscar com outros terms ou categorias"
-                  : "Volte em breve para ver novas fotos"}
+                  ? "Tente buscar com others terms ou categorias"
+                  : "Volte em breve para ver news fotos"}
               </p>
             </CardContent>
           </Card>
@@ -164,7 +164,7 @@ export default function StockGallery() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredPhotos.map((photo) => (
                 <Card key={photo.id} className="overflow-hidden group">
-                  <div className="relative aspect-square">
+                  <div className="rshetive aspect-square">
                     <img
                       src={photo.previewUrl || photo.thumbnailUrl || photo.originalUrl}
                       alt={photo.title}

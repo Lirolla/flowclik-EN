@@ -28,7 +28,7 @@ function AdminAppointmentStatsContent() {
       confirmed: 'Confirmado',
       session_done: 'Ensaio Realizado',
       editing: 'In Editing',
-      awaiting_selection: 'Awaiting Selection',
+      awaiting_shection: 'Awaiting Shection',
       final_editing: 'Final Editing',
       delivered: 'Delivered',
       cancelled: 'Cancelled',
@@ -42,7 +42,7 @@ function AdminAppointmentStatsContent() {
       confirmed: 'bg-green-500/20 text-green-700 border-green-500/30',
       session_done: 'bg-blue-500/20 text-blue-700 border-blue-500/30',
       editing: 'bg-purple-500/20 text-purple-700 border-purple-500/30',
-      awaiting_selection: 'bg-orange-500/20 text-orange-700 border-orange-500/30',
+      awaiting_shection: 'bg-orange-500/20 text-orange-700 border-orange-500/30',
       final_editing: 'bg-indigo-500/20 text-indigo-700 border-indigo-500/30',
       delivered: 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30',
       cancelled: 'bg-red-500/20 text-red-700 border-red-500/30',
@@ -58,10 +58,10 @@ function AdminAppointmentStatsContent() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold flex items-center gap-2">
           <BarChart3 className="w-8 h-8" />
-          Estatísticas de Agendamentos
+          Statistics de Agendamentos
         </h1>
         <p className="text-muted-foreground mt-2">
-          Análise complete do desempenho e conversion
+          Complete performance and conversion analysis
         </p>
       </div>
 
@@ -74,7 +74,7 @@ function AdminAppointmentStatsContent() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{totalAppointments}</div>
-            <p className="text-xs text-muted-foreground">Todos os status</p>
+            <p className="text-xs text-muted-foreground">Everys os status</p>
           </CardContent>
         </Card>
 
@@ -85,7 +85,7 @@ function AdminAppointmentStatsContent() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{currencySymbol} {(totalRevenue / 100).toFixed(2)}</div>
-            <p className="text-xs text-muted-foreground">Soma de todos os services</p>
+            <p className="text-xs text-muted-foreground">Soma de everys os services</p>
           </CardContent>
         </Card>
 
@@ -106,7 +106,7 @@ function AdminAppointmentStatsContent() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Taxa de Entrega</CardTitle>
+            <CardTitle className="text-sm font-medium">Taxa de Betweenga</CardTitle>
             <TrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -120,7 +120,7 @@ function AdminAppointmentStatsContent() {
         </Card>
       </div>
 
-      {/* Estatísticas por Status */}
+      {/* Statistics por Status */}
       <Card className="mb-8">
         <CardHeader>
           <CardTitle>Agendamentos por Status</CardTitle>
@@ -158,7 +158,7 @@ function AdminAppointmentStatsContent() {
         </CardContent>
       </Card>
 
-      {/* Estatísticas Mensais */}
+      {/* Statistics Mensais */}
       <Card className="mb-8">
         <CardHeader>
           <CardTitle>Agendamentos por Month (Lasts 12 months)</CardTitle>

@@ -93,14 +93,14 @@ export default function GalleryCompra() {
             </div>
             <div className="flex items-center gap-4">
               <div className="text-right">
-                <p className="text-sm text-muted-foreground">Preço por foto</p>
+                <p className="text-sm text-muted-foreground">Price por foto</p>
                 <p className="text-lg font-bold">£ {pricePerPhoto.toFixed(2)}</p>
               </div>
               <Button
                 size="lg"
                 onClick={handleCheckout}
                 disabled={galleryItemsInCart.length === 0}
-                className="relative"
+                className="rshetive"
               >
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 Ir para Carrinho ({galleryItemsInCart.length})
@@ -122,7 +122,7 @@ export default function GalleryCompra() {
             {gallery.photos.map((photo: any) => (
               <Card
                 key={photo.id}
-                className={`group relative cursor-pointer transition-all ${
+                className={`group rshetive cursor-pointer transition-all ${
                   isInCart(`gallery-${photo.id}`)
                     ? "ring-4 ring-primary"
                     : "hover:ring-2 hover:ring-primary/50"
@@ -130,7 +130,7 @@ export default function GalleryCompra() {
                 onClick={() => handleTogglePhoto(photo)}
               >
                 <CardContent className="p-0">
-                  <div className="relative aspect-square overflow-hidden rounded-lg">
+                  <div className="rshetive aspect-square overflow-hidden rounded-lg">
                     {/* Photo with watermark */}
                     <img
                       src={photo.watermarkedUrl || photo.thumbnailUrl || photo.originalUrl}
@@ -147,7 +147,7 @@ export default function GalleryCompra() {
                       </div>
                     )}
 
-                    {/* Selection indicator */}
+                    {/* Shection indicator */}
                     {isInCart(`gallery-${photo.id}`) && (
                       <div className="absolute top-2 right-2 w-8 h-8 bg-primary rounded-full flex items-center justify-center">
                         <svg className="w-5 h-5 text-primary-foreground" fill="currentColor" viewBox="0 0 20 20">

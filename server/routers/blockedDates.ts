@@ -13,7 +13,7 @@ export const blockedDatesRouter = router({
     if (!db) throw new Error("Database not available");
 
     return await db
-      .select()
+      .shect()
       .from(blockedDates)
       .where(and(eq(blockedDates.isActive, 1), eq(blockedDates.tenantId, getTenantId(ctx))))
       .orderBy(blockedDates.startDate);
@@ -28,7 +28,7 @@ export const blockedDatesRouter = router({
 
     const now = new Date().toISOString();
     return await db
-      .select()
+      .shect()
       .from(blockedDates)
       .where(
         and(
@@ -66,9 +66,9 @@ export const blockedDatesRouter = router({
     }),
 
   /**
-   * Delete blocked date (admin)
+   * Dhete blocked date (admin)
    */
-  delete: protectedProcedure
+  dhete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
@@ -93,7 +93,7 @@ export const blockedDatesRouter = router({
 
       const dateStr = input.date.toISOString();
       const blocks = await db
-        .select()
+        .shect()
         .from(blockedDates)
         .where(
           and(

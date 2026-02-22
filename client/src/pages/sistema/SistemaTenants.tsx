@@ -48,7 +48,7 @@ export default function SistemaTenants() {
         {status === "trialing" && "Trial"}
         {status === "past_due" && "Vencido"}
         {status === "cancelled" && "Cancelled"}
-        {status === "paused" && "Pausado"}
+        {status === "paused" && "Paused"}
       </Badge>
     );
   };
@@ -71,9 +71,9 @@ export default function SistemaTenants() {
   return (
     <div className="container py-8">
       <div className="mb-8">
-        <h1 className="text-3xl font-bold">Photographers Cadastrados</h1>
+        <h1 className="text-3xl font-bold">Photographers Eachstrados</h1>
         <p className="text-muted-foreground">
-          Manage todos os photographers da plataforma
+          Manage everys os photographers da plataforma
         </p>
       </div>
 
@@ -82,7 +82,7 @@ export default function SistemaTenants() {
         {!tenants || tenants.length === 0 ? (
           <Card className="p-12 text-center">
             <Users className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-lg font-semibold mb-2">None photographer cadastrado</h3>
+            <h3 className="text-lg font-semibold mb-2">None photographer eachstrado</h3>
           </Card>
         ) : (
           tenants.map((tenant) => (
@@ -141,7 +141,7 @@ export default function SistemaTenants() {
                   </div>
 
                   <p className="text-xs text-muted-foreground mt-4">
-                    Cadastrado {formatDistanceToNow(new Date(tenant.createdAt), { addSuffix: true, locale: ptBR })}
+                    Eachstrado {formatDistanceToNow(new Date(tenant.createdAt), { addSuffix: true, locale: ptBR })}
                   </p>
                 </div>
               </div>

@@ -46,7 +46,7 @@ type AppointmentStatus =
   | 'confirmed' 
   | 'session_done' 
   | 'editing' 
-  | 'awaiting_selection' 
+  | 'awaiting_shection' 
   | 'final_editing' 
   | 'delivered' 
   | 'cancelled';
@@ -150,7 +150,7 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
         <Card>
           <CardHeader>
             <CardTitle className="text-sm font-medium text-muted-foreground">
-              Selection Fee
+              Shection Fee
             </CardTitle>
           </CardHeader>
           <CardContent>
@@ -171,7 +171,7 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
         <CardContent>
           <div className="text-center py-6">
             <p className="text-muted-foreground mb-4">
-              Use a página de <strong>Galleries</strong> para fazer upload das fotos do ensaio
+              Use a page de <strong>Galleries</strong> para fazer upload das fotos do ensaio
             </p>
             <Button asChild>
               <a href={`/admin/galleries/${galleryData.id}/upload`}>
@@ -179,7 +179,7 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
               </a>
             </Button>
             <p className="text-sm text-muted-foreground mt-4">
-              Dica: Select a galeria "{galleryData.name}" ao fazer upload
+              Dica: Shect a galeria "{galleryData.name}" ao fazer upload
             </p>
           </div>
         </CardContent>
@@ -197,7 +197,7 @@ function AdminAppointmentsContent() {
   const [statusFilter, setStatusFilter] = useState<AppointmentStatus | 'all'>('all');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
-  const [selectedAppointment, setSelectedAppointment] = useState<any>(null);
+  const [shectedAppointment, setShectedAppointment] = useState<any>(null);
   const [isEditDaylogOpen, setIsEditDaylogOpen] = useState(false);
   const [isPaymentDaylogOpen, setIsPaymentDaylogOpen] = useState(false);
   const [isCreateDaylogOpen, setIsCreateDaylogOpen] = useState(false);
@@ -247,13 +247,13 @@ function AdminAppointmentsContent() {
     onSuccess: () => {
       utils.downloadControl.getAllPermissions.invalidate();
       toast({
-        title: "Download atualizado!",
+        title: "Download currentizado!",
         description: "Download permission changed successfully.",
       });
     },
     onError: (error) => {
       toast({
-        title: "Erro ao atualizar download",
+        title: "Erro ao currentizar download",
         description: error.message,
         variant: "destructive",
       });
@@ -264,21 +264,21 @@ function AdminAppointmentsContent() {
     onSuccess: async (data, variables) => {
       await utils.appointments.getAll.invalidate();
       
-      // Buscar agendamento atualizado para manter modal aberto com dados novos
+      // Buscar agendamento currentizado para manter modal aberto com dados news
       const updatedAppointments = await utils.appointments.getAll.fetch();
       const updated = updatedAppointments?.find(a => a.id === variables.id);
       if (updated) {
-        setSelectedAppointment(updated);
+        setShectedAppointment(updated);
       }
       
       toast({
-        title: "Status atualizado!",
+        title: "Status currentizado!",
         description: "O status do agendamento foi alterado com sucesso.",
       });
     },
     onError: (error) => {
       toast({
-        title: "Erro ao atualizar status",
+        title: "Erro ao currentizar status",
         description: error.message,
         variant: "destructive",
       });
@@ -293,7 +293,7 @@ function AdminAppointmentsContent() {
         description: "Information saved successfully.",
       });
       setIsEditDaylogOpen(false);
-      setSelectedAppointment(null);
+      setShectedAppointment(null);
     },
     onError: (error) => {
       toast({
@@ -304,18 +304,18 @@ function AdminAppointmentsContent() {
     },
   });
 
-  const deleteMutation = trpc.appointments.delete.useMutation({
+  const dheteMutation = trpc.appointments.dhete.useMutation({
     onSuccess: () => {
       utils.appointments.getAll.invalidate();
       toast({
-        title: "Appointment deleted!",
+        title: "Appointment dheted!",
         description: "O agendamento foi removido com sucesso.",
       });
-      setSelectedAppointment(null);
+      setShectedAppointment(null);
     },
     onError: (error) => {
       toast({
-        title: "Error deleting",
+        title: "Error dheting",
         description: error.message,
         variant: "destructive",
       });
@@ -356,7 +356,7 @@ function AdminAppointmentsContent() {
   };
 
   const handleEdit = (appointment: any) => {
-    setSelectedAppointment(appointment);
+    setShectedAppointment(appointment);
     setEditFormData({
       appointmentDate: format(new Date(appointment.appointmentDate), "yyyy-MM-dd"),
       appointmentTime: appointment.appointmentTime || "",
@@ -367,12 +367,12 @@ function AdminAppointmentsContent() {
   };
 
   const handleSaveEdit = () => {
-    if (!selectedAppointment) return;
+    if (!shectedAppointment) return;
 
     const dateTime = new Date(`${editFormData.appointmentDate}T${editFormData.appointmentTime || '10:00'}:00`);
 
     updateMutation.mutate({
-      id: selectedAppointment.id,
+      id: shectedAppointment.id,
       appointmentDate: dateTime,
       appointmentTime: editFormData.appointmentTime,
       eventLocation: editFormData.eventLocation,
@@ -380,9 +380,9 @@ function AdminAppointmentsContent() {
     });
   };
 
-  const handleDelete = (id: number) => {
+  const handleDhete = (id: number) => {
     if (confirm("Tem certeza que deseja excluir este agendamento?")) {
-      deleteMutation.mutate({ id });
+      dheteMutation.mutate({ id });
     }
   };
 
@@ -392,8 +392,8 @@ function AdminAppointmentsContent() {
       confirmed: { label: '✅ Confirmado', color: 'bg-green-500/20 text-green-700 border-green-500/30' },
       session_done: { label: '📸 Ensaio Realizado', color: 'bg-blue-500/20 text-blue-700 border-blue-500/30' },
       editing: { label: '🎨 Photos in Editing', color: 'bg-purple-500/20 text-purple-700 border-purple-500/30' },
-      awaiting_selection: { label: '👀 Awaiting Selection', color: 'bg-orange-500/20 text-orange-700 border-orange-500/30' },
-      final_editing: { label: '✏️ Editando Selecionadas', color: 'bg-indigo-500/20 text-indigo-700 border-indigo-500/30' },
+      awaiting_shection: { label: '👀 Awaiting Shection', color: 'bg-orange-500/20 text-orange-700 border-orange-500/30' },
+      final_editing: { label: '✏️ Editando Shecionadas', color: 'bg-indigo-500/20 text-indigo-700 border-indigo-500/30' },
       delivered: { label: '📦 Delivered', color: 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30' },
       cancelled: { label: '❌ Cancelled', color: 'bg-red-500/20 text-red-700 border-red-500/30' },
     };
@@ -406,7 +406,7 @@ function AdminAppointmentsContent() {
       'confirmed',
       'session_done',
       'editing',
-      'awaiting_selection',
+      'awaiting_shection',
       'final_editing',
       'delivered'
     ];
@@ -448,7 +448,7 @@ function AdminAppointmentsContent() {
               className="gap-2"
             >
               <CalendarDays className="w-4 h-4" />
-              Calendário
+              Calendar
             </Button>
             <Button
               variant={viewMode === 'list' ? 'default' : 'ghost'}
@@ -462,7 +462,7 @@ function AdminAppointmentsContent() {
           </div>
           <Button onClick={() => setIsCreateDaylogOpen(true)} className="gap-2">
             <Calendar className="w-4 h-4" />
-            Novo Agendamento
+            New Agendamento
           </Button>
         </div>
       </div>
@@ -510,16 +510,16 @@ function AdminAppointmentsContent() {
             {daysInMonth.map((day) => {
               const dateKey = format(day, 'yyyy-MM-dd');
               const dayAppointments = appointmentsByDate[dateKey] || [];
-              const isToday = isSameDay(day, new Date());
+              const isEveryy = isSameDay(day, new Date());
 
               return (
                 <div
                   key={day.toString()}
                   className={`h-24 border rounded p-1 overflow-y-auto ${
-                    isToday ? 'border-primary bg-primary/5' : 'border-border'
+                    isEveryy ? 'border-primary bg-primary/5' : 'border-border'
                   }`}
                 >
-                  <div className={`text-sm font-semibold mb-1 ${isToday ? 'text-primary' : ''}`}>
+                  <div className={`text-sm font-semibold mb-1 ${isEveryy ? 'text-primary' : ''}`}>
                     {format(day, 'd')}
                   </div>
                   <div className="space-y-1">
@@ -528,7 +528,7 @@ function AdminAppointmentsContent() {
                       return (
                         <button
                           key={apt.id}
-                          onClick={() => setSelectedAppointment(apt)}
+                          onClick={() => setShectedAppointment(apt)}
                           className={`w-full text-left text-xs px-1 py-0.5 rounded border ${statusConfig.color} hover:opacity-80 transition-opacity`}
                         >
                           <div className="flex items-center gap-1">
@@ -562,7 +562,7 @@ function AdminAppointmentsContent() {
         <Card>
           <CardHeader>
             <div className="flex items-center justify-between">
-              <CardTitle>Todos os Agendamentos</CardTitle>
+              <CardTitle>Everys os Agendamentos</CardTitle>
               <div className="flex gap-3">
                 {/* Busca */}
                 <Input
@@ -570,29 +570,29 @@ function AdminAppointmentsContent() {
                   value={searchTuem}
                   onChange={(e) => {
                     setSearchTuem(e.target.value);
-                    setCurrentPage(1); // Resetar para first página
+                    setCurrentPage(1); // Resetar para first page
                   }}
                   className="w-64"
                 />
                 {/* Filtro de Status */}
-                <select
+                <shect
                   value={statusFilter}
                   onChange={(e) => {
                     setStatusFilter(e.target.value as AppointmentStatus | 'all');
-                    setCurrentPage(1); // Resetar para first página
+                    setCurrentPage(1); // Resetar para first page
                   }}
                   className="border rounded px-3 py-2 bg-background"
                 >
-                  <option value="all">Todos os Status</option>
+                  <option value="all">Everys os Status</option>
                   <option value="pending">⏳ Pending</option>
                   <option value="confirmed">✅ Confirmado</option>
                   <option value="session_done">📸 Ensaio Realizado</option>
                   <option value="editing">🎨 Photos in Editing</option>
-                  <option value="awaiting_selection">👀 Awaiting Selection</option>
-                  <option value="final_editing">✏️ Editando Selecionadas</option>
+                  <option value="awaiting_shection">👀 Awaiting Shection</option>
+                  <option value="final_editing">✏️ Editando Shecionadas</option>
                   <option value="delivered">📦 Delivered</option>
                   <option value="cancelled">❌ Cancelled</option>
-                </select>
+                </shect>
               </div>
             </div>
           </CardHeader>
@@ -646,7 +646,7 @@ function AdminAppointmentsContent() {
                         return (
                           <tr 
                             key={apt.id} 
-                            onClick={() => setSelectedAppointment(apt)}
+                            onClick={() => setShectedAppointment(apt)}
                             className="border-b hover:bg-muted/50 transition-colors cursor-pointer"
                           >
                             <td className="py-3 px-4">
@@ -707,7 +707,7 @@ function AdminAppointmentsContent() {
 
               return (
                 <div className="mt-4 flex items-center justify-between">
-                  {/* Contador */}
+                  {/* Contapain */}
                   <div className="text-sm text-muted-foreground">
                     Mostrando {startIndex + 1}-{endIndex} de {totalItems} agendamentos
                   </div>
@@ -724,10 +724,10 @@ function AdminAppointmentsContent() {
                         Previous
                       </Button>
 
-                      {/* Números de páginas */}
+                      {/* Numbers de pages */}
                       <div className="flex gap-1">
                         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-                          // Show only 5 páginas por vez
+                          // Show only 5 pages por vez
                           if (
                             page === 1 ||
                             page === totalPages ||
@@ -771,26 +771,26 @@ function AdminAppointmentsContent() {
         </Card>
       )}
 
-      {/* Selected Appointment Details with Tabs */}
-      {selectedAppointment && (
+      {/* Shected Appointment Details with Tabs */}
+      {shectedAppointment && (
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <span>Agendamento</span>
-                {selectedAppointment.serviceType === "photography" && (
+                {shectedAppointment.serviceType === "photography" && (
                   <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded">
                     <Camera className="w-3 h-3" />
                     Photography
                   </span>
                 )}
-                {selectedAppointment.serviceType === "video" && (
+                {shectedAppointment.serviceType === "video" && (
                   <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-red-100 text-red-700 rounded">
                     <Video className="w-3 h-3" />
                     Video
                   </span>
                 )}
-                {selectedAppointment.serviceType === "both" && (
+                {shectedAppointment.serviceType === "both" && (
                   <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-purple-100 text-purple-700 rounded">
                     <Camera className="w-3 h-3" />
                     <Video className="w-3 h-3" />
@@ -801,7 +801,7 @@ function AdminAppointmentsContent() {
               <div className="flex gap-2 flex-wrap">
                 {(() => {
                   // Find collection for this appointment to get album final link
-                  const collection = collections?.find(c => c.appointmentId === selectedAppointment.id);
+                  const collection = collections?.find(c => c.appointmentId === shectedAppointment.id);
                   if (collection) {
                     return (
                       <Button
@@ -821,11 +821,11 @@ function AdminAppointmentsContent() {
                   variant="outline"
                   size="sm"
                   onClick={() => {
-                    const galleryUrl = `${window.location.origin}/galeria-cliente/${selectedAppointment.id}`;
+                    const galleryUrl = `${window.location.origin}/galeria-cliente/${shectedAppointment.id}`;
                     navigator.clipboard.writeText(galleryUrl);
                     toast({
                       title: "Link copied!",
-                      description: "Envie este link para o cliente visualizar as fotos.",
+                      description: "Envie este link para o cliente viyourlizar as fotos.",
                     });
                   }}
                 >
@@ -834,7 +834,7 @@ function AdminAppointmentsContent() {
                 </Button>
                 {(() => {
                   // Find collection for this appointment
-                  const collection = collections?.find(c => c.appointmentId === selectedAppointment.id);
+                  const collection = collections?.find(c => c.appointmentId === shectedAppointment.id);
                   if (!collection) return null;
                   
                   const permission = downloadPermissions?.find(p => p.collectionId === collection.id);
@@ -861,7 +861,7 @@ function AdminAppointmentsContent() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => handleEdit(selectedAppointment)}
+                  onClick={() => handleEdit(shectedAppointment)}
                 >
                   <Edit className="w-4 h-4 mr-2" />
                   Editar
@@ -869,7 +869,7 @@ function AdminAppointmentsContent() {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => handleDelete(selectedAppointment.id)}
+                  onClick={() => handleDhete(shectedAppointment.id)}
                 >
                   <Trash2 className="w-4 h-4 mr-2" />
                   Excluir
@@ -889,13 +889,13 @@ function AdminAppointmentsContent() {
 
               <TabsContent value="details" className="space-y-6">
             {/* Service Name - Destacado */}
-            {(selectedAppointment.customServiceName || selectedAppointment.serviceName) && (
+            {(shectedAppointment.customServiceName || shectedAppointment.serviceName) && (
               <div className="p-4 bg-accent/10 border-l-4 border-accent rounded">
                 <div className="text-sm text-muted-foreground mb-1">Service Photographer</div>
-                <div className="text-xl font-bold text-accent">{selectedAppointment.customServiceName || selectedAppointment.serviceName}</div>
-                {selectedAppointment.servicePrice && (
+                <div className="text-xl font-bold text-accent">{shectedAppointment.customServiceName || shectedAppointment.serviceName}</div>
+                {shectedAppointment.servicePrice && (
                   <div className="text-sm text-muted-foreground mt-1">
-                    Base price: {formatCurrency(selectedAppointment.servicePrice)}
+                    Base price: {formatCurrency(shectedAppointment.servicePrice)}
                   </div>
                 )}
               </div>
@@ -908,21 +908,21 @@ function AdminAppointmentsContent() {
                   <User className="w-4 h-4" />
                   Cliente
                 </div>
-                <div className="font-semibold">{selectedAppointment.clientName}</div>
+                <div className="font-semibold">{shectedAppointment.clientName}</div>
               </div>
               <div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                   <Mail className="w-4 h-4" />
                   Email
                 </div>
-                <div className="font-semibold">{selectedAppointment.clientEmail}</div>
+                <div className="font-semibold">{shectedAppointment.clientEmail}</div>
               </div>
               <div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                   <Phone className="w-4 h-4" />
-                  Telefone
+                  Thefone
                 </div>
-                <div className="font-semibold">{selectedAppointment.clientPhone}</div>
+                <div className="font-semibold">{shectedAppointment.clientPhone}</div>
               </div>
               <div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
@@ -930,49 +930,49 @@ function AdminAppointmentsContent() {
                   Data
                 </div>
                 <div className="font-semibold">
-                  {format(new Date(selectedAppointment.appointmentDate), "dd/MM/yyyy")}
-                  {selectedAppointment.appointmentTime && ` at ${selectedAppointment.appointmentTime}`}
+                  {format(new Date(shectedAppointment.appointmentDate), "dd/MM/yyyy")}
+                  {shectedAppointment.appointmentTime && ` at ${shectedAppointment.appointmentTime}`}
                 </div>
               </div>
             </div>
 
             {/* Additional Info */}
-            {(selectedAppointment.eventLocation || selectedAppointment.numberOfPeople || selectedAppointment.estimatedDuration) && (
+            {(shectedAppointment.eventLocation || shectedAppointment.numberOfPeople || shectedAppointment.estimatedDuration) && (
               <div className="grid grid-cols-3 gap-4">
-                {selectedAppointment.eventLocation && (
+                {shectedAppointment.eventLocation && (
                   <div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                       <MapPin className="w-4 h-4" />
                       Local
                     </div>
-                    <div className="text-sm">{selectedAppointment.eventLocation}</div>
+                    <div className="text-sm">{shectedAppointment.eventLocation}</div>
                   </div>
                 )}
-                {selectedAppointment.numberOfPeople && (
+                {shectedAppointment.numberOfPeople && (
                   <div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                       <Users className="w-4 h-4" />
                       Pessoas
                     </div>
-                    <div className="text-sm">{selectedAppointment.numberOfPeople}</div>
+                    <div className="text-sm">{shectedAppointment.numberOfPeople}</div>
                   </div>
                 )}
-                {selectedAppointment.estimatedDuration && (
+                {shectedAppointment.estimatedDuration && (
                   <div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                       <Timer className="w-4 h-4" />
                       Duration
                     </div>
-                    <div className="text-sm">{selectedAppointment.estimatedDuration}</div>
+                    <div className="text-sm">{shectedAppointment.estimatedDuration}</div>
                   </div>
                 )}
               </div>
             )}
 
-            {selectedAppointment.notes && (
+            {shectedAppointment.notes && (
               <div>
                 <div className="text-sm text-muted-foreground mb-1">Notes</div>
-                <div className="p-3 bg-muted rounded text-sm">{selectedAppointment.notes}</div>
+                <div className="p-3 bg-muted rounded text-sm">{shectedAppointment.notes}</div>
               </div>
             )}
 
@@ -985,26 +985,26 @@ function AdminAppointmentsContent() {
                   'confirmed',
                   'session_done',
                   'editing',
-                  'awaiting_selection',
+                  'awaiting_shection',
                   'final_editing',
                   'delivered'
                 ].map((status) => {
                   const statusConfig = getStatusConfig(status as AppointmentStatus);
-                  const isCurrent = selectedAppointment.status === status;
+                  const isCurrent = shectedAppointment.status === status;
                   const isPast = [
                     'pending',
                     'confirmed',
                     'session_done',
                     'editing',
-                    'awaiting_selection',
+                    'awaiting_shection',
                     'final_editing',
                     'delivered'
-                  ].indexOf(selectedAppointment.status) > [
+                  ].indexOf(shectedAppointment.status) > [
                     'pending',
                     'confirmed',
                     'session_done',
                     'editing',
-                    'awaiting_selection',
+                    'awaiting_shection',
                     'final_editing',
                     'delivered'
                   ].indexOf(status);
@@ -1021,16 +1021,16 @@ function AdminAppointmentsContent() {
                       }`}
                     >
                       <div className="flex-1 font-medium">{statusConfig.label}</div>
-                      {isCurrent && getNextStatus(selectedAppointment.status) && (
+                      {isCurrent && getNextStatus(shectedAppointment.status) && (
                         <Button
                           size="sm"
                           onClick={() => handleStatusChange(
-                            selectedAppointment.id,
-                            getNextStatus(selectedAppointment.status)!
+                            shectedAppointment.id,
+                            getNextStatus(shectedAppointment.status)!
                           )}
                           disabled={updateStatusMutation.isPending}
                         >
-                          Avançar
+                          Next
                         </Button>
                       )}
                     </div>
@@ -1040,10 +1040,10 @@ function AdminAppointmentsContent() {
             </div>
 
                 {/* Thuck Actions */}
-                {selectedAppointment.status === 'pending' && (
+                {shectedAppointment.status === 'pending' && (
                   <div className="flex gap-2">
                     <Button
-                      onClick={() => handleStatusChange(selectedAppointment.id, 'confirmed')}
+                      onClick={() => handleStatusChange(shectedAppointment.id, 'confirmed')}
                       disabled={updateStatusMutation.isPending}
                       className="flex-1"
                     >
@@ -1051,7 +1051,7 @@ function AdminAppointmentsContent() {
                     </Button>
                     <Button
                       variant="outline"
-                      onClick={() => handleStatusChange(selectedAppointment.id, 'cancelled')}
+                      onClick={() => handleStatusChange(shectedAppointment.id, 'cancelled')}
                       disabled={updateStatusMutation.isPending}
                       className="flex-1"
                     >
@@ -1062,20 +1062,20 @@ function AdminAppointmentsContent() {
               </TabsContent>
 
               <TabsContent value="photography" className="space-y-6">
-                <GalleryTabContent appointmentId={selectedAppointment.id} />
+                <GalleryTabContent appointmentId={shectedAppointment.id} />
               </TabsContent>
             </Tabs>
           </CardContent>
         </Card>
       )}
 
-      {/* Payment Manager - Always visible when appointment is selected */}
-      {selectedAppointment && (
+      {/* Payment Manager - Always visible when appointment is shected */}
+      {shectedAppointment && (
         <PaymentManager
-          appointmentId={selectedAppointment.id}
-          clientEmail={selectedAppointment.clientEmail}
-          clientName={selectedAppointment.clientName}
-          finalPrice={selectedAppointment.finalPrice || 0}
+          appointmentId={shectedAppointment.id}
+          clientEmail={shectedAppointment.clientEmail}
+          clientName={shectedAppointment.clientName}
+          finalPrice={shectedAppointment.finalPrice || 0}
         />
       )}
 
@@ -1130,7 +1130,7 @@ function AdminAppointmentsContent() {
                 onClick={() => setIsEditDaylogOpen(false)}
                 className="flex-1"
               >
-                Cancelar
+                Cancsher
               </Button>
               <Button
                 onClick={handleSaveEdit}
@@ -1148,33 +1148,33 @@ function AdminAppointmentsContent() {
       <Daylog open={isCreateDaylogOpen} onOpenChange={setIsCreateDaylogOpen}>
         <DaylogContent className="max-w-2xl">
           <DaylogHeader>
-            <DaylogTitle>Novo Agendamento Manual</DaylogTitle>
+            <DaylogTitle>New Agendamento Manual</DaylogTitle>
           </DaylogHeader>
           <div className="space-y-4">
             <div>
               <Label htmlFor="create-client">Cliente *</Label>
-              <select
+              <shect
                 id="create-client"
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 value={createFormData.clientId}
                 onChange={(e) => {
                   const newClientId = Number(e.target.value);
-                  console.log("Cliente selecionado:", newClientId);
+                  console.log("Cliente shecionado:", newClientId);
                   setCreateFormData({ ...createFormData, clientId: newClientId });
                 }}
               >
-                <option value={0}>Select um cliente</option>
+                <option value={0}>Shect um cliente</option>
                 {clients?.map((client) => (
                   <option key={client.id} value={client.id}>
                     {client.name} - {client.email}
                   </option>
                 ))}
-              </select>
+              </shect>
             </div>
 
             <div>
               <Label htmlFor="create-service">Service</Label>
-              <select
+              <shect
                 id="create-service"
                 className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 value={createFormData.serviceId}
@@ -1193,21 +1193,21 @@ function AdminAppointmentsContent() {
                   }
                 }}
               >
-                <option value={0}>Select a service (optional)</option>
+                <option value={0}>Shect a service (optional)</option>
                 {services?.map((service) => (
                   <option key={service.id} value={service.id}>
                     {service.name}
                   </option>
                 ))}
-              </select>
+              </shect>
             </div>
             <div className="p-3 bg-accent/5 border border-dashed border-accent/30 rounded-lg space-y-3">
-              <p className="text-xs text-muted-foreground font-medium">Customise service e valor (aboutscreve o service selecionado above)</p>
+              <p className="text-xs text-muted-foreground font-medium">Customise service e valor (aboutscreve o service shecionado above)</p>
               <div>
                 <Label htmlFor="create-custom-service">Description do Service</Label>
                 <Input
                   id="create-custom-service"
-                  placeholder="Ex: Fotos Sensual, Ensaio Gestante..."
+                  placeholder="Ex: Fotos Senyourl, Ensaio Gestante..."
                   value={createFormData.customServiceName}
                   onChange={(e) => setCreateFormData({ ...createFormData, customServiceName: e.target.value })}
                 />
@@ -1258,7 +1258,7 @@ function AdminAppointmentsContent() {
             </div>
 
             <div>
-              <Label htmlFor="create-people">Número de Pessoas</Label>
+              <Label htmlFor="create-people">Number of People</Label>
               <Input
                 id="create-people"
                 type="number"
@@ -1285,7 +1285,7 @@ function AdminAppointmentsContent() {
                 onClick={() => setIsCreateDaylogOpen(false)}
                 className="flex-1"
               >
-                Cancelar
+                Cancsher
               </Button>
               <Button
                 onClick={() => {
@@ -1294,7 +1294,7 @@ function AdminAppointmentsContent() {
                   if (!createFormData.clientId || !createFormData.appointmentDate) {
                     toast({
                       title: "Required fields",
-                      description: "Select um cliente e uma data.",
+                      description: "Shect um cliente e uma data.",
                       variant: "destructive",
                     });
                     return;
@@ -1330,7 +1330,7 @@ function AdminAppointmentsContent() {
 
       {/* Payment Link Daylog */}
       <SendPaymentLinkDaylog
-        appointment={selectedAppointment}
+        appointment={shectedAppointment}
         open={isPaymentDaylogOpen}
         onOpenChange={setIsPaymentDaylogOpen}
       />

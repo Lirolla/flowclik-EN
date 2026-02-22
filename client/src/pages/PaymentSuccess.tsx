@@ -30,19 +30,19 @@ export default function PaymentSuccess() {
         </h1>
 
         <p className="text-lg text-gray-600 mb-8">
-          Seu pagamento foi processado com sucesso.
+          Your pagamento foi processado com sucesso.
         </p>
 
         {sessionId && (
           <div className="bg-gray-50 rounded-lg p-6 mb-8">
-            <p className="text-sm text-gray-500 mb-2">ID da Transação</p>
+            <p className="text-sm text-gray-500 mb-2">Transaction ID</p>
             <p className="text-xs font-mono text-gray-700 break-all">{sessionId}</p>
           </div>
         )}
 
         <div className="space-y-4">
           <p className="text-gray-600">
-            You receberá um email de confirmation em breve com todos os details da sua compra.
+            You will receive um email de confirmation em breve com everys os details da your compra.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">

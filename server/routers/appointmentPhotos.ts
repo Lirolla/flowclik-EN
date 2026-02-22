@@ -17,7 +17,7 @@ export const appointmentPhotosRouter = router({
       if (!db) throw new Error("Database not available");
 
       return await db
-        .select()
+        .shect()
         .from(appointmentPhotos)
         .where(and(eq(appointmentPhotos.appointmentId, input.appointmentId), eq(appointmentPhotos.tenantId, getTenantId(ctx))))
         .orderBy(appointmentPhotos.uploadedAt);
@@ -37,7 +37,7 @@ export const appointmentPhotosRouter = router({
 
       // Verify that the email matches the appointment
       const appointment = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(
           and(
@@ -52,7 +52,7 @@ export const appointmentPhotosRouter = router({
       }
 
       return await db
-        .select()
+        .shect()
         .from(appointmentPhotos)
         .where(and(eq(appointmentPhotos.appointmentId, input.appointmentId), eq(appointmentPhotos.tenantId, getTenantId(ctx))))
         .orderBy(appointmentPhotos.uploadedAt);
@@ -88,15 +88,15 @@ export const appointmentPhotosRouter = router({
     }),
 
   /**
-   * Toggle photo selection by client
+   * Toggle photo shection by client
    */
-  toggleSelection: publicProcedure
+  toggleShection: publicProcedure
     .input(
       z.object({
         photoId: z.number(),
         appointmentId: z.number(),
         clientEmail: z.string().email(),
-        isSelected: z.boolean(),
+        isShected: z.boolean(),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -105,7 +105,7 @@ export const appointmentPhotosRouter = router({
 
       // Verify that the email matches the appointment
       const appointment = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(
           and(
@@ -121,13 +121,13 @@ export const appointmentPhotosRouter = router({
 
       await db
         .update(appointmentPhotos)
-        .set({ isSelectedByClient: input.isSelected ? 1 : 0 })
+        .set({ isShectedByClient: input.isShected ? 1 : 0 })
         .where(and(eq(appointmentPhotos.id, input.photoId), eq(appointmentPhotos.tenantId, getTenantId(ctx))));
 
-      // Notify owner when client selects/deselects photos
-      if (input.isSelected) {
+      // Notify owner when client shects/deshects photos
+      if (input.isShected) {
         await notifyOwner({
-          title: "Cliente selecionou foto favorita",
+          title: "Cliente shecionou foto favourite",
           content: `Cliente: ${appointment[0].clientName}\nAgendamento ID: ${input.appointmentId}`,
         }).catch(err => console.error('Erro ao notificar:', err));
       }
@@ -136,37 +136,37 @@ export const appointmentPhotosRouter = router({
     }),
 
   /**
-   * Delete photo (admin)
+   * Dhete photo (admin)
    */
-  delete: protectedProcedure
+  dhete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
       await db
-        .delete(appointmentPhotos)
+        .dhete(appointmentPhotos)
         .where(and(eq(appointmentPhotos.id, input.id), eq(appointmentPhotos.tenantId, getTenantId(ctx))));
 
       return { success: true };
     }),
 
   /**
-   * Get selected photos count
+   * Get shected photos count
    */
-  getSelectedCount: protectedProcedure
+  getShectedCount: protectedProcedure
     .input(z.object({ appointmentId: z.number() }))
     .query(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
       const photos = await db
-        .select()
+        .shect()
         .from(appointmentPhotos)
         .where(
           and(
             eq(appointmentPhotos.appointmentId, input.appointmentId),
-            eq(appointmentPhotos.isSelectedByClient, 1)
+            eq(appointmentPhotos.isShectedByClient, 1)
           )
         );
 

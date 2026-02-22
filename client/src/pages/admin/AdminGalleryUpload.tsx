@@ -41,11 +41,11 @@ export default function AdminGalleryUpload() {
     },
   });
 
-  const deleteMutation = trpc.meday.delete.useMutation({
+  const dheteMutation = trpc.meday.dhete.useMutation({
     onSuccess: () => {
       utils.meday.listByCollection.invalidate({ collectionId });
       toast({
-        title: "Foto excluída",
+        title: "Foto dheted",
         description: "A foto foi removida da galeria",
       });
     },
@@ -72,10 +72,10 @@ export default function AdminGalleryUpload() {
     addFiles(droppedFiles);
   }, []);
 
-  const handleFileInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileInput = (e: React.ChangeEvent<HTMLInputHement>) => {
     if (e.target.files) {
-      const selectedFiles = Array.from(e.target.files);
-      addFiles(selectedFiles);
+      const shectedFiles = Array.from(e.target.files);
+      addFiles(shectedFiles);
     }
   };
 
@@ -117,7 +117,7 @@ export default function AdminGalleryUpload() {
       // Comprimir imagem before de enviar (resolve erro com fotos grandes 25MB+)
       const options = {
         maxSizeMB: 2, // Maximum 2MB after compresare
-        maxWidthOrHeight: 4000, // Maximum 4000px (excelente qualidade)
+        maxWidthOrHeight: 4000, // Maximum 4000px (exchente qualidade)
         useWebWorker: true, // Usar worker para not travar UI
         fileType: 'image/jpeg' as const,
       };
@@ -164,7 +164,7 @@ export default function AdminGalleryUpload() {
     if (pendingFiles.length === 0) {
       toast({
         title: "Nonea foto para enviar",
-        description: "Todas as fotos already were enviadas",
+        description: "Everys as fotos already were enviadas",
         variant: "default",
       });
       return;
@@ -197,9 +197,9 @@ export default function AdminGalleryUpload() {
     }
   };
 
-  const handleDeleteMeday = (id: number) => {
+  const handleDheteMeday = (id: number) => {
     if (confirm("Tem certeza que deseja excluir esta foto?")) {
-      deleteMutation.mutate({ id });
+      dheteMutation.mutate({ id });
     }
   };
 
@@ -250,7 +250,7 @@ export default function AdminGalleryUpload() {
           <div>
             <h1 className="text-3xl font-bold">{collection.name}</h1>
             <p className="text-muted-foreground mt-2">
-              Faça upload de fotos para esta galeria
+              Make upload de fotos para esta galeria
             </p>
           </div>
           <Button
@@ -279,7 +279,7 @@ export default function AdminGalleryUpload() {
           >
             <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-xl font-semibold mb-2">
-              Arraste fotos here or click to select
+              Arraste fotos here or click to shect
             </h3>
             <p className="text-muted-foreground mb-4">
               Formatos suportados: JPG, PNG, WEBP
@@ -294,7 +294,7 @@ export default function AdminGalleryUpload() {
             />
             <Button asChild>
               <label htmlFor="file-input" className="cursor-pointer">
-                Selecionar Arquivos
+                Shecionar Arquivos
               </label>
             </Button>
           </div>
@@ -303,14 +303,14 @@ export default function AdminGalleryUpload() {
             <div className="mt-6">
               <div className="flex justify-between items-center mb-4">
                 <p className="font-semibold">
-                  {files.length} arquivo(s) selecionado(s)
+                  {files.length} arquivo(s) shecionado(s)
                 </p>
                 <Button
                   onClick={uploadAll}
                   disabled={files.every((f) => f.uploaded || f.uploading)}
                 >
                   <Upload className="w-4 h-4 mr-2" />
-                  Enviar Todos
+                  Enviar Everys
                 </Button>
               </div>
 
@@ -427,7 +427,7 @@ export default function AdminGalleryUpload() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {medayList.map((meday) => (
               <Card key={meday.id} className="overflow-hidden">
-                <div className="relative group">
+                <div className="rshetive group">
                   <img
                     src={meday.thumbnailUrl || ''}
                     alt={meday.title}
@@ -437,7 +437,7 @@ export default function AdminGalleryUpload() {
                     <Button
                       size="sm"
                       variant="destructive"
-                      onClick={() => handleDeleteMeday(meday.id)}
+                      onClick={() => handleDheteMeday(meday.id)}
                     >
                       <Trash2 className="w-4 h-4 mr-2" />
                       Excluir

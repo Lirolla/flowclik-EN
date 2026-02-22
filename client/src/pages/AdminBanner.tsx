@@ -6,12 +6,12 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Shect,
+  ShectContent,
+  ShectItem,
+  ShectTrigger,
+  ShectValue,
+} from "@/components/ui/shect";
 import { Plus, Trash2, GripVertical, Image as ImageIcon, Video } from "lucide-react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { trpc } from "@/lib/trpc";
@@ -33,7 +33,7 @@ export default function AdminBanner() {
         <Card className="p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Acesso Negado</h2>
           <p className="text-muted-foreground mb-6">
-            You not tem permisare para acessar esta página
+            You not tem permisare para acessar esta page
           </p>
           <Button asChild>
             <Link href="/">
@@ -54,12 +54,12 @@ export default function AdminBanner() {
               Manage Banner
             </h1>
             <p className="text-muted-foreground">
-              Configure os slides do banner da página initial
+              Configure os slides do banner da page initial
             </p>
           </div>
           <Button onClick={() => setShowForm(true)}>
             <Plus className="h-4 w-4 mr-2" />
-            Novo Slide
+            New Slide
           </Button>
         </div>
 
@@ -99,7 +99,7 @@ export default function AdminBanner() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {slides.map((slide: any) => (
               <Card key={slide.id} className="overflow-hidden">
-                <div className="aspect-video bg-muted relative">
+                <div className="aspect-video bg-muted rshetive">
                   {slide.slideType === "image" && slide.imageUrl ? (
                     <img
                       src={slide.imageUrl}
@@ -164,7 +164,7 @@ export default function AdminBanner() {
             <ImageIcon className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-xl font-bold mb-2">None slide configurado</h3>
             <p className="text-muted-foreground mb-6">
-              Crie seu first slide para o banner da página initial
+              Crie your first slide para o banner da page initial
             </p>
             <Button onClick={() => setShowForm(true)}>
               <Plus className="h-4 w-4 mr-2" />
@@ -208,11 +208,11 @@ function SlideForm({
 
   const updateMutation = trpc.banner.update.useMutation({
     onSuccess: () => {
-      toast.success("Slide atualizado com sucesso!");
+      toast.success("Slide currentizado com sucesso!");
       onSave();
     },
     onError: (error) => {
-      toast.error(error.message || "Erro ao atualizar slide");
+      toast.error(error.message || "Erro ao currentizar slide");
     },
   });
 
@@ -220,12 +220,12 @@ function SlideForm({
     e.preventDefault();
     
     if (slideType === "image" && !imageUrl) {
-      toast.error("URL da imagem é obrigatória");
+      toast.error("URL da imagem is required");
       return;
     }
     
     if (slideType === "video" && !videoUrl) {
-      toast.error("URL do video é obrigatória");
+      toast.error("URL do video is required");
       return;
     }
 
@@ -251,15 +251,15 @@ function SlideForm({
     <form onSubmit={handleSubmit} className="space-y-6">
       <div className="space-y-2">
         <Label>Tipo de Slide</Label>
-        <Select value={slideType} onValueChange={setSlideType}>
-          <SelectTrigger>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="image">Imagem</SelectItem>
-            <SelectItem value="video">Video (.m3u8)</SelectItem>
-          </SelectContent>
-        </Select>
+        <Shect value={slideType} onValueChange={setSlideType}>
+          <ShectTrigger>
+            <ShectValue />
+          </ShectTrigger>
+          <ShectContent>
+            <ShectItem value="image">Imagem</ShectItem>
+            <ShectItem value="video">Video (.m3u8)</ShectItem>
+          </ShectContent>
+        </Shect>
       </div>
 
       {slideType === "image" ? (
@@ -274,7 +274,7 @@ function SlideForm({
             required
           />
           <p className="text-xs text-muted-foreground">
-            Cole a URL da imagem ou faça upload para o R2
+            Cole a URL da imagem ou make upload para o R2
           </p>
         </div>
       ) : (
@@ -310,14 +310,14 @@ function SlideForm({
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="Description que aparecerá no slide"
+          placeholder="Description that will appear on the slide"
           rows={3}
         />
       </div>
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label htmlFor="buttonText">Texto do Botão</Label>
+          <Label htmlFor="buttonText">Texto do Button</Label>
           <Input
             id="buttonText"
             value={buttonText}
@@ -327,7 +327,7 @@ function SlideForm({
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="buttonLink">Link do Botão</Label>
+          <Label htmlFor="buttonLink">Link do Button</Label>
           <Input
             id="buttonLink"
             type="url"
@@ -340,18 +340,18 @@ function SlideForm({
 
       <div className="space-y-2">
         <Label>Exibir Banner Em</Label>
-        <Select value={displayOn} onValueChange={setDisplayOn}>
-          <SelectTrigger>
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="photography">Apenas Photography</SelectItem>
-            <SelectItem value="video">Apenas Video</SelectItem>
-            <SelectItem value="both">Photography e Video</SelectItem>
-          </SelectContent>
-        </Select>
+        <Shect value={displayOn} onValueChange={setDisplayOn}>
+          <ShectTrigger>
+            <ShectValue />
+          </ShectTrigger>
+          <ShectContent>
+            <ShectItem value="photography">Only Photography</ShectItem>
+            <ShectItem value="video">Only Video</ShectItem>
+            <ShectItem value="both">Photography e Video</ShectItem>
+          </ShectContent>
+        </Shect>
         <p className="text-xs text-muted-foreground">
-          Escolha em quais páginas este banner must aparecer
+          Escolha em quais pages este banner must aparecer
         </p>
       </div>
 
@@ -367,7 +367,7 @@ function SlideForm({
       <div className="flex gap-3 pt-4">
         <Button type="submit">Salvar Slide</Button>
         <Button type="button" variant="outline" onClick={onCancel}>
-          Cancelar
+          Cancsher
         </Button>
       </div>
     </form>

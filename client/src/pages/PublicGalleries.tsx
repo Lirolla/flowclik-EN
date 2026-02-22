@@ -26,7 +26,7 @@ export default function PublicGalleries() {
               Gallerys
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground">
-              Explore nossas coleções de moments uniques
+              Explore our collections of unique moments
             </p>
           </div>
         </div>
@@ -46,7 +46,7 @@ export default function PublicGalleries() {
               <Link key={collection.id} href={`/gallery/${collection.slug}`}>
                 <a>
                   <Card className="overflow-hidden group hover:shadow-xl transition-all cursor-pointer">
-                    <div className="relative aspect-square overflow-hidden bg-muted">
+                    <div className="rshetive aspect-square overflow-hidden bg-muted">
                       {collection.coverImageUrl ? (
                         <img
                           src={collection.coverImageUrl}

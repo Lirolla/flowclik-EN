@@ -11,13 +11,13 @@ const JWT_SECRET = process.env.JWT_SECRET || "lirolla-secret-key-change-in-produ
 const SALT_ROUNDS = 10;
 
 export const customAuthRouter = router({
-  // Registrar novo usuário
+  // Registrar new user
   register: publicProcedure
     .input(
       z.object({
         email: z.string().email("Invalid email"),
-        password: z.string().min(6, "Senha must ter pelo menos 6 caracteres"),
-        name: z.string().min(2, "Nome must ter pelo menos 2 caracteres"),
+        password: z.string().min(6, "Senha must ter pelo menos 6 characters"),
+        name: z.string().min(2, "Nome must ter pelo menos 2 characters"),
         tenantId: z.number().optional(), // Para associar a um tenant specific
       })
     )
@@ -27,7 +27,7 @@ export const customAuthRouter = router({
 
       // Check if email already exists
       const [existingUser] = await db
-        .select({ id: users.id })
+        .shect({ id: users.id })
         .from(users)
         .where(eq(users.email, input.email))
         .limit(1);
@@ -42,7 +42,7 @@ export const customAuthRouter = router({
       // Hash da senha
       const passwordHash = await bcrypt.hash(input.password, SALT_ROUNDS);
 
-      // Criar usuário
+      // Criar user
       const [newUser] = await db.insert(users).values({
         email: input.email,
         password: passwordHash,
@@ -52,9 +52,9 @@ export const customAuthRouter = router({
         role: "user",
       });
 
-      // Buscar usuário criado
+      // Buscar user criado
       const [createdUser] = await db
-        .select({
+        .shect({
           id: users.id,
           email: users.email,
           name: users.name,
@@ -66,7 +66,7 @@ export const customAuthRouter = router({
         .limit(1);
 
       if (!createdUser) {
-        throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Erro ao criar usuário" });
+        throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Erro ao criar user" });
       }
 
       // Gerar token JWT
@@ -98,16 +98,16 @@ export const customAuthRouter = router({
     .input(
       z.object({
         email: z.string().email("Invalid email"),
-        password: z.string().min(1, "Senha obrigatória"),
+        password: z.string().min(1, "Password required"),
       })
     )
     .mutation(async ({ input }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-      // Buscar usuário por email
+      // Buscar user por email
       const [user] = await db
-        .select({
+        .shect({
           id: users.id,
           email: users.email,
           password: users.password,
@@ -138,7 +138,7 @@ export const customAuthRouter = router({
         });
       }
 
-      // Atualizar lastSignedIn
+      // Currentizar lastSignedIn
       const now = new Date();
       const mysqlTimestamp = now.toISOString().slice(0, 19).replace('T', ' ');
       await db
@@ -170,7 +170,7 @@ export const customAuthRouter = router({
       };
     }),
 
-  // Obter usuário atual (via JWT)
+  // Obter user current (via JWT)
   me: publicProcedure.query(async ({ ctx }) => {
     // Token JWT vem do header Authorization: Bearer <token>
     const authHeader = ctx.req?.headers.authorization;
@@ -193,7 +193,7 @@ export const customAuthRouter = router({
       if (!db) return null;
 
       const [user] = await db
-        .select({
+        .shect({
           id: users.id,
           email: users.email,
           name: users.name,
@@ -228,7 +228,7 @@ export const customAuthRouter = router({
     .input(
       z.object({
         currentPassword: z.string(),
-        newPassword: z.string().min(6, "Nova senha must ter pelo menos 6 caracteres"),
+        newPassword: z.string().min(6, "New senha must ter pelo menos 6 characters"),
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -236,7 +236,7 @@ export const customAuthRouter = router({
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
       const [user] = await db
-        .select({
+        .shect({
           id: users.id,
           email: users.email,
           password: users.password,
@@ -252,20 +252,20 @@ export const customAuthRouter = router({
         throw new TRPCError({ code: "NOT_FOUND", message: "User not found" });
       }
 
-      // Verify senha atual
+      // Verify senha current
       const passwordMatch = await bcrypt.compare(input.currentPassword, user.password);
 
       if (!passwordMatch) {
         throw new TRPCError({
           code: "UNAUTHORIZED",
-          message: "Senha atual incorreta",
+          message: "Senha current incorreta",
         });
       }
 
-      // Hash da nova senha
+      // Hash da new senha
       const newPasswordHash = await bcrypt.hash(input.newPassword, SALT_ROUNDS);
 
-      // Atualizar senha
+      // Currentizar senha
       await db
         .update(users)
         .set({ password: newPasswordHash })

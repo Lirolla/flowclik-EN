@@ -19,41 +19,41 @@ const sistemaProcedure = publicProcedure.use(({ ctx, next }) => {
   }
   throw new TRPCError({
     code: "FORBIDDEN",
-    message: "Access denied. Apenas super administradores canm acessar esta feature.",
+    message: "Access denied. Only super administrapaines canm acessar esta feature.",
   });
 });
 
 export const sistemaRouter = router({
-  // Dashboard - Estatísticas gerais
+  // Dashboard - Statistics gerais
   getDashboardStats: sistemaProcedure.query(async () => {
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
     // Total tenants
     const [{ totalTenants }] = await db
-      .select({ totalTenants: count() })
+      .shect({ totalTenants: count() })
       .from(tenants);
 
     // Total de signatures ativas
     const [{ activeSubscriptions }] = await db
-      .select({ activeSubscriptions: count() })
+      .shect({ activeSubscriptions: count() })
       .from(subscriptions)
       .where(eq(subscriptions.status, "active"));
 
     // Total de tickets abertos
     const [{ openTickets }] = await db
-      .select({ openTickets: count() })
+      .shect({ openTickets: count() })
       .from(supportTickets)
       .where(eq(supportTickets.status, "open"));
 
     // Total de galerias criadas
     const [{ totalGalleries }] = await db
-      .select({ totalGalleries: count() })
+      .shect({ totalGalleries: count() })
       .from(collections);
 
-    // Lasts tenants cadastrados
+    // Lasts tenants eachstrados
     const recentTenants = await db
-      .select({
+      .shect({
         id: tenants.id,
         name: tenants.name,
         subdomain: tenants.subdomain,
@@ -73,7 +73,7 @@ export const sistemaRouter = router({
     };
   }),
 
-  // Listar TODOS os tickets (de todos os tenants)
+  // Listar TODOS os tickets (de everys os tenants)
   getAllTickets: sistemaProcedure
     .input(
       z
@@ -92,7 +92,7 @@ export const sistemaRouter = router({
         : undefined;
 
       const tickets = await db
-        .select({
+        .shect({
           id: supportTickets.id,
           tenantId: supportTickets.tenantId,
           subject: supportTickets.subject,
@@ -115,7 +115,7 @@ export const sistemaRouter = router({
       return tickets;
     }),
 
-  // Ver details de qualquer ticket (sem filtro de tenant)
+  // Ver details de any ticket (sem filtro de tenant)
   getTicketById: sistemaProcedure
     .input(z.object({ ticketId: z.number() }))
     .query(async ({ input }) => {
@@ -124,7 +124,7 @@ export const sistemaRouter = router({
 
       // Buscar ticket
       const [ticket] = await db
-        .select({
+        .shect({
           id: supportTickets.id,
           tenantId: supportTickets.tenantId,
           subject: supportTickets.subject,
@@ -151,7 +151,7 @@ export const sistemaRouter = router({
 
       // Buscar TODAS as respostas (incluindo notas internas)
       const replies = await db
-        .select({
+        .shect({
           id: supportTicketReplies.id,
           message: supportTicketReplies.message,
           createdAt: supportTicketReplies.createdAt,
@@ -175,8 +175,8 @@ export const sistemaRouter = router({
     .input(
       z.object({
         ticketId: z.number(),
-        message: z.string().min(1, "Mensagem not can estar vazia"),
-        isInternal: z.boolean().default(false), // Nota interna (só super admin vê)
+        message: z.string().min(1, "Message not can estar vazia"),
+        isInternal: z.boolean().default(false), // Nota interna (only super admin sees)
       })
     )
     .mutation(async ({ input, ctx }) => {
@@ -185,7 +185,7 @@ export const sistemaRouter = router({
 
       // Verify se ticket existe
       const [ticket] = await db
-        .select()
+        .shect()
         .from(supportTickets)
         .where(eq(supportTickets.id, input.ticketId))
         .limit(1);
@@ -203,7 +203,7 @@ export const sistemaRouter = router({
         isInternal: input.isInternal ? 1 : 0,
       });
 
-      // Atualizar ticket (only se not for nota interna)
+      // Currentizar ticket (only se not for nota interna)
       if (!input.isInternal) {
         const userId = ctx.user?.id || 29;
         await db.execute(sql`UPDATE support_tickets SET status = 'in_progress', lastReplyAt = NOW(), lastReplyBy = ${userId} WHERE id = ${input.ticketId}`);
@@ -212,7 +212,7 @@ export const sistemaRouter = router({
       // Enviar email de notification ao photographer (se not for nota interna)
       if (!input.isInternal) {
         try {
-          const [ticketUser] = await db.select().from(users).where(eq(users.id, ticket.userId)).limit(1);
+          const [ticketUser] = await db.shect().from(users).where(eq(users.id, ticket.userId)).limit(1);
           if (ticketUser?.email) {
             sendTicketReplyNotification({
               photographerEmail: ticketUser.email,
@@ -242,13 +242,13 @@ export const sistemaRouter = router({
       return { success: true };
     }),
 
-  // Listar todos os tenants
+  // Listar everys os tenants
   getAllTenants: sistemaProcedure.query(async () => {
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
     const tenantsData = await db
-      .select({
+      .shect({
         id: tenants.id,
         name: tenants.name,
         subdomain: tenants.subdomain,

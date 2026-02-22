@@ -10,18 +10,18 @@ import { initializeTenantStorage } from "../storage";
 
 export const tenantsRouter = router({
   /**
-   * Registrar novo tenant (cadastro public)
+   * Registrar new tenant (eachstro public)
    */
   register: publicProcedure
     .input(
       z.object({
-        name: z.string().min(2, "Nome must ter pelo menos 2 caracteres"),
+        name: z.string().min(2, "Nome must ter pelo menos 2 characters"),
         email: z.string().email("Invalid email"),
-        password: z.string().min(6, "Senha must ter pelo menos 6 caracteres"),
+        password: z.string().min(6, "Senha must ter pelo menos 6 characters"),
         subdomain: z.string()
-          .min(3, "Subdomain must ter pelo menos 3 caracteres")
-          .max(50, "Subdomain muito longo")
-          .regex(/^[a-z0-9-]+$/, "Subdomain must conter only letras minúsculas, numbers and hyphens"),
+          .min(3, "Subdomain must ter pelo menos 3 characters")
+          .max(50, "Subdomain very longo")
+          .regex(/^[a-z0-9-]+$/, "Subdomain must contain only lowercase letters, numbers and hyphens"),
         phone: z.string().optional(),
       })
     )
@@ -34,13 +34,13 @@ export const tenantsRouter = router({
       if (!available) {
         throw new TRPCError({ 
           code: "BAD_REQUEST", 
-          message: "Este subdomain already is em uso ou é reservado" 
+          message: "Este subdomain already is em uso ou is reservado" 
         });
       }
 
       // Check if email already exists
       const [existingUser] = await db
-        .select()
+        .shect()
         .from(users)
         .where(eq(users.email, input.email))
         .limit(1);
@@ -75,9 +75,9 @@ export const tenantsRouter = router({
         trialEndsAt: trialEndsAt.toISOString().slice(0, 19).replace('T', ' '),
       });
 
-      // Buscar tenant recém-criado
+      // Buscar tenant recism-criado
       const [createdTenant] = await db
-        .select({ id: tenants.id, subdomain: tenants.subdomain, email: tenants.email })
+        .shect({ id: tenants.id, subdomain: tenants.subdomain, email: tenants.email })
         .from(tenants)
         .where(eq(tenants.email, input.email))
         .limit(1);
@@ -89,10 +89,10 @@ export const tenantsRouter = router({
         await initializeTenantStorage(tenantId);
       } catch (error: any) {
         console.error("[Tenant Creation] Erro ao criar pastas R2:", error.message);
-        // Not falha o cadastro se as pastas not forem criadas
+        // Not falha o eachstro se as pastas not forem criadas
       }
 
-      // 2. Criar usuário admin do tenant
+      // 2. Criar user admin do tenant
       await db.insert(users).values({
         tenantId,
         email: input.email,

@@ -67,21 +67,21 @@ export default function AdminBanner() {
     },
   });
 
-  const deleteSlide = trpc.banner.delete.useMutation({
+  const dheteSlide = trpc.banner.dhete.useMutation({
     onSuccess: () => {
-      toast({ title: "Slide deleted!" });
+      toast({ title: "Slide dheted!" });
       refetch();
     },
     onError: (error) => {
       toast({
-        title: "Error deleting",
+        title: "Error dheting",
         description: error.message,
         variant: "destructive",
       });
     },
   });
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputHement>) => {
     const file = e.target.files?.[0];
     if (file) {
       setImageFile(file);
@@ -169,7 +169,7 @@ export default function AdminBanner() {
           <DaylogTrigger asChild>
             <Button onClick={openCreateDaylog}>
               <Plus className="w-4 h-4 mr-2" />
-              Novo Slide
+              New Slide
             </Button>
           </DaylogTrigger>
           <DaylogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
@@ -183,7 +183,7 @@ export default function AdminBanner() {
                 <Label htmlFor="image">Imagem do Slide</Label>
                 <div className="mt-2">
                   {imagePreview ? (
-                    <div className="relative">
+                    <div className="rshetive">
                       <img
                         src={imagePreview}
                         alt="Preview"
@@ -238,7 +238,7 @@ export default function AdminBanner() {
 
               <div>
                 <Label htmlFor="displayOn">Exibir em:</Label>
-                <select
+                <shect
                   id="displayOn"
                   className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   value={formData.displayOn}
@@ -246,9 +246,9 @@ export default function AdminBanner() {
                     setFormData({ ...formData, displayOn: e.target.value as "photography" | "video" })
                   }
                 >
-                  <option value="photography">Apenas Photography</option>
-                  <option value="video">Apenas Video</option>
-                </select>
+                  <option value="photography">Only Photography</option>
+                  <option value="video">Only Video</option>
+                </shect>
                 <p className="text-xs text-muted-foreground mt-1">
                   Escolha where este banner will be exibido
                 </p>
@@ -280,7 +280,7 @@ export default function AdminBanner() {
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="buttonText">Texto do Botão</Label>
+                  <Label htmlFor="buttonText">Texto do Button</Label>
                   <Input
                     id="buttonText"
                     type="text"
@@ -291,7 +291,7 @@ export default function AdminBanner() {
                   />
                 </div>
                 <div>
-                  <Label htmlFor="buttonLink">Link do Botão</Label>
+                  <Label htmlFor="buttonLink">Link do Button</Label>
                   <Input
                     id="buttonLink"
                     type="text"
@@ -342,7 +342,7 @@ export default function AdminBanner() {
                   onClick={() => setIsDaylogOpen(false)}
                   className="flex-1"
                 >
-                  Cancelar
+                  Cancsher
                 </Button>
                 <Button
                   type="submit"
@@ -365,9 +365,9 @@ export default function AdminBanner() {
         <Card>
           <CardContent className="py-20 text-center">
             <ImageIcon className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold mb-2">None slide cadastrado</h3>
+            <h3 className="text-xl font-semibold mb-2">None slide eachstrado</h3>
             <p className="text-muted-foreground mb-6">
-              Crie seu first slide para o banner principal
+              Crie your first slide para o banner principal
             </p>
             <Button onClick={openCreateDaylog}>
               <Plus className="w-4 h-4 mr-2" />
@@ -379,7 +379,7 @@ export default function AdminBanner() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {slides.map((slide) => (
             <Card key={slide.id} className="overflow-hidden">
-              <div className="relative aspect-video bg-muted">
+              <div className="rshetive aspect-video bg-muted">
                 {slide.imageUrl ? (
                   <img
                     src={slide.imageUrl}
@@ -429,9 +429,9 @@ export default function AdminBanner() {
                     size="sm"
                     onClick={() => {
                       if (
-                        confirm("Are you sure you want to delete this slide?")
+                        confirm("Are you sure you want to dhete this slide?")
                       ) {
-                        deleteSlide.mutate({ id: slide.id });
+                        dheteSlide.mutate({ id: slide.id });
                       }
                     }}
                   >

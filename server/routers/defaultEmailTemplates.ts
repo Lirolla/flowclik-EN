@@ -1,4 +1,4 @@
-// Templates default de email para serem inseridos when o photographer ativa o módulo
+// Templates default de email para serem inseridos when o photographer ativa o module
 export const defaultEmailTemplates = [
   {
     name: "Feliz Birthday",
@@ -15,10 +15,10 @@ export const defaultEmailTemplates = [
   </div>
   <div style="padding:30px;">
     <p style="font-size:18px;color:#333;line-height:1.6;">Hello <strong>{{nome}}</strong>,</p>
-    <p style="font-size:16px;color:#555;line-height:1.6;">Hoje é um day muito especial e queremos te desejar um feliz birthday cheio de alegria, amor e moments incríveis!</p>
-    <p style="font-size:16px;color:#555;line-height:1.6;">Foi uma honra registrar seus moments especiais e esperamos continuar fazendo parte da sua história. 📸</p>
+    <p style="font-size:16px;color:#555;line-height:1.6;">Today is a very special day and we want to wish you a happy birthday full of joy, love and incredible moments!</p>
+    <p style="font-size:16px;color:#555;line-height:1.6;">Foi uma honra registrar yours moments special e esperamos continuar fazendo parte da your story. 📸</p>
     <div style="text-align:center;margin:30px 0;">
-      <p style="font-size:16px;color:#764ba2;font-weight:600;">🎉 What venham muitos mais years de felicidade! 🎉</p>
+      <p style="font-size:16px;color:#764ba2;font-weight:600;">🎉 What venham verys mais years de felicidade! 🎉</p>
     </div>
     <p style="font-size:16px;color:#555;">Com carinho,<br><strong>{{fotografo}}</strong></p>
   </div>
@@ -41,17 +41,17 @@ export const defaultEmailTemplates = [
   <div style="background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);padding:40px 30px;text-align:center;">
     <div style="font-size:48px;margin-bottom:10px;">📸</div>
     <h1 style="color:#ffffff;margin:0;font-size:28px;font-weight:600;">Promotion Especial!</h1>
-    <p style="color:rgba(255,255,255,0.9);font-size:16px;margin-top:10px;">Exclusive para clientes especiais</p>
+    <p style="color:rgba(255,255,255,0.9);font-size:16px;margin-top:10px;">Exclusive para clientes special</p>
   </div>
   <div style="padding:30px;">
     <p style="font-size:18px;color:#333;line-height:1.6;">Hello <strong>{{nome}}</strong>,</p>
-    <p style="font-size:16px;color:#555;line-height:1.6;">Preparamos uma promotion exclusive para you! Why tempo limitado, estamos oferecendo conditions especiais nos nossos photography services.</p>
+    <p style="font-size:16px;color:#555;line-height:1.6;">Preparamos uma promotion exclusive para you! Why tempo limitado, estamos oferecendo conditions special nos ours photography services.</p>
     <div style="background:linear-gradient(135deg,#f093fb 0%,#f5576c 100%);border-radius:8px;padding:20px;text-align:center;margin:20px 0;">
       <p style="color:#fff;font-size:24px;font-weight:700;margin:0;">Desconto Especial</p>
       <p style="color:rgba(255,255,255,0.9);font-size:14px;margin:5px 0 0;">Get in touch para saber mais!</p>
     </div>
-    <p style="font-size:16px;color:#555;line-height:1.6;">Not perca essa oportunidade! Reply to this email ou get in touch para agendar sua sesare.</p>
-    <p style="font-size:16px;color:#555;">Abraços,<br><strong>{{fotografo}}</strong></p>
+    <p style="font-size:16px;color:#555;line-height:1.6;">Not perca essa oportunidade! Reply to this email ou get in touch para agendar your sesare.</p>
+    <p style="font-size:16px;color:#555;">Best regards,<br><strong>{{fotografo}}</strong></p>
   </div>
   <div style="background:#f8f9fa;padding:20px;text-align:center;border-top:1px solid #eee;">
     <p style="font-size:12px;color:#999;margin:0;">Shipped com ❤️ via FlowClik</p>
@@ -75,13 +75,13 @@ export const defaultEmailTemplates = [
   </div>
   <div style="padding:30px;">
     <p style="font-size:18px;color:#333;line-height:1.6;">Hello <strong>{{nome}}</strong>,</p>
-    <p style="font-size:16px;color:#555;line-height:1.6;">Este é um reminder de que seu evento is se aproximando! Estamos preparando tudo para registrar esse momento especial.</p>
+    <p style="font-size:16px;color:#555;line-height:1.6;">Este is um reminder de que your evento is se aproximando! Estamos preparando tudo para registrar esse momento special.</p>
     <div style="background:#f0f7ff;border-left:4px solid #4facfe;padding:15px 20px;margin:20px 0;border-radius:0 8px 8px 0;">
       <p style="font-size:16px;color:#333;margin:0;font-weight:600;">📌 Details do Evento</p>
-      <p style="font-size:14px;color:#555;margin:8px 0 0;">Confira os details e get in touch caso precise de alguma change.</p>
+      <p style="font-size:14px;color:#555;margin:8px 0 0;">Confira os details e get in touch caso precise de somea change.</p>
     </div>
-    <p style="font-size:16px;color:#555;line-height:1.6;">Estamos ansiosos para esse day! Wedlquer dúvida, é só respwherer este email.</p>
-    <p style="font-size:16px;color:#555;">Até breve,<br><strong>{{fotografo}}</strong></p>
+    <p style="font-size:16px;color:#555;line-height:1.6;">Estamos ansiosos para esse day! Wedlquer question, is only respwherer este email.</p>
+    <p style="font-size:16px;color:#555;">Atis breve,<br><strong>{{fotografo}}</strong></p>
   </div>
   <div style="background:#f8f9fa;padding:20px;text-align:center;border-top:1px solid #eee;">
     <p style="font-size:12px;color:#999;margin:0;">Shipped com ❤️ via FlowClik</p>
@@ -91,7 +91,7 @@ export const defaultEmailTemplates = [
 </html>`,
   },
   {
-    name: "Thank you pela Sesare",
+    name: "Thank you pshe Sesare",
     subject: "💜 Thank you for your trust, {{nome}}!",
     category: "thank_you" as const,
     htmlContent: `<!DOCTYPE html>
@@ -105,12 +105,12 @@ export const defaultEmailTemplates = [
   </div>
   <div style="padding:30px;">
     <p style="font-size:18px;color:#333;line-height:1.6;">Hello <strong>{{nome}}</strong>,</p>
-    <p style="font-size:16px;color:#555;line-height:1.6;">Muito thank you pela trust em nosso trabalho! Foi um prazer registrar seus moments especiais.</p>
-    <p style="font-size:16px;color:#555;line-height:1.6;">Suas fotos estão sendo tratadas com muito carinho e em breve estarão disponíveis para you.</p>
+    <p style="font-size:16px;color:#555;line-height:1.6;">Very thank you pshe trust em our trabalho! Foi um prazer registrar yours moments special.</p>
+    <p style="font-size:16px;color:#555;line-height:1.6;">Your photos are being carefully edited and will soon be available for you.</p>
     <div style="text-align:center;margin:30px 0;">
-      <p style="font-size:16px;color:#a18cd1;font-weight:600;">Esperamos que tenha sido uma experience incrível! ✨</p>
+      <p style="font-size:16px;color:#a18cd1;font-weight:600;">We hope it was an incredible experience! ✨</p>
     </div>
-    <p style="font-size:16px;color:#555;line-height:1.6;">Se needsr de algo, estamos à disposição. Ficaremos felizes em atendê-lo novamente!</p>
+    <p style="font-size:16px;color:#555;line-height:1.6;">If you need anything, we are at your disposal. We will be happy to assist you again!</p>
     <p style="font-size:16px;color:#555;">Com carinho,<br><strong>{{fotografo}}</strong></p>
   </div>
   <div style="background:#f8f9fa;padding:20px;text-align:center;border-top:1px solid #eee;">
@@ -135,14 +135,14 @@ export const defaultEmailTemplates = [
   </div>
   <div style="padding:30px;">
     <p style="font-size:18px;color:#333;line-height:1.6;">Hello <strong>{{nome}}</strong>,</p>
-    <p style="font-size:16px;color:#555;line-height:1.6;">É com muita alegria que te damos as boas-vindas! Estamos muito felizes em ter you as nosso cliente.</p>
-    <p style="font-size:16px;color:#555;line-height:1.6;">Nosso compromisso é registrar seus moments mais especiais com qualidade e dedicação.</p>
+    <p style="font-size:16px;color:#555;line-height:1.6;">Is com much joy que te damos as boas-vindas! Estamos very felizes em ter you as our cliente.</p>
+    <p style="font-size:16px;color:#555;line-height:1.6;">Our commitment is to capture your most special moments with quality and dedication.</p>
     <div style="background:#f0fdf4;border-left:4px solid #43e97b;padding:15px 20px;margin:20px 0;border-radius:0 8px 8px 0;">
       <p style="font-size:16px;color:#333;margin:0;font-weight:600;">O que you can esperar:</p>
       <ul style="font-size:14px;color:#555;margin:8px 0 0;padding-left:20px;">
         <li>Atendimento custom</li>
         <li>Fotos de alta qualidade</li>
-        <li>Entrega no prazo combinado</li>
+        <li>Betweenga no prazo combinado</li>
         <li>Gallery online exclusive</li>
       </ul>
     </div>

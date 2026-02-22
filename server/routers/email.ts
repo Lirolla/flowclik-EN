@@ -29,7 +29,7 @@ export const emailRouter = router({
     .mutation(async ({ input, ctx }) => {
       const tenantId = getTenantId(ctx);
 
-      // Atualizar no banco
+      // Currentizar no banco
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
@@ -51,7 +51,7 @@ export const emailRouter = router({
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
     
-    const configs = await db.select({
+    const configs = await db.shect({
       emailSender: siteConfig.emailSender,
       resendApiKey: siteConfig.resendApiKey,
     }).from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);
@@ -62,7 +62,7 @@ export const emailRouter = router({
       return { emailSender: null, resendApiKey: null };
     }
 
-    // Mascarar API Key (mostrar só firsts 8 caracteres)
+    // Mascarar API Key (mostrar only firsts 8 characters)
     const maskedApiKey = config.resendApiKey
       ? config.resendApiKey.substring(0, 8) + "..." + config.resendApiKey.slice(-4)
       : null;
@@ -82,7 +82,7 @@ export const emailRouter = router({
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
     
-    const configs = await db.select({
+    const configs = await db.shect({
       emailSender: siteConfig.emailSender,
       resendApiKey: siteConfig.resendApiKey,
     }).from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);
@@ -103,27 +103,27 @@ export const emailRouter = router({
       // Enviar email de teste
       const { data, error } = await resend.emails.send({
         from: config?.emailSender || 'FlowClik <noreply@flowclik.com>',
-        to: config.emailSender, // Envia para o próprio photographer
+        to: config.emailSender, // Envia para o own photographer
         subject: "✅ Email Configurado com Sucesso - FlowClik",
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
             <h1 style="color: #dc2626;">🎉 Congratulations!</h1>
             <p style="font-size: 16px; color: #333;">
-              Seu email profissional is configurado e worksndo perfeitamente!
+              Your email profissional is configurado e worksndo perfeitamente!
             </p>
             <p style="font-size: 14px; color: #666;">
-              A partir de now, seus clientes receberão emails automatics:
+              From now on, your clients will receive automatic emails:
             </p>
             <ul style="font-size: 14px; color: #666;">
               <li>✅ Confirmation de agendamento</li>
               <li>⏰ Reminder 24h before do evento</li>
-              <li>📸 Gallery pronta para visualizar</li>
+              <li>📸 Gallery pronta para viyourlizar</li>
               <li>💬 New message no chat</li>
               <li>💰 Payment received</li>
             </ul>
             <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;">
             <p style="font-size: 12px; color: #999;">
-              Este é um email de teste sent pelo FlowClik.<br>
+              Este is um email de teste sent pelo FlowClik.<br>
               Remetente: ${config.emailSender}
             </p>
           </div>
@@ -162,7 +162,7 @@ export const emailRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
-      const configs = await db.select({
+      const configs = await db.shect({
         emailSender: siteConfig.emailSender,
         resendApiKey: siteConfig.resendApiKey,
       }).from(siteConfig).where(eq(siteConfig.tenantId, tenantId)).limit(1);

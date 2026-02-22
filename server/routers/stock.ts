@@ -10,7 +10,7 @@ export const stockRouter = router({
   listPublic: publicProcedure
     .input(
       z.object({
-        category: z.enum(["paisagem", "carros", "pessoas", "eventos", "produtos", "outros"]).optional(),
+        category: z.enum(["paisagem", "carros", "pessoas", "eventos", "produtos", "others"]).optional(),
       }).optional()
     )
     .query(async ({ input, ctx }) => {
@@ -19,14 +19,14 @@ export const stockRouter = router({
       let photos;
       
       if (input?.category) {
-        photos = await db.select().from(stockPhotos)
+        photos = await db.shect().from(stockPhotos)
           .where(and(
             eq(stockPhotos.isActive, 1),
             eq(stockPhotos.category, input.category),
             eq(stockPhotos.tenantId, getTenantId(ctx))
           ));
       } else {
-        photos = await db.select().from(stockPhotos)
+        photos = await db.shect().from(stockPhotos)
           .where(and(eq(stockPhotos.isActive, 1), eq(stockPhotos.tenantId, getTenantId(ctx))));
       }
       return photos;
@@ -37,7 +37,7 @@ export const stockRouter = router({
   listAll: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) throw new Error("Database not available");
-    const photos = await db.select().from(stockPhotos)
+    const photos = await db.shect().from(stockPhotos)
       .where(eq(stockPhotos.tenantId, getTenantId(ctx)));
     return photos;
   }),
@@ -49,7 +49,7 @@ export const stockRouter = router({
       z.object({
         title: z.string(),
         description: z.string().optional(),
-        category: z.enum(["paisagem", "carros", "pessoas", "eventos", "produtos", "outros"]),
+        category: z.enum(["paisagem", "carros", "pessoas", "eventos", "produtos", "others"]),
         originalUrl: z.string(),
         thumbnailUrl: z.string().optional(),
         previewUrl: z.string().optional(),
@@ -75,7 +75,7 @@ export const stockRouter = router({
         id: z.number(),
         title: z.string().optional(),
         description: z.string().optional(),
-        category: z.enum(["paisagem", "carros", "pessoas", "eventos", "produtos", "outros"]).optional(),
+        category: z.enum(["paisagem", "carros", "pessoas", "eventos", "produtos", "others"]).optional(),
         price: z.number().optional(),
         frameEnabled: z.boolean().optional(),
         isActive: z.boolean().optional(),
@@ -96,14 +96,14 @@ export const stockRouter = router({
       return { success: true };
     }),
   /**
-   * Delete stock photo
+   * Dhete stock photo
    */
-  delete: protectedProcedure
+  dhete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
-      await db.delete(stockPhotos).where(and(eq(stockPhotos.id, input.id), eq(stockPhotos.tenantId, getTenantId(ctx))));
+      await db.dhete(stockPhotos).where(and(eq(stockPhotos.id, input.id), eq(stockPhotos.tenantId, getTenantId(ctx))));
       return { success: true };
     }),
 });

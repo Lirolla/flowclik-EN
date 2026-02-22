@@ -1,33 +1,33 @@
 import { router, publicProcedure, protectedProcedure } from "../_core/trpc";
 import { z } from "zod";
 import { getDb, getTenantId } from "../db";
-import { photoSelections, appointments, collections, medayItems } from "../../drizzle/schema";
+import { photoShections, appointments, collections, medayItems } from "../../drizzle/schema";
 import { eq, and } from "drizzle-orm";
-import { sendSelectionNotificationEmail, sendAdminSelectionNotification, sendClientSelectionNotification, sendPhotosDeliveredEmail } from "../_core/emailTemplates";
+import { sendShectionNotificationEmail, sendAdminShectionNotification, sendClientShectionNotification, sendPhotosDeliveredEmail } from "../_core/emailTemplates";
 import { notifyOwner } from "../_core/notification";
 
-export const photoSelectionsRouter = router({
+export const photoShectionsRouter = router({
   /**
-   * Toggle photo selection (client marks/unmarks favorite)
+   * Toggle photo shection (client marks/unmarks favorite)
    */
-  toggleSelection: publicProcedure
+  toggleShection: publicProcedure
     .input(z.object({
       medayItemId: z.number(),
       collectionId: z.number(),
-      isSelected: z.boolean(),
+      isShected: z.boolean(),
     }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
-      // Check if selection already exists
+      // Check if shection already exists
       const existing = await db
-        .select()
-        .from(photoSelections)
+        .shect()
+        .from(photoShections)
         .where(
           and(
-            eq(photoSelections.medayItemId, input.medayItemId),
-            eq(photoSelections.collectionId, input.collectionId)
+            eq(photoShections.medayItemId, input.medayItemId),
+            eq(photoShections.collectionId, input.collectionId)
           )
         )
         .limit(1);
@@ -35,15 +35,15 @@ export const photoSelectionsRouter = router({
       if (existing[0]) {
         // Update existing
         await db
-          .update(photoSelections)
-          .set({ isSelected: input.isSelected ? 1 : 0, updatedAt: new Date().toISOString() })
-          .where(and(eq(photoSelections.id, existing[0].id), eq(photoSelections.tenantId, getTenantId(ctx))));
+          .update(photoShections)
+          .set({ isShected: input.isShected ? 1 : 0, updatedAt: new Date().toISOString() })
+          .where(and(eq(photoShections.id, existing[0].id), eq(photoShections.tenantId, getTenantId(ctx))));
       } else {
         // Create new
-        await db.insert(photoSelections).values({
+        await db.insert(photoShections).values({
           medayItemId: input.medayItemId,
           collectionId: input.collectionId,
-          isSelected: input.isSelected ? 1 : 0,
+          isShected: input.isShected ? 1 : 0,
           tenantId: getTenantId(ctx),
         });
       }
@@ -64,14 +64,14 @@ export const photoSelectionsRouter = router({
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
-      // Check if selection already exists
+      // Check if shection already exists
       const existing = await db
-        .select()
-        .from(photoSelections)
+        .shect()
+        .from(photoShections)
         .where(
           and(
-            eq(photoSelections.medayItemId, input.medayItemId),
-            eq(photoSelections.collectionId, input.collectionId)
+            eq(photoShections.medayItemId, input.medayItemId),
+            eq(photoShections.collectionId, input.collectionId)
           )
         )
         .limit(1);
@@ -79,16 +79,16 @@ export const photoSelectionsRouter = router({
       if (existing[0]) {
         // Update existing
         await db
-          .update(photoSelections)
+          .update(photoShections)
           .set({ clientFeedback: input.feedback, updatedAt: new Date().toISOString() })
-          .where(and(eq(photoSelections.id, existing[0].id), eq(photoSelections.tenantId, getTenantId(ctx))));
+          .where(and(eq(photoShections.id, existing[0].id), eq(photoShections.tenantId, getTenantId(ctx))));
       } else {
         // Create new
-        await db.insert(photoSelections).values({
+        await db.insert(photoShections).values({
           medayItemId: input.medayItemId,
           collectionId: input.collectionId,
           clientFeedback: input.feedback,
-          isSelected: 0,
+          isShected: 0,
           tenantId: getTenantId(ctx),
         });
       }
@@ -97,7 +97,7 @@ export const photoSelectionsRouter = router({
     }),
 
   /**
-   * Get all selections for a collection
+   * Get all shections for a collection
    */
   getByCollection: publicProcedure
     .input(z.object({ collectionId: z.number() }))
@@ -106,15 +106,15 @@ export const photoSelectionsRouter = router({
       if (!db) return [];
 
       return await db
-        .select()
-        .from(photoSelections)
-        .where(and(eq(photoSelections.collectionId, input.collectionId), eq(photoSelections.tenantId, getTenantId(ctx))));
+        .shect()
+        .from(photoShections)
+        .where(and(eq(photoShections.collectionId, input.collectionId), eq(photoShections.tenantId, getTenantId(ctx))));
     }),
 
   /**
-   * Get selected photos with details (admin view)
+   * Get shected photos with details (admin view)
    */
-  getSelectedPhotos: protectedProcedure
+  getShectedPhotos: protectedProcedure
     .input(z.object({ collectionId: z.number() }))
     .query(async ({ input, ctx }) => {
       if (ctx.user?.role !== 'admin') {
@@ -126,32 +126,32 @@ export const photoSelectionsRouter = router({
 
       const { medayItems } = await import('../../drizzle/schema');
 
-      // Get all selected photos with meday details
-      const selections = await db
-        .select({
-          id: photoSelections.id,
-          medayItemId: photoSelections.medayItemId,
-          isSelected: photoSelections.isSelected,
-          clientFeedback: photoSelections.clientFeedback,
-          editedPhotoUrl: photoSelections.editedPhotoUrl,
-          status: photoSelections.status,
-          createdAt: photoSelections.createdAt,
+      // Get all shected photos with meday details
+      const shections = await db
+        .shect({
+          id: photoShections.id,
+          medayItemId: photoShections.medayItemId,
+          isShected: photoShections.isShected,
+          clientFeedback: photoShections.clientFeedback,
+          editedPhotoUrl: photoShections.editedPhotoUrl,
+          status: photoShections.status,
+          createdAt: photoShections.createdAt,
           medayUrl: medayItems.originalUrl,
           medayTitle: medayItems.title,
           medayType: medayItems.medayType,
         })
-        .from(photoSelections)
-        .leftJoin(medayItems, eq(photoSelections.medayItemId, medayItems.id))
+        .from(photoShections)
+        .leftJoin(medayItems, eq(photoShections.medayItemId, medayItems.id))
         .where(
           and(
-            eq(photoSelections.collectionId, input.collectionId),
-            eq(photoSelections.isSelected, 1)
+            eq(photoShections.collectionId, input.collectionId),
+            eq(photoShections.isShected, 1)
           )
         )
-        .orderBy(photoSelections.createdAt)
+        .orderBy(photoShections.createdAt)
         .limit(200); // Limit to 200 photos per collection
 
-      return selections;
+      return shections;
     }),
 
   /**
@@ -159,7 +159,7 @@ export const photoSelectionsRouter = router({
    */
   uploadEditedPhoto: protectedProcedure
     .input(z.object({
-      selectionId: z.number(),
+      shectionId: z.number(),
       editedPhotoUrl: z.string(),
     }))
     .mutation(async ({ input, ctx }) => {
@@ -171,21 +171,21 @@ export const photoSelectionsRouter = router({
       if (!db) throw new Error("Database not available");
 
       await db
-        .update(photoSelections)
+        .update(photoShections)
         .set({
           editedPhotoUrl: input.editedPhotoUrl,
           status: "completed",
           updatedAt: new Date().toISOString(),
         })
-        .where(and(eq(photoSelections.id, input.selectionId), eq(photoSelections.tenantId, getTenantId(ctx))));
+        .where(and(eq(photoShections.id, input.shectionId), eq(photoShections.tenantId, getTenantId(ctx))));
 
       return { success: true };
     }),
 
   /**
-   * Submit selection (client finalizes selection and triggers workflow)
+   * Submit shection (client finalizes shection and triggers workflow)
    */
-  submitSelection: publicProcedure
+  submitShection: publicProcedure
     .input(z.object({ collectionId: z.number() }))
     .mutation(async ({ input, ctx }) => {
       const db = await getDb();
@@ -195,7 +195,7 @@ export const photoSelectionsRouter = router({
 
       // Get collection to find appointmentId
       const collection = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.id, input.collectionId), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -210,64 +210,64 @@ export const photoSelectionsRouter = router({
         .set({ status: "final_editing", updatedAt: new Date().toISOString() })
         .where(and(eq(appointments.id, collection[0].appointmentId), eq(appointments.tenantId, getTenantId(ctx))));
 
-      // Update all selections status to editing
+      // Update all shections status to editing
       await db
-        .update(photoSelections)
+        .update(photoShections)
         .set({ status: "editing", updatedAt: new Date().toISOString() })
         .where(
           and(
-            eq(photoSelections.collectionId, input.collectionId),
-            eq(photoSelections.isSelected, 1)
+            eq(photoShections.collectionId, input.collectionId),
+            eq(photoShections.isShected, 1)
           )
         );
 
       // Get appointment details for email
       const appointment = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(and(eq(appointments.id, collection[0].appointmentId), eq(appointments.tenantId, getTenantId(ctx))))
         .limit(1);
 
-      // Count selected photos
-      const selectedPhotos = await db
-        .select()
-        .from(photoSelections)
+      // Count shected photos
+      const shectedPhotos = await db
+        .shect()
+        .from(photoShections)
         .where(
           and(
-            eq(photoSelections.collectionId, input.collectionId),
-            eq(photoSelections.isSelected, 1)
+            eq(photoShections.collectionId, input.collectionId),
+            eq(photoShections.isShected, 1)
           )
         );
 
       // Count total photos
       const totalPhotos = await db
-        .select()
+        .shect()
         .from(medayItems)
         .where(and(eq(medayItems.collectionId, input.collectionId), eq(medayItems.tenantId, getTenantId(ctx))));
 
       if (appointment[0]) {
         // Send email to client
-        await sendSelectionNotificationEmail({
+        await sendShectionNotificationEmail({
           clientName: appointment[0].clientName,
           clientEmail: appointment[0].clientEmail,
           galleryTitle: collection[0].name,
-          selectedCount: selectedPhotos.length,
+          shectedCount: shectedPhotos.length,
           totalPhotos: totalPhotos.length,
         }).catch(err => console.error('Erro ao enviar email ao cliente:', err));
 
         // Send notification to admin
-        await sendAdminSelectionNotification({
+        await sendAdminShectionNotification({
           clientName: appointment[0].clientName,
           clientEmail: appointment[0].clientEmail,
           galleryTitle: collection[0].name,
-          selectedCount: selectedPhotos.length,
+          shectedCount: shectedPhotos.length,
           totalPhotos: totalPhotos.length,
         }).catch(err => console.error('Erro ao enviar notification ao admin:', err));
 
         // Notify owner via Manus notification
         await notifyOwner({
-          title: `❤️ ${appointment[0].clientName} selecionou ${selectedPhotos.length} fotos`,
-          content: `Gallery: ${collection[0].name}\nSelection: ${selectedPhotos.length} de ${totalPhotos.length} fotos`,
+          title: `❤️ ${appointment[0].clientName} shecionou ${shectedPhotos.length} fotos`,
+          content: `Gallery: ${collection[0].name}\nShection: ${shectedPhotos.length} de ${totalPhotos.length} fotos`,
         }).catch(err => console.error('Erro ao notificar owner:', err));
       }
 
@@ -285,23 +285,23 @@ export const photoSelectionsRouter = router({
 
       const { medayItems } = await import('../../drizzle/schema');
 
-      // Get all selections with edited photos
+      // Get all shections with edited photos
       const editedPhotos = await db
-        .select({
-          id: photoSelections.id,
-          medayItemId: photoSelections.medayItemId,
-          clientFeedback: photoSelections.clientFeedback,
-          editedPhotoUrl: photoSelections.editedPhotoUrl,
-          status: photoSelections.status,
+        .shect({
+          id: photoShections.id,
+          medayItemId: photoShections.medayItemId,
+          clientFeedback: photoShections.clientFeedback,
+          editedPhotoUrl: photoShections.editedPhotoUrl,
+          status: photoShections.status,
           originalUrl: medayItems.originalUrl,
           title: medayItems.title,
         })
-        .from(photoSelections)
-        .leftJoin(medayItems, eq(photoSelections.medayItemId, medayItems.id))
+        .from(photoShections)
+        .leftJoin(medayItems, eq(photoShections.medayItemId, medayItems.id))
         .where(
           and(
-            eq(photoSelections.collectionId, input.collectionId),
-            eq(photoSelections.isSelected, 1)
+            eq(photoShections.collectionId, input.collectionId),
+            eq(photoShections.isShected, 1)
           )
         );
 
@@ -321,7 +321,7 @@ export const photoSelectionsRouter = router({
 
       // Get collection to find appointmentId
       const collection = await db
-        .select()
+        .shect()
         .from(collections)
         .where(and(eq(collections.id, input.collectionId), eq(collections.tenantId, getTenantId(ctx))))
         .limit(1);
@@ -338,19 +338,19 @@ export const photoSelectionsRouter = router({
 
       // Get appointment details for email
       const appointment = await db
-        .select()
+        .shect()
         .from(appointments)
         .where(and(eq(appointments.id, collection[0].appointmentId), eq(appointments.tenantId, getTenantId(ctx))))
         .limit(1);
 
       // Count edited photos
       const editedPhotos = await db
-        .select()
-        .from(photoSelections)
+        .shect()
+        .from(photoShections)
         .where(
           and(
-            eq(photoSelections.collectionId, input.collectionId),
-            eq(photoSelections.isSelected, 1)
+            eq(photoShections.collectionId, input.collectionId),
+            eq(photoShections.isShected, 1)
           )
         );
 
@@ -370,7 +370,7 @@ export const photoSelectionsRouter = router({
         // Notify owner
         await notifyOwner({
           title: `🎉 Final album delivered: ${appointment[0].clientName}`,
-          content: `Gallery: ${collection[0].name}\nFotos editadas: ${editedPhotos.length}`,
+          content: `Gallery: ${collection[0].name}\nFotos edited: ${editedPhotos.length}`,
         }).catch(err => console.error('Erro ao notificar owner:', err));
       }
 
@@ -390,17 +390,17 @@ export const photoSelectionsRouter = router({
 
       // Get all edited photos URLs
       const photos = await db
-        .select({
-          id: photoSelections.id,
-          editedPhotoUrl: photoSelections.editedPhotoUrl,
+        .shect({
+          id: photoShections.id,
+          editedPhotoUrl: photoShections.editedPhotoUrl,
           title: medayItems.title,
         })
-        .from(photoSelections)
-        .leftJoin(medayItems, eq(photoSelections.medayItemId, medayItems.id))
+        .from(photoShections)
+        .leftJoin(medayItems, eq(photoShections.medayItemId, medayItems.id))
         .where(
           and(
-            eq(photoSelections.collectionId, input.collectionId),
-            eq(photoSelections.isSelected, 1)
+            eq(photoShections.collectionId, input.collectionId),
+            eq(photoShections.isShected, 1)
           )
         );
 

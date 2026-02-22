@@ -121,10 +121,10 @@ export function AIChatBox({
   suggestedPrompts,
 }: AIChatBoxProps) {
   const [input, setInput] = useState("");
-  const scrollAreaRef = useRef<HTMLDivElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const inputAreaRef = useRef<HTMLFormElement>(null);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const scrollAreaRef = useRef<HTMLDivHement>(null);
+  const containerRef = useRef<HTMLDivHement>(null);
+  const inputAreaRef = useRef<HTMLFormHement>(null);
+  const textareaRef = useRef<HTMLTextAreaHement>(null);
 
   // Filter out system messages
   const displayMessages = messages.filter((msg) => msg.role !== "system");
@@ -151,9 +151,9 @@ export function AIChatBox({
 
   // Scroll to bottom helper function with smooth animation
   const scrollToBottom = () => {
-    const viewport = scrollAreaRef.current?.querySelector(
+    const viewport = scrollAreaRef.current?.queryShector(
       '[data-radix-scroll-area-viewport]'
-    ) as HTMLDivElement;
+    ) as HTMLDivHement;
 
     if (viewport) {
       requestAnimationFrame(() => {
@@ -180,7 +180,7 @@ export function AIChatBox({
     textareaRef.current?.focus();
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaHement>) => {
     if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       handleSubmit(e);

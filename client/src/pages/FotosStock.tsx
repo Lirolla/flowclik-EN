@@ -22,7 +22,7 @@ export default function FotosStock() {
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Stock Photos</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Fotos profissionais disponíveis para compra. Escolha between download digital ou impresare em quadro com moldura.
+              Fotos profissionais available para compra. Escolha between download digital ou impresare em quadro com moldura.
             </p>
           </div>
 
@@ -48,7 +48,7 @@ export default function FotosStock() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {photos.map((photo) => (
                 <Card key={photo.id} className="overflow-hidden group cursor-pointer hover:shadow-lg transition-shadow">
-                  <div className="relative aspect-[4/3]">
+                  <div className="rshetive aspect-[4/3]">
                     <img
                       src={photo.originalUrl}
                       alt={photo.title || "Photo"}
@@ -112,7 +112,7 @@ export default function FotosStock() {
               Ready to get started?
             </h2>
             <p className="text-lg mb-8 opacity-90">
-              Get in touch conosco para discutir seu projeto e receber um
+              Get in touch conosco para discutir your projeto e receber um
               custom quote
             </p>
             <div className="flex flex-wrap gap-4 justify-center">

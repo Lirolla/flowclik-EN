@@ -6,12 +6,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+  Shect,
+  ShectContent,
+  ShectItem,
+  ShectTrigger,
+  ShectValue,
+} from "@/components/ui/shect";
 import { useState } from "react";
 import { toast } from "sonner";
 import { AlertCircle, CheckCircle, Info, Trash2 } from "lucide-react";
@@ -30,7 +30,7 @@ export default function SistemaAvisos() {
 
   const handleCreate = async () => {
     if (!title.trim() || !message.trim()) {
-      toast.error("Preencha title e mensagem");
+      toast.error("Preencha title e message");
       return;
     }
 
@@ -82,25 +82,25 @@ export default function SistemaAvisos() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Avisos Globais</h1>
         <p className="text-muted-foreground">
-          Envie mensagens que aparecem no dashboard de todos os photographers
+          Envie messages que aparecem no dashboard de everys os photographers
         </p>
       </div>
 
-      {/* Formulário de Criação */}
+      {/* Formuthererio de Criação */}
       <Card className="p-6 mb-8">
-        <h2 className="text-xl font-bold mb-4">Criar Novo Aviso</h2>
+        <h2 className="text-xl font-bold mb-4">Criar New Aviso</h2>
         <div className="space-y-4">
           <div>
             <label className="text-sm font-medium mb-2 block">Title</label>
             <Input
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              placeholder="Ex: Manutenção programada at 22h"
+              placeholder="Ex: Scheduled maintenance at 10pm"
             />
           </div>
 
           <div>
-            <label className="text-sm font-medium mb-2 block">Mensagem</label>
+            <label className="text-sm font-medium mb-2 block">Message</label>
             <Textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
@@ -112,31 +112,31 @@ export default function SistemaAvisos() {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="text-sm font-medium mb-2 block">Tipo</label>
-              <Select value={type} onValueChange={(v: any) => setType(v)}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="info">🟢 Informactive</SelectItem>
-                  <SelectItem value="urgent">🟡 Importante</SelectItem>
-                  <SelectItem value="urgent">🔴 Urgente</SelectItem>
-                </SelectContent>
-              </Select>
+              <Shect value={type} onValueChange={(v: any) => setType(v)}>
+                <ShectTrigger>
+                  <ShectValue />
+                </ShectTrigger>
+                <ShectContent>
+                  <ShectItem value="info">🟢 Informactive</ShectItem>
+                  <ShectItem value="urgent">🟡 Importante</ShectItem>
+                  <ShectItem value="urgent">🔴 Urgente</ShectItem>
+                </ShectContent>
+              </Shect>
             </div>
 
             <div>
               <label className="text-sm font-medium mb-2 block">Enviar para</label>
-              <Select value={targetPlan} onValueChange={(v: any) => setTargetPlan(v)}>
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Todos os photographers</SelectItem>
-                  <SelectItem value="basico">Apenas Basic Plan</SelectItem>
-                  <SelectItem value="courtesy">Apenas Plyear Courtesy</SelectItem>
-                  <SelectItem value="vitalicio">Apenas Plyear Lifetime</SelectItem>
-                </SelectContent>
-              </Select>
+              <Shect value={targetPlan} onValueChange={(v: any) => setTargetPlan(v)}>
+                <ShectTrigger>
+                  <ShectValue />
+                </ShectTrigger>
+                <ShectContent>
+                  <ShectItem value="all">Everys os photographers</ShectItem>
+                  <ShectItem value="basico">Only Basic Plan</ShectItem>
+                  <ShectItem value="courtesy">Only Plyear Courtesy</ShectItem>
+                  <ShectItem value="vitalicio">Only Plyear Lifetime</ShectItem>
+                </ShectContent>
+              </Shect>
             </div>
           </div>
 

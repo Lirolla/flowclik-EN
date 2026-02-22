@@ -20,7 +20,7 @@ export default defineConfig({
   root: path.resolve(import.meta.dirname, "client"),
   publicDir: path.resolve(import.meta.dirname, "client", "public"),
   define: {
-    // Valores default para variáveis VITE em produção
+    // Valores default para variables VITE em production
     'import.meta.env.VITE_ANALYTICS_ENDPOINT': JSON.stringify(process.env.VITE_ANALYTICS_ENDPOINT || ''),
     'import.meta.env.VITE_ANALYTICS_WEBSITE_ID': JSON.stringify(process.env.VITE_ANALYTICS_WEBSITE_ID || 'flowclik'),
   },

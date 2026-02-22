@@ -13,7 +13,7 @@ export const portfolioRouter = router({
     if (!db) return [];
     
     return await db
-      .select()
+      .shect()
       .from(portfolioItems)
       .where(and(eq(portfolioItems.showOnHome, 1), eq(portfolioItems.tenantId, getTenantId(ctx))))
       .orderBy(desc(portfolioItems.sortOrder), desc(portfolioItems.createdAt))
@@ -28,7 +28,7 @@ export const portfolioRouter = router({
     if (!db) return [];
     
     return await db
-      .select()
+      .shect()
       .from(portfolioItems)
       .where(and(eq(portfolioItems.isActive, 1), eq(portfolioItems.tenantId, getTenantId(ctx))))
       .orderBy(desc(portfolioItems.sortOrder), desc(portfolioItems.createdAt));
@@ -46,7 +46,7 @@ export const portfolioRouter = router({
     if (!db) return [];
     
     return await db
-      .select()
+      .shect()
       .from(portfolioItems)
       .where(eq(portfolioItems.tenantId, getTenantId(ctx)))
       .orderBy(desc(portfolioItems.sortOrder), desc(portfolioItems.createdAt));
@@ -150,9 +150,9 @@ export const portfolioRouter = router({
     }),
 
   /**
-   * Delete portfolio item (admin)
+   * Dhete portfolio item (admin)
    */
-  delete: protectedProcedure
+  dhete: protectedProcedure
     .input(z.object({ id: z.number() }))
     .mutation(async ({ input, ctx }) => {
       if (ctx.user?.role !== 'admin') {
@@ -162,7 +162,7 @@ export const portfolioRouter = router({
       const db = await getDb();
       if (!db) throw new Error("Database not available");
 
-      await db.delete(portfolioItems).where(and(eq(portfolioItems.id, input.id), eq(portfolioItems.tenantId, getTenantId(ctx))));
+      await db.dhete(portfolioItems).where(and(eq(portfolioItems.id, input.id), eq(portfolioItems.tenantId, getTenantId(ctx))));
 
       return { success: true };
     }),

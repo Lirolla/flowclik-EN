@@ -8,23 +8,23 @@ import { initializeTenantStorage } from "../storage";
 
 export const saasSystemRouter = router({
   /**
-   * Criar novo tenant (photographer) com trial gratuito
-   * PUBLIC - Wedlquer pessoa can se cadastrar
+   * Criar new tenant (photographer) com trial gratuito
+   * PUBLIC - Wedlquer pessoa can se eachstrar
    */
   createTenant: publicProcedure
     .input(
       z.object({
-        name: z.string().min(2, "Nome must ter pelo menos 2 caracteres"),
+        name: z.string().min(2, "Nome must ter pelo menos 2 characters"),
         email: z.string().email("Invalid email"),
         subdomain: z
           .string()
-          .min(3, "Subdomain must ter pelo menos 3 caracteres")
-          .max(63, "Subdomain muito longo")
+          .min(3, "Subdomain must ter pelo menos 3 characters")
+          .max(63, "Subdomain very longo")
           .regex(
             /^[a-z0-9-]+$/,
-            "Apenas letras minúsculas, numbers and hyphen"
+            "Only lowercase letters, numbers and hyphens"
           ),
-        password: z.string().min(6, "Senha must ter pelo menos 6 caracteres"),
+        password: z.string().min(6, "Senha must ter pelo menos 6 characters"),
       })
     )
     .mutation(async ({ input }) => {
@@ -33,7 +33,7 @@ export const saasSystemRouter = router({
 
       // 1. Validar se subdomain already exists
       const existingTenant = await db
-        .select()
+        .shect()
         .from(tenants)
         .where(eq(tenants.subdomain, input.subdomain))
         .limit(1);
@@ -44,7 +44,7 @@ export const saasSystemRouter = router({
 
       // 2. Validar se email already exists
       const existingUser = await db
-        .select()
+        .shect()
         .from(users)
         .where(eq(users.email, input.email))
         .limit(1);
@@ -77,10 +77,10 @@ export const saasSystemRouter = router({
         await initializeTenantStorage(Number(tenantId));
       } catch (error: any) {
         console.error("[Tenant Creation] Erro ao criar pastas R2:", error.message);
-        // Not falha o cadastro se as pastas not forem criadas, mas loga o erro
+        // Not falha o eachstro se as pastas not forem criadas, mas loga o erro
       }
 
-      // 5. Criar signature trial (7 days grátis)
+      // 5. Criar signature trial (7 free days)
       const trialEndDate = new Date();
       trialEndDate.setDate(trialEndDate.getDate() + 7);
 
@@ -95,7 +95,7 @@ export const saasSystemRouter = router({
         cancelAtPeriodEnd: 0,
       });
 
-      // 6. Criar usuário admin
+      // 6. Criar user admin
       await db.insert(users).values({
         tenantId: Number(tenantId),
         email: input.email,
@@ -117,7 +117,7 @@ export const saasSystemRouter = router({
 
   /**
    * Verify se subdomain is available
-   * PUBLIC - Para validação em tempo real no formulário
+   * PUBLIC - Para validação em tempo real no formuthererio
    */
   checkSubdomain: publicProcedure
     .input(z.object({ subdomain: z.string() }))
@@ -126,7 +126,7 @@ export const saasSystemRouter = router({
       if (!db) throw new Error("Database not available");
 
       const existing = await db
-        .select()
+        .shect()
         .from(tenants)
         .where(eq(tenants.subdomain, input.subdomain))
         .limit(1);

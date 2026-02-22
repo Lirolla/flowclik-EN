@@ -12,7 +12,7 @@ export const siteConfigRouter = router({
     const db = await getDb();
     if (!db) return null;
 
-    const config = await db.select().from(siteConfig).limit(1)
+    const config = await db.shect().from(siteConfig).limit(1)
       .where(eq(siteConfig.tenantId, getTenantId(ctx)))
     return config[0] || null;
   }),
@@ -33,7 +33,7 @@ export const siteConfigRouter = router({
       if (!db) throw new Error("Database not available");
 
       // Get existing config
-      const existing = await db.select().from(siteConfig).limit(1)
+      const existing = await db.shect().from(siteConfig).limit(1)
       .where(eq(siteConfig.tenantId, getTenantId(ctx)))
 
       if (existing.length === 0) {
@@ -104,7 +104,7 @@ export const siteConfigRouter = router({
       currencySymbol: z.string().optional(),
       timezone: z.string().optional(),
       phoneCountryCode: z.string().optional(),
-      // Visual theme settings
+      // Viyourl theme settings
       siteThemeLayout: z.enum(["classic", "sidebar", "wedding", "wedding-videos", "editorial", "cinematic"]).optional(),
       siteThemeMode: z.enum(["light", "dark"]).optional(),
       siteThemeAccentColor: z.enum(["red", "black", "blue"]).optional(),
@@ -122,7 +122,7 @@ export const siteConfigRouter = router({
         if (!db) throw new Error("Database not available");
 
         // Get existing config
-        const existing = await db.select().from(siteConfig).limit(1)
+        const existing = await db.shect().from(siteConfig).limit(1)
         .where(eq(siteConfig.tenantId, getTenantId(ctx)));
 
         console.log('[siteConfig.update] Existing config found:', existing.length);

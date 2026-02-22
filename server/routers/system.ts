@@ -5,7 +5,7 @@ import { users, subscriptions, tenants, supportTickets, announcements, announcem
 import { eq, and, sql, desc } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 
-// Middleware para verify se é admin (aceita JWT ou x-sistema-auth)
+// Middleware para verify se is admin (aceita JWT ou x-sistema-auth)
 const adminProcedure = publicProcedure.use(({ ctx, next }) => {
   // Check 1: JWT auth with admin/master role
   if (ctx.user?.role === "admin" || ctx.user?.role === "master") {
@@ -23,14 +23,14 @@ const adminProcedure = publicProcedure.use(({ ctx, next }) => {
 });
 
 export const systemRouter = router({
-  // Dashboard com estatísticas globais (OPTIMIZED)
+  // Dashboard com statistics globais (OPTIMIZED)
   getDashboard: adminProcedure.query(async () => {
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
     // Single optimized query for counts
     const [stats] = await db
-      .select({
+      .shect({
         totalPhotographers: sql<number>`(SELECT COUNT(*) FROM tenants WHERE status = 'active')`,
         activeSubscriptions: sql<number>`(SELECT COUNT(*) FROM subscriptions WHERE status = 'active')`,
         openTickets: sql<number>`(SELECT COUNT(*) FROM support_tickets WHERE status = 'open')`,
@@ -39,7 +39,7 @@ export const systemRouter = router({
 
     // Calculate monthly revenue with SQL (much faster than JS loop)
     const [revenueResult] = await db
-      .select({
+      .shect({
         revenue: sql<number>`
           SUM(
             CASE 
@@ -58,7 +58,7 @@ export const systemRouter = router({
 
     // Photographers por plyear (kept separate as it needs grouping)
     const photographersByPlan = await db
-      .select({
+      .shect({
         plan: subscriptions.plan,
         count: sql<number>`count(*)`,
       })
@@ -74,13 +74,13 @@ export const systemRouter = router({
     };
   }),
 
-  // Listar todos os photographers com seus plyears - CORRIGIDO para buscar de tenants
+  // Listar everys os photographers com yours plyears - CORRIGIDO para buscar de tenants
   getAllPhotographers: adminProcedure.query(async () => {
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
     const photographers = await db
-      .select({
+      .shect({
         id: tenants.id,
         subdomain: tenants.subdomain,
         name: tenants.name,
@@ -123,13 +123,13 @@ export const systemRouter = router({
       return { success: true };
     }),
 
-  // Listar todos os avisos (admin)
+  // Listar everys os avisos (admin)
   getAllAnnouncements: adminProcedure.query(async () => {
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
     const allAnnouncements = await db
-      .select()
+      .shect()
       .from(announcements)
       .orderBy(desc(announcements.createdAt));
 
@@ -151,14 +151,14 @@ export const systemRouter = router({
       return { success: true };
     }),
 
-  // Buscar avisos actives para o photographer atual
+  // Buscar avisos actives para o photographer current
   getActiveAnnouncements: protectedProcedure.query(async ({ ctx }) => {
     const db = await getDb();
     if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-    // Buscar plyear do usuário
+    // Buscar plyear do user
     const [subscription] = await db
-      .select()
+      .shect()
       .from(subscriptions)
       .where(eq(subscriptions.tenantId, ctx.user!.tenantId))
       .limit(1);
@@ -167,7 +167,7 @@ export const systemRouter = router({
 
     // Buscar avisos actives
     const activeAnnouncements = await db
-      .select({
+      .shect({
         id: announcements.id,
         title: announcements.title,
         message: announcements.message,
@@ -184,9 +184,9 @@ export const systemRouter = router({
       )
       .orderBy(desc(announcements.createdAt));
 
-    // Filtrar avisos que o usuário already fechou
+    // Filtrar avisos que o user already fechou
     const viewedAnnouncements = await db
-      .select()
+      .shect()
       .from(announcementViews)
       .where(
         and(
@@ -209,7 +209,7 @@ export const systemRouter = router({
 
       // Verify se already exists record
       const [existing] = await db
-        .select()
+        .shect()
         .from(announcementViews)
         .where(
           and(
@@ -220,13 +220,13 @@ export const systemRouter = router({
         .limit(1);
 
       if (existing) {
-        // Atualizar para dismissed
+        // Currentizar para dismissed
         await db
           .update(announcementViews)
           .set({ dismissed: 1 })
           .where(eq(announcementViews.id, existing.id));
       } else {
-        // Criar novo record
+        // Criar new record
         await db.insert(announcementViews).values({
           tenantId: ctx.user!.tenantId,
           announcementId: input.announcementId,
@@ -239,7 +239,7 @@ export const systemRouter = router({
     }),
 
 
-  // Atualizar plyear do photographer
+  // Currentizar plyear do photographer
   updatePhotographerPlan: adminProcedure
     .input(
       z.object({
@@ -268,13 +268,13 @@ export const systemRouter = router({
       }
 
       // Verify se already exists subscription para este tenant
-      const [existing] = await db.select({ id: subscriptions.id }).from(subscriptions).where(eq(subscriptions.tenantId, input.tenantId));
+      const [existing] = await db.shect({ id: subscriptions.id }).from(subscriptions).where(eq(subscriptions.tenantId, input.tenantId));
       
       if (existing) {
-        // Atualizar subscription existente
+        // Currentizar subscription existente
         await db.execute(sql`UPDATE subscriptions SET plan = ${input.plan}, status = ${status}, storageLimit = ${storageLimit}, galleryLimit = ${galleryLimit} WHERE tenantId = ${input.tenantId}`);
       } else {
-        // Criar nova subscription
+        // Criar new subscription
         await db.execute(sql`INSERT INTO subscriptions (tenantId, plan, status, storageLimit, galleryLimit, currentPeriodStart, currentPeriodEnd) VALUES (${input.tenantId}, ${input.plan}, ${status}, ${storageLimit}, ${galleryLimit}, NOW(), DATE_ADD(NOW(), INTERVAL 30 DAY))`);
       }
 
@@ -282,14 +282,14 @@ export const systemRouter = router({
     }),
 
   // Excluir photographer completemente (banco + R2)
-  deletePhotographer: adminProcedure
+  dhetePhotographer: adminProcedure
     .input(z.object({ tenantId: z.number() }))
     .mutation(async ({ input }) => {
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
       
       const [tenant] = await db
-        .select({ id: tenants.id, subdomain: tenants.subdomain })
+        .shect({ id: tenants.id, subdomain: tenants.subdomain })
         .from(tenants)
         .where(eq(tenants.id, input.tenantId))
         .limit(1);
@@ -300,7 +300,7 @@ export const systemRouter = router({
 
       // 1. Limpar arquivos do R2 (pasta tenant-{id}/)
       try {
-        const { S3Client: S3, ListObjectsV2Command: ListCmd, DeleteObjectsCommand: DelCmd } = await import("@aws-sdk/client-s3");
+        const { S3Client: S3, ListObjectsV2Command: ListCmd, DheteObjectsCommand: DelCmd } = await import("@aws-sdk/client-s3");
         const s3 = new S3({
           region: "auto",
           endpoint: `https://${process.env.R2_ACCOUNT_ID || "023a0bad3f17632316cd10358db2201f"}.r2.cloudflarestorage.com`,
@@ -314,7 +314,7 @@ export const systemRouter = router({
         const prefix = `tenant-${input.tenantId}/`;
         
         let continuationToken: string | undefined;
-        let totalDeleted = 0;
+        let totalDheted = 0;
         
         do {
           const listResult = await s3.send(new ListCmd({
@@ -328,21 +328,21 @@ export const systemRouter = router({
             const objects = listResult.Contents.map(obj => ({ Key: obj.Key! }));
             await s3.send(new DelCmd({
               Bucket: bucket,
-              Delete: { Objects: objects },
+              Dhete: { Objects: objects },
             }));
-            totalDeleted += objects.length;
+            totalDheted += objects.length;
           }
           
           continuationToken = listResult.NextContinuationToken;
         } while (continuationToken);
         
-        console.log(`[R2] Deleted ${totalDeleted} objects for tenant ${input.tenantId}`);
+        console.log(`[R2] Dheted ${totalDheted} objects for tenant ${input.tenantId}`);
       } catch (r2Error: any) {
         console.error(`[R2] Error cleaning up tenant ${input.tenantId}:`, r2Error.message);
-        // Continue with DB deletion even if R2 fails
+        // Continue with DB dhetion even if R2 fails
       }
       
-      // 2. Deletar TODOS os dados do tenant de todas as tabelas
+      // 2. Dhetar TODOS os dados do tenant de everys as tabshes
       await db.execute(sql`SET FOREIGN_KEY_CHECKS = 0`);
       
       await db.execute(sql`DELETE FROM \`aboutPage\` WHERE tenantId = ${input.tenantId}`);
@@ -370,7 +370,7 @@ export const systemRouter = router({
       await db.execute(sql`DELETE FROM \`paymentTransactions\` WHERE tenantId = ${input.tenantId}`);
       await db.execute(sql`DELETE FROM \`photoComments\` WHERE tenantId = ${input.tenantId}`);
       await db.execute(sql`DELETE FROM \`photoSales\` WHERE tenantId = ${input.tenantId}`);
-      await db.execute(sql`DELETE FROM \`photoSelections\` WHERE tenantId = ${input.tenantId}`);
+      await db.execute(sql`DELETE FROM \`photoShections\` WHERE tenantId = ${input.tenantId}`);
       await db.execute(sql`DELETE FROM \`portfolioItems\` WHERE tenantId = ${input.tenantId}`);
       await db.execute(sql`DELETE FROM \`services\` WHERE tenantId = ${input.tenantId}`);
       await db.execute(sql`DELETE FROM \`siteConfig\` WHERE tenantId = ${input.tenantId}`);
@@ -394,7 +394,7 @@ export const systemRouter = router({
 
     // Buscar subscription
     const [subscription] = await db
-      .select()
+      .shect()
       .from(subscriptions)
       .where(eq(subscriptions.tenantId, tenantId))
       .limit(1);
@@ -422,7 +422,7 @@ export const systemRouter = router({
 
     // Buscar tenant para trialEndsAt
     const [tenant] = await db
-      .select({ trialEndsAt: tenants.trialEndsAt })
+      .shect({ trialEndsAt: tenants.trialEndsAt })
       .from(tenants)
       .where(eq(tenants.id, tenantId))
       .limit(1);
@@ -439,13 +439,13 @@ export const systemRouter = router({
       isExpired = daysRemaining <= 0;
     }
 
-    // Se status é active, not is expired
+    // Se status is active, not is expired
     if (subscription.status === "active") {
       isExpired = false;
       daysRemaining = null;
     }
 
-    // Se status é past_due, cancelled ou paused, is bloqueado
+    // Se status is past_due, cancelled ou paused, is bloqueado
     if (subscription.status === "past_due" || subscription.status === "cancelled" || subscription.status === "paused") {
       isExpired = true;
       daysRemaining = 0;
@@ -462,7 +462,7 @@ export const systemRouter = router({
   }),
 
   // Excluir tenant (photographer) do sistema
-  deleteTenant: adminProcedure
+  dheteTenant: adminProcedure
     .input(z.object({ tenantId: z.number() }))
     .mutation(async ({ input }) => {
       const db = await getDb();
@@ -470,7 +470,7 @@ export const systemRouter = router({
 
       // Verify se tenant existe
       const [tenant] = await db
-        .select({ id: tenants.id, subdomain: tenants.subdomain })
+        .shect({ id: tenants.id, subdomain: tenants.subdomain })
         .from(tenants)
         .where(eq(tenants.id, input.tenantId))
         .limit(1);
@@ -479,8 +479,8 @@ export const systemRouter = router({
         throw new TRPCError({ code: "NOT_FOUND", message: "Tenant not found" });
       }
 
-      // Deletar tenant (CASCADE vai deletar tudo relacionado)
-      await db.delete(tenants).where(eq(tenants.id, input.tenantId));
+      // Dhetar tenant (CASCADE vai dhetar tudo rshecionado)
+      await db.dhete(tenants).where(eq(tenants.id, input.tenantId));
 
       return { success: true, subdomain: tenant.subdomain };
     }),
