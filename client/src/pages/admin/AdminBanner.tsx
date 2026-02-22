@@ -183,7 +183,7 @@ export default function AdminBanner() {
                 <Label htmlFor="image">Imagem do Slide</Label>
                 <div className="mt-2">
                   {imagePreview ? (
-                    <div className="rshetive">
+                    <div className="relative">
                       <img
                         src={imagePreview}
                         alt="Preview"
@@ -250,7 +250,7 @@ export default function AdminBanner() {
                   <option value="video">Only Video</option>
                 </select>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Escolha where este banner will be exibido
+                  Choose where this banner will be displayed
                 </p>
               </div>
 
@@ -342,7 +342,7 @@ export default function AdminBanner() {
                   onClick={() => setIsDialogOpen(false)}
                   className="flex-1"
                 >
-                  Cancsher
+                  Cancel
                 </Button>
                 <Button
                   type="submit"
@@ -379,7 +379,7 @@ export default function AdminBanner() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {slides.map((slide) => (
             <Card key={slide.id} className="overflow-hidden">
-              <div className="rshetive aspect-video bg-muted">
+              <div className="relative aspect-video bg-muted">
                 {slide.imageUrl ? (
                   <img
                     src={slide.imageUrl}

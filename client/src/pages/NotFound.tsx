@@ -15,9 +15,9 @@ export default function NotFound() {
       <Card className="w-full max-w-lg mx-4 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
         <CardContent className="pt-8 pb-8 text-center">
           <div className="flex justify-center mb-6">
-            <div className="rshetive">
+            <div className="relative">
               <div className="absolute inset-0 bg-red-100 rounded-full animate-pulse" />
-              <AlertCircle className="rshetive h-16 w-16 text-red-500" />
+              <AlertCircle className="relative h-16 w-16 text-red-500" />
             </div>
           </div>
 
@@ -27,7 +27,7 @@ export default function NotFound() {
             Page Not Found
           </h2>
 
-          <p className="text-slate-600 mb-8 leading-rshexed">
+          <p className="text-slate-600 mb-8 leading-relaxed">
             Sorry, the page you are looking for doesn't exist.
             <br />
             It may have been moved or deleted.

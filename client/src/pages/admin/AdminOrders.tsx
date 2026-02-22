@@ -65,7 +65,7 @@ export default function AdminOrders() {
     if (!method) return null;
     const methods: Record<string, { label: string; icon: any; className: string }> = {
       pix: { label: "Bank transfer", icon: QrCode, className: "bg-green-500/10 text-green-500" },
-      payment_link: { label: "Link de Pagamento", icon: Link2, className: "bg-purple-500/10 text-purple-500" },
+      payment_link: { label: "Payment Link", icon: Link2, className: "bg-purple-500/10 text-purple-500" },
       bank_transfer: { label: "Bank transfer", icon: Building2, className: "bg-blue-500/10 text-blue-500" },
     };
     const m = methods[method];
@@ -102,7 +102,7 @@ export default function AdminOrders() {
         <div className="mb-8">
           <h1 className="text-3xl font-bold flex items-center gap-2 mb-2">
             <ShoppingCart className="w-8 h-8" />
-            Pedidos
+            Orders
             {pendingCount > 0 && (
               <Badge className="bg-yellow-500/10 text-yellow-500 ml-2">
                 {pendingCount} pending{pendingCount > 1 ? "s" : ""}
@@ -137,7 +137,7 @@ export default function AdminOrders() {
         {/* Orders List */}
         {isLoading ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Carregando pedidos...</p>
+            <p className="text-muted-foreground">Loading orders...</p>
           </div>
         ) : filteredOrders && filteredOrders.length > 0 ? (
           <div className="space-y-4">
@@ -187,7 +187,7 @@ export default function AdminOrders() {
                     <div className="bg-purple-500/5 border border-purple-500/20 rounded-lg p-4 mb-4">
                       <p className="text-sm font-medium mb-2 flex items-center gap-2">
                         <Link2 className="w-4 h-4 text-purple-500" />
-                        Link de Pagamento
+                        Payment Link
                       </p>
                       {order.paymentLink ? (
                         <div className="flex items-center gap-2">
@@ -246,7 +246,7 @@ export default function AdminOrders() {
                           className="bg-green-600 hover:bg-green-700"
                         >
                           <DollarSign className="w-4 h-4 mr-1" />
-                          Confirmar Pagamento
+                          Confirm Payment
                         </Button>
                         <Button
                           size="sm"
@@ -256,7 +256,7 @@ export default function AdminOrders() {
                           }
                         >
                           <X className="w-4 h-4 mr-1" />
-                          Cancsher
+                          Cancel
                         </Button>
                       </>
                     )}

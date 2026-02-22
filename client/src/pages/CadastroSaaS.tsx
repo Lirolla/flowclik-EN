@@ -37,7 +37,7 @@ export default function CadastroSaaS() {
       const result = await utils.client.saasSystem.checkSubdomain.query({ subdomain });
       setSubdomainCheck(result.available ? "available" : "taken");
     } catch (err) {
-      console.error('Erro ao verify subdomain:', err);
+      console.error('Error checking subdomain:', err);
       setSubdomainCheck("idle");
     }
   };
@@ -53,19 +53,19 @@ export default function CadastroSaaS() {
     e.preventDefault();
     setError("");
 
-    // Validações
+    // Validations
     if (!formData.name || !formData.email || !formData.password || !formData.subdomain) {
-      setError("Preencha everys os campos");
+      setError("Please fill in all fields");
       return;
     }
 
     if (formData.password.length < 6) {
-      setError("Senha must ter pelo menos 6 characters");
+      setError("Password must be at least 6 characters");
       return;
     }
 
     if (subdomainCheck !== "available") {
-      setError("Escolha um subdomain available");
+      setError("Please choose an available subdomain");
       return;
     }
 
@@ -77,10 +77,10 @@ export default function CadastroSaaS() {
         password: formData.password,
       });
 
-      // Sucesso! Redirecionar para o new site
+      // Success! Redirect to the new site
       window.location.href = result.url + '/admin';
     } catch (err: any) {
-      setError(err.message || "Erro ao criar conta. Try again.");
+      setError(err.message || "Error creating account. Please try again.");
     }
   };
 
@@ -92,7 +92,7 @@ export default function CadastroSaaS() {
           <Link href="/">
             <a className="inline-flex items-center gap-2 mb-6 text-zinc-400 hover:text-white transition">
               <ArrowLeft className="w-4 h-4" />
-              Voltar
+              Back
             </a>
           </Link>
           
@@ -103,18 +103,18 @@ export default function CadastroSaaS() {
             </span>
           </div>
           
-          <h1 className="text-3xl font-bold mb-2">Crie your conta</h1>
+          <h1 className="text-3xl font-bold mb-2">Create your account</h1>
           <p className="text-zinc-400">
-            7 free days · Canche when quiser
+            7 days free · Cancel anytime
           </p>
         </div>
 
         {/* Form */}
         <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-8">
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Nome */}
+            {/* Name */}
             <div>
-              <Label htmlFor="name">Nome complete</Label>
+              <Label htmlFor="name">Full name</Label>
               <Input
                 id="name"
                 type="text"
@@ -131,16 +131,16 @@ export default function CadastroSaaS() {
               <Input
                 id="email"
                 type="email"
-                placeholder="joao@email.com"
+                placeholder="john@email.com"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="mt-2"
               />
             </div>
 
-            {/* Senha */}
+            {/* Password */}
             <div>
-              <Label htmlFor="password">Senha</Label>
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -158,7 +158,7 @@ export default function CadastroSaaS() {
                 <Input
                   id="subdomain"
                   type="text"
-                  placeholder="joao"
+                  placeholder="john"
                   value={formData.subdomain}
                   onChange={(e) => handleSubdomainChange(e.target.value)}
                   className="flex-1"
@@ -182,15 +182,15 @@ export default function CadastroSaaS() {
               )}
               {subdomainCheck === "taken" && (
                 <p className="text-xs text-red-500 mt-1">
-                  ✗ Este subdomain already is em uso
+                  ✗ This subdomain is already taken
                 </p>
               )}
               <p className="text-xs text-zinc-500 mt-1">
-                Only letras, numbers and hyphen
+                Only letters, numbers and hyphens
               </p>
             </div>
 
-            {/* Erro */}
+            {/* Error */}
             {error && (
               <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
                 {error}
@@ -206,16 +206,16 @@ export default function CadastroSaaS() {
               {createTenantMutation.isPending ? (
                 <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Criando conta...
+                  Creating account...
                 </>
               ) : (
-                "Criar Conta Free"
+                "Create Free Account"
               )}
             </Button>
           </form>
 
           <div className="mt-6 text-center text-sm text-zinc-500">
-            Already tem uma conta?{" "}
+            Already have an account?{" "}
             <Link href="/login">
               <a className="text-purple-400 hover:text-purple-300">Sign in</a>
             </Link>
@@ -225,9 +225,9 @@ export default function CadastroSaaS() {
         {/* Benefits */}
         <div className="mt-8 space-y-3">
           {[
-            "Site profissional ready em minutes",
-            "7 days free to test tudo",
-            "Canche when quiser, sem burocracia",
+            "Professional website ready in minutes",
+            "7 days free to try everything",
+            "Cancel anytime, no hassle",
           ].map((benefit, i) => (
             <div key={i} className="flex items-center gap-3 text-sm text-zinc-400">
               <Check className="w-4 h-4 text-purple-400 flex-shrink-0" />

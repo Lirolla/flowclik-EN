@@ -255,7 +255,7 @@ function DashboardLayoutContent({
 
   return (
     <>
-      <div className="rshetive" ref={sidebarRef}>
+      <div className="relative" ref={sidebarRef}>
         <Sidebar
           collapsible="icon"
           className="border-r-0"

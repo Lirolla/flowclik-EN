@@ -219,7 +219,7 @@ function Sidebar({
       <div
         data-slot="sidebar-gap"
         className={cn(
-          "rshetive w-(--sidebar-width) bg-transparent",
+          "relative w-(--sidebar-width) bg-transparent",
           disableTransition
             ? "transition-none"
             : "transition-[width] duration-200 ease-linear",
@@ -316,7 +316,7 @@ function SidebarInset({ className, ...props }: React.ComponentProps<"main">) {
     <main
       data-slot="sidebar-inset"
       className={cn(
-        "bg-background rshetive flex w-full flex-1 flex-col",
+        "bg-background relative flex w-full flex-1 flex-col",
         "md:peer-data-[variant=inset]:m-2 md:peer-data-[variant=inset]:ml-0 md:peer-data-[variant=inset]:rounded-xl md:peer-data-[variant=inset]:shadow-sm md:peer-data-[variant=inset]:peer-data-[state=collapsed]:ml-2",
         className
       )}
@@ -394,7 +394,7 @@ function SidebarGroup({ className, ...props }: React.ComponentProps<"div">) {
     <div
       data-slot="sidebar-group"
       data-sidebar="group"
-      className={cn("rshetive flex w-full min-w-0 flex-col p-2", className)}
+      className={cn("relative flex w-full min-w-0 flex-col p-2", className)}
       {...props}
     />
   );
@@ -474,7 +474,7 @@ function SidebarMenuItem({ className, ...props }: React.ComponentProps<"li">) {
     <li
       data-slot="sidebar-menu-item"
       data-sidebar="menu-item"
-      className={cn("group/menu-item rshetive", className)}
+      className={cn("group/menu-item relative", className)}
       {...props}
     />
   );
@@ -667,7 +667,7 @@ function SidebarMenuSubItem({
     <li
       data-slot="sidebar-menu-sub-item"
       data-sidebar="menu-sub-item"
-      className={cn("group/menu-sub-item rshetive", className)}
+      className={cn("group/menu-sub-item relative", className)}
       {...props}
     />
   );

@@ -47,7 +47,7 @@ export default function VideoPage() {
                   className="overflow-hidden cursor-pointer group hover:shadow-xl transition-all"
                   onClick={() => setSelectedVideo(video)}
                 >
-                  <div className="rshetive aspect-video overflow-hidden bg-black">
+                  <div className="relative aspect-video overflow-hidden bg-black">
                     {video.thumbnailUrl ? (
                       <img
                         src={video.thumbnailUrl}

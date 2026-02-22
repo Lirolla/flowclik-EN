@@ -113,7 +113,7 @@ export default function AdminDomainEmail() {
   // Handler: Salvar Configuration de Email
   const handleSaveEmail = async () => {
     if (!emailSender || !resendApiKey) {
-      toast.error("Preencha everys os campos");
+      toast.error("Please fill in all fields");
       return;
     }
     try {
@@ -211,7 +211,7 @@ export default function AdminDomainEmail() {
               </p>
             </div>
 
-            {/* Lista de Subscriptions Cadastrados */}
+            {/* Lista de Registered Domains */}
             {domains && domains.length > 0 ? (
               <div className="space-y-4">
                 {domains.map((d: any) => (

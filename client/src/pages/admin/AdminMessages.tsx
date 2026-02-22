@@ -14,14 +14,14 @@ export default function AdminMessages() {
   const [isNewConversationModalOpen, setIsNewConversationModalOpen] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Buscar conversas do photographer (agendamentos com messages)
+  // Fetch photographer conversations (agendamentos com messages)
   const { data: conversations, isLoading: loadingConversations, refetch: refetchConversations } = 
     trpc.clientChat.getAllConversations.useQuery();
 
-  // Buscar everys os agendamentos para criar new conversa
+  // Fetch all bookings para criar new conversa
   const { data: allAppointments } = trpc.appointments.getAll.useQuery();
 
-  // Buscar messages da conversa shecionada
+  // Fetch messages from selected conversation
   const { data: messages, isLoading: loadingMessages, refetch: refetchMessages } = 
     trpc.clientChat.getMessages.useQuery(
       { appointmentId: selectedAppointmentId! },
@@ -142,7 +142,7 @@ export default function AdminMessages() {
                 ) : (
                   <div className="flex flex-col items-center justify-center py-12 text-center">
                     <MessageSquare className="w-12 h-12 text-muted-foreground mb-3" />
-                    <p className="text-sm text-muted-foreground">Nenhuma conversa still</p>
+                    <p className="text-sm text-muted-foreground">No conversations yet</p>
                     <p className="text-xs text-muted-foreground mt-2">
                       Conversations will appear here when clients send messages
                     </p>
@@ -172,7 +172,7 @@ export default function AdminMessages() {
                   <div className="flex-1 overflow-y-auto space-y-3 mb-4">
                     {loadingMessages ? (
                       <p className="text-sm text-muted-foreground text-center py-8">
-                        Carregando messages...
+                        Loading messages...
                       </p>
                     ) : messages && messages.length > 0 ? (
                       <>
@@ -206,7 +206,7 @@ export default function AdminMessages() {
                       </>
                     ) : (
                       <p className="text-sm text-muted-foreground text-center py-8">
-                        Nenhuma message still. Envie a first!
+                        No messages yet. Send the first one!
                       </p>
                     )}
                   </div>

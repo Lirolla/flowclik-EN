@@ -216,7 +216,7 @@ export default function ClientGalleryAuth() {
             return (
               <Card
                 key={photo.id}
-                className="bg-gray-900 border-gray-800 overflow-hidden group rshetive cursor-pointer"
+                className="bg-gray-900 border-gray-800 overflow-hidden group relative cursor-pointer"
                 onClick={() => setSelectedPhoto(photo)}
               >
                 {canDownload ? (
@@ -302,7 +302,7 @@ export default function ClientGalleryAuth() {
 
             <div className="space-y-4">
               {/* Photo */}
-              <div className="rshetive">
+              <div className="relative">
                 {selectedPhoto && (
                   canDownload ? (
                     <img

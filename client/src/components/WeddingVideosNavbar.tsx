@@ -85,7 +85,7 @@ export default function WeddingVideosNavbar({ currentPage }: WeddingVideosNavbar
                 </Link>
               ))}
               
-              {/* Buttons Cliente e Carrinho */}
+              {/* Buttons Cliente e Cart */}
               <Link href="/client-access">
                 <a className="px-4 py-2 bg-[#C9A961] text-white text-xs font-light tracking-widest hover:bg-[#D4AF37] transition-colors flex items-center gap-2">
                   <User className="w-4 h-4" />
@@ -95,7 +95,7 @@ export default function WeddingVideosNavbar({ currentPage }: WeddingVideosNavbar
               <Link href="/cart">
                 <a className="px-4 py-2 bg-[#C9A961] text-white text-xs font-light tracking-widest hover:bg-[#D4AF37] transition-colors flex items-center gap-2">
                   <ShoppingCart className="w-4 h-4" />
-                  Carrinho
+                  Cart
                 </a>
               </Link>
             </div>
@@ -148,7 +148,7 @@ export default function WeddingVideosNavbar({ currentPage }: WeddingVideosNavbar
                   className="flex items-center justify-center gap-2 w-full py-3 px-6 bg-[#C9A961] text-white text-sm font-light tracking-widest hover:bg-[#D4AF37] transition-colors"
                 >
                   <ShoppingCart className="w-4 h-4" />
-                  Carrinho
+                  Cart
                 </a>
               </Link>
             </div>

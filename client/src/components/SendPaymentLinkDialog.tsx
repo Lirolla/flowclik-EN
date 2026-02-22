@@ -29,19 +29,19 @@ export default function SendPaymentLinkDialog({
       navigator.clipboard.writeText(paymentLink);
       toast({
         title: "Link copied!",
-        description: "O link de pagamento foi copiado para a area de transfer.",
+        description: "The payment link has been copied to your clipboard.",
       });
     }
   };
 
   const handleCopyWhatsApp = () => {
     const whatsappText = message || 
-      `Hello ${appointment.clientName}! 😊\n\nMonue o link para pagamento da your photo session:\n\n💰 Valor: ${formatCurrency(appointment.finalPrice)}\n🔗 Link: ${paymentLink}\n\nWedlquer question, I am at your disposal!`;
+      `Hello ${appointment.clientName}!\n\nHere is the payment link for your photo session:\n\n Amount: ${formatCurrency(appointment.finalPrice)}\n Link: ${paymentLink}\n\nIf you have any questions, please don't hesitate to ask!`;
     
     navigator.clipboard.writeText(whatsappText);
     toast({
-      title: "Message copiada!",
-      description: "A message com o link foi copiada. Cole no WhatsApp para enviar ao cliente.",
+      title: "Message copied!",
+      description: "The message with the link has been copied. Paste it in WhatsApp to send to the client.",
     });
   };
 
@@ -59,7 +59,7 @@ export default function SendPaymentLinkDialog({
 
   if (!appointment) return null;
 
-  const defaultMessage = `Hello ${appointment.clientName}! 😊\n\nMonue o link para pagamento da your photo session:\n\n💰 Valor: ${formatCurrency(appointment.finalPrice)}\n🔗 Link: ${paymentLink || "[cole o link here]"}\n\nWedlquer question, I am at your disposal!`;
+  const defaultMessage = `Hello ${appointment.clientName}!\n\nHere is the payment link for your photo session:\n\n Amount: ${formatCurrency(appointment.finalPrice)}\n Link: ${paymentLink || "[paste the link here]"}\n\nIf you have any questions, please don't hesitate to ask!`;
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
@@ -67,37 +67,37 @@ export default function SendPaymentLinkDialog({
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             <Link2 className="w-5 h-5" />
-            Enviar Link de Pagamento
+            Send Payment Link
           </DialogTitle>
           <DialogDescription>
-            Cliente: {appointment.clientName} | Valor: {formatCurrency(appointment.finalPrice)}
+            Client: {appointment.clientName} | Amount: {formatCurrency(appointment.finalPrice)}
           </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4 py-4">
-          {/* Passo 1: Colar o link */}
+          {/* Step 1: Paste the link */}
           <div className="space-y-2">
             <Label htmlFor="payment-link" className="flex items-center gap-2">
               <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs">1</span>
-              Cole o link de pagamento
+              Paste the payment link
             </Label>
             <Input
               id="payment-link"
               type="url"
-              placeholder="https://checkout.stripe.com/... ou https://mpago.la/..."
+              placeholder="https://checkout.stripe.com/..."
               value={paymentLink}
               onChange={(e) => setPaymentLink(e.target.value)}
             />
             <p className="text-xs text-muted-foreground">
-              Gere o link no your gateway de pagamento (Stripe, PagMonuro, Mercado Pago, PicPay, etc.) e cole here.
+              Generate the link in your payment gateway (Stripe, PayPal, etc.) and paste it here.
             </p>
           </div>
 
-          {/* Passo 2: Message custom */}
+          {/* Step 2: Custom message */}
           <div className="space-y-2">
             <Label htmlFor="payment-message" className="flex items-center gap-2">
               <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs">2</span>
-              Message para o cliente (optional)
+              Message to the client (optional)
             </Label>
             <Textarea
               id="payment-message"
@@ -107,22 +107,22 @@ export default function SendPaymentLinkDialog({
               rows={5}
             />
             <p className="text-xs text-muted-foreground">
-              Personalize a message ou use o modelo default.
+              Customise the message or use the default template.
             </p>
           </div>
 
-          {/* Dica informativa */}
+          {/* Info tip */}
           <div className="bg-blue-50 dark:bg-blue-950 rounded-lg p-4 space-y-2">
-            <p className="text-sm font-medium text-blue-900 dark:text-blue-100">💡 Como works:</p>
+            <p className="text-sm font-medium text-blue-900 dark:text-blue-100">How it works:</p>
             <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1 list-disc list-inside">
-              <li>Gere um link de pagamento no your gateway preferido</li>
-              <li>Cole o link above e copie a message</li>
-              <li>Envie para o cliente via WhatsApp ou e-mail</li>
-              <li>After o pagamento, registre manualmente no sistema</li>
+              <li>Generate a payment link in your preferred gateway</li>
+              <li>Paste the link above and copy the message</li>
+              <li>Send it to the client via WhatsApp or email</li>
+              <li>After payment, record it manually in the system</li>
             </ul>
           </div>
 
-          {/* Buttons de ação */}
+          {/* Action buttons */}
           <div className="flex flex-col gap-2 pt-2">
             {paymentLink && (
               <>
@@ -133,7 +133,7 @@ export default function SendPaymentLinkDialog({
                     className="flex-1"
                   >
                     <Copy className="w-4 h-4 mr-2" />
-                    Copiar Link
+                    Copy Link
                   </Button>
                   <Button 
                     onClick={handleOpenLink}
@@ -141,7 +141,7 @@ export default function SendPaymentLinkDialog({
                     className="flex-1"
                   >
                     <ExternalLink className="w-4 h-4 mr-2" />
-                    Abrir Link
+                    Open Link
                   </Button>
                 </div>
                 <Button 
@@ -149,12 +149,12 @@ export default function SendPaymentLinkDialog({
                   className="w-full bg-green-600 hover:bg-green-700"
                 >
                   <Send className="w-4 h-4 mr-2" />
-                  Copiar Message para WhatsApp
+                  Copy Message for WhatsApp
                 </Button>
               </>
             )}
             <Button variant="outline" onClick={handleClose} className="w-full">
-              Fechar
+              Close
             </Button>
           </div>
         </div>

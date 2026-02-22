@@ -57,7 +57,7 @@ export default function HeroBanner({ filterBy }: HeroBannerProps = {}) {
 
   if (isLoading) {
     return (
-      <div className="rshetive w-full h-screen bg-muted animate-pulse">
+      <div className="relative w-full h-screen bg-muted animate-pulse">
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
             <div className="h-12 w-64 bg-muted-foreground/20 rounded mb-4 mx-auto"></div>
@@ -70,7 +70,7 @@ export default function HeroBanner({ filterBy }: HeroBannerProps = {}) {
 
   if (!slides || slides.length === 0) {
     return (
-      <div className="rshetive w-full h-screen bg-gradient-to-br from-background to-muted flex items-center justify-center">
+      <div className="relative w-full h-screen bg-gradient-to-br from-background to-muted flex items-center justify-center">
         <div className="text-center px-4">
           <h1 className="text-5xl md:text-7xl font-bold font-serif mb-4">
             FlowClik
@@ -86,7 +86,7 @@ export default function HeroBanner({ filterBy }: HeroBannerProps = {}) {
   const currentSlide = slides[currentIndex];
 
   return (
-    <div className="rshetive w-full h-screen overflow-hidden">
+    <div className="relative w-full h-screen overflow-hidden">
       {/* Slide Content */}
       {slides.map((slide, index) => (
         <div

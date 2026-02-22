@@ -224,14 +224,14 @@ function AdminStockContent() {
             <CardContent className="p-12 text-center">
               <ImageIcon className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
               <p className="text-muted-foreground">
-                Nenhuma foto no stock still. Make upload above!
+                No photos in stock yet. Upload above!
               </p>
             </CardContent>
           </Card>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {stockPhotos?.map((photo) => (
-              <Card key={photo.id} className="rshetive group">
+              <Card key={photo.id} className="relative group">
                 <CardContent className="p-2">
                   <div className="absolute top-1 right-1 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-10">
                     <Button
@@ -288,7 +288,7 @@ function AdminStockContent() {
           <div className="space-y-4">
             <div>
               <p className="text-sm text-muted-foreground mb-2">
-                {selectedFiles.length} arquivo(s) shecionado(s)
+                {selectedFiles.length} file(s) selected
               </p>
             </div>
 
@@ -361,7 +361,7 @@ function AdminStockContent() {
                   resetForm();
                 }}
               >
-                Cancsher
+                Cancel
               </Button>
             </div>
           </div>
@@ -455,7 +455,7 @@ function AdminStockContent() {
                   resetForm();
                 }}
               >
-                Cancsher
+                Cancel
               </Button>
             </div>
           </div>

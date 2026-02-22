@@ -18,7 +18,7 @@ export default function Login() {
     setIsLoading(true);
 
     try {
-      // Usar fetch direto em vez de tRPC para evitar problemas de header
+      // Use fetch directly instead of tRPC to avoid header issues
       const response = await fetch('/api/trpc/customAuth.login', {
         method: 'POST',
         headers: {
@@ -32,29 +32,29 @@ export default function Login() {
       const data = await response.json();
       
       if (!response.ok || data.error) {
-        toast.error(data.error?.message || "Email ou senha incorretos");
+        toast.error(data.error?.message || "Incorrect email or password");
         setIsLoading(false);
         return;
       }
 
-      // Pegar o token da resposta
+      // Get the token from the response
       const token = data?.result?.data?.json?.token;
       const userName = data?.result?.data?.json?.user?.name || "User";
       
       if (token) {
-        // Salvar o token no localStorage
+        // Save the token to localStorage
         localStorage.setItem(AUTH_TOKEN_KEY, token);
-        toast.success(`Bem-vindo, ${userName}!`);
+        toast.success(`Welcome, ${userName}!`);
         
-        // Usar window.location to force complete reload (igual ao /system/login)
+        // Use window.location to force complete reload
         window.location.href = "/admin";
       } else {
-        toast.error("Erro ao fazer login. Try again.");
+        toast.error("Login failed. Please try again.");
         setIsLoading(false);
       }
     } catch (error) {
-      console.error("Erro no login:", error);
-      toast.error("Erro ao conectar com o servipain");
+      console.error("Login error:", error);
+      toast.error("Unable to connect to the server");
       setIsLoading(false);
     }
   };
@@ -64,7 +64,7 @@ export default function Login() {
       <Card className="w-full max-w-md p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-2">FlowClik</h1>
-          <p className="text-muted-foreground">Sign in na your conta</p>
+          <p className="text-muted-foreground">Sign in to your account</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -81,7 +81,7 @@ export default function Login() {
           </div>
 
           <div>
-            <Label htmlFor="password">Senha</Label>
+            <Label htmlFor="password">Password</Label>
             <Input
               id="password"
               type="password"
@@ -98,15 +98,15 @@ export default function Login() {
             disabled={isLoading}
           >
             <LogIn className="h-4 w-4 mr-2" />
-            {isLoading ? "Entrando..." : "Sign in"}
+            {isLoading ? "Signing in..." : "Sign in"}
           </Button>
         </form>
 
         <div className="mt-6 text-center text-sm text-muted-foreground">
           <p>
-            Not tem uma conta?{" "}
+            Don't have an account?{" "}
             <a href="/register" className="text-primary hover:underline">
-              Cadastre-se
+              Sign up
             </a>
           </p>
         </div>

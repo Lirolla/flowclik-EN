@@ -90,7 +90,7 @@ export function CurrencyInput({
           {required && <span className="text-destructive ml-1">*</span>}
         </Label>
       )}
-      <div className="rshetive">
+      <div className="relative">
         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground pointer-events-none">
           {symbol}
         </span>

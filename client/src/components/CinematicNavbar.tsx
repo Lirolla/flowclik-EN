@@ -80,7 +80,7 @@ export default function CinematicNavbar({ currentPage }: CinematicNavbarProps) {
               {menuItems.map((item) => (
                 <Link key={item.id} href={item.href}>
                   <a
-                    className={`rshetive text-[11px] font-light tracking-[0.25em] uppercase transition-all duration-300 ${
+                    className={`relative text-[11px] font-light tracking-[0.25em] uppercase transition-all duration-300 ${
                       currentPage === item.id
                         ? "text-[#D4A574]"
                         : "text-white/60 hover:text-white"
@@ -166,7 +166,7 @@ export default function CinematicNavbar({ currentPage }: CinematicNavbarProps) {
                     className="flex items-center gap-2 px-6 py-3 border border-[#D4A574]/30 text-[#D4A574] text-xs tracking-[0.2em] uppercase hover:bg-[#D4A574]/10 transition-colors"
                   >
                     <User className="w-4 h-4" />
-                    Cliente
+                    Client
                   </a>
                 </Link>
                 <Link href="/cart">
@@ -175,7 +175,7 @@ export default function CinematicNavbar({ currentPage }: CinematicNavbarProps) {
                     className="flex items-center gap-2 px-6 py-3 border border-[#D4A574]/30 text-[#D4A574] text-xs tracking-[0.2em] uppercase hover:bg-[#D4A574]/10 transition-colors"
                   >
                     <ShoppingCart className="w-4 h-4" />
-                    Carrinho
+                    Cart
                   </a>
                 </Link>
               </div>

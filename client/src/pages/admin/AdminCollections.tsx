@@ -297,7 +297,7 @@ function AdminCollectionsContent() {
                   )}
                 </div>
                 {formData.coverImageUrl && (
-                  <div className="rshetive w-full aspect-video rounded overflow-hidden bg-muted">
+                  <div className="relative w-full aspect-video rounded overflow-hidden bg-muted">
                     <img
                       src={formData.coverImageUrl}
                       alt="Preview"
@@ -383,7 +383,7 @@ function AdminCollectionsContent() {
                   }}
                   className="flex-1"
                 >
-                  Cancsher
+                  Cancel
                 </Button>
                 <Button onClick={handleSubmit} className="flex-1">
                   {editingId ? "Update" : "Create"}
@@ -503,7 +503,7 @@ function AdminCollectionsContent() {
         <Card>
           <CardContent className="py-12 text-center">
             <FolderOpen className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold mb-2">Nenhuma galeria criada</h3>
+            <h3 className="text-xl font-semibold mb-2">No galleries created</h3>
             <p className="text-muted-foreground mb-4">
               Crie your first galeria para organizar fotos e videos
             </p>

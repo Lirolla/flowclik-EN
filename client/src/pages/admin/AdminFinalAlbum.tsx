@@ -113,7 +113,7 @@ export default function AdminFinalAlbum() {
       <Link href="/admin/appointments">
         <Button variant="ghost" className="mb-4">
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Voltar para Agendamentos
+          Back to Bookings
         </Button>
       </Link>
 
@@ -129,7 +129,7 @@ export default function AdminFinalAlbum() {
         <div className="text-center">
           <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
           <h3 className="text-lg font-semibold mb-2">
-            Enviar Fotos Final Editadas
+            Upload Final Edited Photos
           </h3>
           <p className="text-sm text-muted-foreground mb-4">
             Arraste fotos here or click to select
@@ -165,7 +165,7 @@ export default function AdminFinalAlbum() {
           {finalPhotos.map((photo: any) => (
             <div
               key={photo.id}
-              className="rshetive aspect-square overflow-hidden rounded-lg group bg-muted"
+              className="relative aspect-square overflow-hidden rounded-lg group bg-muted"
             >
               <img
                 src={photo.photoUrl}
@@ -191,7 +191,7 @@ export default function AdminFinalAlbum() {
       ) : (
         <div className="text-center py-12 bg-card rounded-lg border">
           <p className="text-muted-foreground">
-            Nenhuma foto no album final still. Make upload das fotos edited above.
+            No photos in the final album yet. Upload the edited photos above.
           </p>
         </div>
       )}

@@ -72,7 +72,7 @@ export default function ClienteAcesso() {
               <label htmlFor="email" className="block text-sm font-medium mb-2">
                 Email
               </label>
-              <div className="rshetive">
+              <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <Input
                   id="email"
@@ -93,7 +93,7 @@ export default function ClienteAcesso() {
               <label htmlFor="password" className="block text-sm font-medium mb-2">
                 Senha
               </label>
-              <div className="rshetive">
+              <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                 <Input
                   id="password"

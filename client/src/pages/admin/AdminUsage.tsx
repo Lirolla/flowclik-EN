@@ -207,11 +207,11 @@ export default function AdminUsage() {
 
           <div className="grid gap-3 sm:grid-cols-2">
             <Button variant="outline" className="w-full" onClick={() => navigate("/admin/subscription")}>
-              Comprar +10GB
+              Buy +10GB
               <span className="ml-auto text-muted-foreground">£3.99/month</span>
             </Button>
             <Button variant="outline" className="w-full" onClick={() => navigate("/admin/subscription")}>
-              Comprar +10 Gallerys
+              Buy +10 Galleries
               <span className="ml-auto text-muted-foreground">£2.99/month</span>
             </Button>
           </div>

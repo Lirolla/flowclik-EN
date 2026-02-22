@@ -115,7 +115,7 @@ export default function AdminContact() {
               </div>
 
               <div>
-                <Label htmlFor="phone">Telefone</Label>
+                <Label htmlFor="phone">Phone</Label>
                 <Input
                   id="phone"
                   value={formData.phone}
@@ -333,7 +333,7 @@ export default function AdminContact() {
             ) : (
               <>
                 <Save className="mr-2 h-4 w-4" />
-                Salvar Changes
+                Save Changes
               </>
             )}
           </Button>

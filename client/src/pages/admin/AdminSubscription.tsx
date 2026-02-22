@@ -24,16 +24,16 @@ export default function AdminSubscription() {
   const [cancelingAddonId, setCancelingAddonId] = useState<number | null>(null);
   const [showCancelAddonDialog, setShowCancelAddonDialog] = useState<{id: number, type: string} | null>(null);
 
-  // Buscar signature current
+  // Fetch current subscription
   const { data: subscription, isLoading: loadingSubscription } = trpc.subscriptions.getCurrent.useQuery();
   
-  // Buscar status do trial
+  // Fetch trial status
   const { data: trialStatus } = trpc.subscriptions.checkTrialStatus.useQuery();
 
-  // Buscar add-ons actives
+  // Fetch active add-ons
   const { data: activeAddons } = trpc.subscriptions.getActiveAddons.useQuery();
 
-  // Buscar statistics de uso
+  // Fetch usage statistics
   const { data: usage } = trpc.usage.getUsage.useQuery();
 
   // Mutations
@@ -90,7 +90,7 @@ export default function AdminSubscription() {
     }
   };
 
-  // Handler: Comprar add-on de storage
+  // Handler: Buy storage add-on
   const handleBuyStorage = async () => {
     setIsLoading(true);
     try {
@@ -107,7 +107,7 @@ export default function AdminSubscription() {
     }
   };
 
-  // Handler: Comprar add-on de galerias
+  // Handler: Buy galleries add-on
   const handleBuyGalleries = async () => {
     setIsLoading(true);
     try {
@@ -124,7 +124,7 @@ export default function AdminSubscription() {
     }
   };
 
-  // Handler: Cancsher add-on individual
+  // Handler: Cancel add-on individual
   const handleCancelAddon = async (addonId: number) => {
     setCancelingAddonId(addonId);
     try {
@@ -160,7 +160,7 @@ export default function AdminSubscription() {
       utils.subscriptions.getCurrent.invalidate();
       window.history.replaceState({}, '', '/admin/subscription');
     } else if (params.get('canched') === 'true') {
-      toast.error("Compra cancsheda");
+      toast.error("Purchase cancelled");
       window.history.replaceState({}, '', '/admin/subscription');
     }
   }, []);
@@ -498,7 +498,7 @@ export default function AdminSubscription() {
                           ) : (
                             <>
                               <XCircle className="w-4 h-4 mr-1" />
-                              Cancsher
+                              Cancel
                             </>
                           )}
                         </Button>
@@ -625,7 +625,7 @@ export default function AdminSubscription() {
       <AlertDialog open={showCancelAddonDialog !== null} onOpenChange={() => setShowCancelAddonDialog(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Cancsher Add-on</AlertDialogTitle>
+            <AlertDialogTitle>Cancel Add-on</AlertDialogTitle>
             <AlertDialogDescription>
               {showCancelAddonDialog?.type === 'storage' 
                 ? "You is prestes a cancsher um add-on de +10GB de storage. O add-will remain active until the end of the already paid period."
@@ -642,7 +642,7 @@ export default function AdminSubscription() {
               onClick={() => showCancelAddonDialog && handleCancelAddon(showCancelAddonDialog.id)}
               className="bg-red-600 hover:bg-red-700"
             >
-              Confirmar Cancellation
+              Confirm Cancellation
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

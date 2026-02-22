@@ -36,10 +36,10 @@ export default function Cart() {
       setStep("confirmation");
       setIsCheckingOut(false);
       clearCart();
-      toast.success("Pedido criado com sucesso!");
+      toast.success("Order placed successfully!");
     },
     onError: (error) => {
-      toast.error(`Erro: ${error.message}`);
+      toast.error(`Error: ${error.message}`);
       setIsCheckingOut(false);
     },
   });
@@ -54,15 +54,15 @@ export default function Cart() {
 
   const handleConfirmOrder = () => {
     if (!customerName.trim()) {
-      toast.error("Informe your nome");
+      toast.error("Please enter your name");
       return;
     }
     if (!customerEmail.trim() || !customerEmail.includes("@")) {
-      toast.error("Informe um e-mail valid");
+      toast.error("Please enter a valid email address");
       return;
     }
     if (!selectedMethod) {
-      toast.error("Select uma forma de pagamento");
+      toast.error("Please select a payment method");
       return;
     }
 
@@ -84,7 +84,7 @@ export default function Cart() {
     if (paymentConfig?.paymentPixKey) {
       navigator.clipboard.writeText(paymentConfig.paymentPixKey);
       setPixCopied(true);
-      toast.success("Key PIX copiada!");
+      toast.success("Payment key copied!");
       setTimeout(() => setPixCopied(false), 3000);
     }
   };
@@ -99,13 +99,13 @@ export default function Cart() {
               <Card>
                 <CardContent className="p-12">
                   <ShoppingCart className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
-                  <h2 className="text-2xl font-bold mb-2">Carrinho Vazio</h2>
+                  <h2 className="text-2xl font-bold mb-2">Your Cart is Empty</h2>
                   <p className="text-muted-foreground mb-6">
-                    You still not adicionou nonea foto ao carrinho.
+                    You haven't added any photos to your cart yet.
                   </p>
                   <Button onClick={() => setLocation(SITE_ROUTES.stockPhotos())}>
                     <ArrowLeft className="w-4 h-4 mr-2" />
-                    Ver Stock Photos
+                    Browse Stock Photos
                   </Button>
                 </CardContent>
               </Card>
@@ -129,9 +129,9 @@ export default function Cart() {
                     <div className="w-16 h-16 bg-green-500/10 rounded-full flex items-center justify-center mx-auto mb-4">
                       <Check className="w-8 h-8 text-green-500" />
                     </div>
-                    <h2 className="text-2xl font-bold mb-2">Pedido Criado!</h2>
+                    <h2 className="text-2xl font-bold mb-2">Order Placed!</h2>
                     <p className="text-muted-foreground">
-                      Order #{orderId} • Awaiting pagamento
+                      Order #{orderId} • Awaiting payment
                     </p>
                   </div>
 
@@ -140,10 +140,10 @@ export default function Cart() {
                     <div className="bg-green-500/5 border border-green-500/20 rounded-lg p-6 space-y-4">
                       <div className="flex items-center gap-2">
                         <QrCode className="w-5 h-5 text-green-500" />
-                        <h3 className="font-semibold text-green-500">Pagamento via PIX</h3>
+                        <h3 className="font-semibold text-green-500">Payment via PIX</h3>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground mb-2">Key PIX:</p>
+                        <p className="text-sm text-muted-foreground mb-2">PIX Key:</p>
                         <div className="flex items-center gap-2">
                           <code className="flex-1 bg-background px-3 py-2 rounded text-sm font-mono">
                             {paymentConfig.paymentPixKey}
@@ -154,11 +154,11 @@ export default function Cart() {
                         </div>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground mb-1">Valor:</p>
+                        <p className="text-sm text-muted-foreground mb-1">Amount:</p>
                         <p className="text-2xl font-bold text-green-500">{format(orderTotal)}</p>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        After realizar o pagamento, o photographer will confirmar e liberar o download das fotos.
+                        After completing the payment, the photographer will confirm and release the photos for download.
                       </p>
                     </div>
                   )}
@@ -173,11 +173,11 @@ export default function Cart() {
                         {paymentConfig.paymentBankTransferDetails}
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground mb-1">Valor:</p>
+                        <p className="text-sm text-muted-foreground mb-1">Amount:</p>
                         <p className="text-2xl font-bold text-blue-500">{format(orderTotal)}</p>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        After realizar a transfer, o photographer will confirmar e liberar o download das fotos.
+                        After completing the transfer, the photographer will confirm and release the photos for download.
                       </p>
                     </div>
                   )}
@@ -186,15 +186,15 @@ export default function Cart() {
                     <div className="bg-purple-500/5 border border-purple-500/20 rounded-lg p-6 space-y-4">
                       <div className="flex items-center gap-2">
                         <Link2 className="w-5 h-5 text-purple-500" />
-                        <h3 className="font-semibold text-purple-500">Link de Pagamento</h3>
+                        <h3 className="font-semibold text-purple-500">Payment Link</h3>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground mb-1">Valor:</p>
+                        <p className="text-sm text-muted-foreground mb-1">Amount:</p>
                         <p className="text-2xl font-bold text-purple-500">{format(orderTotal)}</p>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        O photographer will enviar um link de pagamento para o your e-mail ({customerEmail}). 
-                        After o pagamento, as fotos will be liberadas para download.
+                        The photographer will send a payment link to your email ({customerEmail}). 
+                        After payment, the photos will be released for download.
                       </p>
                     </div>
                   )}
@@ -202,7 +202,7 @@ export default function Cart() {
                   <div className="text-center pt-4">
                     <Button onClick={() => setLocation(SITE_ROUTES.stockPhotos())} variant="outline">
                       <ArrowLeft className="w-4 h-4 mr-2" />
-                      Voltar at Fotos
+                      Back to Photos
                     </Button>
                   </div>
                 </CardContent>
@@ -223,16 +223,16 @@ export default function Cart() {
             <div className="container mx-auto max-w-2xl">
               <Button variant="ghost" onClick={() => setStep("cart")} className="mb-6">
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Voltar ao Carrinho
+                Back to Cart
               </Button>
 
               <Card>
                 <CardContent className="p-6 space-y-6">
-                  <h2 className="text-2xl font-bold">Finalizar Compra</h2>
+                  <h2 className="text-2xl font-bold">Checkout</h2>
 
                   {/* Order Summary */}
                   <div className="bg-muted/50 rounded-lg p-4">
-                    <h3 className="font-semibold mb-2">Summary do Pedido</h3>
+                    <h3 className="font-semibold mb-2">Order Summary</h3>
                     <div className="space-y-1 text-sm">
                       {items.map((item) => (
                         <div key={item.id} className="flex justify-between">
@@ -249,18 +249,18 @@ export default function Cart() {
 
                   {/* Customer Info */}
                   <div className="space-y-4">
-                    <h3 className="font-semibold">Yours Dados</h3>
+                    <h3 className="font-semibold">Your Details</h3>
                     <div>
-                      <Label htmlFor="name">Nome Complete *</Label>
+                      <Label htmlFor="name">Full Name *</Label>
                       <Input
                         id="name"
                         value={customerName}
                         onChange={(e) => setCustomerName(e.target.value)}
-                        placeholder="Your nome complete"
+                        placeholder="Your full name"
                       />
                     </div>
                     <div>
-                      <Label htmlFor="email">E-mail *</Label>
+                      <Label htmlFor="email">Email *</Label>
                       <Input
                         id="email"
                         type="email"
@@ -270,19 +270,19 @@ export default function Cart() {
                       />
                     </div>
                     <div>
-                      <Label htmlFor="phone">Telefone (optional)</Label>
+                      <Label htmlFor="phone">Phone (optional)</Label>
                       <Input
                         id="phone"
                         value={customerPhone}
                         onChange={(e) => setCustomerPhone(e.target.value)}
-                        placeholder="(11) 99999-9999"
+                        placeholder="+44 7700 900000"
                       />
                     </div>
                   </div>
 
                   {/* Payment Method */}
                   <div className="space-y-4">
-                    <h3 className="font-semibold">Forma de Pagamento</h3>
+                    <h3 className="font-semibold">Payment Method</h3>
                     <div className="grid gap-3">
                       {paymentConfig?.paymentPixEnabled === 1 && (
                         <button
@@ -313,7 +313,7 @@ export default function Cart() {
                           <Building2 className={`w-6 h-6 ${selectedMethod === "bank_transfer" ? "text-blue-500" : "text-muted-foreground"}`} />
                           <div>
                             <p className="font-medium">Bank Transfer</p>
-                            <p className="text-sm text-muted-foreground">Deposit ou TED</p>
+                            <p className="text-sm text-muted-foreground">Direct bank transfer</p>
                           </div>
                         </button>
                       )}
@@ -329,8 +329,8 @@ export default function Cart() {
                         >
                           <Link2 className={`w-6 h-6 ${selectedMethod === "payment_link" ? "text-purple-500" : "text-muted-foreground"}`} />
                           <div>
-                            <p className="font-medium">Link de Pagamento</p>
-                            <p className="text-sm text-muted-foreground">Card, boleto via link</p>
+                            <p className="font-medium">Payment Link</p>
+                            <p className="text-sm text-muted-foreground">Card payment via link</p>
                           </div>
                         </button>
                       )}
@@ -352,7 +352,7 @@ export default function Cart() {
                     ) : (
                       <>
                         <ShoppingCart className="w-4 h-4 mr-2" />
-                        Confirmar Pedido
+                        Confirm Order
                       </>
                     )}
                   </Button>
@@ -373,9 +373,9 @@ export default function Cart() {
           <div className="container mx-auto max-w-4xl">
             {/* Header */}
             <div className="mb-8">
-              <h1 className="text-3xl font-bold mb-2">Carrinho de Compras</h1>
+              <h1 className="text-3xl font-bold mb-2">Shopping Cart</h1>
               <p className="text-muted-foreground">
-                {items.length} {items.length === 1 ? "photo" : "photos"} shecionada{items.length === 1 ? "" : "s"}
+                {items.length} {items.length === 1 ? "photo" : "photos"} selected
               </p>
             </div>
 
@@ -401,7 +401,7 @@ export default function Cart() {
                             </p>
                           )}
                           <p className="text-sm text-muted-foreground capitalize">
-                            {item.type === "stock" ? "Foto Stock" : "Foto da Gallery"}
+                            {item.type === "stock" ? "Stock Photo" : "Gallery Photo"}
                           </p>
                           <p className="text-lg font-bold mt-2">
                             {format(item.price)}
@@ -425,7 +425,7 @@ export default function Cart() {
                   className="w-full"
                 >
                   <Trash2 className="w-4 h-4 mr-2" />
-                  Limpar Carrinho
+                  Clear Cart
                 </Button>
               </div>
 
@@ -452,7 +452,7 @@ export default function Cart() {
                       size="lg"
                     >
                       <ShoppingCart className="w-4 h-4 mr-2" />
-                      Finalizar Compra
+                      Proceed to Checkout
                     </Button>
                   </CardContent>
                 </Card>

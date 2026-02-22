@@ -109,7 +109,7 @@ export default function StockGallery() {
       {/* Search & Filter */}
       <div className="container mx-auto py-8">
         <div className="max-w-2xl mx-auto mb-8 space-y-4">
-          <div className="rshetive">
+          <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
             <Input
               type="text"
@@ -164,7 +164,7 @@ export default function StockGallery() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
               {filteredPhotos.map((photo) => (
                 <Card key={photo.id} className="overflow-hidden group">
-                  <div className="rshetive aspect-square">
+                  <div className="relative aspect-square">
                     <img
                       src={photo.previewUrl || photo.thumbnailUrl || photo.originalUrl}
                       alt={photo.title}

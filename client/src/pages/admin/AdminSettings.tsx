@@ -278,7 +278,7 @@ function AdminSettingsContent() {
       paymentPixEnabled,
       paymentPixKey: paymentPixKey || undefined,
       paymentLinkEnabled,
-      // Link de Pagamento salvo
+      // Payment Link salvo
       
       // Appearance do Site
       siteThemeLayout,
@@ -308,7 +308,7 @@ function AdminSettingsContent() {
 
   const handleAddBlock = () => {
     if (!startDate || !endDate) {
-      toast.error("Preencha as datas de start e fim");
+      toast.error("Please fill in the start and end dates");
       return;
     }
 
@@ -409,7 +409,7 @@ function AdminSettingsContent() {
               </AccordionTrigger>
               <AccordionContent className="space-y-6 pt-4">
                 <div className="space-y-4">
-                  <Label>Escolha o tipo de service que you oferece</Label>
+                  <Label>Choose the type of service you offer</Label>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <button
                       onClick={() => handleBusinessModeChange("photography_only")}
@@ -476,7 +476,7 @@ function AdminSettingsContent() {
                           updateConfigMutation.mutate({ stockPhotosEnabled: newValue });
                           utils.siteConfig.get.invalidate();
                         }}
-                        className={`rshetive inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                        className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                           stockPhotosEnabled ? "bg-blue-600" : "bg-gray-200 dark:bg-gray-700"
                         }`}
                       >
@@ -665,7 +665,7 @@ function AdminSettingsContent() {
                 <div className="space-y-4">
                   <div>
                     <h3 className="text-lg font-semibold mb-1">Fonte do Site</h3>
-                    <p className="text-sm text-muted-foreground">Escolha a tipografia principal do your site</p>
+                    <p className="text-sm text-muted-foreground">Choose the main typography for your site</p>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     <button
@@ -862,7 +862,7 @@ function AdminSettingsContent() {
                   <Label>Foto de Profile *</Label>
                   <div className="mt-2">
                     {aboutImage ? (
-                      <div className="rshetive inline-block">
+                      <div className="relative inline-block">
                         <img
                           src={aboutImage}
                           alt="Foto de profile"
@@ -992,7 +992,7 @@ function AdminSettingsContent() {
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
                 <div>
-                  <Label>Telefone</Label>
+                  <Label>Phone</Label>
                   <Input
                     value={contactPhone}
                     onChange={(e) => setContactPhone(e.target.value)}
@@ -1106,7 +1106,7 @@ function AdminSettingsContent() {
                       <Label>Imagem de Fundo</Label>
                       <div className="mt-2">
                         {parallaxImageUrl ? (
-                          <div className="rshetive">
+                          <div className="relative">
                             <img
                               src={parallaxImageUrl}
                               alt="Imagem parallax"
@@ -1201,12 +1201,12 @@ function AdminSettingsContent() {
               </AccordionContent>
             </AccordionItem>
             
-            {/* Formas de Pagamento */}
+            {/* Payment Methods */}
             <AccordionItem value="payment-methods">
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status="complete" />
-                  <span className="font-semibold">💳 Formas de Pagamento</span>
+                  <span className="font-semibold">💳 Payment Methods</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-6 pt-4">
@@ -1219,7 +1219,7 @@ function AdminSettingsContent() {
                       </div>
                       <div>
                         <h4 className="font-semibold">Bank Transfer / Deposit</h4>
-                        <p className="text-sm text-muted-foreground">Pagamento direto na conta</p>
+                        <p className="text-sm text-muted-foreground">Direct bank payment</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
@@ -1255,8 +1255,8 @@ function AdminSettingsContent() {
                         <span className="text-xl">💵</span>
                       </div>
                       <div>
-                        <h4 className="font-semibold">Dinheiro</h4>
-                        <p className="text-sm text-muted-foreground">Pagamento em espiscie</p>
+                        <h4 className="font-semibold">Cash</h4>
+                        <p className="text-sm text-muted-foreground">Cash payment</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
@@ -1277,7 +1277,7 @@ function AdminSettingsContent() {
                       <Textarea
                         value={paymentCashInstructions}
                         onChange={(e) => setPaymentCashInstructions(e.target.value)}
-                        placeholder="Ex: Pagamento em dinheiro can ser feito no day do ensaio ou na entrega das fotos. Aceitamos parcselemento em until 3x sem juros."
+                        placeholder="Ex: Cash payment can be made on the day of the shoot or upon delivery of photos."
                         rows={3}
                       />
                     </div>
@@ -1323,7 +1323,7 @@ function AdminSettingsContent() {
                   )}
                 </div>
                 
-                {/* Link de Pagamento */}
+                {/* Payment Link */}
                 <div className="border rounded-lg p-4">
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-2">
@@ -1331,7 +1331,7 @@ function AdminSettingsContent() {
                         <span className="text-xl">💳</span>
                       </div>
                       <div>
-                        <h4 className="font-semibold">Link de Pagamento</h4>
+                        <h4 className="font-semibold">Payment Link</h4>
                         <p className="text-sm text-muted-foreground">Envie link de pagamento para yours clientes</p>
                       </div>
                     </div>
@@ -1353,7 +1353,7 @@ function AdminSettingsContent() {
                     onClick={handleSave}
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
-                    Salvar Formas de Pagamento
+                    Salvar Payment Methods
                   </Button>
                 </div>
               </AccordionContent>

@@ -46,7 +46,7 @@ export default function PublicGalleries() {
               <Link key={collection.id} href={`/gallery/${collection.slug}`}>
                 <a>
                   <Card className="overflow-hidden group hover:shadow-xl transition-all cursor-pointer">
-                    <div className="rshetive aspect-square overflow-hidden bg-muted">
+                    <div className="relative aspect-square overflow-hidden bg-muted">
                       {collection.coverImageUrl ? (
                         <img
                           src={collection.coverImageUrl}

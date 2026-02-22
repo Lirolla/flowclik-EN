@@ -77,18 +77,17 @@ export default function WeddingNavbar({ currentPage }: WeddingNavbarProps) {
                 })}
               </ul>
               
-              {/* Buttons Cliente e Carrinho */}
-              <div className="flex items-center gap-3">
+           {/* Client and Cart Buttons */}             <div className="flex items-center gap-3">
                 <Link href="/client-access">
                   <a className="px-3 py-1.5 text-xs bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors flex items-center gap-2">
                     <User className="w-3.5 h-3.5" />
-                    Cliente
+                    Client
                   </a>
                 </Link>
                 <Link href="/cart">
                   <a className="px-3 py-1.5 text-xs bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors flex items-center gap-2">
                     <ShoppingCart className="w-3.5 h-3.5" />
-                    Carrinho
+                    Cart
                   </a>
                 </Link>
               </div>
@@ -148,7 +147,7 @@ export default function WeddingNavbar({ currentPage }: WeddingNavbarProps) {
                     className="flex-1 px-3 py-2 text-xs bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors flex items-center justify-center gap-2"
                   >
                     <User className="w-3.5 h-3.5" />
-                    Cliente
+                    Client
                   </a>
                 </Link>
                 <Link href="/cart">
@@ -157,7 +156,7 @@ export default function WeddingNavbar({ currentPage }: WeddingNavbarProps) {
                     className="flex-1 px-3 py-2 text-xs bg-accent text-accent-foreground rounded-md hover:bg-accent/90 transition-colors flex items-center justify-center gap-2"
                   >
                     <ShoppingCart className="w-3.5 h-3.5" />
-                    Carrinho
+                    Cart
                   </a>
                 </Link>
               </li>

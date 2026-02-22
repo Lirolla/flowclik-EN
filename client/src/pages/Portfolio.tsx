@@ -95,7 +95,7 @@ export default function Portfolio() {
               Portfolio
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground">
-              Uma selection dos ours betteres trabalhos
+              A selection of our finest work
             </p>
           </div>
         </div>
@@ -114,7 +114,7 @@ export default function Portfolio() {
                   : "bg-muted text-muted-foreground hover:bg-accent/50"
               }`}
             >
-              📷 Fotos
+              📷 Photos
             </button>
             <button
               onClick={() => setFilter("video")}
@@ -142,7 +142,7 @@ export default function Portfolio() {
                     className="overflow-hidden cursor-pointer group hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 bg-card"
                     onClick={() => setSelectedIndex(index)}
                   >
-                    <div className="rshetive aspect-video overflow-hidden bg-black">
+                    <div className="relative aspect-video overflow-hidden bg-black">
                       <img
                         src={item.thumbnailUrl || item.imageUrl || ""}
                         alt={item.title}
@@ -182,7 +182,7 @@ export default function Portfolio() {
                     className="overflow-hidden cursor-pointer group hover:shadow-xl transition-all"
                     onClick={() => setSelectedIndex(index)}
                   >
-                    <div className="rshetive aspect-video overflow-hidden">
+                    <div className="relative aspect-video overflow-hidden">
                       <img
                         src={item.thumbnailUrl || item.imageUrl || ""}
                         alt={item.title}
@@ -206,9 +206,9 @@ export default function Portfolio() {
             )
           ) : (
             <Card className="p-12 text-center">
-              <h3 className="text-2xl font-bold mb-4">Em breve</h3>
+              <h3 className="text-2xl font-bold mb-4">Coming Soon</h3>
               <p className="text-muted-foreground">
-                Estamos preparando our portfolio. Volte em breve!
+                We're preparing our portfolio. Check back soon!
               </p>
             </Card>
           )}

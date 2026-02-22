@@ -24,7 +24,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b">
       <div className="container">
-        <div className="flex items-center justify-between py-4 md:flex-col md:items-center md:rshetive">
+        <div className="flex items-center justify-between py-4 md:flex-col md:items-center md:relative">
           {/* Logo */}
           <Link href={SITE_ROUTES.home()}>
             <a className="flex items-center gap-3" onClick={closeMenu}>
@@ -49,7 +49,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
             </a>
           </Link>
 
-          {/* Button Hambúrguer (Mobile) */}
+          {/* Hamburger Button (Mobile) */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="md:hidden p-2 hover:bg-muted rounded-lg transition-colors"
@@ -62,7 +62,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
             )}
           </button>
 
-          {/* Menu Horizontal (Desktop) */}
+          {/* Horizontal Menu (Desktop) */}
           <div className="hidden md:flex items-center justify-center gap-6 mt-3 w-full">
             <div className="flex items-center gap-6">
               <Link href={SITE_ROUTES.home()}>
@@ -76,7 +76,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
               <a className={`text-sm font-medium transition-colors ${
                 currentPage === "galerias" ? "text-accent font-semibold" : "hover:text-accent"
               }`}>
-                Gallerys
+                Galleries
               </a>
             </Link>
             {showVideo && (
@@ -120,25 +120,25 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
             </Link>
             <Link href={SITE_ROUTES.contact()}>
               <a className={`text-sm font-medium transition-colors ${
-                currentPage === "contato" ? "text-accent font-semibold" : "hover:text-accent"
+                currentPage === "contact" ? "text-accent font-semibold" : "hover:text-accent"
               }`}>
-                Contato
+                Contact
               </a>
             </Link>
             </div>
             
-            {/* Action Buttons (posicionados to the direita) */}
+            {/* Action Buttons (positioned to the right) */}
             <div className="absolute right-0 flex items-center gap-2">
               <Link href="/cart">
                 <a className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-primary-foreground text-xs font-medium rounded-md hover:bg-primary/90 transition-colors">
                   <ShoppingCart className="w-3.5 h-3.5" />
-                  Carrinho
+                  Cart
                 </a>
               </Link>
               <Link href="/client-access">
                 <a className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-primary text-primary-foreground text-xs font-medium rounded-md hover:bg-primary/90 transition-colors">
                   <User className="w-3.5 h-3.5" />
-                  Cliente
+                  Client
                 </a>
               </Link>
             </div>
@@ -146,7 +146,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
         </div>
       </div>
 
-      {/* Menu Mobile (Sidebar) */}
+      {/* Mobile Menu (Sidebar) */}
       {mobileMenuOpen && (
         <>
           {/* Overlay */}
@@ -191,7 +191,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                       : "hover:bg-muted"
                   }`}
                 >
-                  Gallerys
+                  Galleries
                 </a>
               </Link>
 
@@ -268,12 +268,12 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                 <a 
                   onClick={closeMenu}
                   className={`text-base font-medium py-2 px-3 rounded-lg transition-colors ${
-                    currentPage === "contato" 
+                    currentPage === "contact" 
                       ? "bg-accent/10 text-accent font-semibold" 
                       : "hover:bg-muted"
                   }`}
                 >
-                  Contato
+                  Contact
                 </a>
               </Link>
 
@@ -284,7 +284,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                     className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
                   >
                     <ShoppingCart className="w-4 h-4" />
-                    Carrinho
+                    Cart
                   </a>
                 </Link>
                 <Link href="/client-access">
@@ -293,7 +293,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                     className="flex items-center justify-center gap-2 w-full py-3 px-4 bg-primary text-primary-foreground font-medium rounded-lg hover:bg-primary/90 transition-colors"
                   >
                     <User className="w-4 h-4" />
-                    Cliente
+                    Client
                   </a>
                 </Link>
               </div>

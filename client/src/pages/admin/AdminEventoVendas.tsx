@@ -187,7 +187,7 @@ function AdminEventoVendasContent() {
                           disabled={!selectedEvent?.leadsCount || selectedEvent.leadsCount === 0}
                         >
                           <Mail className="w-4 h-4 mr-2" />
-                          Enviar para {selectedEvent?.leadsCount || 0} Leads
+                          Send to {selectedEvent?.leadsCount || 0} Leads
                         </Button>
                       </>
                     )}
@@ -260,7 +260,7 @@ function AdminEventoVendasContent() {
                 variant="outline"
                 onClick={() => setSalesModalOpen(false)}
               >
-                Cancsher
+                Cancel
               </Button>
             </div>
           </div>

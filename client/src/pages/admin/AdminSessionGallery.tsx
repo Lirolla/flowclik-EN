@@ -72,7 +72,7 @@ function AdminSessionGalleryContent() {
           <CardContent className="py-12 text-center">
             <Upload className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-xl font-semibold mb-2">
-              Nenhuma galeria criada still
+              No galleries created yet
             </h3>
             <p className="text-muted-foreground mb-6">
               Crie uma galeria privada para fazer upload das fotos do ensaio

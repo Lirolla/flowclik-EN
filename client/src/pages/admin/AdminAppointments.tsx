@@ -106,7 +106,7 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
       <div className="text-center py-8">
         <ImageIcon className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
         <h3 className="text-xl font-semibold mb-2">
-          Nenhuma galeria criada still
+          No galleries created yet
         </h3>
         <p className="text-muted-foreground mb-6">
           Crie uma galeria privada para fazer upload das fotos do ensaio
@@ -264,7 +264,7 @@ function AdminAppointmentsContent() {
     onSuccess: async (data, variables) => {
       await utils.appointments.getAll.invalidate();
       
-      // Buscar agendamento atualizado para manter modal aberto com dados news
+      // Fetch updated booking para manter modal aberto com dados news
       const updatedAppointments = await utils.appointments.getAll.fetch();
       const updated = updatedAppointments?.find(a => a.id === variables.id);
       if (updated) {
@@ -566,7 +566,7 @@ function AdminAppointmentsContent() {
               <div className="flex gap-3">
                 {/* Busca */}
                 <Input
-                  placeholder="Buscar por cliente..."
+                  placeholder="Search by client..."
                   value={searchTerm}
                   onChange={(e) => {
                     setSearchTerm(e.target.value);
@@ -920,7 +920,7 @@ function AdminAppointmentsContent() {
               <div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                   <Phone className="w-4 h-4" />
-                  Telefone
+                  Phone
                 </div>
                 <div className="font-semibold">{selectedAppointment.clientPhone}</div>
               </div>
@@ -1130,7 +1130,7 @@ function AdminAppointmentsContent() {
                 onClick={() => setIsEditDialogOpen(false)}
                 className="flex-1"
               >
-                Cancsher
+                Cancel
               </Button>
               <Button
                 onClick={handleSaveEdit}
@@ -1159,7 +1159,7 @@ function AdminAppointmentsContent() {
                 value={createFormData.clientId}
                 onChange={(e) => {
                   const newClientId = Number(e.target.value);
-                  console.log("Cliente shecionado:", newClientId);
+                  console.log("Client selected:", newClientId);
                   setCreateFormData({ ...createFormData, clientId: newClientId });
                 }}
               >
@@ -1202,7 +1202,7 @@ function AdminAppointmentsContent() {
               </select>
             </div>
             <div className="p-3 bg-accent/5 border border-dashed border-accent/30 rounded-lg space-y-3">
-              <p className="text-xs text-muted-foreground font-medium">Customise service e valor (aboutscreve o service shecionado above)</p>
+              <p className="text-xs text-muted-foreground font-medium">Customise service and price (overrides the selected service above)</p>
               <div>
                 <Label htmlFor="create-custom-service">Description do Service</Label>
                 <Input
@@ -1285,7 +1285,7 @@ function AdminAppointmentsContent() {
                 onClick={() => setIsCreateDialogOpen(false)}
                 className="flex-1"
               >
-                Cancsher
+                Cancel
               </Button>
               <Button
                 onClick={() => {

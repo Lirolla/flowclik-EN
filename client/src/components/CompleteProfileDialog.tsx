@@ -32,8 +32,8 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
   const updateProfileMutation = trpc.auth.updateProfile.useMutation({
     onSuccess: () => {
       toast({
-        title: "Profile atualizado!",
-        description: "Yours dados were salvos com sucesso.",
+        title: "Profile updated!",
+        description: "Your details have been saved successfully.",
       });
       utils.auth.me.invalidate();
       onOpenChange(false);
@@ -54,7 +54,7 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
     if (!formData.phone || !formData.zipCode || !formData.street || !formData.city || !formData.state) {
       toast({
         title: "Required fields",
-        description: "Why favor, preencha everys os campos requireds.",
+        description: "Please fill in all required fields.",
         variant: "destructive",
       });
       return;
@@ -76,37 +76,28 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
             {isIncomplete && <AlertCircle className="w-5 h-5 text-yellow-500" />}
-            Complete yours dados
+            Complete Your Details
           </DialogTitle>
           <DialogDescription>
-            Para uma better experience, needsmos de algumas information adicionais.
+            For a better experience, we need some additional information.
             This data helps us send physical products and stay in touch.
           </DialogDescription>
         </DialogHeader>
 
         <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Contato */}
+          {/* Contact */}
           <div className="space-y-3">
             <h3 className="font-semibold text-sm">Contact</h3>
             <div className="grid gap-3">
               <div>
-                <Label htmlFor="phone">Telefone *</Label>
+                <Label htmlFor="phone">Phone *</Label>
                 <Input
                   id="phone"
                   type="tel"
-                  placeholder="(00) 00000-0000"
+                  placeholder="+44 7700 900000"
                   value={formData.phone}
                   onChange={(e) => handleChange("phone", e.target.value)}
                   required
-                />
-              </div>
-              <div>
-                <Label htmlFor="cpf">CPF</Label>
-                <Input
-                  id="cpf"
-                  placeholder="000.000.000-00"
-                  value={formData.cpf}
-                  onChange={(e) => handleChange("cpf", e.target.value)}
                 />
               </div>
             </div>
@@ -117,10 +108,10 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
             <h3 className="font-semibold text-sm">Address</h3>
             <div className="grid gap-3">
               <div>
-                <Label htmlFor="zipCode">CEP *</Label>
+                <Label htmlFor="zipCode">Postcode *</Label>
                 <Input
                   id="zipCode"
-                  placeholder="00000-000"
+                  placeholder="SW1A 1AA"
                   value={formData.zipCode}
                   onChange={(e) => handleChange("zipCode", e.target.value)}
                   required
@@ -128,10 +119,10 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
               </div>
               <div className="grid grid-cols-3 gap-3">
                 <div className="col-span-2">
-                  <Label htmlFor="street">Rua *</Label>
+                  <Label htmlFor="street">Street *</Label>
                   <Input
                     id="street"
-                    placeholder="Nome da rua"
+                    placeholder="Street name"
                     value={formData.street}
                     onChange={(e) => handleChange("street", e.target.value)}
                     required
@@ -149,26 +140,26 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
                 </div>
               </div>
               <div>
-                <Label htmlFor="complement">Complemento</Label>
+                <Label htmlFor="complement">Flat / Unit</Label>
                 <Input
                   id="complement"
-                  placeholder="Apto, bloco, etc"
+                  placeholder="Flat, unit, etc."
                   value={formData.complement}
                   onChange={(e) => handleChange("complement", e.target.value)}
                 />
               </div>
               <div>
-                <Label htmlFor="neighborhood">Bairro</Label>
+                <Label htmlFor="neighborhood">Area</Label>
                 <Input
                   id="neighborhood"
-                  placeholder="Nome do bairro"
+                  placeholder="Area or district"
                   value={formData.neighborhood}
                   onChange={(e) => handleChange("neighborhood", e.target.value)}
                 />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <Label htmlFor="city">Cidade *</Label>
+                  <Label htmlFor="city">City *</Label>
                   <Input
                     id="city"
                     placeholder="City"
@@ -178,13 +169,12 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
                   />
                 </div>
                 <div>
-                  <Label htmlFor="state">Estado *</Label>
+                  <Label htmlFor="state">County *</Label>
                   <Input
                     id="state"
-                    placeholder="UF"
-                    maxLength={2}
+                    placeholder="County"
                     value={formData.state}
-                    onChange={(e) => handleChange("state", e.target.value.toUpperCase())}
+                    onChange={(e) => handleChange("state", e.target.value)}
                     required
                   />
                 </div>
@@ -195,11 +185,11 @@ export default function CompleteProfileDialog({ open, onOpenChange, user }: Comp
           <div className="flex justify-end gap-3 pt-4">
             {!isIncomplete && (
               <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
-                Cancsher
+                Cancel
               </Button>
             )}
             <Button type="submit" disabled={updateProfileMutation.isPending}>
-              {updateProfileMutation.isPending ? "Saving..." : "Salvar dados"}
+              {updateProfileMutation.isPending ? "Saving..." : "Save Details"}
             </Button>
           </div>
         </form>

@@ -232,7 +232,7 @@ export default function PublicGalleryView() {
                 {items.map((item: any, index: number) => (
                   <div
                     key={item.id}
-                    className="rshetive aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted"
+                    className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted"
                     onClick={() => openLightbox(index)}
                   >
                     {item.mediaType === "photo" ? (
@@ -242,7 +242,7 @@ export default function PublicGalleryView() {
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="rshetive w-full h-full">
+                      <div className="relative w-full h-full">
                         <video
                           src={item.originalUrl}
                           className="w-full h-full object-cover"
@@ -277,7 +277,7 @@ export default function PublicGalleryView() {
                 {items.map((item: any, index: number) => (
                   <div
                     key={item.id}
-                    className="rshetive break-inside-avoid mb-4 overflow-hidden rounded-lg cursor-pointer group"
+                    className="relative break-inside-avoid mb-4 overflow-hidden rounded-lg cursor-pointer group"
                     onClick={() => openLightbox(index)}
                   >
                     {item.mediaType === "photo" ? (
@@ -287,7 +287,7 @@ export default function PublicGalleryView() {
                         className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="rshetive">
+                      <div className="relative">
                         <video
                           src={item.originalUrl}
                           className="w-full h-auto"
@@ -327,7 +327,7 @@ export default function PublicGalleryView() {
                   >
                     <div className="md:flex">
                       {/* Video Thumbnail */}
-                      <div className="md:w-2/5 rshetive aspect-video bg-black">
+                      <div className="md:w-2/5 relative aspect-video bg-black">
                         <video
                           src={item.originalUrl}
                           className="w-full h-full object-cover"
@@ -378,7 +378,7 @@ export default function PublicGalleryView() {
                     onClick={() => openLightbox(index)}
                   >
                     <div className="md:flex">
-                      <div className="md:w-2/5 rshetive aspect-video bg-black">
+                      <div className="md:w-2/5 relative aspect-video bg-black">
                         <video src={item.originalUrl} className="w-full h-full object-cover" muted />
                         <div className="absolute inset-0 flex items-center justify-center bg-black/40">
                           <div className="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center">
@@ -405,7 +405,7 @@ export default function PublicGalleryView() {
             {/* Fullscreen Layout */}
             {layoutType === "fullscreen" && (
               <div className="max-w-6xl mx-auto">
-                <div className="rshetive bg-black rounded-lg overflow-hidden flex items-center justify-center" style={{ height: "75vh" }}>
+                <div className="relative bg-black rounded-lg overflow-hidden flex items-center justify-center" style={{ height: "75vh" }}>
                   {items[lightboxIndex || 0]?.mediaType === "photo" ? (
                     <img
                       src={items[lightboxIndex || 0]?.originalUrl}
@@ -444,7 +444,7 @@ export default function PublicGalleryView() {
                   {items.map((item: any, index: number) => (
                     <div
                       key={item.id}
-                      className={`rshetive flex-shrink-0 w-20 h-20 rounded cursor-pointer overflow-hidden ${
+                      className={`relative flex-shrink-0 w-20 h-20 rounded cursor-pointer overflow-hidden ${
                         index === (lightboxIndex || 0) ? "ring-2 ring-primary" : ""
                       }`}
                       onClick={() => setLightboxIndex(index)}
@@ -456,7 +456,7 @@ export default function PublicGalleryView() {
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <div className="rshetive w-full h-full bg-muted">
+                        <div className="relative w-full h-full bg-muted">
                           <video
                             src={item.originalUrl}
                             className="w-full h-full object-cover"

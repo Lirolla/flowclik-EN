@@ -100,7 +100,7 @@ export default function GalleryCompra() {
                 size="lg"
                 onClick={handleCheckout}
                 disabled={galleryItemsInCart.length === 0}
-                className="rshetive"
+                className="relative"
               >
                 <ShoppingCart className="w-5 h-5 mr-2" />
                 Ir para Carrinho ({galleryItemsInCart.length})
@@ -122,7 +122,7 @@ export default function GalleryCompra() {
             {gallery.photos.map((photo: any) => (
               <Card
                 key={photo.id}
-                className={`group rshetive cursor-pointer transition-all ${
+                className={`group relative cursor-pointer transition-all ${
                   isInCart(`gallery-${photo.id}`)
                     ? "ring-4 ring-primary"
                     : "hover:ring-2 hover:ring-primary/50"
@@ -130,7 +130,7 @@ export default function GalleryCompra() {
                 onClick={() => handleTogglePhoto(photo)}
               >
                 <CardContent className="p-0">
-                  <div className="rshetive aspect-square overflow-hidden rounded-lg">
+                  <div className="relative aspect-square overflow-hidden rounded-lg">
                     {/* Photo with watermark */}
                     <img
                       src={photo.watermarkedUrl || photo.thumbnailUrl || photo.originalUrl}

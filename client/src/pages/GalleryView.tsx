@@ -91,10 +91,10 @@ export default function GalleryView() {
             {media.map((item, index) => (
               <Card
                 key={item.id}
-                className="overflow-hidden cursor-pointer hover:scale-105 transition-transform rshetive group"
+                className="overflow-hidden cursor-pointer hover:scale-105 transition-transform relative group"
                 onClick={() => openLightbox(index)}
               >
-                <div className="aspect-square rshetive">
+                <div className="aspect-square relative">
                   <img
                     src={item.thumbnailUrl || item.previewUrl || item.originalUrl}
                     alt={item.title}
@@ -139,7 +139,7 @@ export default function GalleryView() {
           </button>
 
           {/* Image */}
-          <div className="max-w-[90vw] max-h-[80vh] rshetive">
+          <div className="max-w-[90vw] max-h-[80vh] relative">
             <img
               src={media[lightboxIndex].previewUrl || media[lightboxIndex].originalUrl}
               alt={media[lightboxIndex].title}
@@ -175,7 +175,7 @@ export default function GalleryView() {
               size="lg"
             >
               <ShoppingCart className="w-4 h-4 mr-2" />
-              Add ao Carrinho
+              Add to Cart
             </Button>
           )}
         </div>

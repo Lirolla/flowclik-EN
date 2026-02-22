@@ -48,7 +48,7 @@ export default function FotosStock() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {photos.map((photo) => (
                 <Card key={photo.id} className="overflow-hidden group cursor-pointer hover:shadow-lg transition-shadow">
-                  <div className="rshetive aspect-[4/3]">
+                  <div className="relative aspect-[4/3]">
                     <img
                       src={photo.originalUrl}
                       alt={photo.title || "Photo"}

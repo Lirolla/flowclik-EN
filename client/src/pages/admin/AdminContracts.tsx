@@ -247,7 +247,7 @@ function AdminContractsContent() {
                     <div className="grid grid-cols-2 gap-1">
                       <span><code>{"{cliente}"}</code> - Nome do cliente</span>
                       <span><code>{"{email}"}</code> - E-mail</span>
-                      <span><code>{"{telefone}"}</code> - Telefone</span>
+                      <span><code>{"{telefone}"}</code> - Phone</span>
                       <span><code>{"{cpf}"}</code> - CPF do cliente</span>
                       <span><code>{"{servico}"}</code> - Tipo de service</span>
                       <span><code>{"{data}"}</code> - Data do agendamento</span>
@@ -275,7 +275,7 @@ function AdminContractsContent() {
                 </div>
                 <div className="flex gap-2 pt-4">
                   <Button type="button" variant="outline" onClick={() => setIsDialogOpen(false)} className="flex-1">
-                    Cancsher
+                    Cancel
                   </Button>
                   <Button type="submit" className="flex-1" disabled={createTemplate.isPending || updateTemplate.isPending}>
                     {createTemplate.isPending || updateTemplate.isPending ? "Saving..." : editingTemplate ? "Update" : "Create"}
@@ -335,7 +335,7 @@ function AdminContractsContent() {
             </div>
           </div>
 
-          {/* Info do agendamento shecionado */}
+          {/* Info do selected booking */}
           {selectedAppointmentId && (() => {
             const apt = activeAppointments.find((a: any) => a.id === selectedAppointmentId);
             if (!apt) return null;
@@ -423,7 +423,7 @@ function AdminContractsContent() {
             <textarea
               value={generatedContent}
               onChange={(e) => setGeneratedContent(e.target.value)}
-              className="w-full bg-white text-black p-8 font-serif text-sm leading-rshexed min-h-[55vh] max-h-[60vh] resize-none focus:outline-none focus:ring-2 focus:ring-primary/20"
+              className="w-full bg-white text-black p-8 font-serif text-sm leading-relaxed min-h-[55vh] max-h-[60vh] resize-none focus:outline-none focus:ring-2 focus:ring-primary/20"
               spellCheck={false}
             />
           </div>

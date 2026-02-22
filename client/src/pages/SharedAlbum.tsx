@@ -165,7 +165,7 @@ export default function SharedAlbum() {
     <div className="min-h-screen bg-black text-white">
       {/* Banner Hero Fullscreen com foto random */}
       {randomPhoto && (
-        <div className="rshetive h-screen w-full overflow-hidden">
+        <div className="relative h-screen w-full overflow-hidden">
           {/* Foto de fundo */}
           <div 
             className="absolute inset-0 bg-cover bg-center"
@@ -176,7 +176,7 @@ export default function SharedAlbum() {
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
           
           {/* Content aboutposto */}
-          <div className="rshetive h-full flex flex-col items-center justify-center px-4">
+          <div className="relative h-full flex flex-col items-center justify-center px-4">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 text-center drop-shadow-2xl">
               {appointment.clientName}
             </h1>
@@ -216,7 +216,7 @@ export default function SharedAlbum() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {finalPhotos.map((photo) => (
-                <div key={photo.id} className="rshetive aspect-square bg-gray-900 rounded-lg overflow-hidden group">
+                <div key={photo.id} className="relative aspect-square bg-gray-900 rounded-lg overflow-hidden group">
                   <img
                     src={photo.photoUrl}
                     alt={`Foto ${photo.id}`}

@@ -59,8 +59,8 @@ export default function PaymentManager({
       setExtraDescription("");
       setExtraPrice("");
       toast({
-        title: "Service extra adicionado!",
-        description: "O service extra foi adicionado com sucesso.",
+        title: "Extra service added!",
+        description: "The extra service has been added successfully.",
       });
     },
     onError: (error) => {
@@ -79,8 +79,8 @@ export default function PaymentManager({
       utils.paymentMethods.getPaymentSummary.invalidate({ appointmentId });
       utils.appointments.getAll.invalidate();
       toast({
-        title: "Service extra removido!",
-        description: "O service extra foi removido com sucesso.",
+        title: "Extra service removed!",
+        description: "The extra service has been removed successfully.",
       });
     },
     onError: (error) => {
@@ -98,8 +98,8 @@ export default function PaymentManager({
       utils.paymentMethods.getPaymentSummary.invalidate({ appointmentId });
       utils.appointments.getAll.invalidate();
       toast({
-        title: "Method de pagamento atualizado!",
-        description: "O method de pagamento foi alterado com sucesso.",
+        title: "Payment method updated!",
+        description: "The payment method has been changed successfully.",
       });
     },
     onError: (error) => {
@@ -120,8 +120,8 @@ export default function PaymentManager({
       setPaymentAmount("");
       setPaymentNotes("");
       toast({
-        title: data.paymentStatus === "paid" ? "Pagamento complete!" : "Pagamento parcial registrado!",
-        description: `${formatCurrency(data.newPaidAmount)} de ${formatCurrency(totalPrice)} pago.`,
+        title: data.paymentStatus === "paid" ? "Payment complete!" : "Partial payment recorded!",
+        description: `${formatCurrency(data.newPaidAmount)} of ${formatCurrency(totalPrice)} paid.`,
       });
     },
     onError: (error) => {
@@ -138,8 +138,8 @@ export default function PaymentManager({
     
     if (isNaN(amountValue) || amountValue <= 0) {
       toast({
-        title: "Valor invalid",
-        description: "Why favor, insira um valor valid.",
+        title: "Invalid amount",
+        description: "Please enter a valid amount.",
         variant: "destructive",
       });
       return;
@@ -168,14 +168,14 @@ export default function PaymentManager({
         return (
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">
             <CheckCircle2 className="w-4 h-4" />
-            Pago
+            Paid
           </div>
         );
       case "partial":
         return (
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm font-medium">
             <Clock className="w-4 h-4" />
-            Parcial
+            Partial
           </div>
         );
       case "awaiting_payment":
@@ -195,8 +195,8 @@ export default function PaymentManager({
     }
   };
 
-  // Thuck amount buttons for 50% and 100%
-  const setThuckAmount = (percentage: number) => {
+  // Quick amount buttons for 50% and 100%
+  const setQuickAmount = (percentage: number) => {
     const amount = (totalPrice * percentage) / 100;
     setPaymentAmount(amount.toFixed(2));
   };
@@ -206,7 +206,7 @@ export default function PaymentManager({
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center justify-between">
-            <span>💳 Pagamento</span>
+            <span>Payment</span>
             {getStatusBadge()}
           </CardTitle>
         </CardHeader>
@@ -219,14 +219,14 @@ export default function PaymentManager({
               size="sm"
               className="gap-2"
             >
-              ➕ Add Extra Service
+              Add Extra Service
             </Button>
           </div>
 
-          {/* Lista de Extras */}
+          {/* Extras List */}
           {extras.length > 0 && (
             <div className="space-y-2">
-              <Label className="text-sm font-medium">Services Extras:</Label>
+              <Label className="text-sm font-medium">Extra Services:</Label>
               {extras.map((extra) => (
                 <div key={extra.id} className="flex items-center justify-between p-3 bg-muted/50 rounded-lg">
                   <div>
@@ -239,30 +239,30 @@ export default function PaymentManager({
                     onClick={() => deleteExtraMutation.mutate({ id: extra.id })}
                     className="text-red-600 hover:text-red-700 hover:bg-red-50"
                   >
-                    🗑️ Remover
+                    Remove
                   </Button>
                 </div>
               ))}
             </div>
           )}
 
-          {/* Summary de Pagamento */}
+          {/* Payment Summary */}
           <div className="grid grid-cols-3 gap-4 p-4 bg-muted rounded-lg">
             <div>
               <div className="text-sm text-muted-foreground mb-1">Total</div>
               <div className="text-2xl font-bold">{formatCurrency(totalPrice)}</div>
             </div>
             <div>
-              <div className="text-sm text-muted-foreground mb-1">Pago</div>
+              <div className="text-sm text-muted-foreground mb-1">Paid</div>
               <div className="text-2xl font-bold text-green-600">{formatCurrency(paidAmount)}</div>
             </div>
             <div>
-              <div className="text-sm text-muted-foreground mb-1">Restante</div>
+              <div className="text-sm text-muted-foreground mb-1">Remaining</div>
               <div className="text-2xl font-bold text-orange-600">{formatCurrency(remainingAmount)}</div>
             </div>
           </div>
 
-          {/* Shetor de Payment Method */}
+          {/* Payment Method Selector */}
           <div>
             <Label>Payment Method</Label>
             <Select
@@ -282,7 +282,7 @@ export default function PaymentManager({
                   <SelectItem value="cash">
                     <div className="flex items-center gap-2">
                       <Banknote className="w-4 h-4" />
-                      Dinheiro
+                      Cash
                     </div>
                   </SelectItem>
                 )}
@@ -305,13 +305,13 @@ export default function PaymentManager({
                 <SelectItem value="payment_link">
                   <div className="flex items-center gap-2">
                     <Link2 className="w-4 h-4" />
-                    Link de Pagamento
+                    Payment Link
                   </div>
                 </SelectItem>
               </SelectContent>
             </Select>
             
-            {/* Instructions do method de pagamento */}
+            {/* Payment method instructions */}
             {currentMethod === "cash" && availableMethods?.cashInstructions && (
               <p className="text-sm text-muted-foreground mt-2">
                 {availableMethods.cashInstructions}
@@ -319,19 +319,19 @@ export default function PaymentManager({
             )}
             {currentMethod === "bank_transfer" && availableMethods?.bankDetails && (
               <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded text-sm">
-                <p className="font-medium mb-1">Dados banks:</p>
+                <p className="font-medium mb-1">Bank details:</p>
                 <pre className="whitespace-pre-wrap text-xs">{availableMethods.bankDetails}</pre>
               </div>
             )}
             {currentMethod === "pix" && availableMethods?.pixKey && (
               <div className="mt-2 p-3 bg-green-50 border border-green-200 rounded text-sm">
-                <p className="font-medium mb-1">Key PIX:</p>
+                <p className="font-medium mb-1">PIX Key:</p>
                 <p className="text-sm font-mono">{availableMethods.pixKey}</p>
               </div>
             )}
             {currentMethod === "payment_link" && (
               <p className="text-sm text-muted-foreground mt-2">
-                Cole o link de pagamento gerado no your gateway (Stripe, PagMonuro, Mercado Pago, etc.) e envie para o cliente.
+                Paste the payment link generated in your gateway (Stripe, PayPal, etc.) and send it to the client.
               </p>
             )}
           </div>
@@ -345,7 +345,7 @@ export default function PaymentManager({
                 disabled={paymentStatus === "paid"}
               >
                 <Link2 className="w-4 h-4 mr-2" />
-                Enviar Link de Pagamento
+                Send Payment Link
               </Button>
             ) : (
               <Button
@@ -354,15 +354,15 @@ export default function PaymentManager({
                 disabled={paymentStatus === "paid"}
               >
                 <CheckCircle2 className="w-4 h-4 mr-2" />
-                Registrar Pagamento Manual
+                Record Manual Payment
               </Button>
             )}
           </div>
 
-          {/* History de Pagamentos */}
+          {/* Payment History */}
           {paymentSummary?.transactions && paymentSummary.transactions.length > 0 && (
             <div>
-              <h4 className="font-medium mb-3">History de Pagamentos</h4>
+              <h4 className="font-medium mb-3">Payment History</h4>
               <div className="space-y-2">
                 {paymentSummary.transactions.map((transaction: any) => (
                   <div key={transaction.id} className="flex items-center justify-between p-3 bg-muted rounded">
@@ -383,7 +383,7 @@ export default function PaymentManager({
                     <div className={`text-sm font-medium ${
                       transaction.status === "completed" ? "text-green-600" : "text-orange-600"
                     }`}>
-                      {transaction.status === "completed" ? "✓ Confirmado" : "⏳ Pending"}
+                      {transaction.status === "completed" ? "Confirmed" : "Pending"}
                     </div>
                   </div>
                 ))}
@@ -393,22 +393,22 @@ export default function PaymentManager({
         </CardContent>
       </Card>
 
-      {/* Dialog Enviar Link de Pagamento */}
+      {/* Send Payment Link Dialog */}
       <SendPaymentLinkDialog
         appointment={{ id: appointmentId, clientEmail, clientName, finalPrice: totalPrice }}
         open={isPaymentDialogOpen}
         onOpenChange={setIsPaymentDialogOpen}
       />
 
-      {/* Dialog Registrar Pagamento Manual */}
+      {/* Record Manual Payment Dialog */}
       <Dialog open={isRecordPaymentOpen} onOpenChange={setIsRecordPaymentOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Registrar Pagamento Manual</DialogTitle>
+            <DialogTitle>Record Manual Payment</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div>
-              <Label>Cliente</Label>
+              <Label>Client</Label>
               <Input value={clientName} disabled />
             </div>
 
@@ -426,7 +426,7 @@ export default function PaymentManager({
                     <SelectItem value="cash">
                       <div className="flex items-center gap-2">
                         <Banknote className="w-4 h-4" />
-                        Dinheiro
+                        Cash
                       </div>
                     </SelectItem>
                   )}
@@ -451,12 +451,12 @@ export default function PaymentManager({
             </div>
 
             <div>
-              <Label htmlFor="payment-amount">Valor (£)</Label>
+              <Label htmlFor="payment-amount">Amount (£)</Label>
               <Input
                 id="payment-amount"
                 type="number"
                 step="0.01"
-                placeholder="0,00"
+                placeholder="0.00"
                 value={paymentAmount}
                 onChange={(e) => setPaymentAmount(e.target.value)}
               />
@@ -465,7 +465,7 @@ export default function PaymentManager({
                   type="button"
                   variant="outline"
                   size="sm"
-                  onClick={() => setThuckAmount(50)}
+                  onClick={() => setQuickAmount(50)}
                 >
                   50% ({formatCurrency(Math.round(totalPrice * 0.5))})
                 </Button>
@@ -473,7 +473,7 @@ export default function PaymentManager({
                   type="button"
                   variant="outline"
                   size="sm"
-                  onClick={() => setThuckAmount(100)}
+                  onClick={() => setQuickAmount(100)}
                 >
                   100% ({formatCurrency(totalPrice)})
                 </Button>
@@ -484,7 +484,7 @@ export default function PaymentManager({
               <Label htmlFor="payment-notes">Notes (optional)</Label>
               <Textarea
                 id="payment-notes"
-                placeholder="Ex: Sinal de 50%, Pagamento final, etc."
+                placeholder="E.g.: 50% deposit, Final payment, etc."
                 value={paymentNotes}
                 onChange={(e) => setPaymentNotes(e.target.value)}
                 rows={3}
@@ -497,21 +497,21 @@ export default function PaymentManager({
                 onClick={() => setIsRecordPaymentOpen(false)}
                 className="flex-1"
               >
-                Cancsher
+                Cancel
               </Button>
               <Button
                 onClick={handleRecordPayment}
                 disabled={recordPaymentMutation.isPending}
                 className="flex-1"
               >
-                {recordPaymentMutation.isPending ? "Saving..." : "Registrar Pagamento"}
+                {recordPaymentMutation.isPending ? "Saving..." : "Record Payment"}
               </Button>
             </div>
           </div>
         </DialogContent>
       </Dialog>
 
-      {/* Dialog Add Extra Service */}
+      {/* Add Extra Service Dialog */}
       <Dialog open={isAddExtraOpen} onOpenChange={setIsAddExtraOpen}>
         <DialogContent>
           <DialogHeader>
@@ -534,12 +534,12 @@ export default function PaymentManager({
                 id="extra-price"
                 type="number"
                 step="0.01"
-                placeholder="0,00"
+                placeholder="0.00"
                 value={extraPrice}
                 onChange={(e) => setExtraPrice(e.target.value)}
               />
               <p className="text-sm text-muted-foreground mt-1">
-                Digite o valor em pounds (ex: 300 = £ 300,00)
+                Enter the amount in pounds (e.g.: 300 = £300.00)
               </p>
             </div>
 
@@ -553,7 +553,7 @@ export default function PaymentManager({
                 }}
                 className="flex-1"
               >
-                Cancsher
+                Cancel
               </Button>
               <Button
                 onClick={() => {
@@ -561,12 +561,12 @@ export default function PaymentManager({
                   if (!extraDescription || !extraPrice || isNaN(priceValue) || priceValue <= 0) {
                     toast({
                       title: "Error",
-                      description: "Preencha everys os campos correctly.",
+                      description: "Please fill in all fields correctly.",
                       variant: "destructive",
                     });
                     return;
                   }
-                  // Salvar em pounds (not centavos) - consistente com o resto do sistema
+                  // Save in pounds - consistent with the rest of the system
                   addExtraMutation.mutate({
                     appointmentId,
                     description: extraDescription,

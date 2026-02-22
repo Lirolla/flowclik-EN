@@ -122,7 +122,7 @@ export default function AdminPhotoSelections() {
             <div className="flex items-center justify-between">
               <Button variant="outline" onClick={() => setSelectedCollectionId(null)}>
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Voltar para galerias
+                Back to galleries
               </Button>
               
               {selections && selections.length > 0 && selections.every((s: any) => s.editedPhotoUrl) && (
@@ -169,7 +169,7 @@ export default function AdminPhotoSelections() {
             {selections && selections.length === 0 && (
               <div className="text-center py-12 bg-card rounded-lg border">
                 <Heart className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-                <p className="text-lg font-medium mb-2">Nenhuma foto shecionada still</p>
+                <p className="text-lg font-medium mb-2">No photos selected yet</p>
                 <p className="text-sm text-muted-foreground">
                   O cliente still not marcou nonea foto favourite nesta galeria
                 </p>
@@ -180,7 +180,7 @@ export default function AdminPhotoSelections() {
               {selections?.map((selection: any) => (
                 <div key={selection.id} className="bg-card rounded-lg border overflow-hidden hover:border-primary transition-colors">
                   {/* Photo */}
-                  <div className="rshetive aspect-square">
+                  <div className="relative aspect-square">
                     <img
                       src={selection.mediaUrl}
                       alt={selection.mediaTitle}

@@ -18,20 +18,20 @@ export default function Cadastro() {
 
   const registerMutation = trpc.customAuth.register.useMutation({
     onSuccess: (data) => {
-      // Salvar token no localStorage
+      // Save token to localStorage
       localStorage.setItem("auth_token", data.token);
       
       toast({
-        title: "Cadastro realizado!",
-        description: `Bem-vindo, ${data.user.name}`,
+        title: "Registration successful!",
+        description: `Welcome, ${data.user.name}`,
       });
 
-      // Redirecionar para admin
+      // Redirect to admin
       setLocation("/admin");
     },
     onError: (error) => {
       toast({
-        title: "Erro no cadastro",
+        title: "Registration error",
         description: error.message,
         variant: "destructive",
       });
@@ -44,7 +44,7 @@ export default function Cadastro() {
     if (password !== confirmPassword) {
       toast({
         title: "Error",
-        description: "As senhas not coincidem",
+        description: "Passwords do not match",
         variant: "destructive",
       });
       return;
@@ -53,7 +53,7 @@ export default function Cadastro() {
     if (password.length < 6) {
       toast({
         title: "Error",
-        description: "A senha must ter pelo menos 6 characters",
+        description: "Password must be at least 6 characters",
         variant: "destructive",
       });
       return;
@@ -67,12 +67,12 @@ export default function Cadastro() {
       <Card className="w-full max-w-md p-8">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold mb-2">FlowClik</h1>
-          <p className="text-muted-foreground">Crie your conta</p>
+          <p className="text-muted-foreground">Create your account</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <Label htmlFor="name">Nome Complete</Label>
+            <Label htmlFor="name">Full Name</Label>
             <Input
               id="name"
               type="text"
@@ -96,7 +96,7 @@ export default function Cadastro() {
           </div>
 
           <div>
-            <Label htmlFor="password">Senha</Label>
+            <Label htmlFor="password">Password</Label>
             <Input
               id="password"
               type="password"
@@ -108,7 +108,7 @@ export default function Cadastro() {
           </div>
 
           <div>
-            <Label htmlFor="confirmPassword">Confirmar Senha</Label>
+            <Label htmlFor="confirmPassword">Confirm Password</Label>
             <Input
               id="confirmPassword"
               type="password"
@@ -125,13 +125,13 @@ export default function Cadastro() {
             disabled={registerMutation.isPending}
           >
             <UserPlus className="h-4 w-4 mr-2" />
-            {registerMutation.isPending ? "Criando conta..." : "Criar Conta"}
+            {registerMutation.isPending ? "Creating account..." : "Create Account"}
           </Button>
         </form>
 
         <div className="mt-6 text-center text-sm text-muted-foreground">
           <p>
-            Already tem uma conta?{" "}
+            Already have an account?{" "}
             <a href="/login" className="text-primary hover:underline">
               Sign in
             </a>

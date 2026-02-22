@@ -93,7 +93,7 @@ function DashboardTab() {
   const { data: upcoming } = trpc.emailMarketing.upcomingEvents.useQuery();
 
   const statCards = [
-    { label: "Eventos Cadastrados", value: stats?.totalEvents || 0, icon: Calendar, color: "text-blue-400" },
+    { label: "Registered Events", value: stats?.totalEvents || 0, icon: Calendar, color: "text-blue-400" },
     { label: "Templates", value: stats?.totalTemplates || 0, icon: FileText, color: "text-green-400" },
     { label: "Campaigns", value: stats?.totalCampaigns || 0, icon: Send, color: "text-purple-400" },
     { label: "Emails Shippeds", value: stats?.totalEmailsSent || 0, icon: Mail, color: "text-amber-400" },
@@ -124,7 +124,7 @@ function DashboardTab() {
           <div className="text-center py-8 text-muted-foreground">
             <Calendar className="w-10 h-10 mx-auto mb-2 opacity-50" />
             <p>None evento nos nexts 30 days</p>
-            <p className="text-xs mt-1">Cadastre eventos dos yours clientes na aba Eventos</p>
+            <p className="text-xs mt-1">Register your client events in the Events tab</p>
           </div>
         ) : (
           <div className="space-y-3">
@@ -205,11 +205,11 @@ function EventsTab() {
     <div className="space-y-4">
       {/* Header */}
       <div className="flex flex-col sm:flex-row gap-3 justify-between">
-        <div className="rshetive flex-1 max-w-sm">
+        <div className="relative flex-1 max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
           <input
             type="text"
-            placeholder="Buscar eventos..."
+            placeholder="Search events..."
             value={search}
             onChange={e => setSearch(e.target.value)}
             className="w-full pl-9 pr-4 py-2 bg-card border border-border/50 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
@@ -289,7 +289,7 @@ function EventsTab() {
                 <option key={t.id} value={t.id}>{t.name}</option>
               ))}
             </select>
-            <p className="text-xs text-muted-foreground mt-1">O template will be used when clicar em "Enviar Email"</p>
+            <p className="text-xs text-muted-foreground mt-1">The template will be used when clicking "Send Email"</p>
           </div>
           <div>
             <label className="text-xs text-muted-foreground mb-1 block">Notes</label>
@@ -303,7 +303,7 @@ function EventsTab() {
           </div>
           <div className="flex gap-2 justify-end">
             <button onClick={() => setShowForm(false)} className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Cancsher
+              Cancel
             </button>
             <button
               onClick={() => {
@@ -319,7 +319,7 @@ function EventsTab() {
               disabled={createEvent.isPending}
               className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
             >
-              {createEvent.isPending ? "Saving..." : "Salvar Evento"}
+              {createEvent.isPending ? "Saving..." : "Save Event"}
             </button>
           </div>
         </div>
@@ -330,7 +330,7 @@ function EventsTab() {
         <div className="text-center py-12 text-muted-foreground bg-card border border-border/50 rounded-xl">
           <Calendar className="w-12 h-12 mx-auto mb-3 opacity-50" />
           <p className="font-medium">None evento cadastrado</p>
-          <p className="text-xs mt-1">Cadastre datas importbefore dos yours clientes</p>
+          <p className="text-xs mt-1">Register important dates for your clients</p>
         </div>
       ) : (
         <div className="space-y-2">
@@ -354,13 +354,13 @@ function EventsTab() {
                     onClick={() => handleSendEmail(event)}
                     disabled={sendingEventId === event.id}
                     className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${event.templateId ? 'bg-green-600 hover:bg-green-700 text-white' : 'bg-gray-600 hover:bg-gray-700 text-gray-300'}`}
-                    title={event.templateId ? "Enviar email para o cliente" : "Sem template - select um template first"}
+                    title={event.templateId ? "Send email to client" : "No template - select a template first"}
                   >
                     <Send className="w-3 h-3" />
-                    {sendingEventId === event.id ? "Sending..." : "Enviar Email"}
+                    {sendingEventId === event.id ? "Sending..." : "Send Email"}
                   </button>
                   <button
-                    onClick={() => { if (confirm("Remover este evento?")) deleteEvent.mutate({ id: event.id }); }}
+                    onClick={() => { if (confirm("Remove this event?")) deleteEvent.mutate({ id: event.id }); }}
                     className="p-1.5 text-muted-foreground hover:text-red-400 transition-colors"
                   >
                     <Trash2 className="w-4 h-4" />
@@ -471,7 +471,7 @@ function TemplatesTab() {
           </div>
           <div className="flex gap-2 justify-end">
             <button onClick={() => setShowForm(false)} className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Cancsher
+              Cancel
             </button>
             <button
               onClick={() => {
@@ -484,7 +484,7 @@ function TemplatesTab() {
               disabled={createTemplate.isPending}
               className="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
             >
-              {createTemplate.isPending ? "Saving..." : "Salvar Template"}
+              {createTemplate.isPending ? "Saving..." : "Save Template"}
             </button>
           </div>
         </div>
@@ -520,7 +520,7 @@ function TemplatesTab() {
                       <Eye className="w-4 h-4" />
                     </button>
                     <button
-                      onClick={() => { if (confirm("Remover este template?")) deleteTemplate.mutate({ id: template.id }); }}
+                      onClick={() => { if (confirm("Remove this template?")) deleteTemplate.mutate({ id: template.id }); }}
                       className="p-1.5 text-muted-foreground hover:text-red-400 transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />
@@ -633,7 +633,7 @@ function CampaignsTab() {
               className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
             >
               <option value="all">Everys os clientes ({clientsList?.length || 0})</option>
-              <option value="selected">Clientes shecionados</option>
+              <option value="selected">Selected clients</option>
             </select>
           </div>
           {form.recipientType === 'selected' && (
@@ -683,7 +683,7 @@ function CampaignsTab() {
           </div>
           <div className="flex gap-2 justify-end">
             <button onClick={() => setShowForm(false)} className="px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Cancsher
+              Cancel
             </button>
             <button
               onClick={() => {
@@ -713,7 +713,7 @@ function CampaignsTab() {
       {!campaigns || campaigns.length === 0 ? (
         <div className="text-center py-12 text-muted-foreground bg-card border border-border/50 rounded-xl">
           <Send className="w-12 h-12 mx-auto mb-3 opacity-50" />
-          <p className="font-medium">Nenhuma campanha criada</p>
+          <p className="font-medium">No campaigns created</p>
           <p className="text-xs mt-1">Crie uma campanha para enviar emails em massa</p>
         </div>
       ) : (
@@ -764,7 +764,7 @@ function CampaignsTab() {
                       </button>
                     )}
                     <button
-                      onClick={() => { if (confirm("Remover esta campanha?")) deleteCampaign.mutate({ id: campaign.id }); }}
+                      onClick={() => { if (confirm("Remove this campaign?")) deleteCampaign.mutate({ id: campaign.id }); }}
                       className="p-1.5 text-muted-foreground hover:text-red-400 transition-colors"
                     >
                       <Trash2 className="w-4 h-4" />

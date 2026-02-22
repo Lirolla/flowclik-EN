@@ -69,7 +69,7 @@ export default function SistemaLogin() {
               <Label htmlFor="email" className="text-gray-300">
                 Email
               </Label>
-              <div className="rshetive">
+              <div className="relative">
                 <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                 <Input
                   id="email"
@@ -86,7 +86,7 @@ export default function SistemaLogin() {
               <Label htmlFor="password" className="text-gray-300">
                 Senha
               </Label>
-              <div className="rshetive">
+              <div className="relative">
                 <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                 <Input
                   id="password"

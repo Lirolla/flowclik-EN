@@ -69,7 +69,7 @@ export function ImageUpload({ value, onChange, label = "Imagem", className = "" 
       <label className="text-sm font-medium">{label}</label>
       
       {value ? (
-        <div className="rshetive">
+        <div className="relative">
           <img
             src={value}
             alt="Preview"
@@ -93,16 +93,16 @@ export function ImageUpload({ value, onChange, label = "Imagem", className = "" 
           {isUploading ? (
             <div className="flex flex-col items-center gap-2">
               <Loader2 className="w-8 h-8 animate-spin text-primary" />
-              <p className="text-sm text-muted-foreground">Fazendo upload...</p>
+              <p className="text-sm text-muted-foreground">Uploading...</p>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-2">
               <Upload className="w-8 h-8 text-muted-foreground" />
               <p className="text-sm text-muted-foreground">
-                Clique para shecionar uma imagem
+                Click to select an image
               </p>
               <p className="text-xs text-muted-foreground">
-                PNG, JPG, WEBP until 10MB
+                PNG, JPG, WEBP up to 10MB
               </p>
             </div>
           )}

@@ -79,7 +79,7 @@ function AdminClientDetailsContent() {
           <Link href="/admin/clients">
             <a className="flex items-center gap-2">
               <ArrowLeft className="w-4 h-4" />
-              Voltar para Clientes
+              Back to Clients
             </a>
           </Link>
         </Button>
@@ -139,7 +139,7 @@ function AdminClientDetailsContent() {
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Pedidos</CardTitle>
+            <CardTitle className="text-sm font-medium">Orders</CardTitle>
             <ShoppingCart className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -205,10 +205,10 @@ function AdminClientDetailsContent() {
         </CardContent>
       </Card>
 
-      {/* History de Pedidos */}
+      {/* History de Orders */}
       <Card>
         <CardHeader>
-          <CardTitle>History de Pedidos</CardTitle>
+          <CardTitle>History de Orders</CardTitle>
         </CardHeader>
         <CardContent>
           {!orders || orders.length === 0 ? (

@@ -99,7 +99,7 @@ export default function AdminBanner() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {slides.map((slide: any) => (
               <Card key={slide.id} className="overflow-hidden">
-                <div className="aspect-video bg-muted rshetive">
+                <div className="aspect-video bg-muted relative">
                   {slide.slideType === "image" && slide.imageUrl ? (
                     <img
                       src={slide.imageUrl}

@@ -377,7 +377,7 @@ export default function AdminPortfolio() {
                   variant="outline"
                   onClick={resetForm}
                 >
-                  Cancsher
+                  Cancel
                 </Button>
                 <Button
                   type="submit"
@@ -407,7 +407,7 @@ export default function AdminPortfolio() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {items.map((item) => (
             <Card key={item.id} className="overflow-hidden">
-              <div className="rshetive aspect-square">
+              <div className="relative aspect-square">
                 {item.type === "video" ? (
                   <div className="w-full h-full bg-black flex items-center justify-center">
                     {item.thumbnailUrl || item.imageUrl ? (
@@ -488,7 +488,7 @@ export default function AdminPortfolio() {
       ) : (
         <Card className="p-12 text-center">
           <Upload className="h-12 w-12 mx-auto mb-4 text-muted-foreground" />
-          <h3 className="text-xl font-bold mb-2">Nenhuma foto no portfolio</h3>
+          <h3 className="text-xl font-bold mb-2">No photos in portfolio</h3>
           <p className="text-muted-foreground mb-4">
             Comece adicionando yours betteres fotos
           </p>

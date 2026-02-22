@@ -22,7 +22,7 @@ export default function Galleries() {
 
         {isLoading ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Carregando galerias...</p>
+            <p className="text-muted-foreground">Loading galleries...</p>
           </div>
         ) : collections && collections.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -30,7 +30,7 @@ export default function Galleries() {
               <Link key={collection.id} href={`/gallery/${collection.slug}`}>
                 <Card className="overflow-hidden hover:scale-105 transition-transform cursor-pointer">
                   {collection.coverImageUrl ? (
-                    <div className="rshetive h-64 overflow-hidden">
+                    <div className="relative h-64 overflow-hidden">
                       <img
                         src={collection.coverImageUrl}
                         alt={collection.name}
@@ -68,9 +68,9 @@ export default function Galleries() {
           <Card>
             <CardContent className="py-16 text-center">
               <Folder className="w-20 h-20 mx-auto text-muted-foreground mb-4" />
-              <h3 className="text-2xl font-semibold mb-2">Nenhuma galeria available</h3>
+              <h3 className="text-2xl font-semibold mb-2">No galleries available</h3>
               <p className="text-muted-foreground">
-                Em breve teremos news trabalhos para you explorar!
+                We'll have new work for you to explore soon!
               </p>
             </CardContent>
           </Card>
@@ -86,13 +86,13 @@ export default function Galleries() {
               Ready to get started?
             </h2>
             <p className="text-lg mb-8 opacity-90">
-              Get in touch conosco para discutir your projeto e receber um
+              Get in touch with us to discuss your project and receive a
               custom quote
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/contact">
-                  <a>Falar Conosco</a>
+                  <a>Contact Us</a>
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">

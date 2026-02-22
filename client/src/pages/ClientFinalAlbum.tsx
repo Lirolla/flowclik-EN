@@ -313,7 +313,7 @@ export default function ClientFinalAlbum() {
             {photos.map((photo: any, index: number) => (
               <div
                 key={photo.id}
-                className="rshetive aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted"
+                className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted"
                 onClick={() => openLightbox(index)}
               >
                 {photo.editedPhotoUrl ? (

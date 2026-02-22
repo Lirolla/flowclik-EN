@@ -51,7 +51,7 @@ export default function AdminLeads() {
     return (
       <DashboardLayout>
         <div className="text-center py-12">
-          <p className="text-gray-400">Carregando leads...</p>
+          <p className="text-gray-400">Loading leads...</p>
         </div>
       </DashboardLayout>
     );

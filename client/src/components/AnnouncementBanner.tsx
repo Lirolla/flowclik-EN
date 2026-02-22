@@ -52,7 +52,7 @@ export function AnnouncementBanner() {
           : "bg-green-50 dark:bg-green-950/20 border-green-200 dark:border-green-800";
 
         return (
-          <Alert key={announcement.id} className={`${bgColor} rshetive pr-12`}>
+          <Alert key={announcement.id} className={`${bgColor} relative pr-12`}>
             <Icon className="h-4 w-4" />
             <AlertTitle>{announcement.title}</AlertTitle>
             <AlertDescription className="mt-2">{announcement.message}</AlertDescription>

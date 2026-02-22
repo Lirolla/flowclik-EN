@@ -6,11 +6,11 @@ export default function Footer() {
   const { data: siteConfig } = trpc.site.getConfig.useQuery();
   
   const siteName = siteConfig?.siteName || "FlowClik.com";
-  const siteTagline = siteConfig?.siteTagline || "A photography always foi meu modo de eternizar o que importa. Com mais de 20 years de estrada, registrei storys em diversos contextos — each imagem carregando alma, tempo e verdade.";
+  const siteTagline = siteConfig?.siteTagline || "Photography has always been my way of capturing what matters most. With over 20 years of experience, I have told stories across countless settings — each image carrying soul, time and truth.";
   
   return (
     <footer className="bg-background border-t border-border/50 mt-auto">
-      {/* Section Superior */}
+      {/* Upper Section */}
       <div className="border-b border-border/30">
         <div className="container mx-auto px-4 py-12 text-center">
           <h2 className="text-4xl font-bold mb-4">{siteName}</h2>
@@ -30,16 +30,16 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Section Inferior - 3 Colunas */}
+      {/* Lower Section - 3 Columns */}
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Coluna 1: Brand + Redes Sociais */}
+          {/* Column 1: Brand + Social Media */}
           <div>
             <h3 className="text-xl font-bold mb-3">{siteName}</h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Capturando moments uniques e transformando-os em arte timtheys
+              Capturing unique moments and transforming them into timeless art
             </p>
-            {/* Redes Sociais */}
+            {/* Social Media */}
             <div className="flex gap-4">
               {siteConfig?.socialInstagram && (
                 <a
@@ -88,7 +88,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Coluna 2: Quick Links */}
+          {/* Column 2: Quick Links */}
           <div>
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2">
@@ -102,7 +102,7 @@ export default function Footer() {
               <li>
                 <Link href="/galleries">
                   <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Gallerys
+                    Galleries
                   </a>
                 </Link>
               </li>
@@ -130,20 +130,20 @@ export default function Footer() {
               <li>
                 <Link href="/contact">
                   <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Contato
+                    Contact
                   </a>
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Coluna 3: Acesso Restrito */}
+          {/* Column 3: Restricted Access */}
           <div>
-            <h4 className="font-semibold mb-4">Acesso Restrito</h4>
+            <h4 className="font-semibold mb-4">Restricted Access</h4>
             <Link href="/admin">
               <a className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
                 <Lock className="w-4 h-4" />
-                Area do Photographer
+                Photographer Area
               </a>
             </Link>
           </div>

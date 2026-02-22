@@ -157,7 +157,7 @@ export default function AdminServices() {
           <DialogContent className="max-w-2xl">
             <DialogHeader>
               <DialogTitle>Criar New Service</DialogTitle>
-              <DialogDescription>Preencha os dados do new service</DialogDescription>
+              <DialogDescription>Fill in the details of the new service</DialogDescription>
             </DialogHeader>
 
             <div className="space-y-4 mt-4">

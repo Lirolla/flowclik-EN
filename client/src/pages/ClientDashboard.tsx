@@ -203,7 +203,7 @@ export default function ClientDashboard() {
 
           <Link href={`/client/chat/${appointmentId}`}>
             <a>
-              <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer rshetive">
+              <Card className="bg-gray-900 border-gray-800 p-6 hover:border-red-600 transition cursor-pointer relative">
                 <MessageSquare className="h-8 w-8 text-red-600 mb-3" />
                 {unreadCount && unreadCount.count > 0 && (
                   <span className="absolute top-4 right-4 bg-red-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center">

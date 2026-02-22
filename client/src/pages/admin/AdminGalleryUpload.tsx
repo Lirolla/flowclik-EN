@@ -163,7 +163,7 @@ export default function AdminGalleryUpload() {
     
     if (pendingFiles.length === 0) {
       toast({
-        title: "Nenhuma foto para enviar",
+        title: "No photos to upload",
         description: "Everys as fotos already were enviadas",
         variant: "default",
       });
@@ -209,7 +209,7 @@ export default function AdminGalleryUpload() {
       <div className="container mx-auto py-8">
         <div className="text-center">
           <Loader2 className="w-8 h-8 animate-spin mx-auto mb-4" />
-          <p>Carregando galeria...</p>
+          <p>Loading gallery...</p>
         </div>
       </div>
       </DashboardLayout>
@@ -224,7 +224,7 @@ export default function AdminGalleryUpload() {
           <p>Error loading galeria: {error?.message || "Gallery not found"}</p>
           <p className="text-sm mt-2">ID: {collectionId}</p>
           <Button onClick={() => setLocation("/admin/galleries")} className="mt-4">
-            Voltar para Gallerys
+            Back to Galleries
           </Button>
         </div>
       </div>
@@ -243,7 +243,7 @@ export default function AdminGalleryUpload() {
           className="mb-4"
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
-          Voltar para Gallerys
+          Back to Galleries
         </Button>
 
         <div className="flex items-center justify-between">
@@ -303,14 +303,14 @@ export default function AdminGalleryUpload() {
             <div className="mt-6">
               <div className="flex justify-between items-center mb-4">
                 <p className="font-semibold">
-                  {files.length} arquivo(s) shecionado(s)
+                  {files.length} file(s) selected
                 </p>
                 <Button
                   onClick={uploadAll}
                   disabled={files.every((f) => f.uploaded || f.uploading)}
                 >
                   <Upload className="w-4 h-4 mr-2" />
-                  Enviar Everys
+                  Upload All
                 </Button>
               </div>
 
@@ -419,7 +419,7 @@ export default function AdminGalleryUpload() {
             <CardContent className="py-12 text-center">
               <ImageIcon className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
               <p className="text-muted-foreground">
-                Nenhuma foto nesta galeria still
+                No photos in this gallery yet
               </p>
             </CardContent>
           </Card>
@@ -427,7 +427,7 @@ export default function AdminGalleryUpload() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {mediaList.map((media) => (
               <Card key={media.id} className="overflow-hidden">
-                <div className="rshetive group">
+                <div className="relative group">
                   <img
                     src={media.thumbnailUrl || ''}
                     alt={media.title}

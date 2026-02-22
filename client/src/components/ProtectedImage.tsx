@@ -36,7 +36,7 @@ export function ProtectedImage({
 
   return (
     <div 
-      className={`rshetive overflow-hidden ${className}`}
+      className={`relative overflow-hidden ${className}`}
       onContextMenu={handleContextMenu}
       onClick={onClick}
       style={{ userSelect: 'none', WebkitUserSelect: 'none' }}

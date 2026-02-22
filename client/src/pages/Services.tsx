@@ -20,7 +20,7 @@ export default function Services() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold font-serif mb-6">
-              Ours Services
+              Our Services
             </h1>
             {siteConfig?.servicesIntro && (
               <p className="text-lg md:text-xl text-muted-foreground whitespace-pre-wrap">
@@ -57,7 +57,7 @@ export default function Services() {
                   </h3>
 
                   {service.description && (
-                    <p className="text-muted-foreground mb-6 leading-rshexed">
+                    <p className="text-muted-foreground mb-6 leading-relaxed">
                       {service.description}
                     </p>
                   )}
@@ -71,18 +71,18 @@ export default function Services() {
                     )}
                     <div className="flex items-center gap-2 text-sm">
                       <Check className="h-4 w-4 text-accent" />
-                      <span>Profissionais experientes</span>
+                      <span>Experienced professionals</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm">
                       <Check className="h-4 w-4 text-accent" />
-                      <span>Equipamento de alta qualidade</span>
+                      <span>High-quality equipment</span>
                     </div>
                   </div>
 
                   <div className="border-t pt-6">
                     <div className="flex items-baseline justify-between mb-4">
                       <span className="text-sm text-muted-foreground">
-                        A partir de
+                        Starting from
                       </span>
                       <div className="text-3xl font-bold">
                         {format(service.price)}
@@ -91,7 +91,7 @@ export default function Services() {
 
                     <Button asChild className="w-full" size="lg">
                       <Link href="/book">
-                        <a>Agendar Now</a>
+                        <a>Book Now</a>
                       </Link>
                     </Button>
                   </div>
@@ -101,10 +101,10 @@ export default function Services() {
           ) : (
             <Card className="p-12 text-center">
               <h3 className="text-2xl font-bold mb-4">
-                Services em breve
+                Services Coming Soon
               </h3>
               <p className="text-muted-foreground mb-6">
-                Estamos preparando ours services. Volte em breve!
+                We're preparing our services. Check back soon!
               </p>
               <Button asChild>
                 <Link href={SITE_ROUTES.home()}>
@@ -124,13 +124,13 @@ export default function Services() {
               Ready to get started?
             </h2>
             <p className="text-lg mb-8 opacity-90">
-              Get in touch conosco para discutir your projeto e receber um
+              Get in touch with us to discuss your project and receive a
               custom quote
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/contact">
-                  <a>Falar Conosco</a>
+                  <a>Contact Us</a>
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">

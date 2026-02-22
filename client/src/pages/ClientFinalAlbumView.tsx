@@ -174,7 +174,7 @@ export default function ClientFinalAlbumView() {
             {finalPhotos.map((photo: any, index: number) => (
               <div
                 key={photo.id}
-                className="rshetive aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted hover:ring-2 hover:ring-primary transition-all"
+                className="relative aspect-square overflow-hidden rounded-lg cursor-pointer group bg-muted hover:ring-2 hover:ring-primary transition-all"
                 onClick={() => openLightbox(index)}
                 style={{ userSelect: 'none', WebkitUserSelect: 'none' }}
               >
@@ -228,7 +228,7 @@ export default function ClientFinalAlbumView() {
             <ChevronRight className="w-8 h-8 text-white" />
           </button>
 
-          <div className="rshetive" style={{ userSelect: 'none', WebkitUserSelect: 'none' }}>
+          <div className="relative" style={{ userSelect: 'none', WebkitUserSelect: 'none' }}>
             <img
               src={finalPhotos[lightboxIndex].photoUrl}
               alt={finalPhotos[lightboxIndex].fileName}

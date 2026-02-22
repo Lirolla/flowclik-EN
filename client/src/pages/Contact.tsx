@@ -22,11 +22,11 @@ export default function Contact() {
 
   const sendMessageMutation = trpc.contact.sendMessage.useMutation({
     onSuccess: () => {
-      toast.success("Message enviada com sucesso! Entraremos em contato em breve.");
+      toast.success("Message sent successfully! We'll be in touch shortly.");
       setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
     },
     onError: (error) => {
-      toast.error(error.message || "Erro ao enviar message. Try again.");
+      toast.error(error.message || "Failed to send message. Please try again.");
     },
   });
 
@@ -36,17 +36,17 @@ export default function Contact() {
   };
 
   return (
-    <LayoutWrapper currentPage="contato">
+    <LayoutWrapper currentPage="contact">
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-br from-background to-muted/30">
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold font-serif mb-6">
-              Between em Contato
+              Get in Touch
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground">
-              Estamos readys para transformar yours moments em memorys eternall
+              We're ready to turn your moments into everlasting memories
             </p>
           </div>
         </div>
@@ -65,7 +65,7 @@ export default function Contact() {
                         <Mail className="h-8 w-8 text-accent" />
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold mb-2">E-mail</h3>
+                    <h3 className="text-xl font-bold mb-2">Email</h3>
                     <a
                       href={`mailto:${siteConfig.contactEmail}`}
                       className="text-muted-foreground hover:text-accent transition-colors"
@@ -84,7 +84,7 @@ export default function Contact() {
                         <Phone className="h-8 w-8 text-accent" />
                       </div>
                     </div>
-                    <h3 className="text-xl font-bold mb-2">Telefone</h3>
+                    <h3 className="text-xl font-bold mb-2">Phone</h3>
                     {siteConfig.contactPhone && (
                       <a
                         href={`tel:${siteConfig.contactPhone}`}
@@ -128,12 +128,12 @@ export default function Contact() {
             <Card className="mb-12">
               <CardContent className="p-8">
                 <h2 className="text-3xl font-bold font-serif mb-6 text-center">
-                  Envie uma Message
+                  Send a Message
                 </h2>
                 <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Nome *</Label>
+                      <Label htmlFor="name">Name *</Label>
                       <Input
                         id="name"
                         value={formData.name}
@@ -155,7 +155,7 @@ export default function Contact() {
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="phone">Telefone</Label>
+                      <Label htmlFor="phone">Phone</Label>
                       <Input
                         id="phone"
                         type="tel"
@@ -164,7 +164,7 @@ export default function Contact() {
                       />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="subject">Assunto *</Label>
+                      <Label htmlFor="subject">Subject *</Label>
                       <Input
                         id="subject"
                         value={formData.subject}
@@ -197,7 +197,7 @@ export default function Contact() {
                     ) : (
                       <>
                         <Send className="w-4 h-4 mr-2" />
-                        Enviar Message
+                        Send Message
                       </>
                     )}
                   </Button>
@@ -205,13 +205,13 @@ export default function Contact() {
               </CardContent>
             </Card>
 
-            {/* Social Media Cards - Same estilo dos cards de contato */}
+            {/* Social Media Cards */}
             {(siteConfig?.socialInstagram ||
               siteConfig?.socialFacebook ||
               siteConfig?.socialYouTube) && (
               <div>
                 <h2 className="text-3xl font-bold font-serif mb-6 text-center">
-                  Siga-nos nas Redes Sociais
+                  Follow Us on Social Media
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {siteConfig.socialInstagram && (
@@ -252,7 +252,7 @@ export default function Contact() {
                           </div>
                           <h3 className="text-xl font-bold mb-2">Facebook</h3>
                           <p className="text-muted-foreground hover:text-accent transition-colors">
-                            Siga our page
+                            Follow our page
                           </p>
                         </a>
                       </CardContent>
@@ -274,7 +274,7 @@ export default function Contact() {
                           </div>
                           <h3 className="text-xl font-bold mb-2">YouTube</h3>
                           <p className="text-muted-foreground hover:text-accent transition-colors">
-                            Inscreva-se no canal
+                            Subscribe to our channel
                           </p>
                         </a>
                       </CardContent>
@@ -295,13 +295,13 @@ export default function Contact() {
               Ready to get started?
             </h2>
             <p className="text-lg mb-8 opacity-90">
-              Get in touch conosco para discutir your projeto e receber um
+              Get in touch with us to discuss your project and receive a
               custom quote
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">
                 <Link href="/contact">
-                  <a>Falar Conosco</a>
+                  <a>Contact Us</a>
                 </Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="bg-background text-foreground hover:bg-background/90">

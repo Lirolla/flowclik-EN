@@ -118,8 +118,8 @@ export default function ClientGallery() {
   const handleApproveSelection = () => {
     if (!favoritesCount || favoritesCount === 0) {
       toast({
-        title: "Nenhuma foto shecionada",
-        description: "Why favor, marque pelo menos uma foto as favourite before de aprovar.",
+        title: "No photos selected",
+        description: "Please mark at least one photo as favourite before approving.",
         variant: "destructive",
       });
       return;
@@ -261,7 +261,7 @@ export default function ClientGallery() {
             return (
               <div
                 key={photo.id}
-                className="rshetive group aspect-square overflow-hidden rounded-lg cursor-pointer"
+                className="relative group aspect-square overflow-hidden rounded-lg cursor-pointer"
                 onClick={() => setSelectedPhoto(photo)}
               >
                 {downloadPermission?.allowed ? (
@@ -318,7 +318,7 @@ export default function ClientGallery() {
         {photos.length === 0 && (
           <div className="text-center py-20">
             <p className="text-xl text-muted-foreground">
-              Nenhuma foto available still
+              No photos available yet
             </p>
           </div>
         )}
@@ -330,7 +330,7 @@ export default function ClientGallery() {
           <DialogContent className="max-w-[95vw] max-h-[95vh] p-0">
             <div className="grid md:grid-cols-[1fr,400px] gap-0 max-h-[95vh]">
               {/* Image */}
-              <div className="rshetive bg-black flex items-center justify-center">
+              <div className="relative bg-black flex items-center justify-center">
                 {downloadPermission?.allowed ? (
                   <img
                     src={selectedPhoto.originalUrl}

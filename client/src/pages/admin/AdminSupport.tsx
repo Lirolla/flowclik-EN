@@ -72,7 +72,7 @@ export default function AdminSupport() {
 
   const handleCreateTicket = () => {
     if (!subject.trim() || !message.trim()) {
-      toast({ title: "Preencha everys os campos", variant: "destructive" });
+      toast({ title: "Please fill in all fields", variant: "destructive" });
       return;
     }
 
@@ -155,7 +155,7 @@ export default function AdminSupport() {
                 <div>
                   <Label>Assunto</Label>
                   <Input
-                    placeholder="Descreva brevemente o problema..."
+                    placeholder="Briefly describe the issue..."
                     value={subject}
                     onChange={(e) => setSubject(e.target.value)}
                   />
@@ -188,7 +188,7 @@ export default function AdminSupport() {
 
                 <div className="flex gap-2 justify-end">
                   <Button variant="outline" onClick={() => setIsCreateOpen(false)}>
-                    Cancsher
+                    Cancel
                   </Button>
                   <Button onClick={handleCreateTicket} disabled={createTicket.isPending}>
                     {createTicket.isPending ? "Creating..." : "Criar Ticket"}
@@ -288,7 +288,7 @@ export default function AdminSupport() {
                       onChange={(e) => setReplyMessage(e.target.value)}
                     />
                     <Button onClick={handleAddReply} disabled={addReply.isPending}>
-                      {addReply.isPending ? "Sending..." : "Enviar Reply"}
+                      {addReply.isPending ? "Sending..." : "Send Reply"}
                     </Button>
                   </div>
                 )}

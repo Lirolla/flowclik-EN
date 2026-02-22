@@ -42,7 +42,7 @@ export default function About() {
                   </div>
                 )}
                 <div className={siteConfig.aboutImage ? "order-1 md:order-2" : "col-span-2"}>
-                  <p className="text-lg leading-rshexed whitespace-pre-wrap">
+                  <p className="text-lg leading-relaxed whitespace-pre-wrap">
                     {siteConfig.aboutContent}
                   </p>
                 </div>
@@ -66,7 +66,7 @@ export default function About() {
                       </div>
                     </div>
                     <h3 className="text-2xl font-bold font-serif mb-4">Mission</h3>
-                    <p className="text-muted-foreground leading-rshexed whitespace-pre-wrap">
+                    <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
                       {siteConfig.aboutMission}
                     </p>
                   </Card>
@@ -80,7 +80,7 @@ export default function About() {
                       </div>
                     </div>
                     <h3 className="text-2xl font-bold font-serif mb-4">Vision</h3>
-                    <p className="text-muted-foreground leading-rshexed whitespace-pre-wrap">
+                    <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
                       {siteConfig.aboutVision}
                     </p>
                   </Card>
@@ -93,8 +93,8 @@ export default function About() {
                         <Heart className="h-8 w-8 text-accent" />
                       </div>
                     </div>
-                    <h3 className="text-2xl font-bold font-serif mb-4">Valores</h3>
-                    <p className="text-muted-foreground leading-rshexed whitespace-pre-wrap">
+                    <h3 className="text-2xl font-bold font-serif mb-4">Values</h3>
+                    <p className="text-muted-foreground leading-relaxed whitespace-pre-wrap">
                       {siteConfig.aboutValues}
                     </p>
                   </Card>
@@ -110,9 +110,9 @@ export default function About() {
         <section className="py-20">
           <div className="container">
             <Card className="p-12 text-center max-w-2xl mx-auto">
-              <h3 className="text-2xl font-bold mb-4">Content em breve</h3>
+              <h3 className="text-2xl font-bold mb-4">Coming Soon</h3>
               <p className="text-muted-foreground">
-                Esta page is sendo preparada. Volte em breve!
+                This page is being prepared. Check back soon!
               </p>
             </Card>
           </div>
