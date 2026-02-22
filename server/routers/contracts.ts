@@ -99,14 +99,14 @@ export const contractsRouter = router({
         .where(eq(contractTemplates.tenantId, tenantId));
       
       if (existing.length > 0) {
-        return { success: false, message: "Already existsm templates cadastrados. Exclua-os first se quiser recriar." };
+        return { success: false, message: "Templates already exist. Delete them first if you want to recreate." };
       }
 
       const defaultTemplates = [
         {
-          name: "Contrato de Ensaio Fotográfico",
-          description: "Para ensaios pessoais, sensuais, gestbefore, família, 15 years, newborn. Inclui clauses de direito de imagem e privacidade.",
-          content: `PHOTOGRAPHY SERVICES CONTRACT - ENSAIO
+          name: "Photo Session Contract",
+          description: "For personal, boudoir, maternity, family, sweet 16, newborn sessions. Includes image rights and privacy clauses.",
+          content: `PHOTOGRAPHY SERVICES CONTRACT - SESSION
 
 CLIENT: {cliente}
 E-mail: {email}
@@ -118,64 +118,64 @@ PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}
 Address Profissional: {fotografo_endereco}
 
-As partes above identificadas celebram o this contract de provision of services fotográficos, que se regerá pelas seguintes clauses e condições:
+The above identified parties enter into this photography services contract, which shall be governed by the following clauses and conditions:
 
 CLAUSE 1ª – DO OBJETO
-O this contract tem por objeto a provision of services fotográficos de ensaio, conforme especificações:
-• Tipo de Ensaio: {servico}
-• Data da Sesare: {data}
+This contract has as its object the provision of photography session services, as specified:
+• Session Type: {servico}
+• Session Date: {data}
 • Time: {hourrio}
 • Local: {local}
-• Duration Estimada: {duracao}
+• Estimated Duration: {duracao}
 
-CLAUSE 2ª – DO VALOR E FORMA DE PAGAMENTO
-2.1. O valor total dos services é de £ {valor}.
-2.2. O pagamento canrá ser realizado via PIX, bank transfer or payment link.
-2.3. Sinal de 50% no ato da contratação, restante until a data da sesare.
+CLAUSE 2ª – DO AMOUNT E FORMA DE PAGAMENTO
+2.1. The total value of the services is £ {valor}.
+2.2. Payment can be made via bank transfer or payment link.
+2.3. 50% deposit upon booking, remainder due by the session date.
 
-CLAUSE 3ª – DO SERVIÇO INCLUÍDO
-3.1. Estão inclusos no valor photographer:
-• Sesare fotográfica com duration estimada conforme acordado;
-• Tratamento e editing profissional das photographys selecionadas;
-• Entrega das fotos em alta resolução por meio digital (galeria online).
-3.2. O prazo de betweenga das fotos editadas é de until 15 (quinze) business days after a sesare.
+CLAUSE 3ª – INCLUDED SERVICES
+3.1. The following are included in the price:
+• Photography session with estimated duration as agreed;
+• Professional treatment and editing of selected photographs;
+• Delivery of high-resolution photos via digital means (online gallery).
+3.2. The delivery time for edited photos is up to 15 (fifteen) business days after the session.
 
-CLAUSE 4ª – DOS DIREITOS AUTORAIS (Lei 9.610/1998)
-4.1. As photographys produzidas are obras protegidas por copyright, sendo o(a) PHOTOGRAPHER(A) o(a) titular dos direitos patrimoniais e morais about as mesmas.
-4.2. O(A) CLIENT recebe licença de uso pessoal e not comercial das photographys delivereds.
-4.3. É vedada a change, manipulação digital ou aplicação de filtros nas photographys delivereds sem autorização prévia do(a) photographer(a).
-4.4. A reprodução, distribuição ou uso comercial das photographys depende de autorização expressa e por escrito do(a) PHOTOGRAPHER(A).
+CLAUSE 4ª – COPYRIGHT
+4.1. The photographs produced are works protected by copyright, with the PHOTOGRAPHER being the holder of the economic and moral rights thereof.
+4.2. The CLIENT receives a personal and non-commercial use licence for the delivered photographs.
+4.3. Alteration, digital manipulation or application of filters to the delivered photographs without prior authorisation from the PHOTOGRAPHER is prohibited.
+4.4. Reproduction, distribution or commercial use of the photographs requires express written authorisation from the PHOTOGRAPHER.
 
-CLAUSE 5ª – DO DIREITO DE IMAGEM
-5.1. O(A) CLIENT autoriza / not autoriza (riscar o que not se aplica) o uso de suas imagens pelo(a) PHOTOGRAPHER(A) para fins de divulgação profissional, incluindo portfólio, redes sociais e site.
-5.2. Em caso de ensaio de natureza íntima ou sensual, o(a) PHOTOGRAPHER(A) se compromete a NÃO utilizar as imagens para qualquer fim de divulgação sem autorização expressa e por escrito do(a) CLIENT.
-5.3. O(A) PHOTOGRAPHER(A) garante sigilo absoluto about as imagens produzidas, em conformidade com a LGPD (Lei 13.709/2018).
+CLAUSE 5ª – IMAGE RIGHTS
+5.1. The CLIENT authorises / does not authorise (delete as applicable) the use of their images by the PHOTOGRAPHER for professional promotion purposes, including portfolio, social media and website.
+5.2. In the case of intimate or boudoir sessions, the PHOTOGRAPHER undertakes NOT to use the images for any promotional purpose without express written authorisation from the CLIENT.
+5.3. The PHOTOGRAPHER guarantees absolute confidentiality regarding the images produced, in compliance with data protection legislation.
 
-CLAUSE 6ª – DO CANCELAMENTO E REAGENDAMENTO
-6.1. Cancellation com until 7 days de antecedência: devolução integral do sinal.
-6.2. Cancellation com menos de 7 days: sinal not will be devolvido.
-6.3. Cancellation no day ou not comparecimento: valor total will be devido.
-6.4. Reagendamento permitido uma vez, sem custo, com aviso de 48 hours.
-6.5. Condições climáticas adversas (ensaios externos): reagendamento sem custo.
+CLAUSE 6ª – CANCELLATION AND RESCHEDULING
+6.1. Cancellation with at least 7 days notice: full refund of deposit.
+6.2. Cancellation with less than 7 days notice: deposit will not be refunded.
+6.3. Cancellation on the day or no-show: full amount will be due.
+6.4. Rescheduling permitted once, at no cost, with 48 hours notice.
+6.5. Adverse weather conditions (outdoor sessions): rescheduling at no cost.
 
-CLAUSE 7ª – DAS OBRIGAÇÕES DO PHOTOGRAPHER
-7.1. Realizar a photo session com zelo e profissionalismo.
-7.2. Entregar as photographys editadas no prazo estipulado.
-7.3. Manter sigilo about dados pessoais e imagens do(a) CLIENT (LGPD).
-7.4. Disponibilizar as fotos em galeria online segura por no mínimo 30 days.
+CLAUSE 7ª – PHOTOGRAPHER OBLIGATIONS
+7.1. Carry out the photo session with care and professionalism.
+7.2. Deliver the edited photographs within the stipulated timeframe.
+7.3. Maintain confidentiality regarding personal data and images of the CLIENT (data protection).
+7.4. Make photos available in a secure online gallery for a minimum of 30 days.
 
-CLAUSE 8ª – DAS OBRIGAÇÕES DO CLIENT
-8.1. Efetuar os pagamentos nas datas acordadas.
-8.2. Comparecer no local e horário agendados.
-8.3. Informar eventuais restrições ou necessidades especiais.
-8.4. Respeitar os copyright do(a) photographer(a).
+CLAUSE 8ª – CLIENT OBLIGATIONS
+8.1. Make payments on the agreed dates.
+8.2. Attend at the scheduled location and time.
+8.3. Inform of any restrictions or special needs.
+8.4. Respect the copyright of the photographer.
 
-CLAUSE 9ª – DA PROTEÇÃO DE DADOS (LGPD - Lei 13.709/2018)
-9.1. Os dados pessoais coletados serão utilizados exclusivemente para a execução deste contrato.
-9.2. O(A) PHOTOGRAPHER(A) se compromete a not compartilhar dados pessoais com terceiros.
+CLAUSE 9ª – DATA PROTECTION
+9.1. Personal data collected will be used exclusively for the execution of this contract.
+9.2. The PHOTOGRAPHER undertakes not to share personal data with third parties.
 
-CLAUSE 10ª – DO FORO
-Para dirimir quaisquer controvérsias, as partes elegem o jurisdiction da comarca de domicílio do(a) CLIENT, nos termos do art. 101, I, do CDC.
+CLAUSE 10ª – JURISDICTION
+For the resolution of any disputes, the parties elect the jurisdiction of the CLIENT's domicile.
 
 {cidade}, {data_contrato}
 
@@ -188,9 +188,9 @@ PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}`,
         },
         {
-          name: "Contrato de Cobertura de Casamento",
-          description: "Para casamentos, formaturas e cerimônias. Inclui clauses about cobertura do evento, second photographer e álbum.",
-          content: `PHOTOGRAPHY SERVICES CONTRACT - CASAMENTO / CERIMÔNIA
+          name: "Wedding Coverage Contract",
+          description: "For weddings, graduations and ceremonies. Includes event coverage, second photographer and album clauses.",
+          content: `PHOTOGRAPHY SERVICES CONTRACT - WEDDING / CEREMONY
 
 CLIENT(S): {cliente}
 E-mail: {email}
@@ -203,56 +203,56 @@ CPF/CNPJ: {fotografo_documento}
 Address Profissional: {fotografo_endereco}
 
 CLAUSE 1ª – DO OBJETO
-Cobertura fotográfica do evento:
-• Tipo de Evento: {servico}
+Photographic coverage of the event:
+• Event Type: {servico}
 • Data: {data}
 • Time: {hourrio}
 • Local: {local}
-• Duration da Cobertura: {duracao}
+• Coverage Duration: {duracao}
 
-CLAUSE 2ª – DO VALOR E PAGAMENTO
+CLAUSE 2ª – DO AMOUNT E PAGAMENTO
 2.1. Valor total: £ {valor}.
-2.2. Sinal de 30% na signature para reserva da data; 40% until 30 days before; 30% until 7 days before.
-2.3. Formas: PIX, bank transfer or payment link.
-2.4. A reserva da data somente will be confirmada after o recebimento do sinal.
+2.2. 30% deposit upon signing to reserve the date; 40% due 30 days before; 30% due 7 days before.
+2.3. Methods: bank transfer or payment link.
+2.4. The date reservation will only be confirmed after receipt of the deposit.
 
-CLAUSE 3ª – DOS SERVIÇOS INCLUÍDOS
-3.1. Cobertura fotográfica completa (cerimônia e recepção); editing profissional; betweenga mínima de 300 fotos em alta resolução; galeria online; making of.
-3.2. Prazo de betweenga: until 45 business days after o evento.
+CLAUSE 3ª – INCLUDED SERVICES
+3.1. Complete photographic coverage (ceremony and reception); professional editing; minimum delivery of 300 high-resolution photos; online gallery; behind the scenes.
+3.2. Delivery time: up to 45 business days after the event.
 
-CLAUSE 4ª – DA COBERTURA DO EVENTO
-4.1. O(A) photographer(a) cobrirá os principais moments com profissionalismo e liberdade artística.
-4.2. O(A) CLIENT mustrá informar previamente moments específicos que deseja registrados.
+CLAUSE 4ª – EVENT COVERAGE
+4.1. The photographer will cover the main moments with professionalism and artistic freedom.
+4.2. The CLIENT must inform in advance of specific moments they wish to be captured.
 
-CLAUSE 5ª – DOS DIREITOS AUTORAIS (Lei 9.610/1998)
-5.1. Photographys are obras autorais protegidas. CLIENT recebe licença de uso pessoal e familiar.
-5.2. Uso comercial por terceiros requer autorização expressa.
-5.3. Vedada change ou aplicação de filtros sem autorização.
+CLAUSE 5ª – COPYRIGHT
+5.1. Photographs are protected works of authorship. CLIENT receives a personal and family use licence.
+5.2. Commercial use by third parties requires express authorisation.
+5.3. Alteration or application of filters without authorisation is prohibited.
 
-CLAUSE 6ª – DO DIREITO DE IMAGEM
-6.1. CLIENT autoriza uso para portfólio, redes sociais e site do(a) photographer(a).
-6.2. Restrições mustm ser comunicadas por escrito before do evento.
+CLAUSE 6ª – IMAGE RIGHTS
+6.1. CLIENT authorises use for the photographer's portfolio, social media and website.
+6.2. Restrictions must be communicated in writing before the event.
 
-CLAUSE 7ª – DO CANCELAMENTO
-7.1. Até 90 days before: devolução de 80% do sinal.
-7.2. Entre 90 e 30 days: devolução de 50% do sinal.
-7.3. Menos de 30 days: sinal not devolvido.
-7.4. Cancellation pelo(a) PHOTOGRAPHER(A): devolução integral + penalty de 20%.
-7.5. Força maior: reagendamento sem ônus.
+CLAUSE 7ª – CANCELLATION
+7.1. Up to 90 days before: 80% refund of deposit.
+7.2. Between 90 and 30 days: 50% refund of deposit.
+7.3. Less than 30 days: deposit not refunded.
+7.4. Cancellation by the PHOTOGRAPHER: full refund + 20% penalty.
+7.5. Force majeure: rescheduling at no cost.
 
-CLAUSE 8ª – DA RESPONSABILIDADE
-8.1. Equipamento profissional com backup (second corpo de câmera).
-8.2. Falha técnica com perda total: devolução integral dos valores.
+CLAUSE 8ª – LIABILITY
+8.1. Professional equipment with backup (second camera body).
+8.2. Technical failure with total loss: full refund of all amounts.
 
-CLAUSE 9ª – DA ALIMENTAÇÃO E LOGÍSTICA
-9.1. CLIENT providenciará refeição para photographer(a) e assistente(s).
-9.2. Deslocamentos superiores a 50 km: custo adicional de transporte.
+CLAUSE 9ª – MEALS AND LOGISTICS
+9.1. CLIENT will provide meals for photographer and assistant(s).
+9.2. Travel over 50 km: additional transport cost.
 
-CLAUSE 10ª – DA PROTEÇÃO DE DADOS (LGPD)
-10.1. Dados pessoais tratados com sigilo, conforme Lei 13.709/2018.
+CLAUSE 10ª – DATA PROTECTION
+10.1. Personal data treated with confidentiality, in compliance with data protection legislation.
 
-CLAUSE 11ª – DO FORO
-Jurisdiction da comarca de domicílio do(a) CLIENT.
+CLAUSE 11ª – JURISDICTION
+Jurisdiction of the CLIENT's domicile.
 
 {cidade}, {data_contrato}
 
@@ -265,9 +265,9 @@ PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}`,
         },
         {
-          name: "Contrato de Evento Corporactive / Social",
-          description: "Para festas, birthdays, formaturas, eventos corporactives, confraternizações e lançamentos.",
-          content: `PHOTOGRAPHY SERVICES CONTRACT - EVENTO
+          name: "Corporate / Social Event Contract",
+          description: "For parties, birthdays, graduations, corporate events, celebrations and launches.",
+          content: `PHOTOGRAPHY SERVICES CONTRACT - EVENT
 
 CLIENT: {cliente}
 E-mail: {email}
@@ -280,47 +280,47 @@ CPF/CNPJ: {fotografo_documento}
 Address Profissional: {fotografo_endereco}
 
 CLAUSE 1ª – DO OBJETO
-Cobertura fotográfica do evento:
-• Tipo de Evento: {servico}
+Photographic coverage of the event:
+• Event Type: {servico}
 • Data: {data}
 • Time: {hourrio}
 • Local: {local}
 • Duration: {duracao}
 
-CLAUSE 2ª – DO VALOR E PAGAMENTO
+CLAUSE 2ª – DO AMOUNT E PAGAMENTO
 2.1. Valor total: £ {valor}.
-2.2. 50% de sinal na contratação; 50% until a data do evento.
-2.3. Formas: PIX, bank transfer or payment link.
+2.2. 50% deposit upon booking; 50% due by the event date.
+2.3. Methods: bank transfer or payment link.
 
-CLAUSE 3ª – DOS SERVIÇOS
-3.1. Cobertura fotográfica pelo period photographer; editing profissional; betweenga digital em galeria online (alta resolução).
-3.2. Prazo de betweenga: until 20 business days after o evento.
+CLAUSE 3ª – SERVICES
+3.1. Photographic coverage for the agreed period; professional editing; digital delivery via online gallery (high resolution).
+3.2. Delivery time: up to 20 business days after the event.
 
-CLAUSE 4ª – DOS DIREITOS AUTORAIS (Lei 9.610/1998)
-4.1. Photographer(a) é titular dos copyright.
-4.2. CLIENT recebe licença de uso institucional e divulgação do evento.
-4.3. Uso em campanhas publicitárias requer autorização adicional.
+CLAUSE 4ª – COPYRIGHT
+4.1. Photographer holds the copyright.
+4.2. CLIENT receives an institutional use licence for event promotion.
+4.3. Use in advertising campaigns requires additional authorisation.
 
-CLAUSE 5ª – DO DIREITO DE IMAGEM
-5.1. CLIENT declara possuir autorização dos participbefore para registro fotográfico.
-5.2. Photographer(a) canrá usar imagens no portfólio, salvo restrição expressa.
+CLAUSE 5ª – IMAGE RIGHTS
+5.1. CLIENT declares having authorisation from participants for photographic recording.
+5.2. Photographer may use images in portfolio, unless expressly restricted.
 
-CLAUSE 6ª – DO CANCELAMENTO
-6.1. Mais de 15 days: devolução integral do sinal.
-6.2. Menos de 15 days: sinal retido as taxa de reserva.
-6.3. No day ou not comparecimento: valor total devido.
-6.4. Reagendamento permitido uma vez, com aviso de 72 hours.
+CLAUSE 6ª – CANCELLATION
+6.1. More than 15 days: full refund of deposit.
+6.2. Less than 15 days: deposit retained as booking fee.
+6.3. On the day or no-show: full amount due.
+6.4. Rescheduling permitted once, with 72 hours notice.
 
-CLAUSE 7ª – CONDIÇÕES GERAIS
-7.1. Acesso livre aos ambientes do evento.
-7.2. Alimentação para eventos com duration superior a 4 hours.
+CLAUSE 7ª – GENERAL CONDITIONS
+7.1. Free access to all event areas.
+7.2. Meals for events lasting more than 4 hours.
 
-CLAUSE 8ª – PROTEÇÃO DE DADOS (LGPD)
-8.1. Dados pessoais tratados exclusivemente para execução do contrato.
-8.2. Imagens de menores not serão usadas para divulgação sem autorização dos responsáveis.
+CLAUSE 8ª – DATA PROTECTION
+8.1. Personal data processed exclusively for contract execution.
+8.2. Images of minors will not be used for promotion without authorisation from guardians.
 
-CLAUSE 9ª – DO FORO
-Jurisdiction da comarca de domicílio do(a) CLIENT.
+CLAUSE 9ª – JURISDICTION
+Jurisdiction of the CLIENT's domicile.
 
 {cidade}, {data_contrato}
 
@@ -333,9 +333,9 @@ PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}`,
         },
         {
-          name: "Contrato Simplificado de Photography",
-          description: "Modelo simples e direto para qualquer tipo de service fotográfico. Ideal para trabalhos rápidos e sessões avulsas.",
-          content: `CONTRATO SIMPLIFICADO DE PRESTAÇÃO DE SERVIÇOS FOTOGRÁFICOS
+          name: "Simplified Photography Contract",
+          description: "Simple and straightforward template for any type of photography service. Ideal for quick jobs and one-off sessions.",
+          content: `SIMPLIFIED PHOTOGRAPHY SERVICES CONTRACT
 
 CLIENT: {cliente}
 E-mail: {email} | Telefone: {telefone}
@@ -344,23 +344,23 @@ CPF: {cpf}
 PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}
 
-1. SERVIÇO: {servico}
-2. DATA: {data} | HORÁRIO: {hourrio}
+1. SERVICE: {servico}
+2. DATA: {data} | TIME: {hourrio}
 3. LOCAL: {local}
-4. VALOR: £ {valor}
-5. PAGAMENTO: Conforme acordado between as partes.
+4. AMOUNT: £ {valor}
+5. PAYMENT: As agreed between the parties.
 
-6. ENTREGA: Fotos editadas em until 15 business days via galeria digital.
+6. DELIVERY: Edited photos within 15 business days via digital gallery.
 
-7. DIREITOS AUTORAIS: As photographys are de autoria do(a) PHOTOGRAPHER(A), conforme Lei 9.610/98. O(A) CLIENT recebe licença de uso pessoal.
+7. COPYRIGHT: The photographs are authored by the PHOTOGRAPHER. The CLIENT receives a personal use licence.
 
-8. CANCELAMENTO: Cancellations com menos de 48h de antecedência implicam na retenção de 50% do valor as taxa de reserva.
+8. CANCELLATION: Cancellations with less than 48 hours notice will result in retention of 50% of the amount as a booking fee.
 
-9. IMAGEM: O(A) CLIENT autoriza ( ) SIM ( ) NÃO o uso das fotos para portfólio do(a) photographer(a).
+9. IMAGE: The CLIENT authorises ( ) YES ( ) NO the use of photos for the photographer's portfolio.
 
-10. LGPD: Dados pessoais tratados conforme Lei 13.709/2018, exclusivemente para este contrato.
+10. DATA PROTECTION: Personal data processed in compliance with data protection legislation, exclusively for this contract.
 
-11. FORO: Comarca de domicílio do(a) CLIENT.
+11. JURISDICTION: CLIENT's domicile.
 
 {cidade}, {data_contrato}
 
@@ -386,7 +386,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
 
   /**
    * Generate contract from appointment + template
-   * Substitui todas as variáveis com dados pounds do agendamento
+   * Replaces all variables with real appointment data
    */
   generateFromAppointment: protectedProcedure
     .input(z.object({

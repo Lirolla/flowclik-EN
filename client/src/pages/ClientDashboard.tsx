@@ -85,7 +85,7 @@ export default function ClientDashboard() {
         {/* Header */}
         <div>
           <h1 className="text-3xl font-bold mb-2">Bem-vindo!</h1>
-          <p className="text-gray-400">Acompanhe o andamento do seu projeto fotográfico</p>
+          <p className="text-gray-400">Acompanhe o andamento do seu projeto photography</p>
         </div>
         
         {/* Complete Profile Alert */}

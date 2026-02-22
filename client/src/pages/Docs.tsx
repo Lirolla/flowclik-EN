@@ -128,7 +128,7 @@ Pronto! Agora you can fazer upload de fotos.
 - Finaliza compra com cartão
 - Recebe fotos sem watermark por email
 
-**Dica:** Ótimo para vender fotos de eventos (formaturas, festas, etc)
+**Dica:** Ótimo para vender fotos de eventos (graduations, festas, etc)
       ` },
     ],
   },
@@ -248,7 +248,7 @@ Pronto! Agora you can fazer upload de fotos.
 - Ensaio individual: £ 300
 - Ensaio casal: £ 450
 - Casamento: £ 2.500
-- Formatura: £ 1.800
+- Graduation: £ 1.800
       ` },
       { id: "portfolio", title: "Gerenciar portfólio", content: `
 # Gerenciar portfólio

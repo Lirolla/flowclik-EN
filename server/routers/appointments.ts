@@ -428,7 +428,7 @@ export const appointmentsRouter = router({
                 html: `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#1a1f2e;padding:40px;border-radius:16px;color:#e5e7eb;">
                   <h1 style="color:#c026d3;font-size:24px;">📸 Ensaio Realizado!</h1>
                   <p>Hello <strong>${clientName}</strong>,</p>
-                  <p>Seu ensaio fotográfico foi realizado com sucesso! Agora suas fotos estão sendo processadas com todo carinho.</p>
+                  <p>Seu ensaio photography foi realizado com sucesso! Agora suas fotos estão sendo processadas com todo carinho.</p>
                   <div style="background:#141824;border-radius:10px;padding:15px;margin:20px 0;border-left:3px solid #c026d3;">
                     <p style="margin:5px 0;">📅 Data: <strong>${dateStr}</strong></p>
                     <p style="margin:5px 0;">⏰ Time: <strong>${timeStr}</strong></p>

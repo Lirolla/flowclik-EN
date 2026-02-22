@@ -246,7 +246,7 @@ function EventsTab() {
               </select>
             </div>
             <div>
-              <label className="text-xs text-muted-foreground mb-1 block">Tipo de Evento *</label>
+              <label className="text-xs text-muted-foreground mb-1 block">Event Type *</label>
               <select
                 value={form.eventType}
                 onChange={e => setForm({ ...form, eventType: e.target.value as EventType })}

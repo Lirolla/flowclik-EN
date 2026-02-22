@@ -397,7 +397,7 @@ export default function BookAppointment() {
                   <div>
                     <Label htmlFor="duration" className="flex items-center gap-2">
                       <Timer className="w-4 h-4" />
-                      Duration Estimada
+                      Estimated Duration
                     </Label>
                     <Input
                       id="duration"

@@ -170,8 +170,8 @@ export default function PoliticaDeRefund() {
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">11. Changes nesta Política</h2>
               <p className="text-zinc-300 leading-relaxed">
                 Reservamo-nos o direito de modificar esta Refund Policy a qualquer momento. Mudanças 
-                significativas serão comunicadas por email com pelo menos 30 days de antecedência. Assinaturas 
-                ativas no momento da mudança continuarão regidas pela política vigente no momento da contratação.
+                significativas serão comunicadas por email com pelo menos 30 days de notice. Assinaturas 
+                ativas no momento da mudança continuarão regidas pela política vigente no momento da booking.
               </p>
             </section>
 

@@ -53,7 +53,7 @@ export const paymentsRouter = router({
       let totalPrice = Math.round(photo.price * 100); // Base price in cents
 
       // Build product description
-      let productDescription = "Foto Digital (Alta Resolução)";
+      let productDescription = "Foto Digital (Alta Resolution)";
 
       // Create Stripe checkout session
       const session = await createPhotoCheckoutSession({
@@ -125,7 +125,7 @@ export const paymentsRouter = router({
       // Create Stripe checkout session
       const session = await createAppointmentCheckoutSession({
         appointmentId: appointment.id,
-        serviceName: `Service Fotográfico - ${appointment.clientName}`,
+        serviceName: `Service Photography - ${appointment.clientName}`,
         amount: Math.round(input.amount * 100), // Convert to cents
         clientEmail: appointment.clientEmail,
         clientName: appointment.clientName,

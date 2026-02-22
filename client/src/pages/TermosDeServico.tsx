@@ -93,7 +93,7 @@ export default function TuemosDeServico() {
                 <li>Fazer upload de conteúdo ofensivo, difamatório ou que viole copyright</li>
                 <li>Tentar acessar áreas restritas do sistema ou contas de outros usuários</li>
                 <li>Sobrecarregar ou interferir com a infraestrutura da plataforma</li>
-                <li>Revender ou redistribuir nossos services sem autorização</li>
+                <li>Revender ou redistribuir nossos services sem authorisation</li>
               </ul>
             </section>
 

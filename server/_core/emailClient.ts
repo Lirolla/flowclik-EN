@@ -84,7 +84,7 @@ Team Lirolla
       body: `
 Hello ${data.clientName},
 
-Seu ensaio fotográfico foi realizado com sucesso! 📸
+Seu ensaio photography foi realizado com sucesso! 📸
 
 Agora estamos trabalhando na editing das fotos. Em breve you receberá uma notification para selecionar suas favoritas.
 

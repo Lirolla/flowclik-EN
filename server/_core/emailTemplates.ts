@@ -133,7 +133,7 @@ interface SelectionData {
 export async function sendAppointmentConfirmationEmail(data: AppointmentData): Promise<boolean> {
   const html = base(`
 <h1 style="color:#c026d3;font-size:24px;margin:0 0 8px 0;">📅 Agendamento Confirmado!</h1>
-<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Seu ensaio fotográfico is marcado</p>
+<p style="color:#9ca3af;font-size:14px;margin:0 0 25px 0;">Seu ensaio photography is marcado</p>
 <p style="color:#e5e7eb;font-size:15px;line-height:1.7;">Hello <strong>${data.clientName}</strong>,</p>
 <p style="color:#d1d5db;font-size:15px;line-height:1.7;">Your appointment has been confirmed com sucesso! Estamos ansiosos para capturar moments especiais para you.</p>
 ${card([

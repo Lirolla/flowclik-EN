@@ -35,7 +35,7 @@ export default function Home() {
                 Portfólio de Photography
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-                Conheça nossos melhores trabalhos fotográficos
+                Conheça nossos melhores trabalhos photographys
               </p>
             </div>
 

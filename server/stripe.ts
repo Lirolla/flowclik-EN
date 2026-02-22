@@ -42,7 +42,7 @@ export async function createPhotoCheckoutSession({
           currency: "brl",
           product_data: {
             name: photoTitle,
-            description: photoDescription || "Foto em alta resolução",
+            description: photoDescription || "Foto em alta resolution",
             images: [photoUrl],
           },
           unit_amount: amount,
@@ -140,7 +140,7 @@ export async function createAppointmentCheckoutSession({
           currency: "brl",
           product_data: {
             name: `Agendamento: ${serviceName}`,
-            description: "Pagamento de service fotográfico",
+            description: "Pagamento de service photography",
           },
           unit_amount: amount,
         },
