@@ -111,7 +111,7 @@ export default function AdminUsage() {
             <div className="flex items-center justify-between">
               <CardTitle className="text-lg flex items-center gap-2">
                 <FolderOpen className="w-5 h-5 text-purple-500" />
-                Gallerys
+                Galleries
               </CardTitle>
               <span className={`text-2xl font-bold ${getUsageColor(stats.galleries.percentage)}`}>
                 {stats.galleries.percentage}%

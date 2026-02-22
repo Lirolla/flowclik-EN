@@ -64,7 +64,7 @@ export default function AdminSubscription() {
     const plan = subscription?.plan || 'starter';
     switch (plan) {
       case 'full':
-        return { name: 'Lifetime Plan', price: 'Free', priceNum: '0,00', description: 'Acesso complete e unlimited', storageText: 'Storage Unlimited', galleryText: 'Gallerys Unlimiteds', color: 'text-green-500', badge: 'Lifetime' };
+        return { name: 'Lifetime Plan', price: 'Free', priceNum: '0,00', description: 'Complete and unlimited access', storageText: 'Storage Unlimited', galleryText: 'Unlimited Galleries', color: 'text-green-500', badge: 'Lifetime' };
       case 'courtesy':
         return { name: 'Plyear Courtesy', price: 'Free', priceNum: '0,00', description: 'Courtesy plan with add-on options', storageText: '1GB de storage', galleryText: '2 galerias', color: 'text-amber-500', badge: 'Courtesy' };
       case 'starter':
@@ -155,7 +155,7 @@ export default function AdminSubscription() {
       utils.subscriptions.getCurrent.invalidate();
       window.history.replaceState({}, '', '/admin/subscription');
     } else if (params.get('success') === 'galleries') {
-      toast.success("+10 Gallerys adicionadas com sucesso!");
+      toast.success("+10 Galleries adicionadas com sucesso!");
       utils.subscriptions.getActiveAddons.invalidate();
       utils.subscriptions.getCurrent.invalidate();
       window.history.replaceState({}, '', '/admin/subscription');
@@ -398,12 +398,12 @@ export default function AdminSubscription() {
             </CardContent>
           </Card>
 
-          {/* Gallerys */}
+          {/* Galleries */}
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-lg">
                 <Image className="w-5 h-5 text-purple-500" />
-                Gallerys
+                Galleries
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -466,7 +466,7 @@ export default function AdminSubscription() {
                         </div>
                         <div>
                           <p className="font-semibold">
-                            {addon.addonType === 'storage' ? '+10GB Storage' : '+10 Gallerys'}
+                            {addon.addonType === 'storage' ? '+10GB Storage' : '+10 Galleries'}
                           </p>
                           <div className="flex items-center gap-4 text-sm text-muted-foreground mt-1 flex-wrap">
                             <span className="flex items-center gap-1">
@@ -482,7 +482,7 @@ export default function AdminSubscription() {
                       </div>
                       <div className="flex items-center gap-4">
                         <div className="text-right">
-                          <p className={`font-bold ${addon.addonType === 'storage' ? 'text-blue-500' : 'text-purple-500'}`}>£ 29,90</p>
+                          <p className={`font-bold ${addon.addonType === 'storage' ? 'text-blue-500' : 'text-purple-500'}`}>£ 3.99</p>
                           <p className="text-xs text-muted-foreground">/month</p>
                         </div>
                         <Badge variant="default" className="bg-green-600">Active</Badge>
@@ -533,7 +533,7 @@ export default function AdminSubscription() {
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <p className="text-4xl font-bold text-blue-600">£ 29,90</p>
+                    <p className="text-4xl font-bold text-blue-600">£ 3.99</p>
                     <p className="text-sm text-muted-foreground">/month</p>
                   </div>
                   <Button
@@ -558,21 +558,21 @@ export default function AdminSubscription() {
               </CardContent>
             </Card>
 
-            {/* +10 Gallerys */}
+            {/* +10 Galleries */}
             <Card className="border-2 border-purple-500/20">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                   <Image className="w-6 h-6 text-purple-500" />
-                  +10 Gallerys
+                  +10 Galleries
                 </CardTitle>
                 <CardDescription>
-                  Crie mais galerias para yours clientes
+                  Create more galleries for your clients
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   <div>
-                    <p className="text-4xl font-bold text-purple-600">£ 29,90</p>
+                    <p className="text-4xl font-bold text-purple-600">£ 3.99</p>
                     <p className="text-sm text-muted-foreground">/month</p>
                   </div>
                   <Button
@@ -586,7 +586,7 @@ export default function AdminSubscription() {
                     ) : (
                       <ShoppingCart className="w-4 h-4 mr-2" />
                     )}
-                    Add +10 Gallerys
+                    Add +10 Galleries
                   </Button>
                   {galleryAddonsCount > 0 && (
                     <p className="text-xs text-center text-muted-foreground">
@@ -629,7 +629,7 @@ export default function AdminSubscription() {
             <AlertDialogDescription>
               {showCancelAddonDialog?.type === 'storage' 
                 ? "You is prestes a cancsher um add-on de +10GB de storage. O add-will remain active until the end of the already paid period."
-                : "You is prestes a cancsher um add-on de +10 Gallerys. O add-will remain active until the end of the already paid period."}
+                : "You are about to cancel a +10 Galleries add-on. The add-on will remain active until the end of the already paid period."}
               <br /><br />
               Se o your uso current exceder o limite sem este add-on, o cancellation will be bloqueado. Nesse caso, libere recursos first.
               <br /><br />

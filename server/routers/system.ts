@@ -46,8 +46,8 @@ export const systemRouter = router({
               WHEN plan = 'full' THEN 0
               WHEN plan = 'courtesy' THEN 0
               WHEN plan = 'starter' THEN 69.90 + 
-                (FLOOR(COALESCE(extraStorage, 0) / (10 * 1073741824)) * 29.90) +
-                (FLOOR(COALESCE(extraGalleries, 0) / 10) * 29.90)
+                (FLOOR(COALESCE(extraStorage, 0) / (10 * 1073741824)) * 3.99) +
+                (FLOOR(COALESCE(extraGalleries, 0) / 10) * 3.99)
               ELSE 0
             END
           )

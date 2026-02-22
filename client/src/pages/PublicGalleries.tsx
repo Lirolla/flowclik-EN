@@ -23,7 +23,7 @@ export default function PublicGalleries() {
         <div className="container">
           <div className="max-w-3xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold font-serif mb-6">
-              Gallerys
+              Galleries
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground">
               Explore our collections of unique moments

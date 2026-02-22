@@ -180,7 +180,7 @@ function AdminSessionGalleryContent() {
             </p>
             <Button asChild>
               <Link href={`/admin/galleries/${galleryData.id}/upload`}>
-                <a>Ir para Upload de Gallerys</a>
+                <a>Go to Gallery Upload</a>
               </Link>
             </Button>
             <p className="text-sm text-muted-foreground mt-4">

@@ -189,7 +189,7 @@ export async function checkUsageWarnings(ctx: any) {
   if (galleryPercent > 90) {
     warnings.push(`⚠️ Critical galleries: ${galleryCount}/${subscription.galleryLimit}`);
   } else if (galleryPercent > 80) {
-    warnings.push(`⚠️ Gallerys altas: ${galleryCount}/${subscription.galleryLimit}`);
+    warnings.push(`⚠️ Galleries high: ${galleryCount}/${subscription.galleryLimit}`);
   }
 
   return warnings.length > 0 ? warnings : null;

@@ -132,7 +132,7 @@ export default function SistemaFotografos() {
               if (photographer.plan === "starter") monthlyRevenue += 69.90;
               // Courtesy e Lifetime not pagam mensalidade base
               // courtesy = £ 0,00, full = £ 0,00
-              monthlyRevenue += extraStorageCount * 29.90; // +10GB por £ 29,90
+              monthlyRevenue += extraStorageCount * 3.99; // +10GB for £3.99
               monthlyRevenue += extraGalleriesCount * 39.90; // +10 galerias por £ 39,90
 
               const siteUrl = (photographer as any)?.customDomain 
@@ -249,7 +249,7 @@ export default function SistemaFotografos() {
                               ♾️ Storage Unlimited
                             </p>
                             <p className="text-xs text-green-400">
-                              ♾️ Gallerys Unlimiteds
+                              ♾️ Unlimited Galleries
                             </p>
                           </>
                         ) : (
@@ -280,12 +280,12 @@ export default function SistemaFotografos() {
                         <div className="mt-2 space-y-1">
                           {extraStorageCount > 0 && (
                             <p className="text-xs text-gray-400">
-                              +{extraStorageCount}x Storage (£ {(extraStorageCount * 29.90).toFixed(2).replace('.', ',')})
+                              +{extraStorageCount}x Storage (£ {(extraStorageCount * 3.99).toFixed(2).replace('.', ',')})
                             </p>
                           )}
                           {extraGalleriesCount > 0 && (
                             <p className="text-xs text-gray-400">
-                              +{extraGalleriesCount}x Gallerys (£ {(extraGalleriesCount * 39.90).toFixed(2).replace('.', ',')})
+                              +{extraGalleriesCount}x Galleries (£ {(extraGalleriesCount * 3.99).toFixed(2).replace('.', ',')})
                             </p>
                           )}
                         </div>

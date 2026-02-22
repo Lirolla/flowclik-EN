@@ -68,7 +68,7 @@ export default function StockGallery() {
                   Home
                 </a>
                 <a href="/galleries" className="hover:text-primary transition-colors">
-                  Gallerys
+                  Galleries
                 </a>
                 <a href="/services" className="hover:text-primary transition-colors">
                   Services

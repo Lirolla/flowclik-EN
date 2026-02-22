@@ -133,7 +133,7 @@ export default function SistemaTenants() {
                       <div>
                         <p className="text-sm text-muted-foreground mb-1">
                           <FolderOpen className="h-3 w-3 inline mr-1" />
-                          Limite de Gallerys
+                          Gallery Limit
                         </p>
                         <p className="text-sm font-semibold">{tenant.galleryLimit} galerias</p>
                       </div>

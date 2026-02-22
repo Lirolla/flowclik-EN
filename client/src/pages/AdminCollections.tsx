@@ -160,7 +160,7 @@ function AdminCollectionsContent() {
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-2">
             <Folder className="w-8 h-8" />
-            Gallerys
+            Galleries
           </h1>
           <p className="text-muted-foreground mt-2">Manage your photo collections</p>
         </div>

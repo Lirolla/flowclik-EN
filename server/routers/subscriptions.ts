@@ -17,8 +17,8 @@ if (process.env.STRIPE_SECRET_KEY) {
 // Price IDs dos produtos Stripe (Production BR)
 const PRICE_IDS = {
   PLAN_BASIC: "price_1T35MO3qmmbjfC9dAO6yM22s",      // £ 69,90/month
-  ADDON_STORAGE: "price_1T35MR3qmmbjfC9dfpfFrAKJ",    // £ 29,90/month (+10GB)
-  ADDON_GALLERIES: "price_1T35MV3qmmbjfC9dGHxfo7cB",  // £29.90/month (+10 galleries)
+  ADDON_STORAGE: "price_1T35MR3qmmbjfC9dfpfFrAKJ",    // £3.99/month (+10GB)
+  ADDON_GALLERIES: "price_1T35MV3qmmbjfC9dGHxfo7cB",  // £3.99/month (+10 galleries)
 };
 
 export const subscriptionsRouter = router({
