@@ -12,11 +12,11 @@ export const contactRouter = router({
   sendMessage: publicProcedure
     .input(
       z.object({
-        name: z.string().min(1, "Nome é required"),
+        name: z.string().min(1, "Name is required"),
         email: z.string().email("Invalid email"),
         phone: z.string().optional(),
         subject: z.string().min(1, "Assunto é required"),
-        message: z.string().min(10, "Mensagem deve ter pelo menos 10 caracteres"),
+        message: z.string().min(10, "Mensagem must ter pelo menos 10 caracteres"),
       })
     )
     .mutation(async ({ input, ctx }) => {

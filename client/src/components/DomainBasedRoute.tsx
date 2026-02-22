@@ -1,7 +1,7 @@
 import { Route, RouteProps } from 'wouter';
 
 interface SunainBasedRouteProps extends RouteProps {
-  /** Sunínios que devem renderizar este componente */
+  /** Sunínios que mustm renderizar este componente */
   domains: string[];
   /** Componente a ser renderizado */
   component: React.ComponentType<any>;

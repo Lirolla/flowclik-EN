@@ -65,7 +65,7 @@ export default function AdminMessages() {
 
     sendMessageMutation.mutate({
       appointmentId: selectedAppointmentId,
-      senderId: 1, // Admin/Photographer ID (pode ser ctx.user.id no backend)
+      senderId: 1, // Admin/Photographer ID (can ser ctx.user.id no backend)
       senderRole: "admin",
       message: messageText.trim(),
     });
@@ -142,9 +142,9 @@ export default function AdminMessages() {
                 ) : (
                   <div className="flex flex-col items-center justify-center py-12 text-center">
                     <MessageSquare className="w-12 h-12 text-muted-foreground mb-3" />
-                    <p className="text-sm text-muted-foreground">Nonea conversa ainda</p>
+                    <p className="text-sm text-muted-foreground">Nonea conversa still</p>
                     <p className="text-xs text-muted-foreground mt-2">
-                      As conversas aparecerão quando os clientes enviarem mensagens
+                      As conversas aparecerão when os clientes enviarem mensagens
                     </p>
                   </div>
                 )}
@@ -206,7 +206,7 @@ export default function AdminMessages() {
                       </>
                     ) : (
                       <p className="text-sm text-muted-foreground text-center py-8">
-                        Nonea mensagem ainda. Envie a primeira!
+                        Nonea mensagem still. Envie a first!
                       </p>
                     )}
                   </div>

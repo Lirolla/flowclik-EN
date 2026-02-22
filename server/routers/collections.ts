@@ -153,15 +153,15 @@ export const collectionsRouter = router({
         isFeatured: restInput.isFeatured ?? false,
         isPublic: restInput.isPublic ?? true,
         sortOrder: restInput.sortOrder ?? 0,
-        salesEnabled: 0, // Padrão
-        pricePerPhoto: 2500, // Padrão
+        salesEnabled: 0, // Default
+        pricePerPhoto: 2500, // Default
       };
       
-      // Adicionar campos opcionais apenas se existirem
+      // Adicionar campos opcionais only se existirem
       if (restInput.description) insertData.description = restInput.description;
       if (restInput.coverImageUrl) insertData.coverImageUrl = restInput.coverImageUrl;
       if (restInput.password) insertData.password = restInput.password;
-      if (eventDate) insertData.eventDate = eventDate; // Já vem no formato YYYY-MM-DD
+      if (eventDate) insertData.eventDate = eventDate; // Already vem no formato YYYY-MM-DD
 
       console.log('[Collections Create] Insert data:', JSON.stringify(insertData, null, 2));
 
@@ -203,7 +203,7 @@ export const collectionsRouter = router({
 
       const { id, ...data } = input;
 
-      console.log('[DEBUG collections.update] Input recebido:', JSON.stringify(input, null, 2));
+      console.log('[DEBUG collections.update] Input received:', JSON.stringify(input, null, 2));
 
       // Converter boolean para tinyint (0 ou 1)
       const dbData: any = { ...data };
@@ -294,7 +294,7 @@ export const collectionsRouter = router({
           console.log(`[R2] Gallery ${input.id}: ${keysToDelete.length} arquivos deletados do R2`);
         } catch (r2Error: any) {
           console.error(`[R2] Erro ao deletar arquivos da galeria ${input.id}:`, r2Error.message);
-          // Continua mesmo se falhar no R2 - não bloqueia a deleção do banco
+          // Continua mesmo se falhar no R2 - not bloqueia a deleção do banco
         }
       }
 
@@ -528,7 +528,7 @@ export const collectionsRouter = router({
     const dbConn = await getDb();
     if (!dbConn) throw new Error('Database not available');
     
-    // Deletar fotos primeiro
+    // Deletar fotos first
     await db!.delete(medayItems).where(sql`collectionId >= 21`);
     
     // Deletar galerias

@@ -8,7 +8,7 @@ export default function ThemeWrapper({ children }: ThemeWrapperProps) {
   const { data: siteConfig } = trpc.siteConfig.get.useQuery();
   const [location] = useLocation();
   
-  // Aplica tema personalizado em rotas do site do photographer
+  // Aplica tema custom em rotas do site do photographer
   // Exclui: /admin, /system, /register, /login, /docs, /termos, /politica, /about-nos, /cliente
   const isAdminRoute = location.startsWith('/admin') || location.startsWith('/system');
   const isFlowClikRoute = location === '/register' || location === '/login' || location === '/docs' || 
@@ -18,7 +18,7 @@ export default function ThemeWrapper({ children }: ThemeWrapperProps) {
   const shouldApplyTheme = !isAdminRoute && !isFlowClikRoute && !isClientRoute;
   useEffect(() => {
     if (!siteConfig || !shouldApplyTheme) {
-      // Resetar para tema padrão se não for rota pública
+      // Resetar para tema default se not for rota pública
       const root = document.documentElement;
       root.removeAttribute("data-theme-mode");
       root.removeAttribute("data-accent-color");
@@ -31,7 +31,7 @@ export default function ThemeWrapper({ children }: ThemeWrapperProps) {
     const layout = siteConfig.siteThemeLayout || "classic";
     root.setAttribute("data-layout", layout);
     
-    // Wedding Videos tem cores fixas - não aplicar accent-color nem theme-mode
+    // Wedding Videos tem cores fixas - not aplicar accent-color nem theme-mode
     if (layout === "wedding-videos") {
       root.removeAttribute("data-accent-color");
       root.removeAttribute("data-theme-mode");

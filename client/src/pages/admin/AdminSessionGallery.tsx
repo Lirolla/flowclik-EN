@@ -72,7 +72,7 @@ function AdminSessionGalleryContent() {
           <CardContent className="py-12 text-center">
             <Upload className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-xl font-semibold mb-2">
-              Nonea galeria criada ainda
+              Nonea galeria criada still
             </h3>
             <p className="text-muted-foreground mb-6">
               Crie uma galeria privada para fazer upload das fotos do ensaio
@@ -162,7 +162,7 @@ function AdminSessionGalleryContent() {
             </Button>
           </div>
           <p className="text-sm text-muted-foreground mt-2">
-            O cliente precisará digitar o email cadastrado para acessar as fotos
+            O cliente needsrá digitar o email cadastrado para acessar as fotos
           </p>
         </CardContent>
       </Card>

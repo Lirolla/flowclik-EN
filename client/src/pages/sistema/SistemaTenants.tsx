@@ -94,7 +94,7 @@ export default function SistemaTenants() {
                     {tenant.plan && getPlanBadge(tenant.plan)}
                     {tenant.subscriptionStatus && getStatusBadge(tenant.subscriptionStatus)}
                     {tenant.status === "suspended" && (
-                      <Badge variant="destructive">Suspenso</Badge>
+                      <Badge variant="destructive">Suspended</Badge>
                     )}
                   </div>
 

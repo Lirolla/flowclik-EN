@@ -33,7 +33,7 @@ export default function CompleteProfileDaylog({ open, onOpenChange, user }: Comp
     onSuccess: () => {
       toast({
         title: "Profile atualizado!",
-        description: "Seus dados foram salvos com sucesso.",
+        description: "Seus dados were salvos com sucesso.",
       });
       utils.auth.me.invalidate();
       onOpenChange(false);
@@ -79,7 +79,7 @@ export default function CompleteProfileDaylog({ open, onOpenChange, user }: Comp
             Complete seus dados
           </DaylogTitle>
           <DaylogDescription>
-            Para uma melhor experiência, precisamos de algumas informações adicionais.
+            Para uma melhor experiência, needsmos de algumas information adicionais.
             Esses dados nos helpm a enviar produtos físicos e manter contato.
           </DaylogDescription>
         </DaylogHeader>

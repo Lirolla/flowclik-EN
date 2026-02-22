@@ -174,7 +174,7 @@ function AdminContractsContent() {
     setIsDaylogOpen(true);
   };
 
-  // Filtrar agendamentos actives (não cancelleds)
+  // Filtrar agendamentos actives (not cancelleds)
   const activeAppointments = appointmentsList?.filter(
     (a: any) => a.status !== 'cancelled'
   ) || [];
@@ -249,7 +249,7 @@ function AdminContractsContent() {
                       <span><code>{"{email}"}</code> - E-mail</span>
                       <span><code>{"{telefone}"}</code> - Telefone</span>
                       <span><code>{"{cpf}"}</code> - CPF do cliente</span>
-                      <span><code>{"{servico}"}</code> - Tipo de serviço</span>
+                      <span><code>{"{servico}"}</code> - Tipo de service</span>
                       <span><code>{"{data}"}</code> - Data do agendamento</span>
                       <span><code>{"{hourrio}"}</code> - Time</span>
                       <span><code>{"{local}"}</code> - Local do evento</span>
@@ -297,7 +297,7 @@ function AdminContractsContent() {
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground mb-4">
-            Select um agendamento e um modelo de contrato. Os dados do cliente, serviço, data e valor serão preenchidos automaticamente.
+            Select um agendamento e um modelo de contrato. Os dados do cliente, service, data e valor serão preenchidos automaticamente.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Selecionar Agendamento */}
@@ -311,7 +311,7 @@ function AdminContractsContent() {
                 <option value="">Select um agendamento...</option>
                 {activeAppointments.map((apt: any) => (
                   <option key={apt.id} value={apt.id}>
-                    {apt.clientName} - {apt.customServiceName || apt.serviceName || 'Sem serviço'} - {apt.appointmentDate ? new Date(apt.appointmentDate).toLocaleDateString('en-GB') : 'No date'}
+                    {apt.clientName} - {apt.customServiceName || apt.serviceName || 'No service'} - {apt.appointmentDate ? new Date(apt.appointmentDate).toLocaleDateString('en-GB') : 'No date'}
                   </option>
                 ))}
               </select>
@@ -428,7 +428,7 @@ function AdminContractsContent() {
             />
           </div>
           <p className="text-xs text-muted-foreground mt-1">
-            You pode editar o texto acima antes de copiar, baixar ou enviar.
+            You can editar o texto above before de copiar, baixar ou enviar.
           </p>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-2 pt-2">
             <Button
@@ -507,7 +507,7 @@ function AdminContractsContent() {
               onClick={() => {
                 const phone = generatedInfo?.clientPhone?.replace(/\D/g, '') || '';
                 const phoneFormatted = phone.startsWith('55') ? phone : `55${phone}`;
-                const message = encodeURIComponent(`*${generatedInfo?.templateName || 'Contrato'}*\n\nHello ${generatedInfo?.clientName || ''}! Monue seu contrato:\n\n${generatedContent.substring(0, 1000)}...\n\n_Contrato completo será enviado em PDF._`);
+                const message = encodeURIComponent(`*${generatedInfo?.templateName || 'Contrato'}*\n\nHello ${generatedInfo?.clientName || ''}! Monue seu contrato:\n\n${generatedContent.substring(0, 1000)}...\n\n_Contrato completo will be enviado em PDF._`);
                 window.open(`https://wa.me/${phoneFormatted}?text=${message}`, '_blank');
               }}
             >

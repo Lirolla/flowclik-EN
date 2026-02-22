@@ -58,7 +58,7 @@ export const clientsRouter = router({
   create: protectedProcedure
     .input(
       z.object({
-        name: z.string().min(1, "Nome é required"),
+        name: z.string().min(1, "Name is required"),
         email: z.string().email("Invalid email"),
         phone: z.string().optional(),
         street: z.string().optional(),

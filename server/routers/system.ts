@@ -18,7 +18,7 @@ const adminProcedure = publicProcedure.use(({ ctx, next }) => {
   }
   throw new TRPCError({
     code: "FORBIDDEN",
-    message: "Administrators only podem acessar este recurso",
+    message: "Administrators only canm acessar este recurso",
   });
 });
 
@@ -44,7 +44,7 @@ export const systemRouter = router({
           SUM(
             CASE 
               WHEN plan = 'full' THEN 0
-              WHEN plan = 'cortesia' THEN 0
+              WHEN plan = 'courtesy' THEN 0
               WHEN plan = 'starter' THEN 69.90 + 
                 (FLOOR(COALESCE(extraStorage, 0) / (10 * 1073741824)) * 29.90) +
                 (FLOOR(COALESCE(extraGalleries, 0) / 10) * 29.90)
@@ -184,7 +184,7 @@ export const systemRouter = router({
       )
       .orderBy(desc(announcements.createdAt));
 
-    // Filtrar avisos que o usuário já fechou
+    // Filtrar avisos que o usuário already fechou
     const viewedAnnouncements = await db
       .select()
       .from(announcementViews)
@@ -200,7 +200,7 @@ export const systemRouter = router({
     return activeAnnouncements.filter((a) => !dismissedIds.includes(a.id));
   }),
 
-  // Marcar aviso como visto/fechado
+  // Marcar aviso as visto/fechado
   dismissAnnouncement: protectedProcedure
     .input(z.object({ announcementId: z.number() }))
     .mutation(async ({ input, ctx }) => {
@@ -244,7 +244,7 @@ export const systemRouter = router({
     .input(
       z.object({
         tenantId: z.number(),
-        plan: z.enum(["starter", "cortesia", "full"]),
+        plan: z.enum(["starter", "courtesy", "full"]),
       })
     )
     .mutation(async ({ input }) => {
@@ -259,11 +259,11 @@ export const systemRouter = router({
       if (input.plan === "starter") {
         storageLimit = 10737418240; // 10GB
         galleryLimit = 10;
-      } else if (input.plan === "cortesia") {
+      } else if (input.plan === "courtesy") {
         storageLimit = 1073741824; // 1GB
         galleryLimit = 2;
       } else if (input.plan === "full") {
-        storageLimit = 107374182400; // 100GB (ilimitado na prática)
+        storageLimit = 107374182400; // 100GB (unlimited na prática)
         galleryLimit = 9999;
       }
 
@@ -409,8 +409,8 @@ export const systemRouter = router({
       };
     }
 
-    // Plyears cortesia e full nunca expiram
-    if (subscription.plan === "cortesia" || subscription.plan === "full") {
+    // Plyears courtesy e full never expiram
+    if (subscription.plan === "courtesy" || subscription.plan === "full") {
       return {
         isTrialing: false,
         isExpired: false,
@@ -439,13 +439,13 @@ export const systemRouter = router({
       isExpired = daysRemaining <= 0;
     }
 
-    // Se status é active, não está expired
+    // Se status é active, not is expired
     if (subscription.status === "active") {
       isExpired = false;
       daysRemaining = null;
     }
 
-    // Se status é past_due, cancelled ou paused, está bloqueado
+    // Se status é past_due, cancelled ou paused, is bloqueado
     if (subscription.status === "past_due" || subscription.status === "cancelled" || subscription.status === "paused") {
       isExpired = true;
       daysRemaining = 0;

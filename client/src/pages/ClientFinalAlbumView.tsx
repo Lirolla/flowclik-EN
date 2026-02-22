@@ -49,7 +49,7 @@ export default function ClientFinalAlbumView() {
     if (!appointment?.slug) {
       toast({
         title: "Error",
-        description: "Não foi possível gerar link de compartilhamento.",
+        description: "Not foi possível gerar link de compartilhamento.",
         variant: "destructive",
       });
       return;
@@ -82,7 +82,7 @@ export default function ClientFinalAlbumView() {
       console.error("Erro ao gerar ZIP:", error);
       toast({
         title: "Erro no download",
-        description: "Não foi possível preparar o download. Try again.",
+        description: "Not foi possível preparar o download. Try again.",
         variant: "destructive",
       });
     },
@@ -96,7 +96,7 @@ export default function ClientFinalAlbumView() {
 
     toast({
       title: "Preparando download...",
-      description: "Criando arquivo ZIP com todas as fotos. Isso pode levar alguns seconds.",
+      description: "Criando arquivo ZIP com todas as fotos. Isso can levar alguns seconds.",
     });
 
     generateZipMutation.mutate({ appointmentId });
@@ -163,10 +163,10 @@ export default function ClientFinalAlbumView() {
         {!finalPhotos || finalPhotos.length === 0 ? (
           <div className="text-center py-16 bg-card rounded-lg border">
             <p className="text-muted-foreground text-lg">
-              Seu álbum final ainda não está available.
+              Seu álbum final still not is available.
             </p>
             <p className="text-sm text-muted-foreground mt-2">
-              Aguarde enquanto o photographer finaliza a edição das suas fotos.
+              Aguarde enquanto o photographer finaliza a editing das suas fotos.
             </p>
           </div>
         ) : (

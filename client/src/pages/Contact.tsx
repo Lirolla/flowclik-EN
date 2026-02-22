@@ -46,7 +46,7 @@ export default function Contact() {
               Entre em Contato
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground">
-              Estamos prontos para transformar seus momentos em memórias eternas
+              Estamos prontos para transformar seus moments em memórias eternas
             </p>
           </div>
         </div>

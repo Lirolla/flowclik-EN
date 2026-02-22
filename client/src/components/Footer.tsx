@@ -6,7 +6,7 @@ export default function Footer() {
   const { data: siteConfig } = trpc.site.getConfig.useQuery();
   
   const siteName = siteConfig?.siteName || "FlowClik.com";
-  const siteTagline = siteConfig?.siteTagline || "A fotografia sempre foi meu modo de eternizar o que importa. Com mais de 20 years de estrada, registrei histórias em diversos contextos — cada imagem carregando alma, tempo e verdade.";
+  const siteTagline = siteConfig?.siteTagline || "A photography always foi meu modo de eternizar o que importa. Com mais de 20 years de estrada, registrei histórias em diversos contextos — cada imagem carregando alma, tempo e verdade.";
   
   return (
     <footer className="bg-background border-t border-border/50 mt-auto">
@@ -20,7 +20,7 @@ export default function Footer() {
           <div className="flex items-center justify-center gap-6 text-sm">
             <div className="flex items-center gap-2">
               <Camera className="w-5 h-5 text-primary" />
-              <span>Fotografia</span>
+              <span>Photography</span>
             </div>
             <div className="flex items-center gap-2">
               <Video className="w-5 h-5 text-primary" />
@@ -37,7 +37,7 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-3">{siteName}</h3>
             <p className="text-sm text-muted-foreground mb-4">
-              Capturando momentos únicos e transformando-os em arte atemporal
+              Capturando moments uniques e transformando-os em arte timeless
             </p>
             {/* Redes Sociais */}
             <div className="flex gap-4">
@@ -95,7 +95,7 @@ export default function Footer() {
               <li>
                 <Link href="/">
                   <a className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                    Início
+                    Home
                   </a>
                 </Link>
               </li>

@@ -58,7 +58,7 @@ export default function AdminContact() {
     onSuccess: () => {
       toast({
         title: "Saved successfully!",
-        description: "As informações de contato foram atualizadas.",
+        description: "As information de contato were atualizadas.",
       });
       utils.contact.get.invalidate();
     },
@@ -90,7 +90,7 @@ export default function AdminContact() {
       <div className="mb-8">
         <h1 className="text-3xl font-bold mb-2">Contact Information</h1>
         <p className="text-muted-foreground">
-          Configure as informações de contato exibidas no site
+          Configure as information de contato exibidas no site
         </p>
       </div>
 
@@ -110,7 +110,7 @@ export default function AdminContact() {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  placeholder="contato@exemplo.com"
+                  placeholder="contato@example.com"
                 />
               </div>
 
@@ -168,7 +168,7 @@ export default function AdminContact() {
                   onChange={(e) =>
                     setFormData({ ...formData, city: e.target.value })
                   }
-                  placeholder="São Paulo"
+                  placeholder="London"
                 />
               </div>
 
@@ -333,7 +333,7 @@ export default function AdminContact() {
             ) : (
               <>
                 <Save className="mr-2 h-4 w-4" />
-                Salvar Alterações
+                Salvar Changes
               </>
             )}
           </Button>

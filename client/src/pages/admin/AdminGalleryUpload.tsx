@@ -114,11 +114,11 @@ export default function AdminGalleryUpload() {
     updateFile(uploadFile.id, { uploading: true, error: undefined });
 
     try {
-      // Comprimir imagem antes de enviar (resolve erro com fotos grandes 25MB+)
+      // Comprimir imagem before de enviar (resolve erro com fotos grandes 25MB+)
       const options = {
-        maxSizeMB: 2, // Maximum 2MB após compressão
+        maxSizeMB: 2, // Maximum 2MB after compresare
         maxWidthOrHeight: 4000, // Maximum 4000px (excelente qualidade)
-        useWebWorker: true, // Usar worker para não travar UI
+        useWebWorker: true, // Usar worker para not travar UI
         fileType: 'image/jpeg' as const,
       };
       
@@ -152,7 +152,7 @@ export default function AdminGalleryUpload() {
       
       toast({
         title: "Erro no upload",
-        description: error.message || "Não foi possível enviar a foto",
+        description: error.message || "Not foi possível enviar a foto",
         variant: "destructive",
       });
     }
@@ -164,7 +164,7 @@ export default function AdminGalleryUpload() {
     if (pendingFiles.length === 0) {
       toast({
         title: "Nonea foto para enviar",
-        description: "Todas as fotos já foram enviadas",
+        description: "Todas as fotos already were enviadas",
         variant: "default",
       });
       return;
@@ -185,7 +185,7 @@ export default function AdminGalleryUpload() {
     // Show notification final
     if (successCount > 0) {
       toast({
-        title: "✅ Upload concluído!",
+        title: "✅ Upload complete!",
         description: `${successCount} foto${successCount > 1 ? 's' : ''} enviada${successCount > 1 ? 's' : ''} com sucesso${errorCount > 0 ? ` (${errorCount} com erro)` : ''}`,
       });
     } else if (errorCount > 0) {
@@ -279,7 +279,7 @@ export default function AdminGalleryUpload() {
           >
             <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-xl font-semibold mb-2">
-              Arraste fotos aqui or click to select
+              Arraste fotos here or click to select
             </h3>
             <p className="text-muted-foreground mb-4">
               Formatos suportados: JPG, PNG, WEBP
@@ -419,7 +419,7 @@ export default function AdminGalleryUpload() {
             <CardContent className="py-12 text-center">
               <ImageIcon className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
               <p className="text-muted-foreground">
-                Nonea foto nesta galeria ainda
+                Nonea foto nesta galeria still
               </p>
             </CardContent>
           </Card>

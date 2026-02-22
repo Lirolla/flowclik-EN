@@ -21,7 +21,7 @@ const redirectToLoginIfUnauthorized = (error: unknown) => {
 
   if (!isUnauthorized) return;
 
-  // Não redirecionar se estiver nas páginas do sistema
+  // Not redirecionar se estiver nas páginas do sistema
   if (window.location.pathname.startsWith('/system')) {
     return;
   }

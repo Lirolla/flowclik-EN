@@ -84,7 +84,7 @@ export default function Cart() {
     if (paymentConfig?.paymentPixKey) {
       navigator.clipboard.writeText(paymentConfig.paymentPixKey);
       setPixCopied(true);
-      toast.success("Chave PIX copiada!");
+      toast.success("Key PIX copiada!");
       setTimeout(() => setPixCopied(false), 3000);
     }
   };
@@ -101,7 +101,7 @@ export default function Cart() {
                   <ShoppingCart className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
                   <h2 className="text-2xl font-bold mb-2">Carrinho Vazio</h2>
                   <p className="text-muted-foreground mb-6">
-                    You ainda não adicionou nonea foto ao carrinho.
+                    You still not adicionou nonea foto ao carrinho.
                   </p>
                   <Button onClick={() => setLocation(SITE_ROUTES.stockPhotos())}>
                     <ArrowLeft className="w-4 h-4 mr-2" />
@@ -131,7 +131,7 @@ export default function Cart() {
                     </div>
                     <h2 className="text-2xl font-bold mb-2">Pedido Criado!</h2>
                     <p className="text-muted-foreground">
-                      Order #{orderId} • Aguardando pagamento
+                      Order #{orderId} • Awaiting pagamento
                     </p>
                   </div>
 
@@ -143,7 +143,7 @@ export default function Cart() {
                         <h3 className="font-semibold text-green-500">Pagamento via PIX</h3>
                       </div>
                       <div>
-                        <p className="text-sm text-muted-foreground mb-2">Chave PIX:</p>
+                        <p className="text-sm text-muted-foreground mb-2">Key PIX:</p>
                         <div className="flex items-center gap-2">
                           <code className="flex-1 bg-background px-3 py-2 rounded text-sm font-mono">
                             {paymentConfig.paymentPixKey}
@@ -158,7 +158,7 @@ export default function Cart() {
                         <p className="text-2xl font-bold text-green-500">{format(orderTotal)}</p>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Após realizar o pagamento, o photographer irá confirmar e liberar o download das fotos.
+                        After realizar o pagamento, o photographer irá confirmar e liberar o download das fotos.
                       </p>
                     </div>
                   )}
@@ -177,7 +177,7 @@ export default function Cart() {
                         <p className="text-2xl font-bold text-blue-500">{format(orderTotal)}</p>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Após realizar a transferência, o photographer irá confirmar e liberar o download das fotos.
+                        After realizar a transferência, o photographer irá confirmar e liberar o download das fotos.
                       </p>
                     </div>
                   )}
@@ -194,7 +194,7 @@ export default function Cart() {
                       </div>
                       <p className="text-sm text-muted-foreground">
                         O photographer irá enviar um link de pagamento para o seu e-mail ({customerEmail}). 
-                        Após o pagamento, as fotos serão liberadas para download.
+                        After o pagamento, as fotos serão liberadas para download.
                       </p>
                     </div>
                   )}
@@ -232,7 +232,7 @@ export default function Cart() {
 
                   {/* Order Summary */}
                   <div className="bg-muted/50 rounded-lg p-4">
-                    <h3 className="font-semibold mb-2">Resumo do Pedido</h3>
+                    <h3 className="font-semibold mb-2">Summary do Pedido</h3>
                     <div className="space-y-1 text-sm">
                       {items.map((item) => (
                         <div key={item.id} className="flex justify-between">
@@ -433,7 +433,7 @@ export default function Cart() {
               <div className="lg:col-span-1">
                 <Card className="sticky top-24">
                   <CardContent className="p-6 space-y-4">
-                    <h2 className="text-xl font-bold">Resumo</h2>
+                    <h2 className="text-xl font-bold">Summary</h2>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Subtotal</span>

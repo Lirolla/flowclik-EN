@@ -108,7 +108,7 @@ export default function AdminMessages() {
               {!conversations || conversations.length === 0 ? (
                 <div className="p-8 text-center text-gray-400">
                   <MessageSquare className="h-12 w-12 mx-auto mb-4 opacity-50" />
-                  <p>Nonea conversa ainda</p>
+                  <p>Nonea conversa still</p>
                 </div>
               ) : (
                 <div className="divide-y divide-gray-800">
@@ -180,7 +180,7 @@ export default function AdminMessages() {
                 <ScrollArea className="flex-1 p-4">
                   {!messages || messages.length === 0 ? (
                     <div className="text-center text-gray-400 py-8">
-                      <p>Nonea mensagem ainda</p>
+                      <p>Nonea mensagem still</p>
                     </div>
                   ) : (
                     <div className="space-y-4">

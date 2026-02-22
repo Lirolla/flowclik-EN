@@ -181,13 +181,13 @@ export default function PublicGalleryView() {
   const handleSubmitSelection = async () => {
     const selectedCount = Object.values(selections).filter(Boolean).length;
     if (selectedCount === 0) {
-      alert("Select pelo menos uma foto antes de enviar.");
+      alert("Select pelo menos uma foto before de enviar.");
       return;
     }
 
-    if (confirm(`You selecionou ${selectedCount} foto(s). Deseja enviar sua seleção?`)) {
+    if (confirm(`You selecionou ${selectedCount} foto(s). Deseja enviar sua selection?`)) {
       await submitSelectionMutation.mutateAsync({ collectionId: collection?.id || 0 });
-      alert("Seleção enviada com sucesso! O photographer irá editar as fotos selecionadas.");
+      alert("Selection enviada com sucesso! O photographer irá editar as fotos selecionadas.");
     }
   };
 
@@ -208,13 +208,13 @@ export default function PublicGalleryView() {
                 <span className="font-medium">{selectedCount} foto(s) selecionada(s)</span>
               </div>
               <p className="text-sm text-muted-foreground">
-                Marque as fotos favoritas e deixe seus palpites de edição
+                Marque as fotos favoritas e deixe seus palpites de editing
               </p>
             </div>
             {selectedCount > 0 && (
               <Button onClick={handleSubmitSelection} className="gap-2">
                 <Send className="w-4 h-4" />
-                Enviar Seleção
+                Enviar Selection
               </Button>
             )}
           </div>
@@ -222,7 +222,7 @@ export default function PublicGalleryView() {
 
         {items.length === 0 ? (
           <div className="text-center py-12">
-            <p className="text-muted-foreground">Nonea míday nesta galeria ainda.</p>
+            <p className="text-muted-foreground">Nonea míday nesta galeria still.</p>
           </div>
         ) : (
           <>
@@ -543,7 +543,7 @@ export default function PublicGalleryView() {
                   </button>
                   
                   <div className="text-left">
-                    <label className="block text-sm font-medium mb-2">Palpites de edição (optional)</label>
+                    <label className="block text-sm font-medium mb-2">Palpites de editing (optional)</label>
                     <textarea
                       value={feedbacks[items[lightboxIndex]?.id] || ""}
                       onChange={(e) => {

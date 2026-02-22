@@ -201,7 +201,7 @@ export const photoSelectionsRouter = router({
         .limit(1);
 
       if (!collection[0] || !collection[0].appointmentId) {
-        throw new Error("Gallery não vinculada a um agendamento");
+        throw new Error("Gallery not linked to an appointment");
       }
 
       // Update appointment status to final_editing
@@ -267,7 +267,7 @@ export const photoSelectionsRouter = router({
         // Notify owner via Manus notification
         await notifyOwner({
           title: `❤️ ${appointment[0].clientName} selecionou ${selectedPhotos.length} fotos`,
-          content: `Gallery: ${collection[0].name}\nSeleção: ${selectedPhotos.length} de ${totalPhotos.length} fotos`,
+          content: `Gallery: ${collection[0].name}\nSelection: ${selectedPhotos.length} de ${totalPhotos.length} fotos`,
         }).catch(err => console.error('Erro ao notificar owner:', err));
       }
 
@@ -327,7 +327,7 @@ export const photoSelectionsRouter = router({
         .limit(1);
 
       if (!collection[0] || !collection[0].appointmentId) {
-        throw new Error("Gallery não vinculada a um agendamento");
+        throw new Error("Gallery not linked to an appointment");
       }
 
       // Update appointment status to delivered
@@ -365,7 +365,7 @@ export const photoSelectionsRouter = router({
           galleryTitle: collection[0].name,
           albumUrl,
           editedPhotoCount: editedPhotos.length,
-        }).catch(err => console.error('Erro ao enviar email de álbum final:', err));
+        }).catch(err => console.error('Error sending final album email:', err));
 
         // Notify owner
         await notifyOwner({

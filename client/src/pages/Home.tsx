@@ -32,7 +32,7 @@ export default function Home() {
           <div className="container">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold font-serif mb-4">
-                Portfólio de Fotografia
+                Portfólio de Photography
               </h2>
               <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
                 Conheça nossos melhores trabalhos fotográficos
@@ -84,14 +84,14 @@ export default function Home() {
                     Agende seu Service
                   </h2>
                   <p className="text-lg text-muted-foreground mb-6">
-                    Transforme seus momentos em memórias únicas. Agende agora mesmo uma sessão de fotos profissional.
+                    Transforme seus moments em memórias uniques. Agende now mesmo uma sesare de fotos profissional.
                   </p>
                   <div className="space-y-3 mb-8">
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">
                         <span className="text-primary font-bold">1</span>
                       </div>
-                      <span className="text-sm">Escolha o serviço ideal</span>
+                      <span className="text-sm">Escolha o service ideal</span>
                     </div>
                     <div className="flex items-center gap-3">
                       <div className="w-8 h-8 rounded-full bg-primary/20 flex items-center justify-center">

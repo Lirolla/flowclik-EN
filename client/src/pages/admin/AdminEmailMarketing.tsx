@@ -17,18 +17,18 @@ type EventType = 'birthday' | 'wedding' | 'session' | 'anniversary' | 'other';
 const eventTypeLabels: Record<EventType, { label: string; icon: string; color: string }> = {
   birthday: { label: "Birthday", icon: "🎂", color: "text-pink-400" },
   wedding: { label: "Wedding", icon: "💒", color: "text-rose-400" },
-  session: { label: "Sessão", icon: "📸", color: "text-blue-400" },
-  anniversary: { label: "Aniversário de Casamento", icon: "💍", color: "text-amber-400" },
+  session: { label: "Sesare", icon: "📸", color: "text-blue-400" },
+  anniversary: { label: "Birthday de Casamento", icon: "💍", color: "text-amber-400" },
   other: { label: "Other", icon: "📅", color: "text-gray-400" },
 };
 
 const categoryLabels: Record<string, { label: string; icon: string }> = {
   birthday: { label: "Birthday", icon: "🎂" },
-  promotion: { label: "Promoção", icon: "🔥" },
-  reminder: { label: "Lembrete", icon: "📅" },
+  promotion: { label: "Promotion", icon: "🔥" },
+  reminder: { label: "Reminder", icon: "📅" },
   thank_you: { label: "Agradecimento", icon: "💜" },
   welcome: { label: "Boas-Vindas", icon: "👋" },
-  custom: { label: "Personalizado", icon: "✏️" },
+  custom: { label: "Custom", icon: "✏️" },
 };
 
 // ============ MAIN COMPONENT ============
@@ -41,7 +41,7 @@ export default function AdminEmailMarketing() {
     { id: 'events' as Tab, label: 'Eventos', icon: Calendar },
     { id: 'templates' as Tab, label: 'Templates', icon: FileText },
     { id: 'campaigns' as Tab, label: 'Campaigns', icon: Send },
-    { id: 'logs' as Tab, label: 'Histórico', icon: Clock },
+    { id: 'logs' as Tab, label: 'History', icon: Clock },
   ];
 
   return (
@@ -118,12 +118,12 @@ function DashboardTab() {
       <div className="bg-card border border-border/50 rounded-xl p-5">
         <h3 className="text-lg font-semibold flex items-center gap-2 mb-4">
           <Clock className="w-5 h-5 text-purple-400" />
-          Próximos Eventos (30 days)
+          Nexts Eventos (30 days)
         </h3>
         {!upcoming || upcoming.length === 0 ? (
           <div className="text-center py-8 text-muted-foreground">
             <Calendar className="w-10 h-10 mx-auto mb-2 opacity-50" />
-            <p>None evento nos próximos 30 days</p>
+            <p>None evento nos nexts 30 days</p>
             <p className="text-xs mt-1">Cadastre eventos dos seus clientes na aba Eventos</p>
           </div>
         ) : (
@@ -144,7 +144,7 @@ function DashboardTab() {
                   <div className="text-right">
                     <p className="text-sm font-medium">{eventDate.toLocaleDateString('en-GB')}</p>
                     <p className={`text-xs ${daysUntil <= 3 ? 'text-red-400' : daysUntil <= 7 ? 'text-amber-400' : 'text-muted-foreground'}`}>
-                      {daysUntil === 0 ? 'Hoje!' : daysUntil === 1 ? 'Amanhã' : `Em ${daysUntil} days`}
+                      {daysUntil === 0 ? 'Hoje!' : daysUntil === 1 ? 'Tomorrow' : `Em ${daysUntil} days`}
                     </p>
                   </div>
                 </div>
@@ -176,12 +176,12 @@ function EventsTab() {
 
   const handleSendEmail = (event: any) => {
     if (!event.templateId) {
-      toast.error("Este evento não tem template associado. Edite o evento e select um template.");
+      toast.error("Este evento not tem template associado. Edite o evento e select um template.");
       return;
     }
     const template = templates?.find((t: any) => t.id === event.templateId);
     if (!template) {
-      toast.error("Template not found. Verifique se o template ainda existe.");
+      toast.error("Template not found. Verifique se o template still existe.");
       return;
     }
     setSendingEventId(event.id);
@@ -263,7 +263,7 @@ function EventsTab() {
                 type="text"
                 value={form.eventName}
                 onChange={e => setForm({ ...form, eventName: e.target.value })}
-                placeholder="Ex: Aniversário da Maria"
+                placeholder="Ex: Birthday da Maria"
                 className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
               />
             </div>
@@ -289,14 +289,14 @@ function EventsTab() {
                 <option key={t.id} value={t.id}>{t.name}</option>
               ))}
             </select>
-            <p className="text-xs text-muted-foreground mt-1">O template será usado quando clicar em "Enviar Email"</p>
+            <p className="text-xs text-muted-foreground mt-1">O template will be usado when clicar em "Enviar Email"</p>
           </div>
           <div>
             <label className="text-xs text-muted-foreground mb-1 block">Notes</label>
             <textarea
               value={form.notes}
               onChange={e => setForm({ ...form, notes: e.target.value })}
-              placeholder="Notas sobre o evento..."
+              placeholder="Notas about o evento..."
               rows={2}
               className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-none"
             />
@@ -330,7 +330,7 @@ function EventsTab() {
         <div className="text-center py-12 text-muted-foreground bg-card border border-border/50 rounded-xl">
           <Calendar className="w-12 h-12 mx-auto mb-3 opacity-50" />
           <p className="font-medium">None evento cadastrado</p>
-          <p className="text-xs mt-1">Cadastre datas importantes dos seus clientes</p>
+          <p className="text-xs mt-1">Cadastre datas importbefore dos seus clientes</p>
         </div>
       ) : (
         <div className="space-y-2">
@@ -354,7 +354,7 @@ function EventsTab() {
                     onClick={() => handleSendEmail(event)}
                     disabled={sendingEventId === event.id}
                     className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${event.templateId ? 'bg-green-600 hover:bg-green-700 text-white' : 'bg-gray-600 hover:bg-gray-700 text-gray-300'}`}
-                    title={event.templateId ? "Enviar email para o cliente" : "Sem template - select um template primeiro"}
+                    title={event.templateId ? "Enviar email para o cliente" : "Sem template - select um template first"}
                   >
                     <Send className="w-3 h-3" />
                     {sendingEventId === event.id ? "Sending..." : "Enviar Email"}
@@ -382,7 +382,7 @@ function TemplatesTab() {
   const { data: templates, refetch } = trpc.emailMarketing.listTemplates.useQuery();
   const createTemplate = trpc.emailMarketing.createTemplate.useMutation({ onSuccess: () => { refetch(); setShowForm(false); toast.success("Template criado!"); } });
   const deleteTemplate = trpc.emailMarketing.deleteTemplate.useMutation({ onSuccess: () => { refetch(); toast.success("Template removido!"); } });
-  const initDefaults = trpc.emailMarketing.initDefaultTemplates.useMutation({ onSuccess: () => { refetch(); toast.success("Templates padrão criados!"); } });
+  const initDefaults = trpc.emailMarketing.initDefaultTemplates.useMutation({ onSuccess: () => { refetch(); toast.success("Templates default criados!"); } });
 
   const [showForm, setShowForm] = useState(false);
   const [previewId, setPreviewId] = useState<number | null>(null);
@@ -405,7 +405,7 @@ function TemplatesTab() {
               className="flex items-center gap-2 px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg text-sm font-medium transition-colors disabled:opacity-50"
             >
               <Sparkles className="w-4 h-4" />
-              {initDefaults.isPending ? "Creating..." : "Criar Templates Padrão"}
+              {initDefaults.isPending ? "Creating..." : "Create Default Templates"}
             </button>
           )}
           <button
@@ -432,7 +432,7 @@ function TemplatesTab() {
                 type="text"
                 value={form.name}
                 onChange={e => setForm({ ...form, name: e.target.value })}
-                placeholder="Ex: Email de Aniversário"
+                placeholder="Ex: Email de Birthday"
                 className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
               />
             </div>
@@ -455,7 +455,7 @@ function TemplatesTab() {
               type="text"
               value={form.subject}
               onChange={e => setForm({ ...form, subject: e.target.value })}
-              placeholder="Ex: 🎂 Feliz Aniversário, {{nome}}!"
+              placeholder="Ex: 🎂 Feliz Birthday, {{nome}}!"
               className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
             />
           </div>
@@ -464,7 +464,7 @@ function TemplatesTab() {
             <textarea
               value={form.htmlContent}
               onChange={e => setForm({ ...form, htmlContent: e.target.value })}
-              placeholder="Cole o HTML do email aqui..."
+              placeholder="Cole o HTML do email here..."
               rows={8}
               className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-none font-mono text-xs"
             />
@@ -495,7 +495,7 @@ function TemplatesTab() {
         <div className="text-center py-12 text-muted-foreground bg-card border border-border/50 rounded-xl">
           <FileText className="w-12 h-12 mx-auto mb-3 opacity-50" />
           <p className="font-medium">None template criado</p>
-          <p className="text-xs mt-1">Clique em "Criar Templates Padrão" para começar com 5 templates prontos</p>
+          <p className="text-xs mt-1">Clique em "Create Default Templates" para começar com 5 templates prontos</p>
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -607,7 +607,7 @@ function CampaignsTab() {
                 type="text"
                 value={form.name}
                 onChange={e => setForm({ ...form, name: e.target.value })}
-                placeholder="Ex: Promoção de Natal"
+                placeholder="Ex: Promotion de Natal"
                 className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50"
               />
             </div>
@@ -676,7 +676,7 @@ function CampaignsTab() {
             <textarea
               value={form.htmlContent}
               onChange={e => setForm({ ...form, htmlContent: e.target.value })}
-              placeholder="Cole o HTML do email aqui..."
+              placeholder="Cole o HTML do email here..."
               rows={8}
               className="w-full px-3 py-2 bg-background border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-purple-500/50 resize-none font-mono text-xs"
             />
@@ -752,7 +752,7 @@ function CampaignsTab() {
                     {campaign.status === 'draft' && (
                       <button
                         onClick={() => {
-                          if (confirm("Enviar esta campanha agora? Os emails serão enviados para todos os destinatários.")) {
+                          if (confirm("Enviar esta campanha now? Os emails serão enviados para todos os destinatários.")) {
                             sendCampaign.mutate({ campaignId: campaign.id });
                           }
                         }}
@@ -787,14 +787,14 @@ function LogsTab() {
   return (
     <div className="space-y-4">
       <p className="text-sm text-muted-foreground">
-        Histórico de todos os emails enviados
+        History de todos os emails enviados
       </p>
 
       {!logs || logs.length === 0 ? (
         <div className="text-center py-12 text-muted-foreground bg-card border border-border/50 rounded-xl">
           <Clock className="w-12 h-12 mx-auto mb-3 opacity-50" />
-          <p className="font-medium">None email enviado ainda</p>
-          <p className="text-xs mt-1">O histórico aparecerá aqui quando you enviar emails</p>
+          <p className="font-medium">None email enviado still</p>
+          <p className="text-xs mt-1">O history aparecerá here when you enviar emails</p>
         </div>
       ) : (
         <div className="bg-card border border-border/50 rounded-xl overflow-hidden">

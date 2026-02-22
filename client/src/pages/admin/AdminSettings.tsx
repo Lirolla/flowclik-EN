@@ -21,7 +21,7 @@ import {
 import { Settings, Upload, Loader2, Image as ImageIcon, CheckCircle2, AlertCircle, Camera, Video, Briefcase, Calendar, X, Plus } from "lucide-react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { toast } from "sonner";
-// REMOVIDO: Multi-país (agora 100% Brasil)
+// REMOVIDO: Multi-país (now 100% Brasil)
 // import { COUNTRIES, COUNTRY_LIST, type CountryCode } from "@/lib/currency";
 // import { COUNTRY_MAP, CountryInfo } from "../../../../shared/countryUtils";
 
@@ -129,7 +129,7 @@ function AdminSettingsContent() {
 
   const createBlockMutation = trpc.blockedDates.create.useMutation({
     onSuccess: () => {
-      toast.success("Período bloqueado com sucesso!");
+      toast.success("Period bloqueado com sucesso!");
       setStartDate("");
       setEndDate("");
       setBlockReason("");
@@ -202,7 +202,7 @@ function AdminSettingsContent() {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        toast.error("Por favor, select apenas imagens");
+        toast.error("Por favor, select only imagens");
         return;
       }
 
@@ -308,7 +308,7 @@ function AdminSettingsContent() {
 
   const handleAddBlock = () => {
     if (!startDate || !endDate) {
-      toast.error("Preencha as datas de início e fim");
+      toast.error("Preencha as datas de start e fim");
       return;
     }
 
@@ -389,7 +389,7 @@ function AdminSettingsContent() {
             Site Settings
           </CardTitle>
           <CardDescription>
-            Complete todas as seções para configurar seu site. 🔴 Vermelho = Não preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Completo
+            Complete todas as seções para configurar seu site. 🔴 Vermelho = Not preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Completo
           </CardDescription>
         </CardHeader>
       </Card>
@@ -409,7 +409,7 @@ function AdminSettingsContent() {
               </AccordionTrigger>
               <AccordionContent className="space-y-6 pt-4">
                 <div className="space-y-4">
-                  <Label>Escolha o tipo de serviço que you oferece</Label>
+                  <Label>Escolha o tipo de service que you oferece</Label>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <button
                       onClick={() => handleBusinessModeChange("photography_only")}
@@ -420,7 +420,7 @@ function AdminSettingsContent() {
                       }`}
                     >
                       <Camera className="w-12 h-12 mx-auto mb-3 text-blue-600" />
-                      <h3 className="font-semibold mb-2">Só Fotografia</h3>
+                      <h3 className="font-semibold mb-2">Só Photography</h3>
                       <p className="text-sm text-muted-foreground">
                         Foco em photography services
                       </p>
@@ -453,9 +453,9 @@ function AdminSettingsContent() {
                         <Camera className="w-10 h-10 text-blue-600" />
                         <Video className="w-10 h-10 text-red-600" />
                       </div>
-                      <h3 className="font-semibold mb-2">Fotografia + Video</h3>
+                      <h3 className="font-semibold mb-2">Photography + Video</h3>
                       <p className="text-sm text-muted-foreground">
-                        Ofereço ambos os serviços
+                        Ofereço ambos os services
                       </p>
                     </button>
                   </div>
@@ -741,7 +741,7 @@ function AdminSettingsContent() {
                     onClick={handleSave}
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
-                    Salvar Alterações
+                    Salvar Changes
                   </Button>
                 </div>
               </AccordionContent>
@@ -752,7 +752,7 @@ function AdminSettingsContent() {
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getBasicInfoStatus()} />
-                  <span className="font-semibold">Informações Básicas</span>
+                  <span className="font-semibold">Information Básicas</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-6 pt-4">
@@ -806,12 +806,12 @@ function AdminSettingsContent() {
                     id="siteTagline"
                     value={siteTagline}
                     onChange={(e) => setSiteTagline(e.target.value)}
-                    placeholder="Capturando momentos únicos e transformando-os em arte atemporal"
+                    placeholder="Capturing unique moments and turning them into timeless art"
                     rows={3}
                   />
                 </div>
 
-                {/* REMOVIDO: Settings Regionais (agora hardcoded Brasil) */}
+                {/* REMOVIDO: Settings Regionais (now hardcoded Brasil) */}
 
                 {/* Current Logo URL (readonly) */}
                 {logoUrl && !logoFile && (
@@ -825,7 +825,7 @@ function AdminSettingsContent() {
                     onClick={handleSave}
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
-                    Salvar Informações Básicas
+                    Salvar Information Básicas
                   </Button>
                 </div>
               </AccordionContent>
@@ -854,7 +854,7 @@ function AdminSettingsContent() {
                     // @ts-ignore
                     value={aboutContent}
                     onChange={(e) => setAboutContent(e.target.value)}
-                    placeholder="Conte sua história, experiência e paixão pela fotografia..."
+                    placeholder="Tell your story, experience and passion for photography..."
                     rows={6}
                   />
                 </div>
@@ -964,12 +964,12 @@ function AdminSettingsContent() {
                   <Textarea
                     value={servicesIntro}
                     onChange={(e) => setServicesIntro(e.target.value)}
-                    placeholder="Apresente seus serviços de forma atraente..."
+                    placeholder="Present your services in an attractive way..."
                     rows={4}
                   />
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Os serviços individuais são gerenciados na página Admin → Services
+                  Os services individuais are gerenciados na página Admin → Services
                 </p>
                 <div className="flex justify-end mt-6">
                   <Button
@@ -1005,7 +1005,7 @@ function AdminSettingsContent() {
                     type="email"
                     value={contactEmail}
                     onChange={(e) => setContactEmail(e.target.value)}
-                    placeholder="contato@exemplo.com"
+                    placeholder="contato@example.com"
                   />
                 </div>
                 <div>
@@ -1167,7 +1167,7 @@ function AdminSettingsContent() {
                       <Input
                         value={parallaxTitle}
                         onChange={(e) => setParallaxTitle(e.target.value)}
-                        placeholder="Ex: Capturando Momentos Únicos"
+                        placeholder="Ex: Capturando Moments Uniques"
                       />
                     </div>
                     
@@ -1176,7 +1176,7 @@ function AdminSettingsContent() {
                       <Textarea
                         value={parallaxSubtitle}
                         onChange={(e) => setParallaxSubtitle(e.target.value)}
-                        placeholder="Ex: Transformamos seus momentos especiais em memórias eternas"
+                        placeholder="Ex: Transformamos seus moments especiais em memórias eternas"
                         rows={2}
                       />
                     </div>
@@ -1277,7 +1277,7 @@ function AdminSettingsContent() {
                       <Textarea
                         value={paymentCashInstructions}
                         onChange={(e) => setPaymentCashInstructions(e.target.value)}
-                        placeholder="Ex: Pagamento em dinheiro pode ser feito no day do ensaio ou na entrega das fotos. Aceitamos parcelamento em until 3x sem juros."
+                        placeholder="Ex: Pagamento em dinheiro can ser feito no day do ensaio ou na betweenga das fotos. Aceitamos parcelamento em until 3x sem juros."
                         rows={3}
                       />
                     </div>
@@ -1310,14 +1310,14 @@ function AdminSettingsContent() {
                   </div>
                   {paymentPixEnabled && (
                     <div className="mt-3">
-                      <Label>Chave PIX</Label>
+                      <Label>Key PIX</Label>
                       <Input
                         value={paymentPixKey}
                         onChange={(e) => setPaymentPixKey(e.target.value)}
-                        placeholder="email@exemplo.com ou CPF/CNPJ ou telefone ou chave aleatória"
+                        placeholder="email@example.com or phone or random key"
                       />
                       <p className="text-xs text-muted-foreground mt-1">
-                        Insira sua chave PIX (CPF, CNPJ, e-mail, telefone ou chave aleatória)
+                        Insira sua key PIX (CPF, CNPJ, e-mail, telefone ou key aleatória)
                       </p>
                     </div>
                   )}
@@ -1362,14 +1362,14 @@ function AdminSettingsContent() {
 
           {/* Info */}
           <div className="bg-muted p-4 rounded-lg text-sm space-y-2 mt-6">
-            <p className="font-semibold">ℹ️ Informações:</p>
+            <p className="font-semibold">ℹ️ Information:</p>
             <ul className="list-disc list-inside space-y-1 text-muted-foreground">
               <li>Complete todas as seções marcadas em vermelho</li>
-              <li>O modo de negócio define quais serviços aparecem no site</li>
-              <li>Bloqueios de data impedem agendamentos nos períodos escolhidos</li>
+              <li>O modo de negócio define quais services aparecem no site</li>
+              <li>Bloqueios de data impedem agendamentos nos periods escolhidos</li>
               <li>O logo e nome aparecem no cabeçalho do site</li>
               <li>O conteúdo de Sobre/Services aparece nas páginas públicas</li>
-              <li>Alterações são aplicadas imedaytamente</li>
+              <li>Changes are aplicadas imedaytamente</li>
             </ul>
           </div>
         </CardContent>
@@ -1383,7 +1383,7 @@ function AdminSettingsContent() {
             Bloqueio de Datas
             {blockedDates && blockedDates.length > 0 && (
               <span className="text-xs bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-2 py-1 rounded">
-                {blockedDates.length} período(s)
+                {blockedDates.length} period(s)
               </span>
             )}
           </CardTitle>
@@ -1391,13 +1391,13 @@ function AdminSettingsContent() {
         <CardContent>
           <div className="space-y-4">
             <p className="text-sm text-muted-foreground">
-              Bloqueie períodos em que you não estará available para agendamentos (férias, viagens, etc)
+              Bloqueie periods em que you not estará available para agendamentos (férias, viagens, etc)
             </p>
             
             {/* Formulário horizontal */}
             <div className="flex flex-wrap gap-3 items-end">
               <div className="flex-1 min-w-[150px]">
-                <Label className="text-sm">Data de Início</Label>
+                <Label className="text-sm">Data de Home</Label>
                 <Input
                   type="date"
                   value={startDate}
@@ -1429,7 +1429,7 @@ function AdminSettingsContent() {
             {/* Lista de bloqueios */}
             {blockedDates && blockedDates.length > 0 && (
               <div className="space-y-2">
-                <Label className="text-sm font-semibold">Períodos Bloqueados:</Label>
+                <Label className="text-sm font-semibold">Periods Bloqueados:</Label>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                   {blockedDates.map((block) => (
                     <div

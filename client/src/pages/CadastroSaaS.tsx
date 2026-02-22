@@ -60,7 +60,7 @@ export default function CadastroSaaS() {
     }
 
     if (formData.password.length < 6) {
-      setError("Senha deve ter pelo menos 6 caracteres");
+      setError("Senha must ter pelo menos 6 caracteres");
       return;
     }
 
@@ -105,7 +105,7 @@ export default function CadastroSaaS() {
           
           <h1 className="text-3xl font-bold mb-2">Crie sua conta</h1>
           <p className="text-zinc-400">
-            7 days grátis · Cancele quando quiser
+            7 days grátis · Cancele when quiser
           </p>
         </div>
 
@@ -118,7 +118,7 @@ export default function CadastroSaaS() {
               <Input
                 id="name"
                 type="text"
-                placeholder="João Silva"
+                placeholder="John Smith"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="mt-2"
@@ -177,12 +177,12 @@ export default function CadastroSaaS() {
               </div>
               {subdomainCheck === "available" && (
                 <p className="text-xs text-green-500 mt-1">
-                  ✓ {formData.subdomain}.flowclik.com está available!
+                  ✓ {formData.subdomain}.flowclik.com is available!
                 </p>
               )}
               {subdomainCheck === "taken" && (
                 <p className="text-xs text-red-500 mt-1">
-                  ✗ Este subdomain já está em uso
+                  ✗ Este subdomain already is em uso
                 </p>
               )}
               <p className="text-xs text-zinc-500 mt-1">
@@ -215,7 +215,7 @@ export default function CadastroSaaS() {
           </form>
 
           <div className="mt-6 text-center text-sm text-zinc-500">
-            Já tem uma conta?{" "}
+            Already tem uma conta?{" "}
             <Link href="/login">
               <a className="text-purple-400 hover:text-purple-300">Sign in</a>
             </Link>
@@ -227,7 +227,7 @@ export default function CadastroSaaS() {
           {[
             "Site profissional pronto em minutes",
             "7 days grátis para testar tudo",
-            "Cancele quando quiser, sem burocracia",
+            "Cancele when quiser, sem burocracia",
           ].map((benefit, i) => (
             <div key={i} className="flex items-center gap-3 text-sm text-zinc-400">
               <Check className="w-4 h-4 text-purple-400 flex-shrink-0" />

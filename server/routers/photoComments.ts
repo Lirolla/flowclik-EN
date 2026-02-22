@@ -46,8 +46,8 @@ export const photoCommentsRouter = router({
 
       // Notify owner
       await notifyOwner({
-        title: "Novo comentário em foto",
-        content: `Cliente: ${appointment[0].clientName}\nAgendamento ID: ${input.appointmentId}\nComentário: ${input.comment}`,
+        title: "Novo comment em foto",
+        content: `Cliente: ${appointment[0].clientName}\nAgendamento ID: ${input.appointmentId}\nComment: ${input.comment}`,
       }).catch(err => console.error('Erro ao notificar:', err));
 
       return { success: true };

@@ -109,9 +109,9 @@ export default function SistemaLogin() {
           </form>
           <div className="mt-6 pt-4 border-t border-gray-800">
             <p className="text-xs text-center text-gray-500">
-              Este painel é exclusivo para administradores do FlowClik SaaS.
+              Este painel é exclusive para administradores do FlowClik SaaS.
               <br />
-              Acesso não autorizado é proibido.
+              Acesso not autorizado é proibido.
             </p>
           </div>
         </CardContent>

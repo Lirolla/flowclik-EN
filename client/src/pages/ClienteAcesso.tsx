@@ -128,8 +128,8 @@ export default function ClienteAcesso() {
 
           <div className="mt-6 pt-6 border-t border-gray-800">
             <p className="text-sm text-gray-400 text-center">
-              Não encontrou seu agendamento?<br />
-              Get in touch conosco através do{" "}
+              Not encontrou seu agendamento?<br />
+              Get in touch conosco through do{" "}
               <a href="/contact" className="text-red-400 hover:underline">
                 formulário de contato
               </a>

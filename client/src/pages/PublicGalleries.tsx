@@ -26,7 +26,7 @@ export default function PublicGalleries() {
               Gallerys
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground">
-              Explore nossas coleções de momentos únicos
+              Explore nossas coleções de moments uniques
             </p>
           </div>
         </div>

@@ -28,8 +28,8 @@ export default function ClientFinalAlbum() {
   const approveAlbumMutation = trpc.photoSelections.approveAlbum.useMutation({
     onSuccess: () => {
       toast({
-        title: "Album aprovado!",
-        description: "Suas fotos editadas foram aprovadas com sucesso.",
+        title: "Album approved!",
+        description: "Suas fotos editadas were approveds com sucesso.",
       });
       refetch();
     },
@@ -98,7 +98,7 @@ export default function ClientFinalAlbum() {
       window.URL.revokeObjectURL(url);
 
       toast({
-        title: "Download concluído!",
+        title: "Download completed!",
         description: `${downloadUrls.length} fotos baixadas com sucesso.`,
       });
     } catch (error) {
@@ -128,7 +128,7 @@ export default function ClientFinalAlbum() {
         <Link href="/">
           <Button variant="outline">
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Voltar para início
+            Voltar para start
           </Button>
         </Link>
       </div>
@@ -216,13 +216,13 @@ export default function ClientFinalAlbum() {
     if (!allPhotosEdited) {
       toast({
         title: "Aguarde",
-        description: "Algumas fotos ainda estão sendo editadas.",
+        description: "Algumas fotos still estão sendo editadas.",
         variant: "destructive",
       });
       return;
     }
 
-    if (confirm("You confirma que aprova todas as fotos editadas? Esta ação não pode ser desfeita.")) {
+    if (confirm("You confirma que aprova todas as fotos editadas? Esta ação not can ser desfeita.")) {
       await approveAlbumMutation.mutateAsync({ collectionId: collection.id });
     }
   };
@@ -306,7 +306,7 @@ export default function ClientFinalAlbum() {
         {/* Photos Grid */}
         {photos.length === 0 ? (
           <div className="text-center py-12 bg-card rounded-lg border">
-            <p className="text-muted-foreground">Nonea foto selecionada para edição ainda.</p>
+            <p className="text-muted-foreground">Nonea foto selecionada para editing still.</p>
           </div>
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -395,7 +395,7 @@ export default function ClientFinalAlbum() {
                   </>
                 ) : (
                   <div className="text-center text-white">
-                    <p className="text-lg mb-2">Esta foto ainda está sendo editada</p>
+                    <p className="text-lg mb-2">Esta foto still is sendo editada</p>
                     <p className="text-sm text-white/60">Aguarde o photographer finalizar</p>
                   </div>
                 )}
@@ -421,7 +421,7 @@ export default function ClientFinalAlbum() {
               Compartilhar Album
             </DaylogTitle>
             <DaylogDescription>
-              Compartilhe este álbum com amigos e familiares! Eles precisarão informar o email para visualizar.
+              Compartilhe este álbum com amigos e familiares! Eles needsrão informar o email para visualizar.
             </DaylogDescription>
           </DaylogHeader>
           
@@ -452,8 +452,8 @@ export default function ClientFinalAlbum() {
             
             <div className="bg-muted p-4 rounded-lg">
               <p className="text-sm text-muted-foreground">
-                📧 <strong>Captura de leads:</strong> Todos que acessarem este link precisarão informar o email. 
-                You poderá ver a lista de visitantes no painel admin!
+                📧 <strong>Captura de leads:</strong> Todos que acessarem este link needsrão informar o email. 
+                You canrá ver a lista de visitbefore no painel admin!
               </p>
             </div>
           </div>

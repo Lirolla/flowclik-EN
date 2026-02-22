@@ -95,7 +95,7 @@ export default function Portfolio() {
               Portfólio
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground">
-              Uma seleção dos nossos melhores trabalhos
+              Uma selection dos nossos melhores trabalhos
             </p>
           </div>
         </div>

@@ -228,7 +228,7 @@ function AdminCollectionsContent() {
                   id="title"
                   value={formData.title}
                   onChange={(e) => handleTitleChange(e.target.value)}
-                  placeholder="Ex: Casamento João e Maria"
+                  placeholder="E.g.: John and Mary Wedding"
                 />
               </div>
 
@@ -317,7 +317,7 @@ function AdminCollectionsContent() {
                   placeholder="Password for client to access gallery"
                 />
                 <p className="text-xs text-muted-foreground">
-                  Optional: senha que será enviada ao cliente junto com o link
+                  Optional: senha que will be enviada ao cliente junto com o link
                 </p>
               </div>
 
@@ -505,7 +505,7 @@ function AdminCollectionsContent() {
             <FolderOpen className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
             <h3 className="text-xl font-semibold mb-2">Nonea galeria criada</h3>
             <p className="text-muted-foreground mb-4">
-              Crie sua primeira galeria para organizar fotos e videos
+              Crie sua first galeria para organizar fotos e videos
             </p>
             <Button onClick={() => setIsCreateOpen(true)}>
               <Plus className="w-4 h-4 mr-2" />

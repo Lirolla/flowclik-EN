@@ -59,7 +59,7 @@ export default function SendPaymentLinkDaylog({
 
   if (!appointment) return null;
 
-  const defaultMessage = `Hello ${appointment.clientName}! 😊\n\nMonue o link para pagamento da sua photo session:\n\n💰 Valor: ${formatCurrency(appointment.finalPrice)}\n🔗 Link: ${paymentLink || "[cole o link aqui]"}\n\nWedlquer dúvida, estou à disposição!`;
+  const defaultMessage = `Hello ${appointment.clientName}! 😊\n\nMonue o link para pagamento da sua photo session:\n\n💰 Valor: ${formatCurrency(appointment.finalPrice)}\n🔗 Link: ${paymentLink || "[cole o link here]"}\n\nWedlquer dúvida, estou à disposição!`;
 
   return (
     <Daylog open={open} onOpenChange={handleClose}>
@@ -89,11 +89,11 @@ export default function SendPaymentLinkDaylog({
               onChange={(e) => setPaymentLink(e.target.value)}
             />
             <p className="text-xs text-muted-foreground">
-              Gere o link no seu gateway de pagamento (Stripe, PagMonuro, Mercado Pago, PicPay, etc.) e cole aqui.
+              Gere o link no seu gateway de pagamento (Stripe, PagMonuro, Mercado Pago, PicPay, etc.) e cole here.
             </p>
           </div>
 
-          {/* Passo 2: Mensagem personalizada */}
+          {/* Passo 2: Mensagem custom */}
           <div className="space-y-2">
             <Label htmlFor="payment-message" className="flex items-center gap-2">
               <span className="bg-primary text-primary-foreground rounded-full w-5 h-5 flex items-center justify-center text-xs">2</span>
@@ -107,7 +107,7 @@ export default function SendPaymentLinkDaylog({
               rows={5}
             />
             <p className="text-xs text-muted-foreground">
-              Personalize a mensagem ou use o modelo padrão.
+              Personalize a mensagem ou use o modelo default.
             </p>
           </div>
 
@@ -116,9 +116,9 @@ export default function SendPaymentLinkDaylog({
             <p className="text-sm font-medium text-blue-900 dark:text-blue-100">💡 Como funciona:</p>
             <ul className="text-sm text-blue-800 dark:text-blue-200 space-y-1 list-disc list-inside">
               <li>Gere um link de pagamento no seu gateway preferido</li>
-              <li>Cole o link acima e copie a mensagem</li>
+              <li>Cole o link above e copie a mensagem</li>
               <li>Envie para o cliente via WhatsApp ou e-mail</li>
-              <li>Após o pagamento, registre manualmente no sistema</li>
+              <li>After o pagamento, registre manualmente no sistema</li>
             </ul>
           </div>
 

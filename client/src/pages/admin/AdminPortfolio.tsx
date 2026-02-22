@@ -122,7 +122,7 @@ export default function AdminPortfolio() {
     // YouTube
     const ytMatch = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/);
     if (ytMatch) return `https://img.youtube.com/vi/${ytMatch[1]}/maxresdefault.jpg`;
-    // Vimeo - retorna null, precisaria de API
+    // Vimeo - retorna null, needsria de API
     return null;
   };
 
@@ -251,7 +251,7 @@ export default function AdminPortfolio() {
                   type="url"
                   value={formData.videoUrl}
                   onChange={(e) => handleVideoUrlChange(e.target.value)}
-                  placeholder="https://youtube.com/watch?v=..., https://vimeo.com/..., https://exemplo.com/video.m3u8"
+                  placeholder="https://youtube.com/watch?v=..., https://vimeo.com/..., https://example.com/video.m3u8"
                   required={formData.type === "video"}
                 />
                 <p className="text-xs text-muted-foreground mt-1">
@@ -265,7 +265,7 @@ export default function AdminPortfolio() {
                 )}
               </div>
               <div>
-                <Label htmlFor="thumbnail">Thumbnail personalizada (optional)</Label>
+                <Label htmlFor="thumbnail">Thumbnail custom (optional)</Label>
                 <Input
                   id="thumbnail"
                   type="file"
@@ -274,7 +274,7 @@ export default function AdminPortfolio() {
                   disabled={uploading}
                 />
                 <p className="text-xs text-muted-foreground mt-1">
-                  Envie uma imagem para usar como capa do video
+                  Envie uma imagem para usar as capa do video
                 </p>
               </div>
               </>)
@@ -301,7 +301,7 @@ export default function AdminPortfolio() {
                   onChange={(e) =>
                     setFormData({ ...formData, description: e.target.value })
                   }
-                  placeholder="Breve descrição da foto"
+                  placeholder="Breve description da foto"
                 />
               </div>
 

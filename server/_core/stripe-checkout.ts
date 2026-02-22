@@ -25,12 +25,12 @@ export async function createCheckoutSession(req: Request, res: Response) {
           name: item.title,
           description: "Download digital de foto profissional",
         },
-        unit_amount: item.price, // Preço já está em centavos
+        unit_amount: item.price, // Preço already is em centavos
       },
       quantity: item.quantity || 1,
     }));
 
-    // Criar sessão de checkout
+    // Criar sesare de checkout
     if (!stripe) throw new Error("Stripe not configured");
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ["card"],

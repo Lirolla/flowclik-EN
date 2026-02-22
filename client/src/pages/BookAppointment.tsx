@@ -196,7 +196,7 @@ export default function BookAppointment() {
                 <CardHeader className="p-0">
                   <CardTitle>Escolha o Service</CardTitle>
                   <CardDescription>
-                    Select o serviço que deseja contratar
+                    Select o service que deseja contratar
                   </CardDescription>
                 </CardHeader>
 
@@ -209,7 +209,7 @@ export default function BookAppointment() {
                     }
                   >
                     <SelectTrigger>
-                      <SelectValue placeholder="Select um serviço" />
+                      <SelectValue placeholder="Select um service" />
                     </SelectTrigger>
                     <SelectContent>
                       {services?.map((service) => (
@@ -245,7 +245,7 @@ export default function BookAppointment() {
                     onClick={() => setStep(2)}
                     disabled={!canProceedStep1}
                   >
-                    Próximo <ArrowRight className="w-4 h-4 ml-2" />
+                    Next <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </div>
               </div>
@@ -305,7 +305,7 @@ export default function BookAppointment() {
                     disabled={!canProceedStep2}
                     className="flex-1"
                   >
-                    Próximo <ArrowRight className="w-4 h-4 ml-2" />
+                    Next <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>
                 </div>
               </div>
@@ -315,9 +315,9 @@ export default function BookAppointment() {
             {step === 3 && (
               <div className="space-y-4">
                 <CardHeader className="p-0">
-                  <CardTitle>Informações Adicionais</CardTitle>
+                  <CardTitle>Information Adicionais</CardTitle>
                   <CardDescription>
-                    Complete as informações do agendamento
+                    Complete as information do agendamento
                   </CardDescription>
                 </CardHeader>
 
@@ -415,7 +415,7 @@ export default function BookAppointment() {
                   <Textarea
                     id="notes"
                     rows={4}
-                    placeholder="Conte-nos mais sobre o que you precisa..."
+                    placeholder="Conte-nos mais about o que you needs..."
                     value={formData.notes}
                     onChange={(e) =>
                       setFormData({ ...formData, notes: e.target.value })

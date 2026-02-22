@@ -41,7 +41,7 @@ export default function ClientGallery() {
       refetch();
       toast({
         title: "Favourite atualizada!",
-        description: "Sua seleção foi salva.",
+        description: "Your selection has been saved.",
       });
     },
     onError: (error) => {
@@ -58,7 +58,7 @@ export default function ClientGallery() {
       refetchComments();
       setComment("");
       toast({
-        title: "Comentário adicionado!",
+        title: "Comment added!",
         description: "O photographer foi notificado.",
       });
     },
@@ -76,7 +76,7 @@ export default function ClientGallery() {
       refetch();
       toast({
         title: "Selection approved!",
-        description: "O photographer foi notificado e iniciará a edição final.",
+        description: "O photographer foi notificado e iniciará a editing final.",
       });
     },
     onError: (error) => {
@@ -119,7 +119,7 @@ export default function ClientGallery() {
     if (!favoritesCount || favoritesCount === 0) {
       toast({
         title: "Nonea foto selecionada",
-        description: "Por favor, marque pelo menos uma foto como favorita antes de aprovar.",
+        description: "Por favor, marque pelo menos uma foto as favorita before de aprovar.",
         variant: "destructive",
       });
       return;
@@ -168,7 +168,7 @@ export default function ClientGallery() {
         <Card className="p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Gallery not found</h2>
           <p className="text-muted-foreground mb-6">
-            As fotos do seu ensaio ainda não foram enviadas pelo photographer.
+            As fotos do seu ensaio still not were enviadas pelo photographer.
           </p>
           <Button onClick={() => setIsAuthenticated(false)}>
             Tentar outro email
@@ -222,14 +222,14 @@ export default function ClientGallery() {
                   className="bg-green-600 hover:bg-green-700"
                 >
                   <CheckCircle className="w-5 h-5 mr-2" />
-                  Aprovar Seleção
+                  Aprovar Selection
                 </Button>
               )}
               {appointment.selectionApproved && (
                 <div className="bg-green-500/20 border border-green-500/30 px-4 py-2 rounded">
                   <div className="flex items-center gap-2 text-green-600 font-semibold">
                     <CheckCircle className="w-5 h-5" />
-                    Seleção Aprovada
+                    Selection Approved
                   </div>
                   <div className="text-xs text-muted-foreground">
                     {new Date(appointment.selectionApprovedAt!).toLocaleDateString('en-GB')}
@@ -246,8 +246,8 @@ export default function ClientGallery() {
         <Card className="p-6 bg-blue-500/10 border-blue-500/30">
           <p className="text-center">
             <strong>Instruções:</strong> Clique no ícone de coração ❤️ para marcar suas fotos favoritas. 
-            Clique na foto para ver em tamanho grande e deixar comentários.
-            {!appointment.selectionApproved && " Wedndo terminar, clique em 'Aprovar Seleção' no topo."}
+            Clique na foto para ver em tamanho grande e deixar comments.
+            {!appointment.selectionApproved && " Wedndo terminar, clique em 'Approve Selection' no topo."}
           </p>
         </Card>
       </div>
@@ -318,7 +318,7 @@ export default function ClientGallery() {
         {photos.length === 0 && (
           <div className="text-center py-20">
             <p className="text-xl text-muted-foreground">
-              Nonea foto available ainda
+              Nonea foto available still
             </p>
           </div>
         )}
@@ -369,7 +369,7 @@ export default function ClientGallery() {
                 <DaylogHeader>
                   <DaylogTitle className="flex items-center gap-2">
                     <MessageSquare className="w-5 h-5" />
-                    Comentários
+                    Comments
                   </DaylogTitle>
                 </DaylogHeader>
 
@@ -387,14 +387,14 @@ export default function ClientGallery() {
                     ))}
                   {photoComments.filter(c => c.photoId === selectedPhoto.id).length === 0 && (
                     <p className="text-sm text-muted-foreground text-center py-8">
-                      None comentário ainda
+                      None comment still
                     </p>
                   )}
                 </div>
 
                 {/* Add Comment */}
                 <div className="space-y-2">
-                  <Label>Deixe um comentário</Label>
+                  <Label>Deixe um comment</Label>
                   <Textarea
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
@@ -406,7 +406,7 @@ export default function ClientGallery() {
                     disabled={!comment.trim() || addCommentMutation.isPending}
                     className="w-full"
                   >
-                    Adicionar Comentário
+                    Adicionar Comment
                   </Button>
                 </div>
               </div>

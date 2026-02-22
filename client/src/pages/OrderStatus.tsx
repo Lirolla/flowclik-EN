@@ -30,10 +30,10 @@ export default function OrderStatus() {
 
   const getStatusInfo = (status: string) => {
     const map: Record<string, { label: string; icon: any; color: string; desc: string }> = {
-      pending: { label: "Aguardando Pagamento", icon: Clock, color: "text-yellow-500", desc: "Realize o pagamento para liberar o download das fotos." },
+      pending: { label: "Awaiting Pagamento", icon: Clock, color: "text-yellow-500", desc: "Realize o pagamento para liberar o download das fotos." },
       paid: { label: "Paid", icon: Check, color: "text-green-500", desc: "Payment confirmed! Suas fotos estão disponíveis para download." },
-      processing: { label: "Processing", icon: Clock, color: "text-blue-500", desc: "Seu pedido está sendo processado." },
-      completed: { label: "Completed", icon: Check, color: "text-green-600", desc: "Pedido concluído. Faça o download das suas fotos." },
+      processing: { label: "Processing", icon: Clock, color: "text-blue-500", desc: "Seu pedido is sendo processado." },
+      completed: { label: "Completed", icon: Check, color: "text-green-600", desc: "Pedido completed. Faça o download das suas fotos." },
       cancelled: { label: "Cancelled", icon: XIcon, color: "text-red-500", desc: "Este pedido foi cancelled." },
     };
     return map[status] || map.pending;

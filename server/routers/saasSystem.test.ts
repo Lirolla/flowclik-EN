@@ -12,7 +12,7 @@ describe("SaaS System - Cadastro de Tenants", () => {
     db = await getDb();
   });
 
-  it("deve criar tenant + subscription + usuário admin", async () => {
+  it("must create tenant + subscription + admin user", async () => {
     if (!db) throw new Error("Database not available");
 
     const caller = appRouter.createCaller({
@@ -77,7 +77,7 @@ describe("SaaS System - Cadastro de Tenants", () => {
     });
   }, 30000);
 
-  it("deve rejeitar subdomain duplicado", async () => {
+  it("must rejeitar subdomain duplicado", async () => {
     const caller = appRouter.createCaller({
       user: null,
       req: {} as any,
@@ -91,10 +91,10 @@ describe("SaaS System - Cadastro de Tenants", () => {
         subdomain: testSubdomain, // Mesmo subdomain
         password: "senha123",
       })
-    ).rejects.toThrow("Subdomain já está em uso");
+    ).rejects.toThrow("Subdomain is already in use");
   });
 
-  it("deve verificar disponibilidade de subdomain", async () => {
+  it("must verificar disponibilidade de subdomain", async () => {
     const caller = appRouter.createCaller({
       user: null,
       req: {} as any,

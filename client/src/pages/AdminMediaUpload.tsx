@@ -41,7 +41,7 @@ export default function AdminMedayUpload() {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        alert("Por favor, select apenas imagens");
+        alert("Por favor, select only imagens");
         return;
       }
 
@@ -73,7 +73,7 @@ export default function AdminMedayUpload() {
         description: description || undefined,
         imageData: base64,
         forSale,
-        price: price, // Já está em centavos
+        price: price, // Already is em centavos
       });
     };
     reader.readAsDataURL(selectedFile);
@@ -146,7 +146,7 @@ export default function AdminMedayUpload() {
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
-              placeholder="Detalhes sobre a foto"
+              placeholder="Details about a foto"
               rows={3}
             />
           </div>
@@ -195,7 +195,7 @@ export default function AdminMedayUpload() {
 
           {/* Info */}
           <div className="bg-muted p-4 rounded-lg text-sm space-y-2">
-            <p className="font-semibold">ℹ️ Processamento automático:</p>
+            <p className="font-semibold">ℹ️ Processamento automatic:</p>
             <ul className="list-disc list-inside space-y-1 text-muted-foreground">
               <li>Imagem original salva em alta qualidade</li>
               <li>Thumbnail gerado (400x400px)</li>

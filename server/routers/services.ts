@@ -83,7 +83,7 @@ export const servicesRouter = router({
         tenantId: getTenantId(ctx),
       } as any;
 
-      // Adicionar campos opcionais apenas se tiverem valor
+      // Adicionar campos opcionais only se tiverem valor
       if (input.description) {
         serviceData.description = input.description;
       }

@@ -98,7 +98,7 @@ export default function AdminUsage() {
                 <AlertDescription className="text-sm">
                   {stats.storage.percentage >= 90 
                     ? "Limite quase atingido! Considere fazer upgrade."
-                    : "You está usando mais de 80% do seu armazenamento."}
+                    : "You is usando mais de 80% do seu armazenamento."}
                 </AlertDescription>
               </Alert>
             )}
@@ -132,7 +132,7 @@ export default function AdminUsage() {
                 <AlertDescription className="text-sm">
                   {stats.galleries.percentage >= 90 
                     ? "Limite de galerias quase atingido!"
-                    : "You está usando mais de 80% das suas galerias."}
+                    : "You is usando mais de 80% das suas galerias."}
                 </AlertDescription>
               </Alert>
             )}

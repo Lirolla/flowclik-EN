@@ -35,7 +35,7 @@ export default function StockGallery() {
     const existingItem = cart.find((item: any) => item.id === photo.id && item.type === "stock");
     
     if (existingItem) {
-      alert("Esta foto já está no carrinho!");
+      alert("This photo is already in the cart!");
       return;
     }
 
@@ -65,7 +65,7 @@ export default function StockGallery() {
               </a>
               <div className="hidden md:flex gap-6">
                 <a href="/" className="hover:text-primary transition-colors">
-                  Início
+                  Home
                 </a>
                 <a href="/galleries" className="hover:text-primary transition-colors">
                   Gallerys

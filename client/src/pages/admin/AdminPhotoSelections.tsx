@@ -169,9 +169,9 @@ export default function AdminPhotoSelections() {
             {selections && selections.length === 0 && (
               <div className="text-center py-12 bg-card rounded-lg border">
                 <Heart className="w-12 h-12 mx-auto text-muted-foreground mb-4" />
-                <p className="text-lg font-medium mb-2">Nonea foto selecionada ainda</p>
+                <p className="text-lg font-medium mb-2">Nonea foto selecionada still</p>
                 <p className="text-sm text-muted-foreground">
-                  O cliente ainda não marcou nonea foto favorita nesta galeria
+                  O cliente still not marcou nonea foto favorita nesta galeria
                 </p>
               </div>
             )}

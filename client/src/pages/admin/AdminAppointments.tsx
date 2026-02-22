@@ -59,7 +59,7 @@ export default function AdminAppointments() {
   );
 }
 
-// Componente para aba de fotografia
+// Componente para aba de photography
 function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
   const { toast } = useToast();
   const [copied, setCopied] = useState(false);
@@ -106,7 +106,7 @@ function GalleryTabContent({ appointmentId }: { appointmentId: number }) {
       <div className="text-center py-8">
         <ImageIcon className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
         <h3 className="text-xl font-semibold mb-2">
-          Nonea galeria criada ainda
+          Nonea galeria criada still
         </h3>
         <p className="text-muted-foreground mb-6">
           Crie uma galeria privada para fazer upload das fotos do ensaio
@@ -388,7 +388,7 @@ function AdminAppointmentsContent() {
 
   const getStatusConfig = (status: AppointmentStatus) => {
     const configs = {
-      pending: { label: '⏳ Pendente', color: 'bg-yellow-500/20 text-yellow-700 border-yellow-500/30' },
+      pending: { label: '⏳ Pending', color: 'bg-yellow-500/20 text-yellow-700 border-yellow-500/30' },
       confirmed: { label: '✅ Confirmado', color: 'bg-green-500/20 text-green-700 border-green-500/30' },
       session_done: { label: '📸 Ensaio Realizado', color: 'bg-blue-500/20 text-blue-700 border-blue-500/30' },
       editing: { label: '🎨 Photos in Editing', color: 'bg-purple-500/20 text-purple-700 border-purple-500/30' },
@@ -570,7 +570,7 @@ function AdminAppointmentsContent() {
                   value={searchTuem}
                   onChange={(e) => {
                     setSearchTuem(e.target.value);
-                    setCurrentPage(1); // Resetar para primeira página
+                    setCurrentPage(1); // Resetar para first página
                   }}
                   className="w-64"
                 />
@@ -579,12 +579,12 @@ function AdminAppointmentsContent() {
                   value={statusFilter}
                   onChange={(e) => {
                     setStatusFilter(e.target.value as AppointmentStatus | 'all');
-                    setCurrentPage(1); // Resetar para primeira página
+                    setCurrentPage(1); // Resetar para first página
                   }}
                   className="border rounded px-3 py-2 bg-background"
                 >
                   <option value="all">Todos os Status</option>
-                  <option value="pending">⏳ Pendente</option>
+                  <option value="pending">⏳ Pending</option>
                   <option value="confirmed">✅ Confirmado</option>
                   <option value="session_done">📸 Ensaio Realizado</option>
                   <option value="editing">🎨 Photos in Editing</option>
@@ -727,7 +727,7 @@ function AdminAppointmentsContent() {
                       {/* Números de páginas */}
                       <div className="flex gap-1">
                         {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
-                          // Show apenas 5 páginas por vez
+                          // Show only 5 páginas por vez
                           if (
                             page === 1 ||
                             page === totalPages ||
@@ -760,7 +760,7 @@ function AdminAppointmentsContent() {
                         onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                         disabled={currentPage === totalPages}
                       >
-                        Próximo
+                        Next
                       </Button>
                     </div>
                   )}
@@ -781,7 +781,7 @@ function AdminAppointmentsContent() {
                 {selectedAppointment.serviceType === "photography" && (
                   <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded">
                     <Camera className="w-3 h-3" />
-                    Fotografia
+                    Photography
                   </span>
                 )}
                 {selectedAppointment.serviceType === "video" && (
@@ -878,16 +878,16 @@ function AdminAppointmentsContent() {
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <Tabs defaultValue="detalhes" className="w-full">
+            <Tabs defaultValue="details" className="w-full">
               <TabsList className="grid w-full grid-cols-2 mb-6">
-                <TabsTrigger value="detalhes">Detalhes</TabsTrigger>
-                <TabsTrigger value="fotografia">
+                <TabsTrigger value="details">Details</TabsTrigger>
+                <TabsTrigger value="photography">
                   <ImageIcon className="w-4 h-4 mr-2" />
-                  Fotografia
+                  Photography
                 </TabsTrigger>
               </TabsList>
 
-              <TabsContent value="detalhes" className="space-y-6">
+              <TabsContent value="details" className="space-y-6">
             {/* Service Name - Destacado */}
             {(selectedAppointment.customServiceName || selectedAppointment.serviceName) && (
               <div className="p-4 bg-accent/10 border-l-4 border-accent rounded">
@@ -1061,7 +1061,7 @@ function AdminAppointmentsContent() {
                 )}
               </TabsContent>
 
-              <TabsContent value="fotografia" className="space-y-6">
+              <TabsContent value="photography" className="space-y-6">
                 <GalleryTabContent appointmentId={selectedAppointment.id} />
               </TabsContent>
             </Tabs>
@@ -1202,7 +1202,7 @@ function AdminAppointmentsContent() {
               </select>
             </div>
             <div className="p-3 bg-accent/5 border border-dashed border-accent/30 rounded-lg space-y-3">
-              <p className="text-xs text-muted-foreground font-medium">Customise serviço e valor (sobrescreve o serviço selecionado acima)</p>
+              <p className="text-xs text-muted-foreground font-medium">Customise service e valor (aboutscreve o service selecionado above)</p>
               <div>
                 <Label htmlFor="create-custom-service">Description do Service</Label>
                 <Input
@@ -1275,7 +1275,7 @@ function AdminAppointmentsContent() {
                 value={createFormData.notes}
                 onChange={(e) => setCreateFormData({ ...createFormData, notes: e.target.value })}
                 rows={3}
-                placeholder="Detalhes adicionais sobre o agendamento"
+                placeholder="Details adicionais about o agendamento"
               />
             </div>
 
@@ -1300,7 +1300,7 @@ function AdminAppointmentsContent() {
                     return;
                   }
                   
-                  // Garantir que a data está no formato correto
+                  // Ensure que a data is no formato correto
                   const dateStr = createFormData.appointmentDate;
                   const appointmentDate = dateStr.includes("T") 
                     ? new Date(dateStr)

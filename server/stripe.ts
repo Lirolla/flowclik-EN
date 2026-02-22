@@ -140,7 +140,7 @@ export async function createAppointmentCheckoutSession({
           currency: "brl",
           product_data: {
             name: `Agendamento: ${serviceName}`,
-            description: "Pagamento de serviço fotográfico",
+            description: "Pagamento de service fotográfico",
           },
           unit_amount: amount,
         },

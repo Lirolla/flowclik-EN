@@ -94,7 +94,7 @@ export default function ClientDashboard() {
             <AlertCircle className="h-4 w-4 text-yellow-500" />
             <AlertDescription className="flex items-center justify-between">
               <span className="text-yellow-500">
-                Complete seus dados para receber produtos físicos e comunicações importantes!
+                Complete seus dados para receber produtos físicos e comunicações importbefore!
               </span>
               <Button 
                 size="sm" 
@@ -102,7 +102,7 @@ export default function ClientDashboard() {
                 className="ml-4 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-black"
                 onClick={() => setShowProfileDaylog(true)}
               >
-                Completar agora
+                Completar now
               </Button>
             </AlertDescription>
           </Alert>
@@ -164,7 +164,7 @@ export default function ClientDashboard() {
 
         {/* Appointment Details */}
         <Card className="bg-gray-900 border-gray-800 p-6">
-          <h3 className="text-xl font-semibold mb-4">Detalhes do Agendamento</h3>
+          <h3 className="text-xl font-semibold mb-4">Details do Agendamento</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <p className="text-sm text-gray-400">Service</p>
@@ -249,24 +249,24 @@ export default function ClientDashboard() {
 
         {/* Next Steps */}
         <Card className="bg-gradient-to-r from-red-900/20 to-gray-900 border-red-600 p-6">
-          <h3 className="text-xl font-semibold mb-3">Próximos Passos</h3>
+          <h3 className="text-xl font-semibold mb-3">Nexts Passos</h3>
           {appointment.status === 'pending' && (
-            <p className="text-gray-300">Aguardando confirmação do photographer. You receberá uma notification em breve!</p>
+            <p className="text-gray-300">Awaiting confirmation do photographer. You receberá uma notification em breve!</p>
           )}
           {appointment.status === 'confirmed' && (
-            <p className="text-gray-300">Seu ensaio está confirmado para {appointment.date && new Date(appointment.date).toLocaleDateString('en-GB')}. Prepare-se!</p>
+            <p className="text-gray-300">Seu ensaio is confirmado para {appointment.date && new Date(appointment.date).toLocaleDateString('en-GB')}. Prepare-se!</p>
           )}
           {appointment.status === 'session_done' && (
-            <p className="text-gray-300">Ensaio realizado! As fotos estão sendo editadas. Em breve you poderá visualizá-las.</p>
+            <p className="text-gray-300">Ensaio realizado! As fotos estão sendo editadas. Em breve you canrá visualizá-las.</p>
           )}
           {appointment.status === 'awaiting_selection' && (
             <p className="text-gray-300">Your photos are ready! Acesse a <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link> para selecionar suas favoritas.</p>
           )}
           {appointment.status === 'final_editing' && (
-            <p className="text-gray-300">Suas fotos selecionadas estão sendo editadas. Aguarde a entrega final!</p>
+            <p className="text-gray-300">Suas fotos selecionadas estão sendo editadas. Aguarde a betweenga final!</p>
           )}
           {appointment.status === 'delivered' && (
-            <p className="text-gray-300">Project concluído! Suas fotos estão disponíveis para download na <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link>.</p>
+            <p className="text-gray-300">Project completed! Suas fotos estão disponíveis para download na <Link href={`/client/gallery/${appointmentId}`}><a className="text-red-400 underline">galeria</a></Link>.</p>
           )}
         </Card>
       </div>

@@ -43,7 +43,7 @@ export default function GalleryView() {
     const exists = cart.find((i: any) => i.id === item.id);
 
     if (exists) {
-      alert("Esta foto já está no carrinho!");
+      alert("This photo is already in the cart!");
       return;
     }
 
@@ -113,7 +113,7 @@ export default function GalleryView() {
           <Card className="py-16 text-center">
             <ImageIcon className="w-20 h-20 mx-auto text-muted-foreground mb-4" />
             <h3 className="text-2xl font-semibold mb-2">Gallery vazia</h3>
-            <p className="text-muted-foreground">Esta galeria ainda não possui fotos.</p>
+            <p className="text-muted-foreground">Esta galeria still not possui fotos.</p>
           </Card>
         )}
       </div>

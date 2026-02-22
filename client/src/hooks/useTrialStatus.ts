@@ -8,7 +8,7 @@ export function useTrialStatus() {
   const { data: trialStatus, isLoading } = (trpc as any).subscriptions.checkTrialStatus.useQuery(undefined, {
     // Verify a cada 5 minutes
     refetchInterval: 5 * 60 * 1000,
-    // Não refetch no foco da janela para evitar spam
+    // Not refetch no foco da janela para evitar spam
     refetchOnWindowFocus: false,
   });
 
@@ -21,9 +21,9 @@ export function useTrialStatus() {
       return;
     }
 
-    // Se está em trial e faltam 3 days ou menos, mostrar aviso
+    // Se is em trial e faltam 3 days ou menos, mostrar aviso
     if (trialStatus.isTrialing && trialStatus.daysRemaining !== null && trialStatus.daysRemaining <= 3) {
-      // Verify se já foi dismissado hoje
+      // Verify se already foi dismissado hoje
       const lastDismiss = localStorage.getItem('trial_warning_dismissed');
       const today = new Date().toDateString();
       
@@ -35,7 +35,7 @@ export function useTrialStatus() {
 
   const dismissWarning = () => {
     if (trialStatus?.isExpired) {
-      // Não pode dismissar se expirou
+      // Not can dismissar se expirou
       return;
     }
     setDismissed(true);

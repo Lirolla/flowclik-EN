@@ -63,7 +63,7 @@ export default function ClientContract() {
                   <div>
                     <h2 className="text-2xl font-semibold text-blue-500">Contrato Available</h2>
                     <p className="text-gray-300 mt-1">
-                      Your contract está pronto para visualização
+                      Your contract is pronto para visualização
                     </p>
                   </div>
                 </>
@@ -75,9 +75,9 @@ export default function ClientContract() {
             <div className="flex items-center gap-4">
               <AlertCircle className="h-12 w-12 text-yellow-500" />
               <div>
-                <h2 className="text-2xl font-semibold text-yellow-500">Contrato Pendente</h2>
+                <h2 className="text-2xl font-semibold text-yellow-500">Contrato Pending</h2>
                 <p className="text-gray-300 mt-1">
-                  O contrato ainda não foi gerado pelo photographer
+                  O contrato still not foi gerado pelo photographer
                 </p>
               </div>
             </div>
@@ -89,7 +89,7 @@ export default function ClientContract() {
           <Card className="bg-gray-900 border-gray-800 p-6">
             <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
               <FileText className="h-5 w-5" />
-              Detalhes do Contrato
+              Details do Contrato
             </h3>
             
             <div className="space-y-4">
@@ -113,7 +113,7 @@ export default function ClientContract() {
               <div className="flex justify-between items-center pb-4 border-b border-gray-800">
                 <span className="text-gray-400">Status</span>
                 <span className={`font-semibold ${isSigned ? 'text-green-500' : 'text-blue-500'}`}>
-                  {isSigned ? 'Assinado' : 'Aguardando Assinatura'}
+                  {isSigned ? 'Assinado' : 'Awaiting Assinatura'}
                 </span>
               </div>
 
@@ -157,7 +157,7 @@ export default function ClientContract() {
           <Card className="bg-blue-900/20 border-blue-600 p-6">
             <p className="text-gray-300">
               <strong>Precisa assinar o contrato?</strong><br />
-              Get in touch com o photographer através do <a href={`/client/chat/${appointmentId}`} className="text-red-400 underline">chat</a> para combinar a signature.
+              Get in touch com o photographer through do <a href={`/client/chat/${appointmentId}`} className="text-red-400 underline">chat</a> para combinar a signature.
             </p>
           </Card>
         )}

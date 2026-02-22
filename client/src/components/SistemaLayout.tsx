@@ -69,7 +69,7 @@ export default function SistemaLayout({ children }: SistemaLayoutProps) {
     );
   }
 
-  // Não autenticado - será redirecionado
+  // Not autenticado - will be redirecionado
   if (!isAuthenticated) {
     return null;
   }

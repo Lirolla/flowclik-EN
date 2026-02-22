@@ -63,7 +63,7 @@ export const albumGuestsRouter = router({
       return { success: true, alreadyRegistered: false };
     }),
 
-  // Verify se email já está registrado (para pular modal)
+  // Verify se email already is registrado (para pular modal)
   checkEmail: publicProcedure
     .input(
       z.object({

@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 
 // Estrutura de documentação
 const docsStructure: Record<string, { icon: any; articles: { id: string; title: string; content: string }[] }> = {
-  "Primeiros Passos": {
+  "Firsts Passos": {
     icon: Home,
     articles: [
       { id: "login", title: "Como fazer login", content: `
@@ -32,19 +32,19 @@ const docsStructure: Record<string, { icon: any; articles: { id: string; title: 
 1. Acesse **Settings** no menu lateral
 2. Faça upload do seu **logo**
 3. Escolha as **cores da sua marca**
-4. Configure informações de contato
+4. Configure information de contato
 
 ## Banner da home
 
 1. Vá em **Banner** no menu
 2. Faça upload de uma foto impactante
-3. Adicione título e descrição
-4. Salve as alterações
+3. Adicione título e description
+4. Salve as changes
 
-**Dica:** Use fotos de alta qualidade para impressionar visitantes!
+**Dica:** Use fotos de alta qualidade para impressionar visitbefore!
       ` },
-      { id: "primeiro-agendamento", title: "Criar primeiro agendamento", content: `
-# Criar primeiro agendamento
+      { id: "first-agendamento", title: "Criar first agendamento", content: `
+# Criar first agendamento
 
 1. Acesse **Agendamentos** no menu
 2. Clique em **+ Novo Agendamento**
@@ -55,9 +55,9 @@ const docsStructure: Record<string, { icon: any; articles: { id: string; title: 
    - Local
 4. Clique em **Salvar**
 
-O cliente receberá email de confirmação automaticamente!
+O cliente receberá email de confirmation automaticamente!
 
-**Dica:** Configure seus serviços antes em **Services** no menu.
+**Dica:** Configure seus services before em **Services** no menu.
       ` },
     ],
   },
@@ -75,7 +75,7 @@ O cliente receberá email de confirmação automaticamente!
    - Senha de acesso (optional)
 4. Clique em **Criar**
 
-Pronto! Agora you pode fazer upload de fotos.
+Pronto! Agora you can fazer upload de fotos.
 
 **Tipos de galeria:**
 - **Privada:** Apenas com senha
@@ -105,7 +105,7 @@ Pronto! Agora you pode fazer upload de fotos.
 4. Envie para o cliente (WhatsApp, email, etc)
 
 **Com senha:**
-- Cliente precisa digitar senha para acessar
+- Cliente needs digitar senha para acessar
 - Mais segurança para fotos privadas
 
 **Sem senha:**
@@ -123,10 +123,10 @@ Pronto! Agora you pode fazer upload de fotos.
 6. Envie para clientes interessados
 
 **Como funciona:**
-- Cliente vê fotos com marca d'água
+- Cliente vê fotos com watermark
 - Seleciona fotos que quer comprar
 - Finaliza compra com cartão
-- Recebe fotos sem marca d'água por email
+- Recebe fotos sem watermark por email
 
 **Dica:** Ótimo para vender fotos de eventos (formaturas, festas, etc)
       ` },
@@ -141,15 +141,15 @@ Pronto! Agora you pode fazer upload de fotos.
 1. Acesse **Agendamentos**
 2. Clique em **+ Novo Agendamento**
 3. Select ou crie cliente
-4. Escolha o serviço
+4. Escolha o service
 5. Defina data, horário e local
 6. Adicione observações (optional)
 7. Clique em **Salvar**
 
 **Status do agendamento:**
-- **Pendente:** Aguardando confirmação
+- **Pending:** Awaiting confirmation
 - **Confirmado:** Cliente confirmou
-- **Concluído:** Ensaio realizado
+- **Completed:** Ensaio realizado
 - **Cancelled:** Agendamento cancelled
       ` },
       { id: "gerenciar-status", title: "Gerenciar status de agendamentos", content: `
@@ -158,12 +158,12 @@ Pronto! Agora you pode fazer upload de fotos.
 1. Abra o agendamento
 2. Clique em **Mudar Status**
 3. Escolha o novo status
-4. Cliente recebe notification automática
+4. Cliente recebe notification automatic
 
 **Fluxo recomendado:**
-1. Pendente → Confirmado (cliente pagou sinal)
-2. Confirmado → Concluído (ensaio realizado)
-3. Concluído → Delivered (fotos enviadas)
+1. Pending → Confirmado (cliente pagou sinal)
+2. Confirmado → Completed (ensaio realizado)
+3. Completed → Delivered (fotos enviadas)
       ` },
       { id: "pagamentos-agendamento", title: "Gerenciar pagamentos", content: `
 # Gerenciar pagamentos de agendamentos
@@ -178,7 +178,7 @@ Pronto! Agora you pode fazer upload de fotos.
 **Tipos de pagamento:**
 - **Sinal:** Parte do valor (ex: 50%)
 - **Total:** Valor completo
-- **Restante:** Após entregar fotos
+- **Restante:** After betweengar fotos
       ` },
     ],
   },
@@ -197,7 +197,7 @@ Pronto! Agora you pode fazer upload de fotos.
    - Address (optional)
 4. Clique em **Salvar**
 
-**Dica:** Cadastre clientes antes de criar agendamentos para agilizar!
+**Dica:** Cadastre clientes before de criar agendamentos para agilizar!
       ` },
       { id: "enviar-contrato", title: "Enviar contrato digital", content: `
 # Enviar contrato digital
@@ -210,9 +210,9 @@ Pronto! Agora you pode fazer upload de fotos.
 6. You recebe notification
 
 **Vantagens:**
-- Sem impressão
+- Sem impresare
 - Assinatura digital válida
-- Arquivamento automático
+- Arquivamento automatic
       ` },
       { id: "chat-cliente", title: "Chat com cliente", content: `
 # Chat com cliente
@@ -223,7 +223,7 @@ Pronto! Agora you pode fazer upload de fotos.
 4. Cliente recebe notification
 
 **Recursos:**
-- Histórico completo de conversas
+- History completo de conversas
 - Notifications em tempo real
 - Anexar fotos e documentos
       ` },
@@ -232,8 +232,8 @@ Pronto! Agora you pode fazer upload de fotos.
   "Settings": {
     icon: Settings,
     articles: [
-      { id: "configurar-servicos", title: "Configurar serviços e preços", content: `
-# Configurar serviços e preços
+      { id: "configurar-servicos", title: "Configurar services e preços", content: `
+# Configurar services e preços
 
 1. Acesse **Services** no menu
 2. Clique em **+ Novo Service**
@@ -244,7 +244,7 @@ Pronto! Agora you pode fazer upload de fotos.
    - Duration
 4. Clique em **Salvar**
 
-**Exemplos de serviços:**
+**Examples de services:**
 - Ensaio individual: £ 300
 - Ensaio casal: £ 450
 - Casamento: £ 2.500
@@ -256,7 +256,7 @@ Pronto! Agora you pode fazer upload de fotos.
 1. Acesse **Portfólio** no menu
 2. Clique em **+ Adicionar Foto**
 3. Faça upload da imagem
-4. Adicione título e descrição
+4. Adicione título e description
 5. Organize a ordem arrastando
 
 **Dicas:**
@@ -293,8 +293,8 @@ Valor: [IP fornecido pelo sistema]
 };
 
 export default function Docs() {
-  const [selectedCategory, setSelectedCategory] = useState("Primeiros Passos");
-  const [selectedArticle, setSelectedArticle] = useState(docsStructure["Primeiros Passos"].articles[0]);
+  const [selectedCategory, setSelectedCategory] = useState("Firsts Passos");
+  const [selectedArticle, setSelectedArticle] = useState(docsStructure["Firsts Passos"].articles[0]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
 
@@ -427,7 +427,7 @@ export default function Docs() {
                 👍 Sim
               </Button>
               <Button variant="outline" size="sm">
-                👎 Não
+                👎 Not
               </Button>
             </div>
           </div>

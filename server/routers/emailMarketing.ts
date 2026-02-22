@@ -6,7 +6,7 @@ import { getDb, getTenantId } from "../db";
 import { clientEvents, emailTemplates, emailCampaigns, emailLogs, users } from "../../drizzle/schema";
 import { Resend } from "resend";
 
-// Usar Resend via env var global (mesmo padrão do emailService.ts)
+// Usar Resend via env var global (mesmo default do emailService.ts)
 const RESEND_API_KEY = process.env.RESEND_API_KEY || "";
 const FROM_EMAIL = "FlowClik <noreply@flowclik.com>";
 import { defaultEmailTemplates } from "./defaultEmailTemplates";
@@ -247,7 +247,7 @@ export const emailMarketingRouter = router({
       
       // Verify Resend API Key
       if (!RESEND_API_KEY) {
-        throw new TRPCError({ code: "BAD_REQUEST", message: "RESEND_API_KEY não configurada no servidor" });
+        throw new TRPCError({ code: "BAD_REQUEST", message: "RESEND_API_KEY not configured on server" });
       }
       
       // Buscar cliente
@@ -309,7 +309,7 @@ export const emailMarketingRouter = router({
       
       // Verify Resend API Key
       if (!RESEND_API_KEY) {
-        throw new TRPCError({ code: "BAD_REQUEST", message: "RESEND_API_KEY não configurada no servidor" });
+        throw new TRPCError({ code: "BAD_REQUEST", message: "RESEND_API_KEY not configured on server" });
       }
       
       // Buscar campanha
@@ -394,7 +394,7 @@ export const emailMarketingRouter = router({
           failedCount++;
         }
         
-        // Delay de 100ms entre envios para não estourar rate limit
+        // Delay de 100ms between envios para not estourar rate limit
         await new Promise(resolve => setTimeout(resolve, 100));
       }
       
@@ -464,7 +464,7 @@ export const emailMarketingRouter = router({
     }));
   }),
 
-  // Inicializar templates padrão
+  // Inicializar templates default
   initDefaultTemplates: protectedProcedure.mutation(async ({ ctx }) => {
     const tenantId = getTenantId(ctx);
     const db = await getDb();
@@ -475,7 +475,7 @@ export const emailMarketingRouter = router({
       .where(eq(emailTemplates.tenantId, tenantId));
     
     if (Number(existing[0]?.count || 0) > 0) {
-      throw new TRPCError({ code: "BAD_REQUEST", message: "Templates já foram inicializados" });
+      throw new TRPCError({ code: "BAD_REQUEST", message: "Templates already were inicializados" });
     }
     
     for (const tpl of defaultEmailTemplates) {

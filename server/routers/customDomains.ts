@@ -29,7 +29,7 @@ async function checkDNS(domain: string): Promise<{ ok: boolean; message: string 
       }
       return { ok: false, message: `DNS aponta para ${addresses.join(", ")} ao invés de ${VPS_IP}. Configure o registro A corretamente.` };
     } catch (e: any) {
-      // Se não tem registro A, tentar CNAME
+      // Se not tem registro A, tentar CNAME
     }
 
     // Tentar resolver CNAME
@@ -40,7 +40,7 @@ async function checkDNS(domain: string): Promise<{ ok: boolean; message: string 
       }
       return { ok: false, message: `CNAME aponta para ${cnames.join(", ")}. Configure para apontar para flowclik.com` };
     } catch (e: any) {
-      // Sem CNAME também
+      // Sem CNAME also
     }
 
     return { ok: false, message: "None registro DNS encontrado. Configure o registro A apontando para " + VPS_IP };
@@ -83,7 +83,7 @@ export const customSunainsRouter = router({
         });
       }
 
-      // Verify se domain já está em uso na tabela custom_domains
+      // Verify se domain already is em uso na tabela custom_domains
       const [existing] = await db
         .select()
         .from(customSunains)
@@ -93,11 +93,11 @@ export const customSunainsRouter = router({
       if (existing) {
         throw new TRPCError({
           code: "CONFLICT",
-          message: "Este domain já está sendo usado por outro photographer.",
+          message: "Este domain already is sendo usado por outro photographer.",
         });
       }
 
-      // Verify se já está em uso na tabela tenants
+      // Verify se already is em uso na tabela tenants
       const [existingTenant] = await db
         .select({ id: tenants.id })
         .from(tenants)
@@ -107,7 +107,7 @@ export const customSunainsRouter = router({
       if (existingTenant) {
         throw new TRPCError({
           code: "CONFLICT",
-          message: "Este domain já está associado a outro photographer.",
+          message: "Este domain already is associado a outro photographer.",
         });
       }
 
@@ -131,7 +131,7 @@ export const customSunainsRouter = router({
       };
     }),
 
-  // Verify se domain está configurado corretamente (com verificação DNS real)
+  // Verify se domain is configurado corretamente (com verificação DNS real)
   verify: protectedProcedure
     .input(
       z.object({
@@ -155,7 +155,7 @@ export const customSunainsRouter = router({
         .limit(1);
 
       if (!domain) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Sunínio not found" });
+        throw new TRPCError({ code: "NOT_FOUND", message: "Subscription not found" });
       }
 
       // Verify DNS real
@@ -174,7 +174,7 @@ export const customSunainsRouter = router({
         });
       }
 
-      // DNS OK! Marcar como verificado
+      // DNS OK! Marcar as verificado
       const now = new Date().toISOString().slice(0, 19).replace('T', ' ');
       await db
         .update(customSunains)
@@ -221,7 +221,7 @@ export const customSunainsRouter = router({
         .limit(1);
 
       if (!domain) {
-        throw new TRPCError({ code: "NOT_FOUND", message: "Sunínio not found" });
+        throw new TRPCError({ code: "NOT_FOUND", message: "Subscription not found" });
       }
 
       // Remover domain da tabela custom_domains

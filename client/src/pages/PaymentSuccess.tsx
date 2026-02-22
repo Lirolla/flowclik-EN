@@ -42,7 +42,7 @@ export default function PaymentSuccess() {
 
         <div className="space-y-4">
           <p className="text-gray-600">
-            You receberá um email de confirmação em breve com todos os detalhes da sua compra.
+            You receberá um email de confirmation em breve com todos os details da sua compra.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-6">

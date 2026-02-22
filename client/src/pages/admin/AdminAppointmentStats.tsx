@@ -24,12 +24,12 @@ function AdminAppointmentStatsContent() {
 
   const getStatusLabel = (status: string) => {
     const labels: Record<string, string> = {
-      pending: 'Pendente',
+      pending: 'Pending',
       confirmed: 'Confirmado',
       session_done: 'Ensaio Realizado',
-      editing: 'Em Edição',
+      editing: 'In Editing',
       awaiting_selection: 'Awaiting Selection',
-      final_editing: 'Edição Final',
+      final_editing: 'Final Editing',
       delivered: 'Delivered',
       cancelled: 'Cancelled',
     };
@@ -65,7 +65,7 @@ function AdminAppointmentStatsContent() {
         </p>
       </div>
 
-      {/* Cards de Resumo */}
+      {/* Cards de Summary */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -85,13 +85,13 @@ function AdminAppointmentStatsContent() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{currencySymbol} {(totalRevenue / 100).toFixed(2)}</div>
-            <p className="text-xs text-muted-foreground">Soma de todos os serviços</p>
+            <p className="text-xs text-muted-foreground">Soma de todos os services</p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Taxa de Confirmação</CardTitle>
+            <CardTitle className="text-sm font-medium">Taxa de Confirmation</CardTitle>
             <CheckCircle className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
@@ -161,7 +161,7 @@ function AdminAppointmentStatsContent() {
       {/* Estatísticas Mensais */}
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>Agendamentos por Month (Últimos 12 months)</CardTitle>
+          <CardTitle>Agendamentos por Month (Lasts 12 months)</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="space-y-4">

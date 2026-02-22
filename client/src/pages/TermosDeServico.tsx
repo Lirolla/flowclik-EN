@@ -43,7 +43,7 @@ export default function TuemosDeServico() {
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">1. Aceitação dos Tuemos</h2>
               <p className="text-zinc-300 leading-relaxed">
                 Ao acessar e usar a plataforma FlowClik, you concorda em cumprir e estar vinculado aos seguintes 
-                Tuemos de Service. Se you não concordar com alguma parte destes termos, não deverá usar nossos serviços.
+                Tuemos de Service. Se you not concordar com alguma parte destes termos, not mustrá usar nossos services.
               </p>
             </section>
 
@@ -51,7 +51,7 @@ export default function TuemosDeServico() {
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">2. Description do Service</h2>
               <p className="text-zinc-300 leading-relaxed">
                 FlowClik é uma plataforma SaaS (Software as a Service) que fornece ferramentas de gestão para photographers 
-                profissionais, incluindo gerenciamento de clientes, agendamentos, galerias de fotos, seleção de imagens, 
+                profissionais, incluindo gerenciamento de clientes, agendamentos, galerias de fotos, selection de imagens, 
                 álbuns finais e sistema de vendas de fotos.
               </p>
             </section>
@@ -59,12 +59,12 @@ export default function TuemosDeServico() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">3. Cadastro e Conta</h2>
               <p className="text-zinc-300 leading-relaxed mb-4">
-                Para usar nossos serviços, you deve:
+                Para usar nossos services, you must:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
-                <li>Fornecer informações precisas e completas durante o cadastro</li>
+                <li>Fornecer information needss e completas durante o cadastro</li>
                 <li>Manter a segurança de sua senha e conta</li>
-                <li>Notificar-nos imedaytamente sobre qualquer uso não autorizado de sua conta</li>
+                <li>Notificar-nos imedaytamente about qualquer uso not autorizado de sua conta</li>
                 <li>Ser responsável por todas as atividades que ocorrem em sua conta</li>
               </ul>
             </section>
@@ -72,13 +72,13 @@ export default function TuemosDeServico() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">4. Plyears e Pagamentos</h2>
               <p className="text-zinc-300 leading-relaxed mb-4">
-                FlowClik oferece diferentes plyears de signature (Starter, Pro, Enterprise). Os pagamentos são processados 
-                através do Paddle, nosso parceiro de pagamentos. Ao assinar um plyear, you agree to:
+                FlowClik oferece diferentes plyears de signature (Starter, Pro, Enterprise). Os pagamentos are processados 
+                through do Paddle, nosso parceiro de pagamentos. Ao assinar um plyear, you agree to:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li>Pagamentos recorrentes mensais ou anuais conforme o plyear escolhido</li>
-                <li>Renovação automática until o cancellation</li>
-                <li>Política de reembolso de 14 days para novos assinantes</li>
+                <li>Renovação automatic until o cancellation</li>
+                <li>Política de reembolso de 14 days para novos assinbefore</li>
                 <li>Possíveis ajustes de preço com notification prévia de 30 days</li>
               </ul>
             </section>
@@ -89,18 +89,18 @@ export default function TuemosDeServico() {
                 You concorda em NÃO:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
-                <li>Usar a plataforma para fins ilegais ou não autorizados</li>
+                <li>Usar a plataforma para fins ilegais ou not autorizados</li>
                 <li>Fazer upload de conteúdo ofensivo, difamatório ou que viole copyright</li>
                 <li>Tentar acessar áreas restritas do sistema ou contas de outros usuários</li>
                 <li>Sobrecarregar ou interferir com a infraestrutura da plataforma</li>
-                <li>Revender ou redistribuir nossos serviços sem autorização</li>
+                <li>Revender ou redistribuir nossos services sem autorização</li>
               </ul>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">6. Propriedade Intelectual</h2>
               <p className="text-zinc-300 leading-relaxed">
-                Todo o conteúdo da plataforma FlowClik (código, design, logos, textos) é propriedade da FlowClik e 
+                Todo o conteúdo da plataforma FlowClik (code, design, logos, textos) é propriedade da FlowClik e 
                 protegido por leis de copyright. As fotos e conteúdos enviados pelos photographers permanecem 
                 de propriedade dos respectivos photographers.
               </p>
@@ -110,20 +110,20 @@ export default function TuemosDeServico() {
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">7. Storage e Backup</h2>
               <p className="text-zinc-300 leading-relaxed">
                 Fornecemos armazenamento em nuvem conforme o plyear photographer. Embora façamos backups regulares, 
-                recomendamos que you mantenha cópias de segurança de seus arquivos importantes. Não nos responsabilizamos 
-                por perda de dados devido a falhas técnicas, exclusão acidental ou cancellation de conta.
+                recomendamos que you mantenha cópias de segurança de seus arquivos importbefore. Not nos responsabilizamos 
+                por perda de dados devido a falhas técnicas, excluare acidental ou cancellation de conta.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">8. Cancellation e Encerramento</h2>
               <p className="text-zinc-300 leading-relaxed mb-4">
-                You pode cancelar sua signature a qualquer momento através do painel de configurações. Ao cancelar:
+                You can cancelar sua signature a qualquer momento through do painel de configurações. Ao cancelar:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
-                <li>You terá acesso aos serviços until o final do período pago</li>
-                <li>Seus dados serão mantidos por 30 days após o cancellation</li>
-                <li>Após 30 days, seus dados serão permanentemente excluídos</li>
+                <li>You terá acesso aos services until o final do period pago</li>
+                <li>Seus dados serão mantidos por 30 days after o cancellation</li>
+                <li>After 30 days, seus dados serão permanentemente excluídos</li>
               </ul>
               <p className="text-zinc-300 leading-relaxed">
                 Reservamo-nos o direito de suspender ou encerrar contas que violem estes Tuemos de Service.
@@ -133,16 +133,16 @@ export default function TuemosDeServico() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">9. Limitação de Responsabilidade</h2>
               <p className="text-zinc-300 leading-relaxed">
-                FlowClik é fornecido "como está" sem garantias de qualquer tipo. Não nos responsabilizamos por dyears 
-                indiretos, incidentais ou consequenciais resultantes do uso ou impossibilidade de uso da plataforma.
+                FlowClik é fornecido "as is" sem garantias de qualquer tipo. Not nos responsabilizamos por dyears 
+                indiretos, incidentais ou consequenciais resultbefore do uso ou impossibilidade de uso da plataforma.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">10. Modificações dos Tuemos</h2>
               <p className="text-zinc-300 leading-relaxed">
-                Podemos modificar estes Tuemos de Service a qualquer momento. Notificaremos you sobre mudanças 
-                significativas por email ou através da plataforma. O uso continuado após as mudanças constitui 
+                Podemos modificar estes Tuemos de Service a qualquer momento. Notificaremos you about mudanças 
+                significativas por email ou through da plataforma. O uso continuado after as mudanças constitui 
                 aceitação dos novos termos.
               </p>
             </section>
@@ -150,7 +150,7 @@ export default function TuemosDeServico() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">11. Lei Aplicável</h2>
               <p className="text-zinc-300 leading-relaxed">
-                Estes Tuemos de Service são regidos pelas leis do Brasil. Wedlquer disputa será resolvida nos 
+                Estes Tuemos de Service are regidos pelas leis do Brasil. Wedlquer disputa will be resolvida nos 
                 tribunais competentes do Brasil.
               </p>
             </section>
@@ -158,7 +158,7 @@ export default function TuemosDeServico() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">12. Contato</h2>
               <p className="text-zinc-300 leading-relaxed">
-                Para questions sobre estes Tuemos de Service, get in touch conosco através de:
+                Para questions about estes Tuemos de Service, get in touch conosco through de:
               </p>
               <p className="text-purple-400 mt-2">
                 Email: suporte@flowclik.com

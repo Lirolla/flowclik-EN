@@ -104,7 +104,7 @@ export default function Services() {
                 Services em breve
               </h3>
               <p className="text-muted-foreground mb-6">
-                Estamos preparando nossos serviços. Volte em breve!
+                Estamos preparando nossos services. Volte em breve!
               </p>
               <Button asChild>
                 <Link href={SITE_ROUTES.home()}>

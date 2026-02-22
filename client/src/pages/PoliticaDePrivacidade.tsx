@@ -35,51 +35,51 @@ export default function PoliticaDePrivacy() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">1. Introdução</h2>
               <p className="text-zinc-300 leading-relaxed">
-                A FlowClik ("nós", "nosso" ou "nos") está comprometida em proteger sua privacidade. Esta Política de 
-                Privacy explica como coletamos, usamos, divulgamos e protegemos suas informações quando you usa 
+                A FlowClik ("us", "nosso" ou "nos") is comprometida em proteger sua privacidade. Esta Política de 
+                Privacy explica as coletamos, usamos, divulgamos e protegemos suas information when you usa 
                 nossa plataforma de gestão para photographers.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">2. Informações que Coletamos</h2>
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">2. Information que Coletamos</h2>
               
-              <h3 className="text-xl font-semibold text-purple-400 mt-6 mb-3">2.1 Informações Fornecidas por You</h3>
+              <h3 className="text-xl font-semibold text-purple-400 mt-6 mb-3">2.1 Information Fornecidas por You</h3>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li><strong>Dados de Cadastro:</strong> Nome, email, telefone, endereço</li>
-                <li><strong>Dados de Pagamento:</strong> Processados pelo Paddle (não armazenamos dados de cartão)</li>
+                <li><strong>Dados de Pagamento:</strong> Processados pelo Paddle (not armazenamos dados de cartão)</li>
                 <li><strong>Conteúdo:</strong> Fotos, videos e outros arquivos que you faz upload</li>
-                <li><strong>Dados de Clientes:</strong> Informações dos clientes que you cadastra na plataforma</li>
+                <li><strong>Dados de Clientes:</strong> Information dos clientes que you cadastra na plataforma</li>
               </ul>
 
-              <h3 className="text-xl font-semibold text-purple-400 mt-6 mb-3">2.2 Informações Coletadas Automaticamente</h3>
+              <h3 className="text-xl font-semibold text-purple-400 mt-6 mb-3">2.2 Information Coletadas Automaticamente</h3>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li><strong>Dados de Uso:</strong> Pages visitadas, recursos utilizados, tempo de uso</li>
                 <li><strong>Dados Técnicos:</strong> Address IP, tipo de navegador, sistema operacional</li>
-                <li><strong>Cookies:</strong> Usamos cookies para manter sua sessão e melhourr a experiência</li>
+                <li><strong>Cookies:</strong> Usamos cookies para manter sua sesare e melhourr a experiência</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">3. Como Usamos Suas Informações</h2>
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">3. Como Usamos Suas Information</h2>
               <p className="text-zinc-300 leading-relaxed mb-4">
-                Utilizamos suas informações para:
+                Utilizamos suas information para:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li>Fornecer, operar e manter nossa plataforma</li>
                 <li>Processar pagamentos e gerenciar signatures</li>
                 <li>Enviar emails transacionais (confirmações, notifications)</li>
-                <li>Melhourr nossos serviços e desenvolver novos recursos</li>
-                <li>Prevenir fraudes e garantir a segurança da plataforma</li>
+                <li>Melhourr nossos services e desenvolver novos recursos</li>
+                <li>Prevenir fraudes e ensure a segurança da plataforma</li>
                 <li>Cumprir obrigações legais e regulatórias</li>
                 <li>Enviar comunicações de marketing (com seu consentimento)</li>
               </ul>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">4. Compartilhamento de Informações</h2>
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">4. Compartilhamento de Information</h2>
               <p className="text-zinc-300 leading-relaxed mb-4">
-                Podemos compartilhar suas informações com:
+                Podemos compartilhar suas information com:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li><strong>Paddle:</strong> Processador de pagamentos (sujeito à privacy policy deles)</li>
@@ -87,14 +87,14 @@ export default function PoliticaDePrivacy() {
                 <li><strong>Autoridades Legais:</strong> Wedndo exigido por lei ou para proteger direitos</li>
               </ul>
               <p className="text-zinc-300 leading-relaxed mt-4">
-                <strong>Não vendemos</strong> suas informações pessoais a terceiros.
+                <strong>Not vendemos</strong> suas information pessoais a terceiros.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">5. Storage e Monurança</h2>
               <p className="text-zinc-300 leading-relaxed mb-4">
-                Suas informações são armazenadas em servidores seguros na nuvem (AWS). Implementamos medidas de 
+                Suas information are armazenadas em servidores seguros na nuvem (AWS). Implementamos medidas de 
                 segurança técnicas e organizacionais, incluindo:
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
@@ -113,10 +113,10 @@ export default function PoliticaDePrivacy() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">6. Retenção de Dados</h2>
               <p className="text-zinc-300 leading-relaxed">
-                Mantemos suas informações enquanto sua conta estiver ativa ou conforme necessário para fornecer 
-                nossos serviços. Após o cancellation da conta, seus dados são retidos por 30 days para permitir 
-                reativação, e então são permanentemente excluídos. Podemos reter certas informações por períodos 
-                mais longos quando exigido por lei ou para fins legítimos de negócios.
+                Mantemos suas information enquanto sua conta estiver ativa ou conforme necessário para fornecer 
+                nossos services. After o cancellation da conta, seus dados are retidos por 30 days para permitir 
+                reativação, e then are permanentemente excluídos. Podemos reter certas information por periods 
+                mais longos when exigido por lei ou para fins legítimos de negócios.
               </p>
             </section>
 
@@ -127,14 +127,14 @@ export default function PoliticaDePrivacy() {
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li><strong>Acesso:</strong> Solicitar cópia dos seus dados</li>
-                <li><strong>Correção:</strong> Atualizar informações incorretas</li>
-                <li><strong>Exclusão:</strong> Solicitar exclusão de seus dados</li>
+                <li><strong>Correção:</strong> Atualizar information incorretas</li>
+                <li><strong>Excluare:</strong> Solicitar excluare de seus dados</li>
                 <li><strong>Portabilidade:</strong> Receber seus dados em formato estruturado</li>
                 <li><strong>Objeção:</strong> Opor-se ao processamento de seus dados</li>
                 <li><strong>Retirada de Consentimento:</strong> Cancelar consentimento para marketing</li>
               </ul>
               <p className="text-zinc-300 leading-relaxed">
-                Para exercer esses direitos, get in touch conosco através de suporte@flowclik.com
+                Para exercer esses direitos, get in touch conosco through de suporte@flowclik.com
               </p>
             </section>
 
@@ -145,19 +145,19 @@ export default function PoliticaDePrivacy() {
               </p>
               <ul className="list-disc ml-6 mb-4 text-zinc-300 space-y-2">
                 <li><strong>Cookies Essenciais:</strong> Necessários para autenticação e funcionamento básico</li>
-                <li><strong>Cookies de Desempenho:</strong> Analytics para entender como you usa a plataforma</li>
+                <li><strong>Cookies de Desempenho:</strong> Analytics para entender as you usa a plataforma</li>
                 <li><strong>Cookies de Preferências:</strong> Lembrar suas configurações e preferências</li>
               </ul>
               <p className="text-zinc-300 leading-relaxed">
-                You pode controlar cookies através das configurações do seu navegador, mas isso pode afetar 
-                a funcionalidade da plataforma.
+                You can controlar cookies through das configurações do seu navegador, mas isso can afetar 
+                a feature da plataforma.
               </p>
             </section>
 
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">9. Transferências Internacionais</h2>
               <p className="text-zinc-300 leading-relaxed">
-                Seus dados podem ser transferidos e processados em países fora do Brasil, incluindo Estados Unidos 
+                Seus dados canm ser transferidos e processados em países outside do Brasil, incluindo Estados Unidos 
                 (servidores AWS). Garantimos que essas transferências sejam feitas com proteções adequadas em 
                 conformidade com as leis de proteção de dados aplicáveis.
               </p>
@@ -166,18 +166,18 @@ export default function PoliticaDePrivacy() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">10. Privacy de Crianças</h2>
               <p className="text-zinc-300 leading-relaxed">
-                Nossa plataforma não é direcionada a menores de 18 years. Não coletamos intencionalmente informações 
+                Nossa plataforma not é direcionada a menores de 18 years. Not coletamos intencionalmente information 
                 de crianças. Se you acredita que coletamos dados de uma criança, get in touch conosco 
                 imedaytamente.
               </p>
             </section>
 
             <section>
-              <h2 className="text-2xl font-bold text-white mt-8 mb-4">11. Alterações nesta Política</h2>
+              <h2 className="text-2xl font-bold text-white mt-8 mb-4">11. Changes nesta Política</h2>
               <p className="text-zinc-300 leading-relaxed">
-                Podemos atualizar esta Privacy Policy periodicamente. Notificaremos you sobre mudanças 
-                significativas por email ou através de aviso na plataforma. A data da "Last update" no topo 
-                indica quando esta política foi revisada pela última vez.
+                Podemos atualizar esta Privacy Policy periodicamente. Notificaremos you about mudanças 
+                significativas por email ou through de aviso na plataforma. A data da "Last update" no topo 
+                indica when esta política foi revisada pela last vez.
               </p>
             </section>
 
@@ -192,7 +192,7 @@ export default function PoliticaDePrivacy() {
             <section>
               <h2 className="text-2xl font-bold text-white mt-8 mb-4">13. Contato</h2>
               <p className="text-zinc-300 leading-relaxed mb-4">
-                Para questions sobre esta Privacy Policy ou para exercer seus direitos, get in touch:
+                Para questions about esta Privacy Policy ou para exercer seus direitos, get in touch:
               </p>
               <p className="text-purple-400">
                 Email: suporte@flowclik.com<br />

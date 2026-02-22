@@ -68,9 +68,9 @@ export default function ClientPayments() {
               <>
                 <AlertCircle className="h-12 w-12 text-yellow-500" />
                 <div>
-                  <h2 className="text-2xl font-semibold text-yellow-500">Pagamento Pendente</h2>
+                  <h2 className="text-2xl font-semibold text-yellow-500">Pagamento Pending</h2>
                   <p className="text-gray-300 mt-1">
-                    Aguardando confirmação do pagamento
+                    Awaiting confirmation do pagamento
                   </p>
                 </div>
               </>
@@ -82,7 +82,7 @@ export default function ClientPayments() {
         <Card className="bg-gray-900 border-gray-800 p-6">
           <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
             <CreditCard className="h-5 w-5" />
-            Detalhes do Pagamento
+            Details do Pagamento
           </h3>
           
           <div className="space-y-4">
@@ -134,7 +134,7 @@ export default function ClientPayments() {
               <div className="flex justify-between items-center">
                 <span className="text-gray-400">Payment Method</span>
                 <span className="font-semibold capitalize">
-                  {appointment.paymentMethod === 'stripe' ? 'Cartão de Crédito' : appointment.paymentMethod}
+                  {appointment.paymentMethod === 'stripe' ? 'Credit Card' : appointment.paymentMethod}
                 </span>
               </div>
             )}
@@ -145,7 +145,7 @@ export default function ClientPayments() {
         <Card className="bg-gray-900 border-gray-800 p-6">
           <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
             <Calendar className="h-5 w-5" />
-            Histórico
+            History
           </h3>
 
           <div className="space-y-3">
@@ -166,7 +166,7 @@ export default function ClientPayments() {
 
             {!isPaid && (
               <div className="text-center py-8 text-gray-400">
-                <p>None pagamento registrado ainda</p>
+                <p>None pagamento registrado still</p>
               </div>
             )}
           </div>
@@ -177,7 +177,7 @@ export default function ClientPayments() {
           <Card className="bg-blue-900/20 border-blue-600 p-6">
             <p className="text-gray-300">
               <strong>Precisa de help com o pagamento?</strong><br />
-              Get in touch com o photographer através do <a href={`/client/chat/${appointmentId}`} className="text-red-400 underline">chat</a> para combinar a melhor forma de pagamento.
+              Get in touch com o photographer through do <a href={`/client/chat/${appointmentId}`} className="text-red-400 underline">chat</a> para combinar a melhor forma de pagamento.
             </p>
           </Card>
         )}

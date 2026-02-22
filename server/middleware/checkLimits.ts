@@ -42,7 +42,7 @@ export async function checkStorageLimit(ctx: any, fileSizeBytes: number) {
     });
   }
 
-  // Retornar informações de uso
+  // Retornar information de uso
   return {
     storageUsed,
     storageLimit: subscription.storageLimit,
@@ -93,7 +93,7 @@ export async function checkGalleryLimit(ctx: any) {
     });
   }
 
-  // Retornar informações de uso
+  // Retornar information de uso
   return {
     galleryCount,
     galleryLimit: subscription.galleryLimit,
@@ -147,7 +147,7 @@ function formatBytes(bytes: number): string {
 }
 
 /**
- * Verifica se tenant está próximo do limite (> 80%)
+ * Verifica se tenant is next do limite (> 80%)
  * Retorna mensagem de alerta se necessário
  */
 export async function checkUsageWarnings(ctx: any) {

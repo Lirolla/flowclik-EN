@@ -94,18 +94,18 @@ export const contractsRouter = router({
       
       const tenantId = getTenantId(ctx);
       
-      // Verify se já tem templates
+      // Verify se already tem templates
       const existing = await db.select().from(contractTemplates)
         .where(eq(contractTemplates.tenantId, tenantId));
       
       if (existing.length > 0) {
-        return { success: false, message: "Already existsm templates cadastrados. Exclua-os primeiro se quiser recriar." };
+        return { success: false, message: "Already existsm templates cadastrados. Exclua-os first se quiser recriar." };
       }
 
       const defaultTemplates = [
         {
           name: "Contrato de Ensaio Fotográfico",
-          description: "Para ensaios pessoais, sensuais, gestantes, família, 15 years, newborn. Inclui clauses de direito de imagem e privacidade.",
+          description: "Para ensaios pessoais, sensuais, gestbefore, família, 15 years, newborn. Inclui clauses de direito de imagem e privacidade.",
           content: `PHOTOGRAPHY SERVICES CONTRACT - ENSAIO
 
 CLIENT: {cliente}
@@ -118,50 +118,50 @@ PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}
 Address Profissional: {fotografo_endereco}
 
-As partes acima identificadas celebram o this contract de provision of services fotográficos, que se regerá pelas seguintes clauses e condições:
+As partes above identificadas celebram o this contract de provision of services fotográficos, que se regerá pelas seguintes clauses e condições:
 
 CLAUSE 1ª – DO OBJETO
 O this contract tem por objeto a provision of services fotográficos de ensaio, conforme especificações:
 • Tipo de Ensaio: {servico}
-• Data da Sessão: {data}
+• Data da Sesare: {data}
 • Time: {hourrio}
 • Local: {local}
 • Duration Estimada: {duracao}
 
 CLAUSE 2ª – DO VALOR E FORMA DE PAGAMENTO
-2.1. O valor total dos serviços é de £ {valor}.
-2.2. O pagamento poderá ser realizado via PIX, bank transfer or payment link.
-2.3. Sinal de 50% no ato da contratação, restante until a data da sessão.
+2.1. O valor total dos services é de £ {valor}.
+2.2. O pagamento canrá ser realizado via PIX, bank transfer or payment link.
+2.3. Sinal de 50% no ato da contratação, restante until a data da sesare.
 
 CLAUSE 3ª – DO SERVIÇO INCLUÍDO
 3.1. Estão inclusos no valor photographer:
-• Sessão fotográfica com duração estimada conforme acordado;
-• Tratamento e edição profissional das fotografias selecionadas;
+• Sesare fotográfica com duration estimada conforme acordado;
+• Tratamento e editing profissional das photographys selecionadas;
 • Entrega das fotos em alta resolução por meio digital (galeria online).
-3.2. O prazo de entrega das fotos editadas é de until 15 (quinze) business days após a sessão.
+3.2. O prazo de betweenga das fotos editadas é de until 15 (quinze) business days after a sesare.
 
 CLAUSE 4ª – DOS DIREITOS AUTORAIS (Lei 9.610/1998)
-4.1. As fotografias produzidas são obras protegidas por copyright, sendo o(a) PHOTOGRAPHER(A) o(a) titular dos direitos patrimoniais e morais sobre as mesmas.
-4.2. O(A) CLIENT recebe licença de uso pessoal e não comercial das fotografias delivereds.
-4.3. É vedada a alteração, manipulação digital ou aplicação de filtros nas fotografias delivereds sem autorização prévia do(a) photographer(a).
-4.4. A reprodução, distribuição ou uso comercial das fotografias depende de autorização expressa e por escrito do(a) PHOTOGRAPHER(A).
+4.1. As photographys produzidas are obras protegidas por copyright, sendo o(a) PHOTOGRAPHER(A) o(a) titular dos direitos patrimoniais e morais about as mesmas.
+4.2. O(A) CLIENT recebe licença de uso pessoal e not comercial das photographys delivereds.
+4.3. É vedada a change, manipulação digital ou aplicação de filtros nas photographys delivereds sem autorização prévia do(a) photographer(a).
+4.4. A reprodução, distribuição ou uso comercial das photographys depende de autorização expressa e por escrito do(a) PHOTOGRAPHER(A).
 
 CLAUSE 5ª – DO DIREITO DE IMAGEM
-5.1. O(A) CLIENT autoriza / não autoriza (riscar o que não se aplica) o uso de suas imagens pelo(a) PHOTOGRAPHER(A) para fins de divulgação profissional, incluindo portfólio, redes sociais e site.
+5.1. O(A) CLIENT autoriza / not autoriza (riscar o que not se aplica) o uso de suas imagens pelo(a) PHOTOGRAPHER(A) para fins de divulgação profissional, incluindo portfólio, redes sociais e site.
 5.2. Em caso de ensaio de natureza íntima ou sensual, o(a) PHOTOGRAPHER(A) se compromete a NÃO utilizar as imagens para qualquer fim de divulgação sem autorização expressa e por escrito do(a) CLIENT.
-5.3. O(A) PHOTOGRAPHER(A) garante sigilo absoluto sobre as imagens produzidas, em conformidade com a LGPD (Lei 13.709/2018).
+5.3. O(A) PHOTOGRAPHER(A) garante sigilo absoluto about as imagens produzidas, em conformidade com a LGPD (Lei 13.709/2018).
 
 CLAUSE 6ª – DO CANCELAMENTO E REAGENDAMENTO
 6.1. Cancellation com until 7 days de antecedência: devolução integral do sinal.
-6.2. Cancellation com menos de 7 days: sinal não será devolvido.
-6.3. Cancellation no day ou não comparecimento: valor total será devido.
+6.2. Cancellation com menos de 7 days: sinal not will be devolvido.
+6.3. Cancellation no day ou not comparecimento: valor total will be devido.
 6.4. Reagendamento permitido uma vez, sem custo, com aviso de 48 hours.
 6.5. Condições climáticas adversas (ensaios externos): reagendamento sem custo.
 
 CLAUSE 7ª – DAS OBRIGAÇÕES DO PHOTOGRAPHER
 7.1. Realizar a photo session com zelo e profissionalismo.
-7.2. Entregar as fotografias editadas no prazo estipulado.
-7.3. Manter sigilo sobre dados pessoais e imagens do(a) CLIENT (LGPD).
+7.2. Entregar as photographys editadas no prazo estipulado.
+7.3. Manter sigilo about dados pessoais e imagens do(a) CLIENT (LGPD).
 7.4. Disponibilizar as fotos em galeria online segura por no mínimo 30 days.
 
 CLAUSE 8ª – DAS OBRIGAÇÕES DO CLIENT
@@ -171,8 +171,8 @@ CLAUSE 8ª – DAS OBRIGAÇÕES DO CLIENT
 8.4. Respeitar os copyright do(a) photographer(a).
 
 CLAUSE 9ª – DA PROTEÇÃO DE DADOS (LGPD - Lei 13.709/2018)
-9.1. Os dados pessoais coletados serão utilizados exclusivamente para a execução deste contrato.
-9.2. O(A) PHOTOGRAPHER(A) se compromete a não compartilhar dados pessoais com terceiros.
+9.1. Os dados pessoais coletados serão utilizados exclusivemente para a execução deste contrato.
+9.2. O(A) PHOTOGRAPHER(A) se compromete a not compartilhar dados pessoais com terceiros.
 
 CLAUSE 10ª – DO FORO
 Para dirimir quaisquer controvérsias, as partes elegem o jurisdiction da comarca de domicílio do(a) CLIENT, nos termos do art. 101, I, do CDC.
@@ -189,7 +189,7 @@ CPF/CNPJ: {fotografo_documento}`,
         },
         {
           name: "Contrato de Cobertura de Casamento",
-          description: "Para casamentos, formaturas e cerimônias. Inclui clauses sobre cobertura do evento, second photographer e álbum.",
+          description: "Para casamentos, formaturas e cerimônias. Inclui clauses about cobertura do evento, second photographer e álbum.",
           content: `PHOTOGRAPHY SERVICES CONTRACT - CASAMENTO / CERIMÔNIA
 
 CLIENT(S): {cliente}
@@ -212,31 +212,31 @@ Cobertura fotográfica do evento:
 
 CLAUSE 2ª – DO VALOR E PAGAMENTO
 2.1. Valor total: £ {valor}.
-2.2. Sinal de 30% na signature para reserva da data; 40% until 30 days antes; 30% until 7 days antes.
+2.2. Sinal de 30% na signature para reserva da data; 40% until 30 days before; 30% until 7 days before.
 2.3. Formas: PIX, bank transfer or payment link.
-2.4. A reserva da data somente será confirmada após o recebimento do sinal.
+2.4. A reserva da data somente will be confirmada after o recebimento do sinal.
 
 CLAUSE 3ª – DOS SERVIÇOS INCLUÍDOS
-3.1. Cobertura fotográfica completa (cerimônia e recepção); edição profissional; entrega mínima de 300 fotos em alta resolução; galeria online; making of.
-3.2. Prazo de entrega: until 45 business days após o evento.
+3.1. Cobertura fotográfica completa (cerimônia e recepção); editing profissional; betweenga mínima de 300 fotos em alta resolução; galeria online; making of.
+3.2. Prazo de betweenga: until 45 business days after o evento.
 
 CLAUSE 4ª – DA COBERTURA DO EVENTO
-4.1. O(A) photographer(a) cobrirá os principais momentos com profissionalismo e liberdade artística.
-4.2. O(A) CLIENT deverá informar previamente momentos específicos que deseja registrados.
+4.1. O(A) photographer(a) cobrirá os principais moments com profissionalismo e liberdade artística.
+4.2. O(A) CLIENT mustrá informar previamente moments específicos que deseja registrados.
 
 CLAUSE 5ª – DOS DIREITOS AUTORAIS (Lei 9.610/1998)
-5.1. Fotografias são obras autorais protegidas. CLIENT recebe licença de uso pessoal e familiar.
+5.1. Photographys are obras autorais protegidas. CLIENT recebe licença de uso pessoal e familiar.
 5.2. Uso comercial por terceiros requer autorização expressa.
-5.3. Vedada alteração ou aplicação de filtros sem autorização.
+5.3. Vedada change ou aplicação de filtros sem autorização.
 
 CLAUSE 6ª – DO DIREITO DE IMAGEM
 6.1. CLIENT autoriza uso para portfólio, redes sociais e site do(a) photographer(a).
-6.2. Restrições devem ser comunicadas por escrito antes do evento.
+6.2. Restrições mustm ser comunicadas por escrito before do evento.
 
 CLAUSE 7ª – DO CANCELAMENTO
-7.1. Até 90 days antes: devolução de 80% do sinal.
+7.1. Até 90 days before: devolução de 80% do sinal.
 7.2. Entre 90 e 30 days: devolução de 50% do sinal.
-7.3. Menos de 30 days: sinal não devolvido.
+7.3. Menos de 30 days: sinal not devolvido.
 7.4. Cancellation pelo(a) PHOTOGRAPHER(A): devolução integral + penalty de 20%.
 7.5. Força maior: reagendamento sem ônus.
 
@@ -266,7 +266,7 @@ CPF/CNPJ: {fotografo_documento}`,
         },
         {
           name: "Contrato de Evento Corporactive / Social",
-          description: "Para festas, aniversários, formaturas, eventos corporactives, confraternizações e lançamentos.",
+          description: "Para festas, birthdays, formaturas, eventos corporactives, confraternizações e lançamentos.",
           content: `PHOTOGRAPHY SERVICES CONTRACT - EVENTO
 
 CLIENT: {cliente}
@@ -293,8 +293,8 @@ CLAUSE 2ª – DO VALOR E PAGAMENTO
 2.3. Formas: PIX, bank transfer or payment link.
 
 CLAUSE 3ª – DOS SERVIÇOS
-3.1. Cobertura fotográfica pelo período photographer; edição profissional; entrega digital em galeria online (alta resolução).
-3.2. Prazo de entrega: until 20 business days após o evento.
+3.1. Cobertura fotográfica pelo period photographer; editing profissional; betweenga digital em galeria online (alta resolução).
+3.2. Prazo de betweenga: until 20 business days after o evento.
 
 CLAUSE 4ª – DOS DIREITOS AUTORAIS (Lei 9.610/1998)
 4.1. Photographer(a) é titular dos copyright.
@@ -302,22 +302,22 @@ CLAUSE 4ª – DOS DIREITOS AUTORAIS (Lei 9.610/1998)
 4.3. Uso em campanhas publicitárias requer autorização adicional.
 
 CLAUSE 5ª – DO DIREITO DE IMAGEM
-5.1. CLIENT declara possuir autorização dos participantes para registro fotográfico.
-5.2. Photographer(a) poderá usar imagens no portfólio, salvo restrição expressa.
+5.1. CLIENT declara possuir autorização dos participbefore para registro fotográfico.
+5.2. Photographer(a) canrá usar imagens no portfólio, salvo restrição expressa.
 
 CLAUSE 6ª – DO CANCELAMENTO
 6.1. Mais de 15 days: devolução integral do sinal.
-6.2. Menos de 15 days: sinal retido como taxa de reserva.
-6.3. No day ou não comparecimento: valor total devido.
+6.2. Menos de 15 days: sinal retido as taxa de reserva.
+6.3. No day ou not comparecimento: valor total devido.
 6.4. Reagendamento permitido uma vez, com aviso de 72 hours.
 
 CLAUSE 7ª – CONDIÇÕES GERAIS
 7.1. Acesso livre aos ambientes do evento.
-7.2. Alimentação para eventos com duração superior a 4 hours.
+7.2. Alimentação para eventos com duration superior a 4 hours.
 
 CLAUSE 8ª – PROTEÇÃO DE DADOS (LGPD)
-8.1. Dados pessoais tratados exclusivamente para execução do contrato.
-8.2. Imagens de menores não serão usadas para divulgação sem autorização dos responsáveis.
+8.1. Dados pessoais tratados exclusivemente para execução do contrato.
+8.2. Imagens de menores not serão usadas para divulgação sem autorização dos responsáveis.
 
 CLAUSE 9ª – DO FORO
 Jurisdiction da comarca de domicílio do(a) CLIENT.
@@ -333,8 +333,8 @@ PHOTOGRAPHER(A): {fotografo}
 CPF/CNPJ: {fotografo_documento}`,
         },
         {
-          name: "Contrato Simplificado de Fotografia",
-          description: "Modelo simples e direto para qualquer tipo de serviço fotográfico. Ideal para trabalhos rápidos e sessões avulsas.",
+          name: "Contrato Simplificado de Photography",
+          description: "Modelo simples e direto para qualquer tipo de service fotográfico. Ideal para trabalhos rápidos e sessões avulsas.",
           content: `CONTRATO SIMPLIFICADO DE PRESTAÇÃO DE SERVIÇOS FOTOGRÁFICOS
 
 CLIENT: {cliente}
@@ -348,17 +348,17 @@ CPF/CNPJ: {fotografo_documento}
 2. DATA: {data} | HORÁRIO: {hourrio}
 3. LOCAL: {local}
 4. VALOR: £ {valor}
-5. PAGAMENTO: Conforme acordado entre as partes.
+5. PAGAMENTO: Conforme acordado between as partes.
 
 6. ENTREGA: Fotos editadas em until 15 business days via galeria digital.
 
-7. DIREITOS AUTORAIS: As fotografias são de autoria do(a) PHOTOGRAPHER(A), conforme Lei 9.610/98. O(A) CLIENT recebe licença de uso pessoal.
+7. DIREITOS AUTORAIS: As photographys are de autoria do(a) PHOTOGRAPHER(A), conforme Lei 9.610/98. O(A) CLIENT recebe licença de uso pessoal.
 
-8. CANCELAMENTO: Cancellations com menos de 48h de antecedência implicam na retenção de 50% do valor como taxa de reserva.
+8. CANCELAMENTO: Cancellations com menos de 48h de antecedência implicam na retenção de 50% do valor as taxa de reserva.
 
 9. IMAGEM: O(A) CLIENT autoriza ( ) SIM ( ) NÃO o uso das fotos para portfólio do(a) photographer(a).
 
-10. LGPD: Dados pessoais tratados conforme Lei 13.709/2018, exclusivamente para este contrato.
+10. LGPD: Dados pessoais tratados conforme Lei 13.709/2018, exclusivemente para este contrato.
 
 11. FORO: Comarca de domicílio do(a) CLIENT.
 
@@ -406,7 +406,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         .limit(1);
       if (!template) throw new Error("Template not found");
 
-      // Buscar appointment com dados do serviço
+      // Buscar appointment com dados do service
       const [appointment] = await db.select({
         id: appointments.id,
         clientName: appointments.clientName,
@@ -517,7 +517,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
         .limit(1);
       if (!template) throw new Error("Template not found");
 
-      // Buscar appointment com serviço
+      // Buscar appointment com service
       const [appointment] = await db.select({
         id: appointments.id,
         clientName: appointments.clientName,
@@ -622,7 +622,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
           y = 20;
         }
         // Bold para clauses
-        if (line.startsWith('CLÁUSULA') || line.startsWith('CONTRAT')) {
+        if (line.startsWith('CLAUSE') || line.startsWith('CONTRAT')) {
           doc.setFont("helvetica", "bold");
         } else {
           doc.setFont("helvetica", "normal");
@@ -729,7 +729,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       const html = `
         <div style="font-family: Georgia, serif; max-width: 700px; margin: 0 auto; padding: 20px;">
           ${input.logoUrl ? `<div style="margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #ddd;"><img src="${input.logoUrl}" alt="${studioName}" style="max-height: 60px; max-width: 200px;" /></div>` : ''}
-          <h2 style="color: #333; font-size: 18px; margin-bottom: 5px;">${input.templateName || 'Contrato de Service Fotográfico'}</h2>
+          <h2 style="color: #333; font-size: 18px; margin-bottom: 5px;">${input.templateName || 'Photography Service Contract'}</h2>
           <p style="color: #666; font-size: 13px; margin-bottom: 20px;">Service: ${input.serviceName || ''} | Valor: £ ${input.price || ''}</p>
           <div style="background: #f9f9f9; padding: 25px; border-radius: 8px; font-size: 13px; line-height: 1.8; color: #333; white-space: pre-wrap;">${contentHtml}</div>
           <div style="margin-top: 25px; padding-top: 15px; border-top: 1px solid #eee; font-size: 12px; color: #999; text-align: center;">
@@ -746,7 +746,7 @@ CPF: {cpf}                   CPF/CNPJ: {fotografo_documento}`,
       });
       
       if (sent) {
-        // Salvar/atualizar contrato como enviado
+        // Salvar/atualizar contrato as enviado
         const existing = await db.select().from(contracts)
           .where(and(
             eq(contracts.appointmentId, input.appointmentId),

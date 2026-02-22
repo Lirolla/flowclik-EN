@@ -26,7 +26,7 @@ export default function SistemaAvisos() {
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [type, setType] = useState<"urgent" | "urgent" | "info">("info");
-  const [targetPlan, setTargetPlan] = useState<"all" | "basico" | "cortesia" | "vitalicio">("all");
+  const [targetPlan, setTargetPlan] = useState<"all" | "basico" | "courtesy" | "vitalicio">("all");
 
   const handleCreate = async () => {
     if (!title.trim() || !message.trim()) {
@@ -104,7 +104,7 @@ export default function SistemaAvisos() {
             <Textarea
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              placeholder="Descreva o aviso em detalhes..."
+              placeholder="Descreva o aviso em details..."
               rows={4}
             />
           </div>
@@ -133,8 +133,8 @@ export default function SistemaAvisos() {
                 <SelectContent>
                   <SelectItem value="all">Todos os photographers</SelectItem>
                   <SelectItem value="basico">Apenas Basic Plan</SelectItem>
-                  <SelectItem value="cortesia">Apenas Plyear Cortesia</SelectItem>
-                  <SelectItem value="vitalicio">Apenas Plyear Vitalício</SelectItem>
+                  <SelectItem value="courtesy">Apenas Plyear Courtesy</SelectItem>
+                  <SelectItem value="vitalicio">Apenas Plyear Lifetime</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -181,8 +181,8 @@ export default function SistemaAvisos() {
                         ? "Basic Plan"
                         // @ts-ignore
                         : announcement.targetPlan === "starter"
-                        ? "Plyear Cortesia"
-                        : "Plyear Vitalício"}
+                        ? "Plyear Courtesy"
+                        : "Plyear Lifetime"}
                     </span>
                     <span>
                       {formatDistanceToNow(new Date(announcement.createdAt), {

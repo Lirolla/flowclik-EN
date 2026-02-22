@@ -82,8 +82,8 @@ export default function SistemaDashboard() {
             <div key={item.plan} className="p-4 bg-muted rounded-lg">
               <p className="text-sm text-muted-foreground mb-1">
                 {item.plan === "starter" && "Basic Plan (£ 69,90/month)"}
-                {item.plan === "cortesia" && "🎁 Plyear Cortesia (Free)"}
-                {item.plan === "full" && "⭐ Plyear Vitalício (Unlimited)"}
+                {item.plan === "courtesy" && "🎁 Plyear Courtesy (Free)"}
+                {item.plan === "full" && "⭐ Lifetime Plan (Unlimited)"}
                 {item.plan === "pro" && "Plyear Pro"}
                 {item.plan === "enterprise" && "Plyear Enterprise"}
               </p>
@@ -120,7 +120,7 @@ export default function SistemaDashboard() {
             <Package className="w-8 h-8 text-green-600 mb-3" />
             <h3 className="font-bold text-lg mb-2">Tickets de Support</h3>
             <p className="text-sm text-muted-foreground">
-              Ver e responder tickets dos photographers
+              Ver e respwherer tickets dos photographers
             </p>
           </Card>
         </Link>

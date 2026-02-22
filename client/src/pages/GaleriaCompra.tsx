@@ -23,7 +23,7 @@ export default function GalleryCompra() {
     const itemId = `gallery-${photo.id}`;
     
     if (isInCart(itemId)) {
-      toast.info("Foto já está no carrinho");
+      toast.info("Foto already is no carrinho");
       return;
     }
 
@@ -67,7 +67,7 @@ export default function GalleryCompra() {
           <CardContent className="p-8 text-center">
             <h1 className="text-2xl font-bold mb-2">Gallery not found</h1>
             <p className="text-muted-foreground">
-              Esta galeria não existe ou não está available para venda.
+              Esta galeria not existe ou not is available para venda.
             </p>
           </CardContent>
         </Card>

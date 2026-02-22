@@ -231,7 +231,7 @@ export const appointmentsRouter = router({
         // Cliente already exists, usar o ID dele
         userId = existingClient.id;
       } else {
-        // Cliente não existe, criar novo
+        // Cliente not existe, criar novo
         try {
           console.log('[BOOKING] Criando novo cliente:', {
             name: input.clientName,
@@ -261,19 +261,19 @@ export const appointmentsRouter = router({
           console.log('[BOOKING] Cliente criado:', createdClient);
           
           if (!createdClient) {
-            console.error('[BOOKING] ERRO: Client not found após INSERT!');
+            console.error('[BOOKING] ERROR: Client not found after INSERT!');
             throw new Error('Falha ao criar cliente');
           }
           
           userId = createdClient.id;
         } catch (error) {
           console.error('[BOOKING] Erro ao criar cliente:', error);
-          // Continuar sem userId - agendamento será criado apenas com dados do cliente
+          // Continuar sem userId - agendamento will be criado only com dados do cliente
           userId = undefined;
         }
       }
 
-      // 2. Buscar preço do serviço se serviceId foi fornecido
+      // 2. Buscar preço do service se serviceId foi fornecido
       let servicePrice = 0;
       if (input.serviceId) {
         const [service] = await db
@@ -306,9 +306,9 @@ export const appointmentsRouter = router({
         .where(eq(appointments.id, insertId))
         .limit(1);
 
-      // 5. Notificar o proprietário sobre novo agendamento
+      // 5. Notificar o proprietário about novo agendamento
       await notifyOwner({
-        title: "Novo Agendamento Recebido",
+        title: "Novo Agendamento Received",
         content: `Cliente: ${input.clientName}\nEmail: ${input.clientEmail}\nData: ${new Date(input.appointmentDate as unknown as string).toLocaleDateString('en-GB')}${input.appointmentTime ? ` at ${input.appointmentTime}` : ''}`,
       }).catch(err => console.error('Erro ao notificar:', err));
 
@@ -379,9 +379,9 @@ export const appointmentsRouter = router({
         .where(and(eq(appointments.id, input.id), eq(appointments.tenantId, getTenantId(ctx))))
         .limit(1);
 
-      // Notificar o proprietário sobre mudança de status
+      // Notificar o proprietário about mudança de status
       const statusLabels: Record<string, string> = {
-        pending: '⏳ Pendente',
+        pending: '⏳ Pending',
         confirmed: '✅ Confirmado',
         session_done: '📸 Ensaio Realizado',
         editing: '🎨 Photos in Editing',
@@ -406,7 +406,7 @@ export const appointmentsRouter = router({
           if (tenant?.subdomain) {
             siteUrl = `https://${tenant.subdomain}.flowclik.com`;
           }
-        } catch (e) { /* fallback para url padrão */ }
+        } catch (e) { /* fallback para url default */ }
 
         try {
           switch (input.status) {
@@ -418,7 +418,7 @@ export const appointmentsRouter = router({
                 appointmentDate: dateStr,
                 appointmentTime: timeStr,
                 price: appt.finalPrice ? Number(appt.finalPrice) : 0,
-              }).catch(err => console.error('Erro email confirmação:', err));
+              }).catch(err => console.error('Error email confirmation:', err));
               break;
 
             case 'session_done':
@@ -433,8 +433,8 @@ export const appointmentsRouter = router({
                     <p style="margin:5px 0;">📅 Data: <strong>${dateStr}</strong></p>
                     <p style="margin:5px 0;">⏰ Time: <strong>${timeStr}</strong></p>
                   </div>
-                  <p><strong>Próximo passo:</strong> As fotos serão editadas e you receberá um aviso por email quando estiverem prontas. Fique de olho!</p>
-                  <p style="color:#9ca3af;font-size:13px;margin-top:30px;">FlowClik - Plataforma de Fotografia Profissional</p>
+                  <p><strong>Next passo:</strong> As fotos serão editadas e you receberá um aviso por email when estiverem prontas. Fique de olho!</p>
+                  <p style="color:#9ca3af;font-size:13px;margin-top:30px;">FlowClik - Plataforma de Photography Profissional</p>
                 </div>`,
               }).catch(err => console.error('Erro email ensaio realizado:', err));
               break;
@@ -442,39 +442,39 @@ export const appointmentsRouter = router({
             case 'editing':
               sendEmail({
                 to: clientEmail,
-                subject: '🎨 Suas Fotos Estão em Edição!',
+                subject: '🎨 Your Photos Are Being Edited!',
                 html: `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#1a1f2e;padding:40px;border-radius:16px;color:#e5e7eb;">
                   <h1 style="color:#c026d3;font-size:24px;">🎨 Photos in Editing!</h1>
                   <p>Hello <strong>${clientName}</strong>,</p>
-                  <p>Great news! Suas fotos já estão sendo editadas com todo carinho e atenção aos detalhes.</p>
+                  <p>Great news! Suas fotos already estão sendo editadas com todo carinho e atenção aos details.</p>
                   <div style="background:#141824;border-radius:10px;padding:15px;margin:20px 0;border-left:3px solid #f59e0b;">
                     <p style="margin:5px 0;">🖌️ Estamos trabalhando nas suas fotos</p>
-                    <p style="margin:5px 0;">✨ Cada detalhe está sendo cuidado</p>
+                    <p style="margin:5px 0;">✨ Cada detalhe is sendo cuidado</p>
                   </div>
                   <p>Fique tranquilo(a), avisaremos por email assim que sua galeria estiver pronta para visualização!</p>
-                  <p style="color:#9ca3af;font-size:13px;margin-top:30px;">FlowClik - Plataforma de Fotografia Profissional</p>
+                  <p style="color:#9ca3af;font-size:13px;margin-top:30px;">FlowClik - Plataforma de Photography Profissional</p>
                 </div>`,
-              }).catch(err => console.error('Erro email fotos em edição:', err));
+              }).catch(err => console.error('Error email photos in editing:', err));
               break;
 
             case 'awaiting_selection':
               sendEmail({
                 to: clientEmail,
-                subject: '👀 Sua Gallery Está Pronta - Select Suas Favourites!',
+                subject: '👀 Your Gallery Is Ready - Select Your Favourites!',
                 html: `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#1a1f2e;padding:40px;border-radius:16px;color:#e5e7eb;">
                   <h1 style="color:#c026d3;font-size:24px;">👀 Hour de Escolher Suas Favourites!</h1>
                   <p>Hello <strong>${clientName}</strong>,</p>
-                  <p>Sua galeria de fotos está pronta! Acesse o painel do seu photographer para visualizar e selecionar suas fotos favoritas.</p>
+                  <p>Sua galeria de fotos is ready! Acesse o painel do seu photographer para visualizar e selecionar suas fotos favoritas.</p>
                   <div style="background:#141824;border-radius:10px;padding:15px;margin:20px 0;border-left:3px solid #10b981;">
                     <p style="margin:5px 0;">🖼️ Suas fotos estão esperando por you</p>
                     <p style="margin:5px 0;">❤️ Select as que mais gostou</p>
-                    <p style="margin:5px 0;">⏰ Wednto antes selecionar, mais rápido entregaremos</p>
+                    <p style="margin:5px 0;">⏰ Wednto before selecionar, mais rápido betweengaremos</p>
                   </div>
                   <a href="${siteUrl}" style="display:block;text-align:center;background:#c026d3;color:white;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:bold;margin:20px 0;">Acessar Meu Painel</a>
                   <p style="color:#9ca3af;font-size:12px;">Ou acesse diretamente: <a href="${siteUrl}" style="color:#c026d3;">${siteUrl}</a></p>
-                  <p style="color:#9ca3af;font-size:13px;margin-top:30px;">FlowClik - Plataforma de Fotografia Profissional</p>
+                  <p style="color:#9ca3af;font-size:13px;margin-top:30px;">FlowClik - Plataforma de Photography Profissional</p>
                 </div>`,
-              }).catch(err => console.error('Erro email aguardando seleção:', err));
+              }).catch(err => console.error('Error email awaiting selection:', err));
               break;
 
             case 'final_editing':
@@ -484,14 +484,14 @@ export const appointmentsRouter = router({
                 html: `<div style="font-family:sans-serif;max-width:600px;margin:0 auto;background:#1a1f2e;padding:40px;border-radius:16px;color:#e5e7eb;">
                   <h1 style="color:#c026d3;font-size:24px;">✏️ Editando Suas Selecionadas!</h1>
                   <p>Hello <strong>${clientName}</strong>,</p>
-                  <p>Recebemos sua seleção de fotos e já estamos trabalhando na edição final das suas favoritas!</p>
+                  <p>Recebemos sua selection de fotos e already estamos trabalhando na editing final das suas favoritas!</p>
                   <div style="background:#141824;border-radius:10px;padding:15px;margin:20px 0;border-left:3px solid #8b5cf6;">
-                    <p style="margin:5px 0;">🎨 Edição final em andamento</p>
-                    <p style="margin:5px 0;">✨ Cada foto será tratada individualmente</p>
-                    <p style="margin:5px 0;">📧 You receberá um email quando estiverem prontas</p>
+                    <p style="margin:5px 0;">🎨 Editing final in progress</p>
+                    <p style="margin:5px 0;">✨ Cada foto will be tratada individualmente</p>
+                    <p style="margin:5px 0;">📧 You receberá um email when estiverem prontas</p>
                   </div>
                   <p>Estamos quase lá! Em breve suas fotos editadas estarão prontas para download.</p>
-                  <p style="color:#9ca3af;font-size:13px;margin-top:30px;">FlowClik - Plataforma de Fotografia Profissional</p>
+                  <p style="color:#9ca3af;font-size:13px;margin-top:30px;">FlowClik - Plataforma de Photography Profissional</p>
                 </div>`,
               }).catch(err => console.error('Erro email editando selecionadas:', err));
               break;
@@ -510,8 +510,8 @@ export const appointmentsRouter = router({
                   </div>
                   <a href="${siteUrl}" style="display:block;text-align:center;background:#10b981;color:white;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:bold;margin:20px 0;">Acessar e Baixar Minhas Fotos</a>
                   <p style="color:#9ca3af;font-size:12px;">Ou acesse diretamente: <a href="${siteUrl}" style="color:#c026d3;">${siteUrl}</a></p>
-                  <p>Obrigado por nos escolher! Se gostou do trabalho, share with friends and family. 💚</p>
-                  <p style="color:#9ca3af;font-size:13px;margin-top:30px;">FlowClik - Plataforma de Fotografia Profissional</p>
+                  <p>Thank you por nos escolher! Se gostou do trabalho, share with friends and family. 💚</p>
+                  <p style="color:#9ca3af;font-size:13px;margin-top:30px;">FlowClik - Plataforma de Photography Profissional</p>
                 </div>`,
               }).catch(err => console.error('Erro email delivered:', err));
               break;
@@ -636,11 +636,11 @@ export const appointmentsRouter = router({
 
       // Notify owner
       await notifyOwner({
-        title: "Cliente aprovou seleção de fotos",
+        title: "Cliente aprovou selection de fotos",
         content: `Cliente: ${appointment[0].clientName}\nAgendamento ID: ${input.appointmentId}\nStatus alterado para: Editando Selecionadas`,
       }).catch(err => console.error('Erro ao notificar:', err));
 
-      // Email de seleção aprovada será enviado pelo sistema de galerias
+      // Email de selection approved will be enviado pelo sistema de galerias
 
       return { success: true };
     }),
@@ -683,7 +683,7 @@ export const appointmentsRouter = router({
         throw new Error('Client not found');
       }
 
-      // Buscar preço do serviço se fornecido
+      // Buscar preço do service se fornecido
       let servicePrice = 0;
       if (input.serviceId) {
         const [service] = await db
@@ -873,7 +873,7 @@ export const appointmentsRouter = router({
         .limit(1);
 
       if (existingGuest) {
-        return { success: true, message: "You já tem acesso a este álbum" };
+        return { success: true, message: "You already tem acesso a este álbum" };
       }
 
       // Register new guest

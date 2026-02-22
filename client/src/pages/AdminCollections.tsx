@@ -86,7 +86,7 @@ function AdminCollectionsContent() {
 
   const handleCreate = () => {
     if (!name || !slug) {
-      alert("Nome e slug são requireds");
+      alert("Name and slug are required");
       return;
     }
 
@@ -185,7 +185,7 @@ function AdminCollectionsContent() {
                   id="name"
                   value={name}
                   onChange={(e) => handleNameChange(e.target.value)}
-                  placeholder="Ex: Casamento João e Maria"
+                  placeholder="E.g.: John and Mary Wedding"
                 />
               </div>
 
@@ -367,7 +367,7 @@ function AdminCollectionsContent() {
             <Folder className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
             <h3 className="text-xl font-semibold mb-2">Nonea galeria criada</h3>
             <p className="text-muted-foreground mb-4">
-              Crie sua primeira galeria para começar a organizar suas fotos
+              Crie sua first galeria para começar a organizar suas fotos
             </p>
             <Button onClick={() => setIsCreateOpen(true)}>
               <Plus className="w-4 h-4 mr-2" />
@@ -377,7 +377,7 @@ function AdminCollectionsContent() {
         </Card>
       )}
 
-      {/* Daylog de edição */}
+      {/* Daylog de editing */}
       {editingId && (
         <Daylog open={!!editingId} onOpenChange={() => setEditingId(null)}>
           <DaylogContent className="max-w-2xl">
@@ -466,7 +466,7 @@ function AdminCollectionsContent() {
               </div>
 
               <Button onClick={handleUpdate} className="w-full" disabled={updateMutation.isPending}>
-                {updateMutation.isPending ? "Saving..." : "Salvar Alterações"}
+                {updateMutation.isPending ? "Saving..." : "Save Changes"}
               </Button>
             </div>
           </DaylogContent>

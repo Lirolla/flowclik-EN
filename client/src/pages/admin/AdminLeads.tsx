@@ -144,7 +144,7 @@ export default function AdminLeads() {
           {!leads || leads.length === 0 ? (
             <div className="p-12 text-center">
               <Mail className="w-12 h-12 text-gray-600 mx-auto mb-4" />
-              <p className="text-gray-400">None lead capturado ainda.</p>
+              <p className="text-gray-400">None lead capturado still.</p>
               <p className="text-sm text-gray-500 mt-2">
                 Compartilhe álbuns com clientes para começar a capturar leads!
               </p>

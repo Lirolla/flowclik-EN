@@ -223,7 +223,7 @@ function AdminEventoVendasContent() {
           <DaylogHeader>
             <DaylogTitle>Ativar Vendas de Fotos</DaylogTitle>
             <DaylogDescription>
-              Configure o preço por foto. Um link público será gerado para compartilhar com os leads.
+              Configure o preço por foto. Um link público will be gerado para compartilhar com os leads.
             </DaylogDescription>
           </DaylogHeader>
           <div className="space-y-4 mt-4">
@@ -238,7 +238,7 @@ function AdminEventoVendasContent() {
                 placeholder="25.00"
               />
               <p className="text-xs text-muted-foreground">
-                Valor que será cobrado por cada foto vendida (download digital)
+                Valor que will be cobrado por cada foto vendida (download digital)
               </p>
             </div>
             <div className="flex gap-2">

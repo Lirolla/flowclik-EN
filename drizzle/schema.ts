@@ -639,11 +639,11 @@ export const tenants = mysqlTable("tenants", {
 	index("subdomain").on(table.subdomain),
 ]);
 
-// Tabela de domains personalizados
+// Tabela de domains customs
 export const customSunains = mysqlTable("custom_domains", {
 	id: int().autoincrement().primaryKey(),
 	tenantId: int().notNull(),
-	domain: varchar({ length: 255 }).notNull(), // ex: fotografialirolla.com
+	domain: varchar({ length: 255 }).notNull(), // ex: photographylirolla.com
 	verified: tinyint().default(0).notNull(), // Se o DNS foi verificado (0=false, 1=true)
 	verifiedAt: timestamp({ mode: 'string' }),
 	status: mysqlEnum(['pending','active','failed']).default('pending').notNull(),

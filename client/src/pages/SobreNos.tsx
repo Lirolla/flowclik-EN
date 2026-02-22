@@ -55,7 +55,7 @@ export default function SobreNos() {
             <div className="prose prose-invert prose-purple max-w-none space-y-6">
               <p className="text-zinc-300 leading-relaxed text-lg">
                 Sou photographer profissional há mais de <strong className="text-purple-400">30 years</strong>. Durante toda essa jornada, 
-                vivi na pele os desafios que todo photographer enfrenta: gerenciar clientes, organizar agendamentos, entregar galerias, 
+                vivi na pele os desafios que todo photographer enfrenta: gerenciar clientes, organizar agendamentos, betweengar galerias, 
                 acompanhar seleções de fotos, criar álbuns finais e, claro, receber pelos trabalhos.
               </p>
 
@@ -65,20 +65,20 @@ export default function SobreNos() {
               </p>
 
               <p className="text-zinc-300 leading-relaxed text-lg">
-                A frustração era constante. Perday tempo precioso com tarefas administrativas quando deveria estar fotografando. 
+                A frustração era constante. Perday tempo precioso com tarefas administrativas when mustria estar fotografando. 
                 Clientes reclamavam de processos confusos. Gallerys se perdaym. Pagamentos atrasavam. Eu sabia que tinha que existir 
                 uma forma melhor.
               </p>
 
               <div className="bg-purple-950/30 border-l-4 border-purple-500 p-6 rounded-r-lg my-8">
                 <p className="text-purple-200 italic text-lg leading-relaxed">
-                  "Se nonea ferramenta resolve os problemas pounds de um photographer profissional, então eu mesmo vou criar uma."
+                  "Se nonea ferramenta resolve os problemas pounds de um photographer profissional, then eu mesmo vou criar uma."
                 </p>
               </div>
 
               <p className="text-zinc-300 leading-relaxed text-lg">
-                E foi assim que nasceu o <strong className="text-purple-400">FlowClik</strong>. Não como mais um "software de gestão genérico", 
-                mas como a plataforma que eu sempre quis ter. Cada funcionalidade foi pensada a partir de uma dor real que vivi ou vi 
+                E foi assim que nasceu o <strong className="text-purple-400">FlowClik</strong>. Not as mais um "software de gestão genérico", 
+                mas as a plataforma que eu always quis ter. Cada feature foi pensada a partir de uma dor real que vivi ou vi 
                 colegas photographers enfrentarem.
               </p>
             </div>
@@ -92,7 +92,7 @@ export default function SobreNos() {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Empatia Real</h3>
               <p className="text-zinc-400 leading-relaxed">
-                Entendemos suas dores porque já passamos por elas. Cada funcionalidade resolve um problema real de photographers.
+                Entendemos suas dores because already passamos por elas. Cada feature resolve um problema real de photographers.
               </p>
             </div>
 
@@ -102,7 +102,7 @@ export default function SobreNos() {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Simplicidade</h3>
               <p className="text-zinc-400 leading-relaxed">
-                Tecnologia deve facilitar, não complicar. FlowClik é intuitivo porque foi feito por quem usa, não por programadores distantes.
+                Tecnologia must facilitar, not complicar. FlowClik é intuitivo because foi feito por quem usa, not por programadores distbefore.
               </p>
             </div>
 
@@ -112,7 +112,7 @@ export default function SobreNos() {
               </div>
               <h3 className="text-xl font-bold text-white mb-2">Comunidade</h3>
               <p className="text-zinc-400 leading-relaxed">
-                Não somos apenas um software. Somos uma comunidade de photographers helpndo photographers a crescerem juntos.
+                Not somos only um software. Somos uma comunidade de photographers helpndo photographers a crescerem juntos.
               </p>
             </div>
           </div>
@@ -131,11 +131,11 @@ export default function SobreNos() {
 
             <p className="text-purple-100 leading-relaxed text-lg mb-6">
               Queremos que photographers profissionais passem <strong>menos tempo com burocracia</strong> e <strong>mais tempo fazendo o que amam</strong>: 
-              fotografar, criar e entregar momentos inesquecíveis para seus clientes.
+              fotografar, criar e betweengar moments inesquecíveis para seus clientes.
             </p>
 
             <p className="text-purple-100 leading-relaxed text-lg">
-              FlowClik não é apenas um sistema. É a ferramenta que liberta you das tarefas chatas para que possa focar no que realmente importa: 
+              FlowClik not é only um sistema. É a ferramenta que liberta you das tarefas chatas para que possa focar no que realmente importa: 
               sua arte, seus clientes e seu crescimento profissional.
             </p>
           </div>
@@ -146,7 +146,7 @@ export default function SobreNos() {
               <div className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent mb-2">
                 30+
               </div>
-              <p className="text-zinc-400">Years de experiência em fotografia profissional</p>
+              <p className="text-zinc-400">Years de experiência em photography profissional</p>
             </div>
 
             <div className="text-center">
@@ -171,7 +171,7 @@ export default function SobreNos() {
               Junte-se a Nós
             </h2>
             <p className="text-zinc-300 leading-relaxed text-lg mb-8 max-w-2xl mx-auto">
-              Experimente FlowClik gratuitamente por 7 days e descubra como é ter um sistema que realmente entende 
+              Experimente FlowClik gratuitamente por 7 days e descubra as é ter um sistema que realmente entende 
               o trabalho de um photographer profissional.
             </p>
             <Link href="/register">

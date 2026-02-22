@@ -21,7 +21,7 @@ export default function DocsNew() {
     fetch('/docs/documentacao-completa.md')
       .then(response => response.text())
       .then(text => setMarkdownContent(text))
-      .catch(error => console.error('Error loading documentação:', error));
+      .catch(error => console.error('Error loading documentation:', error));
   }, []);
 
   // Extrair seções do Markdown

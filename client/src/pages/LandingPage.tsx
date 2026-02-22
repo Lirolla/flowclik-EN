@@ -24,7 +24,7 @@ export default function LandingPage() {
             <a href="#beneficios" className="text-zinc-400 hover:text-white transition">
               Benefícios
             </a>
-            <a href="#como-funciona" className="text-zinc-400 hover:text-white transition">
+            <a href="#as-funciona" className="text-zinc-400 hover:text-white transition">
               Como Funciona
             </a>
             <a href="#precos" className="text-zinc-400 hover:text-white transition">
@@ -56,7 +56,7 @@ export default function LandingPage() {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Seu site de fotografia
+            Seu site de photography
             <br />
             <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
               pronto em minutes
@@ -65,7 +65,7 @@ export default function LandingPage() {
           
           <p className="text-xl md:text-2xl text-zinc-400 mb-12 max-w-2xl mx-auto">
             Sistema completo que <strong className="text-white">monta seu site sozinho</strong>.
-            Fluxo perfeito do agendamento until a entrega final.
+            Fluxo perfeito do agendamento until a betweenga final.
             <strong className="text-white"> Zero complicação</strong>.
           </p>
 
@@ -86,7 +86,7 @@ export default function LandingPage() {
           </div>
 
           <p className="text-sm text-zinc-500">
-            Apenas <strong className="text-purple-400">£ 69,90/month</strong> · Cancele quando quiser · Sem taxas ocultas
+            Apenas <strong className="text-purple-400">£ 69,90/month</strong> · Cancele when quiser · Sem taxas ocultas
           </p>
 
           {/* FlowClik Logo */}
@@ -110,7 +110,7 @@ export default function LandingPage() {
               Por que photographers <span className="text-purple-400">amam</span> o FlowClik?
             </h2>
             <p className="text-xl text-zinc-400">
-              Everything you need para gerenciar seu negócio de fotografia
+              Everything you need para gerenciar seu negócio de photography
             </p>
           </div>
 
@@ -119,32 +119,32 @@ export default function LandingPage() {
               {
                 icon: Zap,
                 title: "Sistema Monta Sozinho",
-                description: "Seu site fica pronto automaticamente. You só escolhe as cores e logo. O resto é automático.",
+                description: "Seu site fica pronto automaticamente. You só escolhe as cores e logo. O resto é automatic.",
               },
               {
                 icon: Users,
                 title: "Fluxo Perfeito",
-                description: "Do agendamento until a entrega final. Cliente escolhe fotos, you edita, sistema entrega. Simples assim.",
+                description: "Do agendamento until a betweenga final. Cliente escolhe fotos, you edita, sistema betweenga. Simples assim.",
               },
               {
                 icon: TrendingUp,
                 title: "Venda Mais",
-                description: "Sistema de vendas integrado. Fotos avulsas, álbuns, molduras. Tudo com carrinho e pagamento automático.",
+                description: "Sistema de vendas integrado. Fotos avulsas, álbuns, molduras. Tudo com carrinho e pagamento automatic.",
               },
               {
                 icon: Camera,
                 title: "Gallerys Profissionais",
-                description: "Compartilhe galerias privadas com senha. Cliente vê, escolhe favoritas e deixa comentários.",
+                description: "Compartilhe galerias privadas com senha. Cliente vê, escolhe favoritas e deixa comments.",
               },
               {
                 icon: Check,
                 title: "Gestão Completa",
-                description: "Agendamentos, clientes, contratos, pagamentos. Tudo em um só lugar. Sem planilhas, sem confusão.",
+                description: "Agendamentos, clientes, contratos, pagamentos. Tudo em um só lugar. Sem planilhas, sem confuare.",
               },
               {
                 icon: Star,
                 title: "Support Real",
-                description: "Feito por photographers que entendem suas dores. Documentation completa e suporte quando precisar.",
+                description: "Feito por photographers que entendem suas dores. Documentation completa e suporte when needsr.",
               },
             ].map((benefit, i) => (
               <div
@@ -161,7 +161,7 @@ export default function LandingPage() {
       </section>
 
       {/* Como Funciona */}
-      <section id="como-funciona" className="container mx-auto px-4 py-20 border-t border-zinc-800">
+      <section id="as-funciona" className="container mx-auto px-4 py-20 border-t border-zinc-800">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -182,7 +182,7 @@ export default function LandingPage() {
               {
                 step: "2",
                 title: "Personalize seu site",
-                description: "Adicione seu logo, escolha as cores da sua marca. Configure seus serviços e preços. Tudo em minutes.",
+                description: "Adicione seu logo, escolha as cores da sua marca. Configure seus services e preços. Tudo em minutes.",
               },
               {
                 step: "3",
@@ -231,7 +231,7 @@ export default function LandingPage() {
               </div>
               
               <p className="text-lg text-purple-300 mb-6">
-                7 days grátis · Cancele quando quiser
+                7 days grátis · Cancele when quiser
               </p>
 
               <Button
@@ -248,13 +248,13 @@ export default function LandingPage() {
               <p className="font-semibold text-lg mb-4">Tudo incluído:</p>
               {[
                 "Site profissional pronto",
-                "10 galerias (compre mais quando precisar)",
+                "10 galerias (compre mais when needsr)",
                 "10GB de armazenamento",
                 "Sistema de vendas completo",
                 "Agendamentos e contratos",
                 "Client chat",
                 "Support por email",
-                "Atualizações automáticas",
+                "Atualizações automatics",
               ].map((feature, i) => (
                 <div key={i} className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-purple-400 flex-shrink-0" />
@@ -265,7 +265,7 @@ export default function LandingPage() {
 
             <div className="mt-8 pt-8 border-t border-zinc-700">
               <p className="text-sm text-zinc-400 text-center">
-                <strong className="text-white">Precisa de mais?</strong> Compre add-ons dentro do sistema:
+                <strong className="text-white">Precisa de mais?</strong> Compre add-ons inside do sistema:
                 <br />
                 +10GB storage · +10 galerias extras
               </p>
@@ -281,7 +281,7 @@ export default function LandingPage() {
             Ready to get started?
           </h2>
           <p className="text-xl text-zinc-400 mb-8">
-            Junte-se a centenas de photographers que já automatizaram seu negócio
+            Junte-se a centenas de photographers que already automatizaram seu negócio
           </p>
           <Button
             size="lg"
@@ -315,7 +315,7 @@ export default function LandingPage() {
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-4 text-zinc-400 leading-relaxed">
-                Não! O FlowClik foi feito para photographers, não para programadores. You configura tudo pelo painel admin de forma visual: faz upload de fotos, adiciona textos, escolhe cores e pronto. O sistema monta seu site automaticamente. É tão fácil quanto usar Instagram.
+                Not! O FlowClik foi feito para photographers, not para programadores. You configura tudo pelo painel admin de forma visual: faz upload de fotos, adiciona textos, escolhe cores e pronto. O sistema monta seu site automaticamente. É tão fácil quanto usar Instagram.
               </p>
             </details>
 
@@ -326,7 +326,7 @@ export default function LandingPage() {
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-4 text-zinc-400 leading-relaxed">
-                Sim! You pode conectar seu domain próprio ou usar o subdomain gratuito que fornecemos (seusite.flowclik.com). A configuração é simples e temos guia passo a passo na documentação. Se you já tem domain, leva menos de 5 minutes para conectar.
+                Sim! You can conectar seu domain próprio ou usar o subdomain gratuito que fornecemos (seusite.flowclik.com). A configuração é simples e temos guia passo a passo na documentação. Se you already tem domain, leva menos de 5 minutes para conectar.
               </p>
             </details>
 
@@ -337,7 +337,7 @@ export default function LandingPage() {
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-4 text-zinc-400 leading-relaxed">
-                You pode receber de 3 formas: dinheiro (registra manualmente), transferência bancária (registra quando receber) ou cartão online via Stripe (cliente paga direto no site e you recebe automaticamente). O sistema controla tudo: quanto falta receber, histórico de pagamentos e envia recibos por email.
+                You can receber de 3 formas: dinheiro (registra manualmente), transferência bancária (registra when receber) ou cartão online via Stripe (cliente paga direto no site e you recebe automaticamente). O sistema controla tudo: quanto falta receber, history de pagamentos e envia recibos por email.
               </p>
             </details>
 
@@ -348,7 +348,7 @@ export default function LandingPage() {
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-4 text-zinc-400 leading-relaxed">
-                You pode cancelar quando quiser, sem penalty. Seus dados ficam disponíveis por 30 days após cancellation para you fazer backup. Recomendamos sempre manter backup local das fotos originais (boa prática para qualquer photographer). You também pode exportar todos os dados do sistema antes de cancelar.
+                You can cancelar when quiser, sem penalty. Seus dados ficam disponíveis por 30 days after cancellation para you fazer backup. Recomendamos always manter backup local das fotos originais (boa prática para qualquer photographer). You also can exportar todos os dados do sistema before de cancelar.
               </p>
             </details>
 
@@ -359,18 +359,18 @@ export default function LandingPage() {
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-4 text-zinc-400 leading-relaxed">
-                O plyear básico (£ 69,90/month) inclui 10GB de storage e 10 galerias. Cada galeria pode ter quantas fotos you quiser. Para a maioria dos photographers, isso é mais que suficiente. Se precisar de mais, you pode comprar add-ons: +10GB por £ 39,90/month ou +10 galerias por £ 49,90/month. Clientes são ilimitados sempre!
+                O plyear básico (£ 69,90/month) inclui 10GB de storage e 10 galerias. Cada galeria can ter quantas fotos you quiser. Para a maioria dos photographers, isso é mais que suficiente. Se needsr de mais, you can comprar add-ons: +10GB por £ 39,90/month ou +10 galerias por £ 49,90/month. Clientes are unlimiteds always!
               </p>
             </details>
 
             {/* FAQ 6 */}
             <details className="group bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:border-purple-500/50 transition">
               <summary className="cursor-pointer list-none flex items-center justify-between font-semibold text-lg text-white">
-                <span>O sistema adiciona marca d'água nas fotos?</span>
+                <span>O sistema adiciona watermark nas fotos?</span>
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-4 text-zinc-400 leading-relaxed">
-                Sim! Wedndo you envia fotos para o cliente selecionar favoritas, o sistema adiciona automaticamente marca d'água "PREVIEW" para proteger seu trabalho. Depois que cliente escolher e you editar, as fotos finais são delivereds SEM marca d'água. You também pode customise a marca d'água com seu logo nas configurações.
+                Sim! Wedndo you envia fotos para o cliente selecionar favoritas, o sistema adiciona automaticamente marca d'watermark "PREVIEW" para protect your work. Depois que client chooses e you editar, as final photos are delivereds SEM watermark. You also can customise a watermark com seu logo nas configurações.
               </p>
             </details>
 
@@ -381,7 +381,7 @@ export default function LandingPage() {
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-4 text-zinc-400 leading-relaxed">
-                Sim! Essa é uma das funcionalidades mais legais. Depois de entregar o álbum para o cliente principal, you ativa "Event Sales" e define preço por foto (ex: $25). O sistema gera link público onde amigos/família podem comprar fotos avulsas com cartão. You recebe automaticamente via Stripe. Ótimo para formaturas, festas e casamentos!
+                Sim! Essa é uma das features mais legais. Depois de betweengar o álbum para o cliente principal, you ativa "Event Sales" e define preço por foto (ex: $25). O sistema gera link público where amigos/família canm comprar fotos avulsas com cartão. You recebe automaticamente via Stripe. Ótimo para formaturas, festas e casamentos!
               </p>
             </details>
 
@@ -392,7 +392,7 @@ export default function LandingPage() {
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-4 text-zinc-400 leading-relaxed">
-                Não! Tudo está incluído no plyear: hospedagem do site, armazenamento de fotos, banco de dados, emails automáticos, SSL (cadeado de segurança) e backups diários. You não precisa contratar nada extra. É literalmente: assina, configura e está no ar. Zero dor de cabeça com infraestrutura.
+                Not! Tudo is incluído no plyear: hospedagem do site, armazenamento de fotos, banco de dados, emails automatics, SSL (cadeado de segurança) e backups diários. You not needs contratar nada extra. É literalmente: assina, configura e is no ar. Zero dor de cabeça com infraestrutura.
               </p>
             </details>
 
@@ -403,18 +403,18 @@ export default function LandingPage() {
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-4 text-zinc-400 leading-relaxed">
-                Perfeitamente! Tanto o site público quanto o painel admin são 100% responsivos. Seus clientes podem agendar, ver fotos e aprovar álbuns pelo celular. You pode gerenciar agendamentos, responder mensagens e until fazer upload de fotos pelo smartphone. Tudo se adapta automaticamente ao tamanho da tela.
+                Perfeitamente! Tanto o site público quanto o painel admin are 100% responsivos. Seus clientes canm agendar, ver fotos e aprovar álbuns pelo celular. You can gerenciar agendamentos, respwherer mensagens e until fazer upload de fotos pelo smartphone. Tudo se adapta automaticamente ao tamanho da tela.
               </p>
             </details>
 
             {/* FAQ 10 */}
             <details className="group bg-zinc-900/50 border border-zinc-800 rounded-lg p-6 hover:border-purple-500/50 transition">
               <summary className="cursor-pointer list-none flex items-center justify-between font-semibold text-lg text-white">
-                <span>Tem suporte se eu precisar de help?</span>
+                <span>Tem suporte se eu needsr de help?</span>
                 <span className="text-purple-400 group-open:rotate-180 transition-transform">▼</span>
               </summary>
               <p className="mt-4 text-zinc-400 leading-relaxed">
-                Sim! Temos documentação completa com guias passo a passo, sistema de tickets para questions técnicas (respondemos em until 24h) e comunidade de photographers no Discord. Além disso, o sistema tem chat integrado onde you pode tirar questions rápidas. Estamos aqui para te helpr a ter sucesso!
+                Sim! Temos documentação completa com guias passo a passo, sistema de tickets para questions técnicas (respwheremos em until 24h) e comunidade de photographers no Discord. Além disso, o sistema tem chat integrado where you can tirar questions rápidas. Estamos here para te helpr a ter sucesso!
               </p>
             </details>
           </div>
@@ -458,7 +458,7 @@ export default function LandingPage() {
               <h4 className="font-semibold mb-4">Produto</h4>
               <ul className="space-y-2 text-sm text-zinc-400">
                 <li><a href="#beneficios" className="hover:text-white transition">Benefícios</a></li>
-                <li><a href="#como-funciona" className="hover:text-white transition">Como Funciona</a></li>
+                <li><a href="#as-funciona" className="hover:text-white transition">Como Funciona</a></li>
                 <li><a href="#precos" className="hover:text-white transition">Preços</a></li>
                 <li><Link href="/docs"><a className="hover:text-white transition">Documentation</a></Link></li>
               </ul>

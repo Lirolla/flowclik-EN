@@ -45,7 +45,7 @@ export const paymentsRouter = router({
       if (!photo.price || photo.price === 0) {
         throw new TRPCError({
           code: "BAD_REQUEST",
-          message: "Esta foto não está available para venda",
+          message: "Esta foto not is available para venda",
         });
       }
 
@@ -118,7 +118,7 @@ export const paymentsRouter = router({
       if (ctx.user.role !== "admin") {
         throw new TRPCError({
           code: "FORBIDDEN",
-          message: "Administrators only podem enviar links de pagamento",
+          message: "Administrators only canm enviar links de pagamento",
         });
       }
 

@@ -18,12 +18,12 @@ export default function AdminDashboard() {
 
   const getStatusLabel = (status: string) => {
     const labels: Record<string, string> = {
-      pending: 'Pendente',
+      pending: 'Pending',
       confirmed: 'Confirmado',
       session_done: 'Ensaio Realizado',
-      editing: 'Em Edição',
+      editing: 'In Editing',
       awaiting_selection: 'Awaiting Selection',
-      final_editing: 'Edição Final',
+      final_editing: 'Final Editing',
       delivered: 'Delivered',
       cancelled: 'Cancelled',
     };
@@ -75,9 +75,9 @@ export default function AdminDashboard() {
       bgColor: 'bg-blue-500/10',
     },
     {
-      title: 'Agendamentos Pendentes',
+      title: 'Agendamentos Pendings',
       value: stats?.pendingBookings || 0,
-      subtitle: '3 aguardando confirmação',
+      subtitle: '3 awaiting confirmation',
       icon: Calendar,
       color: 'text-yellow-500',
       bgColor: 'bg-yellow-500/10',
@@ -126,7 +126,7 @@ export default function AdminDashboard() {
             Estatísticas de Agendamentos
           </h2>
 
-          {/* Cards de Resumo de Agendamentos */}
+          {/* Cards de Summary de Agendamentos */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
             <Card className="bg-gray-900 border-gray-800">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -146,13 +146,13 @@ export default function AdminDashboard() {
               </CardHeader>
               <CardContent>
                 <div className="text-2xl font-bold text-white">{format(totalRevenue)}</div>
-                <p className="text-xs text-gray-500">Soma de todos os serviços</p>
+                <p className="text-xs text-gray-500">Soma de todos os services</p>
               </CardContent>
             </Card>
 
             <Card className="bg-gray-900 border-gray-800">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-400">Taxa de Confirmação</CardTitle>
+                <CardTitle className="text-sm font-medium text-gray-400">Taxa de Confirmation</CardTitle>
                 <CheckCircle className="h-4 w-4 text-gray-500" />
               </CardHeader>
               <CardContent>
@@ -262,7 +262,7 @@ export default function AdminDashboard() {
         {/* Agendamentos por Month */}
         <Card className="bg-gray-900 border-gray-800 mb-8">
           <CardHeader>
-            <CardTitle className="text-white">Agendamentos por Month (Últimos 12 months)</CardTitle>
+            <CardTitle className="text-white">Agendamentos por Month (Lasts 12 months)</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -321,7 +321,7 @@ export default function AdminDashboard() {
                 {!recentOrders || recentOrders.length === 0 ? (
                   <tr>
                     <td colSpan={6} className="px-6 py-12 text-center text-gray-400">
-                      None pedido ainda
+                      None pedido still
                     </td>
                   </tr>
                 ) : (
@@ -340,7 +340,7 @@ export default function AdminDashboard() {
                           'bg-gray-800 text-gray-300'
                         }`}>
                           {order.status === 'completed' ? 'Completo' :
-                           order.status === 'pending' ? 'Pendente' :
+                           order.status === 'pending' ? 'Pending' :
                            order.status === 'cancelled' ? 'Cancelled' : order.status}
                         </span>
                       </td>

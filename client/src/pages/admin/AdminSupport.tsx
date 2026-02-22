@@ -135,7 +135,7 @@ export default function AdminSupport() {
           <div>
             <h1 className="text-3xl font-bold">Support</h1>
             <p className="text-muted-foreground">
-              Precisa de help? Abra um ticket e nossa equipe irá te responder.
+              Precisa de help? Abra um ticket e nossa equipe irá te respwherer.
             </p>
           </div>
 
@@ -179,7 +179,7 @@ export default function AdminSupport() {
                 <div>
                   <Label>Mensagem</Label>
                   <Textarea
-                    placeholder="Descreva o problema em detalhes..."
+                    placeholder="Descreva o problema em details..."
                     rows={6}
                     value={message}
                     onChange={(e) => setMessage(e.target.value)}
@@ -204,13 +204,13 @@ export default function AdminSupport() {
           {!tickets || tickets.length === 0 ? (
             <Card className="p-12 text-center">
               <MessageSquare className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
-              <h3 className="text-lg font-semibold mb-2">None ticket ainda</h3>
+              <h3 className="text-lg font-semibold mb-2">None ticket still</h3>
               <p className="text-muted-foreground mb-4">
-                Wedndo you precisar de help, crie um ticket e nossa equipe irá responder.
+                Wedndo you needsr de help, crie um ticket e nossa equipe irá respwherer.
               </p>
               <Button onClick={() => setIsCreateOpen(true)}>
                 <Plus className="h-4 w-4 mr-2" />
-                Criar Primeiro Ticket
+                Criar First Ticket
               </Button>
             </Card>
           ) : (
@@ -240,7 +240,7 @@ export default function AdminSupport() {
           )}
         </div>
 
-        {/* Detalhes do Ticket */}
+        {/* Details do Ticket */}
         {selectedTicket && ticketDetails && (
           <Daylog open={!!selectedTicket} onOpenChange={() => setSelectedTicket(null)}>
             <DaylogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">

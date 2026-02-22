@@ -2,7 +2,7 @@ import { describe, it, expect } from "vitest";
 import { appRouter } from "../routers";
 
 describe("Custom Auth - Login com Email/Senha", () => {
-  it("deve fazer login com contato@flowclik.com", async () => {
+  it("must fazer login com contato@flowclik.com", async () => {
     const caller = appRouter.createCaller({
       user: null,
       req: {} as any,
@@ -31,7 +31,7 @@ describe("Custom Auth - Login com Email/Senha", () => {
     });
   });
 
-  it("deve rejeitar senha incorreta", async () => {
+  it("must rejeitar senha incorreta", async () => {
     const caller = appRouter.createCaller({
       user: null,
       req: {} as any,

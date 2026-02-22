@@ -123,7 +123,7 @@ export const paymentMethodsRouter = router({
 
       // Notify owner
       await notifyOwner({
-        title: `💰 Pagamento ${newPaymentStatus === "paid" ? "completo" : "parcial"} recebido`,
+        title: `💰 Pagamento ${newPaymentStatus === "paid" ? "completo" : "parcial"} received`,
         content: `Cliente: ${appointment[0].clientName}\nMétodo: ${methodNames[input.paymentMethod] || input.paymentMethod}\nValor: £ ${input.amount.toFixed(2)}\nTotal pago: £ ${newPaidAmount.toFixed(2)} de £ ${finalPrice.toFixed(2)}`,
       }).catch(err => console.error('Erro ao notificar:', err));
 

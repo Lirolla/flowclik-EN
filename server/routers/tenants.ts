@@ -15,13 +15,13 @@ export const tenantsRouter = router({
   register: publicProcedure
     .input(
       z.object({
-        name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
+        name: z.string().min(2, "Nome must ter pelo menos 2 caracteres"),
         email: z.string().email("Invalid email"),
-        password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres"),
+        password: z.string().min(6, "Senha must ter pelo menos 6 caracteres"),
         subdomain: z.string()
-          .min(3, "Subdomain deve ter pelo menos 3 caracteres")
+          .min(3, "Subdomain must ter pelo menos 3 caracteres")
           .max(50, "Subdomain muito longo")
-          .regex(/^[a-z0-9-]+$/, "Subdomain deve conter apenas letras minúsculas, numbers and hyphens"),
+          .regex(/^[a-z0-9-]+$/, "Subdomain must conter only letras minúsculas, numbers and hyphens"),
         phone: z.string().optional(),
       })
     )
@@ -29,12 +29,12 @@ export const tenantsRouter = router({
       const db = await getDb();
       if (!db) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Database not available" });
 
-      // Validar se subdomain está available
+      // Validar se subdomain is available
       const available = await isSubdomainAvailable(input.subdomain);
       if (!available) {
         throw new TRPCError({ 
           code: "BAD_REQUEST", 
-          message: "Este subdomain já está em uso ou é reservado" 
+          message: "Este subdomain already is em uso ou é reservado" 
         });
       }
 
@@ -48,7 +48,7 @@ export const tenantsRouter = router({
       if (existingUser) {
         throw new TRPCError({ 
           code: "BAD_REQUEST", 
-          message: "Este email já está cadastrado" 
+          message: "This email is already registered" 
         });
       }
 
@@ -89,7 +89,7 @@ export const tenantsRouter = router({
         await initializeTenantStorage(tenantId);
       } catch (error: any) {
         console.error("[Tenant Creation] Erro ao criar pastas R2:", error.message);
-        // Não falha o cadastro se as pastas não forem criadas
+        // Not falha o cadastro se as pastas not forem criadas
       }
 
       // 2. Criar usuário admin do tenant
@@ -101,17 +101,17 @@ export const tenantsRouter = router({
         role: 'admin',
       });
 
-      // 3. Criar subscription padrão (trial de 7 days)
+      // 3. Criar subscription default (trial de 7 days)
       // Usar SQL puro para evitar problemas com defaults do Drizzle
       await db.execute(
         sql`INSERT INTO subscriptions (tenantId, plan, status, currentPeriodStart, currentPeriodEnd) VALUES (${tenantId}, 'basico', 'trialing', ${new Date().toISOString()}, ${trialEndsAt.toISOString()})`
       );
 
-      // 4. Criar siteConfig padrão
+      // 4. Criar siteConfig default
       await db.insert(siteConfig).values({
         tenantId,
         siteName: input.name,
-        siteTagline: 'Fotografia Profissional',
+        siteTagline: 'Photography Profissional',
         businessMode: 'photography_only',
         paymentCashEnabled: 1,
         paymentBankTransferEnabled: 1,

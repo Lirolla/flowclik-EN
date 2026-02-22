@@ -60,7 +60,7 @@ export default function PaymentManager({
       setExtraPrice("");
       toast({
         title: "Service extra adicionado!",
-        description: "O serviço extra foi adicionado com sucesso.",
+        description: "O service extra foi adicionado com sucesso.",
       });
     },
     onError: (error) => {
@@ -80,7 +80,7 @@ export default function PaymentManager({
       utils.appointments.getAll.invalidate();
       toast({
         title: "Service extra removido!",
-        description: "O serviço extra foi removido com sucesso.",
+        description: "O service extra foi removido com sucesso.",
       });
     },
     onError: (error) => {
@@ -182,14 +182,14 @@ export default function PaymentManager({
         return (
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium">
             <AlertCircle className="w-4 h-4" />
-            Aguardando
+            Awaiting
           </div>
         );
       default:
         return (
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-sm font-medium">
             <Clock className="w-4 h-4" />
-            Pendente
+            Pending
           </div>
         );
     }
@@ -246,7 +246,7 @@ export default function PaymentManager({
             </div>
           )}
 
-          {/* Resumo de Pagamento */}
+          {/* Summary de Pagamento */}
           <div className="grid grid-cols-3 gap-4 p-4 bg-muted rounded-lg">
             <div>
               <div className="text-sm text-muted-foreground mb-1">Total</div>
@@ -325,7 +325,7 @@ export default function PaymentManager({
             )}
             {currentMethod === "pix" && availableMethods?.pixKey && (
               <div className="mt-2 p-3 bg-green-50 border border-green-200 rounded text-sm">
-                <p className="font-medium mb-1">Chave PIX:</p>
+                <p className="font-medium mb-1">Key PIX:</p>
                 <p className="text-sm font-mono">{availableMethods.pixKey}</p>
               </div>
             )}
@@ -359,10 +359,10 @@ export default function PaymentManager({
             )}
           </div>
 
-          {/* Histórico de Pagamentos */}
+          {/* History de Pagamentos */}
           {paymentSummary?.transactions && paymentSummary.transactions.length > 0 && (
             <div>
-              <h4 className="font-medium mb-3">Histórico de Pagamentos</h4>
+              <h4 className="font-medium mb-3">History de Pagamentos</h4>
               <div className="space-y-2">
                 {paymentSummary.transactions.map((transaction: any) => (
                   <div key={transaction.id} className="flex items-center justify-between p-3 bg-muted rounded">
@@ -383,7 +383,7 @@ export default function PaymentManager({
                     <div className={`text-sm font-medium ${
                       transaction.status === "completed" ? "text-green-600" : "text-orange-600"
                     }`}>
-                      {transaction.status === "completed" ? "✓ Confirmado" : "⏳ Pendente"}
+                      {transaction.status === "completed" ? "✓ Confirmado" : "⏳ Pending"}
                     </div>
                   </div>
                 ))}
@@ -566,7 +566,7 @@ export default function PaymentManager({
                     });
                     return;
                   }
-                  // Salvar em pounds (não centavos) - consistente com o resto do sistema
+                  // Salvar em pounds (not centavos) - consistente com o resto do sistema
                   addExtraMutation.mutate({
                     appointmentId,
                     description: extraDescription,

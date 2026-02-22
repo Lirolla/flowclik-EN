@@ -36,7 +36,7 @@ export default function SistemaFotografos() {
   const [deletingId, setDeletingId] = useState<number | null>(null);
   const [showDeleteDaylog, setShowDeleteDaylog] = useState(false);
 
-  const handlePlanChange = async (tenantId: number, newPlan: "starter" | "cortesia" | "full") => {
+  const handlePlanChange = async (tenantId: number, newPlan: "starter" | "courtesy" | "full") => {
     setChangingPlan(tenantId);
     try {
       await updatePlanMutation.mutateAsync({ tenantId, plan: newPlan });
@@ -53,10 +53,10 @@ export default function SistemaFotografos() {
     const newStatus = currentStatus === 'active' || currentStatus === 'trialing' ? 'paused' : 'active';
     try {
       await updateStatusMutation.mutateAsync({ tenantId, status: newStatus });
-      toast.success(newStatus === 'paused' ? 'Photographer suspenso!' : 'Photographer reativado!');
+      toast.success(newStatus === 'paused' ? 'Photographer suspended!' : 'Photographer reativado!');
       refetch();
     } catch (error: any) {
-      toast.error(error.message || 'Erro ao alterar status');
+      toast.error(error.message || 'Erro ao change status');
     }
   };
 
@@ -86,7 +86,7 @@ export default function SistemaFotografos() {
       case "trial":
         return <Badge className="bg-blue-600">Trial</Badge>;
       case "suspended":
-        return <Badge className="bg-yellow-600">Suspenso</Badge>;
+        return <Badge className="bg-yellow-600">Suspended</Badge>;
       case "cancelled":
         return <Badge className="bg-red-600">Cancelled</Badge>;
       default:
@@ -116,8 +116,8 @@ export default function SistemaFotografos() {
 
         {photographers?.length === 0 ? (
           <Card className="p-12 bg-gray-800/50 border-gray-700 text-center">
-            <p className="text-gray-400 text-lg">None photographer cadastrado ainda.</p>
-            <p className="text-gray-500 mt-2">Os photographers aparecerão aqui quando se cadastrarem.</p>
+            <p className="text-gray-400 text-lg">None photographer cadastrado still.</p>
+            <p className="text-gray-500 mt-2">Os photographers aparecerão here when se cadastrarem.</p>
           </Card>
         ) : (
           <div className="space-y-4">
@@ -130,8 +130,8 @@ export default function SistemaFotografos() {
               // Cálculo de receita em REAIS (£)
               let monthlyRevenue = 0;
               if (photographer.plan === "starter") monthlyRevenue += 69.90;
-              // Cortesia e Vitalício não pagam mensalidade base
-              // cortesia = £ 0,00, full = £ 0,00
+              // Courtesy e Lifetime not pagam mensalidade base
+              // courtesy = £ 0,00, full = £ 0,00
               monthlyRevenue += extraStorageCount * 29.90; // +10GB por £ 29,90
               monthlyRevenue += extraGalleriesCount * 39.90; // +10 galerias por £ 39,90
 
@@ -232,15 +232,15 @@ export default function SistemaFotografos() {
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="starter">Básico (£ 69,90/month)</SelectItem>
-                          <SelectItem value="cortesia">Cortesia (£ 0,00/month)</SelectItem>
-                          <SelectItem value="full">Vitalício (Unlimited Free)</SelectItem>
+                          <SelectItem value="courtesy">Courtesy (£ 0,00/month)</SelectItem>
+                          <SelectItem value="full">Lifetime (Unlimited Free)</SelectItem>
                         </SelectContent>
                       </Select>
 
                       <div className="mt-3 space-y-1">
-                        {photographer.plan === "cortesia" && (
+                        {photographer.plan === "courtesy" && (
                           <p className="text-xs text-blue-400">
-                            🎁 Plyear Cortesia
+                            🎁 Plyear Courtesy
                           </p>
                         )}
                         {photographer.plan === "full" ? (
@@ -249,7 +249,7 @@ export default function SistemaFotografos() {
                               ♾️ Storage Unlimited
                             </p>
                             <p className="text-xs text-green-400">
-                              ♾️ Gallerys Ilimitadas
+                              ♾️ Gallerys Unlimiteds
                             </p>
                           </>
                         ) : (
@@ -299,13 +299,13 @@ export default function SistemaFotografos() {
         )}
       </div>
 
-      {/* Daylog de Confirmação de Exclusão */}
+      {/* Daylog de Confirmation de Excluare */}
       <AlertDaylog open={showDeleteDaylog} onOpenChange={setShowDeleteDaylog}>
         <AlertDaylogContent>
           <AlertDaylogHeader>
             <AlertDaylogTitle>Tem certeza?</AlertDaylogTitle>
             <AlertDaylogDescription>
-              Esta ação não pode ser desfeita. Isso irá excluir permanentemente o photographer,
+              Esta ação not can ser desfeita. Isso irá excluir permanentemente o photographer,
               seu site, todas as fotos, galerias, agendamentos e dados relacionados.
             </AlertDaylogDescription>
           </AlertDaylogHeader>

@@ -9,22 +9,22 @@ import { initializeTenantStorage } from "../storage";
 export const saasSystemRouter = router({
   /**
    * Criar novo tenant (photographer) com trial gratuito
-   * PUBLIC - Wedlquer pessoa pode se cadastrar
+   * PUBLIC - Wedlquer pessoa can se cadastrar
    */
   createTenant: publicProcedure
     .input(
       z.object({
-        name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
+        name: z.string().min(2, "Nome must ter pelo menos 2 caracteres"),
         email: z.string().email("Invalid email"),
         subdomain: z
           .string()
-          .min(3, "Subdomain deve ter pelo menos 3 caracteres")
+          .min(3, "Subdomain must ter pelo menos 3 caracteres")
           .max(63, "Subdomain muito longo")
           .regex(
             /^[a-z0-9-]+$/,
             "Apenas letras minúsculas, numbers and hyphen"
           ),
-        password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres"),
+        password: z.string().min(6, "Senha must ter pelo menos 6 caracteres"),
       })
     )
     .mutation(async ({ input }) => {
@@ -39,7 +39,7 @@ export const saasSystemRouter = router({
         .limit(1);
 
       if (existingTenant.length > 0) {
-        throw new Error("Subdomain já está em uso");
+        throw new Error("Subdomain is already in use");
       }
 
       // 2. Validar se email already exists
@@ -77,7 +77,7 @@ export const saasSystemRouter = router({
         await initializeTenantStorage(Number(tenantId));
       } catch (error: any) {
         console.error("[Tenant Creation] Erro ao criar pastas R2:", error.message);
-        // Não falha o cadastro se as pastas não forem criadas, mas loga o erro
+        // Not falha o cadastro se as pastas not forem criadas, mas loga o erro
       }
 
       // 5. Criar signature trial (7 days grátis)
@@ -116,7 +116,7 @@ export const saasSystemRouter = router({
     }),
 
   /**
-   * Verify se subdomain está available
+   * Verify se subdomain is available
    * PUBLIC - Para validação em tempo real no formulário
    */
   checkSubdomain: publicProcedure

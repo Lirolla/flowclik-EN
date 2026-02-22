@@ -16,8 +16,8 @@ export const customAuthRouter = router({
     .input(
       z.object({
         email: z.string().email("Invalid email"),
-        password: z.string().min(6, "Senha deve ter pelo menos 6 caracteres"),
-        name: z.string().min(2, "Nome deve ter pelo menos 2 caracteres"),
+        password: z.string().min(6, "Senha must ter pelo menos 6 caracteres"),
+        name: z.string().min(2, "Nome must ter pelo menos 2 caracteres"),
         tenantId: z.number().optional(), // Para associar a um tenant específico
       })
     )
@@ -35,7 +35,7 @@ export const customAuthRouter = router({
       if (existingUser) {
         throw new TRPCError({
           code: "CONFLICT",
-          message: "Este email já está cadastrado",
+          message: "This email is already registered",
         });
       }
 
@@ -47,7 +47,7 @@ export const customAuthRouter = router({
         email: input.email,
         password: passwordHash,
         name: input.name,
-        tenantId: input.tenantId || 1, // Tenant padrão
+        tenantId: input.tenantId || 1, // Tenant default
         loginMethod: "email",
         role: "user",
       });
@@ -218,7 +218,7 @@ export const customAuthRouter = router({
     }
   }),
 
-  // Logout (apenas limpa token no frontend)
+  // Logout (only limpa token no frontend)
   logout: protectedProcedure.mutation(async () => {
     return { success: true };
   }),
@@ -228,7 +228,7 @@ export const customAuthRouter = router({
     .input(
       z.object({
         currentPassword: z.string(),
-        newPassword: z.string().min(6, "Nova senha deve ter pelo menos 6 caracteres"),
+        newPassword: z.string().min(6, "Nova senha must ter pelo menos 6 caracteres"),
       })
     )
     .mutation(async ({ input, ctx }) => {

@@ -23,7 +23,7 @@ export default function PaymentCanceled() {
 
         <div className="bg-gray-50 rounded-lg p-6 mb-8">
           <p className="text-sm text-gray-700">
-            Não se preocupe, nonea cobrança foi realizada.
+            Not se preocupe, nonea cobrança foi realizada.
           </p>
         </div>
 
@@ -43,7 +43,7 @@ export default function PaymentCanceled() {
             <Button asChild variant="default" size="lg">
               <Link href="/">
                 <Home className="w-4 h-4 mr-2" />
-                Ir ao Início
+                Ir ao Home
               </Link>
             </Button>
           </div>

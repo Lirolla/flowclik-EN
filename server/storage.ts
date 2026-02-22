@@ -73,7 +73,7 @@ export async function storagePut(
 /**
  * Obter URL de download de um arquivo no R2
  * @param relKey - Caminho relactive do arquivo
- * @param expiresIn - Tempo de expiração em seconds (padrão: 1 hour)
+ * @param expiresIn - Tempo de expiração em seconds (default: 1 hour)
  * @returns Objeto com key e url assinada
  */
 export async function storageGet(
@@ -94,7 +94,7 @@ export async function storageGet(
 }
 
 /**
- * Normalizar chave removendo barras iniciais
+ * Normalizar key removendo barras iniciais
  */
 function normalizeKey(relKey: string): string {
   return relKey.replace(/^\/+/, "");
@@ -102,7 +102,7 @@ function normalizeKey(relKey: string): string {
 
 /**
  * Criar pastas iniciais do tenant no R2
- * Chamado quando um novo photographer se cadastra
+ * Chamado when um novo photographer se cadastra
  */
 export async function initializeTenantStorage(tenantId: number): Promise<void> {
   const folders = [
@@ -119,7 +119,7 @@ export async function initializeTenantStorage(tenantId: number): Promise<void> {
 
   for (const folder of folders) {
     try {
-      // R2/S3 não tem "pastas" pounds - criamos um objeto vazio como placeholder
+      // R2/S3 not tem "pastas" pounds - criamos um objeto vazio as placeholder
       await storagePut(folder + ".keep", "", "text/plain");
     } catch (error: any) {
       console.error(`[R2] Erro ao criar pasta ${folder}:`, error.message);

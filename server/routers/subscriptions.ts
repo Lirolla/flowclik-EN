@@ -59,7 +59,7 @@ export const subscriptionsRouter = router({
   }),
 
   /**
-   * Criar sessão de checkout para plyear básico (£ 69,90/month)
+   * Criar sesare de checkout para plyear básico (£ 69,90/month)
    */
   createCheckoutSession: protectedProcedure
     .input(z.object({
@@ -72,7 +72,7 @@ export const subscriptionsRouter = router({
 
       if (!stripe) throw new Error("Stripe not configured");
 
-      // Verify se já tem customer no Stripe
+      // Verify se already tem customer no Stripe
       const dbInstance = await getDb();
       if (!dbInstance) throw new Error("Database not available");
 
@@ -84,7 +84,7 @@ export const subscriptionsRouter = router({
 
       let customerEmail = user.email;
 
-      // Se já tem customer ID, usar ele
+      // Se already tem customer ID, usar ele
       const sessionParams: any = {
         mode: "subscription",
         line_items: [{ price: PRICE_IDS.PLAN_BASIC, quantity: 1 }],
@@ -135,8 +135,8 @@ export const subscriptionsRouter = router({
         .where(eq(subscriptions.tenantId, tenantId))
         .limit(1);
 
-      if (!subscription || (subscription.status !== "active" && subscription.plan !== "cortesia" && subscription.plan !== "full")) {
-        throw new Error("You precisa ter um plyear active para comprar add-ons");
+      if (!subscription || (subscription.status !== "active" && subscription.plan !== "courtesy" && subscription.plan !== "full")) {
+        throw new Error("You needs ter um plyear active para comprar add-ons");
       }
 
       const sessionParams: any = {
@@ -188,8 +188,8 @@ export const subscriptionsRouter = router({
         .where(eq(subscriptions.tenantId, tenantId))
         .limit(1);
 
-      if (!subscription || (subscription.status !== "active" && subscription.plan !== "cortesia" && subscription.plan !== "full")) {
-        throw new Error("You precisa ter um plyear active para comprar add-ons");
+      if (!subscription || (subscription.status !== "active" && subscription.plan !== "courtesy" && subscription.plan !== "full")) {
+        throw new Error("You needs ter um plyear active para comprar add-ons");
       }
 
       const sessionParams: any = {
@@ -244,11 +244,11 @@ export const subscriptionsRouter = router({
 
       if (!addon) throw new Error("Add-on not found");
 
-      // Verify uso antes de cancelar
+      // Verify uso before de cancelar
       const { medayItems, collections } = await import("../../drizzle/schema");
 
       if (addon.addonType === "storage") {
-        // Verify se o storage extra está sendo usado
+        // Verify se o storage extra is sendo usado
         const [photoCount] = await dbInstance
           .select({ count: sql<number>`count(*)` })
           .from(medayItems)
@@ -276,7 +276,7 @@ export const subscriptionsRouter = router({
         const storageAfterCancel = (subscription?.storageLimit || 10737418240) + (otherStorageCount * 10737418240);
 
         if (storageUsed > storageAfterCancel) {
-          throw new Error("Não é possível cancelar este add-on. Seu armazenamento usado excede o limite sem ele. Libere espaço primeiro.");
+          throw new Error("Not é possível cancelar este add-on. Seu armazenamento usado excede o limite sem ele. Libere espaço first.");
         }
       }
 
@@ -307,11 +307,11 @@ export const subscriptionsRouter = router({
         const galleriesAfterCancel = (subscription?.galleryLimit || 10) + (otherGalleryCount * 10);
 
         if (galleriesUsed > galleriesAfterCancel) {
-          throw new Error("Não é possível cancelar este add-on. Your galleries usadas excedem o limite sem ele. Remova galerias primeiro.");
+          throw new Error("Not é possível cancelar este add-on. Your galleries usadas excedem o limite sem ele. Remova galerias first.");
         }
       }
 
-      // Cancelar no Stripe (no final do período)
+      // Cancelar no Stripe (no final do period)
       await stripe.subscriptions.update(addon.stripeSubscriptionId, {
         cancel_at_period_end: true,
       });
@@ -349,7 +349,7 @@ export const subscriptionsRouter = router({
       throw new Error("Subscription not found");
     }
 
-    // Cancelar no Stripe (no final do período)
+    // Cancelar no Stripe (no final do period)
     await stripe.subscriptions.update(subscription.stripeSubscriptionId, {
       cancel_at_period_end: true,
     });
@@ -450,8 +450,8 @@ export const subscriptionsRouter = router({
       };
     }
 
-    // Plyears cortesia e full nunca expiram
-    if (subscription.plan === "cortesia" || subscription.plan === "full") {
+    // Plyears courtesy e full never expiram
+    if (subscription.plan === "courtesy" || subscription.plan === "full") {
       return {
         isTrialing: false,
         isExpired: false,
@@ -461,7 +461,7 @@ export const subscriptionsRouter = router({
       };
     }
 
-    // Se está suspenso, cancelled ou inadimplente, bloquear
+    // Se is suspended, cancelled ou inadimplente, bloquear
     if (subscription.status === "paused" || subscription.status === "cancelled" || subscription.status === "past_due") {
       return {
         isTrialing: false,
@@ -472,7 +472,7 @@ export const subscriptionsRouter = router({
       };
     }
 
-    // Se já está active (pagou), não está expired
+    // Se already is active (pagou), not is expired
     if (subscription.status === "active") {
       return {
         isTrialing: false,
@@ -515,7 +515,7 @@ export const subscriptionsRouter = router({
   }),
 
   /**
-   * Obter resumo completo de signature + add-ons + uso
+   * Obter summary completo de signature + add-ons + uso
    */
   getSubscriptionSummary: protectedProcedure.query(async ({ ctx }) => {
     const tenantId = db.getTenantId(ctx);

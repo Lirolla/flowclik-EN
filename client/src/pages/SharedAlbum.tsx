@@ -26,14 +26,14 @@ export default function SharedAlbum() {
       setEmailSubmitted(true);
       toast({
         title: "Bem-vindo!",
-        description: "You agora tem acesso ao álbum.",
+        description: "You now tem acesso ao álbum.",
       });
     },
     onError: (error) => {
       console.error('Registration error:', error);
       toast({
         title: "Error",
-        description: error.message || "Não foi possível registrar seu email.",
+        description: error.message || "Not foi possível registrar seu email.",
         variant: "destructive",
       });
     },
@@ -77,7 +77,7 @@ export default function SharedAlbum() {
             </h2>
             <p className="text-gray-400 text-sm">
               Para visualizar este álbum, por favor informe seu email.
-              You receberá atualizações quando novas fotos forem adicionadas!
+              You receberá atualizações when novas fotos forem adicionadas!
             </p>
           </div>
 
@@ -148,7 +148,7 @@ export default function SharedAlbum() {
       <div className="min-h-screen bg-black flex items-center justify-center p-4">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-white mb-2">Album not found</h1>
-          <p className="text-gray-400">O link pode estar incorreto ou o álbum foi removido.</p>
+          <p className="text-gray-400">O link can estar incorreto ou o álbum foi removido.</p>
         </div>
       </div>
     );
@@ -175,7 +175,7 @@ export default function SharedAlbum() {
           {/* Overlay escuro para legibilidade */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black" />
           
-          {/* Conteúdo sobreposto */}
+          {/* Conteúdo aboutposto */}
           <div className="relative h-full flex flex-col items-center justify-center px-4">
             <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 text-center drop-shadow-2xl">
               {appointment.clientName}
@@ -199,8 +199,8 @@ export default function SharedAlbum() {
         {finalPhotos.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-gray-400 text-lg">
-              Ainda não há fotos finais disponíveis.
-              You receberá um email quando forem adicionadas!
+              Ainda not há fotos finais disponíveis.
+              You receberá um email when forem adicionadas!
             </p>
           </div>
         ) : (

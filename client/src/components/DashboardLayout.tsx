@@ -41,7 +41,7 @@ const menuItems = [
   { icon: Users, label: "Clients", path: "/admin/clients" },
   { icon: Calendar, label: "Appointments", path: "/admin/appointments" },
   { icon: FolderOpen, label: "Gallery", path: "/admin/galleries" },
-  { icon: Heart, label: "Seleção do Cliente", path: "/admin/selections" },
+  { icon: Heart, label: "Selection do Cliente", path: "/admin/selections" },
   { icon: MessageSquare, label: "Messages", path: "/admin/messages" },
   { icon: Mail, label: "Email Marketing", path: "/admin/email-marketing" },
   
@@ -136,7 +136,7 @@ export default function DashboardLayout({
     checkToken();
   }, []);
   
-  // Usar usuário manual se available, senão usar do useAuth
+  // Usar usuário manual se available, senot usar do useAuth
   const user = manualUser || authUser;
   const loading = manualLoading || (authLoading && !manualUser);
 
@@ -303,7 +303,7 @@ function DashboardLayoutContent({
                 const isActive = location === item.path;
                 const groupClass = item.group ? `group-${item.group}` : "";
                 
-                // Verify se item está bloqueado (tudo exceto Assinatura quando expired)
+                // Verify se item is bloqueado (tudo exceto Assinatura when expired)
                 const isLocked = isExpired && item.path !== '/admin/subscription';
                 
                 return (
@@ -312,7 +312,7 @@ function DashboardLayoutContent({
                       isActive={isActive}
                       onClick={() => {
                         if (isLocked) {
-                          toast.error('Sua conta está suspensa. Regularize sua signature para continuar.');
+                          toast.error('Your account is suspended. Please renew your subscription to continue.');
                           setLocation('/admin/subscription');
                           return;
                         }
@@ -395,14 +395,14 @@ function DashboardLayoutContent({
         <main className={`flex-1 p-4 ${isExpired ? "pt-12" : ""}`}>{children}</main>
       </SidebarInset>
       
-      {/* Banner de conta suspensa */}
+      {/* Banner de conta suspended */}
       {isExpired && (
         <div className="fixed top-0 left-0 right-0 z-50 bg-red-600 text-white text-center py-2 px-4 text-sm font-medium shadow-lg">
-          🔒 Sua conta está suspensa. Acesse <button onClick={() => setLocation('/admin/subscription')} className="underline font-bold hover:text-red-100">Assinatura</button> para regularizar.
+          🔒 Sua conta is suspended. Acesse <button onClick={() => setLocation('/admin/subscription')} className="underline font-bold hover:text-red-100">Assinatura</button> para regularizar.
         </div>
       )}
       
-      {/* Modal de aviso de trial (só quando não expirou ainda, faltam poucos days) */}
+      {/* Modal de aviso de trial (só when not expirou still, faltam poucos days) */}
       {!isExpired && showModal && (
         <TrialExpiredModal 
           isOpen={showModal} 

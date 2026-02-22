@@ -132,7 +132,7 @@ export default function AdminFinalAlbum() {
             Enviar Fotos Finais Editadas
           </h3>
           <p className="text-sm text-muted-foreground mb-4">
-            Arraste fotos aqui or click to select
+            Arraste fotos here or click to select
           </p>
           <input
             type="file"
@@ -191,7 +191,7 @@ export default function AdminFinalAlbum() {
       ) : (
         <div className="text-center py-12 bg-card rounded-lg border">
           <p className="text-muted-foreground">
-            Nonea foto no álbum final ainda. Faça upload das fotos editadas acima.
+            Nonea foto no álbum final still. Faça upload das fotos editadas above.
           </p>
         </div>
       )}

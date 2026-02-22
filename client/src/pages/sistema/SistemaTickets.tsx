@@ -54,7 +54,7 @@ export default function SistemaTickets() {
 
   const resolveTicket = trpc.sistema.resolveTicket.useMutation({
     onSuccess: () => {
-      toast({ title: "Ticket marcado como resolvido!" });
+      toast({ title: "Ticket marcado as resolvido!" });
       setSelectedTicket(null);
       refetchTickets();
     },
@@ -148,7 +148,7 @@ export default function SistemaTickets() {
             <MessageSquare className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
             <h3 className="text-lg font-semibold mb-2">None ticket encontrado</h3>
             <p className="text-muted-foreground">
-              Não há tickets com o filtro selecionado.
+              Not há tickets com o filtro selecionado.
             </p>
           </Card>
         ) : (
@@ -183,7 +183,7 @@ export default function SistemaTickets() {
         )}
       </div>
 
-      {/* Detalhes do Ticket */}
+      {/* Details do Ticket */}
       {selectedTicket && ticketDetails && (
         <Daylog open={!!selectedTicket} onOpenChange={() => setSelectedTicket(null)}>
           <DaylogContent className="max-w-3xl max-h-[80vh] overflow-y-auto">
@@ -245,7 +245,7 @@ export default function SistemaTickets() {
                       onCheckedChange={(checked) => setIsInternal(checked as boolean)}
                     />
                     <Label htmlFor="internal" className="text-sm cursor-pointer">
-                      Nota interna (photographer não verá)
+                      Nota interna (photographer not verá)
                     </Label>
                   </div>
                   <div className="flex gap-2">
@@ -260,7 +260,7 @@ export default function SistemaTickets() {
                         disabled={resolveTicket.isPending}
                       >
                         <Check className="h-4 w-4 mr-2" />
-                        Marcar como Resolvido
+                        Marcar as Resolvido
                       </Button>
                     )}
                   </div>

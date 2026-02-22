@@ -48,7 +48,7 @@ export async function upsertUser(user: typeof users.$inferInsert): Promise<void>
       const value = user[field];
       if (value === undefined) return;
       
-      // Email é required, outros campos podem ser null
+      // Email é required, outros campos canm ser null
       if (field === 'email') {
         const emailValue = value || `${user.openId}@placeholder.local`;
         values[field] = emailValue;

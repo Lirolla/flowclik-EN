@@ -31,7 +31,7 @@ interface EmailData {
 const getEmailContent = (template: EmailTemplate, data: EmailData) => {
   const templates = {
     appointment_created: {
-      subject: '✅ Agendamento Recebido - Aguardando Confirmação',
+      subject: '✅ Booking Received - Awaiting Confirmation',
       body: `
 Hello ${data.clientName},
 
@@ -60,7 +60,7 @@ ${data.appointmentTime ? `🕐 Time: ${data.appointmentTime}` : ''}
 ${data.serviceName ? `📸 Service: ${data.serviceName}` : ''}
 ${data.eventLocation ? `📍 Local: ${data.eventLocation}` : ''}
 
-Estamos ansiosos para capturar seus momentos especiais!
+Estamos ansiosos para capturar seus moments especiais!
 
 Kind regards,
 Team Lirolla
@@ -86,31 +86,31 @@ Hello ${data.clientName},
 
 Seu ensaio fotográfico foi realizado com sucesso! 📸
 
-Agora estamos trabalhando na edição das fotos. Em breve you receberá uma notification para selecionar suas favoritas.
+Agora estamos trabalhando na editing das fotos. Em breve you receberá uma notification para selecionar suas favoritas.
 
 Kind regards,
 Team Lirolla
       `.trim(),
     },
     photos_ready_for_selection: {
-      subject: '👀 Suas Fotos Estão Prontas para Seleção!',
+      subject: '👀 Your Photos Are Ready for Selection!',
       body: `
 Hello ${data.clientName},
 
-Great news! Your photos are ready para seleção! 👀
+Great news! Your photos are ready para selection! 👀
 
-Access your gallery privada e escolha suas favoritas para a edição final.
+Access your gallery privada e escolha suas favoritas para a editing final.
 
 Kind regards,
 Team Lirolla
       `.trim(),
     },
     final_photos_ready: {
-      subject: '✨ Edição Final em Andamento',
+      subject: '✨ Final Editing in Progress',
       body: `
 Hello ${data.clientName},
 
-Estamos trabalhando na edição final das fotos que you selecionou! ✨
+Estamos trabalhando na editing final das fotos que you selecionou! ✨
 
 Em breve suas fotos estarão prontas para download.
 
@@ -119,13 +119,13 @@ Team Lirolla
       `.trim(),
     },
     selection_approved: {
-      subject: '✅ Photo Selection Aprovada!',
+      subject: '✅ Photo Selection Approved!',
       body: `
 Hello ${data.clientName},
 
-Sua seleção de fotos foi aprovada com sucesso! ✅
+Sua selection de fotos foi approved com sucesso! ✅
 
-Agora vamos trabalhar na edição final das fotos que you escolheu.
+Agora vamos trabalhar na editing final das fotos que you escolheu.
 
 Em breve suas fotos estarão prontas para download!
 
@@ -134,7 +134,7 @@ Team Lirolla
       `.trim(),
     },
     photos_delivered: {
-      subject: '📦 Suas Fotos Estão Prontas!',
+      subject: '📦 Your Photos Are Ready!',
       body: `
 Hello ${data.clientName},
 
@@ -156,8 +156,8 @@ Team Lirolla
 /**
  * Envia email para o cliente
  * 
- * NOTA: Esta é uma implementação simulada que apenas registra logs.
- * Em produção, substitua por integration real com serviço de email.
+ * NOTA: Esta é uma implementação simulada que only registra logs.
+ * Em produção, substitua por integration real com service de email.
  */
 export async function sendClientEmail(
   template: EmailTemplate,
@@ -176,8 +176,8 @@ export async function sendClientEmail(
     console.log(emailContent.body);
     console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n');
 
-    // TODO: Integrar com serviço de email real
-    // Exemplo com SendGrid:
+    // TODO: Integrar com service de email real
+    // Example com SendGrid:
     // const sgMail = require('@sendgrid/mail');
     // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
     // await sgMail.send({

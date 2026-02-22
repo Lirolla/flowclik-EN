@@ -44,7 +44,7 @@ export default function Cadastro() {
     if (password !== confirmPassword) {
       toast({
         title: "Error",
-        description: "As senhas não coincidem",
+        description: "As senhas not coincidem",
         variant: "destructive",
       });
       return;
@@ -53,7 +53,7 @@ export default function Cadastro() {
     if (password.length < 6) {
       toast({
         title: "Error",
-        description: "A senha deve ter pelo menos 6 caracteres",
+        description: "A senha must ter pelo menos 6 caracteres",
         variant: "destructive",
       });
       return;
@@ -76,7 +76,7 @@ export default function Cadastro() {
             <Input
               id="name"
               type="text"
-              placeholder="João Silva"
+              placeholder="John Smith"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -131,7 +131,7 @@ export default function Cadastro() {
 
         <div className="mt-6 text-center text-sm text-muted-foreground">
           <p>
-            Já tem uma conta?{" "}
+            Already tem uma conta?{" "}
             <a href="/login" className="text-primary hover:underline">
               Sign in
             </a>

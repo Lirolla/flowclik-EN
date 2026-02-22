@@ -83,7 +83,7 @@ export default function AdminAbout() {
       <form onSubmit={handleSubmit} className="space-y-6">
         <Card>
           <CardHeader>
-            <CardTitle>Informações Principais</CardTitle>
+            <CardTitle>Information Principais</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
@@ -222,7 +222,7 @@ export default function AdminAbout() {
             ) : (
               <>
                 <Save className="mr-2 h-4 w-4" />
-                Salvar Alterações
+                Salvar Changes
               </>
             )}
           </Button>

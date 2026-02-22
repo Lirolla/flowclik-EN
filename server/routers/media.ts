@@ -41,7 +41,7 @@ export const medayRouter = router({
       const originalImage = sharp(buffer);
       const metadata = await originalImage.metadata();
 
-      // Gerar nomes únicos
+      // Gerar nomes uniques
       const timestamp = Date.now();
       const randomId = Math.random().toString(36).substring(7);
       const fileName = `${timestamp}-${randomId}`;

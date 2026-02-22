@@ -19,7 +19,7 @@ const sistemaProcedure = publicProcedure.use(({ ctx, next }) => {
   }
   throw new TRPCError({
     code: "FORBIDDEN",
-    message: "Access denied. Apenas super administradores podem acessar esta funcionalidade.",
+    message: "Access denied. Apenas super administradores canm acessar esta feature.",
   });
 });
 
@@ -51,7 +51,7 @@ export const sistemaRouter = router({
       .select({ totalGalleries: count() })
       .from(collections);
 
-    // Últimos tenants cadastrados
+    // Lasts tenants cadastrados
     const recentTenants = await db
       .select({
         id: tenants.id,
@@ -115,7 +115,7 @@ export const sistemaRouter = router({
       return tickets;
     }),
 
-  // Ver detalhes de qualquer ticket (sem filtro de tenant)
+  // Ver details de qualquer ticket (sem filtro de tenant)
   getTicketById: sistemaProcedure
     .input(z.object({ ticketId: z.number() }))
     .query(async ({ input }) => {
@@ -170,12 +170,12 @@ export const sistemaRouter = router({
       };
     }),
 
-  // Super admin responde ticket
+  // Super admin respwhere ticket
   replyToTicket: sistemaProcedure
     .input(
       z.object({
         ticketId: z.number(),
-        message: z.string().min(1, "Mensagem não pode estar vazia"),
+        message: z.string().min(1, "Mensagem not can estar vazia"),
         isInternal: z.boolean().default(false), // Nota interna (só super admin vê)
       })
     )
@@ -203,13 +203,13 @@ export const sistemaRouter = router({
         isInternal: input.isInternal ? 1 : 0,
       });
 
-      // Atualizar ticket (apenas se não for nota interna)
+      // Atualizar ticket (only se not for nota interna)
       if (!input.isInternal) {
         const userId = ctx.user?.id || 29;
         await db.execute(sql`UPDATE support_tickets SET status = 'in_progress', lastReplyAt = NOW(), lastReplyBy = ${userId} WHERE id = ${input.ticketId}`);
       }
 
-      // Enviar email de notification ao photographer (se não for nota interna)
+      // Enviar email de notification ao photographer (se not for nota interna)
       if (!input.isInternal) {
         try {
           const [ticketUser] = await db.select().from(users).where(eq(users.id, ticket.userId)).limit(1);
@@ -229,7 +229,7 @@ export const sistemaRouter = router({
       return { success: true };
     }),
 
-  // Marcar ticket como resolvido
+  // Marcar ticket as resolvido
   resolveTicket: sistemaProcedure
     .input(z.object({ ticketId: z.number() }))
     .mutation(async ({ input, ctx }) => {

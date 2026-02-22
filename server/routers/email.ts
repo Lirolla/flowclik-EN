@@ -62,7 +62,7 @@ export const emailRouter = router({
       return { emailSender: null, resendApiKey: null };
     }
 
-    // Mascarar API Key (mostrar só primeiros 8 caracteres)
+    // Mascarar API Key (mostrar só firsts 8 caracteres)
     const maskedApiKey = config.resendApiKey
       ? config.resendApiKey.substring(0, 8) + "..." + config.resendApiKey.slice(-4)
       : null;
@@ -92,7 +92,7 @@ export const emailRouter = router({
     if (!config?.resendApiKey || !config?.emailSender) {
       throw new TRPCError({
         code: "BAD_REQUEST",
-        message: "Configure o email e API Key primeiro",
+        message: "Configure o email e API Key first",
       });
     }
 
@@ -107,16 +107,16 @@ export const emailRouter = router({
         subject: "✅ Email Configurado com Sucesso - FlowClik",
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <h1 style="color: #dc2626;">🎉 Parabéns!</h1>
+            <h1 style="color: #dc2626;">🎉 Congratulations!</h1>
             <p style="font-size: 16px; color: #333;">
-              Seu email profissional está configurado e funcionando perfeitamente!
+              Seu email profissional is configurado e funcionando perfeitamente!
             </p>
             <p style="font-size: 14px; color: #666;">
-              A partir de agora, seus clientes receberão emails automáticos:
+              A partir de now, seus clientes receberão emails automatics:
             </p>
             <ul style="font-size: 14px; color: #666;">
-              <li>✅ Confirmação de agendamento</li>
-              <li>⏰ Lembrete 24h antes do evento</li>
+              <li>✅ Confirmation de agendamento</li>
+              <li>⏰ Reminder 24h before do evento</li>
               <li>📸 Gallery pronta para visualizar</li>
               <li>💬 New message no chat</li>
               <li>💰 Payment received</li>
@@ -146,7 +146,7 @@ export const emailRouter = router({
     }
   }),
 
-  // Enviar email transacional (confirmação, lembrete, etc)
+  // Enviar email transacional (confirmation, reminder, etc)
   sendTransactionalEmail: protectedProcedure
     .input(
       z.object({
@@ -172,7 +172,7 @@ export const emailRouter = router({
       if (!config?.resendApiKey || !config?.emailSender) {
         throw new TRPCError({
           code: "BAD_REQUEST",
-          message: "Email não configurado",
+          message: "Email not configurado",
         });
       }
 

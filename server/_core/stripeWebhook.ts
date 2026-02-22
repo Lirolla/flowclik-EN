@@ -61,7 +61,7 @@ export async function handleStripeWebhook(req: Request, res: Response) {
 }
 
 /**
- * Checkout concluído - criar/atualizar signature ou add-on
+ * Checkout completed - criar/atualizar signature ou add-on
  */
 async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   const tenantId = parseInt(session.metadata?.tenantId || "0");
@@ -89,7 +89,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
       .where(eq(subscriptions.tenantId, tenantId))
       .limit(1);
 
-    // Buscar detalhes da subscription do Stripe para pegar período
+    // Buscar details da subscription do Stripe para pegar period
     if (stripe && stripeSubscriptionId) {
       const stripeSub = await stripe.subscriptions.retrieve(stripeSubscriptionId);
       

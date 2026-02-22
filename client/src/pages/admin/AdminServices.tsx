@@ -72,7 +72,7 @@ export default function AdminServices() {
 
   const handleCreate = () => {
     if (!name || !slug) {
-      alert("Nome e slug são requireds");
+      alert("Name and slug are required");
       return;
     }
 
@@ -114,7 +114,7 @@ export default function AdminServices() {
   };
 
   const handleDelete = (id: number) => {
-    if (confirm("Tem certeza que deseja excluir este serviço?")) {
+    if (confirm("Tem certeza que deseja excluir este service?")) {
       deleteMutation.mutate({ id });
     }
   };
@@ -157,7 +157,7 @@ export default function AdminServices() {
           <DaylogContent className="max-w-2xl">
             <DaylogHeader>
               <DaylogTitle>Criar Novo Service</DaylogTitle>
-              <DaylogDescription>Preencha os dados do novo serviço</DaylogDescription>
+              <DaylogDescription>Preencha os dados do novo service</DaylogDescription>
             </DaylogHeader>
 
             <div className="space-y-4 mt-4">
@@ -167,7 +167,7 @@ export default function AdminServices() {
                   id="name"
                   value={name}
                   onChange={(e) => handleNameChange(e.target.value)}
-                  placeholder="Ex: Ensaio Fotográfico"
+                  placeholder="E.g.: Photo Session"
                 />
               </div>
 
@@ -187,7 +187,7 @@ export default function AdminServices() {
                   id="description"
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Description do serviço..."
+                  placeholder="Service description..."
                   rows={3}
                 />
               </div>
@@ -200,9 +200,9 @@ export default function AdminServices() {
                   value={serviceType}
                   onChange={(e) => setServiceType(e.target.value as "photography" | "video" | "both")}
                 >
-                  <option value="photography">📷 Fotografia</option>
+                  <option value="photography">📷 Photography</option>
                   <option value="video">🎥 Video</option>
-                  <option value="both">📷🎥 Fotografia + Video</option>
+                  <option value="both">📷🎥 Photography + Video</option>
                 </select>
               </div>
 
@@ -252,7 +252,7 @@ export default function AdminServices() {
         <DaylogContent className="max-w-2xl">
           <DaylogHeader>
             <DaylogTitle>Editar Service</DaylogTitle>
-            <DaylogDescription>Atualize os dados do serviço</DaylogDescription>
+            <DaylogDescription>Atualize os dados do service</DaylogDescription>
           </DaylogHeader>
 
           <div className="space-y-4 mt-4">
@@ -262,7 +262,7 @@ export default function AdminServices() {
                 id="edit-name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="Ex: Ensaio Fotográfico"
+                placeholder="E.g.: Photo Session"
               />
             </div>
 
@@ -282,7 +282,7 @@ export default function AdminServices() {
                 id="edit-description"
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                placeholder="Description do serviço..."
+                placeholder="Service description..."
                 rows={3}
               />
             </div>
@@ -327,7 +327,7 @@ export default function AdminServices() {
         </DaylogContent>
       </Daylog>
 
-      {/* Lista de serviços */}
+      {/* Lista de services */}
       {isLoading ? (
         <div className="text-center py-12">Loading...</div>
       ) : services && services.length > 0 ? (
@@ -397,13 +397,13 @@ export default function AdminServices() {
         <Card>
           <CardContent className="py-12 text-center">
             <Briefcase className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-            <h3 className="text-xl font-semibold mb-2">None serviço cadastrado</h3>
+            <h3 className="text-xl font-semibold mb-2">None service cadastrado</h3>
             <p className="text-muted-foreground mb-4">
-              Crie seu primeiro serviço para começar a oferecer aos clientes
+              Crie seu first service para começar a oferecer aos clientes
             </p>
             <Button onClick={() => setIsCreateOpen(true)}>
               <Plus className="w-4 h-4 mr-2" />
-              Criar Primeiro Service
+              Criar First Service
             </Button>
           </CardContent>
         </Card>

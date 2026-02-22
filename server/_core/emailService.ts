@@ -51,7 +51,7 @@ function baseTemplate(content: string, footerText?: string): string {
                   </td>
                 </tr>
               </table>
-              <p style="color: #6b7280; font-size: 13px; margin: 10px 0 0 0;">Plataforma de Fotografia Profissional</p>
+              <p style="color: #6b7280; font-size: 13px; margin: 10px 0 0 0;">Plataforma de Photography Profissional</p>
             </td>
           </tr>
 
@@ -96,7 +96,7 @@ function emailButton(text: string, url: string, color: string = "#22c55e"): stri
     </table>`;
 }
 
-// Card de detalhes
+// Card de details
 function detailsCard(items: { label: string; value: string }[]): string {
   const rows = items.map(item => `
     <tr>
@@ -115,7 +115,7 @@ function detailsCard(items: { label: string; value: string }[]): string {
 // TEMPLATES DE EMAIL
 // ============================================================
 
-// --- EMAILS PARA CLIENTES (visitantes do site do photographer) ---
+// --- EMAILS PARA CLIENTES (visitbefore do site do photographer) ---
 
 export function templateConfirmacaoAgendamento(data: {
   clientName: string;
@@ -129,13 +129,13 @@ export function templateConfirmacaoAgendamento(data: {
 }): string {
   return baseTemplate(`
     <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">📅 Agendamento Confirmado!</h1>
-    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Seu ensaio fotográfico está marcado</p>
+    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Seu ensaio fotográfico is marcado</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
       Hello <strong>${data.clientName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Seu agendamento com <strong style="color: #22c55e;">${data.photographerName}</strong> foi confirmado com sucesso! Estamos ansiosos para capturar momentos especiais para you.
+      Seu agendamento com <strong style="color: #22c55e;">${data.photographerName}</strong> foi confirmado com sucesso! Estamos ansiosos para capturar moments especiais para you.
     </p>
 
     ${detailsCard([
@@ -147,8 +147,8 @@ export function templateConfirmacaoAgendamento(data: {
     ])}
 
     <p style="color: #9ca3af; font-size: 14px; line-height: 1.7; margin-top: 20px;">
-      <strong style="color: #e5e7eb;">O que vem agora?</strong><br>
-      O photographer entrará em contato para confirmar os detalhes finais. Após a sessão, you receberá um link para visualizar e selecionar suas fotos favoritas.
+      <strong style="color: #e5e7eb;">O que vem now?</strong><br>
+      O photographer entrará em contato para confirmar os details finais. After a sesare, you receberá um link para visualizar e selecionar suas fotos favoritas.
     </p>
 
     ${emailButton("Ver Meu Agendamento", data.siteUrl)}
@@ -195,24 +195,24 @@ export function templateSelecaoFotos(data: {
 }): string {
   return baseTemplate(`
     <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">👀 Select Suas Fotos Favourites!</h1>
-    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Escolha as melhores para edição final</p>
+    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Escolha as melhores para editing final</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
       Hello <strong>${data.clientName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Your photos are ready para seleção! Acesse a galeria e escolha until <strong style="color: #22c55e;">${data.maxSelections} fotos</strong> para a edição final.
+      Your photos are ready para selection! Acesse a galeria e escolha until <strong style="color: #22c55e;">${data.maxSelections} fotos</strong> para a editing final.
     </p>
 
     ${detailsCard([
       { label: "📁 Collection", value: data.collectionName },
-      { label: "✅ Maximum de Seleções", value: `${data.maxSelections} fotos` },
+      { label: "✅ Maximum Selections", value: `${data.maxSelections} fotos` },
     ])}
 
     ${emailButton("✨ Selecionar Fotos", data.galleryUrl)}
 
     <p style="color: #6b7280; font-size: 13px; margin-top: 15px; text-align: center;">
-      Após selecionar, o photographer iniciará a edição final.
+      After selecionar, o photographer iniciará a editing final.
     </p>
   `, `Email enviado por ${data.photographerName} via FlowClik`);
 }
@@ -287,26 +287,26 @@ export function templateBoasVindasFotografo(data: {
 }): string {
   return baseTemplate(`
     <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">🎉 Bem-vindo(a) ao FlowClik!</h1>
-    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Sua plataforma de fotografia está pronta</p>
+    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Sua plataforma de photography is pronta</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
       Hello <strong>${data.photographerName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Seja muito bem-vindo(a) ao FlowClik! Sua conta foi criada com sucesso e seu site já está no ar.
+      Seja muito bem-vindo(a) ao FlowClik! Sua conta foi criada com sucesso e seu site already is no ar.
     </p>
 
     ${detailsCard([
       { label: "🌐 Seu Site", value: `${data.subdomain}.flowclik.com` },
-      { label: "📊 Painel Admin", value: "Acesse pelo botão abaixo" },
+      { label: "📊 Painel Admin", value: "Access via the button below" },
     ])}
 
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
       <strong style="color: #e5e7eb;">Next steps:</strong>
     </p>
     <table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin: 10px 0;">
-      <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Personalize seu site (cores, logo, sobre)</td></tr>
-      <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Adicione seus serviços e preços</td></tr>
+      <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Personalize seu site (cores, logo, about)</td></tr>
+      <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Adicione seus services e preços</td></tr>
       <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Faça upload do seu portfólio</td></tr>
       <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Configure seus horários disponíveis</td></tr>
       <tr><td style="color: #d1d5db; font-size: 14px; padding: 6px 0;">✅ Compartilhe seu link com clientes!</td></tr>
@@ -335,7 +335,7 @@ export function templateNovoAgendamento(data: {
       Hello <strong>${data.photographerName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      You recebeu um novo agendamento! Confira os detalhes:
+      You recebeu um novo agendamento! Confira os details:
     </p>
 
     ${detailsCard([
@@ -361,13 +361,13 @@ export function templateClienteSelecionouFotos(data: {
 }): string {
   return baseTemplate(`
     <h1 style="color: #22c55e; font-size: 24px; margin: 0 0 8px 0;">✅ Cliente Selecionou Fotos!</h1>
-    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Seleção pronta para revisão</p>
+    <p style="color: #9ca3af; font-size: 14px; margin: 0 0 25px 0;">Selection pronta para reviare</p>
     
     <p style="color: #e5e7eb; font-size: 15px; line-height: 1.7;">
       Hello <strong>${data.photographerName}</strong>,
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      <strong style="color: #22c55e;">${data.clientName}</strong> finalizou a seleção de fotos da coleção <strong>"${data.collectionName}"</strong>.
+      <strong style="color: #22c55e;">${data.clientName}</strong> finalizou a selection de fotos da coleção <strong>"${data.collectionName}"</strong>.
     </p>
 
     ${detailsCard([
@@ -376,10 +376,10 @@ export function templateClienteSelecionouFotos(data: {
     ])}
 
     <p style="color: #d1d5db; font-size: 14px; line-height: 1.7;">
-      Acesse o painel para revisar a seleção e iniciar a edição final.
+      Acesse o painel para revisar a selection e iniciar a editing final.
     </p>
 
-    ${emailButton("👁️ Ver Seleção", data.adminUrl)}
+    ${emailButton("👁️ View Selection", data.adminUrl)}
   `);
 }
 
@@ -431,7 +431,7 @@ export function templateVencimentoPlyear(data: {
       Seu plyear <strong style="color: #f59e0b;">${data.planName}</strong> vence em <strong style="color: #f59e0b;">${data.expiryDate}</strong>.
     </p>
     <p style="color: #d1d5db; font-size: 15px; line-height: 1.7;">
-      Renove agora para não perder acesso ao seu site, galerias e agendamentos.
+      Renove now para not perder acesso ao seu site, galerias e agendamentos.
     </p>
 
     ${detailsCard([
@@ -442,7 +442,7 @@ export function templateVencimentoPlyear(data: {
     ${emailButton("🔄 Renovar Plyear", data.renewUrl, "#f59e0b")}
 
     <p style="color: #6b7280; font-size: 13px; margin-top: 15px; text-align: center;">
-      Após o vencimento, seu site ficará temporariamente inavailable.
+      After o vencimento, seu site ficará temporariamente inavailable.
     </p>
   `);
 }
@@ -632,7 +632,7 @@ export async function enviarEmailBoasVindas(data: {
 }): Promise<boolean> {
   return sendFlowClikEmail({
     to: data.photographerEmail,
-    subject: "🎉 Bem-vindo(a) ao FlowClik! Sua plataforma está pronta",
+    subject: "🎉 Welcome to FlowClik! Your platform is ready",
     html: templateBoasVindasFotografo(data),
   });
 }

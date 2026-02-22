@@ -39,7 +39,7 @@ function AdminClientDetailsContent() {
 
   const getStatusConfig = (status: string) => {
     const configs: Record<string, { label: string; color: string }> = {
-      pending: { label: '⏳ Pendente', color: 'bg-yellow-500/20 text-yellow-700 border-yellow-500/30' },
+      pending: { label: '⏳ Pending', color: 'bg-yellow-500/20 text-yellow-700 border-yellow-500/30' },
       confirmed: { label: '✅ Confirmado', color: 'bg-green-500/20 text-green-700 border-green-500/30' },
       session_done: { label: '📸 Ensaio Realizado', color: 'bg-blue-500/20 text-blue-700 border-blue-500/30' },
       editing: { label: '🎨 Photos in Editing', color: 'bg-purple-500/20 text-purple-700 border-purple-500/30' },
@@ -53,7 +53,7 @@ function AdminClientDetailsContent() {
 
   const getOrderStatusConfig = (status: string) => {
     const configs: Record<string, { label: string; color: string }> = {
-      pending: { label: 'Pendente', color: 'bg-yellow-500/20 text-yellow-700 border-yellow-500/30' },
+      pending: { label: 'Pending', color: 'bg-yellow-500/20 text-yellow-700 border-yellow-500/30' },
       paid: { label: 'Pago', color: 'bg-green-500/20 text-green-700 border-green-500/30' },
       processing: { label: 'Processing', color: 'bg-blue-500/20 text-blue-700 border-blue-500/30' },
       completed: { label: 'Completo', color: 'bg-emerald-500/20 text-emerald-700 border-emerald-500/30' },
@@ -65,7 +65,7 @@ function AdminClientDetailsContent() {
   if (!email) {
     return (
       <div className="container mx-auto py-8">
-        <p>Email não fornecido</p>
+        <p>Email not fornecido</p>
       </div>
     );
   }
@@ -98,7 +98,7 @@ function AdminClientDetailsContent() {
         </div>
       </div>
 
-      {/* Cards de Resumo */}
+      {/* Cards de Summary */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
@@ -121,19 +121,19 @@ function AdminClientDetailsContent() {
           <CardContent>
             <div className="text-2xl font-bold">{summary?.totalAppointments || 0}</div>
             <p className="text-xs text-muted-foreground">
-              {summary?.completedAppointments || 0} concluídos
+              {summary?.completedAppointments || 0} completeds
             </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Pendentes</CardTitle>
+            <CardTitle className="text-sm font-medium">Pendings</CardTitle>
             <Calendar className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{summary?.pendingAppointments || 0}</div>
-            <p className="text-xs text-muted-foreground">Aguardando aprovação</p>
+            <p className="text-xs text-muted-foreground">Awaiting aprovação</p>
           </CardContent>
         </Card>
 
@@ -149,10 +149,10 @@ function AdminClientDetailsContent() {
         </Card>
       </div>
 
-      {/* Histórico de Agendamentos */}
+      {/* History de Agendamentos */}
       <Card className="mb-8">
         <CardHeader>
-          <CardTitle>Histórico de Agendamentos</CardTitle>
+          <CardTitle>History de Agendamentos</CardTitle>
         </CardHeader>
         <CardContent>
           {!appointments || appointments.length === 0 ? (
@@ -194,7 +194,7 @@ function AdminClientDetailsContent() {
                     </div>
                     <Button variant="outline" size="sm" asChild>
                       <Link href="/admin/appointments">
-                        <a>Ver Detalhes</a>
+                        <a>Ver Details</a>
                       </Link>
                     </Button>
                   </div>
@@ -205,10 +205,10 @@ function AdminClientDetailsContent() {
         </CardContent>
       </Card>
 
-      {/* Histórico de Pedidos */}
+      {/* History de Pedidos */}
       <Card>
         <CardHeader>
-          <CardTitle>Histórico de Pedidos</CardTitle>
+          <CardTitle>History de Pedidos</CardTitle>
         </CardHeader>
         <CardContent>
           {!orders || orders.length === 0 ? (
@@ -249,7 +249,7 @@ function AdminClientDetailsContent() {
                     </div>
                     <Button variant="outline" size="sm" asChild>
                       <Link href="/admin/orders">
-                        <a>Ver Detalhes</a>
+                        <a>Ver Details</a>
                       </Link>
                     </Button>
                   </div>

@@ -101,7 +101,7 @@ export default function AdminVideos() {
     e.preventDefault();
 
     if (!formData.title || !formData.videoUrl) {
-      toast.error("Title e URL do video são requireds");
+      toast.error("Title e URL do video are requireds");
       return;
     }
 
@@ -211,7 +211,7 @@ export default function AdminVideos() {
             <Video className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
             <h3 className="text-xl font-semibold mb-2">None video cadastrado</h3>
             <p className="text-muted-foreground mb-4">
-              Comece adicionando seu primeiro video ao portfólio
+              Comece adicionando seu first video ao portfólio
             </p>
             <Button onClick={() => handleOpenDaylog()}>
               <Plus className="w-4 h-4 mr-2" />
@@ -306,7 +306,7 @@ export default function AdminVideos() {
                   onChange={(e) => setFormData({ ...formData, sortOrder: parseInt(e.target.value) || 0 })}
                 />
                 <p className="text-xs text-muted-foreground">
-                  Maior number aparece primeiro
+                  Maior number aparece first
                 </p>
               </div>
 

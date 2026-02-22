@@ -183,7 +183,7 @@ function AdminStockContent() {
           Gerenciar Stock Photos
         </h1>
         <p className="text-muted-foreground">
-          Upload de fotos exclusivas para venda e configuração de molduras
+          Upload de fotos exclusives para venda e configuração de molduras
         </p>
       </div>
       {/* Upload Area */}
@@ -196,7 +196,7 @@ function AdminStockContent() {
             onClick={() => document.getElementById("file-input")?.click()}
           >
             <Upload className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
-            <p className="text-lg font-semibold mb-2">Arraste fotos aqui or click to select</p>
+            <p className="text-lg font-semibold mb-2">Arraste fotos here or click to select</p>
             <p className="text-sm text-muted-foreground">
               Formatos aceitos: JPG, PNG, WEBP
             </p>
@@ -224,7 +224,7 @@ function AdminStockContent() {
             <CardContent className="p-12 text-center">
               <ImageIcon className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
               <p className="text-muted-foreground">
-                Nonea foto no stock ainda. Faça upload acima!
+                Nonea foto no stock still. Faça upload above!
               </p>
             </CardContent>
           </Card>
@@ -445,7 +445,7 @@ function AdminStockContent() {
                 disabled={updateMutation.isPending}
                 className="flex-1"
               >
-                {updateMutation.isPending ? "Saving..." : "Salvar Alterações"}
+                {updateMutation.isPending ? "Saving..." : "Save Changes"}
               </Button>
               <Button
                 variant="outline"

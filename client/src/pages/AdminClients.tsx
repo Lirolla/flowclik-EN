@@ -29,7 +29,7 @@ export default function AdminClients() {
   const deleteMutation = trpc.clients.delete.useMutation({
     onSuccess: () => {
       utils.clients.list.invalidate();
-      alert('Cliente excluído com sucesso!');
+      alert('Client deleted successfully!');
     },
   });
 
@@ -141,7 +141,7 @@ export default function AdminClients() {
                         phone: value || ''
                       });
                     }}
-                    placeholder="Telefone com código do país"
+                    placeholder="Phone with country code"
                   />
                 </div>
 
@@ -265,7 +265,7 @@ export default function AdminClients() {
                         phone: value || ''
                       });
                     }}
-                    placeholder="Telefone com código do país"
+                    placeholder="Phone with country code"
                   />
                 </div>
 
@@ -284,7 +284,7 @@ export default function AdminClients() {
                   <Input
                     value={formData.city || ''}
                     onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                    placeholder="São Paulo"
+                    placeholder="London"
                     className="bg-gray-800 border-gray-700"
                   />
                 </div>
@@ -324,7 +324,7 @@ export default function AdminClients() {
 
               <div className="flex gap-4">
                 <Button type="submit" className="bg-yellow-600 hover:bg-yellow-700">
-                  Salvar Alterações
+                  Salvar Changes
                 </Button>
                 <Button type="button" variant="outline" onClick={() => setShowEditDaylog(false)}>
                   Cancelar
@@ -355,7 +355,7 @@ export default function AdminClients() {
                     <div className="flex flex-col items-center">
                       <p className="text-xl mb-4">None cliente cadastrado</p>
                       <Button onClick={() => setShowCreateDaylog(true)} className="bg-red-600 hover:bg-red-700">
-                        Adicionar Primeiro Cliente
+                        Adicionar First Cliente
                       </Button>
                     </div>
                   </td>
@@ -379,7 +379,7 @@ export default function AdminClients() {
                           asChild
                         >
                           <Link href={`/admin/client/${encodeURIComponent(client.email || '')}`}>
-                            <a>Histórico</a>
+                            <a>History</a>
                           </Link>
                         </Button>
                         <Button

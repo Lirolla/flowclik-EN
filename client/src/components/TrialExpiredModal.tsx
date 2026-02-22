@@ -14,7 +14,7 @@ interface TrialExpiredModalProps {
 export function TrialExpiredModal({ isOpen, daysRemaining, onClose }: TrialExpiredModalProps) {
   const [isLoading, setIsLoading] = useState(false);
   
-  // createCheckoutSession não implementado para Assas
+  // createCheckoutSession not implementado para Assas
   // const createCheckout = trpc.signatures.createCheckoutSession.useMutation(...);
   const createCheckout = { mutate: () => {
     toast.error("Checkout session not available. Please contact support.");

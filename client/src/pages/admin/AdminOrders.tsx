@@ -105,7 +105,7 @@ export default function AdminOrders() {
             Pedidos
             {pendingCount > 0 && (
               <Badge className="bg-yellow-500/10 text-yellow-500 ml-2">
-                {pendingCount} pendente{pendingCount > 1 ? "s" : ""}
+                {pendingCount} pending{pendingCount > 1 ? "s" : ""}
               </Badge>
             )}
           </h1>
@@ -118,9 +118,9 @@ export default function AdminOrders() {
         <div className="flex gap-2 mb-6 flex-wrap">
           {[
             { key: "all", label: "All" },
-            { key: "pending", label: "Pendentes" },
+            { key: "pending", label: "Pendings" },
             { key: "paid", label: "Pagos" },
-            { key: "completed", label: "Concluídos" },
+            { key: "completed", label: "Completeds" },
             { key: "cancelled", label: "Cancelleds" },
           ].map((f) => (
             <Button
@@ -157,7 +157,7 @@ export default function AdminOrders() {
                         {order.customerPhone && ` • ${order.customerPhone}`}
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        {dateFormat(new Date(order.createdAt), "dd/MM/yyyy 'às' HH:mm", { locale: ptBR })}
+                        {dateFormat(new Date(order.createdAt), "dd/MM/yyyy 'at' HH:mm", { locale: ptBR })}
                       </p>
                     </div>
                     <div className="text-right">
@@ -215,7 +215,7 @@ export default function AdminOrders() {
                       ) : (
                         <div className="flex gap-2">
                           <Input
-                            placeholder="Cole o link de pagamento aqui (Stripe, Mercado Pago, etc.)"
+                            placeholder="Cole o link de pagamento here (Stripe, Mercado Pago, etc.)"
                             value={paymentLinks[order.id] || ""}
                             onChange={(e) =>
                               setPaymentLinks((prev) => ({ ...prev, [order.id]: e.target.value }))
@@ -268,7 +268,7 @@ export default function AdminOrders() {
                         }
                       >
                         <Check className="w-4 h-4 mr-1" />
-                        Marcar como Concluído
+                        Marcar as Completed
                       </Button>
                     )}
                   </div>
@@ -283,8 +283,8 @@ export default function AdminOrders() {
               <h3 className="text-xl font-bold mb-2">None pedido encontrado</h3>
               <p className="text-muted-foreground">
                 {filter === "all"
-                  ? "Ainda não há pedidos no sistema"
-                  : `Não há pedidos com status "${filter}"`}
+                  ? "Ainda not há pedidos no sistema"
+                  : `Not há pedidos com status "${filter}"`}
               </p>
             </CardContent>
           </Card>

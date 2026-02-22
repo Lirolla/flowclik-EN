@@ -12,8 +12,8 @@ export const supportTicketsRouter = router({
   create: protectedProcedure
     .input(
       z.object({
-        subject: z.string().min(5, "Assunto deve ter pelo menos 5 caracteres"),
-        message: z.string().min(10, "Mensagem deve ter pelo menos 10 caracteres"),
+        subject: z.string().min(5, "Assunto must ter pelo menos 5 caracteres"),
+        message: z.string().min(10, "Mensagem must ter pelo menos 10 caracteres"),
         priority: z.enum(["low", "normal", "high", "urgent"]).default("normal"),
       })
     )
@@ -69,7 +69,7 @@ export const supportTicketsRouter = router({
     return tickets;
   }),
 
-  // Photographer busca detalhes de um ticket
+  // Photographer busca details de um ticket
   getTicketById: protectedProcedure
     .input(z.object({ ticketId: z.number() }))
     .query(async ({ input, ctx }) => {
@@ -84,7 +84,7 @@ export const supportTicketsRouter = router({
         .where(
           and(
             eq(supportTickets.id, input.ticketId),
-            eq(supportTickets.tenantId, tenantId) // Garantir que é do tenant correto
+            eq(supportTickets.tenantId, tenantId) // Ensure que é do tenant correto
           )
         )
         .limit(1);
@@ -93,7 +93,7 @@ export const supportTicketsRouter = router({
         throw new TRPCError({ code: "NOT_FOUND", message: "Ticket not found" });
       }
 
-      // Buscar respostas (excluir notas internas se não for super admin)
+      // Buscar respostas (excluir notas internas se not for super admin)
       const replies = await db
         .select({
           id: supportTicketReplies.id,
@@ -108,7 +108,7 @@ export const supportTicketsRouter = router({
         .where(
           and(
             eq(supportTicketReplies.ticketId, input.ticketId),
-            // Hide notas internas se não for super admin
+            // Hide notas internas se not for super admin
             ctx.user!.role === "admin" 
               ? eq(supportTicketReplies.isInternal, 0)
               : undefined
@@ -127,7 +127,7 @@ export const supportTicketsRouter = router({
     .input(
       z.object({
         ticketId: z.number(),
-        message: z.string().min(10, "Mensagem deve ter pelo menos 10 caracteres"),
+        message: z.string().min(10, "Mensagem must ter pelo menos 10 caracteres"),
       })
     )
     .mutation(async ({ input, ctx }) => {

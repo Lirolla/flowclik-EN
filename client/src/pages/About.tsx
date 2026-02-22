@@ -8,7 +8,7 @@ export default function About() {
   const { data: siteConfig, isLoading } = trpc.siteConfig.get.useQuery();
 
   return (
-    <LayoutWrapper currentPage="sobre">
+    <LayoutWrapper currentPage="about">
 
       {/* Hero Section */}
       <section className="pt-32 pb-20 bg-gradient-to-br from-background to-muted/30">
@@ -112,7 +112,7 @@ export default function About() {
             <Card className="p-12 text-center max-w-2xl mx-auto">
               <h3 className="text-2xl font-bold mb-4">Conteúdo em breve</h3>
               <p className="text-muted-foreground">
-                Esta página está sendo preparada. Volte em breve!
+                Esta página is sendo preparada. Volte em breve!
               </p>
             </Card>
           </div>

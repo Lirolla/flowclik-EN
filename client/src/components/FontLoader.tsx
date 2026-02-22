@@ -19,7 +19,7 @@ export function FontLoader({ font }: FontLoaderProps) {
     const googleFont = FONT_MAP[fontFamily];
 
     if (!googleFont) {
-      console.warn(`Fonte "${font}" not found, usando Inter como padrão`);
+      console.warn(`Fonte "${font}" not found, usando Inter as default`);
       return;
     }
 

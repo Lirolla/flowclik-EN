@@ -33,7 +33,7 @@ export default function AdminBanner() {
         <Card className="p-8 text-center">
           <h2 className="text-2xl font-bold mb-4">Acesso Negado</h2>
           <p className="text-muted-foreground mb-6">
-            You não tem permissão para acessar esta página
+            You not tem permisare para acessar esta página
           </p>
           <Button asChild>
             <Link href="/">
@@ -164,11 +164,11 @@ export default function AdminBanner() {
             <ImageIcon className="h-16 w-16 text-muted-foreground mx-auto mb-4" />
             <h3 className="text-xl font-bold mb-2">None slide configurado</h3>
             <p className="text-muted-foreground mb-6">
-              Crie seu primeiro slide para o banner da página inicial
+              Crie seu first slide para o banner da página inicial
             </p>
             <Button onClick={() => setShowForm(true)}>
               <Plus className="h-4 w-4 mr-2" />
-              Criar Primeiro Slide
+              Criar First Slide
             </Button>
           </Card>
         )}
@@ -345,13 +345,13 @@ function SlideForm({
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="photography">Apenas Fotografia</SelectItem>
+            <SelectItem value="photography">Apenas Photography</SelectItem>
             <SelectItem value="video">Apenas Video</SelectItem>
-            <SelectItem value="both">Fotografia e Video</SelectItem>
+            <SelectItem value="both">Photography e Video</SelectItem>
           </SelectContent>
         </Select>
         <p className="text-xs text-muted-foreground">
-          Escolha em quais páginas este banner deve aparecer
+          Escolha em quais páginas este banner must aparecer
         </p>
       </div>
 

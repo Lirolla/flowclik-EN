@@ -22,7 +22,7 @@ export default function FotosStock() {
           <div className="text-center mb-12">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Stock Photos</h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Fotos profissionais disponíveis para compra. Escolha entre download digital ou impressão em quadro com moldura.
+              Fotos profissionais disponíveis para compra. Escolha between download digital ou impresare em quadro com moldura.
             </p>
           </div>
 

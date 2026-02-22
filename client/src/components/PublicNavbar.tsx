@@ -69,7 +69,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                 <a className={`text-sm font-medium transition-colors ${
                   currentPage === "home" ? "text-accent font-semibold" : "hover:text-accent"
                 }`}>
-                  Início
+                  Home
                 </a>
               </Link>
             <Link href={SITE_ROUTES.galleries()}>
@@ -113,7 +113,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
             </Link>
             <Link href={SITE_ROUTES.about()}>
               <a className={`text-sm font-medium transition-colors ${
-                currentPage === "sobre" ? "text-accent font-semibold" : "hover:text-accent"
+                currentPage === "about" ? "text-accent font-semibold" : "hover:text-accent"
               }`}>
                 Sobre
               </a>
@@ -178,7 +178,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                       : "hover:bg-muted"
                   }`}
                 >
-                  Início
+                  Home
                 </a>
               </Link>
 
@@ -255,7 +255,7 @@ export default function PublicNavbar({ currentPage }: PublicNavbarProps) {
                 <a 
                   onClick={closeMenu}
                   className={`text-base font-medium py-2 px-3 rounded-lg transition-colors ${
-                    currentPage === "sobre" 
+                    currentPage === "about" 
                       ? "bg-accent/10 text-accent font-semibold" 
                       : "hover:bg-muted"
                   }`}

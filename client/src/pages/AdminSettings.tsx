@@ -87,7 +87,7 @@ export default function AdminSettings() {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        toast.error("Por favor, select apenas imagens");
+        toast.error("Por favor, select only imagens");
         return;
       }
 
@@ -217,7 +217,7 @@ export default function AdminSettings() {
             Site Settings
           </CardTitle>
           <CardDescription>
-            Complete todas as seções para configurar seu site. 🔴 Vermelho = Não preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Completo
+            Complete todas as seções para configurar seu site. 🔴 Vermelho = Not preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Completo
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -227,7 +227,7 @@ export default function AdminSettings() {
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getBasicInfoStatus()} />
-                  <span className="font-semibold">Informações Básicas</span>
+                  <span className="font-semibold">Information Básicas</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-6 pt-4">
@@ -281,7 +281,7 @@ export default function AdminSettings() {
                     id="siteTagline"
                     value={siteTagline}
                     onChange={(e) => setSiteTagline(e.target.value)}
-                    placeholder="Capturando momentos únicos e transformando-os em arte atemporal"
+                    placeholder="Capturing unique moments and turning them into timeless art"
                     rows={3}
                   />
                 </div>
@@ -320,7 +320,7 @@ export default function AdminSettings() {
                     // @ts-ignore
                     value={aboutContent}
                     onChange={(e) => setAboutContent(e.target.value)}
-                    placeholder="Conte sua história, experiência e paixão pela fotografia..."
+                    placeholder="Tell your story, experience and passion for photography..."
                     rows={6}
                   />
                 </div>
@@ -375,12 +375,12 @@ export default function AdminSettings() {
                   <Textarea
                     value={servicesIntro}
                     onChange={(e) => setServicesIntro(e.target.value)}
-                    placeholder="Apresente seus serviços de forma atraente..."
+                    placeholder="Present your services in an attractive way..."
                     rows={4}
                   />
                 </div>
                 <p className="text-sm text-muted-foreground">
-                  Os serviços individuais são gerenciados na página Admin → Services
+                  Os services individuais are gerenciados na página Admin → Services
                 </p>
               </AccordionContent>
             </AccordionItem>
@@ -408,7 +408,7 @@ export default function AdminSettings() {
                     type="email"
                     value={contactEmail}
                     onChange={(e) => setContactEmail(e.target.value)}
-                    placeholder="contato@exemplo.com"
+                    placeholder="contato@example.com"
                   />
                 </div>
                 <div>
@@ -494,12 +494,12 @@ export default function AdminSettings() {
 
           {/* Info */}
           <div className="bg-muted p-4 rounded-lg text-sm space-y-2 mt-6">
-            <p className="font-semibold">ℹ️ Informações:</p>
+            <p className="font-semibold">ℹ️ Information:</p>
             <ul className="list-disc list-inside space-y-1 text-muted-foreground">
               <li>Complete todas as seções marcadas em vermelho</li>
               <li>O logo e nome aparecem no cabeçalho do site</li>
               <li>O conteúdo de Sobre/Services aparece nas páginas públicas</li>
-              <li>Alterações são aplicadas imedaytamente</li>
+              <li>Changes are aplicadas imedaytamente</li>
             </ul>
           </div>
         </CardContent>

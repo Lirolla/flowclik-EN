@@ -12,7 +12,7 @@ import { useToast } from "@/hooks/use-toast";
 export default function ClientChat() {
   const [, params] = useRoute("/client/chat/:id");
   const appointmentId = params?.id ? parseInt(params.id) : 0;
-  // const { user } = useAuth(); // Clientes não usam OAuth, usam email+senha do agendamento
+  // const { user } = useAuth(); // Clientes not usam OAuth, usam email+senha do agendamento
   const { toast } = useToast();
   
   const [message, setMessage] = useState("");
@@ -61,7 +61,7 @@ export default function ClientChat() {
 
     sendMessageMutation.mutate({
       appointmentId,
-      senderId: appointmentId, // Use appointmentId como identificador do cliente
+      senderId: appointmentId, // Use appointmentId as identificador do cliente
       senderRole: "client",
       message: message.trim(),
     });
@@ -74,7 +74,7 @@ export default function ClientChat() {
     }
   };
 
-  // Clientes acessam via appointmentId, não precisam de OAuth
+  // Clientes acessam via appointmentId, not needsm de OAuth
   if (!appointmentId) {
     return (
       <ClientLayout appointmentId={appointmentId}>
@@ -96,7 +96,7 @@ export default function ClientChat() {
           <div className="flex-1 overflow-y-auto p-6 space-y-4">
             {messages && messages.length === 0 && (
               <div className="text-center py-12 text-gray-400">
-                <p>Nonea mensagem ainda. Comece a conversa!</p>
+                <p>Nonea mensagem still. Comece a conversa!</p>
               </div>
             )}
 

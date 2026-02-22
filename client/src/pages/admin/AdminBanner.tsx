@@ -225,7 +225,7 @@ export default function AdminBanner() {
                 <Input
                   id="videoUrl"
                   type="url"
-                  placeholder="https://exemplo.com/video.m3u8"
+                  placeholder="https://example.com/video.m3u8"
                   value={formData.videoUrl}
                   onChange={(e) =>
                     setFormData({ ...formData, videoUrl: e.target.value })
@@ -246,11 +246,11 @@ export default function AdminBanner() {
                     setFormData({ ...formData, displayOn: e.target.value as "photography" | "video" })
                   }
                 >
-                  <option value="photography">Apenas Fotografia</option>
+                  <option value="photography">Apenas Photography</option>
                   <option value="video">Apenas Video</option>
                 </select>
                 <p className="text-xs text-muted-foreground mt-1">
-                  Escolha onde este banner será exibido
+                  Escolha where este banner will be exibido
                 </p>
               </div>
 
@@ -367,11 +367,11 @@ export default function AdminBanner() {
             <ImageIcon className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
             <h3 className="text-xl font-semibold mb-2">None slide cadastrado</h3>
             <p className="text-muted-foreground mb-6">
-              Crie seu primeiro slide para o banner principal
+              Crie seu first slide para o banner principal
             </p>
             <Button onClick={openCreateDaylog}>
               <Plus className="w-4 h-4 mr-2" />
-              Criar Primeiro Slide
+              Criar First Slide
             </Button>
           </CardContent>
         </Card>

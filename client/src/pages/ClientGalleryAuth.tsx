@@ -46,7 +46,7 @@ export default function ClientGalleryAuth() {
       refetch();
       toast({
         title: "Favourite atualizada!",
-        description: "Sua seleção foi salva.",
+        description: "Your selection has been saved.",
       });
     },
     onError: (error) => {
@@ -64,7 +64,7 @@ export default function ClientGalleryAuth() {
       setComment("");
       setSelectedPhoto(null);
       toast({
-        title: "Comentário adicionado!",
+        title: "Comment added!",
         description: "Seu feedback foi salvo.",
       });
     },
@@ -124,9 +124,9 @@ export default function ClientGalleryAuth() {
       <ClientLayout appointmentId={appointmentId}>
         <div className="text-center py-12">
           <AlertCircle className="h-12 w-12 text-yellow-600 mx-auto mb-4" />
-          <h2 className="text-2xl font-semibold mb-2">Gallery não available</h2>
+          <h2 className="text-2xl font-semibold mb-2">Gallery not available</h2>
           <p className="text-gray-400">
-            Suas fotos ainda não foram enviadas pelo photographer.
+            Suas fotos still not were enviadas pelo photographer.
           </p>
         </div>
       </ClientLayout>
@@ -201,7 +201,7 @@ export default function ClientGalleryAuth() {
           <Card className="bg-gray-900 border-gray-800 p-4">
             <div className="text-center">
               <p className="text-3xl font-bold text-red-500">{photoComments.length}</p>
-              <p className="text-gray-400 text-sm mt-1">Comentários</p>
+              <p className="text-gray-400 text-sm mt-1">Comments</p>
             </div>
           </Card>
         </div>
@@ -341,7 +341,7 @@ export default function ClientGalleryAuth() {
 
               {/* Comments */}
               <div className="space-y-3">
-                <h3 className="font-semibold">Comentários</h3>
+                <h3 className="font-semibold">Comments</h3>
                 
                 {/* Existing Comments */}
                 <div className="space-y-2 max-h-40 overflow-y-auto">
@@ -366,7 +366,7 @@ export default function ClientGalleryAuth() {
                 {/* Add Comment */}
                 <div className="space-y-2">
                   <Textarea
-                    placeholder="Deixe um comentário sobre esta foto..."
+                    placeholder="Deixe um comment about esta foto..."
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                     rows={3}
@@ -378,7 +378,7 @@ export default function ClientGalleryAuth() {
                     className="w-full bg-red-600 hover:bg-red-700"
                   >
                     <MessageSquare className="h-4 w-4 mr-2" />
-                    Adicionar Comentário
+                    Adicionar Comment
                   </Button>
                 </div>
               </div>

@@ -6,19 +6,19 @@ import { eq, or } from "drizzle-orm";
 /**
  * Detecta o tenant baseado no subdomain ou domain customizado
  * 
- * Exemplos:
+ * Examples:
  * - joao.lirolla.com → busca tenant com subdomain="joao"
- * - fotografia-silva.com → busca tenant com customSunain="fotografia-silva.com"
- * - localhost:3000 → retorna tenant padrão (id=1, lirolla)
+ * - photography-silva.com → busca tenant com customSunain="photography-silva.com"
+ * - localhost:3000 → retorna tenant default (id=1, lirolla)
  */
 export async function detectTenantFromRequest(req: Request): Promise<number> {
   const host = req.get("host") || "";
   
   console.log(`[Tenant Detection] Host: ${host}`);
 
-  // Desenvolvimento local: sempre retorna tenant 1 (lirolla)
+  // Desenvolvimento local: always retorna tenant 1 (lirolla)
   if (host.includes("localhost") || host.includes("127.0.0.1") || host.includes("manusvm.computer")) {
-    console.log(`[Tenant Detection] Localhost detectado, usando tenant padrão (id=1)`);
+    console.log(`[Tenant Detection] Localhost detectado, usando tenant default (id=1)`);
     return 1;
   }
 
@@ -27,16 +27,16 @@ export async function detectTenantFromRequest(req: Request): Promise<number> {
   const domain = host.split(":")[0];
   if (domain === "flowclik.com" || domain === "www.flowclik.com") {
     console.log(`[Tenant Detection] Sunínio principal flowclik.com detectado - Landing page (sem tenant)`);
-    return 0; // 0 = landing page, não é tenant
+    return 0; // 0 = landing page, not é tenant
   }
 
   const db = await getDb();
   if (!db) {
-    console.warn("[Tenant Detection] Database not available, usando tenant padrão");
+    console.warn("[Tenant Detection] Database not available, using default tenant");
     return 1;
   }
 
-  // Caso 1: Sunínio customizado (ex: fotografia-silva.com)
+  // Caso 1: Sunínio customizado (ex: photography-silva.com)
   // Buscar tenant que tenha esse domain cadastrado
   const [customSunainTenant] = await db
     .select({ id: tenants.id, customSunain: tenants.customSunain })
@@ -50,7 +50,7 @@ export async function detectTenantFromRequest(req: Request): Promise<number> {
   }
 
   // Caso 2: Subdomain (ex: joao.lirolla.com)
-  // Extrair subdomain antes do domain principal
+  // Extrair subdomain before do domain principal
   const parts = domain.split(".");
   
   // Se tem pelo menos 3 partes (ex: joao.lirolla.com)
@@ -71,13 +71,13 @@ export async function detectTenantFromRequest(req: Request): Promise<number> {
   }
 
   // Caso 3: Sunínio principal (lirolla.com)
-  // Retorna tenant padrão (id=1)
-  console.log(`[Tenant Detection] None tenant específico encontrado, usando tenant padrão (id=1)`);
+  // Retorna tenant default (id=1)
+  console.log(`[Tenant Detection] None tenant específico encontrado, usando tenant default (id=1)`);
   return 1;
 }
 
 /**
- * Valida se um subdomain está available para uso
+ * Valida se um subdomain is available para uso
  */
 export async function isSubdomainAvailable(subdomain: string): Promise<boolean> {
   const db = await getDb();
@@ -100,7 +100,7 @@ export async function isSubdomainAvailable(subdomain: string): Promise<boolean> 
 }
 
 /**
- * Valida se um domain customizado está available
+ * Valida se um domain customizado is available
  */
 export async function isCustomSunainAvailable(domain: string): Promise<boolean> {
   const db = await getDb();
