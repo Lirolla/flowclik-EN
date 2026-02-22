@@ -21,7 +21,7 @@ import {
 import { Settings, Upload, Loader2, Image as ImageIcon, CheckCircle2, AlertCircle, Camera, Video, Briefcase, Calendar, X, Plus } from "lucide-react";
 import DashboardLayout from "@/components/DashboardLayout";
 import { toast } from "sonner";
-// REMOVIDO: Multi-country (now 100% Brasil)
+// REMOVED: Multi-country (now 100% UK)
 // import { COUNTRIES, COUNTRY_LIST, type CountryCode } from "@/lib/currency";
 // import { COUNTRY_MAP, CountryInfo } from "../../../../shared/countryUtils";
 
@@ -100,7 +100,7 @@ function AdminSettingsContent() {
   const [parallaxPreview, setParallaxPreview] = useState<string | null>(null);
   const [uploadingParallax, setUploadingParallax] = useState(false);
   
-  // Regional settings (HARDCODED BRASIL)
+  // Regional settings (HARDCODED UK)
   const baseCountry = "United Kingdom";
   const baseCurrency = "GBP";
   const currencySymbol = "£";
@@ -112,10 +112,10 @@ function AdminSettingsContent() {
   
   const updateConfigMutation = trpc.siteConfig.update.useMutation({
     onSuccess: () => {
-      toast.success("Settings salvas com sucesso!");
+      toast.success("Settings saved successfully!");
     },
     onError: (error) => {
-      toast.error(`Erro: ${error.message}`);
+      toast.error(`Error: ${error.message}`);
     },
   });
 
@@ -123,13 +123,13 @@ function AdminSettingsContent() {
 
   const updateBusinessModeMutation = trpc.siteConfig.updateBusinessMode.useMutation({
     onSuccess: () => {
-      toast.success("Modo de business atualizado!");
+      toast.success("Business mode updated!");
     },
   });
 
   const createBlockMutation = trpc.blockedDates.create.useMutation({
     onSuccess: () => {
-      toast.success("Period bloqueado com sucesso!");
+      toast.success("Period blocked successfully!");
       setStartDate("");
       setEndDate("");
       setBlockReason("");
@@ -138,7 +138,7 @@ function AdminSettingsContent() {
 
   const deleteBlockMutation = trpc.blockedDates.delete.useMutation({
     onSuccess: () => {
-      toast.success("Bloqueio removido!");
+      toast.success("Block removed!");
     },
   });
 
@@ -194,7 +194,7 @@ function AdminSettingsContent() {
       setParallaxSubtitle(config.parallaxSubtitle || "");
       setParallaxPreview(config.parallaxImageUrl || null);
       
-      // Regional settings (hardcoded Brasil - sem setters)
+      // Regional settings (hardcoded UK - no setters)
     }
   }, [config]);
 
@@ -202,7 +202,7 @@ function AdminSettingsContent() {
     const file = e.target.files?.[0];
     if (file) {
       if (!file.type.startsWith("image/")) {
-        toast.error("Why favor, select only imagens");
+        toast.error("Please select only images");
         return;
       }
 
@@ -236,7 +236,7 @@ function AdminSettingsContent() {
       return base64;
     } catch (error) {
       console.error("Upload error:", error);
-      toast.error("Erro ao fazer upload do logo");
+      toast.error("Error uploading logo");
       setUploadingLogo(false);
       return logoUrl;
     }
@@ -278,9 +278,9 @@ function AdminSettingsContent() {
       paymentPixEnabled,
       paymentPixKey: paymentPixKey || undefined,
       paymentLinkEnabled,
-      // Payment Link salvo
+      // Payment Link saved
       
-      // Appearance do Site
+      // Site Appearance
       siteThemeLayout,
       siteThemeMode,
       siteThemeAccentColor,
@@ -290,7 +290,7 @@ function AdminSettingsContent() {
       parallaxImageUrl: parallaxImageUrl || undefined,
       parallaxTitle: parallaxTitle || undefined,
       
-      // Regional settings (hardcoded Brasil)
+      // Regional settings (hardcoded UK)
       baseCountry: "United Kingdom",
       baseCurrency: "GBP",
       currencySymbol: "£",
@@ -389,7 +389,7 @@ function AdminSettingsContent() {
             Site Settings
           </CardTitle>
           <CardDescription>
-            Complete everys as sections para configure your site. 🔴 Vermelho = Not preenchido | 🟡 Amarelo = Parcial | 🟢 Verde = Complete
+            Complete all sections to configure your site. 🔴 Red = Not filled | 🟡 Yellow = Partial | 🟢 Green = Complete
           </CardDescription>
         </CardHeader>
       </Card>
@@ -404,7 +404,7 @@ function AdminSettingsContent() {
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getBusinessModeStatus()} />
                   <Briefcase className="w-5 h-5" />
-                  <span className="font-semibold">Modo de Business</span>
+                  <span className="font-semibold">Business Mode</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-6 pt-4">
@@ -422,7 +422,7 @@ function AdminSettingsContent() {
                       <Camera className="w-12 h-12 mx-auto mb-3 text-blue-600" />
                       <h3 className="font-semibold mb-2">Photography Only</h3>
                       <p className="text-sm text-muted-foreground">
-                        Foco em photography services
+                        Focus on photography services
                       </p>
                     </button>
 
@@ -437,7 +437,7 @@ function AdminSettingsContent() {
                       <Video className="w-12 h-12 mx-auto mb-3 text-red-600" />
                       <h3 className="font-semibold mb-2">Video Only</h3>
                       <p className="text-sm text-muted-foreground">
-                        Foco em production de videos
+                        Focus on video production
                       </p>
                     </button>
 
@@ -497,7 +497,7 @@ function AdminSettingsContent() {
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status="complete" />
-                  <span className="font-semibold">Appearance do Site</span>
+                  <span className="font-semibold">Site Appearance</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-6 pt-4">
@@ -633,7 +633,7 @@ function AdminSettingsContent() {
                         }`}
                       >
                         <div className="w-8 h-8 mx-auto mb-2 rounded-full bg-red-600"></div>
-                        <h3 className="font-semibold text-sm">Vermelho</h3>
+                        <h3 className="font-semibold text-sm">Red</h3>
                       </button>
                       <button
                         onClick={() => setSiteThemeAccentColor("black")}
@@ -664,7 +664,7 @@ function AdminSettingsContent() {
                 {/* Site Font */}
                 <div className="space-y-4">
                   <div>
-                    <h3 className="text-lg font-semibold mb-1">Fonte do Site</h3>
+                    <h3 className="text-lg font-semibold mb-1">Site Font</h3>
                     <p className="text-sm text-muted-foreground">Choose the main typography for your site</p>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
@@ -811,7 +811,7 @@ function AdminSettingsContent() {
                   />
                 </div>
 
-                {/* REMOVIDO: Settings Regionais (now hardcoded Brasil) */}
+                {/* REMOVED: Regional Settings (now hardcoded UK) */}
 
                 {/* Current Logo URL (readonly) */}
                 {logoUrl && !logoFile && (
@@ -902,7 +902,7 @@ function AdminSettingsContent() {
                                 setAboutImage(result.url);
                                 toast.success("Photo uploaded successfully!");
                               } catch (error: any) {
-                                toast.error(`Erro ao enviar foto: ${error.message}`);
+                                toast.error(`Error uploading photo: ${error.message}`);
                               }
                             };
                             reader.readAsDataURL(file);
@@ -1005,7 +1005,7 @@ function AdminSettingsContent() {
                     type="email"
                     value={contactEmail}
                     onChange={(e) => setContactEmail(e.target.value)}
-                    placeholder="contato@example.com"
+                    placeholder="contact@example.com"
                   />
                 </div>
                 <div>
@@ -1041,7 +1041,7 @@ function AdminSettingsContent() {
               <AccordionTrigger>
                 <div className="flex items-center gap-3">
                   <StatusIcon status={getSocialStatus()} />
-                  <span className="font-semibold">Redes Sociais</span>
+                  <span className="font-semibold">Social Media</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pt-4">
@@ -1149,9 +1149,9 @@ function AdminSettingsContent() {
                                     });
                                     setParallaxImageUrl(result.url);
                                     setParallaxPreview(result.url);
-                                    toast.success("Imagem enviada com sucesso!");
+                                    toast.success("Image uploaded successfully!");
                                   } catch (error: any) {
-                                    toast.error(`Erro ao enviar imagem: ${error.message}`);
+                                    toast.error(`Error uploading image: ${error.message}`);
                                   }
                                 };
                                 reader.readAsDataURL(file);
@@ -1195,7 +1195,7 @@ function AdminSettingsContent() {
                     onClick={handleSave}
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
-                    Salvar Parallax
+                    Save Parallax
                   </Button>
                 </div>
               </AccordionContent>
@@ -1295,7 +1295,7 @@ function AdminSettingsContent() {
                       </div>
                       <div>
                         <h4 className="font-semibold">Payment Link</h4>
-                        <p className="text-sm text-muted-foreground">Envie link de pagamento para yours clientes</p>
+                        <p className="text-sm text-muted-foreground">Send payment link to your clients</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-2">
@@ -1316,7 +1316,7 @@ function AdminSettingsContent() {
                     onClick={handleSave}
                     className="bg-red-600 hover:bg-red-700 text-white"
                   >
-                    Salvar Payment Methods
+                    Save Payment Methods
                   </Button>
                 </div>
               </AccordionContent>
@@ -1327,9 +1327,9 @@ function AdminSettingsContent() {
           <div className="bg-muted p-4 rounded-lg text-sm space-y-2 mt-6">
             <p className="font-semibold">ℹ️ Information:</p>
             <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-              <li>Complete everys as sections mareachs em vermelho</li>
-              <li>O modo de business define quais services aparecem no site</li>
-              <li>Bloqueios de data impedem agendamentos nos periods escolhidos</li>
+              <li>Complete all sections marked in red</li>
+              <li>Business mode defines which services appear on the site</li>
+              <li>Date blocks prevent bookings during the chosen periods</li>
               <li>The logo and name appear in the site header</li>
               <li>O content de About/Services aparece nas pages publics</li>
               <li>Changes are aplieachs imediatamente</li>
@@ -1338,12 +1338,12 @@ function AdminSettingsContent() {
         </CardContent>
       </Card>
       
-      {/* Bloqueio de Datas - Card Horizontal */}
+      {/* Date Blocking - Card Horizontal */}
       <Card>
         <CardHeader>
           <CardTitle className="flex items-center gap-2 text-base">
             <Calendar className="w-5 h-5 text-orange-600" />
-            Bloqueio de Datas
+            Date Blocking
             {blockedDates && blockedDates.length > 0 && (
               <span className="text-xs bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-200 px-2 py-1 rounded">
                 {blockedDates.length} period(s)
@@ -1360,7 +1360,7 @@ function AdminSettingsContent() {
             {/* Formuthererio horizontal */}
             <div className="flex flex-wrap gap-3 items-end">
               <div className="flex-1 min-w-[150px]">
-                <Label className="text-sm">Data de Home</Label>
+                <Label className="text-sm">Start Date</Label>
                 <Input
                   type="date"
                   value={startDate}
@@ -1368,7 +1368,7 @@ function AdminSettingsContent() {
                 />
               </div>
               <div className="flex-1 min-w-[150px]">
-                <Label className="text-sm">Data de Fim</Label>
+                <Label className="text-sm">End Date</Label>
                 <Input
                   type="date"
                   value={endDate}
@@ -1376,9 +1376,9 @@ function AdminSettingsContent() {
                 />
               </div>
               <div className="flex-1 min-w-[200px]">
-                <Label className="text-sm">Motivo (optional)</Label>
+                <Label className="text-sm">Reason (optional)</Label>
                 <Input
-                  placeholder="Ex: Fisrias, Trip"
+                  placeholder="Ex: Holidays, Trip"
                   value={blockReason}
                   onChange={(e) => setBlockReason(e.target.value)}
                 />
@@ -1389,10 +1389,10 @@ function AdminSettingsContent() {
               </Button>
             </div>
 
-            {/* Lista de bloqueios */}
+            {/* Block list */}
             {blockedDates && blockedDates.length > 0 && (
               <div className="space-y-2">
-                <Label className="text-sm font-semibold">Periods Bloqueados:</Label>
+                <Label className="text-sm font-semibold">Blocked Periods:</Label>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
                   {blockedDates.map((block) => (
                     <div
