@@ -534,7 +534,7 @@ export const appointmentsRouter = router({
 
       if (updated[0]) {
         await notifyOwner({
-          title: `Status do Agendamento Currentizado: ${statusLabels[input.status] || input.status}`,
+          title: `Appointment Status Updated: ${statusLabels[input.status] || input.status}`,
           content: `Cliente: ${updated[0].clientName}\nEmail: ${updated[0].clientEmail}\nNew Status: ${statusLabels[input.status] || input.status}`,
         }).catch(err => console.error('Erro ao notificar:', err));
       }

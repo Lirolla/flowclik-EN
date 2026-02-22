@@ -105,7 +105,7 @@ export default function PoliticaDeRefund() {
                   <ul className="list-disc ml-6 mt-2 space-y-1">
                     <li>Your nome complete e email de cadastro</li>
                     <li>Data da signature</li>
-                    <li>Motivo do cancellation (optional, mas nos help a melhourr)</li>
+                    <li>Motivo do cancellation (optional, mas nos help a improve)</li>
                   </ul>
                 </li>
                 <li>Aguarde confirmation em until 2 business days</li>

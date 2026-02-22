@@ -252,7 +252,7 @@ export default function AdminServices() {
         <DialogContent className="max-w-2xl">
           <DialogHeader>
             <DialogTitle>Editar Service</DialogTitle>
-            <DialogDescription>Currentize os dados do service</DialogDescription>
+            <DialogDescription>Update the service details</DialogDescription>
           </DialogHeader>
 
           <div className="space-y-4 mt-4">

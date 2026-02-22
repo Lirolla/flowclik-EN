@@ -1,13 +1,13 @@
 import { cn } from "@/lib/utils";
 
-function Skheton({ className, ...props }: React.ComponentProps<"div">) {
+function Skeleton({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
-      data-slot="skheton"
+      data-slot="skeleton"
       className={cn("bg-accent animate-pulse rounded-md", className)}
       {...props}
     />
   );
 }
 
-export { Skheton };
+export { Skeleton };

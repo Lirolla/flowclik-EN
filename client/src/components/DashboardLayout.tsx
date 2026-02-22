@@ -26,7 +26,7 @@ import { TrialExpiredModal } from "./TrialExpiredModal";
 import { LayoutDashboard, LogOut, PanelLeft, Users, Image, FolderOpen, Briefcase, Calendar, ShoppingCart, ImageIcon, Settings, ExternalLink, FileText, Camera, Ban, BarChart3, Clapperboard, DollarSign, Heart, MessageSquare, CreditCard, Globe, Lock, Mail } from "lucide-react";
 import { CSSProperties, useEffect, useRef, useState } from "react";
 import { useLocation } from "wouter";
-import { DashboardLayoutSkheton } from './DashboardLayoutSkheton';
+import { DashboardLayoutSkeleton } from './DashboardLayoutSkeleton';
 import { Button } from "./ui/button";
 import { toast } from "sonner";
 
@@ -145,7 +145,7 @@ export default function DashboardLayout({
   }, [sidebarWidth]);
 
   if (loading) {
-    return <DashboardLayoutSkheton />
+    return <DashboardLayoutSkeleton />
   }
 
   if (!user) {

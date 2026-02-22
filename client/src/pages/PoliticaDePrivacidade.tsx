@@ -69,7 +69,7 @@ export default function PoliticaDePrivacy() {
                 <li>Fornecer, operar e manter our plataforma</li>
                 <li>Processar pagamentos e manage signatures</li>
                 <li>Send transactional emails (confirmations, notifications)</li>
-                <li>Melhourr ours services e desenvolver news recursos</li>
+                <li>Improve our services and develop new features</li>
                 <li>Prevent fraud and ensure platform security</li>
                 <li>Comply with legal and regulatory obligations</li>
                 <li>Send marketing communications (with your consent)</li>

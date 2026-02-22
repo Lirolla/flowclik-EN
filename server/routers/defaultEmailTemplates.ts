@@ -91,7 +91,7 @@ export const defaultEmailTemplates = [
 </html>`,
   },
   {
-    name: "Thank you pela Sesare",
+    name: "Thank you for the Session",
     subject: "💜 Thank you for your trust, {{nome}}!",
     category: "thank_you" as const,
     htmlContent: `<!DOCTYPE html>

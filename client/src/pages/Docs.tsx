@@ -262,7 +262,7 @@ Ready! Now you can fazer upload de fotos.
 **Dicas:**
 - Use yours betteres fotos
 - Maximum 20 fotos no portfolio
-- Currentize regularmente
+- Update regularly
 - Mostre variedade de trabalhos
       ` },
       { id: "dominio-proprio", title: "Configure domain own", content: `

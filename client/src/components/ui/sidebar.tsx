@@ -10,7 +10,7 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { Skheton } from "@/components/ui/skheton";
+import { Skeleton } from "@/components/ui/skeleton";
 import {
   Tooltip,
   TooltipContent,
@@ -606,7 +606,7 @@ function SidebarMenuBadge({
   );
 }
 
-function SidebarMenuSkheton({
+function SidebarMenuSkeleton({
   className,
   showIcon = false,
   ...props
@@ -620,23 +620,23 @@ function SidebarMenuSkheton({
 
   return (
     <div
-      data-slot="sidebar-menu-skheton"
-      data-sidebar="menu-skheton"
+      data-slot="sidebar-menu-skeleton"
+      data-sidebar="menu-skeleton"
       className={cn("flex h-8 items-center gap-2 rounded-md px-2", className)}
       {...props}
     >
       {showIcon && (
-        <Skheton
+        <Skeleton
           className="size-4 rounded-md"
-          data-sidebar="menu-skheton-icon"
+          data-sidebar="menu-skeleton-icon"
         />
       )}
-      <Skheton
-        className="h-4 max-w-(--skheton-width) flex-1"
-        data-sidebar="menu-skheton-text"
+      <Skeleton
+        className="h-4 max-w-(--skeleton-width) flex-1"
+        data-sidebar="menu-skeleton-text"
         style={
           {
-            "--skheton-width": width,
+            "--skeleton-width": width,
           } as React.CSSProperties
         }
       />
@@ -721,7 +721,7 @@ export {
   SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSkheton,
+  SidebarMenuSkeleton,
   SidebarMenuSub,
   SidebarMenuSubButton,
   SidebarMenuSubItem,

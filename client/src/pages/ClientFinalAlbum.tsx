@@ -216,7 +216,7 @@ export default function ClientFinalAlbum() {
     if (!allPhotosEdited) {
       toast({
         title: "Aguarde",
-        description: "Someas fotos still are sendo edited.",
+        description: "Some photos are still being edited.",
         variant: "destructive",
       });
       return;

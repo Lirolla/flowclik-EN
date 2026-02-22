@@ -136,7 +136,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Skheton } from "@/components/ui/skheton";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import {
@@ -725,11 +725,11 @@ export default function ComponentsShowcase() {
                 </div>
                 <Separator />
                 <div className="space-y-2">
-                  <Label>Skheton</Label>
+                  <Label>Skeleton</Label>
                   <div className="space-y-2">
-                    <Skheton className="h-4 w-full" />
-                    <Skheton className="h-4 w-3/4" />
-                    <Skheton className="h-4 w-1/2" />
+                    <Skeleton className="h-4 w-full" />
+                    <Skeleton className="h-4 w-3/4" />
+                    <Skeleton className="h-4 w-1/2" />
                   </div>
                 </div>
                 <Separator />

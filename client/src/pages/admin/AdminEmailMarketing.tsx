@@ -17,7 +17,7 @@ type EventType = 'birthday' | 'wedding' | 'session' | 'anniversary' | 'other';
 const eventTypeLabels: Record<EventType, { label: string; icon: string; color: string }> = {
   birthday: { label: "Birthday", icon: "🎂", color: "text-pink-400" },
   wedding: { label: "Wedding", icon: "💒", color: "text-rose-400" },
-  session: { label: "Sesare", icon: "📸", color: "text-blue-400" },
+  session: { label: "Session", icon: "📸", color: "text-blue-400" },
   anniversary: { label: "Birthday de Casamento", icon: "💍", color: "text-amber-400" },
   other: { label: "Other", icon: "📅", color: "text-gray-400" },
 };
