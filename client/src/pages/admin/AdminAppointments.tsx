@@ -264,7 +264,7 @@ function AdminAppointmentsContent() {
     onSuccess: async (data, variables) => {
       await utils.appointments.getAll.invalidate();
       
-      // Fetch updated booking para manter modal aberto com dados news
+      // Fetch updated booking to keep modal open with new data
       const updatedAppointments = await utils.appointments.getAll.fetch();
       const updated = updatedAppointments?.find(a => a.id === variables.id);
       if (updated) {
@@ -617,7 +617,7 @@ function AdminAppointmentsContent() {
                   </thead>
                   <tbody>
                     {(() => {
-                      // Filtrar agendamentos
+                      // Filter appointments
                       const filteredAppointments = appointments
                         .filter((apt) => {
                           // Search filter by client name
@@ -631,7 +631,7 @@ function AdminAppointmentsContent() {
                         })
                         .sort((a, b) => new Date(a.appointmentDate).getTime() - new Date(b.appointmentDate).getTime());
 
-                      // Calcular paginação
+                      // Calculate pagination
                       const totalItems = filteredAppointments.length;
                       const totalPages = Math.ceil(totalItems / itemsPerPage);
                       const startIndex = (currentPage - 1) * itemsPerPage;
@@ -688,7 +688,7 @@ function AdminAppointmentsContent() {
               </div>
             )}
 
-            {/* Paginação */}
+            {/* Pagination */}
             {appointments && appointments.length > 0 && (() => {
               const filteredAppointments = appointments
                 .filter((apt) => {
@@ -712,7 +712,7 @@ function AdminAppointmentsContent() {
                     Showing {startIndex + 1}-{endIndex} of {totalItems} bookings
                   </div>
 
-                  {/* Controles de navegação */}
+                  {/* Navigation controls */}
                   {totalPages > 1 && (
                     <div className="flex items-center gap-2">
                       <Button
@@ -777,7 +777,7 @@ function AdminAppointmentsContent() {
           <CardHeader>
             <CardTitle className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span>Agendamento</span>
+                <span>Booking</span>
                 {selectedAppointment.serviceType === "photography" && (
                   <span className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-blue-100 text-blue-700 rounded">
                     <Camera className="w-3 h-3" />
@@ -864,7 +864,7 @@ function AdminAppointmentsContent() {
                   onClick={() => handleEdit(selectedAppointment)}
                 >
                   <Edit className="w-4 h-4 mr-2" />
-                  Editar
+                  Edit
                 </Button>
                 <Button
                   variant="outline"
@@ -872,7 +872,7 @@ function AdminAppointmentsContent() {
                   onClick={() => handleDelete(selectedAppointment.id)}
                 >
                   <Trash2 className="w-4 h-4 mr-2" />
-                  Excluir
+                  Delete
                 </Button>
               </div>
             </CardTitle>
@@ -906,7 +906,7 @@ function AdminAppointmentsContent() {
               <div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                   <User className="w-4 h-4" />
-                  Cliente
+                  Client
                 </div>
                 <div className="font-semibold">{selectedAppointment.clientName}</div>
               </div>
@@ -927,7 +927,7 @@ function AdminAppointmentsContent() {
               <div>
                 <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                   <Calendar className="w-4 h-4" />
-                  Data
+                  Date
                 </div>
                 <div className="font-semibold">
                   {format(new Date(selectedAppointment.appointmentDate), "dd/MM/yyyy")}
@@ -943,7 +943,7 @@ function AdminAppointmentsContent() {
                   <div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground mb-1">
                       <MapPin className="w-4 h-4" />
-                      Local
+                      Location
                     </div>
                     <div className="text-sm">{selectedAppointment.eventLocation}</div>
                   </div>
@@ -978,7 +978,7 @@ function AdminAppointmentsContent() {
 
             {/* Workflow Timeline */}
             <div>
-              <h3 className="font-semibold mb-4">Fluxo de Trabalho</h3>
+              <h3 className="font-semibold mb-4">Workflow</h3>
               <div className="space-y-2">
                 {[
                   'pending',
@@ -1039,7 +1039,7 @@ function AdminAppointmentsContent() {
               </div>
             </div>
 
-                {/* Thuck Actions */}
+                {/* Quick Actions */}
                 {selectedAppointment.status === 'pending' && (
                   <div className="flex gap-2">
                     <Button
@@ -1047,7 +1047,7 @@ function AdminAppointmentsContent() {
                       disabled={updateStatusMutation.isPending}
                       className="flex-1"
                     >
-                      ✅ Aprovar Agendamento
+                      ✅ Approve Booking
                     </Button>
                     <Button
                       variant="outline"
@@ -1186,7 +1186,7 @@ function AdminAppointmentsContent() {
                       ...createFormData, 
                       serviceId: svcId,
                       customServiceName: svc?.name || "",
-                      customPrice: svc?.price ? String(svc.price / 100) : "",
+                      customPrice: svc?.price ? String(svc.price) : "",
                     });
                   } else {
                     setCreateFormData({ ...createFormData, serviceId: 0 });
@@ -1300,7 +1300,7 @@ function AdminAppointmentsContent() {
                     return;
                   }
                   
-                  // Ensure que a data is no formato correto
+                  // Ensure date is in correct format
                   const dateStr = createFormData.appointmentDate;
                   const appointmentDate = dateStr.includes("T") 
                     ? new Date(dateStr)
