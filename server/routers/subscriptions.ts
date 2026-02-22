@@ -14,11 +14,11 @@ if (process.env.STRIPE_SECRET_KEY) {
   });
 }
 
-// Price IDs dos produtos Stripe (Production BR)
+// Price IDs dos produtos Stripe (Production UK)
 const PRICE_IDS = {
-  PLAN_BASIC: "price_1T35MO3qmmbjfC9dAO6yM22s",      // £ 69,90/month
-  ADDON_STORAGE: "price_1T35MR3qmmbjfC9dfpfFrAKJ",    // £3.99/month (+10GB)
-  ADDON_GALLERIES: "price_1T35MV3qmmbjfC9dGHxfo7cB",  // £3.99/month (+10 galleries)
+  PLAN_BASIC: "price_1SePJU2ME98p2oJbnTJpUVso",      // £8.99/month
+  ADDON_STORAGE: "price_1SePMQ2ME98p2oJbxnhhP3Gi",    // £3.99/month (+10GB)
+  ADDON_GALLERIES: "price_1SePMh2ME98p2oJb1nCJtxpE",  // £2.99/month (+10 galleries)
 };
 
 export const subscriptionsRouter = router({
